@@ -55,19 +55,54 @@ new TextInput("Username", username),     // auto-converted via TextInputBinding
 
 See [Bindings](state/bindings.md) for details.
 
+## The shared core
+
+Every backend's `State<T>` extends
+[`rui.state.State`](https://lapavoiserie.github.io/rui/#/state) — the reactive core that
+`sui`, `aui`, `wui`, `cui` and `qui` share. So this much behaves **identically** whichever
+`-D mui_backend` you select:
+
+| | |
+|---|---|
+| `get()` / `value` | tracked read — registers a dependency inside an `Effect` |
+| `set(v)` / `value = v` | write — re-runs dependent effects, then the platform |
+| `peek()` | untracked read |
+| `applyExternal(v)` | a write coming *from* the platform: effects only, no echo back |
+| `name` | the state's identifier |
+
+`State` stays dispatched per backend rather than collapsing into `rui.state.State`, because
+each backend still has a platform half to run on a write: `cui` raises its redraw flag, `sui`
+mirrors into Swift's `AppState`, `aui` into a Compose `MutableState`. What is shared is the
+reactive half and the contract — not the platform half.
+
+Two things *are* shared outright, since they need no platform half:
+
+```haxe
+import mui.state.Signal;              // Signal, Effect, Scheduler
+import mui.structures.ImmutableList;  // persistent list
+
+var count = new Signal(0);
+new Effect(() -> trace("count = " + count.value));  // runs now, and on change
+count.value = 1;
+```
+
+Use `Signal` for reactive state that is not bound to a view, and `ImmutableList` for a
+collection held in a state — a write only notifies when the value *changes*, compared with
+`!=`, so mutating an array in place is invisible while a new instance is not.
+
 ## Backend-Specific Methods
 
-Some methods are only available on certain backends:
+Everything above is portable. The methods below are **not** part of the contract — the
+backends disagree on them, so an app that uses them stops being portable:
 
-| Method | sui | wui | cui | Description |
-|--------|-----|-----|-----|-------------|
-| `.get()` | Yes | Yes | Yes | Read value |
-| `.set(v)` | Yes | Yes | Yes | Write value |
-| `.value` | Yes | Yes | Yes | Read/write property |
-| `.inc(n)` | Yes | Yes | Yes* | Increment (returns StateAction on sui/wui) |
-| `.dec(n)` | Yes | Yes | Yes* | Decrement (returns StateAction on sui/wui) |
-| `.tog()` | Yes | Yes | -- | Toggle boolean (returns StateAction) |
-| `.toggle()` | -- | -- | Yes | Toggle boolean (void, cui only) |
-| `.subscribe()` | -- | Yes | -- | Register change listener |
+| Method | sui | wui | aui | cui | qui | Description |
+|--------|-----|-----|-----|-----|-----|-------------|
+| `.inc(n)` | -- | Yes | Yes | Yes* | Yes* | Increment (a `StateAction` on wui/aui, void on cui/qui) |
+| `.dec(n)` | -- | Yes | Yes | Yes* | Yes* | Decrement (same split) |
+| `.tog()` | -- | Yes | Yes | -- | -- | Toggle boolean (returns a `StateAction`) |
+| `.toggle()` | -- | -- | -- | Yes | Yes | Toggle boolean (void) |
+| `.setTo(v)` | -- | Yes | Yes | Yes | Yes | Returns a `StateAction` on wui/aui, the state itself on cui/qui |
+| `.subscribe()` | -- | Yes | -- | -- | -- | Register a change listener |
+| `.onValueChanged()` | Yes | -- | -- | -- | -- | Change callback, whichever side wrote |
 
-*cui `IntState`/`FloatState` have `.inc()`/`.dec()` that mutate directly (void return).
+*`IntState`/`FloatState` on cui and qui have `.inc()`/`.dec()` that mutate directly (void return).

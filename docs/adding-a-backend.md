@@ -9,9 +9,28 @@ A backend library must provide:
 1. **`App` base class** with `@:autoBuild` StateMacro and `body():View` override
 2. **`View` base class** with modifier methods (padding, font, foregroundColor, etc.)
 3. **`ViewComponent`** extending View with its own `body()`
-4. **`state/State<T>`** with `.get()`, `.set()`, and `.value`
+4. **`state/State<T>`** extending [`rui.state.State`](https://lapavoiserie.github.io/rui/#/state) — see below
 5. **`state/Binding<T>`** with `.get()` and `.set()`
 6. **UI components** in a `ui/` package: Text, VStack, HStack, Button, Spacer, etc.
+
+### What comes from the shared libraries
+
+Two of these are not yours to reinvent:
+
+- **State.** `state/State<T>` must extend
+  [`rui.state.State`](https://lapavoiserie.github.io/rui/#/state), which gives you
+  `get`/`value`/`set`/`peek`/`applyExternal`/`name` and the reactive half for
+  free. You add only the *platform half*: register a sink with
+  `setPlatformSink(...)` to push a new value to the native side, and route writes
+  arriving *from* the platform through `applyExternal` so they reach Haxe effects
+  without being echoed back.
+- **The view tree.** How a node is described — type, children, key, typed
+  properties, ordered modifiers, actions — and how a renderer consumes it, is
+  [`nui`](https://lapavoiserie.github.io/nui/). It offers two contracts, and which
+  one you implement is decided by your host, not by preference: **pull**
+  (`NodeSource`) if it diffs and re-renders on its own like SwiftUI or Compose,
+  **push** (`Node` + `NodeSink`) if it diffs nothing like Qt or a terminal. See
+  [Adopting nui](https://lapavoiserie.github.io/nui/#/adopting).
 
 ## Steps
 
