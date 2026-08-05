@@ -5,6 +5,15 @@
     "license": "MIT",
     "classPath": "src",
     "main": "tools.cli.CLI",
-    "dependencies": {},
-    "tags": ["ui", "cross-platform", "swiftui", "winui", "tui", "multiplatform"]
+    "dependencies": {
+        "rui": ""
+    },
+    "tags": [
+        "ui",
+        "cross-platform",
+        "swiftui",
+        "winui",
+        "tui",
+        "multiplatform"
+    ]
 }
