@@ -1,0 +1,11 @@
+# La chaîne complète : markup mui -> nui.Node -> rendu par le backend cible.
+# Changer -D mui_backend change la cible ; le markup est vérifié contre elle.
+-cp src
+-cp ../../src
+-cp ../../../wui/wui/src
+-lib rui
+-lib nui
+-D mui_backend=wui
+--macro wui.macros.WinUIGenerator.register()
+-main EndToEnd
+-cpp build/cpp

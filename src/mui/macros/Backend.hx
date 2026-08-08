@@ -108,9 +108,9 @@ class Backend {
 	/** Types the target knows, for an error message that helps. **/
 	public static function types():Array<String> {
 		#if (mui_backend == "wui")
-		var out = [for (t in wui.nui.Vocabulary.types.keys()) t];
-		out.sort(function(a, b) return a < b ? -1 : (a > b ? 1 : 0));
-		return out;
+		// `types` became a function when the vocabulary stopped being a table and
+		// started reading the controls; it already returns them sorted.
+		return wui.nui.Vocabulary.types();
 		#else
 		return [];
 		#end

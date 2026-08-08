@@ -186,6 +186,13 @@ class Markup {
 		return macro $v{raw};
 	}
 
+	/** Append one `.prop(key, value)` to a node expression. **/
+	static function applyTo(node:Expr, setter:{key:String, value:Expr}):Expr {
+		var key = setter.key;
+		var value = setter.value;
+		return macro $node.prop($v{key}, $value);
+	}
+
 	static function buildNode(xml:Xml, pos:Position):Expr {
 		var tag = xml.nodeName;
 
@@ -196,7 +203,7 @@ class Markup {
 		}
 
 		var keyExpr:Expr = macro null;
-		var setters:Array<Expr> = [];
+		var setters:Array<{key:String, value:Expr}> = [];
 		var seen = new Map<String, Bool>();
 
 		for (attr in xml.attributes()) {
@@ -216,7 +223,7 @@ class Markup {
 
 			seen.set(attr, true);
 			var value = wrap(kind, valueExpr(raw, pos));
-			setters.push(macro __node.prop($v{attr}, $value));
+			setters.push({key: attr, value: value});
 		}
 
 		// Text content is the `text` property -- `nui` settled in B2 that text is
@@ -227,7 +234,7 @@ class Markup {
 				Context.error('"$tag" ne porte pas de texte.', pos);
 			} else {
 				seen.set("text", true);
-				setters.push(macro __node.prop("text", nui.PropValue.PString(${valueExpr(text, pos)})));
+				setters.push({key: "text", value: macro nui.PropValue.PString(${valueExpr(text, pos)})});
 			}
 		}
 
@@ -244,12 +251,18 @@ class Markup {
 			}
 		}
 
-		var body:Array<Expr> = [macro var __node = new nui.Node($v{tag}, $keyExpr)];
-		for (s in setters) body.push(s);
-		for (c in childExprs) body.push(macro __node.child($c));
-		body.push(macro __node);
+		// A chain, not a block of statements.
+		//
+		// `prop` and `child` return the node, so both shapes build the same tree
+		// -- but the backend's validator reads a chain as one node with its
+		// properties, where statements on a local look like a bare `new` carrying
+		// none, and a required property is then reported missing. Emitting the
+		// idiomatic form keeps the two in agreement.
+		var chain = macro new nui.Node($v{tag}, $keyExpr);
+		for (setter in setters) chain = applyTo(chain, setter);
+		for (child in childExprs) chain = macro $chain.child($child);
 
-		return macro $b{body};
+		return chain;
 	}
 
 	/** Text directly inside this element, ignoring what belongs to children. **/

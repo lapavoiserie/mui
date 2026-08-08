@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mui — Write once, run everywhere</title>
+  <meta name="description" content="Cross-platform UI framework for Haxe. Build native apps for macOS, iOS, Windows, Android, and terminal from a single codebase.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple: #7C3AED;
+      --purple-light: #A78BFA;
+      --purple-dark: #5B21B6;
+      --purple-glow: rgba(124, 58, 237, 0.15);
+      --bg: #0F0F1A;
+      --bg-card: #1A1A2E;
+      --bg-code: #12121F;
+      --text: #E8E8F0;
+      --text-dim: #9090A8;
+      --border: #2A2A40;
+      --green: #34D399;
+      --blue: #60A5FA;
+      --orange: #FB923C;
+      --pink: #F472B6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* --- NAV --- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 15, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--purple-light);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    nav .links { display: flex; gap: 1.5rem; align-items: center; }
+    nav .links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav .links a:hover { color: var(--text); }
+    nav .links .btn-nav {
+      background: var(--purple);
+      color: #fff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    nav .links .btn-nav:hover { background: var(--purple-dark); }
+
+    /* --- HERO --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+    .hero .badge span { color: var(--green); font-weight: 600; }
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--purple-light), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+    .hero .cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(124, 58, 237, 0.3);
+    }
+    .btn-primary:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--purple-light); }
+
+    /* --- PLATFORMS --- */
+    .platforms {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+    .platform {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .platform .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .platform .name { font-size: 0.8rem; color: var(--text-dim); font-weight: 500; }
+
+    /* --- SECTIONS --- */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    section h2 em {
+      font-style: normal;
+      color: var(--purple-light);
+    }
+    section .subtitle {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    /* --- CODE --- */
+    .code-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 3rem auto;
+      max-width: 720px;
+    }
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.2rem;
+      background: rgba(0,0,0,0.2);
+      border-bottom: 1px solid var(--border);
+    }
+    .code-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .code-dot.r { background: #FF5F57; }
+    .code-dot.y { background: #FEBC2E; }
+    .code-dot.g { background: #28C840; }
+    .code-header .filename {
+      margin-left: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    pre {
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+    pre .kw { color: var(--purple-light); }
+    pre .fn { color: var(--blue); }
+    pre .str { color: var(--green); }
+    pre .ty { color: var(--orange); }
+    pre .cm { color: var(--text-dim); }
+    pre .num { color: var(--pink); }
+
+    /* --- FEATURES --- */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem;
+      transition: border-color 0.2s;
+    }
+    .feature:hover { border-color: var(--purple); }
+    .feature .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--purple-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .feature h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .feature p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* --- MATRIX --- */
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem auto;
+      font-size: 0.9rem;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: 0.8rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .matrix-table th {
+      color: var(--text-dim);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .matrix-table td:first-child { font-weight: 600; }
+    .check { color: var(--green); }
+    .dash { color: var(--text-dim); }
+
+    /* --- INSTALL --- */
+    .install-box {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      max-width: 520px;
+      margin: 0 auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+    .install-box .prompt { color: var(--purple-light); }
+    .install-box .cmd { color: var(--text); }
+
+    /* --- FOOTER --- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: var(--purple-light);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      nav .links a:not(.btn-nav) { display: none; }
+      .platforms { gap: 1.5rem; }
+      section { padding: 4rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">mui</a>
+  <div class="links">
+    <a href="https://pign.github.io/mui/">Docs</a>
+    <a href="https://github.com/Pign/mui">GitHub</a>
+    <a href="https://github.com/Pign/mui#example" class="btn-nav">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge"><span>v0.1.0</span> MIT License</div>
+  <h1>Write once,<br>run <em>everywhere</em>.</h1>
+  <p>Build native apps for macOS, iOS, Windows, Android, and terminal from a single Haxe codebase. Zero runtime overhead.</p>
+  <div class="cta">
+    <a href="https://pign.github.io/mui/#/getting-started" class="btn btn-primary">Get Started</a>
+    <a href="https://github.com/Pign/mui" class="btn btn-secondary">View on GitHub</a>
+  </div>
+
+  <div class="platforms">
+    <div class="platform">
+      <div class="icon">&#63743;</div>
+      <span class="name">macOS / iOS</span>
+    </div>
+    <div class="platform">
+      <div class="icon">&#9114;</div>
+      <span class="name">Windows</span>
+    </div>
+    <div class="platform">
+      <div class="icon">&#9861;</div>
+      <span class="name">Android</span>
+    </div>
+    <div class="platform">
+      <div class="icon">&gt;_</div>
+      <span class="name">Terminal</span>
+    </div>
+  </div>
+</div>
+
+<!-- CODE EXAMPLE -->
+<section>
+  <h2>One codebase. <em>Four platforms.</em></h2>
+  <p class="subtitle">Write your UI once. The same code compiles to native SwiftUI, WinUI, Jetpack Compose, and terminal.</p>
+
+  <div class="code-section">
+    <div class="code-header">
+      <div class="code-dot r"></div>
+      <div class="code-dot y"></div>
+      <div class="code-dot g"></div>
+      <span class="filename">Counter.hx</span>
+    </div>
+    <pre><span class="kw">import</span> mui.App;
+<span class="kw">import</span> mui.View;
+<span class="kw">import</span> mui.ui.*;
+
+<span class="kw">class</span> <span class="ty">Counter</span> <span class="kw">extends</span> <span class="ty">App</span> {
+    <span class="cm">@:state</span> <span class="kw">var</span> count:<span class="ty">Int</span> = <span class="num">0</span>;
+
+    <span class="kw">override function</span> <span class="fn">body</span>():<span class="ty">View</span> {
+        <span class="kw">return new</span> <span class="ty">VStack</span>([
+            <span class="kw">new</span> <span class="ty">Text</span>(<span class="str">'Count: ${count.get()}'</span>),
+            <span class="kw">new</span> <span class="ty">HStack</span>([
+                <span class="kw">new</span> <span class="ty">Button</span>(<span class="str">"-"</span>, <span class="kw">function</span>() count.<span class="fn">set</span>(count.<span class="fn">get</span>() - <span class="num">1</span>)),
+                <span class="kw">new</span> <span class="ty">Button</span>(<span class="str">"+"</span>, <span class="kw">function</span>() count.<span class="fn">set</span>(count.<span class="fn">get</span>() + <span class="num">1</span>)),
+            ], <span class="num">8</span>),
+        ], <span class="num">10</span>);
+    }
+}</pre>
+  </div>
+
+  <div style="text-align:center; margin-top:1.5rem;">
+    <code style="background:var(--bg-card); border:1px solid var(--border); padding:0.5rem 1rem; border-radius:8px; font-family:'JetBrains Mono',monospace; font-size:0.85rem;">
+      <span style="color:var(--text-dim)">$</span> mui run sui &nbsp;&nbsp;<span style="color:var(--text-dim)">|</span>&nbsp;&nbsp; mui run wui &nbsp;&nbsp;<span style="color:var(--text-dim)">|</span>&nbsp;&nbsp; mui run aui &nbsp;&nbsp;<span style="color:var(--text-dim)">|</span>&nbsp;&nbsp; mui run cui
+    </code>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <h2>Built for <em>real apps</em>.</h2>
+  <p class="subtitle">Not a toy abstraction. Each component compiles to the platform's native widget with zero overhead.</p>
+
+  <div class="features">
+    <div class="feature">
+      <div class="icon-box">&#9889;</div>
+      <h3>Zero runtime overhead</h3>
+      <p>Typedefs, subclasses, and abstracts compile away entirely. Your app runs native code, not a compatibility layer.</p>
+    </div>
+    <div class="feature">
+      <div class="icon-box">&#128268;</div>
+      <h3>Type-safe bindings</h3>
+      <p>Toggle, TextInput, and Slider accept @:state fields directly. @:from abstracts handle backend conversion at compile time.</p>
+    </div>
+    <div class="feature">
+      <div class="icon-box">&#128736;</div>
+      <h3>Macro-powered ForEach</h3>
+      <p>ForEach.build() transforms builder closures into backend-specific code. String templates for codegen backends, runtime closures for others.</p>
+    </div>
+    <div class="feature">
+      <div class="icon-box">&#127912;</div>
+      <h3>Unified color & font enums</h3>
+      <p>ColorValue and FontStyle map to each platform's native types via .toBackend(). One palette, four renderers.</p>
+    </div>
+    <div class="feature">
+      <div class="icon-box">&#128640;</div>
+      <h3>CLI tooling</h3>
+      <p>mui init, build, run. Scaffolds projects, delegates to backend CLIs, handles cross-compilation for iOS and Android.</p>
+    </div>
+    <div class="feature">
+      <div class="icon-box">&#128295;</div>
+      <h3>Extensible by design</h3>
+      <p>Add a new backend by adding #elseif blocks to ~25 files. Each addition is 2-5 lines of mechanical import + constructor mapping.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENT MATRIX -->
+<section>
+  <h2>18 unified <em>components</em>.</h2>
+  <p class="subtitle">Layout, controls, navigation, and data display. Each maps to the right native widget.</p>
+
+  <table class="matrix-table">
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>macOS / iOS</th>
+        <th>Windows</th>
+        <th>Android</th>
+        <th>Terminal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Text</td><td class="check">Text</td><td class="check">TextBlock</td><td class="check">Text</td><td class="check">Text</td></tr>
+      <tr><td>Button</td><td class="check">Button</td><td class="check">Button</td><td class="check">Button</td><td class="check">Button</td></tr>
+      <tr><td>Toggle</td><td class="check">Toggle</td><td class="check">ToggleSwitch</td><td class="check">Switch</td><td class="check">Checkbox</td></tr>
+      <tr><td>TextInput</td><td class="check">TextField</td><td class="check">TextBox</td><td class="check">TextField</td><td class="check">Input</td></tr>
+      <tr><td>Slider</td><td class="check">Slider</td><td class="check">Slider</td><td class="check">Slider</td><td class="check">TUI bar</td></tr>
+      <tr><td>VStack / HStack</td><td class="check">VStack</td><td class="check">StackPanel</td><td class="check">Column/Row</td><td class="check">VStack</td></tr>
+      <tr><td>ZStack</td><td class="check">ZStack</td><td class="check">ZStack</td><td class="check">Box</td><td class="dash">fallback</td></tr>
+      <tr><td>ForEach</td><td class="check">macro</td><td class="check">runtime</td><td class="check">runtime</td><td class="check">runtime</td></tr>
+      <tr><td>ConditionalView</td><td class="check">native</td><td class="check">native</td><td class="check">native</td><td class="check">runtime</td></tr>
+      <tr><td>ProgressView</td><td class="check">ProgressView</td><td class="check">ProgressRing</td><td class="check">ProgressView</td><td class="check">ProgressBar</td></tr>
+      <tr><td>SafeArea</td><td class="dash">default</td><td class="dash">n/a</td><td class="check">safeDrawing</td><td class="dash">n/a</td></tr>
+      <tr><td>Image</td><td class="check">Image</td><td class="check">Image</td><td class="check">Image</td><td class="dash">n/a</td></tr>
+      <tr><td>Divider</td><td class="check">Divider</td><td class="check">Border</td><td class="check">Divider</td><td class="check">Divider</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- GET STARTED -->
+<section>
+  <h2>Up and running in <em>30 seconds</em>.</h2>
+  <p class="subtitle">Install mui and a backend, scaffold a project, and build.</p>
+
+  <div class="install-box">
+    <div><span class="prompt">$</span> <span class="cmd">haxelib git mui https://github.com/Pign/mui</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">haxelib git sui https://github.com/Pign/sui</span></div>
+    <div style="margin-top:1rem;"><span class="prompt">$</span> <span class="cmd">haxelib run mui init MyApp</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">cd MyApp</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">mui run sui</span></div>
+  </div>
+
+  <div style="text-align:center; margin-top:2.5rem;">
+    <a href="https://pign.github.io/mui/#/getting-started" class="btn btn-primary">Read the docs</a>
+  </div>
+</section>
+
+<footer>
+  <p>
+    <a href="https://github.com/Pign/mui">GitHub</a> &middot;
+    <a href="https://pign.github.io/mui/">Documentation</a> &middot;
+    MIT License
+  </p>
+  <p style="margin-top:0.5rem;">Built with Haxe. Backends: <a href="https://github.com/Pign/sui">sui</a>, <a href="https://github.com/Pign/wui">wui</a>, <a href="https://github.com/Pign/aui">aui</a>, <a href="https://github.com/Pign/cui">cui</a>.</p>
+</footer>
+
+</body>
+</html>
