@@ -14,7 +14,7 @@ import mui.macros.Markup.ui;
 **/
 @:keep
 class EndToEnd extends mui.App {
-	static var clics = 0;
+	@:state var clics:Int = 0;
 
 	static function main() {}
 
@@ -26,14 +26,15 @@ class EndToEnd extends mui.App {
 	override public function view():nui.Node {
 		return ui(<VStack spacing={8}>
 			<Text text="Écrit en markup mui"/>
-			<Text text={"clics : " + clics}/>
+			<Text text={"clics : " + clics.value}/>
 			<Button text="Compter" onClick={compter}/>
 		</VStack>);
 	}
 
+	// Rien ici ne demande un re-rendu : la vue lit `clics`, donc l'effet qui
+	// l'entoure s'y est abonné, et l'écriture ci-dessous suffit.
 	function compter():Void {
-		clics++;
-		trace('[mui] clic n°$clics');
-		wui.bridge.HaxeBridge.rerenderNui();
+		clics.value = clics.value + 1;
+		trace('[mui] clic n°${clics.value}');
 	}
 }
