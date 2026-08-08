@@ -2,7 +2,7 @@
 # Changer -D mui_backend change la cible ; le markup est vérifié contre elle.
 -cp src
 -cp ../../src
--cp ../../../wui/wui/src
+-lib wui
 -lib rui
 -lib nui
 -D mui_backend=wui
