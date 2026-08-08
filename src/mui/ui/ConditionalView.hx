@@ -28,7 +28,7 @@ class ConditionalView extends aui.ui.ConditionalView {
 }
 #elseif (mui_backend == "cui")
 // cui has no ConditionalView — implement at runtime
-@:muiSupport("built", "cui n'a pas de vue conditionnelle : la branche est choisie à la construction")
+@:muiSupport("built", "cui has no conditional view: the branch is chosen at construction")
 class ConditionalView extends cui.View {
     var condition:cui.state.State<Bool>;
     var thenView:cui.View;

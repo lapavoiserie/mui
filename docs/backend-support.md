@@ -1,17 +1,17 @@
-# Ce que chaque backend supporte
+# Backend support
 
-> Cette page est **générée** : `haxe -cp tools --run BackendMatrix`.
-> Elle lit les branches `#if (mui_backend == …)` de `src/mui/ui/`,
-> donc elle ne peut pas promettre ce que le code ne fait plus.
+> This page is **generated**: `haxe -cp tools --run BackendMatrix`.
+> It reads the `#if (mui_backend == …)` branches in `src/mui/ui/`, so it
+> cannot promise what the code no longer does.
 
-| Type `mui` | sui | aui | wui | cui |
+| `mui` type | sui | aui | wui | cui |
 |---|---|---|---|---|
 | **Button** | Button | Button | Button | Button |
 | **ConditionalView** | ConditionalView | ConditionalView | ConditionalView | View ⚙️ |
 | **Divider** | Divider | Divider | View ⚙️ | Divider |
 | **ForEach** | macro | macro | macro | macro |
 | **HStack** | HStack | HStack | HStack | HStack |
-| **Image** | Image | Image | Image | **refusé** |
+| **Image** | Image | Image | Image | **refused** |
 | **ListView** | List | LazyColumn | ListView | ListView |
 | **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar |
 | **SafeArea** | VStack ○ | SafeArea | VStack ○ | VStack ○ |
@@ -25,33 +25,33 @@
 | **VStack** | VStack | VStack | VStack | VStack |
 | **ZStack** | ZStack | ZStack | ZStack | VStack ⚠️ |
 
-## Légende
+## Legend
 
-Sans marque, le backend a nativement la notion et `mui` s'y branche.
+Unmarked, the backend has the concept natively and `mui` binds straight to it.
 
-- ⚙️ **construit** — `mui` le compose à partir de primitives du backend.
-- ○ **sans objet** — la plateforme n'a pas cette notion ; ne rien faire est la bonne réponse.
-- ⚠️ **approximation** — le rendu diffère de ce que le type promet. C'est la seule catégorie où votre interface ne se comportera pas comme ailleurs.
-- **refusé** — l'usage ne compile pas, plutôt que de rendre quelque chose de faux.
+- ⚙️ **built** — `mui` composes it from the backend's primitives.
+- ○ **not applicable** — the platform has no such concept; doing nothing is the right answer.
+- ⚠️ **approximation** — what is drawn differs from what the type promises. This is the only row where your UI will not behave as it does elsewhere.
+- **refused** — using it does not compile, rather than rendering something wrong.
 
-## Les cas qui ne sont pas natifs
+## The cases that are not native
 
-| Type | Backend | | Ce qui se passe |
+| Type | Backend | | What happens |
 |---|---|---|---|
-| ConditionalView | cui | ⚙️ | cui n'a pas de vue conditionnelle : la branche est choisie à la construction |
-| Divider | wui | ⚙️ | WinUI n'a pas de Divider : un Border de 1 px gris |
-| Image | cui | **refusé** | l'usage ne compile pas, avec un message qui le dit |
-| SafeArea | sui | ○ | SwiftUI gère les zones sûres par défaut : rien à poser |
-| SafeArea | wui | ○ | une fenêtre de bureau n'a pas de zone sûre |
-| SafeArea | cui | ○ | un terminal n'a pas de zone sûre |
-| ZStack | cui | ⚠️ | le terminal ne superpose pas : les vues sont empilées |
+| ConditionalView | cui | ⚙️ | cui has no conditional view: the branch is chosen at construction |
+| Divider | wui | ⚙️ | WinUI has no Divider: a 1px grey Border stands in |
+| Image | cui | **refused** | using it does not compile, with a message that says why |
+| SafeArea | sui | ○ | SwiftUI handles safe areas by default: nothing to apply |
+| SafeArea | wui | ○ | a desktop window has no safe area |
+| SafeArea | cui | ○ | a terminal has no safe area |
+| ZStack | cui | ⚠️ | a terminal cannot overlay: the views are stacked instead |
 
-## Ce que la table ne dit pas
+## What the table does not say
 
-`qui` n'y figure pas : il **n'est pas un backend `mui`**. Son `#else` l'énonce
-(`mui requires -D mui_backend=sui|wui|cui|aui`), et `qui/src/qui/ui/` contient
-les mêmes fichiers que `src/mui/ui/` — une copie, pas un branchement.
+`qui` is absent because it **is not a `mui` backend**. The `#else` says so
+(`mui requires -D mui_backend=sui|wui|cui|aui`), and `qui/src/qui/ui/` holds the
+same files as `src/mui/ui/` — a copy, not a binding.
 
-`aui` a deux chemins : le statique couvre tout ce qui est listé ici, le renderer
-dynamique (`-D aui_dynamic`) en couvre un sous-ensemble et **refuse de compiler**
-ce qu'il ne dessine pas.
+`aui` has two paths: the static one covers everything listed here, while the
+dynamic renderer (`-D aui_dynamic`) covers a subset and **refuses to compile**
+what it cannot draw.

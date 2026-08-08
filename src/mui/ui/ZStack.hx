@@ -24,7 +24,7 @@ class ZStack extends aui.ui.ZStack {
 }
 #elseif (mui_backend == "cui")
 // Terminal can't overlay views — fall back to VStack
-@:muiSupport("approx", "le terminal ne superpose pas : les vues sont empilées")
+@:muiSupport("approx", "a terminal cannot overlay: the views are stacked instead")
 class ZStack extends cui.ui.VStack {
     public function new(content:Array<cui.View>) {
         super(content, 0);

@@ -42,7 +42,7 @@ class BackendMatrix {
 	static function main() {
 		var dir = "src/mui/ui";
 		if (!FileSystem.exists(dir)) {
-			Sys.println('Introuvable : $dir — lancez depuis la racine de mui.');
+			Sys.println('Not found: $dir — run this from the mui repository root.');
 			Sys.exit(1);
 		}
 
@@ -76,9 +76,9 @@ class BackendMatrix {
 				}
 
 				if (branch.indexOf("#error") >= 0) {
-					cells.push("**refusé**");
+					cells.push("**refused**");
 					notes.push({type: type, backend: backend, kind: "error",
-						note: "l'usage ne compile pas, avec un message qui le dit"});
+						note: "using it does not compile, with a message that says why"});
 					continue;
 				}
 
@@ -108,43 +108,43 @@ class BackendMatrix {
 		}
 
 		var out = new StringBuf();
-		out.add("# Ce que chaque backend supporte\n\n");
-		out.add("> Cette page est **générée** : `haxe -cp tools --run BackendMatrix`.\n");
-		out.add("> Elle lit les branches `#if (mui_backend == …)` de `src/mui/ui/`,\n");
-		out.add("> donc elle ne peut pas promettre ce que le code ne fait plus.\n\n");
+		out.add("# Backend support\n\n");
+		out.add("> This page is **generated**: `haxe -cp tools --run BackendMatrix`.\n");
+		out.add("> It reads the `#if (mui_backend == …)` branches in `src/mui/ui/`, so it\n");
+		out.add("> cannot promise what the code no longer does.\n\n");
 
-		out.add("| Type `mui` | " + BACKENDS.join(" | ") + " |\n");
+		out.add("| `mui` type | " + BACKENDS.join(" | ") + " |\n");
 		out.add("|---|" + [for (_ in BACKENDS) "---"].join("|") + "|\n");
 		for (row in rows) {
 			out.add("| **" + row.type + "** | " + row.cells.join(" | ") + " |\n");
 		}
 
-		out.add("\n## Légende\n\n");
-		out.add("Sans marque, le backend a nativement la notion et `mui` s'y branche.\n\n");
-		out.add("- ⚙️ **construit** — `mui` le compose à partir de primitives du backend.\n");
-		out.add("- ○ **sans objet** — la plateforme n'a pas cette notion ; ne rien faire est la bonne réponse.\n");
-		out.add("- ⚠️ **approximation** — le rendu diffère de ce que le type promet. C'est la seule catégorie où votre interface ne se comportera pas comme ailleurs.\n");
-		out.add("- **refusé** — l'usage ne compile pas, plutôt que de rendre quelque chose de faux.\n");
+		out.add("\n## Legend\n\n");
+		out.add("Unmarked, the backend has the concept natively and `mui` binds straight to it.\n\n");
+		out.add("- ⚙️ **built** — `mui` composes it from the backend's primitives.\n");
+		out.add("- ○ **not applicable** — the platform has no such concept; doing nothing is the right answer.\n");
+		out.add("- ⚠️ **approximation** — what is drawn differs from what the type promises. This is the only row where your UI will not behave as it does elsewhere.\n");
+		out.add("- **refused** — using it does not compile, rather than rendering something wrong.\n");
 
 		if (notes.length > 0) {
-			out.add("\n## Les cas qui ne sont pas natifs\n\n");
-			out.add("| Type | Backend | | Ce qui se passe |\n|---|---|---|---|\n");
+			out.add("\n## The cases that are not native\n\n");
+			out.add("| Type | Backend | | What happens |\n|---|---|---|---|\n");
 			for (n in notes) {
 				out.add("| " + n.type + " | " + n.backend + " | " + badge(n.kind) + " | " + n.note + " |\n");
 			}
 		}
 
-		out.add("\n## Ce que la table ne dit pas\n\n");
-		out.add("`qui` n'y figure pas : il **n'est pas un backend `mui`**. Son `#else` l'énonce\n");
-		out.add("(`mui requires -D mui_backend=sui|wui|cui|aui`), et `qui/src/qui/ui/` contient\n");
-		out.add("les mêmes fichiers que `src/mui/ui/` — une copie, pas un branchement.\n\n");
-		out.add("`aui` a deux chemins : le statique couvre tout ce qui est listé ici, le renderer\n");
-		out.add("dynamique (`-D aui_dynamic`) en couvre un sous-ensemble et **refuse de compiler**\n");
-		out.add("ce qu'il ne dessine pas.\n");
+		out.add("\n## What the table does not say\n\n");
+		out.add("`qui` is absent because it **is not a `mui` backend**. The `#else` says so\n");
+		out.add("(`mui requires -D mui_backend=sui|wui|cui|aui`), and `qui/src/qui/ui/` holds the\n");
+		out.add("same files as `src/mui/ui/` — a copy, not a binding.\n\n");
+		out.add("`aui` has two paths: the static one covers everything listed here, while the\n");
+		out.add("dynamic renderer (`-D aui_dynamic`) covers a subset and **refuses to compile**\n");
+		out.add("what it cannot draw.\n");
 
 		FileSystem.createDirectory("docs");
 		File.saveContent("docs/backend-support.md", out.toString());
-		Sys.println("docs/backend-support.md — " + rows.length + " types, " + notes.length + " cas non natifs");
+		Sys.println("docs/backend-support.md — " + rows.length + " types, " + notes.length + " non-native cases");
 	}
 
 	static function badge(kind:String):String {
@@ -152,7 +152,7 @@ class BackendMatrix {
 			case "built": "⚙️";
 			case "none": "○";
 			case "approx": "⚠️";
-			case "error": "**refusé**";
+			case "error": "**refused**";
 			case _: kind;
 		};
 	}

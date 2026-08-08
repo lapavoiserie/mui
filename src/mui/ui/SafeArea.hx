@@ -19,7 +19,7 @@ package mui.ui;
     On wui/cui: No safe area concept — renders children in a plain stack.
 **/
 #if (mui_backend == "sui")
-@:muiSupport("none", "SwiftUI gère les zones sûres par défaut : rien à poser")
+@:muiSupport("none", "SwiftUI handles safe areas by default: nothing to apply")
 class SafeArea extends sui.ui.VStack {
     public function new(content:Array<sui.View>) {
         // SwiftUI handles safe areas by default
@@ -32,7 +32,7 @@ class SafeArea extends sui.ui.VStack {
     }
 }
 #elseif (mui_backend == "wui")
-@:muiSupport("none", "une fenêtre de bureau n'a pas de zone sûre")
+@:muiSupport("none", "a desktop window has no safe area")
 class SafeArea extends wui.ui.VStack {
     public function new(content:Array<wui.View>) {
         super(content);
@@ -53,7 +53,7 @@ class SafeArea extends aui.ui.SafeArea {
     }
 }
 #elseif (mui_backend == "cui")
-@:muiSupport("none", "un terminal n'a pas de zone sûre")
+@:muiSupport("none", "a terminal has no safe area")
 class SafeArea extends cui.ui.VStack {
     public function new(content:Array<cui.View>) {
         super(content, 0);
