@@ -1,0 +1,19 @@
+# Build output. Everything under a build/ directory is produced by a generator
+# or a compiler -- hxcpp C++, object files, static libraries, the compiled
+# binaries, and the Xcode/WinUI/Gradle projects the backends emit. None of it is
+# written by hand, and all of it is reproduced by running the example's build.
+#
+# It had been tracked: 1492 files, 213 MB, against 105 files of actual source.
+build/
+bin/
+bin-tests/
+
+# Haxe / hxcpp
+*.n
+*.jar
+*.hash
+haxe_libraries/
+.haxelib/
+
+# macOS
+.DS_Store
