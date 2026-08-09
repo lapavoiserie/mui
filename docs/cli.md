@@ -54,7 +54,7 @@ Watches `.hx` source files and auto-rebuilds on save.
 | `aui` | Dynamic renderer + Gradle incremental | ~15-30s |
 | `wui` | Full warm rebuild via MSBuild | ~10-15s |
 
-The first build for sui/aui includes a dynamic view renderer (`--watch` flag) so the native host can interpret the Haxe view tree at runtime. Subsequent rebuilds only recompile the Haxe side.
+The first build for `sui` includes a dynamic view renderer (`--watch` flag) so the native host can interpret the Haxe view tree at runtime. Subsequent rebuilds only recompile the Haxe side. `aui` needs no flag: interpreting the tree at runtime is how it draws, watching or not.
 
 See [Hot Reload](hot-reload.md) for a step-by-step guide and architecture details.
 

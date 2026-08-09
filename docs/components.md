@@ -68,12 +68,14 @@ returns. **How** that expansion happens differs, and so does what it costs you.
 | `sui` | a separate SwiftUI struct, generated | `@:binding` fields become `@Binding var` |
 | `wui` | a separate C++/WinRT construction function | |
 | `cui` | expanded at draw time — `measure`/`render` delegate to `body()` | |
-| `aui` | expanded by the tree reader, **on the dynamic path only** | `-D aui_dynamic`; the static path refuses, with a message |
+| `aui` | expanded by the tree reader, on the device | |
 
-The `aui` exception is worth stating plainly: its static path emits Kotlin ahead
-of time and would need to produce a composable carrying the component's own
-state, which it does not do. Building a component without `-D aui_dynamic` is a
-compile error that says so.
+There is no exception left to state: `aui` used to render through a compile-time
+Kotlin transpiler, which would have needed a composable carrying the component's
+own state and did not produce one. That path is
+[decommissioned](https://lapavoiserie.github.io/aui/#/render-paths) and `aui`
+renders through its tree reader, where a component is expanded like everywhere
+else.
 
 ## What a component is not
 

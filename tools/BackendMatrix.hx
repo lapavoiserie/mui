@@ -138,9 +138,12 @@ class BackendMatrix {
 		out.add("`qui` is absent because it **is not a `mui` backend**. The `#else` says so\n");
 		out.add("(`mui requires -D mui_backend=sui|wui|cui|aui`), and `qui/src/qui/ui/` holds the\n");
 		out.add("same files as `src/mui/ui/` — a copy, not a binding.\n\n");
-		out.add("`aui` has two paths: the static one covers everything listed here, while the\n");
-		out.add("dynamic renderer (`-D aui_dynamic`) covers a subset and **refuses to compile**\n");
-		out.add("what it cannot draw.\n");
+		out.add("The `aui` column is the *mapping* -- which Compose widget a type is meant to\n");
+		out.add("become -- not the renderer's coverage. `aui` draws through its dynamic\n");
+		out.add("renderer, whose vocabulary is a subset of this table: a type outside it\n");
+		out.add("**refuses to compile**, naming the type and listing what is covered. The\n");
+		out.add("compile-time transpiler that covered everything listed here is\n");
+		out.add("[decommissioned](https://lapavoiserie.github.io/aui/#/render-paths).\n");
 
 		FileSystem.createDirectory("docs");
 		File.saveContent("docs/backend-support.md", out.toString());

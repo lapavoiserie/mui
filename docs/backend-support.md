@@ -52,6 +52,9 @@ Unmarked, the backend has the concept natively and `mui` binds straight to it.
 (`mui requires -D mui_backend=sui|wui|cui|aui`), and `qui/src/qui/ui/` holds the
 same files as `src/mui/ui/` — a copy, not a binding.
 
-`aui` has two paths: the static one covers everything listed here, while the
-dynamic renderer (`-D aui_dynamic`) covers a subset and **refuses to compile**
-what it cannot draw.
+The `aui` column is the *mapping* -- which Compose widget a type is meant to
+become -- not the renderer's coverage. `aui` draws through its dynamic
+renderer, whose vocabulary is a subset of this table: a type outside it
+**refuses to compile**, naming the type and listing what is covered. The
+compile-time transpiler that covered everything listed here is
+[decommissioned](https://lapavoiserie.github.io/aui/#/render-paths).

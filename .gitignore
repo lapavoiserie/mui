@@ -8,6 +8,11 @@ build/
 bin/
 bin-tests/
 
+# `aui` emits its Android project beside the build.hxml that asked for it,
+# not under build/ -- so building examples/build-aui.hxml drops an
+# examples/android/ into the tree. Generated, like everything above.
+android/
+
 # Haxe / hxcpp
 *.n
 *.jar
