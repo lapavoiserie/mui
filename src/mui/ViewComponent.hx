@@ -7,9 +7,10 @@ typedef ViewComponent = wui.ViewComponent;
 #elseif (mui_backend == "cui")
 typedef ViewComponent = cui.ViewComponent;
 #elseif (mui_backend == "aui")
-class ViewComponent extends aui.View {
-    public function body():aui.View { return this; }
-}
+// Was declared inline here for want of a real one -- which meant no
+// @:autoBuild, so a component's own @:state fields were never turned into
+// cells. aui has had aui.ViewComponent since 2026-08-09.
+typedef ViewComponent = aui.ViewComponent;
 #else
 #error "mui requires -D mui_backend=sui|wui|cui|aui"
 #end
