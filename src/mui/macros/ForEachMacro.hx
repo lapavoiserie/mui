@@ -48,7 +48,29 @@ class ForEachMacro {
         }
     }
 
+    /**
+        `sui` has two `ForEach` shapes, and which one to emit depends on the
+        render path.
+
+        The closure form is a value: the builder runs, and the renderer walks
+        what it produced. The legacy form is a *string template* the transpiler
+        resolved against the generated `appState` — which is why it is the only
+        one the static path understands, and why the dynamic renderer cannot
+        resolve it at all: at runtime `"{items[i]}"` is a name with nothing to
+        look it up in, so it yields no rows.
+
+        sui's transpiler is decommissioned, so the closure form is what mui
+        emits; the template form is kept for a build that asked for the other
+        path by name.
+    **/
     static function transformSui(items:Expr, builder:Expr):Expr {
+        if (!Context.defined("sui_static")) {
+            return macro new sui.ui.ForEach($items, $builder);
+        }
+        return transformSuiTemplate(items, builder);
+    }
+
+    static function transformSuiTemplate(items:Expr, builder:Expr):Expr {
         // Extract field name from items (e.g., `todos` → "todos")
         var arrayName = extractIdent(items);
         if (arrayName == null) {

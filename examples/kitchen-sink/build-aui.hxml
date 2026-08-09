@@ -1,0 +1,8 @@
+-cp src
+-cp ../../src
+-lib aui
+-D mui_backend=aui
+-D jvm
+--jvm build/app-logic.jar
+--macro aui.macros.ComposeGenerator.register()
+--main KitchenSink

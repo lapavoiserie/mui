@@ -1,0 +1,7 @@
+-cp src
+-cp ../../src
+-lib sui
+-D mui_backend=sui
+--macro sui.macros.SwiftGenerator.register()
+--main KitchenSink
+-cpp build/cpp
