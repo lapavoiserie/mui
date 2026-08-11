@@ -17,12 +17,11 @@ because the source differs.
 ## What it leaves out, and why
 
 A kitchen sink that quietly skipped a type would be the wrong kind of example,
-so each absence has a reason:
+so the absence has a reason:
 
 | Left out | Why |
 |---|---|
 | `Image`, `ListView` | In `mui`'s vocabulary and in all three backends, but not in **aui's dynamic renderer**, which is narrower than the backend. Being outside it is a compile error naming the type, not a blank area on screen. |
-| `ScrollView` | It does not have one API: `Array<View>` on sui and aui, a single child on wui, a child plus a scroll offset on cui. Until that is one signature it cannot appear in an example whose whole claim is that the source is the same everywhere. |
 
 ## What building it found
 
@@ -41,6 +40,11 @@ running this example on a device, and none announced itself:
 - `mui`'s `ForEach` emitted sui's legacy string-template form — the one the
   decommissioned transpiler resolved, and the one the dynamic renderer cannot.
 - An empty tab icon made SwiftUI draw its unsupported-view placeholder.
+- `ScrollView` had three different constructors behind one name, so this example
+  could not use it at all. It takes an array on every backend now.
+- Typing in the text field left the line below it on its placeholder: a value
+  arriving from a control reached Haxe but invalidated no other view showing the
+  same cell.
 
 ## Not yet seen
 
