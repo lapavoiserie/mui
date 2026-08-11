@@ -1,26 +1,62 @@
 package mui.ui;
 
-// ScrollView constructors differ:
-//   sui: ScrollView(content:Array<View>)
-//   wui: ScrollViewer(content:View) -- single child
-//   cui: ScrollView(child:View, offset:ScrollOffset) -- needs scroll offset binding
+/**
+	A scrollable column of children.
 
+	## One signature, four backends
+
+	The backends disagree about what a scroll container takes: `sui` and `aui`
+	take an array, `wui`'s `ScrollViewer` takes a single child, and `cui`'s needs
+	a child *and* a scroll offset to read the position from. `mui` used to expose
+	that disagreement — three different constructors behind one name — which
+	makes the type unusable in anything meant to build everywhere. An example
+	whose whole claim is "the same source" could not use it.
+
+	So the signature is the array, everywhere, and the backends that want one
+	child get a `VStack` around it. That is what they would have been given
+	anyway.
+
+	## The scroll offset, on cui
+
+	A terminal has no scrollbar to drag, so `cui` asks the application where the
+	view is scrolled to. Passing one stays possible; leaving it out gets a
+	position this view owns, which is the right default for content that is
+	merely long rather than navigated.
+**/
 #if (mui_backend == "sui")
-typedef ScrollView = sui.ui.ScrollView;
+class ScrollView extends sui.ui.ScrollView {
+	public function new(content:Array<sui.View>) {
+		super(content);
+	}
+}
+
+#elseif (mui_backend == "aui")
+class ScrollView extends aui.ui.ScrollView {
+	public function new(content:Array<aui.View>) {
+		super(content);
+	}
+}
+
 #elseif (mui_backend == "wui")
 class ScrollView extends wui.ui.ScrollViewer {
-    public function new(content:wui.View) {
-        super(content);
-    }
+	public function new(content:Array<wui.View>) {
+		super(new wui.ui.VStack(content));
+	}
 }
+
 #elseif (mui_backend == "cui")
 class ScrollView extends cui.ui.ScrollView {
-    public function new(child:cui.View, offset:cui.ui.ScrollView.ScrollOffset) {
-        super(child, offset);
-    }
+	public function new(content:Array<cui.View>, ?offset:cui.ui.ScrollView.ScrollOffset) {
+		super(new cui.ui.VStack(content), offset != null ? offset : ownPosition());
+	}
+
+	/** A position this view keeps, for content nothing else scrolls. **/
+	static function ownPosition():cui.ui.ScrollView.ScrollOffset {
+		var position = 0;
+		return new cui.ui.ScrollView.ScrollOffset(() -> position, v -> position = v);
+	}
 }
-#elseif (mui_backend == "aui")
-typedef ScrollView = aui.ui.ScrollView;
+
 #else
 #error "mui requires -D mui_backend=sui|wui|cui|aui"
 #end

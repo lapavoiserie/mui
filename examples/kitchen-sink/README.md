@@ -5,10 +5,14 @@ them. This is the example that answers "does write-once actually hold?" — not
 by asserting it, but by being the same file.
 
 ```bash
-haxe build-aui.hxml && haxelib run aui build --run     # Android
-haxelib run sui build ios                              # iOS simulator
-haxelib run sui build macos                            # macOS
+haxelib run sui build ios      # iOS simulator   — uses build.hxml
+haxelib run sui build macos    # macOS           — uses build.hxml
+haxelib run aui build --run    # Android         — uses build-aui.hxml
 ```
+
+`sui`'s CLI reads `build.hxml` by name, so that is the sui one; `aui`'s takes
+its own. Two files because the two toolchains disagree about the name, not
+because the source differs.
 
 ## What it leaves out, and why
 

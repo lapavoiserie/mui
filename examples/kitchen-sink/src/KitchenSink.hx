@@ -7,6 +7,7 @@ import mui.ui.ForEach;
 import mui.ui.HStack;
 import mui.ui.ProgressView;
 import mui.ui.SafeArea;
+import mui.ui.ScrollView;
 import mui.ui.Slider;
 import mui.ui.Spacer;
 import mui.ui.TabView;
@@ -26,18 +27,13 @@ import mui.ui.ZStack;
 
     ## What it deliberately does not use, and why
 
-    Three absences, each for a stated reason rather than for convenience — a
-    kitchen sink that quietly skipped a type would be the wrong kind of example.
+    One absence, for a stated reason rather than for convenience — a kitchen
+    sink that quietly skipped a type would be the wrong kind of example.
 
     - **`Image` and `ListView`** are in `mui`'s vocabulary and in all three
       backends, but not in **aui's dynamic renderer**, which is a narrower thing
       than the backend. Being outside it is a compile error naming the type, not
       a blank area on screen.
-    - **`ScrollView`** does not have one API. `Array<View>` on sui and aui, a
-      single child on wui, and a child plus a scroll offset on cui — the comments
-      in `mui/ui/ScrollView.hx` say so outright. Until that is one signature, it
-      cannot appear in an example whose whole claim is that the source is the
-      same everywhere.
 
     ## Reading it
 
@@ -79,7 +75,7 @@ class KitchenSink extends App {
     // --- Layout ------------------------------------------------------------
 
     function layoutTab():View {
-        return new VStack([
+        return new ScrollView([new VStack([
             heading("Stacks"),
             new Text("A row of three, spaced evenly."),
             new HStack([
@@ -109,13 +105,13 @@ class KitchenSink extends App {
                 new Text("two"),
                 new Text("three"),
             ], 4),
-        ], 12);
+        ], 12)]);
     }
 
     // --- Controls ----------------------------------------------------------
 
     function controlsTab():View {
-        return new VStack([
+        return new ScrollView([new VStack([
             heading("Buttons and state"),
             new Text('Count: ${count.get()}'),
             new HStack([
@@ -142,7 +138,7 @@ class KitchenSink extends App {
             heading("A value, two ways"),
             new Slider(level),
             new ProgressView("Level", level.get()),
-        ], 12);
+        ], 12)]);
     }
 
     function greeting():String {
@@ -153,7 +149,7 @@ class KitchenSink extends App {
     // --- Data --------------------------------------------------------------
 
     function dataTab():View {
-        return new VStack([
+        return new ScrollView([new VStack([
             heading("A loop"),
             new Text("Each row below is built by the same closure."),
             new VStack([ForEach.build(items, item -> new HStack([
@@ -181,7 +177,7 @@ class KitchenSink extends App {
             new ConditionalView(hasAny,
                 new Text("The list has something in it."),
                 new Text("The list is empty.")),
-        ], 12);
+        ], 12)]);
     }
 
     // --- Shared ------------------------------------------------------------
