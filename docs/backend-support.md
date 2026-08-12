@@ -13,7 +13,7 @@
 | **HStack** | HStack | HStack | HStack | HStack | HStack | HStack |
 | **Image** | Image | Image | Image | **refused** | Image | Image |
 | **ListView** | List | LazyColumn | ListView | ListView | ListView | ListView |
-| **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar | ProgressView | ProgressView ⚠️ |
+| **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar | ProgressView | ProgressView |
 | **SafeArea** | VStack ○ | SafeArea | VStack ○ | VStack ○ | SafeArea ○ | SafeArea |
 | **ScrollView** | ScrollView | ScrollView | ScrollViewer | ScrollView | ScrollView | ScrollView |
 | **Slider** | Slider | Slider | Slider | Slider | Slider | Slider |
@@ -41,7 +41,6 @@ Unmarked, the backend has the concept natively and `mui` binds straight to it.
 | ConditionalView | cui | ⚙️ | cui has no conditional view: the branch is chosen at construction |
 | Divider | wui | ⚙️ | WinUI has no Divider: a 1px grey Border stands in |
 | Image | cui | **refused** | using it does not compile, with a message that says why |
-| ProgressView | pui | ⚠️ | pui draws the indeterminate ring at a fixed angle rather than spinning it, until pui has a ticker |
 | SafeArea | sui | ○ | SwiftUI handles safe areas by default: nothing to apply |
 | SafeArea | wui | ○ | a desktop window has no safe area |
 | SafeArea | cui | ○ | a terminal has no safe area |

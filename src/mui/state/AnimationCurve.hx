@@ -18,6 +18,11 @@ enum AnimationCurve {
 }
 #elseif (mui_backend == "aui")
 typedef AnimationCurve = aui.state.StateAction.AnimationCurve;
+#elseif (mui_backend == "pui")
+// pui draws its own animation, so the seven names are its own enum rather than
+// a host's. Spring and Bouncy are closed-form approximations -- see
+// `pui.anim.Curve`.
+typedef AnimationCurve = pui.anim.Curve;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end
