@@ -35,16 +35,21 @@ haxe build-aui.hxml                  # Android, through aui
 haxelib run wui build                # Windows, through wui
 ```
 
-## What it does not prove yet
+## What building it found
 
-Two things are visibly wrong on Windows and are not this example's doing:
+Two defects, both in wui and neither in this example. Listing them here rather
+than working around them is the point — an example that quietly avoided them
+would hide exactly what it exists to show. Both are fixed now, and the note
+stays because *how* they were found is the argument for having this example at
+all.
 
-- **`Spacer` does not push.** A WinUI `StackPanel` hands each child its
-  desired size and distributes nothing, so the buttons sit left instead of
-  right. Making it work means an `HStack` carrying a spacer has to become a
-  `Grid` with a star column.
-- **`Divider` draws nothing.** It is a one-pixel `Border`, and its background
-  is not arriving.
+- **`Spacer` did not push.** A WinUI `StackPanel` hands each child the size it
+  asks for and distributes nothing, so an empty `Border` between two labels came
+  out zero wide. An `HStack` is a `Grid` now: every child gets a column, sized
+  `Auto` for content and `*` for a spacer.
+- **`Divider` drew nothing.** It asked for the colour `"Gray"`; the runtime's
+  table was keyed `"gray"`, and the mismatch cost it its whole background. Names
+  are folded now, and an unrecognised one is reported instead of ignored.
 
-Both are wui defects, and both are listed here rather than worked around: an
-example that quietly avoided them would hide exactly what it exists to show.
+A spacer still does nothing in a **`VStack`**, which is a StackPanel and
+distributes nothing vertically. Stated rather than discovered.
