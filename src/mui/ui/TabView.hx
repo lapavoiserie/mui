@@ -20,8 +20,26 @@ class TabView extends wui.ui.TabView {
 }
 #elseif (mui_backend == "cui")
 class TabView extends cui.ui.Tabs {
-    public function new(tabs:Array<TabItem>, active:cui.ui.Tabs.TabSelection) {
-        super([for (t in tabs) {label: t.label, content: t.content}], active);
+    /**
+        The selection is optional here, as it is absent everywhere else.
+
+        `cui` asks the application which tab is active, because a terminal has
+        no widget keeping that for you. The other three backends keep it
+        themselves, so requiring it here gave `mui.ui.TabView` two signatures --
+        and an example whose whole claim is one source could not use it.
+
+        Passing one stays possible, and is what you want when something else
+        drives the selection. Leaving it out gets a selection this view owns.
+    **/
+    public function new(tabs:Array<TabItem>, ?active:cui.ui.Tabs.TabSelection) {
+        super([for (t in tabs) {label: t.label, content: t.content}],
+            active != null ? active : ownSelection());
+    }
+
+    /** A selection this view keeps, for tabs nothing else drives. **/
+    static function ownSelection():cui.ui.Tabs.TabSelection {
+        var index = 0;
+        return new cui.ui.Tabs.TabSelection(() -> index, i -> index = i);
     }
 }
 #elseif (mui_backend == "aui")

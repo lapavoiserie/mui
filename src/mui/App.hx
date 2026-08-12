@@ -35,13 +35,33 @@ class App extends wui.App {
         return new nui.Node("VStack");
     }
 
-    /** What wui's push mode calls. Handed straight to the sink. **/
+    /**
+        What wui's push mode calls.
+
+        Either shape of application answers it. An app that overrides `view()`
+        describes nodes directly, and that is handed to the sink. An app that
+        overrides `body()` — the shape the other three backends take — has its
+        view tree *described* as nodes by `mui.nui.FromViews`.
+
+        Before this, `body()` was a stub the push renderer never called: an app
+        written the ordinary way compiled for wui and drew an empty window,
+        which is the one thing a layer like this exists to prevent.
+    **/
     public function nuiBody():nui.Node {
-        return view();
+        var declared = view();
+        if (declared != null && !isEmptyRoot(declared)) return declared;
+        return mui.nui.FromViews.describe(body());
     }
 
-    // wui.App requires it, and push mode ignores it: the window gets an empty
-    // root and the node tree is mounted into it.
+    /** The placeholder `view()` returns when an app never overrode it. **/
+    function isEmptyRoot(node:nui.Node):Bool {
+        return node.type == "VStack"
+            && (node.children == null || node.children.length == 0)
+            && (node.props == null || !node.props.keys().hasNext());
+    }
+
+    // wui.App requires it. An app that overrides it gets it described as nodes;
+    // one that does not gets an empty root, and its `view()` is what renders.
     override function body():wui.View {
         return new wui.ui.VStack([]);
     }
