@@ -41,6 +41,12 @@ class VStack extends qui.ui.VStack {
         super(content, spacing);
     }
 }
+#elseif (mui_backend == "pui")
+class VStack extends pui.ui.VStack {
+    public function new(content:Array<pui.View>, ?spacing:Float) {
+        super(content, spacing == null ? 8 : spacing);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

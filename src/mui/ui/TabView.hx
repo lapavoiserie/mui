@@ -92,6 +92,15 @@ class TabView extends qui.ui.TabView {
     **/
     static var selection:qui.state.State<Int> = new qui.state.State(0);
 }
+#elseif (mui_backend == "pui")
+class TabView extends pui.ui.TabView {
+    // No static selection cell here, unlike qui and cui: pui keeps the selected
+    // index under the view's own path, so two tab bars in one app do not share
+    // a page -- the caveat those two branches have to carry.
+    public function new(tabs:Array<TabItem>) {
+        super([for (t in tabs) {label: t.label, content: t.content}]);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

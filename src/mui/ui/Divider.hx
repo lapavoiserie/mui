@@ -35,6 +35,12 @@ class Divider extends aui.ui.Divider {
 }
 #elseif (mui_backend == "qui")
 typedef Divider = qui.ui.Divider;
+#elseif (mui_backend == "pui")
+class Divider extends pui.ui.Divider {
+    public function new() {
+        super(false);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

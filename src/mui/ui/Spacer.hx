@@ -12,6 +12,8 @@ typedef Spacer = cui.ui.Spacer;
 typedef Spacer = aui.ui.Spacer;
 #elseif (mui_backend == "qui")
 typedef Spacer = qui.ui.Spacer;
+#elseif (mui_backend == "pui")
+typedef Spacer = pui.ui.Spacer;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

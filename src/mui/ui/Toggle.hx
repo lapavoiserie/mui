@@ -38,6 +38,12 @@ class Toggle extends qui.ui.Toggle {
         super(label, state);
     }
 }
+#elseif (mui_backend == "pui")
+class Toggle extends pui.ui.Toggle {
+    public function new(label:String, state:ToggleBinding) {
+        super(label, state);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

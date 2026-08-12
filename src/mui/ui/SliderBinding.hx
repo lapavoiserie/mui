@@ -50,6 +50,8 @@ abstract SliderBinding(cui.ui.Slider.SliderBinding) {
 }
 #elseif (mui_backend == "qui")
 typedef SliderBinding = qui.ui.SliderBinding;
+#elseif (mui_backend == "pui")
+typedef SliderBinding = pui.ui.SliderBinding;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

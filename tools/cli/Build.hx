@@ -63,9 +63,15 @@ class Build {
                 if (code != 0) Sys.exit(code);
                 Sys.println("Build complete: build/cui/");
 
+            case "pui":
+                // pui compiles directly too, and its own CLI serves the result.
+                var code = Sys.command("haxe", [hxmlFile]);
+                if (code != 0) Sys.exit(code);
+                Sys.println("Build complete — serve it with: haxelib run pui run");
+
             default:
                 Sys.println('Unknown backend: $backend');
-                Sys.println("Available backends: sui, wui, cui, aui");
+                Sys.println("Available backends: sui, wui, cui, aui, qui, pui");
                 Sys.exit(1);
         }
     }

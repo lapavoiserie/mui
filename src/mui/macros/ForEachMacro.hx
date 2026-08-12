@@ -28,7 +28,7 @@ class ForEachMacro {
     public static function transform(items:Expr, builder:Expr):Expr {
         var backend = Context.definedValue("mui_backend");
         if (backend == null) {
-            Context.error("mui requires -D mui_backend=sui|wui|cui|aui|qui", items.pos);
+            Context.error("mui requires -D mui_backend=sui|wui|cui|aui|qui|pui", items.pos);
             return macro null;
         }
 
@@ -44,6 +44,8 @@ class ForEachMacro {
                 return transformAui(items, builder);
             case "qui":
                 return transformQui(items, builder);
+            case "pui":
+                return transformPui(items, builder);
             default:
                 Context.error('Unknown mui_backend: $backend', items.pos);
                 return macro null;
@@ -125,6 +127,14 @@ class ForEachMacro {
         // rebuilt when the cell changes, which is the whole point of handing it
         // over rather than reading it here.
         return macro new qui.ui.ForEach($items, $builder);
+    }
+
+    static function transformPui(items:Expr, builder:Expr):Expr {
+        // The array itself, read here, as `cui` does. `pui` rebuilds its whole
+        // tree when the cell changes rather than diffing it, so handing the cell
+        // over would buy nothing -- and the read still subscribes, because the
+        // write marks the tree dirty either way.
+        return macro new pui.ui.ForEach($items.get(), $builder);
     }
 
     static function transformAui(items:Expr, builder:Expr):Expr {

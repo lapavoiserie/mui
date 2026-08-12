@@ -87,6 +87,20 @@ class Text extends qui.ui.Text {
         });
     }
 }
+#elseif (mui_backend == "pui")
+class Text extends pui.ui.Text {
+    public function new(content:String, ?scale:TextScale) {
+        // pui is the only backend where the four steps are the whole scale
+        // rather than a selection from someone else's ramp, so the mapping is
+        // one to one and there is nothing to approximate.
+        super(content, scale == null ? null : switch (scale) {
+            case Title: pui.ui.Text.TextScale.Title;
+            case Subtitle: pui.ui.Text.TextScale.Subtitle;
+            case Body: pui.ui.Text.TextScale.Body;
+            case Caption: pui.ui.Text.TextScale.Caption;
+        });
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

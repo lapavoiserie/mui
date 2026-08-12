@@ -78,6 +78,12 @@ class ScrollView extends qui.ui.ScrollView {
 		super(content.length == 1 ? content[0] : new qui.ui.VStack(content));
 	}
 }
+#elseif (mui_backend == "pui")
+class ScrollView extends pui.ui.ScrollView {
+    public function new(content:Array<pui.View>) {
+        super(content);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

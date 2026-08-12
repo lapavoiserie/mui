@@ -22,7 +22,7 @@ import sys.io.File;
 	not source.
 **/
 class BackendMatrix {
-	static final BACKENDS = ["sui", "aui", "wui", "cui"];
+	static final BACKENDS = ["sui", "aui", "wui", "cui", "qui", "pui"];
 
 	/** One backend's answer for one mui type. **/
 	static function branchOf(source:String, backend:String):Null<String> {
@@ -66,6 +66,12 @@ class BackendMatrix {
 
 			// The three *Binding types are conversion abstracts, not views.
 			if (StringTools.endsWith(type, "Binding")) continue;
+
+			// Nor is an enum. `TextScale` names four steps every backend maps in
+			// its own `Text` branch; a row of its own said "macro" in all five
+			// columns, which reads as a type resolved by a macro rather than as
+			// a vocabulary the Text row already accounts for.
+			if (source.indexOf("\nenum ") >= 0) continue;
 
 			var cells = [];
 			for (backend in BACKENDS) {
@@ -135,9 +141,10 @@ class BackendMatrix {
 		}
 
 		out.add("\n## What the table does not say\n\n");
-		out.add("`qui` is absent because it **is not a `mui` backend**. The `#else` says so\n");
-		out.add("(`mui requires -D mui_backend=sui|wui|cui|aui`), and `qui/src/qui/ui/` holds the\n");
-		out.add("same files as `src/mui/ui/` — a copy, not a binding.\n\n");
+		out.add("`qui` joined as the fifth backend. It had been written against this contract\n");
+		out.add("before it was wired to one -- the same twenty-one views, the same `App` shape,\n");
+		out.add("and an `appTitle` already mapped to its own `appName` -- so the column is a\n");
+		out.add("binding like the others, not a copy.\n\n");
 		out.add("The `aui` column is the *mapping* -- which Compose widget a type is meant to\n");
 		out.add("become -- not the renderer's coverage. `aui` draws through its dynamic\n");
 		out.add("renderer, whose vocabulary is a subset of this table: a type outside it\n");

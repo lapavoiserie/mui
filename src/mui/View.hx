@@ -10,6 +10,8 @@ typedef View = cui.View;
 typedef View = aui.View;
 #elseif (mui_backend == "qui")
 typedef View = qui.View;
+#elseif (mui_backend == "pui")
+typedef View = pui.View;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

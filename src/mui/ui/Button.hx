@@ -42,6 +42,12 @@ class Button extends qui.ui.Button {
         super(label, action);
     }
 }
+#elseif (mui_backend == "pui")
+class Button extends pui.ui.Button {
+    public function new(label:String, ?action:() -> Void) {
+        super(label, action);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

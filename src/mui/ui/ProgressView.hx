@@ -35,6 +35,13 @@ class ProgressView extends qui.ui.ProgressView {
         super(label, value);
     }
 }
+#elseif (mui_backend == "pui")
+@:muiSupport("approx", "pui draws the indeterminate ring at a fixed angle rather than spinning it, until pui has a ticker")
+class ProgressView extends pui.ui.ProgressView {
+    public function new(?label:String, ?value:Float) {
+        super(label, value);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

@@ -36,6 +36,12 @@ class ZStack extends qui.ui.ZStack {
         super(content);
     }
 }
+#elseif (mui_backend == "pui")
+class ZStack extends pui.ui.ZStack {
+    public function new(content:Array<pui.View>) {
+        super(content);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

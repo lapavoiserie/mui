@@ -100,6 +100,12 @@ class SafeArea extends qui.ui.SafeArea {
         padding(24);
     }
 }
+#elseif (mui_backend == "pui")
+class SafeArea extends pui.ui.SafeArea {
+    public function new(content:Array<pui.View>) {
+        super(content);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

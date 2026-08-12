@@ -107,6 +107,11 @@ class App extends aui.App {
 // Sailfish backend was written against this contract before it was wired in.
 class App extends qui.App {}
 
+#elseif (mui_backend == "pui")
+// `pui.App` already carries `appTitle` and the `@:state` build macro. Nothing
+// is added here on purpose: the macro must run once, and it runs there.
+class App extends pui.App {}
+
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end

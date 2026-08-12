@@ -48,6 +48,8 @@ abstract TextInputBinding(aui.state.State<String>) {
 }
 #elseif (mui_backend == "qui")
 typedef TextInputBinding = qui.ui.TextInputBinding;
+#elseif (mui_backend == "pui")
+typedef TextInputBinding = pui.ui.TextInputBinding;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui|pui"
 #end
