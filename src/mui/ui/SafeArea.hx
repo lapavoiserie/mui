@@ -88,14 +88,16 @@ class SafeArea extends cui.ui.VStack {
     }
 }
 #elseif (mui_backend == "qui")
-@:muiSupport("partial", "Silica keeps the status bar clear; the page margin does not arrive yet")
+@:muiSupport("none", "Silica keeps the status bar clear on its own")
 class SafeArea extends qui.ui.SafeArea {
     public function new(content:Array<qui.View>) {
         super(content);
-        // No `padding()` call, deliberately. `qui.View.padding` returns `this`
-        // and does nothing yet, so asking for the margin here would read as
-        // applied while the screen showed otherwise. Named in @:muiSupport
-        // instead, which is where a backend says what it cannot do.
+        // Silica sizes text in pixels and lays a page out from the screen
+        // edge, so the inset is stated in the same unit the platform uses.
+        // This was left out while `qui.View.padding` was a stub that returned
+        // `this`: asking then would have read as applied while the screen
+        // showed the first character against the edge.
+        padding(24);
     }
 }
 #else
