@@ -40,7 +40,84 @@ class FromViews {
 	/** Describe a view tree, or an empty root when there is nothing to draw. **/
 	public static function describe(view:wui.View):Node {
 		if (view == null) return new Node("VStack");
+
+		// Where *one* node is expected there are no siblings to become, so an
+		// expansion is wrapped in the stack it would have filled.
+		var expansion:Array<Node> = [];
+		if (expanded(view, expansion, 0)) {
+			var root = new Node("VStack", "#0");
+			for (child in expansion) root.children.push(child);
+			return root;
+		}
+
 		return node(view, 0);
+	}
+
+	/**
+		Nodes with no rendering of their own, expanded before the sink sees them.
+
+		A `ForEach` is a loop that yields siblings; a `ConditionalView` is the
+		branch its condition picks. Neither is a control, and asking the sink for
+		one would be asking for a WinRT type that does not exist. `sui` and `aui`
+		expand them in their own walks for the same reason -- this is that rule,
+		on the push side.
+	**/
+	static function expanded(view:wui.View, into:Array<Node>, index:Int):Bool {
+		switch (view.viewType) {
+			case "ForEach":
+				for (item in loopItems(view)) into.push(node(item, into.length));
+				return true;
+
+			case "ConditionalView":
+				var taken = branchOf(view);
+				if (taken != null) into.push(node(taken, into.length));
+				return true;
+
+			case _:
+				return false;
+		}
+	}
+
+	/** The views a `ForEach` yields, or none when it cannot be run. **/
+	static function loopItems(view:wui.View):Array<wui.View> {
+		var out:Array<wui.View> = [];
+		if (view.properties == null) return out;
+
+		var template:Dynamic = view.properties.get("template");
+		if (template == null || !Reflect.isFunction(template)) return out;
+
+		var source:Dynamic = view.properties.get("items");
+		if (Std.isOfType(source, rui.state.State)) source = (cast source : rui.state.State<Dynamic>).get();
+		if (source == null || !Std.isOfType(source, Array)) return out;
+
+		var items:Array<Dynamic> = source;
+		for (item in items) {
+			var built:Dynamic = Reflect.callMethod(null, template, [item]);
+			if (built != null) out.push(cast built);
+		}
+		return out;
+	}
+
+	/**
+		The branch a condition selects, or null when it cannot be read.
+
+		Null rather than the else-branch: an unreadable condition is not `false`,
+		and taking a branch on a guess puts half a screen up on one.
+	**/
+	static function branchOf(view:wui.View):Null<wui.View> {
+		if (view.properties == null) return null;
+
+		var condition:Dynamic = view.properties.get("condition");
+		var holds:Null<Bool> = null;
+		if (Std.isOfType(condition, rui.state.State)) {
+			holds = (cast condition : rui.state.State<Dynamic>).get() == true;
+		} else if (Std.isOfType(condition, Bool)) {
+			holds = condition;
+		}
+		if (holds == null) return null;
+
+		var taken:Dynamic = holds ? view.properties.get("thenView") : view.properties.get("elseView");
+		return taken == null ? null : cast taken;
 	}
 
 	static function node(view:wui.View, index:Int):Node {
@@ -48,19 +125,83 @@ class FromViews {
 
 		if (view.properties != null) {
 			for (key in view.properties.keys()) {
+				// A binding is not a value and does not describe as one. It is a
+				// cell, and `bind` turns it into the two things the sink can use.
+				if (key == "binding") continue;
 				var value = toProp(view.properties.get(key));
 				if (value != null) out.prop(key, value);
 			}
+			bind(out, view.properties.get("binding"));
 		}
 
 		if (view.children != null) {
-			for (i in 0...view.children.length) {
-				var child = view.children[i];
-				if (child != null) out.children.push(node(child, i));
+			for (child in view.children) {
+				if (child == null) continue;
+				if (!expanded(child, out.children, out.children.length)) {
+					out.children.push(node(child, out.children.length));
+				}
 			}
 		}
 
 		return out;
+	}
+
+	/**
+		Describe a bound cell as the two halves of a two-way control.
+
+		A `wui.ui` control stores the cell it is bound to under `binding` and
+		never reads it. That was survivable on the transpiled path, which knows
+		every state by name at compile time and pushes to it separately. On the
+		push path it meant a control was **blind in both directions**: a switch
+		bound to a cell holding `true` drew itself `Off`, and flipping it changed
+		nothing in Haxe, so the line reading that cell never moved.
+
+		Both halves are established here:
+
+		- the cell's current value, under the property the control calls its
+		  value, so a write in Haxe reaches the screen;
+		- a handler under the key that control reports through, so an edit by the
+		  user reaches the cell.
+
+		Reading the cell here is what subscribes the render to it: `renderNui`
+		runs this walk inside an effect, so `get()` makes the re-render happen by
+		itself. That is the same rule the view layer follows everywhere else --
+		a view reads observable state, and the reading is the subscription.
+	**/
+	static function bind(node:Node, binding:Dynamic):Void {
+		if (binding == null) return;
+
+		var valueKey = wui.nui.Bindings.valueKey(node.type);
+		var changeKey = wui.nui.Bindings.changeKey(node.type);
+		if (valueKey == null || changeKey == null) {
+			trace('[mui] ${node.type} carries a binding, but nothing says what its value is called');
+			return;
+		}
+
+		if (!Std.isOfType(binding, rui.state.State)) {
+			trace('[mui] ${node.type}: a binding has to be a state cell to be observed');
+			return;
+		}
+
+		var cell:rui.state.State<Dynamic> = cast binding;
+		var current:Dynamic = cell.get();
+
+		// The cell's own type decides, not the control's. A slider bound to an
+		// Int must put an Int back: rounding is the binding's job here, because
+		// the control only ever reports a number.
+		if (Std.isOfType(current, Bool)) {
+			node.prop(valueKey, PBool(current));
+			node.prop(changeKey, PCallbackBool(function(v:Bool) cell.set(v)));
+		} else if (Std.isOfType(current, Int)) {
+			node.prop(valueKey, PFloat(current));
+			node.prop(changeKey, PCallbackFloat(function(v:Float) cell.set(Std.int(v))));
+		} else if (Std.isOfType(current, Float)) {
+			node.prop(valueKey, PFloat(current));
+			node.prop(changeKey, PCallbackFloat(function(v:Float) cell.set(v)));
+		} else {
+			node.prop(valueKey, PString(current == null ? "" : Std.string(current)));
+			node.prop(changeKey, PCallbackString(function(v:String) cell.set(v)));
+		}
 	}
 
 	/**

@@ -14,7 +14,7 @@ class Divider extends sui.View {
 // WinUI has no native Divider. Emits a thin horizontal line via a
 // 1px-tall view with a gray background.
 @:muiSupport("built", "WinUI has no Divider: a 1px grey Border stands in")
-class Divider extends wui.View {
+class Divider extends wui.ui.Border {
     public function new() {
         super("Border");
         properties.set("height", 1);
