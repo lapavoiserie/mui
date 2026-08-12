@@ -1,0 +1,10 @@
+-cp src
+-cp ../../src
+-lib wui
+-lib nui
+-lib rui
+-D mui_backend=wui
+--macro rui.macros.ViewRule.register("mui.App", "body")
+--macro wui.macros.WinUIGenerator.register()
+--main Showcase
+-cpp build/cpp
