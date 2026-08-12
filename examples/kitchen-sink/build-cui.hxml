@@ -1,0 +1,8 @@
+-cp src
+-cp ../../src
+-lib cui
+-lib rui
+-lib nui
+-D mui_backend=cui
+--main KitchenSink
+-cpp build/cui
