@@ -30,8 +30,8 @@ special-cased.
 ## Building it
 
 ```bash
-haxe build.hxml                      # iOS / macOS, through sui
-haxe build-aui.hxml                  # Android, through aui
+haxelib run sui build macos          # macOS / iOS, through sui
+haxelib run aui run                  # Android, through aui
 haxelib run wui build                # Windows, through wui
 ```
 

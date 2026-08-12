@@ -5,14 +5,23 @@ them. This is the example that answers "does write-once actually hold?" — not
 by asserting it, but by being the same file.
 
 ```bash
-haxelib run sui build ios      # iOS simulator   — uses build.hxml
-haxelib run sui build macos    # macOS           — uses build.hxml
-haxelib run aui build --run    # Android         — uses build-aui.hxml
+haxelib run sui build ios      # iOS simulator
+haxelib run sui build macos    # macOS
+haxelib run aui run            # Android
+haxelib run wui build          # Windows
 ```
 
-`sui`'s CLI reads `build.hxml` by name, so that is the sui one; `aui`'s takes
-its own. Two files because the two toolchains disagree about the name, not
-because the source differs.
+One build file per backend — `build-sui.hxml`, `build-aui.hxml`,
+`build-wui.hxml` — because the three toolchains want different flags, not
+because the source differs. Each tool reads the one named after it, and falls
+back to `build.hxml` for a project with a single target.
+
+That fallback used to be the only rule, and it cost real time. `build.hxml`
+could belong to only one of the three, so the other two compiled *its* target,
+packaged whatever artefact was already sitting in `build/`, and reported
+success. The aui target had not compiled in months and nothing said so — an
+example that exists to prove one source works everywhere was, on one platform,
+proving nothing at all.
 
 ## What it leaves out, and why
 
