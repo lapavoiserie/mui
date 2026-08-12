@@ -12,6 +12,7 @@ import mui.ui.Slider;
 import mui.ui.Spacer;
 import mui.ui.TabView;
 import mui.ui.Text;
+import mui.ui.TextScale;
 import mui.ui.TextInput;
 import mui.ui.Toggle;
 import mui.ui.VStack;
@@ -77,7 +78,7 @@ class KitchenSink extends App {
     function layoutTab():View {
         return new ScrollView([new VStack([
             heading("Stacks"),
-            new Text("A row of three, spaced evenly."),
+            note("A row of three, spaced evenly."),
             new HStack([
                 new Text("left"),
                 new Spacer(),
@@ -89,7 +90,7 @@ class KitchenSink extends App {
             new Divider(),
 
             heading("Depth"),
-            new Text("A ZStack lays its children on top of each other."),
+            note("A ZStack lays its children on top of each other."),
             new ZStack([
                 new Text("behind"),
                 new Text("in front"),
@@ -98,7 +99,7 @@ class KitchenSink extends App {
             new Divider(),
 
             heading("Spacing"),
-            new Text("This column is built with an explicit gap, so the same\n"
+            note("This column is built with an explicit gap, so the same\n"
                 + "number produces the same rhythm on every backend."),
             new VStack([
                 new Text("one"),
@@ -151,7 +152,7 @@ class KitchenSink extends App {
     function dataTab():View {
         return new ScrollView([new VStack([
             heading("A loop"),
-            new Text("Each row below is built by the same closure."),
+            note("Each row below is built by the same closure."),
             new VStack([ForEach.build(items, item -> new HStack([
                 new Text("•"),
                 new Text(item),
@@ -173,7 +174,7 @@ class KitchenSink extends App {
             new Divider(),
 
             heading("A condition"),
-            new Text("The line below swaps when the list empties."),
+            note("The line below swaps when the list empties."),
             new ConditionalView(hasAny,
                 new Text("The list has something in it."),
                 new Text("The list is empty.")),
@@ -183,7 +184,12 @@ class KitchenSink extends App {
     // --- Shared ------------------------------------------------------------
 
     function heading(label:String):View {
-        return new Text(label);
+        return new Text(label, Subtitle);
+    }
+
+    /** An explanatory aside, which is what `Caption` is for. **/
+    function note(line:String):View {
+        return new Text(line, Caption);
     }
 
     static function main() {
