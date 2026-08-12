@@ -33,6 +33,12 @@ class Slider extends cui.ui.Slider {
         super(state.unwrap(), min, max);
     }
 }
+#elseif (mui_backend == "qui")
+class Slider extends qui.ui.Slider {
+    public function new(state:SliderBinding, min:Float = 0.0, max:Float = 1.0) {
+        super(state, min, max);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

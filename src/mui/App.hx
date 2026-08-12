@@ -102,6 +102,11 @@ class App extends aui.App {
     function set_appTitle(v:String):String { appName = v; return v; }
 }
 
+#elseif (mui_backend == "qui")
+// `qui.App` already carries `appTitle`, mapped to its own `appName`: the
+// Sailfish backend was written against this contract before it was wired in.
+class App extends qui.App {}
+
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

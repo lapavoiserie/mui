@@ -19,5 +19,5 @@ enum AnimationCurve {
 #elseif (mui_backend == "aui")
 typedef AnimationCurve = aui.state.StateAction.AnimationCurve;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

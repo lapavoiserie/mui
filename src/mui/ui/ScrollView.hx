@@ -57,6 +57,15 @@ class ScrollView extends cui.ui.ScrollView {
 	}
 }
 
+#elseif (mui_backend == "qui")
+class ScrollView extends qui.ui.ScrollView {
+	// Silica scrolls one child, like WinUI. The stack that would have been
+	// written by hand is written here instead, so the shared constructor keeps
+	// taking an array on all five.
+	public function new(content:Array<qui.View>) {
+		super(content.length == 1 ? content[0] : new qui.ui.VStack(content));
+	}
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

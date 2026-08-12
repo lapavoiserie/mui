@@ -10,6 +10,8 @@ typedef Image = wui.ui.Image;
 #error "mui.ui.Image is not available on the cui (terminal) backend. Use #if (mui_backend != \"cui\") to guard Image usage."
 #elseif (mui_backend == "aui")
 typedef Image = aui.ui.Image;
+#elseif (mui_backend == "qui")
+typedef Image = qui.ui.Image;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

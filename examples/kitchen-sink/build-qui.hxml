@@ -1,0 +1,9 @@
+-cp src
+-cp ../../src
+-cp ../../../haxe-sailfish-workspace/haxe-sailfish/src
+-lib rui
+-lib nui
+-D mui_backend=qui
+--main KitchenSink
+--no-output
+-cpp build/qui-check

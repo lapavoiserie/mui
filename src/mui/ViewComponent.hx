@@ -12,5 +12,5 @@ typedef ViewComponent = cui.ViewComponent;
 // cells. aui has had aui.ViewComponent since 2026-08-09.
 typedef ViewComponent = aui.ViewComponent;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

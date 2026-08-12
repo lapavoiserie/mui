@@ -87,6 +87,17 @@ class SafeArea extends cui.ui.VStack {
         return this;
     }
 }
+#elseif (mui_backend == "qui")
+@:muiSupport("partial", "Silica keeps the status bar clear; the page margin does not arrive yet")
+class SafeArea extends qui.ui.SafeArea {
+    public function new(content:Array<qui.View>) {
+        super(content);
+        // No `padding()` call, deliberately. `qui.View.padding` returns `this`
+        // and does nothing yet, so asking for the margin here would read as
+        // applied while the screen showed otherwise. Named in @:muiSupport
+        // instead, which is where a backend says what it cannot do.
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

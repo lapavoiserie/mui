@@ -28,7 +28,7 @@ class ForEachMacro {
     public static function transform(items:Expr, builder:Expr):Expr {
         var backend = Context.definedValue("mui_backend");
         if (backend == null) {
-            Context.error("mui requires -D mui_backend=sui|wui|cui|aui", items.pos);
+            Context.error("mui requires -D mui_backend=sui|wui|cui|aui|qui", items.pos);
             return macro null;
         }
 
@@ -42,6 +42,8 @@ class ForEachMacro {
             case "aui":
                 // aui uses Compose codegen like sui — same AST transform
                 return transformAui(items, builder);
+            case "qui":
+                return transformQui(items, builder);
             default:
                 Context.error('Unknown mui_backend: $backend', items.pos);
                 return macro null;
@@ -116,6 +118,13 @@ class ForEachMacro {
 
     static function transformWui(items:Expr, builder:Expr):Expr {
         return macro new wui.ui.ForEach($items, $builder);
+    }
+
+    static function transformQui(items:Expr, builder:Expr):Expr {
+        // Silica's ForEach takes the cell itself, not its contents: the list is
+        // rebuilt when the cell changes, which is the whole point of handing it
+        // over rather than reading it here.
+        return macro new qui.ui.ForEach($items, $builder);
     }
 
     static function transformAui(items:Expr, builder:Expr):Expr {

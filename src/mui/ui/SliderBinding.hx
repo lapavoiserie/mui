@@ -48,6 +48,8 @@ abstract SliderBinding(cui.ui.Slider.SliderBinding) {
 
     public inline function unwrap():cui.ui.Slider.SliderBinding return this;
 }
+#elseif (mui_backend == "qui")
+typedef SliderBinding = qui.ui.SliderBinding;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

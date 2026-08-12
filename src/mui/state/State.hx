@@ -38,5 +38,5 @@ typedef State<T> = cui.state.State<T>;
 #elseif (mui_backend == "aui")
 typedef State<T> = aui.state.State<T>;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

@@ -60,6 +60,26 @@ class TabView extends aui.ui.TabView {
         super([for (t in tabs) new aui.ui.Tab(t.label, "", t.content)]);
     }
 }
+#elseif (mui_backend == "qui")
+class TabView extends qui.ui.TabView {
+    /**
+        Silica has no tab bar, so `qui` composes one -- and asks who owns the
+        selection, as `cui` does. Nothing else drives it here, so this view
+        does.
+    **/
+    public function new(tabs:Array<TabItem>) {
+        super([for (t in tabs) {label: t.label, content: t.content}], selection);
+    }
+
+    /**
+        Static, because it has to outlive a rebuild. Created per construction it
+        would be new every time the tree is rebuilt, and the selection would
+        snap back to the first tab on the write the tap itself caused --
+        the lesson `wui.ui.NavigationView` and `sui`'s renderer both paid for.
+        One tab bar per application, said rather than discovered.
+    **/
+    static var selection:qui.state.State<Int> = new qui.state.State(0);
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

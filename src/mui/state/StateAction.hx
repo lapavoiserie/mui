@@ -17,5 +17,5 @@ enum StateAction {
 #elseif (mui_backend == "aui")
 typedef StateAction = aui.state.StateAction;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

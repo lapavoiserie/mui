@@ -30,6 +30,12 @@ class HStack extends aui.ui.HStack {
         super(null, spacing, content);
     }
 }
+#elseif (mui_backend == "qui")
+class HStack extends qui.ui.HStack {
+    public function new(content:Array<qui.View>, ?spacing:Float) {
+        super(content, spacing);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

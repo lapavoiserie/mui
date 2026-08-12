@@ -73,6 +73,20 @@ class Text extends cui.ui.Text {
         }
     }
 }
+#elseif (mui_backend == "qui")
+class Text extends qui.ui.Text {
+    public function new(content:String, ?scale:TextScale) {
+        super(content);
+        // Silica follows Apple's scale, as sui does, so the four steps land on
+        // the same names.
+        if (scale != null) font(switch (scale) {
+            case Title: qui.View.FontStyle.Title;
+            case Subtitle: qui.View.FontStyle.Headline;
+            case Body: qui.View.FontStyle.Body;
+            case Caption: qui.View.FontStyle.Caption;
+        });
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

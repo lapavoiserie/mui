@@ -32,6 +32,12 @@ class Toggle extends aui.ui.Toggle {
         super(label, state.unwrap());
     }
 }
+#elseif (mui_backend == "qui")
+class Toggle extends qui.ui.Toggle {
+    public function new(label:String, state:ToggleBinding) {
+        super(label, state);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

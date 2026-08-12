@@ -53,6 +53,12 @@ class ConditionalView extends cui.View {
         if (active != null) active.render(buffer, area);
     }
 }
+#elseif (mui_backend == "qui")
+class ConditionalView extends qui.ui.ConditionalView {
+    public function new(condition:qui.state.State<Bool>, thenView:qui.View, ?elseView:qui.View) {
+        super(condition, thenView, elseView);
+    }
+}
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

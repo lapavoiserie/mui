@@ -9,5 +9,5 @@ typedef Observable = cui.state.Observable;
 #elseif (mui_backend == "aui")
 typedef Observable = aui.state.Observable;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

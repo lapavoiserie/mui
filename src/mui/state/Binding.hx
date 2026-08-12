@@ -9,5 +9,5 @@ typedef Binding<T> = cui.state.Binding<T>;
 #elseif (mui_backend == "aui")
 typedef Binding<T> = aui.state.Binding<T>;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end

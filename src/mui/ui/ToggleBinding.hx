@@ -49,6 +49,8 @@ abstract ToggleBinding(aui.state.State<Bool>) {
 
     public inline function unwrap():aui.state.State<Bool> return this;
 }
+#elseif (mui_backend == "qui")
+typedef ToggleBinding = qui.ui.ToggleBinding;
 #else
-#error "mui requires -D mui_backend=sui|wui|cui|aui"
+#error "mui requires -D mui_backend=sui|wui|cui|aui|qui"
 #end
