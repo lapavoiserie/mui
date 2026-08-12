@@ -80,7 +80,18 @@ Maps to SwiftUI `ZStack`, WinUI/Compose `Box`. On cui, falls back to a vertical 
 
 ## SafeArea
 
-Wraps content to respect platform safe areas (notch, status bar, home indicator).
+The part of the screen that is yours, with the margin the platform expects
+around what you put in it.
+
+Two things, and the platform answers both. **What you must stay out of** — a
+notch, a status bar, a home indicator — which only some platforms have. And
+**how far in the content sits**, which all of them answer, and not with the same
+number: 24 pixels is a reasonable inset on a desktop, a wasteful one on a phone,
+and a quarter of the screen in a terminal, where the margin is one cell.
+
+That is why the margin lives here rather than as a shared `padding`. An app that
+says `SafeArea` gets the right one without naming it — and content used to start
+hard against the window corner because nothing said otherwise.
 
 ```haxe
 new SafeArea([
