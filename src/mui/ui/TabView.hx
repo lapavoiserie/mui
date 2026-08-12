@@ -48,10 +48,22 @@ class TabView extends cui.ui.Tabs {
             active != null ? active : ownSelection());
     }
 
-    /** A selection this view keeps, for tabs nothing else drives. **/
+    /**
+        A selection this view keeps, for tabs nothing else drives.
+
+        A **static state cell**, for two reasons found the hard way. It has to
+        outlive a rebuild: held in a local, it was new on every frame and the
+        selection snapped back to the first tab as soon as anything re-rendered.
+        And a plain variable tells the loop nothing -- a cell marks the frame
+        dirty when it changes, which is what makes the new tab appear.
+
+        One tab bar per application, said rather than discovered, as on the
+        three other backends that own their selection.
+    **/
+    static var selection:cui.state.State<Int> = new cui.state.State(0, "mui.tabView.selection");
+
     static function ownSelection():cui.ui.Tabs.TabSelection {
-        var index = 0;
-        return new cui.ui.Tabs.TabSelection(() -> index, i -> index = i);
+        return new cui.ui.Tabs.TabSelection(() -> selection.get(), i -> selection.set(i));
     }
 }
 #elseif (mui_backend == "aui")
