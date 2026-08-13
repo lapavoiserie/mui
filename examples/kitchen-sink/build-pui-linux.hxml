@@ -1,0 +1,14 @@
+# Generate C++ only; qmake compiles it alongside Qt inside the container.
+-cp src
+-cp ../../src
+-cp ../../../pui/src
+-lib rui
+-lib nui
+-lib hxcpp
+-D mui_backend=pui
+-D pui_surface=qt
+-D no-compilation
+-D static_link
+--macro rui.macros.ViewRule.register("mui.App", "body")
+--main KitchenSink
+-cpp ../../../pui/packaging/linux/generated
