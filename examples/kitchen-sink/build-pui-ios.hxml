@@ -1,0 +1,17 @@
+-cp src
+-cp ../../src
+-cp ../../../pui/src
+-lib rui
+-lib nui
+-lib hxcpp
+-D mui_backend=pui
+-D pui_surface=ios
+-D iphonesim
+-D HXCPP_M64
+# Generate C++ and stop: hxcpp's iOS toolchain cannot target an arm64 simulator,
+# which is every simulator on an Apple Silicon Mac. `build-ios.sh` compiles what
+# this produces.
+-D no-compilation
+--macro rui.macros.ViewRule.register("mui.App", "body")
+--main KitchenSink
+-cpp build/pui-ios
