@@ -96,22 +96,35 @@ You may leave out an entry marked optional in the contract. Exactly one is: a
 terminal cannot draw an image, so `cui` provides no `cui.mui.Image`, and
 `mui.ui.Image` does not exist there.
 
-### 3. What is still shared, and still needs a case
+### 3. Register a markup vocabulary, if you have one
 
-The inversion covers the view vocabulary. Four things in `mui` still name
-backends, and adding one means editing them:
+`ui()` markup is checked against the target's schema, and a macro cannot call a
+function it was only handed the *name* of. So this one part is registered rather
+than resolved — by the backend, from its own build file:
 
-| File | Change |
-|------|--------|
-| `mui/macros/ForEachMacro.hx` | a `case "gtk":` producing the backend's loop |
-| `mui/macros/Backend.hx` | the backend's name, for `Backend.name()` |
-| `mui/enums/{ColorValue,FontStyle,Alignment}.hx` | a `toBackend()` mapping |
-| `mui/state/*.hx` | typedefs — and `qui` and `pui` have none today |
-| `tools/cli/{Build,Run}.hx` | a build and run case |
+```
+--macro gtk.nui.Vocabulary.registerWithMui()
+```
 
-These are the next candidates for the same treatment. They were left alone
-deliberately: the view vocabulary was 132 of the branches, and inverting it
-first is what proves the mechanism on the part that matters.
+That function hands `mui.macros.Backend.register` five closures. A backend that
+registers none cannot be markup-checked, and `ui()` refuses to compile rather
+than waving `<Hologramme/>` through.
+
+### What still names a backend here
+
+Three things, all in `tools/`, none of them a binding:
+
+| File | Why |
+|---|---|
+| `tools/BackendMatrix.hx` | it *is* a table across backends — a report, not a resolution |
+| `tools/cli/Watch.hx` | which reload a backend can do is not something its CLI can be asked; guessing wrong means watching a host that never reloads |
+| `tools/cli/Init.hx` | scaffolding templates, which belong to each backend's own `init` and have not moved yet |
+| `tools/cli/Build.hx` | one line: `sui` reads a `sui.json` beside the build file |
+
+`src/` names none. Building and running delegate to `haxelib run <backend>
+build|run` for every backend — `cui` grew those two commands so that it could be
+delegated to like the rest, instead of `mui` remembering that cui is the one
+that compiles straight.
 
 ## Why it is this way round
 

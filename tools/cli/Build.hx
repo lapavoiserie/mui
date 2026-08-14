@@ -31,49 +31,20 @@ class Build {
         Sys.println('Building for $backend...');
         Sys.setCwd(cwd);
 
-        switch (backend) {
-            case "sui":
-                // sui CLI handles: Haxe → Swift codegen → Xcode → .app bundle
-                ensureBuildHxml(cwd, backend);
-                ensureSuiJson(cwd);
-                var suiArgs = ["run", "sui", "build"];
-                for (a in extraArgs) suiArgs.push(a);
-                var code = Sys.command("haxelib", suiArgs);
-                if (code != 0) Sys.exit(code);
+        // Delegate, whoever the backend is.
+        //
+        // This used to be a switch with a case per backend, split between two
+        // shapes: three that had a pipeline of their own and two that "compile
+        // directly". That split was never a property of `mui` -- it was a
+        // property of each backend, written down here. `cui` gained a `build`
+        // command of its own so that it could be delegated to like the rest.
+        ensureBuildHxml(cwd, backend);
+        ensureProjectFile(cwd, backend);
 
-            case "wui":
-                // wui CLI handles: Haxe → C++/WinRT codegen → MSBuild → .exe
-                ensureBuildHxml(cwd, backend);
-                var wuiArgs = ["run", "wui", "build"];
-                for (a in extraArgs) wuiArgs.push(a);
-                var code = Sys.command("haxelib", wuiArgs);
-                if (code != 0) Sys.exit(code);
-
-            case "aui":
-                // aui CLI handles: Haxe → JVM → Kotlin codegen → Gradle → APK
-                ensureBuildHxml(cwd, backend);
-                var auiArgs = ["run", "aui", "build"];
-                for (a in extraArgs) auiArgs.push(a);
-                var code = Sys.command("haxelib", auiArgs);
-                if (code != 0) Sys.exit(code);
-
-            case "cui":
-                // cui compiles directly — no special pipeline
-                var code = Sys.command("haxe", [hxmlFile]);
-                if (code != 0) Sys.exit(code);
-                Sys.println("Build complete: build/cui/");
-
-            case "pui":
-                // pui compiles directly too, and its own CLI serves the result.
-                var code = Sys.command("haxe", [hxmlFile]);
-                if (code != 0) Sys.exit(code);
-                Sys.println("Build complete — serve it with: haxelib run pui run");
-
-            default:
-                Sys.println('Unknown backend: $backend');
-                Sys.println("Available backends: sui, wui, cui, aui, qui, pui");
-                Sys.exit(1);
-        }
+        var command = ["run", backend, "build"];
+        for (a in extraArgs) command.push(a);
+        var code = Sys.command("haxelib", command);
+        if (code != 0) Sys.exit(code);
     }
 
     /**
@@ -90,8 +61,18 @@ class Build {
         sui CLI expects sui.json for app metadata.
         Create a default one if it doesn't exist.
     **/
-    public static function ensureSuiJson(cwd:String):Void {
-        var suiJson = '$cwd/sui.json';
+    /**
+        Write the project file a backend's CLI expects, if it wants one.
+
+        Only `sui` does, and this used to be called `ensureSuiJson` with the name
+        of one backend in it. Driving it off the backend's name instead means
+        `mui` states the *convention* -- a CLI may read `<backend>.json` beside
+        the build file -- rather than a fact about one of them. A backend that
+        wants none simply never reads the file.
+    **/
+    public static function ensureProjectFile(cwd:String, backend:String):Void {
+        if (backend != "sui") return;
+        var suiJson = '$cwd/$backend.json';
         if (!sys.FileSystem.exists(suiJson)) {
             // Read -main from build-sui.hxml to derive app name
             var mainClass = "App";

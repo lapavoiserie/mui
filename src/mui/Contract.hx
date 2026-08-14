@@ -56,6 +56,9 @@ typedef Binding = {
 	/** Whether a backend may leave this out entirely. **/
 	var ?optional:Bool;
 
+	/** Type parameters the alias carries, e.g. `["T"]` for `State<T>`. **/
+	var ?params:Array<String>;
+
 }
 
 class Contract {
@@ -93,5 +96,20 @@ class Contract {
 
 		// ---- flow ----
 		{pack: ["mui", "ui"], name: "ConditionalView", args: ["*", "View", "?View"]},
+		{pack: ["mui", "ui"], name: "ForEach"},
+
+		// ---- reactive state ----
+		//
+		// All optional, and that is the honest reading of what the six backends
+		// have rather than a relaxation. `cui` has no `StateAction`, `pui` and
+		// `qui` have neither `Observable` nor `StateAction`, and only four have
+		// an `AnimationCurve`. An application that reaches for one it does not
+		// have gets `Type not found` at the line that reached — which is what it
+		// got before, when `mui` simply had no branch.
+		{pack: ["mui", "state"], name: "State", params: ["T"], optional: true},
+		{pack: ["mui", "state"], name: "Binding", params: ["T"], optional: true},
+		{pack: ["mui", "state"], name: "Observable", optional: true},
+		{pack: ["mui", "state"], name: "StateAction", optional: true},
+		{pack: ["mui", "state"], name: "AnimationCurve", optional: true},
 	];
 }

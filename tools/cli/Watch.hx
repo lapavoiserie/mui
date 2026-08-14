@@ -37,6 +37,10 @@ class Watch {
 
         Sys.setCwd(cwd);
 
+        // Which reload a backend can do is the last thing here that names one,
+        // and it stays named on purpose: it is not a capability a CLI can be
+        // asked about, and guessing wrong means watching a host that never
+        // reloads. When a backend's CLI can answer for itself, this goes too.
         switch (backend) {
             case "cui":
                 // CPPIA: recompile .cppia script only (<1s), restart process
@@ -113,26 +117,17 @@ class Watch {
         // Phase 1: Build the host app with dynamic renderer (once)
         Sys.println('[watch] Building hot reload host for $backend (first time only)...');
 
-        switch (backend) {
-            case "sui":
-                Build.ensureBuildHxml(cwd, backend);
-                Build.ensureSuiJson(cwd);
-                Sys.setCwd(cwd);
-                // Pass --watch flag so sui CLI includes DynamicView renderer
-                var code = Sys.command("haxelib", ["run", "sui", "build", "--watch"]);
-                if (code != 0) {
-                    Sys.println("[watch] Host build failed.");
-                    Sys.exit(1);
-                }
-            case "aui":
-                Build.ensureBuildHxml(cwd, backend);
-                Sys.setCwd(cwd);
-                var code = Sys.command("haxelib", ["run", "aui", "build", "--watch"]);
-                if (code != 0) {
-                    Sys.println("[watch] Host build failed.");
-                    Sys.exit(1);
-                }
-            default:
+        // `--watch` is a request, not a fact about a backend: a CLI that knows
+        // the flag builds a host that can re-render, and one that does not
+        // ignores it. Naming the two that know it was `mui` keeping a note about
+        // someone else's CLI.
+        Build.ensureBuildHxml(cwd, backend);
+        Build.ensureProjectFile(cwd, backend);
+        Sys.setCwd(cwd);
+        var code = Sys.command("haxelib", ["run", backend, "build", "--watch"]);
+        if (code != 0) {
+            Sys.println("[watch] Host build failed.");
+            Sys.exit(1);
         }
 
         // Phase 2: Now watch and do warm reloads
@@ -290,19 +285,9 @@ class Watch {
 
     static function launchBackendRun(cwd:String, backend:String):Int {
         var pidFile = '/tmp/mui-watch-pid';
-        switch (backend) {
-            case "sui":
-                Build.ensureBuildHxml(cwd, backend);
-                Build.ensureSuiJson(cwd);
-                Sys.command("/bin/sh", ["-c", 'haxelib run sui run & echo $$! > $pidFile']);
-            case "wui":
-                Build.ensureBuildHxml(cwd, backend);
-                Sys.command("/bin/sh", ["-c", 'haxelib run wui run & echo $$! > $pidFile']);
-            case "aui":
-                Build.ensureBuildHxml(cwd, backend);
-                Sys.command("/bin/sh", ["-c", 'haxelib run aui run & echo $$! > $pidFile']);
-            default:
-        }
+        Build.ensureBuildHxml(cwd, backend);
+        Build.ensureProjectFile(cwd, backend);
+        Sys.command("/bin/sh", ["-c", 'haxelib run $backend run & echo $$! > $pidFile']);
         try {
             return Std.parseInt(StringTools.trim(File.getContent(pidFile)));
         } catch (e:Dynamic) {

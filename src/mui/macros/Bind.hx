@@ -74,11 +74,20 @@ class Bind {
 				var here = backend + ".mui." + binding.name;
 				if ((try Context.getType(here) catch (_:Dynamic) null) == null) continue;
 			}
+			var params = binding.params == null ? [] : binding.params;
 			Context.defineType({
 				pack: binding.pack,
 				name: binding.name,
 				pos: pos,
-				kind: TDAlias(TPath({pack: [backend, "mui"], name: binding.name})),
+				params: [for (p in params) {name: p}],
+				kind: TDAlias(TPath({
+					pack: [backend, "mui"],
+					name: binding.name,
+					// `State<T>` aliases `<backend>.mui.State<T>`: the parameter
+					// has to be handed on, or the alias asks for none and the
+					// target complains that it wanted one.
+					params: [for (p in params) TPType(TPath({pack: [], name: p}))],
+				})),
 				fields: [],
 			});
 		}

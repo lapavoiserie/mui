@@ -22,46 +22,13 @@ class Run {
 
         Sys.setCwd(cwd);
 
-        switch (backend) {
-            case "sui":
-                // sui CLI handles full pipeline + launch
-                Build.ensureBuildHxml(cwd, backend);
-                Build.ensureSuiJson(cwd);
-                var suiArgs = ["run", "sui", "run"];
-                for (a in extraArgs) suiArgs.push(a);
-                Sys.exit(Sys.command("haxelib", suiArgs));
+        // Delegate, as `Build` does, and for the same reason.
+        Build.ensureBuildHxml(cwd, backend);
+        Build.ensureProjectFile(cwd, backend);
 
-            case "wui":
-                Build.ensureBuildHxml(cwd, backend);
-                var wuiArgs = ["run", "wui", "run"];
-                for (a in extraArgs) wuiArgs.push(a);
-                Sys.exit(Sys.command("haxelib", wuiArgs));
-
-            case "aui":
-                // aui CLI handles full pipeline + deploy to emulator/device
-                Build.ensureBuildHxml(cwd, backend);
-                var auiArgs = ["run", "aui", "run"];
-                for (a in extraArgs) auiArgs.push(a);
-                Sys.exit(Sys.command("haxelib", auiArgs));
-
-            case "cui":
-                // Build first, then run the binary
-                Build.run(cwd, args);
-                var mainClass = readMainClass('$cwd/build-cui.hxml');
-                if (mainClass != null) {
-                    var bin = '$cwd/build/cui/$mainClass';
-                    if (sys.FileSystem.exists(bin)) {
-                        Sys.println('Running $mainClass...');
-                        Sys.exit(Sys.command(bin));
-                    }
-                }
-                Sys.println("Error: could not find compiled binary in build/cui/");
-                Sys.exit(1);
-
-            default:
-                Sys.println('Unknown backend: $backend');
-                Sys.exit(1);
-        }
+        var command = ["run", backend, "run"];
+        for (a in extraArgs) command.push(a);
+        Sys.exit(Sys.command("haxelib", command));
     }
 
     static function readMainClass(hxmlPath:String):String {
