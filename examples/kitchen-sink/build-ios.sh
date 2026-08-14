@@ -37,7 +37,12 @@ FLAGS=(-target "$TRIPLE" -isysroot "$SDK" -O1 -fno-strict-aliasing
 	# an arm64 target. hxcpp keeps a setjmp path for exactly this case; the arm64
 	# assembly path in GcRegCapture.h is commented out upstream.
 	-DHXCPP_CAPTURE_SETJMP
-	-DHXCPP_VISIT_ALLOCS -DHXCPP_GC_GENERATIONAL -DHXCPP_API_LEVEL=430
+	# HXCPP_VISIT_ALLOCS is not optional: the generated classes carry
+	# HX_VISIT_MEMBER_NAME and will not compile without it. HXCPP_GC_GENERATIONAL
+	# is the opposite -- turning it on here builds a collector that expects write
+	# barriers the generated code does not emit, and the result is a segfault
+	# inside an array reallocation, long after the frame that caused it.
+	-DHXCPP_VISIT_ALLOCS -DHXCPP_API_LEVEL=430
 	-I"$HXCPP/include" -I"$PUI/src/pui/backend/ios/native" -I"$HERE/build/pui-ios/include" -I"$HERE/build/pui-ios/src"
 	-std=c++11 -stdlib=libc++ -Wno-everything)
 
