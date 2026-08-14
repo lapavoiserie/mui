@@ -1,6 +1,6 @@
 # Adding a Backend
 
-mui is designed for extensibility. Adding a new backend (e.g., `gtk` for Linux) involves ~20 files with mechanical changes.
+Adding a backend touches **no file in this repository**. The backend declares its own conformance under a `mui` package of its own, and `mui` resolves it by name through [`mui.Contract`](https://github.com/lapavoiserie/mui/blob/main/src/mui/Contract.hx) and `mui.macros.Bind`.
 
 ## Backend Requirements
 
@@ -40,92 +40,86 @@ Two of these are not yours to reinvent:
 
 ## Steps
 
-### 1. Add `#elseif` blocks
+Nothing here is edited. A backend declares its own conformance, and `mui`
+resolves it by name.
 
-Each mui source file needs a new `#elseif (mui_backend == "gtk")` block. Example for `mui/View.hx`:
+### 1. Write `<backend>.mui.*`
+
+One file per entry in [`mui.Contract`](https://github.com/lapavoiserie/mui/blob/main/src/mui/Contract.hx),
+in your own repository, under a `mui` package. A `typedef` when the signature
+already matches, a small subclass when it does not:
 
 ```haxe
-#elseif (mui_backend == "gtk")
+package gtk.mui;
+
 typedef View = gtk.View;
 ```
 
-For components with constructor normalization (VStack, HStack, Button, etc.), adapt the constructor:
-
 ```haxe
-#elseif (mui_backend == "gtk")
+package gtk.mui;
+
 class VStack extends gtk.ui.VStack {
-    public function new(content:Array<gtk.View>, ?spacing:Float) {
-        super(content, spacing);
-    }
+	public function new(content:Array<gtk.View>, ?spacing:Float) {
+		super(content, spacing == null ? 8 : spacing);
+	}
 }
 ```
 
-### 2. Add binding abstracts
+Two types come the other way, and they are the only two: `mui.ui.TextScale` and
+`mui.ui.TabItem`. They exist because they are what the backends had to *agree*
+on, not what any one of them provides.
 
-In `ToggleBinding.hx`:
+### 2. Run the macro from your build file
 
-```haxe
-#elseif (mui_backend == "gtk")
-abstract ToggleBinding(gtk.ui.Switch.SwitchBinding) {
-    @:from static function fromState(s:gtk.state.State<Bool>):ToggleBinding
-        return cast gtk.ui.Switch.SwitchBinding.fromState(s);
-    public inline function unwrap():gtk.ui.Switch.SwitchBinding return this;
-}
+```
+-D mui_backend=gtk
+--macro mui.macros.Bind.all()
 ```
 
-Same pattern for `TextInputBinding.hx`.
+That is the whole wiring. `Bind` defines `mui.View`, `mui.ui.Button` and the
+rest as aliases onto `gtk.mui.*`, then checks each constructor against the
+contract — arity, optionality and argument types — and names what does not
+match:
 
-### 3. Add color/font mappings
-
-In `mui/enums/ColorValue.hx`, add a `toBackend()` case:
-
-```haxe
-#elseif (mui_backend == "gtk")
-public function toBackend():gtk.Color {
-    return switch (cast this : ColorValueKind) {
-        case Red: gtk.Color.Red;
-        // ... map all values
-    };
-}
+```
+gtk.mui.HStack argument 2 is Int, mui.Contract says Float
+gtk.mui.VStack argument 2 is optional, mui.Contract says it is required
+Type not found : gtk.mui.Carousel
 ```
 
-Same for `FontStyle.hx` and `Alignment.hx`.
+You may add **trailing optional arguments** the contract does not name. `cui`
+does: its `ScrollView` and `TabView` let the application own the offset and the
+selection, because a terminal keeps neither for you. Code written against the
+contract still compiles.
 
-### 4. Add ForEach macro path
+You may leave out an entry marked optional in the contract. Exactly one is: a
+terminal cannot draw an image, so `cui` provides no `cui.mui.Image`, and
+`mui.ui.Image` does not exist there.
 
-In `mui/macros/ForEachMacro.hx`, add the backend case. For runtime backends (like cui/wui), this is typically one line:
+### 3. What is still shared, and still needs a case
 
-```haxe
-case "gtk":
-    return macro new gtk.ui.ForEach($items, $builder);
-```
-
-### 5. Add CLI support
-
-In `tools/cli/Build.hx` and `Run.hx`, add a case for the new backend.
-
-### 6. Add App class
-
-In `mui/App.hx`, add the `#elseif` block extending the backend's App class.
-
-## Files to Modify
+The inversion covers the view vocabulary. Four things in `mui` still name
+backends, and adding one means editing them:
 
 | File | Change |
 |------|--------|
-| `mui/View.hx` | typedef |
-| `mui/App.hx` | class extending backend App |
-| `mui/ViewComponent.hx` | typedef |
-| `mui/state/State.hx` | typedef |
-| `mui/state/Binding.hx` | typedef |
-| `mui/state/Observable.hx` | typedef |
-| `mui/state/StateAction.hx` | typedef or stub |
-| `mui/state/AnimationCurve.hx` | typedef or stub |
-| `mui/ui/*.hx` (14 files) | subclass or typedef |
-| `mui/ui/ToggleBinding.hx` | @:from abstract |
-| `mui/ui/TextInputBinding.hx` | @:from abstract |
-| `mui/enums/ColorValue.hx` | toBackend() mapping |
-| `mui/enums/FontStyle.hx` | toBackend() mapping |
-| `mui/enums/Alignment.hx` | toBackend() mapping |
-| `mui/macros/ForEachMacro.hx` | backend case |
-| `tools/cli/Build.hx` | build case |
-| `tools/cli/Run.hx` | run case |
+| `mui/macros/ForEachMacro.hx` | a `case "gtk":` producing the backend's loop |
+| `mui/macros/Backend.hx` | the backend's name, for `Backend.name()` |
+| `mui/enums/{ColorValue,FontStyle,Alignment}.hx` | a `toBackend()` mapping |
+| `mui/state/*.hx` | typedefs — and `qui` and `pui` have none today |
+| `tools/cli/{Build,Run}.hx` | a build and run case |
+
+These are the next candidates for the same treatment. They were left alone
+deliberately: the view vocabulary was 132 of the branches, and inverting it
+first is what proves the mechanism on the part that matters.
+
+## Why it is this way round
+
+`mui` used to adapt to each backend, which meant `mui` had to know all six of
+them — and adding a seventh meant editing twenty-two files in a repository that
+had nothing to learn from it. Of the 132 `#if` branches, 109 were a `typedef` or
+a five-line `extends`.
+
+The volume was never the problem. The direction was. Inverted, adding a backend
+touches **zero** files here, and a backend can be released without waiting for
+one.

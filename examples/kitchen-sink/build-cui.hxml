@@ -4,5 +4,6 @@
 -lib rui
 -lib nui
 -D mui_backend=cui
+--macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp build/cui

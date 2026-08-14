@@ -3,5 +3,6 @@
 -lib sui
 -D mui_backend=sui
 --macro sui.macros.SwiftGenerator.register()
+--macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp build/cpp

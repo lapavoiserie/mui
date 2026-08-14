@@ -10,5 +10,6 @@
 -D no-compilation
 -D static_link
 --macro rui.macros.ViewRule.register("mui.App", "body")
+--macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp ../../../pui/packaging/linux/generated

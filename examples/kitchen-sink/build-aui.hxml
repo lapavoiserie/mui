@@ -5,4 +5,5 @@
 -D jvm
 --jvm build/app-logic.jar
 --macro aui.macros.ComposeGenerator.register()
+--macro mui.macros.Bind.all()
 --main KitchenSink

@@ -12,5 +12,6 @@
 # assembles the APK. Same shape as iOS and SailfishOS.
 -D no-compilation
 --macro rui.macros.ViewRule.register("mui.App", "body")
+--macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp build/pui-android

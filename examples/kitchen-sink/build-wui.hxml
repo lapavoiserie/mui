@@ -6,5 +6,6 @@
 -D mui_backend=wui
 --macro rui.macros.ViewRule.register("mui.App", "body")
 --macro wui.macros.WinUIGenerator.register()
+--macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp build/cpp

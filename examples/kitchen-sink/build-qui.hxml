@@ -4,6 +4,7 @@
 -lib rui
 -lib nui
 -D mui_backend=qui
+--macro mui.macros.Bind.all()
 --main KitchenSink
 --no-output
 -cpp build/qui-check
