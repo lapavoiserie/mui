@@ -27,10 +27,16 @@ Two of these are not yours to reinvent:
 - **The view tree.** How a node is described — type, children, key, typed
   properties, ordered modifiers, actions — and how a renderer consumes it, is
   [`nui`](https://lapavoiserie.github.io/nui/). It offers two contracts, and which
-  one you implement is decided by your host, not by preference: **pull**
-  (`NodeSource`) if it diffs and re-renders on its own like SwiftUI or Compose,
-  **push** (`Node` + `NodeSink`) if it diffs nothing like Qt or a terminal. See
+  one you implement is decided by your host, not by preference. The question that
+  settles it is **does the host preserve widget state across a rebuild?** —
+  **push** (`Node` + `NodeSink`) when it does and must be patched, like Qt or
+  WinUI; **pull** (`NodeSource`) when it does not, whether because it re-renders
+  on its own like SwiftUI and Compose, or because it has no widget state at all
+  and repaints from a freshly walked tree, like `cui` and `pui`. See
   [Adopting nui](https://lapavoiserie.github.io/nui/#/adopting).
+
+  This page used to file "a terminal" under push. That was wrong on the criterion
+  above, and both backends that draw their own widgets implement pull.
 
 ## Steps
 
