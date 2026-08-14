@@ -96,7 +96,36 @@ You may leave out an entry marked optional in the contract. Exactly one is: a
 terminal cannot draw an image, so `cui` provides no `cui.mui.Image`, and
 `mui.ui.Image` does not exist there.
 
-### 3. Register a markup vocabulary, if you have one
+### 3. Ship a build template
+
+`mui init` writes a `build-<backend>.hxml` for every installed backend, and it
+gets each one from the backend. Put yours at `<backend>/mui/init.hxml`, beside
+the rest of your conformance; `$MAIN` is substituted with the project's main
+class.
+
+A library that ships that file **is** a backend as far as `mui init` is
+concerned. There is no list of names to be added to, and a seventh appears in a
+scaffolded project the moment it is installed.
+
+### 4. Say whether your engine owns the process
+
+If `run()` blocks and nothing may follow it — as on `cui` and `pui` — put
+`@:muiOwnsMain` on your `mui.App`. `mui.macros.Bind` turns that into the
+`mui_owns_main` flag, so an application writes its `main()` once:
+
+```haxe
+static function main() {
+	#if mui_owns_main
+	new MyApp().run();
+	#end
+}
+```
+
+Examples used to write `#if (mui_backend == "cui" || mui_backend == "pui")` —
+a list a seventh backend would have had to be added to by hand, in every
+application.
+
+### 5. Register a markup vocabulary, if you have one
 
 `ui()` markup is checked against the target's schema, and a macro cannot call a
 function it was only handed the *name* of. So this one part is registered rather
@@ -112,13 +141,12 @@ than waving `<Hologramme/>` through.
 
 ### What still names a backend here
 
-Three things, all in `tools/`, none of them a binding:
+Two things, both in `tools/`, neither a binding:
 
 | File | Why |
 |---|---|
 | `tools/BackendMatrix.hx` | it *is* a table across backends — a report, not a resolution |
 | `tools/cli/Watch.hx` | which reload a backend can do is not something its CLI can be asked; guessing wrong means watching a host that never reloads |
-| `tools/cli/Init.hx` | scaffolding templates, which belong to each backend's own `init` and have not moved yet |
 | `tools/cli/Build.hx` | one line: `sui` reads a `sui.json` beside the build file |
 
 `src/` names none. Building and running delegate to `haxelib run <backend>

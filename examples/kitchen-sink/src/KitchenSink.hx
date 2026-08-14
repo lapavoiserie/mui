@@ -196,7 +196,7 @@ class KitchenSink extends App {
         // cui and pui are the two backends whose engine owns the process:
         // everywhere else the generated app has its own entry point and this
         // main() must stay empty.
-        #if (mui_backend == "cui" || mui_backend == "pui")
+        #if mui_owns_main
         new KitchenSink().run();
         #end
     }

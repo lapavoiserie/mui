@@ -92,6 +92,16 @@ class Bind {
 			});
 		}
 
+		// One flag, read off the backend's own App.
+		//
+		// Whether the engine owns the process decides whether an application's
+		// `main()` may do anything. It cannot be answered by resolving a type,
+		// because the answer is a *fact about* a type — so the backend states it
+		// as metadata and this turns it into a define. Examples used to write
+		// `#if (mui_backend == "cui" || mui_backend == "pui")`, a list a seventh
+		// backend would have had to be added to by hand, in every application.
+		ownsMain(backend);
+
 		// The check waits until everything has been typed.
 		//
 		// Resolving a backend's façade from inside this macro types its
@@ -100,6 +110,20 @@ class Bind {
 		// from anything a reader would connect to the cause. After typing, every
 		// alias has been followed and the same resolution is ordinary.
 		Context.onAfterTyping(_ -> verify(backend, pos));
+	}
+
+	/** Define `mui_owns_main` if `<backend>.mui.App` carries `@:muiOwnsMain`. **/
+	static function ownsMain(backend:String):Void {
+		// Safe to resolve here, before the aliases: an App borrows nothing from
+		// `mui`, so this cannot walk into the half-defined vocabulary.
+		var app = try Context.getType(backend + ".mui.App") catch (_:Dynamic) null;
+		if (app == null) return;
+		switch (Context.follow(app)) {
+			case TInst(t, _):
+				if (t.get().meta.has(":muiOwnsMain"))
+					haxe.macro.Compiler.define("mui_owns_main");
+			case _:
+		}
 	}
 
 	static function verify(backend:String, pos:Position):Void {
