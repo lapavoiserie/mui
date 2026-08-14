@@ -1,0 +1,12 @@
+# The same source as the five other backends, on a native Windows window.
+-cp src
+-cp ../../src
+-cp ../../../pui/src
+-lib rui
+-lib nui
+-lib hxcpp
+-D mui_backend=pui
+-D pui_surface=win
+--macro rui.macros.ViewRule.register("mui.App", "body")
+--main KitchenSink
+-cpp build/pui-win
