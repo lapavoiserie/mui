@@ -1,0 +1,16 @@
+-cp src
+-cp ../../src
+-cp ../../../pui/src
+-lib rui
+-lib nui
+-lib hxcpp
+-D mui_backend=pui
+-D pui_surface=android
+-D android
+-D HXCPP_M64
+# Generate C++ and stop; `build-android.sh` compiles it with the NDK and
+# assembles the APK. Same shape as iOS and SailfishOS.
+-D no-compilation
+--macro rui.macros.ViewRule.register("mui.App", "body")
+--main KitchenSink
+-cpp build/pui-android
