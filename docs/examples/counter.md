@@ -29,7 +29,7 @@ class Counter extends App {
     }
 
     static function main() {
-        #if (mui_backend == "cui")
+        #if mui_owns_main
         new Counter().run();
         #end
     }

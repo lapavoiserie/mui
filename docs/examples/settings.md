@@ -38,7 +38,7 @@ class SettingsApp extends App {
     }
 
     static function main() {
-        #if (mui_backend == "cui")
+        #if mui_owns_main
         new SettingsApp().run();
         #end
     }

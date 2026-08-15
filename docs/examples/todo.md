@@ -45,7 +45,7 @@ class TodoApp extends App {
     }
 
     static function main() {
-        #if (mui_backend == "cui")
+        #if mui_owns_main
         new TodoApp().run();
         #end
     }

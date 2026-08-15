@@ -34,7 +34,10 @@ cd MyApp
 
 This creates:
 - `src/MyApp.hx` -- your app with a counter template
-- `build-sui.hxml` / `build-wui.hxml` / `build-aui.hxml` / `build-cui.hxml` -- build files for each backend
+- `build-<backend>.hxml` -- one per **installed** backend, and each comes from
+  that backend rather than from `mui`: a library that ships a
+  `<backend>/mui/init.hxml` is a backend as far as `mui init` is concerned, so a
+  seventh appears here the moment it is installed
 - `mui.json` -- project metadata
 
 ## Build and Run
@@ -94,7 +97,7 @@ class MyApp extends App {
     }
 
     static function main() {
-        #if (mui_backend == "cui")
+        #if mui_owns_main
         new MyApp().run();
         #end
     }

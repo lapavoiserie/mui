@@ -25,7 +25,10 @@ mui is a thin wrapper over four backend libraries:
 | `aui`   | Android (Jetpack Compose) | [Pign/aui](https://github.com/Pign/aui) |
 | `cui`   | Terminal (TUI) | [Pign/cui](https://github.com/Pign/cui) |
 
-Backend selection is compile-time via `-D mui_backend=sui|wui|aui|cui`. All mui types compile down to the backend types with zero runtime overhead.
+Backend selection is compile-time: `-D mui_backend=sui|wui|aui|cui|qui|pui`, plus
+`--macro mui.macros.Bind.all()`, which resolves `mui`'s vocabulary onto that
+backend and checks it against `mui.Contract`. All mui types are aliases of the
+backend's own, so there is no runtime overhead and no wrapper to step through.
 
 ## Example
 
@@ -48,14 +51,17 @@ class Counter extends App {
     }
 
     static function main() {
-        #if (mui_backend == "cui")
+        #if mui_owns_main
         new Counter().run();
         #end
     }
 }
 ```
 
-No `#if` blocks in the UI code. The only conditional is the `main()` entry point for the terminal backend.
+No `#if` blocks in the UI code. The only conditional is `main()`, and it does not
+name a backend: `mui_owns_main` is defined when the chosen backend's engine owns
+the process — `cui` and `pui` today, where `run()` blocks and nothing may follow
+it. Everywhere else a generator drives.
 
 ## Unified Components
 
@@ -180,10 +186,21 @@ mui version           Show version
 
 ## Adding a New Backend
 
-1. Create the backend library with: `App` base class, `View` with modifiers, `State<T>` with `.get()`/`.set()`/`.value`, and `ui/` components.
-2. Add `#elseif (mui_backend == "newbackend")` blocks to each mui file (~20 files).
-3. Add color/font mappings and a `ToggleBinding`/`TextInputBinding` `@:from` conversion.
-4. Add a build case in `tools/cli/Build.hx` and `Run.hx`.
+**It touches no file in this repository.** The backend declares its own
+conformance and `mui` resolves it by name.
+
+1. Create the backend library: an `App`, a `View`, a `State<T>` over
+   [`rui`](https://lapavoiserie.github.io/rui/), and its own components.
+2. Write `<backend>/mui/*.hx` — one file per entry in
+   [`mui.Contract`](src/mui/Contract.hx). A `typedef` where the signature already
+   matches, a small subclass where it does not.
+3. Ship `<backend>/mui/init.hxml`, the build file `mui init` writes for you.
+4. Put `@:muiOwnsMain` on your `mui.App` if `run()` blocks and nothing may follow
+   it.
+5. Build with `--macro mui.macros.Bind.all()`. It names anything missing or
+   mis-shaped at the top of the build rather than at first use.
+
+See [Adding a backend](docs/adding-a-backend.md) for the whole of it.
 
 ## Prerequisites
 

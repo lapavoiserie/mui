@@ -1,8 +1,8 @@
 # Backend support
 
 > This page is **generated**: `haxe -cp tools --run BackendMatrix`.
-> It reads the `#if (mui_backend == …)` branches in `src/mui/ui/`, so it
-> cannot promise what the code no longer does.
+> It reads each backend's own `<backend>/mui/` conformance, so it cannot
+> promise what the code no longer does.
 
 | `mui` type | sui | aui | wui | cui | qui | pui |
 |---|---|---|---|---|---|---|
@@ -11,7 +11,7 @@
 | **Divider** | Divider | Divider | Border ⚙️ | Divider | Divider | Divider |
 | **ForEach** | macro | macro | macro | macro | macro | macro |
 | **HStack** | HStack | HStack | HStack | HStack | HStack | HStack |
-| **Image** | Image | Image | Image | **refused** | Image | Image |
+| **Image** | Image | Image | Image | — | Image | Image |
 | **ListView** | List | LazyColumn | ListView | ListView | ListView | ListView |
 | **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar | ProgressView | ProgressView |
 | **SafeArea** | VStack ○ | SafeArea | VStack ○ | VStack ○ | SafeArea ○ | SafeArea |
@@ -29,10 +29,13 @@
 
 Unmarked, the backend has the concept natively and `mui` binds straight to it.
 
-- ⚙️ **built** — `mui` composes it from the backend's primitives.
+- ⚙️ **built** — the backend composes it from its own primitives.
 - ○ **not applicable** — the platform has no such concept; doing nothing is the right answer.
 - ⚠️ **approximation** — what is drawn differs from what the type promises. This is the only row where your UI will not behave as it does elsewhere.
 - **refused** — using it does not compile, rather than rendering something wrong.
+- — **absent** — the backend provides no such type. `mui.Contract` marks the
+  entry optional, and reaching for it there is a compile error at the line
+  that reached.
 
 ## The cases that are not native
 
@@ -40,7 +43,6 @@ Unmarked, the backend has the concept natively and `mui` binds straight to it.
 |---|---|---|---|
 | ConditionalView | cui | ⚙️ | cui has no conditional view: the branch is chosen at construction |
 | Divider | wui | ⚙️ | WinUI has no Divider: a 1px grey Border stands in |
-| Image | cui | **refused** | using it does not compile, with a message that says why |
 | SafeArea | sui | ○ | SwiftUI handles safe areas by default: nothing to apply |
 | SafeArea | wui | ○ | a desktop window has no safe area |
 | SafeArea | cui | ○ | a terminal has no safe area |
@@ -49,13 +51,14 @@ Unmarked, the backend has the concept natively and `mui` binds straight to it.
 
 ## What the table does not say
 
-`qui` joined as the fifth backend. It had been written against this contract
-before it was wired to one -- the same twenty-one views, the same `App` shape,
-and an `appTitle` already mapped to its own `appName` -- so the column is a
-binding like the others, not a copy.
+The three types that carry everything else — `View`, `App` and
+`ViewComponent` — and the five reactive ones under `mui.state` are in
+[the contract](https://github.com/lapavoiserie/mui/blob/main/src/mui/Contract.hx)
+but not tabulated. There is nothing to compare: a backend either provides
+them, or `mui.macros.Bind` names what is missing at the top of the build.
 
-The `aui` column is the *mapping* -- which Compose widget a type is meant to
-become -- not the renderer's coverage. `aui` draws through its dynamic
+The `aui` column is the *mapping* — which Compose widget a type is meant to
+become — not the renderer's coverage. `aui` draws through its dynamic
 renderer, whose vocabulary is a subset of this table: a type outside it
 **refuses to compile**, naming the type and listing what is covered. The
 compile-time transpiler that covered everything listed here is

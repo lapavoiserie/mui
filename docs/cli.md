@@ -85,6 +85,7 @@ Each backend has its own `.hxml` build file:
 -lib sui
 -D mui_backend=sui
 --macro sui.macros.SwiftGenerator.register()
+--macro mui.macros.Bind.all()
 -main MyApp
 -cpp build/sui
 
@@ -93,6 +94,7 @@ Each backend has its own `.hxml` build file:
 -lib mui
 -lib wui
 -D mui_backend=wui
+--macro mui.macros.Bind.all()
 -main MyApp
 -cpp build/wui
 
@@ -101,8 +103,16 @@ Each backend has its own `.hxml` build file:
 -lib mui
 -lib cui
 -D mui_backend=cui
+--macro mui.macros.Bind.all()
 -main MyApp
 -cpp build/cui
 ```
 
-The key line is `-D mui_backend=<backend>` which activates the correct backend at compile time.
+Two lines matter. `-D mui_backend=<backend>` chooses the backend, and
+`--macro mui.macros.Bind.all()` resolves `mui`'s vocabulary onto it —
+`mui.ui.Button` becomes `<backend>.mui.Button` — then checks every
+constructor against [`mui.Contract`](https://github.com/lapavoiserie/mui/blob/main/src/mui/Contract.hx).
+Without the macro, nothing under `mui.` exists and the first import fails.
+
+`mui init` writes these files for you, one per installed backend, from a
+template each backend ships.

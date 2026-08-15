@@ -48,7 +48,7 @@ class DashboardApp extends App {
     }
 
     static function main() {
-        #if (mui_backend == "cui")
+        #if mui_owns_main
         new DashboardApp().run();
         #end
     }

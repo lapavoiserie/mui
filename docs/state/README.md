@@ -58,9 +58,9 @@ See [Bindings](state/bindings.md) for details.
 ## The shared core
 
 Every backend's `State<T>` extends
-[`rui.state.State`](https://lapavoiserie.github.io/rui/#/state) — the reactive core that
-`sui`, `aui`, `wui`, `cui` and `qui` share. So this much behaves **identically** whichever
-`-D mui_backend` you select:
+[`rui.state.State`](https://lapavoiserie.github.io/rui/#/state) — the reactive core all
+six backends share. So this much behaves **identically** whichever `-D mui_backend`
+you select:
 
 | | |
 |---|---|

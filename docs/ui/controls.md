@@ -88,4 +88,9 @@ new Image("photo.png")
 
 **Constructor**: `Image(source:String)`
 
-Guard with `#if (mui_backend != "cui")` when used in cross-platform code.
+`cui` provides no `Image`: a terminal cannot draw one, and `mui.Contract` marks
+the entry optional, so `mui.ui.Image` does not exist there. Using it on that
+backend is a compile error at the line that used it — which is the rule this
+ecosystem follows, that what can be known at compile time is never a marker on
+screen. Guard with `#if (mui_backend != "cui")` in code meant for every
+backend.
