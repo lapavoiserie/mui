@@ -123,6 +123,11 @@ PLIST
 echo "-- installing on $DEVICE"
 xcrun simctl boot "$DEVICE" 2>/dev/null || true
 xcrun simctl bootstatus "$DEVICE" -b >/dev/null 2>&1 || true
+# Terminate first. Installing over a running app leaves the running one in
+# place, and the next launch is the *old* binary -- which cost an hour of
+# reading logs against a build that was never on the device.
+xcrun simctl terminate "$DEVICE" com.lapavoiserie.pui.kitchensink 2>/dev/null || true
+xcrun simctl uninstall "$DEVICE" com.lapavoiserie.pui.kitchensink 2>/dev/null || true
 xcrun simctl install "$DEVICE" "$APP"
 xcrun simctl launch "$DEVICE" com.lapavoiserie.pui.kitchensink
 
