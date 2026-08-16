@@ -15,6 +15,7 @@
 - [Enums](enums.md)
 - [Hot Reload](hot-reload.md)
 - [CLI Reference](cli.md)
+- [Native capabilities](native-capabilities.md)
 - [Adding a Backend](adding-a-backend.md)
 - **Examples**
   - [Overview](examples/README.md)
