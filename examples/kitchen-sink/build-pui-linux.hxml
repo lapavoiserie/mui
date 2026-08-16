@@ -5,11 +5,17 @@
 -lib rui
 -lib nui
 -lib hxcpp
+-lib kui
 -D mui_backend=pui
 -D pui_surface=qt
+# Which of the two this is, nothing in Haxe can tell: this file and its
+# counterpart differ only here, because only DEFINES += PUI_SAILFISH in the
+# .pro separates them -- the C++ preprocessor, long after macros have run.
+-D kui_platform=linux
 -D no-compilation
 -D static_link
 --macro rui.macros.ViewRule.register("mui.App", "body")
 --macro mui.macros.Bind.all()
+--macro pui.kui.Platform.registerWithKui()
 --main KitchenSink
 -cpp ../../../pui/packaging/linux/generated
