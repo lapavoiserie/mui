@@ -5,7 +5,7 @@ Multi-UI abstraction layer for Haxe. Write your app once, compile to native macO
 ## Quick Start
 
 ```bash
-haxelib git mui https://github.com/Pign/mui
+haxelib git mui https://github.com/lapavoiserie/mui
 haxelib run mui init MyApp
 cd MyApp
 mui run cui       # terminal
@@ -20,10 +20,10 @@ mui is a thin wrapper over four backend libraries:
 
 | Backend | Target Platform | Library |
 |---------|----------------|---------|
-| `sui`   | macOS, iOS, visionOS (SwiftUI) | [Pign/sui](https://github.com/Pign/sui) |
-| `wui`   | Windows (WinUI 3) | [Pign/wui](https://github.com/Pign/wui) |
-| `aui`   | Android (Jetpack Compose) | [Pign/aui](https://github.com/Pign/aui) |
-| `cui`   | Terminal (TUI) | [Pign/cui](https://github.com/Pign/cui) |
+| `sui`   | macOS, iOS, visionOS (SwiftUI) | [sui](https://github.com/lapavoiserie/sui) |
+| `wui`   | Windows (WinUI 3) | [wui](https://github.com/lapavoiserie/wui) |
+| `aui`   | Android (Jetpack Compose) | [aui](https://github.com/lapavoiserie/aui) |
+| `cui`   | Terminal (TUI) | [cui](https://github.com/lapavoiserie/cui) |
 
 Backend selection is compile-time: `-D mui_backend=sui|wui|aui|cui|qui|pui`, plus
 `--macro mui.macros.Bind.all()`, which resolves `mui`'s vocabulary onto that

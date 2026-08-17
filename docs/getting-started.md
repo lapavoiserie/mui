@@ -16,13 +16,13 @@ Backend-specific requirements:
 
 ```bash
 # Install mui
-haxelib git mui https://github.com/Pign/mui
+haxelib git mui https://github.com/lapavoiserie/mui
 
 # Install backend(s)
-haxelib git sui https://github.com/Pign/sui
-haxelib git wui https://github.com/Pign/wui
-haxelib git aui https://github.com/Pign/aui
-haxelib git cui https://github.com/Pign/cui
+haxelib git sui https://github.com/lapavoiserie/sui
+haxelib git wui https://github.com/lapavoiserie/wui
+haxelib git aui https://github.com/lapavoiserie/aui
+haxelib git cui https://github.com/lapavoiserie/cui
 ```
 
 ## Create a Project

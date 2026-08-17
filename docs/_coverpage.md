@@ -9,5 +9,5 @@ A cross-platform UI abstraction for Haxe. Build native apps for macOS/iOS, Windo
 - Type-safe bindings with `@:from` abstracts
 - Macro-based `ForEach` that works across codegen and runtime backends
 
-[GitHub](https://github.com/Pign/mui ':target=_blank')
+[GitHub](https://github.com/lapavoiserie/mui ':target=_blank')
 [Get Started](getting-started.md)

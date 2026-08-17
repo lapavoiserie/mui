@@ -4,10 +4,10 @@
 
 | Backend | Platform | Library |
 |---------|----------|---------|
-| `sui` | macOS, iOS, visionOS (SwiftUI) | [Pign/sui](https://github.com/Pign/sui) |
-| `wui` | Windows (WinUI 3) | [Pign/wui](https://github.com/Pign/wui) |
-| `aui` | Android (Jetpack Compose) | [Pign/aui](https://github.com/Pign/aui) |
-| `cui` | Terminal (TUI) | [Pign/cui](https://github.com/Pign/cui) |
+| `sui` | macOS, iOS, visionOS (SwiftUI) | [sui](https://github.com/lapavoiserie/sui) |
+| `wui` | Windows (WinUI 3) | [wui](https://github.com/lapavoiserie/wui) |
+| `aui` | Android (Jetpack Compose) | [aui](https://github.com/lapavoiserie/aui) |
+| `cui` | Terminal (TUI) | [cui](https://github.com/lapavoiserie/cui) |
 
 You write your app once and compile to any backend by setting a `-D mui_backend` flag. All mui types compile down to backend types with zero runtime overhead.
 
