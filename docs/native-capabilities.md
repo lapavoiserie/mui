@@ -82,6 +82,50 @@ Never a runtime `null`, and never a marker on screen — the same rule
 genuinely optional, `kui.Kui.supports(Battery)` folds to a compile-time constant
 and dead-code elimination removes the branch that cannot work.
 
+## Stopping what an application started
+
+A capability that only answers questions needs nothing. One that has to be
+**watched** — connectivity, location, anything that changes while the
+application runs — means the application owns something that must later be
+stopped, and forgetting is a leak that grows with use.
+
+`mui.App` carries a `lifetime` for exactly that:
+
+```haxe
+public function new() {
+    super();
+    lifetime.ownEffect(new Effect(() -> {
+        var stop = Watch.changes(net, 1000, v -> online.value = v);
+        Effect.onCleanup(stop);
+    }));
+}
+```
+
+It is released where the application's loop ends and hands control back to
+Haxe — `cui` when the loop quits, `pui` when the window closes. Where no loop
+returns, the process is ending instead and the system reclaims what is left:
+`sui` and `aui` never give the loop back, and `pui` in a browser returns
+immediately, which is why it does **not** release there.
+
+`mui.Contract` requires `lifetime` of every backend, so an application can rely
+on it without asking whether this one has it.
+
+### Why the effect goes in the constructor, not `body()`
+
+`body()` runs again on every rebuild. An effect created there would start a
+second watcher on the first rebuild and a third on the next, each keeping the
+last alive — the leak `onCleanup` prevents *inside* an effect, reintroduced
+*around* it.
+
+### There is no view lifetime
+
+Deliberately, and it is a real limit rather than an omission. A view
+disappearing is observable to Haxe only where Haxe reconciles the tree — the
+push backends — and not at all where the host walks it, which is what `sui` and
+`aui` do. A hook that fired on some backends and stayed silent on others would
+be worse than none, because an application would be written against the ones
+where it works.
+
 ## Further reading
 
 The [`kui` documentation](https://lapavoiserie.github.io/kui/) covers writing a

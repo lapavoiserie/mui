@@ -137,8 +137,52 @@ class Bind {
 					+ 'mui.Contract lists ${binding.name}', pos);
 				continue;
 			}
+			checkRequired(backend, binding, type, pos);
 			check(backend, binding, type, pos);
 		}
+	}
+
+	/**
+		Every member `mui.Contract` says the backend must carry.
+
+		By name only — see the note on `Binding.requires`. What this catches is
+		the omission, which an application has no way to detect: `mui.App` is an
+		alias for the backend's own class, so a missing member is a compile error
+		in the application, naming the backend's type, for something the
+		application never mentioned.
+	**/
+	static function checkRequired(backend:String, binding:Binding, type:Type, pos:Position):Void {
+		if (binding.requires == null) return;
+
+		var cls = switch (Context.follow(type)) {
+			case TInst(t, _): t.get();
+			case _: null;
+		}
+		if (cls == null) return;
+
+		for (name in binding.requires) {
+			if (!hasField(cls, name))
+				Context.error('${backend}.mui.${binding.name} has no "$name" — '
+					+ 'mui.Contract requires it', pos);
+		}
+	}
+
+	/**
+		Walk the superclasses too.
+
+		`ClassType.fields` lists only what a class declares itself, and every
+		backend's `mui.App` is a thin façade over its own `App` — so a member
+		that is there and inherited would read as missing, and the check would
+		fail on all six at once. Found the first time it ran.
+	**/
+	static function hasField(cls:Null<haxe.macro.Type.ClassType>, name:String):Bool {
+		var at = cls;
+		while (at != null) {
+			for (field in at.fields.get())
+				if (field.name == name) return true;
+			at = at.superClass == null ? null : at.superClass.t.get();
+		}
+		return false;
 	}
 
 	static function check(backend:String, binding:Binding, type:Type, pos:Position):Void {

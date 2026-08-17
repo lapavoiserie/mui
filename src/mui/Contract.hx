@@ -59,6 +59,17 @@ typedef Binding = {
 	/** Type parameters the alias carries, e.g. `["T"]` for `State<T>`. **/
 	var ?params:Array<String>;
 
+	/**
+		Members the backend's type must have, checked by name only.
+
+		Names rather than signatures on purpose: this exists to stop a backend
+		from quietly omitting something an application depends on, and comparing
+		printed signatures is the fair-weather check `args` already shows the
+		limits of. A member that exists with the wrong shape fails at the
+		application's call site, where the error names the actual mismatch.
+	**/
+	var ?requires:Array<String>;
+
 }
 
 class Contract {
@@ -66,7 +77,10 @@ class Contract {
 	public static final BINDINGS:Array<Binding> = [
 		// ---- the three that carry everything else ----
 		{pack: ["mui"], name: "View"},
-		{pack: ["mui"], name: "App"},
+		// `lifetime` is what an application attaches an effect to, so that
+		// starting a watcher does not mean remembering to stop one. Required of
+		// every backend, because an application cannot ask whether it is there.
+		{pack: ["mui"], name: "App", requires: ["lifetime"]},
 		{pack: ["mui"], name: "ViewComponent"},
 
 		// ---- containers ----
