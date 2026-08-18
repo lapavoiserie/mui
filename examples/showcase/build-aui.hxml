@@ -1,3 +1,7 @@
+# Regenerated from aui's src/aui/mui/init.hxml -- the backend states
+# what its build needs. Only two things differ here: mui comes from this
+# repository's source rather than -lib mui, and the example states its main.
+
 -cp src
 -cp ../../src
 -lib aui
@@ -5,4 +9,6 @@
 -D jvm
 --jvm build/app-logic.jar
 --macro aui.macros.ComposeGenerator.register()
+--macro mui.macros.Bind.all()
+--macro aui.kui.Platform.registerWithKui()
 --main Showcase

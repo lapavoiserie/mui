@@ -1,7 +1,14 @@
+# Regenerated from sui's src/sui/mui/init.hxml -- the backend states
+# what its build needs. Only two things differ here: mui comes from this
+# repository's source rather than -lib mui, and the example states its main.
+
 -cp .
 -cp ../../src
 -lib sui
+-lib kui
 -D mui_backend=sui
 --macro sui.macros.SwiftGenerator.register()
--main TodoApp
--cpp build/cpp
+--macro mui.macros.Bind.all()
+--macro sui.kui.Platform.registerWithKui()
+--main TodoApp
+-cpp build/sui

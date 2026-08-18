@@ -3,11 +3,13 @@
 -cp src
 -cp ../../src
 -lib wui
+-lib kui
 -lib rui
 -lib nui
 -D mui_backend=wui
 --macro wui.macros.WinUIGenerator.register()
 --macro mui.macros.Bind.all()
 --macro wui.nui.Vocabulary.registerWithMui()
+--macro wui.kui.Platform.registerWithKui()
 -main EndToEnd
 -cpp build/cpp

@@ -1,6 +1,17 @@
+# Regenerated from wui's src/wui/mui/init.hxml -- the backend states
+# what its build needs. Only two things differ here: mui comes from this
+# repository's source rather than -lib mui, and the example states its main.
+
 -cp .
 -cp ../../src
 -lib wui
+-lib kui
+-lib nui
+-lib rui
 -D mui_backend=wui
--main FormApp
--cpp build/wui
+--macro wui.macros.WinUIGenerator.register()
+--macro mui.macros.Bind.all()
+--macro wui.nui.Vocabulary.registerWithMui()
+--macro wui.kui.Platform.registerWithKui()
+--main FormApp
+-cpp build/cpp
