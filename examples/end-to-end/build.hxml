@@ -6,7 +6,6 @@
 -lib rui
 -lib nui
 -D mui_backend=wui
---macro rui.macros.ViewRule.register("mui.App", "view")
 --macro wui.macros.WinUIGenerator.register()
 --macro mui.macros.Bind.all()
 --macro wui.nui.Vocabulary.registerWithMui()

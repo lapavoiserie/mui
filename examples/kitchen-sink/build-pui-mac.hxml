@@ -6,7 +6,6 @@
 -lib nui
 -lib hxcpp
 -D mui_backend=pui
---macro rui.macros.ViewRule.register("mui.App", "body")
 --macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp build/pui-mac

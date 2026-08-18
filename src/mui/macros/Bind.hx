@@ -56,6 +56,14 @@ class Bind {
 
 		var pos = Context.currentPos();
 
+		// The view rule comes with the vocabulary, not as a line each backend
+		// remembers to add. Registered here because every mui build passes
+		// through Bind.all() — some init files carried the line, some did not,
+		// and the rule silently protected some backends and not others.
+		// register() guards against double registration, so builds that still
+		// carry their own line lose nothing.
+		rui.macros.ViewRule.register(backend + ".mui.App", "body", true);
+
 		// Every alias first, and not one type resolved yet.
 		//
 		// Resolving `<backend>.mui.TabView` before `mui.View` exists pulls

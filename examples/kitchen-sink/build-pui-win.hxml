@@ -7,7 +7,6 @@
 -lib hxcpp
 -D mui_backend=pui
 -D pui_surface=win
---macro rui.macros.ViewRule.register("mui.App", "body")
 --macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp build/pui-win

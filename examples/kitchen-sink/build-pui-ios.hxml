@@ -12,7 +12,6 @@
 # which is every simulator on an Apple Silicon Mac. `build-ios.sh` compiles what
 # this produces.
 -D no-compilation
---macro rui.macros.ViewRule.register("mui.App", "body")
 --macro mui.macros.Bind.all()
 --main KitchenSink
 -cpp build/pui-ios

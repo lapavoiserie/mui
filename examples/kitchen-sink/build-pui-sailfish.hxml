@@ -14,7 +14,6 @@
 -D kui_platform=sailfish
 -D no-compilation
 -D static_link
---macro rui.macros.ViewRule.register("mui.App", "body")
 --macro mui.macros.Bind.all()
 --macro pui.kui.Platform.registerWithKui()
 --main KitchenSink
