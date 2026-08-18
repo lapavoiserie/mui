@@ -117,14 +117,42 @@ second watcher on the first rebuild and a third on the next, each keeping the
 last alive — the leak `onCleanup` prevents *inside* an effect, reintroduced
 *around* it.
 
-### There is no view lifetime
+### A view lifetime, expressed as a key
 
-Deliberately, and it is a real limit rather than an omission. A view
-disappearing is observable to Haxe only where Haxe reconciles the tree — the
-push backends — and not at all where the host walks it, which is what `sui` and
-`aui` do. A hook that fired on some backends and stayed silent on others would
-be worse than none, because an application would be written against the ones
-where it works.
+A watcher that should only run while part of the interface is showing does not
+belong to the application's whole life. `lifetime.keep` scopes it to a
+**declaration**:
+
+```haxe
+override function body():View {
+    if (showDetail) lifetime.keep("detail", () -> {
+        var stop = Watch.changes(net, 1000, onChange);
+        return stop;
+    });
+    …
+}
+```
+
+Started the first time the key appears, undone once `body()` stops asking for
+it.
+
+**Why a key rather than the view itself.** A view has no identity to hang this
+on: a rebuild produces new objects, so a pointer means nothing across two
+passes. And under the pull contract — `sui`, `aui` — the host expands and
+discards views on its own schedule and tells Haxe nothing. The key is the one
+identity the application is in a position to state, and it reads the same on all
+six backends.
+
+**Why not the host's `onDisappear`.** Because "gone from the screen" is not
+"gone from the interface". A view scrolled out of a lazy list, or sitting under
+another tab, has disappeared by the host's reckoning and is still perfectly
+declared. Stopping its watcher there would be a bug that takes weeks to
+attribute. `body()` knows the difference; `onDisappear` does not.
+
+**It is undone one pass late**, and deliberately: the sweep runs at the start of
+a pass rather than the end, because a component's `body()` runs while the host
+walks — after the application's own `body()` has returned. Sweeping at the end
+would undo what a component had just declared.
 
 ## Further reading
 
