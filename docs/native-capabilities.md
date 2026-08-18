@@ -94,10 +94,11 @@ stopped, and forgetting is a leak that grows with use.
 ```haxe
 public function new() {
     super();
-    lifetime.ownEffect(new Effect(() -> {
+    var watcher = new Effect(() -> {
         var stop = Watch.changes(net, 1000, v -> online.value = v);
         Effect.onCleanup(stop);
-    }));
+    });
+    lifetime.own(watcher.dispose);
 }
 ```
 

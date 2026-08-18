@@ -86,9 +86,14 @@ new Effect(() -> trace("count = " + count.value));  // runs now, and on change
 count.value = 1;
 ```
 
-Use `Signal` for reactive state that is not bound to a view, and `ImmutableList` for a
-collection held in a state — a write only notifies when the value *changes*, compared with
-`!=`, so mutating an array in place is invisible while a new instance is not.
+Use `Signal` for reactive state that is not bound to a view — a queue length a worker
+watches, a value two effects coordinate on. **Not in `body()`**: a raw `Signal` notifies
+its subscribers, but on the backends that rebuild from their own dirty flag nothing
+subscribes the view tree, so the screen would quietly never update. The compiler refuses
+the read and names the field; what a view displays is declared `@:state`, which carries
+the platform half. Use `ImmutableList` for a collection held in a state — a write only
+notifies when the value *changes*, compared with `!=`, so mutating an array in place is
+invisible while a new instance is not.
 
 ## Backend-Specific Methods
 
