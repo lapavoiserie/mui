@@ -149,10 +149,12 @@ another tab, has disappeared by the host's reckoning and is still perfectly
 declared. Stopping its watcher there would be a bug that takes weeks to
 attribute. `body()` knows the difference; `onDisappear` does not.
 
-**It is undone one pass late**, and deliberately: the sweep runs at the start of
-a pass rather than the end, because a component's `body()` runs while the host
-walks — after the application's own `body()` has returned. Sweeping at the end
-would undo what a component had just declared.
+**It is undone when the pass ends.** A pass is bracketed: `beginPass` before the
+tree is built, `endPass` once it is fully realised — which under the pull
+contract is *after* the host has forced the lazy expansion, not merely after
+`body()` returned. Sweeping at the end of the pass rather than at the start of
+the next one matters: a backend that only rebuilds on demand might never run
+another pass, and a dropped key would then never be undone at all.
 
 ## Further reading
 
