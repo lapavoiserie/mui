@@ -80,7 +80,10 @@ class Contract {
 		// `lifetime` is what an application attaches an effect to, so that
 		// starting a watcher does not mean remembering to stop one. Required of
 		// every backend, because an application cannot ask whether it is there.
-		{pack: ["mui"], name: "App", requires: ["lifetime"]},
+		// `surfaces` is the declaration substrate: the backend's App answers
+		// the Primary declaration plus whatever `@:surface` methods collected
+		// into `declaredSurfaces()` — see mui.surface.SurfaceDecl.
+		{pack: ["mui"], name: "App", requires: ["lifetime", "surfaces"]},
 		{pack: ["mui"], name: "ViewComponent"},
 
 		// ---- containers ----

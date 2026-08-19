@@ -9,6 +9,14 @@ import mui.ui.Spacer;
 class Counter extends App {
     @:state var count:Int = 0;
 
+    // A read-at-a-glance summary — the Sailfish cover once its host lands;
+    // declared today, mounted by no backend yet. The method name is the
+    // surface's stable id: Tree(Glance, "glance", …).
+    @:surface(Glance)
+    function glance():View {
+        return new Text('Count: ${count.get()}');
+    }
+
     override function body():View {
         return new VStack([
             new Spacer(),

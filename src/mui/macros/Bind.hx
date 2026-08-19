@@ -63,6 +63,11 @@ class Bind {
 		// register() guards against double registration, so builds that still
 		// carry their own line lose nothing.
 		rui.macros.ViewRule.register(backend + ".mui.App", "body", true);
+		// Surface declarations are views too: any `@:surface` method runs
+		// inside its surface's effect, so it reads under the same rule as
+		// `body()` — matched by metadata, because the methods have no fixed
+		// names for a list to name.
+		rui.macros.ViewRule.registerMeta(backend + ".mui.App", ":surface", true);
 
 		// Every alias first, and not one type resolved yet.
 		//
