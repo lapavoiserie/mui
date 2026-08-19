@@ -11,4 +11,4 @@
 --macro mui.macros.Bind.all()
 --macro sui.kui.Platform.registerWithKui()
 --main TodoApp
--cpp build/sui
+-cpp build/cpp

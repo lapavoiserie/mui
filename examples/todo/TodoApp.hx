@@ -45,6 +45,18 @@ class TodoApp extends App {
         ], 8);
     }
 
+    // The Preferences surface: the macOS Settings scene on sui (Cmd+, — a
+    // second live root rendered by DynamicSurfaceView), nothing on backends
+    // without a preferences surface. Same rules as any surface: display
+    // reads state live, in the shared rebuild.
+    @:surface(Preferences)
+    function preferences():View {
+        return new VStack([
+            new Text("Todo preferences"),
+            new Text('${todos.get().length} items kept'),
+        ], 8);
+    }
+
     // The Glance surface: the Sailfish cover (live-mounted by qui's CoverHost),
     // a widget elsewhere someday, nothing at all on backends without a glance
     // surface. Display-only — reading state here keeps it live, in the
