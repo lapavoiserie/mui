@@ -45,6 +45,18 @@ class TodoApp extends App {
         ], 8);
     }
 
+    // The Glance surface: the Sailfish cover (live-mounted by qui's CoverHost),
+    // a widget elsewhere someday, nothing at all on backends without a glance
+    // surface. Display-only — reading state here keeps it live, in the
+    // surface's own effect. The method name is the surface's stable id.
+    @:surface(Glance)
+    function glance():View {
+        return new VStack([
+            new Text("Todo"),
+            new Text('${todos.get().length} items'),
+        ], 8);
+    }
+
     static function main() {
         #if (mui_backend == "cui")
         new TodoApp().run();

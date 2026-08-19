@@ -6,10 +6,12 @@ those an **app surface**, and lets an application declare them portably: the
 declaration is shared, each backend maps it onto the surface its platform
 actually has, and a role a backend cannot honour degrades to a silent no-op.
 
-> **Status.** This page describes the *declaration* vocabulary, which is
-> implemented and checked. No backend mounts a declared surface yet — the first
-> host (the Sailfish cover) is the next step. Declaring today is safe
-> everywhere: it compiles, it is checked, and it renders nothing extra.
+> **Status.** The declaration vocabulary is implemented and checked, and the
+> first host exists: on Sailfish, `qui.mui.CoverHost` live-mounts a
+> `Glance` declaration onto the application cover. Every other backend
+> degrades every non-Primary role to a silent no-op for now. Declaring is safe
+> everywhere: it compiles, it is checked, and where no host exists it renders
+> nothing extra.
 
 ## Declaring a surface
 
@@ -93,7 +95,9 @@ Roles degrade per backend, deliberately and visibly: a terminal has no cover,
 so a `Glance` declaration is never mounted there — no error, no placeholder.
 When a platform can mount only one surface of a role (the Sailfish cover) and
 several are declared, the host takes the role's default id (`"glance"`) if
-declared, else the first declaration. The per-backend answers will be stated
-by each backend's surface host capabilities as hosts land, the same way
+declared, else the first declaration. Each backend's answers are stated by its
+surface hosts' `capabilities()` (`mui.surface.SurfaceHost`), the same way
 component support is stated by `@:muiSupport` in the
-[backend support table](backend-support.md).
+[backend support table](backend-support.md). The one host so far: qui's
+cover — `{role: Glance, cardinality: One, interaction: ActionsOnly,
+update: Live}`.
