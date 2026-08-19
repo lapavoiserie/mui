@@ -17,6 +17,17 @@ class Counter extends App {
         return new Text('Count: ${count.get()}');
     }
 
+    // An Auxiliary window: a second top-level window on wui (live, its own
+    // surface record), nothing anywhere else — windowless backends degrade it
+    // to a silent no-op. The method name, prettified, is the window title.
+    @:surface(Auxiliary)
+    function inspector():View {
+        return new VStack([
+            new Text("Inspector"),
+            new Text('Count is ${count.get()}'),
+        ], 8);
+    }
+
     override function body():View {
         return new VStack([
             new Spacer(),

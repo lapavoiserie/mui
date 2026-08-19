@@ -7,6 +7,7 @@ import mui.ui.Button;
 import mui.ui.Spacer;
 import mui.ui.TextInput;
 import mui.ui.ForEach;
+import mui.surface.Command;
 
 class TodoApp extends App {
     @:state var inputText:String = "";
@@ -43,6 +44,20 @@ class TodoApp extends App {
             }),
             new Spacer(),
         ], 8);
+    }
+
+    // The Commands surface: the menu bar on sui (a "Shortcuts" menu — the
+    // portable chord names the platform's primary modifier, so ctrl+n is
+    // Cmd+N there), key bindings on cui, nothing on backends without a
+    // command surface. One command carries a chord, one deliberately does
+    // not: on a menu bar it still shows and clicks.
+    @:surface(Commands)
+    function shortcuts():Array<Command> {
+        return [
+            new Command("Clear completed", function() todos.set([])).key("ctrl+k"),
+            new Command("Reset examples", function()
+                todos.set(["Buy groceries", "Write documentation", "Review pull request"])),
+        ];
     }
 
     // The Preferences surface: the macOS Settings scene on sui (Cmd+, — a
