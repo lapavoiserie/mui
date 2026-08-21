@@ -13,7 +13,7 @@ class StaleRead extends App {
 
 	override function body():View return new Text("body");
 
-	@:surface(Glance)
+	@:surface(Glance, optional)
 	function today():View return new Text('hits $hits');
 
 	static function main() {}

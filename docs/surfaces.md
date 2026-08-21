@@ -4,7 +4,8 @@ An application is not one render root. It has a main window — and, depending o
 the platform, a cover, a widget, a settings scene, a menu bar. mui calls each of
 those an **app surface**, and lets an application declare them portably: the
 declaration is shared, each backend maps it onto the surface its platform
-actually has, and a role a backend cannot honour degrades to a silent no-op.
+actually has, and a role the backend being built has no host for is a
+**compile error** — never a silence.
 
 > **Status.** The vocabulary is implemented and checked, and hosts exist
 > across the family — all validated on their platforms:
@@ -19,8 +20,10 @@ actually has, and a role a backend cannot honour degrades to a silent no-op.
 > | `Companion` | any machine on the CAFOS network — see below |
 > | `Notification` | not yet — waits for the detached subsystem |
 >
-> A role with no host on a backend still degrades to a silent no-op:
-> declaring is safe everywhere.
+> A role with no host on the backend being built stops that build, naming
+> the role and the backend. Declaring stays portable — you accept the gap
+> in your own source with `@:surface(Role, optional)` — but you are never
+> told by an empty screen.
 
 ## Declaring a surface
 
@@ -139,14 +142,46 @@ on `mui.surface.Describe.impl` at `mui.App` construction, emitting the
 served from any backend looks the same on the wire. A backend without a
 describer degrades with a word: the declaration never projects.
 
-## Degradation
+## Degradation, and who declares it
 
-Roles degrade per backend, deliberately and visibly: a terminal has no cover,
-so a `Glance` declaration is never mounted there — no error, no placeholder.
-When a platform can mount only one surface of a role (the Sailfish cover) and
-several are declared, the host takes the role's default id (`"glance"`) if
-declared, else the first declaration. Roles with `Many` cardinality (widgets,
-auxiliary windows, companions) mount every declaration, in declaration order.
-Each backend's answers are stated by its surface hosts' `capabilities()`
-(`mui.surface.SurfaceHost`), the same way component support is stated by
-`@:muiSupport` in the [backend support table](backend-support.md).
+The house rule first: **what is knowable at compile time is a compile error,
+never a silence.** Which roles a backend hosts is knowable — each backend
+states them as `@:hostedRoles` on its `mui.App`, where
+`mui.macros.Surfaces` reads them — so a terminal build that meets a `Glance`
+declaration stops, naming both:
+
+```
+Counter.hx:16: cui hosts no Glance: surface "glance" would fly nowhere here
+  (it hosts Commands, Companion). Accept that with @:surface(Glance, optional),
+  or build for a backend that hosts it.
+```
+
+An application built for several platforms says so once, in its own source:
+
+```haxe
+@:surface(Glance, optional)      // the Sailfish cover; nothing on the others,
+function today():View { … }      // and this app accepts that
+```
+
+That is what "degradation is declared, not accidental" has to mean to be
+worth anything: declared by the application, for this build, where the next
+reader sees it — not asserted in a doc comment while a `case _:` drops it on
+the floor.
+
+| | today |
+|---|---|
+| `Primary` | every backend |
+| `Glance` | qui |
+| `Preferences` | sui |
+| `Commands` | sui, wui, cui |
+| `Auxiliary` | sui, wui |
+| `Companion` | every backend that installs a describer — all but qui |
+
+Cardinality is still the host's answer: when a platform mounts only one
+surface of a role (the Sailfish cover) and several are declared, the host
+takes the role's default id (`"glance"`) if declared, else the first. Roles
+with `Many` cardinality (auxiliary windows, companions) mount every
+declaration, in declaration order.
+
+`mui.surface.SurfaceHost.capabilities()` describes a host's shape at
+runtime; it is not what the check reads, and nothing consumes it yet.

@@ -9,18 +9,23 @@ import mui.ui.Spacer;
 class Counter extends App {
     @:state var count:Int = 0;
 
-    // A read-at-a-glance summary — the Sailfish cover once its host lands;
-    // declared today, mounted by no backend yet. The method name is the
-    // surface's stable id: Tree(Glance, "glance", …).
-    @:surface(Glance)
+    // A read-at-a-glance summary: the Sailfish cover, hosted by qui. The
+    // other backends host no Glance, and this example is built for all of
+    // them — so it says `optional`, which is the application accepting, in
+    // its own source, that this surface flies nowhere on those targets. Drop
+    // the word and a cui or wui build stops, naming the role: that is the
+    // point of the check.
+    //
+    // The method name is the surface's stable id: Tree(Glance, "glance", …).
+    @:surface(Glance, optional)
     function glance():View {
         return new Text('Count: ${count.get()}');
     }
 
-    // An Auxiliary window: a second top-level window on wui (live, its own
-    // surface record), nothing anywhere else — windowless backends degrade it
-    // to a silent no-op. The method name, prettified, is the window title.
-    @:surface(Auxiliary)
+    // An Auxiliary window: a second top-level window on wui and sui, each
+    // live with its own surface record. cui and pui host none, so the same
+    // `optional` applies. The method name, prettified, is the window title.
+    @:surface(Auxiliary, optional)
     function inspector():View {
         return new VStack([
             new Text("Inspector"),

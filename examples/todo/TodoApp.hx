@@ -51,7 +51,7 @@ class TodoApp extends App {
     // Cmd+N there), key bindings on cui, nothing on backends without a
     // command surface. One command carries a chord, one deliberately does
     // not: on a menu bar it still shows and clicks.
-    @:surface(Commands)
+    @:surface(Commands, optional)
     function shortcuts():Array<Command> {
         return [
             new Command("Clear completed", function() todos.set([])).key("ctrl+k"),
@@ -61,10 +61,12 @@ class TodoApp extends App {
     }
 
     // The Preferences surface: the macOS Settings scene on sui (Cmd+, — a
-    // second live root rendered by DynamicSurfaceView), nothing on backends
-    // without a preferences surface. Same rules as any surface: display
-    // reads state live, in the shared rebuild.
-    @:surface(Preferences)
+    // second live root rendered by DynamicSurfaceView). No other backend here
+    // hosts Preferences, and this app is built for four — hence `optional`,
+    // the application accepting in its own source that it flies nowhere on
+    // those. Same rules as any surface: display reads state live, in the
+    // shared rebuild.
+    @:surface(Preferences, optional)
     function preferences():View {
         return new VStack([
             new Text("Todo preferences"),
@@ -73,10 +75,11 @@ class TodoApp extends App {
     }
 
     // The Glance surface: the Sailfish cover (live-mounted by qui's CoverHost),
-    // a widget elsewhere someday, nothing at all on backends without a glance
-    // surface. Display-only — reading state here keeps it live, in the
-    // surface's own effect. The method name is the surface's stable id.
-    @:surface(Glance)
+    // a widget elsewhere someday. Only qui hosts it today, so `optional` says
+    // the app accepts it flying nowhere on the four backends built here.
+    // Display-only — reading state here keeps it live, in the surface's own
+    // effect. The method name is the surface's stable id.
+    @:surface(Glance, optional)
     function glance():View {
         return new VStack([
             new Text("Todo"),

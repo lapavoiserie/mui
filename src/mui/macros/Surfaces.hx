@@ -34,6 +34,8 @@ import haxe.macro.Expr;
 	declaration form until the detached subsystem), arguments on a declaration,
 	and a duplicate role/id pair, including against superclasses.
 **/
+typedef Parsed = {role:String, id:String, optional:Bool};
+
 class Surfaces {
 	public static function build():Array<Field> {
 		var fields = Context.getBuildFields();
@@ -71,6 +73,7 @@ class Surfaces {
 
 			var parsed = parse(m, f.name, f.pos);
 			if (parsed == null) continue;
+			checkHosted(parsed, f.name, f.pos);
 			var key = parsed.role + "/" + parsed.id;
 			if (seen.exists(key)) {
 				Context.error('Surface ${parsed.role} "${parsed.id}" is already declared by ${seen.get(key)}. '
@@ -103,17 +106,17 @@ class Surfaces {
 		return fields;
 	}
 
-	/** Role and id out of one `@:surface(Role)` / `@:surface(Role, "id")`.
+	/** Role, id and the `optional` flag out of one `@:surface(…)`.
 		`null` after a reported refusal — the caller skips the field. **/
-	static function parse(m:MetadataEntry, methodName:String, pos:Position):Null<{role:String, id:String}> {
+	static function parse(m:MetadataEntry, methodName:String, pos:Position):Null<Parsed> {
 		var roles = roleNames();
 
 		if (m.params == null || m.params.length == 0) {
 			Context.error('@:surface names a role: @:surface(${sayRoles(roles)}).', pos);
 			return null;
 		}
-		if (m.params.length > 2) {
-			Context.error("@:surface takes a role and optionally an id — nothing more.", pos);
+		if (m.params.length > 3) {
+			Context.error("@:surface takes a role, optionally an id, optionally `optional` — nothing more.", pos);
 			return null;
 		}
 
@@ -143,15 +146,87 @@ class Surfaces {
 		}
 
 		var id = methodName;
-		if (m.params.length == 2) {
-			switch (m.params[1].expr) {
+		var optional = false;
+		for (i in 1...m.params.length) {
+			switch (m.params[i].expr) {
 				case EConst(CString(s, _)): id = s;
+				case EConst(CIdent("optional")): optional = true;
 				case _:
-					Context.error("@:surface's second argument is the surface's id, as a string.", m.params[1].pos);
+					Context.error("After the role, @:surface takes the surface's id as a string "
+						+ "and/or `optional`.", m.params[i].pos);
 					return null;
 			}
 		}
-		return {role: role, id: id};
+		return {role: role, id: id, optional: optional};
+	}
+
+	/**
+		Refuse a role the backend being compiled has no host for.
+
+		The rule the family keeps: what is knowable at compile time is a
+		compile error, never a silence. Which roles a backend hosts *is*
+		knowable — each backend states them as `@:hostedRoles` on its
+		`mui.App` — so a declaration that would fly nowhere on this target is
+		refused at the declaration, naming the backend.
+
+		Accepting one is then an act of the application, in the source, where
+		the next reader sees it: `@:surface(Glance, optional)`. That is what
+		"degradation is declared, not accidental" has to mean to be worth
+		anything — declared by the application for this build, not asserted in
+		a doc comment.
+
+		A backend that states nothing cannot be checked; that is a hole in the
+		framework, not in the application, so it warns here rather than
+		failing someone else's build.
+	**/
+	static function checkHosted(parsed:Parsed, methodName:String, pos:Position):Void {
+		if (parsed.optional) return;
+
+		var hosted = hostedRoles();
+		var backend = Context.defined("mui_backend") ? Context.definedValue("mui_backend") : "this backend";
+		if (hosted == null) {
+			Context.warning('$backend states no @:hostedRoles on its mui.App, so surface '
+				+ 'declarations cannot be checked against it.', pos);
+			return;
+		}
+		if (hosted.contains(parsed.role)) return;
+
+		Context.error('$backend hosts no ${parsed.role}: surface "${parsed.id}" would fly nowhere here'
+			+ (hosted.length == 0 ? " (it hosts no declared surface at all)" : ' (it hosts ${hosted.join(", ")})')
+			+ '. Accept that with @:surface(${parsed.role}, optional), or build for a backend that hosts it.',
+			pos);
+	}
+
+	/**
+		The roles the backend states it hosts, or `null` if none says.
+
+		Read off the superclass chain rather than by resolving `mui.App`: the
+		application being built already extends the backend's class, and the
+		metadata rides up that chain — which also lets an application's own
+		intermediate base class widen the set if it ever hosts something
+		itself.
+	**/
+	static function hostedRoles():Null<Array<String>> {
+		var cls = Context.getLocalClass();
+		if (cls == null) return null;
+
+		var at = cls.get().superClass == null ? null : cls.get().superClass.t.get();
+		while (at != null) {
+			if (at.meta.has(":hostedRoles")) {
+				var out:Array<String> = [];
+				for (m in at.meta.extract(":hostedRoles")) {
+					if (m.params == null) continue;
+					for (p in m.params) switch (p.expr) {
+						case EConst(CIdent(name)): out.push(name);
+						case EConst(CString(name, _)): out.push(name);
+						case _:
+					}
+				}
+				return out;
+			}
+			at = at.superClass == null ? null : at.superClass.t.get();
+		}
+		return null;
 	}
 
 	/** `Tree(role, id, thunk)` for tree roles, `CommandSet(id, thunk)` for Commands. **/

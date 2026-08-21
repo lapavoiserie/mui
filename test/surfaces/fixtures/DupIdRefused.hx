@@ -6,10 +6,10 @@ import mui.ui.Text;
 class DupIdRefused extends App {
 	override function body():View return new Text("body");
 
-	@:surface(Glance, "today")
+	@:surface(Glance, "today", optional)
 	function today():View return new Text("a");
 
-	@:surface(Glance, "today")
+	@:surface(Glance, "today", optional)
 	function alsoToday():View return new Text("b");
 
 	static function main() {}

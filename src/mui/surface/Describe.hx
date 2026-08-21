@@ -11,10 +11,12 @@ package mui.surface;
 	`mui.App` installs its describer here at construction, the same layering
 	as sui's `extraRootsOf`: shared code calls the hook, never a backend.
 
-	A backend that has not installed one cannot serve detached surfaces —
-	`describe` says so with a word and returns null; the caller degrades (a
-	Companion declaration on such a backend simply never projects, the same
-	silent no-op as any unsupported role).
+	A backend that has not installed one cannot serve detached surfaces, and
+	says so twice over: it leaves `Companion` out of its `@:hostedRoles`, so
+	declaring one for that target does not compile — and should the hook still
+	be missing at runtime (a describer installed late, a host outside the
+	`mui.App` path), `describe` says so with a word and returns null rather
+	than projecting an empty tree.
 
 	## The canon
 

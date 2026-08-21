@@ -80,6 +80,11 @@ check ArgsRefused         reject "no arguments"
 check DupIdRefused        reject "already declared"
 check UnknownRole         reject "not a mui.surface.SurfaceRole"
 
+# The role this backend cannot host: refused at the declaration, naming the
+# backend. `Collected` covers the other half — the same declaration accepted
+# on purpose with `optional`.
+check UnhostedRefused     reject "cui hosts no Glance"
+
 # What the typer refuses through the generated code: the thunk's return type.
 check WrongReturn         reject "Command"
 

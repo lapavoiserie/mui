@@ -9,10 +9,14 @@ package mui.surface;
 	"cover", "widget", "live tile" — would have made every application name a
 	platform; several of those are the same thing wearing different clothes.
 
-	A role a backend does not support degrades to a silent no-op. That is the
-	role system's whole promise: degradation *declared* by the backend's host
-	capabilities, instead of accidental (the pre-surface state of things, where
-	an unsupported modifier was simply dropped on the floor).
+	A role the backend being built has no host for is a **compile error**, not
+	a silence: each backend states what it hosts as `@:hostedRoles` on its
+	`mui.App`, and `mui.macros.Surfaces` refuses a declaration that would fly
+	nowhere on this target. An application built for several platforms accepts
+	the gap explicitly — `@:surface(Glance, optional)` — which is what makes
+	the degradation *declared* rather than accidental: declared by the
+	application, in its own source, instead of a `case _:` dropping it on the
+	floor the way an unsupported modifier used to.
 
 	`Primary` never appears in a declaration: it is implicit, it is `body()`,
 	and it is required everywhere. `@:surface(Primary)` is a compile error
