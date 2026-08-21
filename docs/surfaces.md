@@ -17,7 +17,7 @@ actually has, and a role the backend being built has no host for is a
 > | `Preferences` | macOS: the Settings scene (⌘,), a second live root |
 > | `Commands` | macOS: the menu bar (with derived shortcuts); terminal: key bindings; Windows: the MenuBar, injected as ordinary nodes |
 > | `Auxiliary` | Windows and macOS: real extra windows, one per declaration, each with its own lifetime |
-> | `Companion` | any machine on the CAFOS network — see below |
+> | `Companion` | any machine on the CAFOS network, when the build asks for it (`-D mui_cafos`) — see below |
 > | `Notification` | not yet — waits for the detached subsystem |
 >
 > A role with no host on the backend being built stops that build, naming
@@ -103,12 +103,25 @@ override function surfaces():Array<SurfaceDecl> {
 
 ## Companion: a surface on another machine
 
+**Off unless the build asks.** A Companion is served to machines this one has
+merely met, and nothing about writing an application implies wanting that, so
+the networked corner is opt-in: without `-D mui_cafos` the declaration below
+does not compile, and the refusal says why. Turning it on is one line in the
+build file, where it is reviewable — and it still takes the explicit
+`CompanionServe.serve` call before anything reaches the network. Two
+deliberate acts, neither of them a default.
+
 A `@:surface(Companion)` declaration is not rendered by this process at all:
 it is *projected* — over the local [CAFOS](../../cafos/) agent — onto whatever
 machine serves a surface of that id, and rendered there by that machine's own
 renderer. The remote taps come back as action ids and run your closures; ids
 are stable by place, so a tap racing a re-render does what the unchanged
 button says.
+
+```hxml
+# in the build file — the switch, once
+-D mui_cafos
+```
 
 ```haxe
 @:surface(Companion)
@@ -175,7 +188,7 @@ the floor.
 | `Preferences` | sui |
 | `Commands` | sui, wui, cui |
 | `Auxiliary` | sui, wui |
-| `Companion` | every backend that installs a describer — all but qui |
+| `Companion` | every backend that installs a describer — all but qui — **and only when the build sets `-D mui_cafos`** |
 
 Cardinality is still the host's answer: when a platform mounts only one
 surface of a role (the Sailfish cover) and several are declared, the host

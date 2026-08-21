@@ -189,6 +189,21 @@ class Surfaces {
 				+ 'declarations cannot be checked against it.', pos);
 			return;
 		}
+		// A Companion is served over the network, to machines this one has
+		// merely *met*. Nothing about declaring surfaces implies wanting that,
+		// so the whole detached-over-cafos corner is off unless the build asks
+		// for it — and asking is one define, in the build file, where it is
+		// reviewable. A backend that states Companion is saying it *could*
+		// serve one (it installs a describer), never that this build does.
+		if (parsed.role == "Companion" && !Context.defined(CAFOS_DEFINE)) {
+			Context.error('a Companion surface is served over the network by cafos, which is off in '
+				+ 'this build: "${parsed.id}" would be declared but never reachable.\n'
+				+ '  Turn it on for this build with -D $CAFOS_DEFINE (and cafos on the classpath), '
+				+ 'or mark the declaration optional.',
+				pos);
+			return;
+		}
+
 		if (hosted.contains(parsed.role)) return;
 
 		Context.error('$backend hosts no ${parsed.role}: surface "${parsed.id}" would fly nowhere here'
@@ -196,6 +211,18 @@ class Surfaces {
 			+ '. Accept that with @:surface(${parsed.role}, optional), or build for a backend that hosts it.',
 			pos);
 	}
+
+	/**
+		The one switch that turns the networked corner on.
+
+		Pavois is two things at once — a way to write native applications, and
+		a way to let their surfaces live on other machines — and the second
+		must never arrive by default with the first. Off, a `Companion`
+		declaration does not compile; on, it does, and the application still
+		has to call `cafos.mui.CompanionServe.serve` before anything reaches
+		the network. Two deliberate acts, neither of them a default.
+	**/
+	public static inline var CAFOS_DEFINE = "mui_cafos";
 
 	/**
 		The roles the backend states it hosts, or `null` if none says.

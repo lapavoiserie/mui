@@ -30,11 +30,16 @@ compile() {
 }
 
 # check <fixture> <pass|reject> [text the refusal must contain]
+#
+# EXTRA carries build flags for the one fixture that needs a different build
+# than the others — the cafos switch, whose whole point is that it is not on
+# by default.
+EXTRA=""
 check() {
 	local fixture="$1" expect="$2" text="${3:-}"
 	local out code
 
-	out=$(compile "$fixture" -cpp /dev/null --no-output)
+	out=$(compile "$fixture" -cpp /dev/null --no-output $EXTRA)
 	code=$?
 
 	if [ "$expect" = "pass" ]; then
@@ -84,6 +89,14 @@ check UnknownRole         reject "not a mui.surface.SurfaceRole"
 # backend. `Collected` covers the other half — the same declaration accepted
 # on purpose with `optional`.
 check UnhostedRefused     reject "cui hosts no Glance"
+
+# The networked corner is opt-in: the same declaration is refused without the
+# switch and accepted with it. Both halves, or "it compiles" would prove
+# nothing about the default.
+check CompanionOffRefused reject "cafos, which is off in this build"
+EXTRA="-D mui_cafos"
+check CompanionOptIn      pass
+EXTRA=""
 
 # What the typer refuses through the generated code: the thunk's return type.
 check WrongReturn         reject "Command"
