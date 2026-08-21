@@ -6,12 +6,39 @@ Adding a backend touches **no file in this repository**. The backend declares it
 
 A backend library must provide:
 
-1. **`App` base class** with `@:autoBuild` StateMacro and `body():View` override
+1. **`App` base class** with `@:autoBuild` StateMacro, `body():View` override,
+   and **`@:hostedRoles(...)`** — the surface roles this backend actually
+   mounts (see below)
 2. **`View` base class** with modifier methods (padding, font, foregroundColor, etc.)
 3. **`ViewComponent`** extending View with its own `body()`
 4. **`state/State<T>`** extending [`rui.state.State`](https://lapavoiserie.github.io/rui/#/state) — see below
 5. **`state/Binding<T>`** with `.get()` and `.set()`
 6. **UI components** in a `ui/` package: Text, VStack, HStack, Button, Spacer, etc.
+
+### Stating what you host
+
+`@:hostedRoles` on your `mui.App` is not documentation, it is the check:
+`mui.macros.Surfaces` reads it and refuses, at compile time, any
+`@:surface(Role)` declaration your backend has no host for — naming the role,
+you, and what you do host. Start honest and empty; widen it the day a host
+lands, never to quiet a build.
+
+```haxe
+@:hostedRoles(Commands, Companion)
+@:autoBuild(mui.macros.Surfaces.build())
+@:autoBuild(yourbackend.macros.StateMacro.build())
+class App extends yourbackend.App { … }
+```
+
+List `Companion` only if you install a `mui.surface.Describe` implementation
+in your `App` constructor — that is what a projection needs. It states a
+capability, not an appetite: the networked corner stays off in any build that
+has not set `-D mui_cafos`.
+
+A backend that states nothing at all is not refused — the application whose
+build would stop did nothing wrong — but every application built against it
+gets a warning saying its surfaces cannot be checked. That warning is aimed
+at you.
 
 ### What comes from the shared libraries
 
