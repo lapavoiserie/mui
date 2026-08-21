@@ -6,12 +6,21 @@ those an **app surface**, and lets an application declare them portably: the
 declaration is shared, each backend maps it onto the surface its platform
 actually has, and a role a backend cannot honour degrades to a silent no-op.
 
-> **Status.** The declaration vocabulary is implemented and checked, and the
-> first host exists: on Sailfish, `qui.mui.CoverHost` live-mounts a
-> `Glance` declaration onto the application cover. Every other backend
-> degrades every non-Primary role to a silent no-op for now. Declaring is safe
-> everywhere: it compiles, it is checked, and where no host exists it renders
-> nothing extra.
+> **Status.** The vocabulary is implemented and checked, and hosts exist
+> across the family — all validated on their platforms:
+>
+> | Role | Where it lives today |
+> |---|---|
+> | `Primary` | everywhere — it is `body()` |
+> | `Glance` | Sailfish: the cover, live-mounted by `qui.mui.CoverHost` |
+> | `Preferences` | macOS: the Settings scene (⌘,), a second live root |
+> | `Commands` | macOS: the menu bar (with derived shortcuts); terminal: key bindings; Windows: the MenuBar, injected as ordinary nodes |
+> | `Auxiliary` | Windows and macOS: real extra windows, one per declaration, each with its own lifetime |
+> | `Companion` | any machine on the CAFOS network — see below |
+> | `Notification` | not yet — waits for the detached subsystem |
+>
+> A role with no host on a backend still degrades to a silent no-op:
+> declaring is safe everywhere.
 
 ## Declaring a surface
 
@@ -89,15 +98,55 @@ override function surfaces():Array<SurfaceDecl> {
 
 `mui.Contract` requires `surfaces` of every backend, next to `lifetime`.
 
+## Companion: a surface on another machine
+
+A `@:surface(Companion)` declaration is not rendered by this process at all:
+it is *projected* — over the local [CAFOS](../../cafos/) agent — onto whatever
+machine serves a surface of that id, and rendered there by that machine's own
+renderer. The remote taps come back as action ids and run your closures; ids
+are stable by place, so a tap racing a re-render does what the unchanged
+button says.
+
+```haxe
+@:surface(Companion)
+function panel():View {
+	return new VStack([
+		new Text('count: ${count.get()}'),
+		new Button("Add", () -> count.set(count.get() + 10)),
+	]);
+}
+
+// once, after construction (the app opts into the transport):
+var projector = cafos.mui.CompanionServe.serve(app);
+app.lifetime.own(() -> projector.stop());
+```
+
+Reading state inside the method keeps the remote surface live — the same rule
+as every other surface. The machinery underneath: the backend's **describer**
+(`mui.surface.Describe`, installed by each backend's `mui.App`) turns views
+into canonical `nui.Node`s; `nui.Snapshot` ships them as pure data with
+closures replaced by table ids; the far side inflates and renders with any
+backend's `NodeRenderer`. See nui's *Snapshot* page and cafos's *nui-wire*
+page for the contracts.
+
+## The describer
+
+Serving detached surfaces (Companion today, widget snapshots in P4a) needs
+the backend's views as `nui.Node` data. Each backend installs its describer
+on `mui.surface.Describe.impl` at `mui.App` construction, emitting the
+**canonical prop names** (`text`, `label`/`onClick`, `isOn`/`onToggle`,
+`value`/`min`/`max`/`onValue`, `text`/`placeholder`/`onText`) so a tree
+served from any backend looks the same on the wire. A backend without a
+describer degrades with a word: the declaration never projects.
+
 ## Degradation
 
 Roles degrade per backend, deliberately and visibly: a terminal has no cover,
 so a `Glance` declaration is never mounted there — no error, no placeholder.
 When a platform can mount only one surface of a role (the Sailfish cover) and
 several are declared, the host takes the role's default id (`"glance"`) if
-declared, else the first declaration. Each backend's answers are stated by its
-surface hosts' `capabilities()` (`mui.surface.SurfaceHost`), the same way
-component support is stated by `@:muiSupport` in the
-[backend support table](backend-support.md). The one host so far: qui's
-cover — `{role: Glance, cardinality: One, interaction: ActionsOnly,
-update: Live}`.
+declared, else the first declaration. Roles with `Many` cardinality (widgets,
+auxiliary windows, companions) mount every declaration, in declaration order.
+Each backend's answers are stated by its surface hosts' `capabilities()`
+(`mui.surface.SurfaceHost`), the same way component support is stated by
+`@:muiSupport` in the [backend support table](backend-support.md).
