@@ -13,7 +13,7 @@ actually has, and a role the backend being built has no host for is a
 > | Role | Where it lives today |
 > |---|---|
 > | `Primary` | everywhere — it is `body()` |
-> | `Glance` | Sailfish: the cover, live-mounted by `qui.mui.CoverHost`. Android: an App Widget, sampled — buttons in it run their closures. iOS: a WidgetKit widget, sampled through an App Group (display only so far) |
+> | `Glance` | Sailfish: the cover, live-mounted by `qui.mui.CoverHost`. Android: an App Widget, sampled — buttons in it run their closures. iOS: a WidgetKit widget, sampled through an App Group — its buttons run too, in the extension's own process |
 > | `Preferences` | macOS: the Settings scene (⌘,), a second live root |
 > | `Commands` | macOS: the menu bar (with derived shortcuts); terminal: key bindings; Windows: the MenuBar, injected as ordinary nodes |
 > | `Auxiliary` | Windows and macOS: real extra windows, one per declaration, each with its own lifetime |
@@ -184,6 +184,35 @@ Two shapes are worth copying rather than inventing:
 - **A live host answers with nothing, on purpose**, and says so in a comment.
   The empty implementation is what separates "already satisfied" from
   "forgot to implement", and only the backend can tell those apart.
+
+## What a detached surface reaches
+
+A snapshot surface is a picture, and for a long time that was the whole of it:
+the host kept the tree of text, the application kept the state, and the two
+only met when the application took a new sample. A surface sampled by a
+process that had just started — the launcher waking us for a tap, an extension
+that never ran before — sampled an application at its *initial* state and drew
+a number nobody had ever seen.
+
+A cell declared `@:state(durable)` closes that. Its value lives in a
+device-local store, a file with one line per key, that the application and its
+own detached surfaces both open, so the fresh process reads what the
+application last wrote instead of the default in the source. The picture
+already outlived the process that drew it; now the value in it does too.
+
+On iOS it is also what makes the tap work. A WidgetKit tap runs in the
+extension's process, where the application's closures do not exist, so the
+extension boots its own instance of the application and invokes the action
+there — and durable cells are what let that instance agree with the
+application about what the count is. Everything *not* declared durable is at
+its initial value in that instance: a draft that never existed anywhere. A
+closure that reads three cells and writes one is wrong there with nothing on
+screen to say so, which is the reason to keep a `Glance` closure to what it
+can honestly reach.
+
+Nothing about this crosses a machine. The store is per device; what may be
+durable, where it lives per platform, and what happens when two processes
+write the same key at once are on [Durable state](state/durable.md).
 
 ## Companion: a surface on another machine
 

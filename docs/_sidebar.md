@@ -12,6 +12,7 @@
 - **State**
   - [Overview](state/README.md)
   - [Bindings](state/bindings.md)
+  - [Durable state](state/durable.md)
 - [Surfaces](surfaces.md)
 - [Enums](enums.md)
 - [Hot Reload](hot-reload.md)

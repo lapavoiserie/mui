@@ -157,6 +157,26 @@ contract is *after* the host has forced the lazy expansion, not merely after
 the next one matters: a backend that only rebuilds on demand might never run
 another pass, and a dropped key would then never be undone at all.
 
+## The capabilities that exist
+
+| Capability | haxelib | Platforms |
+|---|---|---|
+| `battery` | `kui-battery`, in `kui/examples` | macOS, iOS, Linux, Android, Windows, Sailfish |
+| `network` | `kui-network`, in `kui/examples` | macOS, Linux, Android, Windows, Sailfish |
+| `store` | `kui-store`, its own repository | macOS, Linux, Windows, Android, iOS |
+
+`store` is the one an application meets without asking for it: it is what
+[`@:state(durable)`](state/durable.md) is built on. Add `-lib kui-store` and a
+cell can outlive its process; leave it out and a durable declaration is a
+compile error naming the platform, never a cell that quietly stopped saving.
+
+It is also the capability that shows the boundary `kui` keeps. The obvious
+Android implementation is `SharedPreferences`, and it is not used: that needs a
+`Context`, which a capability is handed none of. The store finds the
+application's own private directory instead, from `/proc/self/cmdline`, and
+stays inside what a plain JVM object can do — the same line the `battery`
+example draws when it reads sysfs rather than `BatteryManager`.
+
 ## Further reading
 
 The [`kui` documentation](https://lapavoiserie.github.io/kui/) covers writing a
