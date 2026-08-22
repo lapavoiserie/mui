@@ -13,6 +13,10 @@ bin-tests/
 # examples/android/ into the tree. Generated, like everything above.
 android/
 
+# `wui` does the same with its WinUI project: examples/build-wui.hxml drops
+# an examples/winui/ beside itself. 3200 lines of generated C++.
+winui/
+
 # Haxe / hxcpp
 *.n
 *.jar
