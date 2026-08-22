@@ -71,6 +71,8 @@ A `kui` capability, `kui-store`, one implementation per platform:
 | Windows | `%APPDATA%\pavois\store` |
 | Android | `/data/data/<package>/files/pavois/store` |
 | iOS | the App Group container, shared with the widget extension |
+| visionOS | the app's container, `Library/Application Support/pavois/store` |
+| Sailfish | `~/.local/share/<app>/pavois-store` — the app's own, per Sailjail |
 
 A text file in every case, one line per entry, readable by a human at the moment
 it disagrees with the screen — which is exactly the moment nobody has a debugger

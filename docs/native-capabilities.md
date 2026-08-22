@@ -163,7 +163,7 @@ another pass, and a dropped key would then never be undone at all.
 |---|---|---|
 | `battery` | `kui-battery`, in `kui/examples` | macOS, iOS, Linux, Android, Windows, Sailfish |
 | `network` | `kui-network`, in `kui/examples` | macOS, Linux, Android, Windows, Sailfish |
-| `store` | `kui-store`, its own repository | macOS, Linux, Windows, Android, iOS |
+| `store` | `kui-store`, its own repository | macOS, Linux, Windows, Android, iOS, visionOS, Sailfish |
 
 `store` is the one an application meets without asking for it: it is what
 [`@:state(durable)`](state/durable.md) is built on. Add `-lib kui-store` and a
