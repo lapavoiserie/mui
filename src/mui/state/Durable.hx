@@ -1,5 +1,7 @@
 package mui.state;
 
+import haxe.macro.Expr;
+
 /**
 	Joins the two halves: `rui`'s durable port and `kui`'s device store.
 
@@ -29,33 +31,29 @@ class Durable {
 		Idempotent: a second call replaces the store, which is what a process
 		re-entering its own boot does.
 	**/
-	public static function install(writer:String = "app"):Void {
-		rui.state.Durable.store = new KuiStore(kui.Kui.get(store.Store));
-		rui.state.Durable.writer = writer;
+	public static macro function install(?writer:haxe.macro.Expr):haxe.macro.Expr {
+		// Expands to nothing where this platform has no store. It has to: the
+		// backend's `mui.App` calls this unconditionally, and `kui.Kui.get`
+		// errors at macro time for a missing capability — so a build that
+		// asked for no durable cell would fail for a feature it never used.
+		//
+		// Not a silence. An application that *does* ask, with `@:state(durable)`,
+		// is refused at the field, by name, with the platform named too.
+		if (!rui.macros.DurableState.hasStore())
+			return macro {};
+
+		// An omitted optional macro argument arrives as the *expression* `null`,
+		// not as Haxe null — so both have to be checked, or the store records
+		// every write as coming from nobody.
+		var given = switch (writer) {
+			case null: false;
+			case {expr: EConst(CIdent("null"))}: false;
+			case _: true;
+		}
+		var who = given ? writer : macro "app";
+		return macro {
+			rui.state.Durable.store = new mui.state.KuiStore(kui.Kui.get(store.Store));
+			rui.state.Durable.writer = $who;
+		};
 	}
-}
-
-/**
-	`rui`'s port, spoken by `kui`'s capability. Nothing but a forward — the
-	shapes were made to match, which is the point of having designed them
-	together rather than adapting one to the other afterwards.
-**/
-private class KuiStore implements rui.state.Durable.DurableStore {
-	final backing:store.Store;
-
-	public function new(backing:store.Store) {
-		this.backing = backing;
-	}
-
-	public function read(key:String):Null<String>
-		return backing.read(key);
-
-	public function seqOf(key:String):Int
-		return backing.seqOf(key);
-
-	public function put(key:String, packed:String, expectedSeq:Int, writer:String):Bool
-		return backing.put(key, packed, expectedSeq, writer);
-
-	public function epoch():Int
-		return backing.epoch();
 }
