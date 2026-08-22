@@ -127,12 +127,63 @@ where the application accepted, in its own source, that the surface flies
 nowhere on this target. Refreshing what flies nowhere is nothing by
 construction.
 
-Where the role *is* hosted, the call is real, and a backend that hosts the
-role but installed no resampler says so with a word — that hole belongs to
-the backend. A backend hosting the role *live* installs a no-op on purpose:
-the request is already satisfied, and that is a difference of kind, not a
-gap. (`qui` does exactly this: its cover is a live effect, so there is never
-a stale picture to retake.)
+Where the role *is* hosted, the call is real, and there are exactly three
+things that can happen — worth knowing, because two of them look like
+silence and only one is a bug:
+
+| The backend… | A request does | Why |
+|---|---|---|
+| hosts the role as a **snapshot** | takes a new sample | what the call is for |
+| hosts the role **live** | nothing, deliberately | the picture was never stale; the request is already satisfied |
+| hosts the role but installed **no resampler** | nothing, with a word | a hole, and it belongs to the backend |
+| does not host the role | nothing — *the call is not compiled* | the declaration needed `optional` here; see above |
+
+`qui` is the live row: its cover is an effect over the signal graph, so it
+installs an empty resampler on purpose rather than leave the warning to fire
+on a difference of kind.
+
+### Naming one surface among several
+
+A role can be declared more than once — several widgets, several covers —
+and `request` takes the surface's id when you mean one of them:
+
+```haxe
+mui.surface.Resample.request(Glance);            // all of them
+mui.surface.Resample.request(Glance, "today");   // the one with that id
+```
+
+A host that mounts a single surface of the role ignores the id, since it
+already picked its declaration by the rule its cardinality states.
+
+### Implementing it, as a backend
+
+`Resample.impl` is a register the backend signs at construction, the same
+shape as `mui.surface.Describe.impl`: shared code calls the hook, never a
+backend.
+
+```haxe
+class App extends yourbackend.App {
+    public function new() {
+        super();
+        mui.surface.Resample.impl = (role, id) -> {
+            if (role == mui.surface.SurfaceRole.Glance) yourHost.retake(id);
+        };
+    }
+}
+```
+
+Two shapes are worth copying rather than inventing:
+
+- **A snapshot host answers by sampling and delivering.** `aui` reaches a
+  Kotlin object in a *fixed* package (`aui.glance.GlanceHost`) because Haxe
+  must be able to name it, while the code that knows how to push the picture
+  is generated into the application's own package — it names the app class
+  and the widget class, which vary — and registers itself with that object
+  when the process boots. Every entry point that can start the process
+  registers, since any of them may be the one that did.
+- **A live host answers with nothing, on purpose**, and says so in a comment.
+  The empty implementation is what separates "already satisfied" from
+  "forgot to implement", and only the backend can tell those apart.
 
 ## Companion: a surface on another machine
 

@@ -35,12 +35,32 @@ in your `App` constructor — that is what a projection needs. It states a
 capability, not an appetite: the networked corner stays off in any build that
 has not set `-D mui_cafos`.
 
+### Answering a resample request
+
 If any role you host is a **snapshot** one — sampled by the system rather
-than reconciled by an effect — also install `mui.surface.Resample.impl` in
-your `mui.App` constructor: it is how an application says "the picture is
-worth retaking", and without it the call reaches nothing and says so. A
-backend hosting the role *live* installs a no-op deliberately, since the
-request is already satisfied.
+than reconciled by an effect — install `mui.surface.Resample.impl` beside
+your describer:
+
+```haxe
+mui.surface.Resample.impl = (role, id) -> {
+    if (role == mui.surface.SurfaceRole.Glance) yourHost.retake(id);
+};
+```
+
+That is how an application says "the picture is worth retaking", and without
+it the call reaches nothing and says so — the warning names you, because the
+hole is yours. `id` is set when the application meant one surface among
+several of that role, and a host that mounts only one may ignore it.
+
+**A backend hosting the role live installs an empty one, deliberately.** Its
+picture was never stale, so there is nothing to retake; the empty
+implementation is what separates "already satisfied" from "forgot", and only
+you can tell those apart. `qui` does this for its cover — read it, it is
+three lines and a comment.
+
+See mui's [Surfaces](surfaces.md) page for what the application side looks
+like, including why the call compiles to nothing on a backend that hosts no
+such role.
 
 A backend that states nothing at all is not refused — the application whose
 build would stop did nothing wrong — but every application built against it
