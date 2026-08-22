@@ -1,0 +1,43 @@
+@:realPath("java.lang.Throwable") @:directlyUsed @:used @:native("java.lang.Throwable") @:libType
+extern class java.lang.Throwable implements java.io.Serializable {
+
+	function new():Void;
+
+	function new(param1:java.lang.String, param2:java.lang.Throwable, param3:Bool, param4:Bool):Void;
+
+	function new(param1:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function getMessage():java.lang.String;
+
+	function getLocalizedMessage():java.lang.String;
+
+	function getCause():java.lang.Throwable;
+
+	function initCause(param1:java.lang.Throwable):java.lang.Throwable;
+
+	function toString():java.lang.String;
+
+	function printStackTrace():Void;
+
+	function printStackTrace(param1:java.io.PrintWriter):Void;
+
+	function printStackTrace(param1:java.io.PrintStream):Void;
+
+	function fillInStackTrace():java.lang.Throwable;
+
+	function getStackTrace():java.NativeArray<java.lang.StackTraceElement>;
+
+	function setStackTrace(param1:java.NativeArray<java.lang.StackTraceElement>):Void;
+
+	function getStackTraceDepth():Int;
+
+	function getStackTraceElement(param1:Int):java.lang.StackTraceElement;
+
+	function addSuppressed(param1:java.lang.Throwable):Void;
+
+	function getSuppressed():java.NativeArray<java.lang.Throwable>;
+}

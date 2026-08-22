@@ -1,0 +1,11 @@
+@:realPath("java.util.LinkedList_Node") @:native("java.util.LinkedList$Node") @:libType
+extern class java.util.LinkedList$Node<E:Dynamic> {
+
+	function new(param1:java.util.LinkedList$Node<java.util.LinkedList_Node.E>, param2:java.util.LinkedList_Node.E, param3:java.util.LinkedList$Node<java.util.LinkedList_Node.E>):Void;
+
+	var item:java.util.LinkedList_Node.E;
+
+	var next:java.util.LinkedList$Node<java.util.LinkedList_Node.E>;
+
+	var prev:java.util.LinkedList$Node<java.util.LinkedList_Node.E>;
+}

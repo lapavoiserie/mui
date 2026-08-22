@@ -1,0 +1,75 @@
+@:realPath("java.net.URI") @:used @:native("java.net.URI") @:libType
+extern class java.net.URI implements java.io.Serializable implements java.lang.Comparable<java.net.URI> {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String, param4:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String, param4:java.lang.String, param5:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String, param4:Int, param5:java.lang.String, param6:java.lang.String, param7:java.lang.String):Void;
+
+	function parseServerAuthority():java.net.URI;
+
+	function normalize():java.net.URI;
+
+	function resolve(param1:java.net.URI):java.net.URI;
+
+	function resolve(param1:java.lang.String):java.net.URI;
+
+	function relativize(param1:java.net.URI):java.net.URI;
+
+	function toURL():java.net.URL;
+
+	function getScheme():java.lang.String;
+
+	function isAbsolute():Bool;
+
+	function isOpaque():Bool;
+
+	function getRawSchemeSpecificPart():java.lang.String;
+
+	function getSchemeSpecificPart():java.lang.String;
+
+	function getRawAuthority():java.lang.String;
+
+	function getAuthority():java.lang.String;
+
+	function getRawUserInfo():java.lang.String;
+
+	function getUserInfo():java.lang.String;
+
+	function getHost():java.lang.String;
+
+	function getPort():Int;
+
+	function getRawPath():java.lang.String;
+
+	function getPath():java.lang.String;
+
+	function getRawQuery():java.lang.String;
+
+	function getQuery():java.lang.String;
+
+	function getRawFragment():java.lang.String;
+
+	function getFragment():java.lang.String;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function compareTo(param1:java.net.URI):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function toString():java.lang.String;
+
+	function toASCIIString():java.lang.String;
+
+	static function create(param1:java.lang.String):java.net.URI;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

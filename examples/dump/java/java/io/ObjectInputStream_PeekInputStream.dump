@@ -1,0 +1,19 @@
+@:realPath("java.io.ObjectInputStream_PeekInputStream") @:used @:native("java.io.ObjectInputStream$PeekInputStream") @:libType
+extern class java.io.ObjectInputStream$PeekInputStream extends java.io.InputStream {
+
+	function new(param1:java.io.InputStream):Void;
+
+	function peek():Int;
+
+	function read():Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function readFully(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function available():Int;
+
+	function close():Void;
+}

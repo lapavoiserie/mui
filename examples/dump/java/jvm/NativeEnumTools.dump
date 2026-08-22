@@ -1,0 +1,4 @@
+extern class jvm.NativeEnumTools {
+
+	static inline function native<T>(e:Enum<Dynamic>):java.lang.Class<native.T>;
+}

@@ -1,0 +1,25 @@
+@:realPath("java.text.Format") @:used @:native("java.text.Format") @:libType
+extern class java.text.Format implements java.io.Serializable implements java.lang.Cloneable {
+
+	function new():Void;
+
+	function format(param1:Dynamic):java.lang.String;
+
+	function format(param1:Dynamic, param2:java.lang.StringBuffer, param3:java.text.FieldPosition):java.lang.StringBuffer;
+
+	function formatToCharacterIterator(param1:Dynamic):java.text.AttributedCharacterIterator;
+
+	function parseObject(param1:java.lang.String, param2:java.text.ParsePosition):Dynamic;
+
+	function parseObject(param1:java.lang.String):Dynamic;
+
+	function clone():Dynamic;
+
+	function createAttributedCharacterIterator(param1:java.lang.String):java.text.AttributedCharacterIterator;
+
+	function createAttributedCharacterIterator(param1:java.text.AttributedCharacterIterator, param2:java.text.AttributedCharacterIterator$Attribute, param3:Dynamic):java.text.AttributedCharacterIterator;
+
+	function createAttributedCharacterIterator(param1:java.lang.String, param2:java.text.AttributedCharacterIterator$Attribute, param3:Dynamic):java.text.AttributedCharacterIterator;
+
+	function createAttributedCharacterIterator(param1:java.NativeArray<java.text.AttributedCharacterIterator>):java.text.AttributedCharacterIterator;
+}

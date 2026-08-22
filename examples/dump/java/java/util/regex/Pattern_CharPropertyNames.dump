@@ -1,0 +1,5 @@
+@:realPath("java.util.regex.Pattern_CharPropertyNames") @:native("java.util.regex.Pattern$CharPropertyNames") @:libType
+extern class java.util.regex.Pattern$CharPropertyNames {
+
+	static function charPropertyFor(param1:java.lang.String):java.util.regex.Pattern$CharProperty;
+}

@@ -1,0 +1,15 @@
+@:realPath("java.util.ArrayList_ArrayListSpliterator") @:used @:native("java.util.ArrayList$ArrayListSpliterator") @:libType
+extern class java.util.ArrayList$ArrayListSpliterator<E:Dynamic> implements java.util.Spliterator<java.util.ArrayList_ArrayListSpliterator.E> {
+
+	function new(param1:java.util.ArrayList<java.util.ArrayList_ArrayListSpliterator.E>, param2:Int, param3:Int, param4:Int):Void;
+
+	function trySplit():java.util.ArrayList$ArrayListSpliterator<java.util.ArrayList_ArrayListSpliterator.E>;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+}

@@ -1,0 +1,1 @@
+typedef haxe.extern.Rest<T> = haxe.Rest<haxe.extern.Rest.T>

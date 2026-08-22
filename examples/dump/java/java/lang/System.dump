@@ -1,0 +1,65 @@
+@:realPath("java.lang.System") @:directlyUsed @:used @:native("java.lang.System") @:libType
+extern class java.lang.System {
+
+	static function setIn(param1:java.io.InputStream):Void;
+
+	static function setOut(param1:java.io.PrintStream):Void;
+
+	static function setErr(param1:java.io.PrintStream):Void;
+
+	static function console():java.io.Console;
+
+	static function inheritedChannel():java.nio.channels.Channel;
+
+	static function setSecurityManager(param1:java.lang.SecurityManager):Void;
+
+	static function getSecurityManager():java.lang.SecurityManager;
+
+	static function currentTimeMillis():haxe.Int64;
+
+	static function nanoTime():haxe.Int64;
+
+	static function arraycopy(param1:Dynamic, param2:Int, param3:Dynamic, param4:Int, param5:Int):Void;
+
+	static function identityHashCode(param1:Dynamic):Int;
+
+	static function getProperties():java.util.Properties;
+
+	static function lineSeparator():java.lang.String;
+
+	static function setProperties(param1:java.util.Properties):Void;
+
+	static function getProperty(param1:java.lang.String):java.lang.String;
+
+	static function getProperty(param1:java.lang.String, param2:java.lang.String):java.lang.String;
+
+	static function setProperty(param1:java.lang.String, param2:java.lang.String):java.lang.String;
+
+	static function clearProperty(param1:java.lang.String):java.lang.String;
+
+	static function getenv(param1:java.lang.String):java.lang.String;
+
+	static function getenv():java.util.Map<java.lang.String, java.lang.String>;
+
+	static function exit(param1:Int):Void;
+
+	static function gc():Void;
+
+	static function runFinalization():Void;
+
+	@:deprecated
+	static function runFinalizersOnExit(param1:Bool):Void;
+
+	static function load(param1:java.lang.String):Void;
+
+	static function loadLibrary(param1:java.lang.String):Void;
+
+	static function mapLibraryName(param1:java.lang.String):java.lang.String;
+
+	@:realPath("_in") @:native("in")
+	static var in(default,never):java.io.InputStream;
+
+	static var out(default,never):java.io.PrintStream;
+
+	static var err(default,never):java.io.PrintStream;
+}

@@ -1,0 +1,9 @@
+private class haxe.display._Protocol.HaxeRequestMethod_Impl_ {
+
+	@:noCompletion
+	public static inline function _new(method:String) {
+		var this;
+		this = method;
+		return cast this;
+	}
+}

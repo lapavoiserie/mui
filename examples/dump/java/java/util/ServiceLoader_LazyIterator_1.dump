@@ -1,0 +1,10 @@
+@:realPath("java.util.ServiceLoader_LazyIterator_1") @:used @:native("java.util.ServiceLoader$LazyIterator$1") @:libType
+extern class java.util.ServiceLoader$LazyIterator$1 implements java.security.PrivilegedAction<java.lang.Boolean> {
+
+	function new(param1:java.util.ServiceLoader$LazyIterator):Void;
+
+	function run():java.lang.Boolean;
+
+	@:realPath("this_1") @:native("this$1")
+	var this$1(default,ctor):java.util.ServiceLoader$LazyIterator;
+}

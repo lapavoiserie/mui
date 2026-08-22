@@ -1,0 +1,9 @@
+@:realPath("java.net.InetAddress_CacheEntry") @:native("java.net.InetAddress$CacheEntry") @:libType
+extern class java.net.InetAddress$CacheEntry {
+
+	function new(param1:java.NativeArray<java.net.InetAddress>, param2:haxe.Int64):Void;
+
+	var addresses:java.NativeArray<java.net.InetAddress>;
+
+	var expiration:haxe.Int64;
+}

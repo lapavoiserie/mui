@@ -1,0 +1,23 @@
+@:realPath("java.util.LongSummaryStatistics") @:used @:native("java.util.LongSummaryStatistics") @:libType
+extern class java.util.LongSummaryStatistics implements java.util.function.LongConsumer implements java.util.function.IntConsumer {
+
+	function new():Void;
+
+	function accept(param1:Int):Void;
+
+	function accept(param1:haxe.Int64):Void;
+
+	function combine(param1:java.util.LongSummaryStatistics):Void;
+
+	function getCount():haxe.Int64;
+
+	function getSum():haxe.Int64;
+
+	function getMin():haxe.Int64;
+
+	function getMax():haxe.Int64;
+
+	function getAverage():Float;
+
+	function toString():java.lang.String;
+}

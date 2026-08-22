@@ -1,0 +1,9 @@
+@:realPath("java.util.concurrent.locks.ReentrantLock_NonfairSync") @:used @:native("java.util.concurrent.locks.ReentrantLock$NonfairSync") @:libType
+extern class java.util.concurrent.locks.ReentrantLock$NonfairSync extends java.util.concurrent.locks.ReentrantLock$Sync {
+
+	function new():Void;
+
+	function lock():Void;
+
+	function tryAcquire(param1:Int):Bool;
+}

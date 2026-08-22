@@ -1,0 +1,93 @@
+@:realPath("java.io.PrintWriter") @:used @:native("java.io.PrintWriter") @:libType
+extern class java.io.PrintWriter extends java.io.Writer {
+
+	function new(param1:java.io.Writer):Void;
+
+	function new(param1:java.io.File, param2:java.lang.String):Void;
+
+	function new(param1:java.io.File):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.io.OutputStream, param2:Bool):Void;
+
+	function new(param1:java.io.OutputStream):Void;
+
+	function new(param1:java.io.Writer, param2:Bool):Void;
+
+	function flush():Void;
+
+	function close():Void;
+
+	function checkError():Bool;
+
+	function setError():Void;
+
+	function clearError():Void;
+
+	function write(param1:Int):Void;
+
+	function write(param1:java.lang.String):Void;
+
+	function write(param1:java.lang.String, param2:Int, param3:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Char16>):Void;
+
+	function write(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Void;
+
+	function print(param1:Bool):Void;
+
+	function print(param1:Dynamic):Void;
+
+	function print(param1:java.lang.String):Void;
+
+	function print(param1:java.NativeArray<java.types.Char16>):Void;
+
+	function print(param1:Float):Void;
+
+	function print(param1:Single):Void;
+
+	function print(param1:haxe.Int64):Void;
+
+	function print(param1:Int):Void;
+
+	function print(param1:java.types.Char16):Void;
+
+	function println():Void;
+
+	function println(param1:Dynamic):Void;
+
+	function println(param1:java.lang.String):Void;
+
+	function println(param1:java.NativeArray<java.types.Char16>):Void;
+
+	function println(param1:Float):Void;
+
+	function println(param1:Single):Void;
+
+	function println(param1:haxe.Int64):Void;
+
+	function println(param1:Int):Void;
+
+	function println(param1:java.types.Char16):Void;
+
+	function println(param1:Bool):Void;
+
+	function printf(param1:java.lang.String, param2:haxe.Rest<Dynamic>):java.io.PrintWriter;
+
+	function printf(param1:java.util.Locale, param2:java.lang.String, param3:haxe.Rest<Dynamic>):java.io.PrintWriter;
+
+	function format(param1:java.lang.String, param2:haxe.Rest<Dynamic>):java.io.PrintWriter;
+
+	function format(param1:java.util.Locale, param2:java.lang.String, param3:haxe.Rest<Dynamic>):java.io.PrintWriter;
+
+	function append(param1:java.lang.CharSequence):java.io.PrintWriter;
+
+	function append(param1:java.types.Char16):java.io.PrintWriter;
+
+	function append(param1:java.lang.CharSequence, param2:Int, param3:Int):java.io.PrintWriter;
+
+	var out:java.io.Writer;
+}

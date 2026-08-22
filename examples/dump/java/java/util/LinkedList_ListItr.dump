@@ -1,0 +1,30 @@
+@:realPath("java.util.LinkedList_ListItr") @:used @:native("java.util.LinkedList$ListItr") @:libType
+extern class java.util.LinkedList$ListItr implements java.util.ListIterator<Dynamic> {
+
+	function new(param1:java.util.LinkedList<Dynamic>, param2:Int):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function hasPrevious():Bool;
+
+	function previous():Dynamic;
+
+	function nextIndex():Int;
+
+	function previousIndex():Int;
+
+	function remove():Void;
+
+	function set(param1:Dynamic):Void;
+
+	function add(param1:Dynamic):Void;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function checkForComodification():Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.LinkedList<Dynamic>;
+}

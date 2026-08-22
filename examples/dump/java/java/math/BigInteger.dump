@@ -1,0 +1,155 @@
+@:realPath("java.math.BigInteger") @:directlyUsed @:used @:native("java.math.BigInteger") @:libType
+extern class java.math.BigInteger extends java.lang.Number implements java.lang.Comparable<java.math.BigInteger> {
+
+	function new(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function new(param1:java.NativeArray<Int>, param2:Int):Void;
+
+	function new(param1:Int, param2:Int, param3:java.util.Random):Void;
+
+	function new(param1:Int, param2:java.util.Random):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Void;
+
+	function new(param1:java.lang.String, param2:Int):Void;
+
+	function new(param1:Int, param2:java.NativeArray<java.types.Int8>):Void;
+
+	function nextProbablePrime():java.math.BigInteger;
+
+	function primeToCertainty(param1:Int, param2:java.util.Random):Bool;
+
+	function add(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function add(param1:haxe.Int64):java.math.BigInteger;
+
+	function subtract(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function multiply(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function multiply(param1:haxe.Int64):java.math.BigInteger;
+
+	function divide(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function divideAndRemainder(param1:java.math.BigInteger):java.NativeArray<java.math.BigInteger>;
+
+	function remainder(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function pow(param1:Int):java.math.BigInteger;
+
+	function gcd(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function abs():java.math.BigInteger;
+
+	function negate():java.math.BigInteger;
+
+	function signum():Int;
+
+	function mod(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function modPow(param1:java.math.BigInteger, param2:java.math.BigInteger):java.math.BigInteger;
+
+	function modInverse(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function shiftLeft(param1:Int):java.math.BigInteger;
+
+	function shiftRight(param1:Int):java.math.BigInteger;
+
+	function javaIncrement(param1:java.NativeArray<Int>):java.NativeArray<Int>;
+
+	function and(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function or(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function xor(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function not():java.math.BigInteger;
+
+	function andNot(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function testBit(param1:Int):Bool;
+
+	function setBit(param1:Int):java.math.BigInteger;
+
+	function clearBit(param1:Int):java.math.BigInteger;
+
+	function flipBit(param1:Int):java.math.BigInteger;
+
+	function getLowestSetBit():Int;
+
+	function bitLength():Int;
+
+	function bitCount():Int;
+
+	function isProbablePrime(param1:Int):Bool;
+
+	function compareTo(param1:java.math.BigInteger):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function compareMagnitude(param1:java.math.BigInteger):Int;
+
+	function compareMagnitude(param1:haxe.Int64):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function min(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function max(param1:java.math.BigInteger):java.math.BigInteger;
+
+	function hashCode():Int;
+
+	function toString(param1:Int):java.lang.String;
+
+	function toString():java.lang.String;
+
+	function toByteArray():java.NativeArray<java.types.Int8>;
+
+	function intValue():Int;
+
+	function longValue():haxe.Int64;
+
+	function floatValue():Single;
+
+	function doubleValue():Float;
+
+	function longValueExact():haxe.Int64;
+
+	function intValueExact():Int;
+
+	function shortValueExact():java.types.Int16;
+
+	function byteValueExact():java.types.Int8;
+
+	var mag(default,ctor):java.NativeArray<Int>;
+
+	static function probablePrime(param1:Int, param2:java.util.Random):java.math.BigInteger;
+
+	static function valueOf(param1:haxe.Int64):java.math.BigInteger;
+
+	static function bitLengthForInt(param1:Int):Int;
+
+	static function primitiveRightShift(param1:java.NativeArray<Int>, param2:Int, param3:Int):Void;
+
+	static function primitiveLeftShift(param1:java.NativeArray<Int>, param2:Int, param3:Int):Void;
+
+	static function mulAdd(param1:java.NativeArray<Int>, param2:java.NativeArray<Int>, param3:Int, param4:Int, param5:Int):Int;
+
+	static function addOne(param1:java.NativeArray<Int>, param2:Int, param3:Int, param4:Int):Int;
+
+	static var LONG_MASK(default,never):haxe.Int64;
+
+	static var BURNIKEL_ZIEGLER_THRESHOLD(default,never):Int;
+
+	static var BURNIKEL_ZIEGLER_OFFSET(default,never):Int;
+
+	static var ZERO(default,never):java.math.BigInteger;
+
+	static var ONE(default,never):java.math.BigInteger;
+
+	static var TEN(default,never):java.math.BigInteger;
+
+	static var bnExpModThreshTable:java.NativeArray<Int>;
+}

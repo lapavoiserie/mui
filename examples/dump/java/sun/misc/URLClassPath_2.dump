@@ -1,0 +1,18 @@
+@:realPath("java.sun.misc.URLClassPath_2") @:used @:native("sun.misc.URLClassPath$2") @:libType
+extern class sun.misc.URLClassPath$2 implements java.util.Enumeration<sun.misc.Resource> {
+
+	function new(param1:sun.misc.URLClassPath, param2:java.lang.String, param3:Bool):Void;
+
+	function hasMoreElements():Bool;
+
+	function nextElement():sun.misc.Resource;
+
+	@:realPath("val_name") @:native("val$name")
+	var val$name(default,ctor):java.lang.String;
+
+	@:realPath("val_check") @:native("val$check")
+	var val$check(default,ctor):Bool;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):sun.misc.URLClassPath;
+}

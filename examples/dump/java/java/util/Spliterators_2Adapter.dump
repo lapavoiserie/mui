@@ -1,0 +1,18 @@
+@:realPath("java.util.Spliterators_2Adapter") @:used @:native("java.util.Spliterators$2Adapter") @:libType
+extern class java.util.Spliterators$2Adapter implements java.util.PrimitiveIterator$OfInt implements java.util.function.IntConsumer {
+
+	function new():Void;
+
+	function accept(param1:Int):Void;
+
+	function hasNext():Bool;
+
+	function nextInt():Int;
+
+	var valueReady:Bool;
+
+	var nextElement:Int;
+
+	@:realPath("val_spliterator") @:native("val$spliterator")
+	var val$spliterator(default,ctor):java.util.Spliterator$OfInt;
+}

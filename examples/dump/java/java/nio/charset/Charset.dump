@@ -1,0 +1,49 @@
+@:realPath("java.nio.charset.Charset") @:used @:native("java.nio.charset.Charset") @:libType
+extern class java.nio.charset.Charset implements java.lang.Comparable<java.nio.charset.Charset> {
+
+	function new(param1:java.lang.String, param2:java.NativeArray<java.lang.String>):Void;
+
+	function name():java.lang.String;
+
+	function aliases():java.util.Set<java.lang.String>;
+
+	function displayName():java.lang.String;
+
+	function displayName(param1:java.util.Locale):java.lang.String;
+
+	function isRegistered():Bool;
+
+	function contains(param1:java.nio.charset.Charset):Bool;
+
+	function newDecoder():java.nio.charset.CharsetDecoder;
+
+	function newEncoder():java.nio.charset.CharsetEncoder;
+
+	function canEncode():Bool;
+
+	function decode(param1:java.nio.ByteBuffer):java.nio.CharBuffer;
+
+	function encode(param1:java.nio.CharBuffer):java.nio.ByteBuffer;
+
+	function encode(param1:java.lang.String):java.nio.ByteBuffer;
+
+	function compareTo(param1:java.nio.charset.Charset):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function toString():java.lang.String;
+
+	static function atBugLevel(param1:java.lang.String):Bool;
+
+	static function isSupported(param1:java.lang.String):Bool;
+
+	static function forName(param1:java.lang.String):java.nio.charset.Charset;
+
+	static function availableCharsets():java.util.SortedMap<java.lang.String, java.nio.charset.Charset>;
+
+	static function defaultCharset():java.nio.charset.Charset;
+}

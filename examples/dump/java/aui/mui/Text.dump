@@ -1,0 +1,17 @@
+@:directlyUsed @:used
+class aui.mui.Text extends aui.ui.Text {
+
+	public function new(content:java.lang.String, scale:Null<mui.ui.TextScale> = null) {
+		super(content);
+		if ((scale != null)) {
+			var tmp;
+			switch ((@:exhaustive enumIndex scale)) {
+				case 0: tmp = aui.modifiers.FontStyle.HeadlineSmall;
+				case 1: tmp = aui.modifiers.FontStyle.TitleMedium;
+				case 2: tmp = aui.modifiers.FontStyle.BodyLarge;
+				case 3: tmp = aui.modifiers.FontStyle.BodySmall;
+			};
+			this.font(tmp);
+		};
+	}
+}

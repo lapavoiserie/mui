@@ -1,0 +1,5 @@
+@:realPath("java.lang.ref.Reference_Lock") @:native("java.lang.ref.Reference$Lock") @:libType
+extern class java.lang.ref.Reference$Lock {
+
+	function new(param1:java.lang.ref.Reference$1):Void;
+}

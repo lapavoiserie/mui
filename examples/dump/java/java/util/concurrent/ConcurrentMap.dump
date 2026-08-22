@@ -1,0 +1,32 @@
+@:realPath("java.util.concurrent.ConcurrentMap") @:used @:native("java.util.concurrent.ConcurrentMap") @:libType
+extern interface java.util.concurrent.ConcurrentMap<K:Dynamic, V:Dynamic> implements java.util.Map<java.util.concurrent.ConcurrentMap.K, java.util.concurrent.ConcurrentMap.V> {
+
+	@:java.default
+	function getOrDefault(param1:Dynamic, param2:java.util.concurrent.ConcurrentMap.V):java.util.concurrent.ConcurrentMap.V;
+
+	@:java.default
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function putIfAbsent(param1:java.util.concurrent.ConcurrentMap.K, param2:java.util.concurrent.ConcurrentMap.V):java.util.concurrent.ConcurrentMap.V;
+
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function replace(param1:java.util.concurrent.ConcurrentMap.K, param2:java.util.concurrent.ConcurrentMap.V, param3:java.util.concurrent.ConcurrentMap.V):Bool;
+
+	function replace(param1:java.util.concurrent.ConcurrentMap.K, param2:java.util.concurrent.ConcurrentMap.V):java.util.concurrent.ConcurrentMap.V;
+
+	@:java.default
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.concurrent.ConcurrentMap.V>):Void;
+
+	@:java.default
+	function computeIfAbsent(param1:java.util.concurrent.ConcurrentMap.K, param2:java.util.function.Function<Dynamic, java.util.concurrent.ConcurrentMap.V>):java.util.concurrent.ConcurrentMap.V;
+
+	@:java.default
+	function computeIfPresent(param1:java.util.concurrent.ConcurrentMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.concurrent.ConcurrentMap.V>):java.util.concurrent.ConcurrentMap.V;
+
+	@:java.default
+	function compute(param1:java.util.concurrent.ConcurrentMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.concurrent.ConcurrentMap.V>):java.util.concurrent.ConcurrentMap.V;
+
+	@:java.default
+	function merge(param1:java.util.concurrent.ConcurrentMap.K, param2:java.util.concurrent.ConcurrentMap.V, param3:java.util.function.BiFunction<Dynamic, Dynamic, java.util.concurrent.ConcurrentMap.V>):java.util.concurrent.ConcurrentMap.V;
+}

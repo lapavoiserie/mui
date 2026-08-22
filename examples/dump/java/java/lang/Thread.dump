@@ -1,0 +1,135 @@
+@:realPath("java.lang.Thread") @:directlyUsed @:used @:native("java.lang.Thread") @:libType
+extern class java.lang.Thread implements java.lang.Runnable {
+
+	function new():Void;
+
+	function new(param1:java.lang.ThreadGroup, param2:java.lang.Runnable, param3:java.lang.String, param4:haxe.Int64):Void;
+
+	function new(param1:java.lang.ThreadGroup, param2:java.lang.Runnable, param3:java.lang.String):Void;
+
+	function new(param1:java.lang.Runnable, param2:java.lang.String):Void;
+
+	function new(param1:java.lang.ThreadGroup, param2:java.lang.String):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.ThreadGroup, param2:java.lang.Runnable):Void;
+
+	function new(param1:java.lang.Runnable, param2:java.security.AccessControlContext):Void;
+
+	function new(param1:java.lang.Runnable):Void;
+
+	function blockedOn(param1:sun.nio.ch.Interruptible):Void;
+
+	function clone():Dynamic;
+
+	function start():Void;
+
+	function run():Void;
+
+	@:deprecated
+	function stop():Void;
+
+	@:deprecated
+	function stop(param1:java.lang.Throwable):Void;
+
+	function interrupt():Void;
+
+	function isInterrupted():Bool;
+
+	@:deprecated
+	function destroy():Void;
+
+	function isAlive():Bool;
+
+	@:deprecated
+	function suspend():Void;
+
+	@:deprecated
+	function resume():Void;
+
+	function setPriority(param1:Int):Void;
+
+	function getPriority():Int;
+
+	function setName(param1:java.lang.String):Void;
+
+	function getName():java.lang.String;
+
+	function getThreadGroup():java.lang.ThreadGroup;
+
+	@:deprecated
+	function countStackFrames():Int;
+
+	function join(param1:haxe.Int64):Void;
+
+	function join():Void;
+
+	function join(param1:haxe.Int64, param2:Int):Void;
+
+	function setDaemon(param1:Bool):Void;
+
+	function isDaemon():Bool;
+
+	function checkAccess():Void;
+
+	function toString():java.lang.String;
+
+	function getContextClassLoader():java.lang.ClassLoader;
+
+	function setContextClassLoader(param1:java.lang.ClassLoader):Void;
+
+	function getStackTrace():java.NativeArray<java.lang.StackTraceElement>;
+
+	function getId():haxe.Int64;
+
+	function getState():java.lang.Thread$State;
+
+	function getUncaughtExceptionHandler():java.lang.Thread$UncaughtExceptionHandler;
+
+	function setUncaughtExceptionHandler(param1:java.lang.Thread$UncaughtExceptionHandler):Void;
+
+	var threadLocals:java.lang.ThreadLocal$ThreadLocalMap;
+
+	var inheritableThreadLocals:java.lang.ThreadLocal$ThreadLocalMap;
+
+	var parkBlocker:Dynamic;
+
+	var threadLocalRandomSeed:haxe.Int64;
+
+	var threadLocalRandomProbe:Int;
+
+	var threadLocalRandomSecondarySeed:Int;
+
+	static function currentThread():java.lang.Thread;
+
+	static function yield():Void;
+
+	static function sleep(param1:haxe.Int64):Void;
+
+	static function sleep(param1:haxe.Int64, param2:Int):Void;
+
+	static function interrupted():Bool;
+
+	static function activeCount():Int;
+
+	static function enumerate(param1:java.NativeArray<java.lang.Thread>):Int;
+
+	static function dumpStack():Void;
+
+	static function holdsLock(param1:Dynamic):Bool;
+
+	static function getAllStackTraces():java.util.Map<java.lang.Thread, java.NativeArray<java.lang.StackTraceElement>>;
+
+	static function setDefaultUncaughtExceptionHandler(param1:java.lang.Thread$UncaughtExceptionHandler):Void;
+
+	static function getDefaultUncaughtExceptionHandler():java.lang.Thread$UncaughtExceptionHandler;
+
+	static function processQueue(param1:java.lang.ref.ReferenceQueue<java.lang.Class<Dynamic>>, param2:java.util.concurrent.ConcurrentMap<java.lang.ref.WeakReference<java.lang.Class<Dynamic>>, Dynamic>):Void;
+
+	static var MIN_PRIORITY(default,never):Int;
+
+	static var NORM_PRIORITY(default,never):Int;
+
+	static var MAX_PRIORITY(default,never):Int;
+}

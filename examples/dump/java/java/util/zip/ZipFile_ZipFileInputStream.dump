@@ -1,0 +1,26 @@
+@:realPath("java.util.zip.ZipFile_ZipFileInputStream") @:used @:native("java.util.zip.ZipFile$ZipFileInputStream") @:libType
+extern class java.util.zip.ZipFile$ZipFileInputStream extends java.io.InputStream {
+
+	function new(param1:java.util.zip.ZipFile, param2:haxe.Int64):Void;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function read():Int;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function available():Int;
+
+	function size():haxe.Int64;
+
+	function close():Void;
+
+	function finalize():Void;
+
+	var jzentry:haxe.Int64;
+
+	var rem:haxe.Int64;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.zip.ZipFile;
+}

@@ -1,0 +1,21 @@
+@:realPath("java.lang.ClassValue_ClassValueMap") @:used @:native("java.lang.ClassValue$ClassValueMap") @:libType
+extern class java.lang.ClassValue$ClassValueMap extends java.util.WeakHashMap<java.lang.ClassValue$Identity, java.lang.ClassValue$Entry<Dynamic>> {
+
+	function new(param1:java.lang.Class<Dynamic>):Void;
+
+	function getCache():java.NativeArray<java.lang.ClassValue$Entry<Dynamic>>;
+
+	function startEntry<T:Dynamic>(param1:java.lang.ClassValue<startEntry.T>):java.lang.ClassValue$Entry<startEntry.T>;
+
+	function finishEntry<T:Dynamic>(param1:java.lang.ClassValue<finishEntry.T>, param2:java.lang.ClassValue$Entry<finishEntry.T>):java.lang.ClassValue$Entry<finishEntry.T>;
+
+	function removeEntry(param1:java.lang.ClassValue<Dynamic>):Void;
+
+	function changeEntry<T:Dynamic>(param1:java.lang.ClassValue<changeEntry.T>, param2:changeEntry.T):Void;
+
+	static function loadFromCache(param1:java.NativeArray<java.lang.ClassValue$Entry<Dynamic>>, param2:Int):java.lang.ClassValue$Entry<Dynamic>;
+
+	static function probeHomeLocation<T:Dynamic>(param1:java.NativeArray<java.lang.ClassValue$Entry<Dynamic>>, param2:java.lang.ClassValue<probeHomeLocation.T>):java.lang.ClassValue$Entry<probeHomeLocation.T>;
+
+	static function probeBackupLocations<T:Dynamic>(param1:java.NativeArray<java.lang.ClassValue$Entry<Dynamic>>, param2:java.lang.ClassValue<probeBackupLocations.T>):java.lang.ClassValue$Entry<probeBackupLocations.T>;
+}

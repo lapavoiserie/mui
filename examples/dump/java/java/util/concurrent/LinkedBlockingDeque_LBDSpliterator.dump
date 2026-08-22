@@ -1,0 +1,27 @@
+@:realPath("java.util.concurrent.LinkedBlockingDeque_LBDSpliterator") @:used @:native("java.util.concurrent.LinkedBlockingDeque$LBDSpliterator") @:libType
+extern class java.util.concurrent.LinkedBlockingDeque$LBDSpliterator<E:Dynamic> implements java.util.Spliterator<java.util.concurrent.LinkedBlockingDeque_LBDSpliterator.E> {
+
+	function new(param1:java.util.concurrent.LinkedBlockingDeque<java.util.concurrent.LinkedBlockingDeque_LBDSpliterator.E>):Void;
+
+	function estimateSize():haxe.Int64;
+
+	function trySplit():java.util.Spliterator<java.util.concurrent.LinkedBlockingDeque_LBDSpliterator.E>;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	function characteristics():Int;
+
+	var queue(default,ctor):java.util.concurrent.LinkedBlockingDeque<java.util.concurrent.LinkedBlockingDeque_LBDSpliterator.E>;
+
+	var current:java.util.concurrent.LinkedBlockingDeque$Node<java.util.concurrent.LinkedBlockingDeque_LBDSpliterator.E>;
+
+	var batch:Int;
+
+	var exhausted:Bool;
+
+	var est:haxe.Int64;
+
+	static var MAX_BATCH(default,never):Int;
+}

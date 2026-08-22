@@ -1,0 +1,5 @@
+@:realPath("java.sun.util.locale.provider.LocaleServiceProviderPool_LocalizedObjectGetter") @:used @:native("sun.util.locale.provider.LocaleServiceProviderPool$LocalizedObjectGetter") @:libType
+extern interface sun.util.locale.provider.LocaleServiceProviderPool$LocalizedObjectGetter<P:java.util.spi.LocaleServiceProvider, S:Dynamic> {
+
+	function getObject(param1:java.sun.util.locale.provider.LocaleServiceProviderPool_LocalizedObjectGetter.P, param2:java.util.Locale, param3:java.lang.String, param4:haxe.Rest<Dynamic>):java.sun.util.locale.provider.LocaleServiceProviderPool_LocalizedObjectGetter.S;
+}

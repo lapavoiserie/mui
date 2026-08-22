@@ -1,0 +1,5 @@
+@:realPath("java.util.function.LongBinaryOperator") @:used @:native("java.util.function.LongBinaryOperator") @:libType
+extern interface java.util.function.LongBinaryOperator {
+
+	function applyAsLong(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+}

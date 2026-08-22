@@ -1,0 +1,9 @@
+@:realPath("java.util.Spliterators_AbstractDoubleSpliterator_HoldingDoubleConsumer") @:used @:native("java.util.Spliterators$AbstractDoubleSpliterator$HoldingDoubleConsumer") @:libType
+extern class java.util.Spliterators$AbstractDoubleSpliterator$HoldingDoubleConsumer implements java.util.function.DoubleConsumer {
+
+	function new():Void;
+
+	function accept(param1:Float):Void;
+
+	var value:Float;
+}

@@ -1,0 +1,3 @@
+@:realPath("java.lang.ref.Reference_1") @:native("java.lang.ref.Reference$1") @:libType
+extern class java.lang.ref.Reference$1 {
+}

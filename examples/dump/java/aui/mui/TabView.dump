@@ -1,0 +1,16 @@
+@:used
+class aui.mui.TabView extends aui.ui.TabView {
+
+	public function new(tabs:Array<mui.ui.TabItem>) {
+		var _g = [];
+		{
+			var _g1 = 0;
+			while ((_g1 < tabs.length)) {
+				var t = tabs[_g1];
+				++ _g1;
+				_g.push(new aui.ui.Tab(t.label, "", t.content));
+			};
+		};
+		super(_g);
+	}
+}

@@ -1,0 +1,37 @@
+@:realPath("java.sun.reflect.generics.visitor.TypeTreeVisitor") @:used @:native("sun.reflect.generics.visitor.TypeTreeVisitor") @:libType
+extern interface sun.reflect.generics.visitor.TypeTreeVisitor<T:Dynamic> {
+
+	function getResult():java.sun.reflect.generics.visitor.TypeTreeVisitor.T;
+
+	function visitFormalTypeParameter(param1:sun.reflect.generics.tree.FormalTypeParameter):Void;
+
+	function visitClassTypeSignature(param1:sun.reflect.generics.tree.ClassTypeSignature):Void;
+
+	function visitArrayTypeSignature(param1:sun.reflect.generics.tree.ArrayTypeSignature):Void;
+
+	function visitTypeVariableSignature(param1:sun.reflect.generics.tree.TypeVariableSignature):Void;
+
+	function visitWildcard(param1:sun.reflect.generics.tree.Wildcard):Void;
+
+	function visitSimpleClassTypeSignature(param1:sun.reflect.generics.tree.SimpleClassTypeSignature):Void;
+
+	function visitBottomSignature(param1:sun.reflect.generics.tree.BottomSignature):Void;
+
+	function visitByteSignature(param1:sun.reflect.generics.tree.ByteSignature):Void;
+
+	function visitBooleanSignature(param1:sun.reflect.generics.tree.BooleanSignature):Void;
+
+	function visitShortSignature(param1:sun.reflect.generics.tree.ShortSignature):Void;
+
+	function visitCharSignature(param1:sun.reflect.generics.tree.CharSignature):Void;
+
+	function visitIntSignature(param1:sun.reflect.generics.tree.IntSignature):Void;
+
+	function visitLongSignature(param1:sun.reflect.generics.tree.LongSignature):Void;
+
+	function visitFloatSignature(param1:sun.reflect.generics.tree.FloatSignature):Void;
+
+	function visitDoubleSignature(param1:sun.reflect.generics.tree.DoubleSignature):Void;
+
+	function visitVoidDescriptor(param1:sun.reflect.generics.tree.VoidDescriptor):Void;
+}

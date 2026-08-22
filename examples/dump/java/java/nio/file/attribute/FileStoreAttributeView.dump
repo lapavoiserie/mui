@@ -1,0 +1,3 @@
+@:realPath("java.nio.file.attribute.FileStoreAttributeView") @:native("java.nio.file.attribute.FileStoreAttributeView") @:libType
+extern interface java.nio.file.attribute.FileStoreAttributeView implements java.nio.file.attribute.AttributeView {
+}

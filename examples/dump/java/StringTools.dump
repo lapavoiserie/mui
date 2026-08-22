@@ -1,0 +1,15 @@
+@:keep @:directlyUsed @:used
+class StringTools {
+
+	public static function isSpace(s:java.lang.String, pos:Int) {
+		var c = haxe.jvm.StringExt.charCodeAt(s, pos);
+		if ((! (c > 8 && c < 14))) return c == 32 else return true;
+	}
+
+	public static function ltrim(s:java.lang.String) {
+		var l = s.length;
+		var r = 0;
+		while ((r < l && StringTools.isSpace(s, r))) ++ r;
+		if ((r > 0)) return haxe.jvm.StringExt.substr(s, r, l - r) else return s;
+	}
+}

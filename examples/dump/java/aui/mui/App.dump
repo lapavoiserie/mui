@@ -1,0 +1,32 @@
+@:used @:build(aui.macros.StateMacro.build()) @:autoBuild(aui.macros.StateMacro.build()) @:hostedRoles(Glance, Companion) @:autoBuild(mui.macros.Surfaces.build())
+class aui.mui.App extends aui.App {
+
+	public function new() {
+		super();
+		mui.surface.Describe.impl = function(v:mui.View) {
+			return aui.nui.Describe.describe(v);
+		};
+	}
+
+	public var appTitle(get,set):java.lang.String;
+
+	function get_appTitle() {
+		return this.appName;
+	}
+
+	function set_appTitle(v:java.lang.String) {
+		this.appName = v;
+		return v;
+	}
+
+	public function surfaces() {
+		var _gthis = this;
+		return [mui.surface.SurfaceDecl.Tree(mui.surface.SurfaceRole.Primary, "body", function() {
+			return _gthis.body();
+		})].concat(this.declaredSurfaces());
+	}
+
+	public function declaredSurfaces() {
+		return [];
+	}
+}

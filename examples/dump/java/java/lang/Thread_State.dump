@@ -1,0 +1,9 @@
+@:realPath("java.lang.Thread_State") @:used @:flatEnum @:native("java.lang.Thread$State")
+extern enum java.lang.Thread$State {
+	NEW;
+	RUNNABLE;
+	BLOCKED;
+	WAITING;
+	TIMED_WAITING;
+	TERMINATED;
+}

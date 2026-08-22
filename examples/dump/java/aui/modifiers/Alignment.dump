@@ -1,0 +1,12 @@
+@:directlyUsed @:used @:flatEnum
+enum aui.modifiers.Alignment {
+	Center;
+	TopStart;
+	TopCenter;
+	TopEnd;
+	CenterStart;
+	CenterEnd;
+	BottomStart;
+	BottomCenter;
+	BottomEnd;
+}

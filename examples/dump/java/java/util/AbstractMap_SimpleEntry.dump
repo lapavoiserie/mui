@@ -1,0 +1,19 @@
+@:realPath("java.util.AbstractMap_SimpleEntry") @:used @:native("java.util.AbstractMap$SimpleEntry") @:libType
+extern class java.util.AbstractMap$SimpleEntry<K:Dynamic, V:Dynamic> implements java.io.Serializable implements java.util.Map$Entry<java.util.AbstractMap_SimpleEntry.K, java.util.AbstractMap_SimpleEntry.V> {
+
+	function new(param1:java.util.AbstractMap_SimpleEntry.K, param2:java.util.AbstractMap_SimpleEntry.V):Void;
+
+	function new(param1:java.util.Map$Entry<java.util.AbstractMap_SimpleEntry.K, java.util.AbstractMap_SimpleEntry.V>):Void;
+
+	function getKey():java.util.AbstractMap_SimpleEntry.K;
+
+	function getValue():java.util.AbstractMap_SimpleEntry.V;
+
+	function setValue(param1:java.util.AbstractMap_SimpleEntry.V):java.util.AbstractMap_SimpleEntry.V;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+}

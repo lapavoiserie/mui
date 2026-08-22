@@ -1,0 +1,10 @@
+@:realPath("java.util.ServiceLoader_LazyIterator_2") @:used @:native("java.util.ServiceLoader$LazyIterator$2") @:libType
+extern class java.util.ServiceLoader$LazyIterator$2 implements java.security.PrivilegedAction<Dynamic> {
+
+	function new(param1:java.util.ServiceLoader$LazyIterator):Void;
+
+	function run():Dynamic;
+
+	@:realPath("this_1") @:native("this$1")
+	var this$1(default,ctor):java.util.ServiceLoader$LazyIterator;
+}

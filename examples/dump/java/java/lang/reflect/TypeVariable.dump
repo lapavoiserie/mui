@@ -1,0 +1,11 @@
+@:realPath("java.lang.reflect.TypeVariable") @:used @:native("java.lang.reflect.TypeVariable") @:libType
+extern interface java.lang.reflect.TypeVariable<D:java.lang.reflect.GenericDeclaration> implements java.lang.reflect.AnnotatedElement implements java.lang.reflect.Type {
+
+	function getBounds():java.NativeArray<java.lang.reflect.Type>;
+
+	function getGenericDeclaration():java.lang.reflect.TypeVariable.D;
+
+	function getName():java.lang.String;
+
+	function getAnnotatedBounds():java.NativeArray<java.lang.reflect.AnnotatedType>;
+}

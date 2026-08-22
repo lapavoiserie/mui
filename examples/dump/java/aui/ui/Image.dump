@@ -1,0 +1,20 @@
+@:used
+class aui.ui.Image extends aui.View {
+
+	public function new(resourceName:java.lang.String) {
+		super();
+		this.viewType = "Image";
+		this.resourceName = resourceName;
+	}
+
+	public var resourceName:java.lang.String;
+
+	public var systemName:Null<java.lang.String>;
+
+	public static function system(name:java.lang.String) {
+		var img = new aui.ui.Image("");
+		img.systemName = name;
+		img.viewType = "SystemImage";
+		return img;
+	}
+}

@@ -1,0 +1,14 @@
+@:realPath("java.util.function.IntPredicate") @:used @:native("java.util.function.IntPredicate") @:libType
+extern interface java.util.function.IntPredicate {
+
+	function test(param1:Int):Bool;
+
+	@:java.default
+	function and(param1:java.util.function.IntPredicate):java.util.function.IntPredicate;
+
+	@:java.default
+	function negate():java.util.function.IntPredicate;
+
+	@:java.default
+	function or(param1:java.util.function.IntPredicate):java.util.function.IntPredicate;
+}

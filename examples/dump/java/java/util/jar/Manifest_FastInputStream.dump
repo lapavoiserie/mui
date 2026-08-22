@@ -1,0 +1,23 @@
+@:realPath("java.util.jar.Manifest_FastInputStream") @:used @:native("java.util.jar.Manifest$FastInputStream") @:libType
+extern class java.util.jar.Manifest$FastInputStream extends java.io.FilterInputStream {
+
+	function new(param1:java.io.InputStream):Void;
+
+	function new(param1:java.io.InputStream, param2:Int):Void;
+
+	function read():Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function readLine(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function readLine(param1:java.NativeArray<java.types.Int8>):Int;
+
+	function peek():java.types.Int8;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function available():Int;
+
+	function close():Void;
+}

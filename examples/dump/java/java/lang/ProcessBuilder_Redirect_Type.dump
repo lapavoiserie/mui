@@ -1,0 +1,8 @@
+@:realPath("java.lang.ProcessBuilder_Redirect_Type") @:used @:flatEnum @:native("java.lang.ProcessBuilder$Redirect$Type")
+extern enum java.lang.ProcessBuilder$Redirect$Type {
+	PIPE;
+	INHERIT;
+	READ;
+	WRITE;
+	APPEND;
+}

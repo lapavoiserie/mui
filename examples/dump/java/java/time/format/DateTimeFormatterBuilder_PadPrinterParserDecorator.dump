@@ -1,0 +1,11 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_PadPrinterParserDecorator") @:used @:native("java.time.format.DateTimeFormatterBuilder$PadPrinterParserDecorator") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$PadPrinterParserDecorator implements java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser {
+
+	function new(param1:java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser, param2:Int, param3:java.types.Char16):Void;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function parse(param1:java.time.format.DateTimeParseContext, param2:java.lang.CharSequence, param3:Int):Int;
+
+	function toString():java.lang.String;
+}

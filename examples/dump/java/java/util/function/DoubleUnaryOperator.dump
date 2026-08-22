@@ -1,0 +1,14 @@
+@:realPath("java.util.function.DoubleUnaryOperator") @:used @:native("java.util.function.DoubleUnaryOperator") @:libType
+extern interface java.util.function.DoubleUnaryOperator {
+
+	function applyAsDouble(param1:Float):Float;
+
+	@:java.default
+	function compose(param1:java.util.function.DoubleUnaryOperator):java.util.function.DoubleUnaryOperator;
+
+	@:java.default
+	function andThen(param1:java.util.function.DoubleUnaryOperator):java.util.function.DoubleUnaryOperator;
+
+	@:java.default
+	static function identity():java.util.function.DoubleUnaryOperator;
+}

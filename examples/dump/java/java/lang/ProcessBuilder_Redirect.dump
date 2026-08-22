@@ -1,0 +1,25 @@
+@:realPath("java.lang.ProcessBuilder_Redirect") @:used @:native("java.lang.ProcessBuilder$Redirect") @:libType
+extern class java.lang.ProcessBuilder$Redirect {
+
+	function new(param1:java.lang.ProcessBuilder$1):Void;
+
+	function type():java.lang.ProcessBuilder$Redirect$Type;
+
+	function file():java.io.File;
+
+	function append():Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	static function from(param1:java.io.File):java.lang.ProcessBuilder$Redirect;
+
+	static function to(param1:java.io.File):java.lang.ProcessBuilder$Redirect;
+
+	static function appendTo(param1:java.io.File):java.lang.ProcessBuilder$Redirect;
+
+	static var PIPE(default,never):java.lang.ProcessBuilder$Redirect;
+
+	static var INHERIT(default,never):java.lang.ProcessBuilder$Redirect;
+}

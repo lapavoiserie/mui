@@ -1,0 +1,7 @@
+@:used
+class aui.mui.ConditionalView extends aui.ui.ConditionalView {
+
+	public function new(condition:aui.state.State<Bool>, thenView:aui.View, elseView:Null<aui.View> = null) {
+		super(condition, thenView, if ((elseView == null)) null else elseView);
+	}
+}

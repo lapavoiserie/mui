@@ -1,0 +1,7 @@
+@:realPath("java.lang.reflect.WildcardType") @:used @:native("java.lang.reflect.WildcardType") @:libType
+extern interface java.lang.reflect.WildcardType implements java.lang.reflect.Type {
+
+	function getUpperBounds():java.NativeArray<java.lang.reflect.Type>;
+
+	function getLowerBounds():java.NativeArray<java.lang.reflect.Type>;
+}

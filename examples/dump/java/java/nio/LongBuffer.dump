@@ -1,0 +1,65 @@
+@:realPath("java.nio.LongBuffer") @:used @:native("java.nio.LongBuffer") @:libType
+extern class java.nio.LongBuffer extends java.nio.Buffer implements java.lang.Comparable<java.nio.LongBuffer> {
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int, param5:java.NativeArray<haxe.Int64>, param6:Int):Void;
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int):Void;
+
+	function slice():java.nio.LongBuffer;
+
+	function duplicate():java.nio.LongBuffer;
+
+	function asReadOnlyBuffer():java.nio.LongBuffer;
+
+	function get():haxe.Int64;
+
+	function get(param1:java.NativeArray<haxe.Int64>):java.nio.LongBuffer;
+
+	function get(param1:java.NativeArray<haxe.Int64>, param2:Int, param3:Int):java.nio.LongBuffer;
+
+	function get(param1:Int):haxe.Int64;
+
+	function put(param1:haxe.Int64):java.nio.LongBuffer;
+
+	function put(param1:java.NativeArray<haxe.Int64>):java.nio.LongBuffer;
+
+	function put(param1:java.NativeArray<haxe.Int64>, param2:Int, param3:Int):java.nio.LongBuffer;
+
+	function put(param1:java.nio.LongBuffer):java.nio.LongBuffer;
+
+	function put(param1:Int, param2:haxe.Int64):java.nio.LongBuffer;
+
+	function hasArray():Bool;
+
+	function array():java.NativeArray<haxe.Int64>;
+
+	function arrayOffset():Int;
+
+	function compact():java.nio.LongBuffer;
+
+	function isDirect():Bool;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function compareTo(param1:java.nio.LongBuffer):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function order():java.nio.ByteOrder;
+
+	var hb(default,ctor):java.NativeArray<haxe.Int64>;
+
+	var offset(default,ctor):Int;
+
+	var isReadOnly:Bool;
+
+	static function allocate(param1:Int):java.nio.LongBuffer;
+
+	static function wrap(param1:java.NativeArray<haxe.Int64>, param2:Int, param3:Int):java.nio.LongBuffer;
+
+	static function wrap(param1:java.NativeArray<haxe.Int64>):java.nio.LongBuffer;
+}

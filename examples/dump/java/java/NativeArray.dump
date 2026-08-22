@@ -1,0 +1,9 @@
+@:directlyUsed @:used @:nativeGen
+extern class java.NativeArray<T> implements ArrayAccess<java.NativeArray.T> {
+
+	function new(len:Int):Void;
+
+	var length(default,null):Int;
+
+	static function make<T>(elements:haxe.extern.Rest<make.T>):java.NativeArray<make.T>;
+}

@@ -1,0 +1,13 @@
+@:realPath("jvm.Function") @:directlyUsed @:used @:native("haxe.jvm.Function") @:nativeGen
+extern class haxe.jvm.Function implements java.lang.Runnable {
+
+	function new():Void;
+
+	function invokeDynamic(args:java.NativeArray<Dynamic>):Dynamic;
+
+	function equals(other:java.lang.Object):Bool;
+
+	function invoke(arg1:java.lang.Object):java.lang.Object;
+
+	function run():Void;
+}

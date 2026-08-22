@@ -1,0 +1,7 @@
+@:realPath("java.time.format.FormatStyle") @:used @:flatEnum @:native("java.time.format.FormatStyle")
+extern enum java.time.format.FormatStyle {
+	FULL;
+	LONG;
+	MEDIUM;
+	SHORT;
+}

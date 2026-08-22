@@ -1,0 +1,15 @@
+@:realPath("java.net.InetAddressImpl") @:used @:native("java.net.InetAddressImpl") @:libType
+extern interface java.net.InetAddressImpl {
+
+	function getLocalHostName():java.lang.String;
+
+	function lookupAllHostAddr(param1:java.lang.String):java.NativeArray<java.net.InetAddress>;
+
+	function getHostByAddr(param1:java.NativeArray<java.types.Int8>):java.lang.String;
+
+	function anyLocalAddress():java.net.InetAddress;
+
+	function loopbackAddress():java.net.InetAddress;
+
+	function isReachable(param1:java.net.InetAddress, param2:Int, param3:java.net.NetworkInterface, param4:Int):Bool;
+}

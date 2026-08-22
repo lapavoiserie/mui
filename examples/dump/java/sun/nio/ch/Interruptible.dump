@@ -1,0 +1,5 @@
+@:realPath("java.sun.nio.ch.Interruptible") @:used @:native("sun.nio.ch.Interruptible") @:libType
+extern interface sun.nio.ch.Interruptible {
+
+	function interrupt(param1:java.lang.Thread):Void;
+}

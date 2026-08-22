@@ -1,0 +1,7 @@
+@:used
+enum aui.modifiers.ShapeType {
+	Rectangle;
+	RoundedRectangle(radius:Float);
+	Circle;
+	Capsule;
+}

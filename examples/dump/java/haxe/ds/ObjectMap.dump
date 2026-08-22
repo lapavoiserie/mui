@@ -1,0 +1,225 @@
+@:keep @:directlyUsed @:used @:coreApi
+class haxe.ds.ObjectMap<K:{ }, V> implements haxe.IMap<haxe.ds.ObjectMap.K, haxe.ds.ObjectMap.V> {
+
+	public function new() {
+		this.cachedIndex = -1;
+	}
+
+	var hashes:java.NativeArray<haxe.ds._ObjectMap.HashType>;
+
+	var _keys:java.NativeArray<haxe.ds.ObjectMap.K>;
+
+	var vals:java.NativeArray<haxe.ds.ObjectMap.V>;
+
+	var nBuckets:Int;
+
+	var size:Int;
+
+	var nOccupied:Int;
+
+	var upperBound:Int;
+
+	var cachedKey:haxe.ds.ObjectMap.K;
+
+	var cachedIndex:Int;
+
+	public function set(key:haxe.ds.ObjectMap.K, value:haxe.ds.ObjectMap.V) {
+		var x;
+		var k;
+		if ((this.nOccupied >= this.upperBound)) {
+			if ((this.nBuckets > this.size << 1)) this.resize(this.nBuckets - 1) else this.resize(this.nBuckets + 2);
+		};
+		var hashes = this.hashes;
+		var keys = this._keys;
+		var hashes = hashes;
+		{
+			var mask = if ((this.nBuckets == 0)) 0 else this.nBuckets - 1;
+			x = this.nBuckets;
+			var site = x;
+			var k1 = cast cast key.hashCode();
+			k1 = k1 + 2127912214 + (k1 << 12);
+			k1 = k1 ^ -949894596 ^ k1 >> 19;
+			k1 = k1 + 374761393 + (k1 << 5);
+			k1 = k1 + (-744332180) ^ k1 << 9;
+			k1 = k1 + (-42973499) + (k1 << 3);
+			k1 = k1 ^ -1252372727 ^ k1 >> 16;
+			var ret = k1;
+			if (((ret & -2) == 0)) {
+				if ((ret == 0)) ret = 2 else ret = -1;
+			};
+			k = ret;
+			var i = k & mask;
+			var nProbes = 0;
+			var delKey = -1;
+			if ((hashes[i] == 0)) x = i else {
+				var last = i;
+				var flag;
+				while ((true)) {
+					flag = hashes[i];
+					if ((flag == 0 || flag == k && cast keys[i].equals(key))) break;
+					if ((flag == 1 && delKey == -1)) delKey = i;
+					i = i + ++ nProbes & mask;
+				};
+				if ((flag == 0 && delKey != -1)) x = delKey else x = i;
+			};
+		};
+		var flag = hashes[x];
+		if ((flag == 0)) {
+			keys[x] = key;
+			this.vals[x] = value;
+			hashes[x] = k;
+			this.size ++;
+			this.nOccupied ++;
+		} else if ((flag == 1)) {
+			keys[x] = key;
+			this.vals[x] = value;
+			hashes[x] = k;
+			this.size ++;
+		} else this.vals[x] = value;
+		this.cachedIndex = x;
+		this.cachedKey = key;
+	}
+
+	function lookup(key:haxe.ds.ObjectMap.K) {
+		if ((this.nBuckets != 0)) {
+			var hashes = this.hashes;
+			var keys = this._keys;
+			var mask = this.nBuckets - 1;
+			var k = cast cast key.hashCode();
+			k = k + 2127912214 + (k << 12);
+			k = k ^ -949894596 ^ k >> 19;
+			k = k + 374761393 + (k << 5);
+			k = k + (-744332180) ^ k << 9;
+			k = k + (-42973499) + (k << 3);
+			k = k ^ -1252372727 ^ k >> 16;
+			var ret = k;
+			if (((ret & -2) == 0)) {
+				if ((ret == 0)) ret = 2 else ret = -1;
+			};
+			var hash = ret;
+			var k = hash;
+			var nProbes = 0;
+			var i = k & mask;
+			var last = i;
+			var flag;
+			while ((true)) {
+				flag = hashes[i];
+				if ((! (flag != 0 && (flag == 1 || flag != k || ! cast keys[i].equals(key))))) break;
+				i = i + ++ nProbes & mask;
+			};
+			if (((flag & -2) == 0)) return -1 else return i;
+		};
+		return -1;
+	}
+
+	@:private
+	function resize(newNBuckets:Int) {
+		var newHash = null;
+		var j = 1;
+		{
+			var x = newNBuckets;
+			-- x;
+			x |= x >>> 1;
+			x |= x >>> 2;
+			x |= x >>> 4;
+			x |= x >>> 8;
+			x |= x >>> 16;
+			++ x;
+			newNBuckets = x;
+			if ((newNBuckets < 4)) newNBuckets = 4;
+			if ((this.size >= newNBuckets * 0.77 + 0.5)) j = 0 else {
+				var nfSize = newNBuckets;
+				newHash = new java.NativeArray(nfSize);
+				if ((this.nBuckets < newNBuckets)) {
+					var k = new java.NativeArray(newNBuckets);
+					if ((this._keys != null)) java.lang.System.arraycopy(cast this._keys, 0, cast k, 0, this.nBuckets);
+					this._keys = k;
+					var v = new java.NativeArray(newNBuckets);
+					if ((this.vals != null)) java.lang.System.arraycopy(cast this.vals, 0, cast v, 0, this.nBuckets);
+					this.vals = v;
+				};
+			};
+		};
+		if ((j != 0)) {
+			this.cachedKey = null;
+			this.cachedIndex = -1;
+			j = -1;
+			var nBuckets = this.nBuckets;
+			var _keys = this._keys;
+			var vals = this.vals;
+			var hashes = this.hashes;
+			var newMask = newNBuckets - 1;
+			while ((++ j < nBuckets)) {
+				var k = hashes[j];
+				if (((k & -2) != 0)) {
+					var key = _keys[j];
+					var val = vals[j];
+					_keys[j] = null;
+					vals[j] = cast null;
+					hashes[j] = 1;
+					while ((true)) {
+						var nProbes = 0;
+						var i = k & newMask;
+						while ((newHash[i] != 0)) i = i + ++ nProbes & newMask;
+						newHash[i] = k;
+						var tmp;
+						if ((i < nBuckets)) {
+							k = hashes[i];
+							tmp = (k & -2) != 0;
+						} else tmp = false;
+						if ((tmp)) {
+							{
+								var tmp = _keys[i];
+								_keys[i] = key;
+								key = tmp;
+							};
+							{
+								var tmp = vals[i];
+								vals[i] = val;
+								val = tmp;
+							};
+							hashes[i] = 1;
+						} else {
+							_keys[i] = key;
+							vals[i] = val;
+							break;
+						};
+					};
+				};
+			};
+			if ((nBuckets > newNBuckets)) {
+				{
+					var k = new java.NativeArray(newNBuckets);
+					java.lang.System.arraycopy(cast _keys, 0, cast k, 0, newNBuckets);
+					this._keys = k;
+				};
+				{
+					var v = new java.NativeArray(newNBuckets);
+					java.lang.System.arraycopy(cast vals, 0, cast v, 0, newNBuckets);
+					this.vals = v;
+				};
+			};
+			this.hashes = newHash;
+			this.nBuckets = newNBuckets;
+			this.nOccupied = this.size;
+			this.upperBound = Std.int(newNBuckets * 0.77 + .5);
+		};
+	}
+
+	public function get(key:haxe.ds.ObjectMap.K) {
+		var idx = -1;
+		var tmp;
+		if ((this.cachedKey == key)) {
+			idx = this.cachedIndex;
+			tmp = idx != -1;
+		} else tmp = false;
+		if ((tmp)) return this.vals[idx];
+		idx = this.lookup(key);
+		if ((idx != -1)) {
+			this.cachedKey = key;
+			this.cachedIndex = idx;
+			return this.vals[idx];
+		};
+		return null;
+	}
+}

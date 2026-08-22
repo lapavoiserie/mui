@@ -1,0 +1,9 @@
+@:realPath("java.lang.Throwable_PrintStreamOrWriter") @:used @:native("java.lang.Throwable$PrintStreamOrWriter") @:libType
+extern class java.lang.Throwable$PrintStreamOrWriter {
+
+	function new(param1:java.lang.Throwable$1):Void;
+
+	function lock():Dynamic;
+
+	function println(param1:Dynamic):Void;
+}

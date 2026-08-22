@@ -1,0 +1,9 @@
+@:realPath("java.security.ProtectionDomain_1") @:used @:native("java.security.ProtectionDomain$1") @:libType
+extern class java.security.ProtectionDomain$1 implements sun.misc.JavaSecurityAccess {
+
+	function new():Void;
+
+	function doIntersectionPrivilege<T:Dynamic>(param1:java.security.PrivilegedAction<doIntersectionPrivilege.T>, param2:java.security.AccessControlContext, param3:java.security.AccessControlContext):doIntersectionPrivilege.T;
+
+	function doIntersectionPrivilege<T:Dynamic>(param1:java.security.PrivilegedAction<doIntersectionPrivilege.T>, param2:java.security.AccessControlContext):doIntersectionPrivilege.T;
+}

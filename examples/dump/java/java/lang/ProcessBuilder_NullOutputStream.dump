@@ -1,0 +1,7 @@
+@:realPath("java.lang.ProcessBuilder_NullOutputStream") @:used @:native("java.lang.ProcessBuilder$NullOutputStream") @:libType
+extern class java.lang.ProcessBuilder$NullOutputStream extends java.io.OutputStream {
+
+	function write(param1:Int):Void;
+
+	static var INSTANCE(default,never):java.lang.ProcessBuilder$NullOutputStream;
+}

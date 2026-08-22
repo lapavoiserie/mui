@@ -1,0 +1,81 @@
+@:realPath("java.util.concurrent.locks.AbstractQueuedSynchronizer") @:used @:native("java.util.concurrent.locks.AbstractQueuedSynchronizer") @:libType
+extern class java.util.concurrent.locks.AbstractQueuedSynchronizer extends java.util.concurrent.locks.AbstractOwnableSynchronizer implements java.io.Serializable {
+
+	function new():Void;
+
+	function getState():Int;
+
+	function setState(param1:Int):Void;
+
+	function compareAndSetState(param1:Int, param2:Int):Bool;
+
+	function acquireQueued(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node, param2:Int):Bool;
+
+	function tryAcquire(param1:Int):Bool;
+
+	function tryRelease(param1:Int):Bool;
+
+	function tryAcquireShared(param1:Int):Int;
+
+	function tryReleaseShared(param1:Int):Bool;
+
+	function isHeldExclusively():Bool;
+
+	function acquire(param1:Int):Void;
+
+	function acquireInterruptibly(param1:Int):Void;
+
+	function tryAcquireNanos(param1:Int, param2:haxe.Int64):Bool;
+
+	function release(param1:Int):Bool;
+
+	function acquireShared(param1:Int):Void;
+
+	function acquireSharedInterruptibly(param1:Int):Void;
+
+	function tryAcquireSharedNanos(param1:Int, param2:haxe.Int64):Bool;
+
+	function releaseShared(param1:Int):Bool;
+
+	function hasQueuedThreads():Bool;
+
+	function hasContended():Bool;
+
+	function getFirstQueuedThread():java.lang.Thread;
+
+	function isQueued(param1:java.lang.Thread):Bool;
+
+	function apparentlyFirstQueuedIsExclusive():Bool;
+
+	function hasQueuedPredecessors():Bool;
+
+	function getQueueLength():Int;
+
+	function getQueuedThreads():java.util.Collection<java.lang.Thread>;
+
+	function getExclusiveQueuedThreads():java.util.Collection<java.lang.Thread>;
+
+	function getSharedQueuedThreads():java.util.Collection<java.lang.Thread>;
+
+	function toString():java.lang.String;
+
+	function isOnSyncQueue(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node):Bool;
+
+	function transferForSignal(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node):Bool;
+
+	function transferAfterCancelledWait(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node):Bool;
+
+	function fullyRelease(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node):Int;
+
+	function owns(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject):Bool;
+
+	function hasWaiters(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject):Bool;
+
+	function getWaitQueueLength(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject):Int;
+
+	function getWaitingThreads(param1:java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject):java.util.Collection<java.lang.Thread>;
+
+	static function selfInterrupt():Void;
+
+	static var spinForTimeoutThreshold(default,never):haxe.Int64;
+}

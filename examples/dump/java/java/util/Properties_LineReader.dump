@@ -1,0 +1,26 @@
+@:realPath("java.util.Properties_LineReader") @:native("java.util.Properties$LineReader") @:libType
+extern class java.util.Properties$LineReader {
+
+	function new(param1:java.util.Properties, param2:java.io.InputStream):Void;
+
+	function new(param1:java.util.Properties, param2:java.io.Reader):Void;
+
+	function readLine():Int;
+
+	var inByteBuf:java.NativeArray<java.types.Int8>;
+
+	var inCharBuf:java.NativeArray<java.types.Char16>;
+
+	var lineBuf:java.NativeArray<java.types.Char16>;
+
+	var inLimit:Int;
+
+	var inOff:Int;
+
+	var inStream:java.io.InputStream;
+
+	var reader:java.io.Reader;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.Properties;
+}

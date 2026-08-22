@@ -1,0 +1,14 @@
+@:realPath("java.util.jar.JarFile_JarFileEntry") @:used @:native("java.util.jar.JarFile$JarFileEntry") @:libType
+extern class java.util.jar.JarFile$JarFileEntry extends java.util.jar.JarEntry {
+
+	function new(param1:java.util.jar.JarFile, param2:java.util.zip.ZipEntry):Void;
+
+	function getAttributes():java.util.jar.Attributes;
+
+	function getCertificates():java.NativeArray<java.security.cert.Certificate>;
+
+	function getCodeSigners():java.NativeArray<java.security.CodeSigner>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.jar.JarFile;
+}

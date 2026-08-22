@@ -1,0 +1,11 @@
+@:realPath("java.util.Spliterators_EmptySpliterator_OfLong") @:used @:native("java.util.Spliterators$EmptySpliterator$OfLong") @:libType
+extern class java.util.Spliterators$EmptySpliterator$OfLong extends java.util.Spliterators$EmptySpliterator<java.lang.Long, java.util.Spliterator$OfLong, java.util.function.LongConsumer> implements java.util.Spliterator$OfLong {
+
+	function new():Void;
+
+	function forEachRemaining(param1:java.util.function.LongConsumer):Void;
+
+	function tryAdvance(param1:java.util.function.LongConsumer):Bool;
+
+	function trySplit():java.util.Spliterator$OfLong;
+}

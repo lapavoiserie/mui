@@ -1,0 +1,155 @@
+@:realPath("java.util.Collections") @:directlyUsed @:used @:native("java.util.Collections") @:libType
+extern class java.util.Collections {
+
+	static function sort<T:java.lang.Comparable<Dynamic>>(param1:java.util.List<sort.T>):Void;
+
+	static function sort<T:Dynamic>(param1:java.util.List<sort.T>, param2:java.util.Comparator<Dynamic>):Void;
+
+	static function binarySearch<T:Dynamic>(param1:java.util.List<java.lang.Comparable<Dynamic>>, param2:binarySearch.T):Int;
+
+	static function binarySearch<T:Dynamic>(param1:java.util.List<binarySearch.T>, param2:binarySearch.T, param3:java.util.Comparator<Dynamic>):Int;
+
+	static function reverse(param1:java.util.List<Dynamic>):Void;
+
+	static function shuffle(param1:java.util.List<Dynamic>):Void;
+
+	static function shuffle(param1:java.util.List<Dynamic>, param2:java.util.Random):Void;
+
+	static function swap(param1:java.util.List<Dynamic>, param2:Int, param3:Int):Void;
+
+	static function fill<T:Dynamic>(param1:java.util.List<Dynamic>, param2:fill.T):Void;
+
+	static function copy<T:Dynamic>(param1:java.util.List<Dynamic>, param2:java.util.List<copy.T>):Void;
+
+	static function min<T:Dynamic & java.lang.Comparable<Dynamic>>(param1:java.util.Collection<min.T>):min.T;
+
+	static function min<T:Dynamic>(param1:java.util.Collection<min.T>, param2:java.util.Comparator<Dynamic>):min.T;
+
+	static function max<T:Dynamic & java.lang.Comparable<Dynamic>>(param1:java.util.Collection<max.T>):max.T;
+
+	static function max<T:Dynamic>(param1:java.util.Collection<max.T>, param2:java.util.Comparator<Dynamic>):max.T;
+
+	static function rotate(param1:java.util.List<Dynamic>, param2:Int):Void;
+
+	static function replaceAll<T:Dynamic>(param1:java.util.List<replaceAll.T>, param2:replaceAll.T, param3:replaceAll.T):Bool;
+
+	static function indexOfSubList(param1:java.util.List<Dynamic>, param2:java.util.List<Dynamic>):Int;
+
+	static function lastIndexOfSubList(param1:java.util.List<Dynamic>, param2:java.util.List<Dynamic>):Int;
+
+	static function unmodifiableCollection<T:Dynamic>(param1:java.util.Collection<unmodifiableCollection.T>):java.util.Collection<unmodifiableCollection.T>;
+
+	static function unmodifiableSet<T:Dynamic>(param1:java.util.Set<unmodifiableSet.T>):java.util.Set<unmodifiableSet.T>;
+
+	static function unmodifiableSortedSet<T:Dynamic>(param1:java.util.SortedSet<unmodifiableSortedSet.T>):java.util.SortedSet<unmodifiableSortedSet.T>;
+
+	static function unmodifiableNavigableSet<T:Dynamic>(param1:java.util.NavigableSet<unmodifiableNavigableSet.T>):java.util.NavigableSet<unmodifiableNavigableSet.T>;
+
+	static function unmodifiableList<T:Dynamic>(param1:java.util.List<unmodifiableList.T>):java.util.List<unmodifiableList.T>;
+
+	static function unmodifiableMap<K:Dynamic, V:Dynamic>(param1:java.util.Map<unmodifiableMap.K, unmodifiableMap.V>):java.util.Map<unmodifiableMap.K, unmodifiableMap.V>;
+
+	static function unmodifiableSortedMap<K:Dynamic, V:Dynamic>(param1:java.util.SortedMap<unmodifiableSortedMap.K, unmodifiableSortedMap.V>):java.util.SortedMap<unmodifiableSortedMap.K, unmodifiableSortedMap.V>;
+
+	static function unmodifiableNavigableMap<K:Dynamic, V:Dynamic>(param1:java.util.NavigableMap<unmodifiableNavigableMap.K, unmodifiableNavigableMap.V>):java.util.NavigableMap<unmodifiableNavigableMap.K, unmodifiableNavigableMap.V>;
+
+	static function synchronizedCollection<T:Dynamic>(param1:java.util.Collection<synchronizedCollection.T>):java.util.Collection<synchronizedCollection.T>;
+
+	static function synchronizedCollection<T:Dynamic>(param1:java.util.Collection<synchronizedCollection.T>, param2:Dynamic):java.util.Collection<synchronizedCollection.T>;
+
+	static function synchronizedSet<T:Dynamic>(param1:java.util.Set<synchronizedSet.T>):java.util.Set<synchronizedSet.T>;
+
+	static function synchronizedSet<T:Dynamic>(param1:java.util.Set<synchronizedSet.T>, param2:Dynamic):java.util.Set<synchronizedSet.T>;
+
+	static function synchronizedSortedSet<T:Dynamic>(param1:java.util.SortedSet<synchronizedSortedSet.T>):java.util.SortedSet<synchronizedSortedSet.T>;
+
+	static function synchronizedNavigableSet<T:Dynamic>(param1:java.util.NavigableSet<synchronizedNavigableSet.T>):java.util.NavigableSet<synchronizedNavigableSet.T>;
+
+	static function synchronizedList<T:Dynamic>(param1:java.util.List<synchronizedList.T>):java.util.List<synchronizedList.T>;
+
+	static function synchronizedList<T:Dynamic>(param1:java.util.List<synchronizedList.T>, param2:Dynamic):java.util.List<synchronizedList.T>;
+
+	static function synchronizedMap<K:Dynamic, V:Dynamic>(param1:java.util.Map<synchronizedMap.K, synchronizedMap.V>):java.util.Map<synchronizedMap.K, synchronizedMap.V>;
+
+	static function synchronizedSortedMap<K:Dynamic, V:Dynamic>(param1:java.util.SortedMap<synchronizedSortedMap.K, synchronizedSortedMap.V>):java.util.SortedMap<synchronizedSortedMap.K, synchronizedSortedMap.V>;
+
+	static function synchronizedNavigableMap<K:Dynamic, V:Dynamic>(param1:java.util.NavigableMap<synchronizedNavigableMap.K, synchronizedNavigableMap.V>):java.util.NavigableMap<synchronizedNavigableMap.K, synchronizedNavigableMap.V>;
+
+	static function checkedCollection<E:Dynamic>(param1:java.util.Collection<checkedCollection.E>, param2:java.lang.Class<checkedCollection.E>):java.util.Collection<checkedCollection.E>;
+
+	static function zeroLengthArray<T:Dynamic>(param1:java.lang.Class<zeroLengthArray.T>):java.NativeArray<zeroLengthArray.T>;
+
+	static function checkedQueue<E:Dynamic>(param1:java.util.Queue<checkedQueue.E>, param2:java.lang.Class<checkedQueue.E>):java.util.Queue<checkedQueue.E>;
+
+	static function checkedSet<E:Dynamic>(param1:java.util.Set<checkedSet.E>, param2:java.lang.Class<checkedSet.E>):java.util.Set<checkedSet.E>;
+
+	static function checkedSortedSet<E:Dynamic>(param1:java.util.SortedSet<checkedSortedSet.E>, param2:java.lang.Class<checkedSortedSet.E>):java.util.SortedSet<checkedSortedSet.E>;
+
+	static function checkedNavigableSet<E:Dynamic>(param1:java.util.NavigableSet<checkedNavigableSet.E>, param2:java.lang.Class<checkedNavigableSet.E>):java.util.NavigableSet<checkedNavigableSet.E>;
+
+	static function checkedList<E:Dynamic>(param1:java.util.List<checkedList.E>, param2:java.lang.Class<checkedList.E>):java.util.List<checkedList.E>;
+
+	static function checkedMap<K:Dynamic, V:Dynamic>(param1:java.util.Map<checkedMap.K, checkedMap.V>, param2:java.lang.Class<checkedMap.K>, param3:java.lang.Class<checkedMap.V>):java.util.Map<checkedMap.K, checkedMap.V>;
+
+	static function checkedSortedMap<K:Dynamic, V:Dynamic>(param1:java.util.SortedMap<checkedSortedMap.K, checkedSortedMap.V>, param2:java.lang.Class<checkedSortedMap.K>, param3:java.lang.Class<checkedSortedMap.V>):java.util.SortedMap<checkedSortedMap.K, checkedSortedMap.V>;
+
+	static function checkedNavigableMap<K:Dynamic, V:Dynamic>(param1:java.util.NavigableMap<checkedNavigableMap.K, checkedNavigableMap.V>, param2:java.lang.Class<checkedNavigableMap.K>, param3:java.lang.Class<checkedNavigableMap.V>):java.util.NavigableMap<checkedNavigableMap.K, checkedNavigableMap.V>;
+
+	static function emptyIterator<T:Dynamic>():java.util.Iterator<emptyIterator.T>;
+
+	static function emptyListIterator<T:Dynamic>():java.util.ListIterator<emptyListIterator.T>;
+
+	static function emptyEnumeration<T:Dynamic>():java.util.Enumeration<emptyEnumeration.T>;
+
+	static function emptySet<T:Dynamic>():java.util.Set<emptySet.T>;
+
+	static function emptySortedSet<E:Dynamic>():java.util.SortedSet<emptySortedSet.E>;
+
+	static function emptyNavigableSet<E:Dynamic>():java.util.NavigableSet<emptyNavigableSet.E>;
+
+	static function emptyList<T:Dynamic>():java.util.List<emptyList.T>;
+
+	static function emptyMap<K:Dynamic, V:Dynamic>():java.util.Map<emptyMap.K, emptyMap.V>;
+
+	static function emptySortedMap<K:Dynamic, V:Dynamic>():java.util.SortedMap<emptySortedMap.K, emptySortedMap.V>;
+
+	static function emptyNavigableMap<K:Dynamic, V:Dynamic>():java.util.NavigableMap<emptyNavigableMap.K, emptyNavigableMap.V>;
+
+	static function singleton<T:Dynamic>(param1:singleton.T):java.util.Set<singleton.T>;
+
+	static function singletonIterator<E:Dynamic>(param1:singletonIterator.E):java.util.Iterator<singletonIterator.E>;
+
+	static function singletonSpliterator<T:Dynamic>(param1:singletonSpliterator.T):java.util.Spliterator<singletonSpliterator.T>;
+
+	static function singletonList<T:Dynamic>(param1:singletonList.T):java.util.List<singletonList.T>;
+
+	static function singletonMap<K:Dynamic, V:Dynamic>(param1:singletonMap.K, param2:singletonMap.V):java.util.Map<singletonMap.K, singletonMap.V>;
+
+	static function nCopies<T:Dynamic>(param1:Int, param2:nCopies.T):java.util.List<nCopies.T>;
+
+	static function reverseOrder<T:Dynamic>():java.util.Comparator<reverseOrder.T>;
+
+	static function reverseOrder<T:Dynamic>(param1:java.util.Comparator<reverseOrder.T>):java.util.Comparator<reverseOrder.T>;
+
+	static function enumeration<T:Dynamic>(param1:java.util.Collection<enumeration.T>):java.util.Enumeration<enumeration.T>;
+
+	static function list<T:Dynamic>(param1:java.util.Enumeration<list.T>):java.util.ArrayList<list.T>;
+
+	static function eq(param1:Dynamic, param2:Dynamic):Bool;
+
+	static function frequency(param1:java.util.Collection<Dynamic>, param2:Dynamic):Int;
+
+	static function disjoint(param1:java.util.Collection<Dynamic>, param2:java.util.Collection<Dynamic>):Bool;
+
+	static function addAll<T:Dynamic>(param1:java.util.Collection<Dynamic>, param2:haxe.Rest<addAll.T>):Bool;
+
+	static function newSetFromMap<E:Dynamic>(param1:java.util.Map<newSetFromMap.E, java.lang.Boolean>):java.util.Set<newSetFromMap.E>;
+
+	static function asLifoQueue<T:Dynamic>(param1:java.util.Deque<asLifoQueue.T>):java.util.Queue<asLifoQueue.T>;
+
+	static var EMPTY_SET(default,never):java.util.Set<Dynamic>;
+
+	static var EMPTY_LIST(default,never):java.util.List<Dynamic>;
+
+	static var EMPTY_MAP(default,never):java.util.Map<Dynamic, Dynamic>;
+}

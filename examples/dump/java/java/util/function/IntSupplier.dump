@@ -1,0 +1,5 @@
+@:realPath("java.util.function.IntSupplier") @:used @:native("java.util.function.IntSupplier") @:libType
+extern interface java.util.function.IntSupplier {
+
+	function getAsInt():Int;
+}

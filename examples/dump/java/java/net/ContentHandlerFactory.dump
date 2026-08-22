@@ -1,0 +1,5 @@
+@:realPath("java.net.ContentHandlerFactory") @:used @:native("java.net.ContentHandlerFactory") @:libType
+extern interface java.net.ContentHandlerFactory {
+
+	function createContentHandler(param1:java.lang.String):java.net.ContentHandler;
+}

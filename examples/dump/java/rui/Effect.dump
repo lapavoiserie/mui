@@ -1,0 +1,102 @@
+@:directlyUsed @:used
+class rui.Effect {
+
+	public function new(fn:() -> Void) {
+		this._fn = fn;
+		this.run();
+	}
+
+	var _fn:() -> Void;
+
+	@:value([])
+	var _cleanups:Array<() -> Void> = [];
+
+	@:value([])
+	var _dependencies:Array<rui.Signal<Dynamic>> = [];
+
+	@:value(false)
+	var _isScheduled:Bool = false;
+
+	@:value(false)
+	var _disposed:Bool = false;
+
+	public function run() {
+		if ((this._disposed)) return;
+		this._isScheduled = false;
+		this.runCleanups();
+		this.cleanupDeps();
+		rui.Effect.contextStack.push(this);
+		try {
+			this._fn();
+		} catch (_g:java.lang.Throwable) {
+			var e = cast haxe.Exception.caught(_g).unwrap();
+			haxe.Log.trace("Error in Effect: " + Std.string(e), {fileName : "rui/Signal.hx", lineNumber : 97, className : "rui.Effect", methodName : "run"});
+		};
+		rui.Effect.contextStack.pop();
+	}
+
+	public function schedule() {
+		if ((! this._isScheduled)) {
+			this._isScheduled = true;
+			rui.Scheduler.schedule(this.run);
+		};
+	}
+
+	function cleanupDeps() {
+		{
+			var _g = 0;
+			var _g1 = this._dependencies;
+			while ((_g < _g1.length)) {
+				var sig = _g1[_g];
+				++ _g;
+				sig.unsubscribe(this);
+			};
+		};
+		this._dependencies = [];
+	}
+
+	public function addDependency(sig:rui.Signal<Dynamic>) {
+		if ((this._dependencies.indexOf(sig, null) == -1)) this._dependencies.push(sig);
+	}
+
+	public function dispose() {
+		if ((this._disposed)) return;
+		this._disposed = true;
+		this.runCleanups();
+		this.cleanupDeps();
+	}
+
+	function runCleanups() {
+		if ((this._cleanups.length == 0)) return;
+		var pending = this._cleanups;
+		this._cleanups = [];
+		{
+			var _g = 0;
+			while ((_g < pending.length)) {
+				var fn = pending[_g];
+				++ _g;
+				try {
+					fn();
+				} catch (_g:java.lang.Throwable) {
+					var e = cast haxe.Exception.caught(_g).unwrap();
+					haxe.Log.trace("Error in Effect cleanup: " + Std.string(e), {fileName : "rui/Signal.hx", lineNumber : 143, className : "rui.Effect", methodName : "runCleanups"});
+				};
+			};
+		};
+	}
+
+	@:value([])
+	public static var contextStack:Array<rui.Effect> = [];
+
+	public static var current(get,never):rui.Effect;
+
+	static function get_current() {
+		if ((rui.Effect.contextStack.length > 0)) return rui.Effect.contextStack[rui.Effect.contextStack.length - 1] else return null;
+	}
+
+	public static function onCleanup(fn:() -> Void) {
+		var effect = rui.Effect.get_current();
+		if ((effect == null)) throw @:wrappedException cast haxe.Exception.thrown("rui: Effect.onCleanup was called outside an effect, so nothing would ever run it. " + "Call it from inside the function given to new Effect(...).");
+		effect._cleanups.push(fn);
+	}
+}

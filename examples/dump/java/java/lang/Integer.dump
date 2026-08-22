@@ -1,0 +1,2 @@
+@:used @:native("") @:transitive @:forwardStatics @:forward
+abstract java.lang.Integer from java.lang.Integer to java.lang.Integer {}

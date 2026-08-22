@@ -1,0 +1,17 @@
+@:realPath("java.util.Collections_SingletonSet") @:used @:native("java.util.Collections$SingletonSet") @:libType
+extern class java.util.Collections$SingletonSet<E:Dynamic> extends java.util.AbstractSet<java.util.Collections_SingletonSet.E> implements java.io.Serializable {
+
+	function new(param1:java.util.Collections_SingletonSet.E):Void;
+
+	function iterator():java.util.Iterator<java.util.Collections_SingletonSet.E>;
+
+	function size():Int;
+
+	function contains(param1:Dynamic):Bool;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function spliterator():java.util.Spliterator<java.util.Collections_SingletonSet.E>;
+
+	function removeIf(param1:java.util.function.Predicate<Dynamic>):Bool;
+}

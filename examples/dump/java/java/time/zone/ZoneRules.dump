@@ -1,0 +1,45 @@
+@:realPath("java.time.zone.ZoneRules") @:used @:native("java.time.zone.ZoneRules") @:libType
+extern class java.time.zone.ZoneRules implements java.io.Serializable {
+
+	function new(param1:java.time.ZoneOffset, param2:java.time.ZoneOffset, param3:java.util.List<java.time.zone.ZoneOffsetTransition>, param4:java.util.List<java.time.zone.ZoneOffsetTransition>, param5:java.util.List<java.time.zone.ZoneOffsetTransitionRule>):Void;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	function isFixedOffset():Bool;
+
+	function getOffset(param1:java.time.Instant):java.time.ZoneOffset;
+
+	function getOffset(param1:java.time.LocalDateTime):java.time.ZoneOffset;
+
+	function getValidOffsets(param1:java.time.LocalDateTime):java.util.List<java.time.ZoneOffset>;
+
+	function getTransition(param1:java.time.LocalDateTime):java.time.zone.ZoneOffsetTransition;
+
+	function getStandardOffset(param1:java.time.Instant):java.time.ZoneOffset;
+
+	function getDaylightSavings(param1:java.time.Instant):java.time.Duration;
+
+	function isDaylightSavings(param1:java.time.Instant):Bool;
+
+	function isValidOffset(param1:java.time.LocalDateTime, param2:java.time.ZoneOffset):Bool;
+
+	function nextTransition(param1:java.time.Instant):java.time.zone.ZoneOffsetTransition;
+
+	function previousTransition(param1:java.time.Instant):java.time.zone.ZoneOffsetTransition;
+
+	function getTransitions():java.util.List<java.time.zone.ZoneOffsetTransition>;
+
+	function getTransitionRules():java.util.List<java.time.zone.ZoneOffsetTransitionRule>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function of(param1:java.time.ZoneOffset, param2:java.time.ZoneOffset, param3:java.util.List<java.time.zone.ZoneOffsetTransition>, param4:java.util.List<java.time.zone.ZoneOffsetTransition>, param5:java.util.List<java.time.zone.ZoneOffsetTransitionRule>):java.time.zone.ZoneRules;
+
+	static function of(param1:java.time.ZoneOffset):java.time.zone.ZoneRules;
+
+	static function readExternal(param1:java.io.DataInput):java.time.zone.ZoneRules;
+}

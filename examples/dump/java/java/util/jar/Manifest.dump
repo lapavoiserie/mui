@@ -1,0 +1,29 @@
+@:realPath("java.util.jar.Manifest") @:used @:native("java.util.jar.Manifest") @:libType
+extern class java.util.jar.Manifest implements java.lang.Cloneable {
+
+	function new():Void;
+
+	function new(param1:java.util.jar.Manifest):Void;
+
+	function new(param1:java.io.InputStream):Void;
+
+	function getMainAttributes():java.util.jar.Attributes;
+
+	function getEntries():java.util.Map<java.lang.String, java.util.jar.Attributes>;
+
+	function getAttributes(param1:java.lang.String):java.util.jar.Attributes;
+
+	function clear():Void;
+
+	function write(param1:java.io.OutputStream):Void;
+
+	function read(param1:java.io.InputStream):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function clone():Dynamic;
+
+	static function make72Safe(param1:java.lang.StringBuffer):Void;
+}

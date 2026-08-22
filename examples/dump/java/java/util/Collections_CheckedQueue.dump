@@ -1,0 +1,21 @@
+@:realPath("java.util.Collections_CheckedQueue") @:used @:native("java.util.Collections$CheckedQueue") @:libType
+extern class java.util.Collections$CheckedQueue<E:Dynamic> extends java.util.Collections$CheckedCollection<java.util.Collections_CheckedQueue.E> implements java.io.Serializable implements java.util.Queue<java.util.Collections_CheckedQueue.E> {
+
+	function new(param1:java.util.Queue<java.util.Collections_CheckedQueue.E>, param2:java.lang.Class<java.util.Collections_CheckedQueue.E>):Void;
+
+	function element():java.util.Collections_CheckedQueue.E;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function peek():java.util.Collections_CheckedQueue.E;
+
+	function poll():java.util.Collections_CheckedQueue.E;
+
+	function remove():java.util.Collections_CheckedQueue.E;
+
+	function offer(param1:java.util.Collections_CheckedQueue.E):Bool;
+
+	var queue(default,ctor):java.util.Queue<java.util.Collections_CheckedQueue.E>;
+}

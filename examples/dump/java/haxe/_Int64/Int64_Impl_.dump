@@ -1,0 +1,8 @@
+@:keep @:directlyUsed @:used @:coreApi
+private class haxe._Int64.Int64_Impl_ {
+
+	@:op(-A)
+	public static function neg(x:haxe.Int64) {
+		return - cast x;
+	}
+}

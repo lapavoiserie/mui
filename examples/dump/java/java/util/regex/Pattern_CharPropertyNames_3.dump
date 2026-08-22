@@ -1,0 +1,10 @@
+@:realPath("java.util.regex.Pattern_CharPropertyNames_3") @:used @:native("java.util.regex.Pattern$CharPropertyNames$3") @:libType
+extern class java.util.regex.Pattern$CharPropertyNames$3 extends java.util.regex.Pattern$CharPropertyNames$CharPropertyFactory {
+
+	function new(param1:Int):Void;
+
+	function make():java.util.regex.Pattern$CharProperty;
+
+	@:realPath("val_ctype") @:native("val$ctype")
+	var val$ctype(default,ctor):Int;
+}

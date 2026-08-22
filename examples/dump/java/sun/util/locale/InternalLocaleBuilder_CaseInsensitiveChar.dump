@@ -1,0 +1,13 @@
+@:realPath("java.sun.util.locale.InternalLocaleBuilder_CaseInsensitiveChar") @:native("sun.util.locale.InternalLocaleBuilder$CaseInsensitiveChar") @:libType
+extern class sun.util.locale.InternalLocaleBuilder$CaseInsensitiveChar {
+
+	function new(param1:java.types.Char16):Void;
+
+	function new(param1:java.lang.String, param2:sun.util.locale.InternalLocaleBuilder$1):Void;
+
+	function value():java.types.Char16;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+}

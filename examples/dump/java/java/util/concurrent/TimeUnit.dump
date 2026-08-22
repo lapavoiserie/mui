@@ -1,0 +1,10 @@
+@:realPath("java.util.concurrent.TimeUnit") @:directlyUsed @:used @:flatEnum @:native("java.util.concurrent.TimeUnit")
+extern enum java.util.concurrent.TimeUnit {
+	NANOSECONDS;
+	MICROSECONDS;
+	MILLISECONDS;
+	SECONDS;
+	MINUTES;
+	HOURS;
+	DAYS;
+}

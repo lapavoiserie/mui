@@ -1,0 +1,9 @@
+@:realPath("java.net.InetAddress_Cache") @:native("java.net.InetAddress$Cache") @:libType
+extern class java.net.InetAddress$Cache {
+
+	function new(param1:java.net.InetAddress$Cache$Type):Void;
+
+	function put(param1:java.lang.String, param2:java.NativeArray<java.net.InetAddress>):java.net.InetAddress$Cache;
+
+	function get(param1:java.lang.String):java.net.InetAddress$CacheEntry;
+}

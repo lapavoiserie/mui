@@ -1,0 +1,15 @@
+@:realPath("java.nio.channels.SeekableByteChannel") @:used @:native("java.nio.channels.SeekableByteChannel") @:libType
+extern interface java.nio.channels.SeekableByteChannel implements java.nio.channels.ByteChannel {
+
+	function read(param1:java.nio.ByteBuffer):Int;
+
+	function write(param1:java.nio.ByteBuffer):Int;
+
+	function position():haxe.Int64;
+
+	function position(param1:haxe.Int64):java.nio.channels.SeekableByteChannel;
+
+	function size():haxe.Int64;
+
+	function truncate(param1:haxe.Int64):java.nio.channels.SeekableByteChannel;
+}

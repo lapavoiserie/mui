@@ -1,0 +1,5 @@
+@:realPath("java.sun.reflect.MethodAccessor") @:used @:native("sun.reflect.MethodAccessor") @:libType
+extern interface sun.reflect.MethodAccessor {
+
+	function invoke(param1:Dynamic, param2:java.NativeArray<Dynamic>):Dynamic;
+}

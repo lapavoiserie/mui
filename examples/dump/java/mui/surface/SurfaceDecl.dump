@@ -1,0 +1,5 @@
+@:directlyUsed @:used
+enum mui.surface.SurfaceDecl {
+	Tree(role:mui.surface.SurfaceRole, id:java.lang.String, content:() -> mui.View);
+	CommandSet(id:java.lang.String, commands:() -> Array<mui.surface.Command>);
+}

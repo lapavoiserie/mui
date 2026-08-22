@@ -1,0 +1,21 @@
+@:realPath("java.net.InetAddress_InetAddressHolder") @:native("java.net.InetAddress$InetAddressHolder") @:libType
+extern class java.net.InetAddress$InetAddressHolder {
+
+	function new():Void;
+
+	function new(param1:java.lang.String, param2:Int, param3:Int):Void;
+
+	function init(param1:java.lang.String, param2:Int):Void;
+
+	function getHostName():java.lang.String;
+
+	function getAddress():Int;
+
+	function getFamily():Int;
+
+	var hostName:java.lang.String;
+
+	var address:Int;
+
+	var family:Int;
+}

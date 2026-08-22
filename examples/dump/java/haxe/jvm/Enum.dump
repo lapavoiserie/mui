@@ -1,0 +1,26 @@
+@:realPath("jvm.Enum") @:directlyUsed @:used @:keep @:native("haxe.jvm.Enum")
+class haxe.jvm.Enum<T:EnumValue> extends java.lang.Enum<jvm.Enum.T> {
+
+	@:nativeGen
+	public function new(index:Int, name:java.lang.String) {
+		super(name, index);
+	}
+
+	@:overload
+	public function equals<T:EnumValue>(other:haxe.jvm.Enum<equals.T>) {
+		return super.equals(other);
+	}
+
+	@:jvm.synthetic
+	public function _hx_getParameters() {
+		return new java.NativeArray(0);
+	}
+
+	@:overload
+	public function toString() {
+		var baseName = Type.getEnumConstructs(Type.getEnum(cast this))[this.ordinal()];
+		var parameters = Type.enumParameters(cast this);
+		if ((parameters.length == 0)) return baseName;
+		return "" + baseName + "(" + parameters.join(",") + ")";
+	}
+}

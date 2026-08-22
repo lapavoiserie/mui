@@ -1,0 +1,61 @@
+@:realPath("java.util.concurrent.BlockingDeque") @:used @:native("java.util.concurrent.BlockingDeque") @:libType
+extern interface java.util.concurrent.BlockingDeque<E:Dynamic> implements java.util.Deque<java.util.concurrent.BlockingDeque.E> implements java.util.concurrent.BlockingQueue<java.util.concurrent.BlockingDeque.E> {
+
+	function addFirst(param1:java.util.concurrent.BlockingDeque.E):Void;
+
+	function addLast(param1:java.util.concurrent.BlockingDeque.E):Void;
+
+	function offerFirst(param1:java.util.concurrent.BlockingDeque.E):Bool;
+
+	function offerFirst(param1:java.util.concurrent.BlockingDeque.E, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):Bool;
+
+	function offerLast(param1:java.util.concurrent.BlockingDeque.E):Bool;
+
+	function offerLast(param1:java.util.concurrent.BlockingDeque.E, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):Bool;
+
+	function putFirst(param1:java.util.concurrent.BlockingDeque.E):Void;
+
+	function putLast(param1:java.util.concurrent.BlockingDeque.E):Void;
+
+	function takeFirst():java.util.concurrent.BlockingDeque.E;
+
+	function takeLast():java.util.concurrent.BlockingDeque.E;
+
+	function pollFirst(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.BlockingDeque.E;
+
+	function pollLast(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.BlockingDeque.E;
+
+	function removeFirstOccurrence(param1:Dynamic):Bool;
+
+	function removeLastOccurrence(param1:Dynamic):Bool;
+
+	function add(param1:java.util.concurrent.BlockingDeque.E):Bool;
+
+	function offer(param1:java.util.concurrent.BlockingDeque.E):Bool;
+
+	function offer(param1:java.util.concurrent.BlockingDeque.E, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):Bool;
+
+	function put(param1:java.util.concurrent.BlockingDeque.E):Void;
+
+	function remove():java.util.concurrent.BlockingDeque.E;
+
+	function remove(param1:Dynamic):Bool;
+
+	function poll():java.util.concurrent.BlockingDeque.E;
+
+	function poll(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.BlockingDeque.E;
+
+	function take():java.util.concurrent.BlockingDeque.E;
+
+	function element():java.util.concurrent.BlockingDeque.E;
+
+	function peek():java.util.concurrent.BlockingDeque.E;
+
+	function contains(param1:Dynamic):Bool;
+
+	function size():Int;
+
+	function iterator():java.util.Iterator<java.util.concurrent.BlockingDeque.E>;
+
+	function push(param1:java.util.concurrent.BlockingDeque.E):Void;
+}

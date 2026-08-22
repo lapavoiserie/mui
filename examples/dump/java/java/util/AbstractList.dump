@@ -1,0 +1,39 @@
+@:realPath("java.util.AbstractList") @:used @:native("java.util.AbstractList") @:libType
+extern class java.util.AbstractList<E:Dynamic> extends java.util.AbstractCollection<java.util.AbstractList.E> implements java.util.List<java.util.AbstractList.E> {
+
+	function new():Void;
+
+	function add(param1:java.util.AbstractList.E):Bool;
+
+	function add(param1:Int, param2:java.util.AbstractList.E):Void;
+
+	function get(param1:Int):java.util.AbstractList.E;
+
+	function set(param1:Int, param2:java.util.AbstractList.E):java.util.AbstractList.E;
+
+	function remove(param1:Int):java.util.AbstractList.E;
+
+	function indexOf(param1:Dynamic):Int;
+
+	function lastIndexOf(param1:Dynamic):Int;
+
+	function clear():Void;
+
+	function addAll(param1:Int, param2:java.util.Collection<java.util.AbstractList.E>):Bool;
+
+	function iterator():java.util.Iterator<java.util.AbstractList.E>;
+
+	function listIterator():java.util.ListIterator<java.util.AbstractList.E>;
+
+	function listIterator(param1:Int):java.util.ListIterator<java.util.AbstractList.E>;
+
+	function subList(param1:Int, param2:Int):java.util.List<java.util.AbstractList.E>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function removeRange(param1:Int, param2:Int):Void;
+
+	var modCount:Int;
+}

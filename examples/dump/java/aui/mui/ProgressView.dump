@@ -1,0 +1,7 @@
+@:used
+class aui.mui.ProgressView extends aui.ui.ProgressView {
+
+	public function new(label:Null<java.lang.String> = null, value:Null<Float> = null) {
+		super(null);
+	}
+}

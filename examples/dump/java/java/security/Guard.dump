@@ -1,0 +1,5 @@
+@:realPath("java.security.Guard") @:used @:native("java.security.Guard") @:libType
+extern interface java.security.Guard {
+
+	function checkGuard(param1:Dynamic):Void;
+}

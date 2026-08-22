@@ -1,0 +1,1 @@
+typedef haxe.macro.Ref<T> = { toString : () -> java.lang.String, get : () -> haxe.macro.Ref.T }

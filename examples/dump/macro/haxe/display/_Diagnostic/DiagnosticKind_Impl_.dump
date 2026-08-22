@@ -1,0 +1,27 @@
+@:enum
+private class haxe.display._Diagnostic.DiagnosticKind_Impl_ {
+
+	@:value(cast 0) @:impl @:enum
+	public static inline var DKUnusedImport:haxe.display.DiagnosticKind<Void> = cast 0;
+
+	@:value(cast 1) @:impl @:enum
+	public static inline var DKUnresolvedIdentifier:haxe.display.DiagnosticKind<Array<{ name : String, kind : haxe.display.UnresolvedIdentifierSuggestion }>> = cast 1;
+
+	@:value(cast 2) @:impl @:enum
+	public static inline var DKCompilerError:haxe.display.DiagnosticKind<String> = cast 2;
+
+	@:value(cast 3) @:impl @:enum
+	public static inline var DKRemovableCode:haxe.display.DiagnosticKind<{ range : haxe.display.Range, description : String }> = cast 3;
+
+	@:value(cast 4) @:impl @:enum
+	public static inline var DKParserError:haxe.display.DiagnosticKind<String> = cast 4;
+
+	@:value(cast 5) @:impl @:enum
+	public static inline var DeprecationWarning:haxe.display.DiagnosticKind<String> = cast 5;
+
+	@:value(cast 6) @:impl @:enum
+	public static inline var InactiveBlock:haxe.display.DiagnosticKind<Void> = cast 6;
+
+	@:value(cast 7) @:impl @:enum
+	public static inline var MissingFields:haxe.display.DiagnosticKind<haxe.display.MissingFieldDiagnostics> = cast 7;
+}

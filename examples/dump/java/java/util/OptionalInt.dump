@@ -1,0 +1,25 @@
+@:realPath("java.util.OptionalInt") @:used @:native("java.util.OptionalInt") @:libType
+extern class java.util.OptionalInt {
+
+	function getAsInt():Int;
+
+	function isPresent():Bool;
+
+	function ifPresent(param1:java.util.function.IntConsumer):Void;
+
+	function orElse(param1:Int):Int;
+
+	function orElseGet(param1:java.util.function.IntSupplier):Int;
+
+	function orElseThrow<X:java.lang.Throwable>(param1:java.util.function.Supplier<orElseThrow.X>):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function empty():java.util.OptionalInt;
+
+	static function of(param1:Int):java.util.OptionalInt;
+}

@@ -1,0 +1,35 @@
+@:realPath("java.lang.reflect.AccessibleObject") @:used @:native("java.lang.reflect.AccessibleObject") @:libType
+extern class java.lang.reflect.AccessibleObject implements java.lang.reflect.AnnotatedElement {
+
+	function new():Void;
+
+	function setAccessible(param1:Bool):Void;
+
+	function isAccessible():Bool;
+
+	function getAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.T>):getAnnotation.T;
+
+	function isAnnotationPresent(param1:java.lang.Class<java.lang.annotation.Annotation>):Bool;
+
+	function getAnnotationsByType<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotationsByType.T>):java.NativeArray<getAnnotationsByType.T>;
+
+	function getAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getDeclaredAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotation.T>):getDeclaredAnnotation.T;
+
+	function getDeclaredAnnotationsByType<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotationsByType.T>):java.NativeArray<getDeclaredAnnotationsByType.T>;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function checkAccess(param1:java.lang.Class<Dynamic>, param2:java.lang.Class<Dynamic>, param3:Dynamic, param4:Int):Void;
+
+	function slowCheckMemberAccess(param1:java.lang.Class<Dynamic>, param2:java.lang.Class<Dynamic>, param3:Dynamic, param4:Int, param5:java.lang.Class<Dynamic>):Void;
+
+	var override:Bool;
+
+	var securityCheckCache:Dynamic;
+
+	static function setAccessible(param1:java.NativeArray<java.lang.reflect.AccessibleObject>, param2:Bool):Void;
+
+	static var reflectionFactory(default,never):sun.reflect.ReflectionFactory;
+}

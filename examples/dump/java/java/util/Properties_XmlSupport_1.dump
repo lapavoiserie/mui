@@ -1,0 +1,7 @@
+@:realPath("java.util.Properties_XmlSupport_1") @:used @:native("java.util.Properties$XmlSupport$1") @:libType
+extern class java.util.Properties$XmlSupport$1 implements java.security.PrivilegedAction<sun.util.spi.XmlPropertiesProvider> {
+
+	function new():Void;
+
+	function run():sun.util.spi.XmlPropertiesProvider;
+}

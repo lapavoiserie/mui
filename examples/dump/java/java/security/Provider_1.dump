@@ -1,0 +1,3 @@
+@:realPath("java.security.Provider_1") @:native("java.security.Provider$1") @:libType
+extern class java.security.Provider$1 {
+}

@@ -1,0 +1,4 @@
+extern class jvm.ObjectTools {
+
+	static inline function object<T>(t:object.T):java.lang.Object;
+}

@@ -1,0 +1,11 @@
+@:realPath("java.util.regex.Pattern_BitClass") @:used @:native("java.util.regex.Pattern$BitClass") @:libType
+extern class java.util.regex.Pattern$BitClass extends java.util.regex.Pattern$BmpCharProperty {
+
+	function new():Void;
+
+	function add(param1:Int, param2:Int):java.util.regex.Pattern$BitClass;
+
+	function isSatisfiedBy(param1:Int):Bool;
+
+	var bits(default,ctor):java.NativeArray<Bool>;
+}

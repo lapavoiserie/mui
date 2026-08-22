@@ -1,0 +1,31 @@
+@:realPath("java.util.LinkedList_LLSpliterator") @:used @:native("java.util.LinkedList$LLSpliterator") @:libType
+extern class java.util.LinkedList$LLSpliterator<E:Dynamic> implements java.util.Spliterator<java.util.LinkedList_LLSpliterator.E> {
+
+	function new(param1:java.util.LinkedList<java.util.LinkedList_LLSpliterator.E>, param2:Int, param3:Int):Void;
+
+	function getEst():Int;
+
+	function estimateSize():haxe.Int64;
+
+	function trySplit():java.util.Spliterator<java.util.LinkedList_LLSpliterator.E>;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	function characteristics():Int;
+
+	var list(default,ctor):java.util.LinkedList<java.util.LinkedList_LLSpliterator.E>;
+
+	var current:java.util.LinkedList$Node<java.util.LinkedList_LLSpliterator.E>;
+
+	var est:Int;
+
+	var expectedModCount:Int;
+
+	var batch:Int;
+
+	static var BATCH_UNIT(default,never):Int;
+
+	static var MAX_BATCH(default,never):Int;
+}

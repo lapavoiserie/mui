@@ -1,0 +1,9 @@
+@:realPath("java.util.Collections_UnmodifiableSet") @:used @:native("java.util.Collections$UnmodifiableSet") @:libType
+extern class java.util.Collections$UnmodifiableSet<E:Dynamic> extends java.util.Collections$UnmodifiableCollection<java.util.Collections_UnmodifiableSet.E> implements java.io.Serializable implements java.util.Set<java.util.Collections_UnmodifiableSet.E> {
+
+	function new(param1:java.util.Set<java.util.Collections_UnmodifiableSet.E>):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+}

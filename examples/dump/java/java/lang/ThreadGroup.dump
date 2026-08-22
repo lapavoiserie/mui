@@ -1,0 +1,89 @@
+@:realPath("java.lang.ThreadGroup") @:used @:native("java.lang.ThreadGroup") @:libType
+extern class java.lang.ThreadGroup implements java.lang.Thread$UncaughtExceptionHandler {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.ThreadGroup, param2:java.lang.String):Void;
+
+	function getName():java.lang.String;
+
+	function getParent():java.lang.ThreadGroup;
+
+	function getMaxPriority():Int;
+
+	function isDaemon():Bool;
+
+	function isDestroyed():Bool;
+
+	function setDaemon(param1:Bool):Void;
+
+	function setMaxPriority(param1:Int):Void;
+
+	function parentOf(param1:java.lang.ThreadGroup):Bool;
+
+	function checkAccess():Void;
+
+	function activeCount():Int;
+
+	function enumerate(param1:java.NativeArray<java.lang.Thread>):Int;
+
+	function enumerate(param1:java.NativeArray<java.lang.ThreadGroup>, param2:Bool):Int;
+
+	function enumerate(param1:java.NativeArray<java.lang.ThreadGroup>):Int;
+
+	function enumerate(param1:java.NativeArray<java.lang.Thread>, param2:Bool):Int;
+
+	function activeGroupCount():Int;
+
+	@:deprecated
+	function stop():Void;
+
+	function interrupt():Void;
+
+	@:deprecated
+	function suspend():Void;
+
+	@:deprecated
+	function resume():Void;
+
+	function destroy():Void;
+
+	function addUnstarted():Void;
+
+	function add(param1:java.lang.Thread):Void;
+
+	function threadStartFailed(param1:java.lang.Thread):Void;
+
+	function threadTerminated(param1:java.lang.Thread):Void;
+
+	function list():Void;
+
+	function list(param1:java.io.PrintStream, param2:Int):Void;
+
+	function uncaughtException(param1:java.lang.Thread, param2:java.lang.Throwable):Void;
+
+	@:deprecated
+	function allowThreadSuspension(param1:Bool):Bool;
+
+	function toString():java.lang.String;
+
+	var name:java.lang.String;
+
+	var maxPriority:Int;
+
+	var destroyed:Bool;
+
+	var daemon:Bool;
+
+	var vmAllowSuspension:Bool;
+
+	var nUnstartedThreads:Int;
+
+	var nthreads:Int;
+
+	var threads:java.NativeArray<java.lang.Thread>;
+
+	var ngroups:Int;
+
+	var groups:java.NativeArray<java.lang.ThreadGroup>;
+}

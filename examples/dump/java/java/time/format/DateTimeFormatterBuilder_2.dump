@@ -1,0 +1,9 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_2") @:used @:native("java.time.format.DateTimeFormatterBuilder$2") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$2 implements java.util.Comparator<java.lang.String> {
+
+	function new():Void;
+
+	function compare(param1:java.lang.String, param2:java.lang.String):Int;
+
+	function compare(param1:Dynamic, param2:Dynamic):Int;
+}

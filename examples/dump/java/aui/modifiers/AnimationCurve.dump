@@ -1,0 +1,10 @@
+@:directlyUsed @:used @:flatEnum
+enum aui.modifiers.AnimationCurve {
+	Default;
+	EaseIn;
+	EaseOut;
+	EaseInOut;
+	Spring;
+	Linear;
+	Bouncy;
+}

@@ -1,0 +1,41 @@
+@:realPath("java.util.Collections_CheckedMap_CheckedEntrySet") @:used @:native("java.util.Collections$CheckedMap$CheckedEntrySet") @:libType
+extern class java.util.Collections$CheckedMap$CheckedEntrySet<K:Dynamic, V:Dynamic> implements java.util.Set<java.util.Map$Entry<java.util.Collections_CheckedMap_CheckedEntrySet.K, java.util.Collections_CheckedMap_CheckedEntrySet.V>> {
+
+	function new(param1:java.util.Set<java.util.Map$Entry<java.util.Collections_CheckedMap_CheckedEntrySet.K, java.util.Collections_CheckedMap_CheckedEntrySet.V>>, param2:java.lang.Class<java.util.Collections_CheckedMap_CheckedEntrySet.V>):Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function clear():Void;
+
+	function add(param1:java.util.Map$Entry<java.util.Collections_CheckedMap_CheckedEntrySet.K, java.util.Collections_CheckedMap_CheckedEntrySet.V>):Bool;
+
+	function add(param1:Dynamic):Bool;
+
+	function addAll(param1:java.util.Collection<java.util.Map$Entry<java.util.Collections_CheckedMap_CheckedEntrySet.K, java.util.Collections_CheckedMap_CheckedEntrySet.V>>):Bool;
+
+	function iterator():java.util.Iterator<java.util.Map$Entry<java.util.Collections_CheckedMap_CheckedEntrySet.K, java.util.Collections_CheckedMap_CheckedEntrySet.V>>;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function contains(param1:Dynamic):Bool;
+
+	function containsAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function remove(param1:Dynamic):Bool;
+
+	function removeAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function retainAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	static function checkedEntry<K:Dynamic, V:Dynamic, T:Dynamic>(param1:java.util.Map$Entry<checkedEntry.K, checkedEntry.V>, param2:java.lang.Class<checkedEntry.T>):java.util.Collections$CheckedMap$CheckedEntrySet$CheckedEntry<checkedEntry.K, checkedEntry.V, checkedEntry.T>;
+}

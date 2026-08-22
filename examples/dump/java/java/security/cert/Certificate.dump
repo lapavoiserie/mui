@@ -1,0 +1,25 @@
+@:realPath("java.security.cert.Certificate") @:used @:native("java.security.cert.Certificate") @:libType
+extern class java.security.cert.Certificate implements java.io.Serializable {
+
+	function new(param1:java.lang.String):Void;
+
+	function getType():java.lang.String;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function getEncoded():java.NativeArray<java.types.Int8>;
+
+	function verify(param1:java.security.PublicKey):Void;
+
+	function verify(param1:java.security.PublicKey, param2:java.security.Provider):Void;
+
+	function verify(param1:java.security.PublicKey, param2:java.lang.String):Void;
+
+	function toString():java.lang.String;
+
+	function getPublicKey():java.security.PublicKey;
+
+	function writeReplace():Dynamic;
+}

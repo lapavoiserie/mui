@@ -1,0 +1,7 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_SettingsParser") @:used @:flatEnum @:native("java.time.format.DateTimeFormatterBuilder$SettingsParser")
+extern enum java.time.format.DateTimeFormatterBuilder$SettingsParser {
+	SENSITIVE;
+	INSENSITIVE;
+	STRICT;
+	LENIENT;
+}

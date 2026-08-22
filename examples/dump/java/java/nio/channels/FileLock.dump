@@ -1,0 +1,27 @@
+@:realPath("java.nio.channels.FileLock") @:used @:native("java.nio.channels.FileLock") @:libType
+extern class java.nio.channels.FileLock implements java.lang.AutoCloseable {
+
+	function new(param1:java.nio.channels.FileChannel, param2:haxe.Int64, param3:haxe.Int64, param4:Bool):Void;
+
+	function new(param1:java.nio.channels.AsynchronousFileChannel, param2:haxe.Int64, param3:haxe.Int64, param4:Bool):Void;
+
+	function channel():java.nio.channels.FileChannel;
+
+	function acquiredBy():java.nio.channels.Channel;
+
+	function position():haxe.Int64;
+
+	function size():haxe.Int64;
+
+	function isShared():Bool;
+
+	function overlaps(param1:haxe.Int64, param2:haxe.Int64):Bool;
+
+	function isValid():Bool;
+
+	function release():Void;
+
+	function close():Void;
+
+	function toString():java.lang.String;
+}

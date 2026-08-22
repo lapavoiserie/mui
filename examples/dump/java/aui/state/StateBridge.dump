@@ -1,0 +1,9 @@
+@:realPath("aui.state.StateBridge") @:directlyUsed @:used @:keep @:native("aui.state.StateBridge")
+extern class aui.state.StateBridge {
+
+	static function create(initialValue:Dynamic):Dynamic;
+
+	static function read(state:Dynamic):Dynamic;
+
+	static function write(state:Dynamic, value:Dynamic):Void;
+}

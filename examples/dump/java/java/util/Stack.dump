@@ -1,0 +1,15 @@
+@:realPath("java.util.Stack") @:used @:native("java.util.Stack") @:libType
+extern class java.util.Stack<E:Dynamic> extends java.util.Vector<java.util.Stack.E> {
+
+	function new():Void;
+
+	function push(param1:java.util.Stack.E):java.util.Stack.E;
+
+	function pop():java.util.Stack.E;
+
+	function peek():java.util.Stack.E;
+
+	function empty():Bool;
+
+	function search(param1:Dynamic):Int;
+}

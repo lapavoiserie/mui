@@ -1,0 +1,14 @@
+@:realPath("java.time.ZoneId_1") @:used @:native("java.time.ZoneId$1") @:libType
+extern class java.time.ZoneId$1 implements java.time.temporal.TemporalAccessor {
+
+	function new(param1:java.time.ZoneId):Void;
+
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	function getLong(param1:java.time.temporal.TemporalField):haxe.Int64;
+
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.time.ZoneId;
+}

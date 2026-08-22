@@ -1,0 +1,45 @@
+@:realPath("java.time.zone.ZoneOffsetTransition") @:used @:native("java.time.zone.ZoneOffsetTransition") @:libType
+extern class java.time.zone.ZoneOffsetTransition implements java.io.Serializable implements java.lang.Comparable<java.time.zone.ZoneOffsetTransition> {
+
+	function new(param1:java.time.LocalDateTime, param2:java.time.ZoneOffset, param3:java.time.ZoneOffset):Void;
+
+	function new(param1:haxe.Int64, param2:java.time.ZoneOffset, param3:java.time.ZoneOffset):Void;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	function getInstant():java.time.Instant;
+
+	function toEpochSecond():haxe.Int64;
+
+	function getDateTimeBefore():java.time.LocalDateTime;
+
+	function getDateTimeAfter():java.time.LocalDateTime;
+
+	function getOffsetBefore():java.time.ZoneOffset;
+
+	function getOffsetAfter():java.time.ZoneOffset;
+
+	function getDuration():java.time.Duration;
+
+	function isGap():Bool;
+
+	function isOverlap():Bool;
+
+	function isValidOffset(param1:java.time.ZoneOffset):Bool;
+
+	function getValidOffsets():java.util.List<java.time.ZoneOffset>;
+
+	function compareTo(param1:java.time.zone.ZoneOffsetTransition):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function of(param1:java.time.LocalDateTime, param2:java.time.ZoneOffset, param3:java.time.ZoneOffset):java.time.zone.ZoneOffsetTransition;
+
+	static function readExternal(param1:java.io.DataInput):java.time.zone.ZoneOffsetTransition;
+}

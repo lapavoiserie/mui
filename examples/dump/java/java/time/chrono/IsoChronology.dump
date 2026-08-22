@@ -1,0 +1,61 @@
+@:realPath("java.time.chrono.IsoChronology") @:used @:native("java.time.chrono.IsoChronology") @:libType
+extern class java.time.chrono.IsoChronology extends java.time.chrono.AbstractChronology implements java.io.Serializable {
+
+	function getId():java.lang.String;
+
+	function getCalendarType():java.lang.String;
+
+	function date(param1:java.time.chrono.Era, param2:Int, param3:Int, param4:Int):java.time.LocalDate;
+
+	function date(param1:java.time.temporal.TemporalAccessor):java.time.LocalDate;
+
+	function date(param1:Int, param2:Int, param3:Int):java.time.LocalDate;
+
+	function dateYearDay(param1:java.time.chrono.Era, param2:Int, param3:Int):java.time.LocalDate;
+
+	function dateYearDay(param1:Int, param2:Int):java.time.LocalDate;
+
+	function dateEpochDay(param1:haxe.Int64):java.time.LocalDate;
+
+	function localDateTime(param1:java.time.temporal.TemporalAccessor):java.time.LocalDateTime;
+
+	function zonedDateTime(param1:java.time.temporal.TemporalAccessor):java.time.ZonedDateTime;
+
+	function zonedDateTime(param1:java.time.Instant, param2:java.time.ZoneId):java.time.ZonedDateTime;
+
+	function dateNow():java.time.LocalDate;
+
+	function dateNow(param1:java.time.Clock):java.time.LocalDate;
+
+	function dateNow(param1:java.time.ZoneId):java.time.LocalDate;
+
+	function isLeapYear(param1:haxe.Int64):Bool;
+
+	function prolepticYear(param1:java.time.chrono.Era, param2:Int):Int;
+
+	function eraOf(param1:Int):java.time.chrono.IsoEra;
+
+	function eras():java.util.List<java.time.chrono.Era>;
+
+	function resolveDate(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.LocalDate;
+
+	function resolveDate(param1:java.util.Map<Dynamic, Dynamic>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveProlepticMonth(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):Void;
+
+	function resolveYearOfEra(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.LocalDate;
+
+	function resolveYearOfEra(param1:java.util.Map<Dynamic, Dynamic>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveYMD(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.LocalDate;
+
+	function resolveYMD(param1:java.util.Map<Dynamic, Dynamic>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function range(param1:java.time.temporal.ChronoField):java.time.temporal.ValueRange;
+
+	function period(param1:Int, param2:Int, param3:Int):java.time.Period;
+
+	function writeReplace():Dynamic;
+
+	static var INSTANCE(default,never):java.time.chrono.IsoChronology;
+}

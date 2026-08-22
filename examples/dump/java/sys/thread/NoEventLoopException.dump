@@ -1,0 +1,9 @@
+@:keep @:directlyUsed @:used
+class sys.thread.NoEventLoopException extends haxe.Exception {
+
+	@:value({ msg : "Event loop is not available. Refer to sys.thread.Thread.runWithEventLoop." })
+	public function new(msg:java.lang.String = "Event loop is not available. Refer to sys.thread.Thread.runWithEventLoop.", previous:Null<haxe.Exception> = null) {
+		super(if ((msg == null)) "Event loop is not available. Refer to sys.thread.Thread.runWithEventLoop." else msg, if ((previous == null)) null else previous, null);
+		if ((msg == null)) msg = "Event loop is not available. Refer to sys.thread.Thread.runWithEventLoop.";
+	}
+}

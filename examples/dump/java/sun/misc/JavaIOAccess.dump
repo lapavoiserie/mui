@@ -1,0 +1,7 @@
+@:realPath("java.sun.misc.JavaIOAccess") @:used @:native("sun.misc.JavaIOAccess") @:libType
+extern interface sun.misc.JavaIOAccess {
+
+	function console():java.io.Console;
+
+	function charset():java.nio.charset.Charset;
+}

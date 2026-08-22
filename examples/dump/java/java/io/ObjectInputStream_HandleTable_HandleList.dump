@@ -1,0 +1,11 @@
+@:realPath("java.io.ObjectInputStream_HandleTable_HandleList") @:native("java.io.ObjectInputStream$HandleTable$HandleList") @:libType
+extern class java.io.ObjectInputStream$HandleTable$HandleList {
+
+	function new():Void;
+
+	function add(param1:Int):Void;
+
+	function get(param1:Int):Int;
+
+	function size():Int;
+}

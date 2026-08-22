@@ -1,0 +1,8 @@
+@:realPath("java.util.function.BiFunction") @:used @:native("java.util.function.BiFunction") @:libType
+extern interface java.util.function.BiFunction<T:Dynamic, U:Dynamic, R:Dynamic> {
+
+	function apply(param1:java.util.function.BiFunction.T, param2:java.util.function.BiFunction.U):java.util.function.BiFunction.R;
+
+	@:java.default
+	function andThen<V:Dynamic>(param1:java.util.function.Function<Dynamic, andThen.V>):java.util.function.BiFunction<java.util.function.BiFunction.T, java.util.function.BiFunction.U, andThen.V>;
+}

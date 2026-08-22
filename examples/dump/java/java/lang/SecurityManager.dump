@@ -1,0 +1,102 @@
+@:realPath("java.lang.SecurityManager") @:used @:native("java.lang.SecurityManager") @:libType
+extern class java.lang.SecurityManager {
+
+	function new():Void;
+
+	@:deprecated
+	function getInCheck():Bool;
+
+	function getClassContext():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	@:deprecated
+	function currentClassLoader():java.lang.ClassLoader;
+
+	@:deprecated
+	function currentLoadedClass():java.lang.Class<Dynamic>;
+
+	@:deprecated
+	function classDepth(param1:java.lang.String):Int;
+
+	@:deprecated
+	function classLoaderDepth():Int;
+
+	@:deprecated
+	function inClass(param1:java.lang.String):Bool;
+
+	@:deprecated
+	function inClassLoader():Bool;
+
+	function getSecurityContext():Dynamic;
+
+	function checkPermission(param1:java.security.Permission):Void;
+
+	function checkPermission(param1:java.security.Permission, param2:Dynamic):Void;
+
+	function checkCreateClassLoader():Void;
+
+	function checkAccess(param1:java.lang.Thread):Void;
+
+	function checkAccess(param1:java.lang.ThreadGroup):Void;
+
+	function checkExit(param1:Int):Void;
+
+	function checkExec(param1:java.lang.String):Void;
+
+	function checkLink(param1:java.lang.String):Void;
+
+	function checkRead(param1:java.io.FileDescriptor):Void;
+
+	function checkRead(param1:java.lang.String, param2:Dynamic):Void;
+
+	function checkRead(param1:java.lang.String):Void;
+
+	function checkWrite(param1:java.io.FileDescriptor):Void;
+
+	function checkWrite(param1:java.lang.String):Void;
+
+	function checkDelete(param1:java.lang.String):Void;
+
+	function checkConnect(param1:java.lang.String, param2:Int):Void;
+
+	function checkConnect(param1:java.lang.String, param2:Int, param3:Dynamic):Void;
+
+	function checkListen(param1:Int):Void;
+
+	function checkAccept(param1:java.lang.String, param2:Int):Void;
+
+	function checkMulticast(param1:java.net.InetAddress):Void;
+
+	@:deprecated
+	function checkMulticast(param1:java.net.InetAddress, param2:java.types.Int8):Void;
+
+	function checkPropertiesAccess():Void;
+
+	function checkPropertyAccess(param1:java.lang.String):Void;
+
+	@:deprecated
+	function checkTopLevelWindow(param1:Dynamic):Bool;
+
+	function checkPrintJobAccess():Void;
+
+	@:deprecated
+	function checkSystemClipboardAccess():Void;
+
+	@:deprecated
+	function checkAwtEventQueueAccess():Void;
+
+	function checkPackageAccess(param1:java.lang.String):Void;
+
+	function checkPackageDefinition(param1:java.lang.String):Void;
+
+	function checkSetFactory():Void;
+
+	@:deprecated
+	function checkMemberAccess(param1:java.lang.Class<Dynamic>, param2:Int):Void;
+
+	function checkSecurityAccess(param1:java.lang.String):Void;
+
+	function getThreadGroup():java.lang.ThreadGroup;
+
+	@:deprecated
+	var inCheck:Bool;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.net.InetAddress_Cache_Type") @:used @:flatEnum @:native("java.net.InetAddress$Cache$Type")
+extern enum java.net.InetAddress$Cache$Type {
+	Positive;
+	Negative;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.io.File_PathStatus") @:used @:flatEnum @:native("java.io.File$PathStatus")
+extern enum java.io.File$PathStatus {
+	INVALID;
+	CHECKED;
+}

@@ -1,0 +1,42 @@
+@:realPath("java.util.ArrayList_SubList_1") @:used @:native("java.util.ArrayList$SubList$1") @:libType
+extern class java.util.ArrayList$SubList$1 implements java.util.ListIterator<Dynamic> {
+
+	function new(param1:java.util.ArrayList$SubList, param2:Int, param3:Int):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function hasPrevious():Bool;
+
+	function previous():Dynamic;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function nextIndex():Int;
+
+	function previousIndex():Int;
+
+	function remove():Void;
+
+	function set(param1:Dynamic):Void;
+
+	function add(param1:Dynamic):Void;
+
+	function checkForComodification():Void;
+
+	var cursor:Int;
+
+	var lastRet:Int;
+
+	var expectedModCount:Int;
+
+	@:realPath("val_index") @:native("val$index")
+	var val$index(default,ctor):Int;
+
+	@:realPath("val_offset") @:native("val$offset")
+	var val$offset(default,ctor):Int;
+
+	@:realPath("this_1") @:native("this$1")
+	var this$1(default,ctor):java.util.ArrayList$SubList;
+}

@@ -1,0 +1,15 @@
+@:realPath("java.util.regex.Pattern_Conditional") @:used @:native("java.util.regex.Pattern$Conditional") @:libType
+extern class java.util.regex.Pattern$Conditional extends java.util.regex.Pattern$Node {
+
+	function new(param1:java.util.regex.Pattern$Node, param2:java.util.regex.Pattern$Node, param3:java.util.regex.Pattern$Node):Void;
+
+	function match(param1:java.util.regex.Matcher, param2:Int, param3:java.lang.CharSequence):Bool;
+
+	function study(param1:java.util.regex.Pattern$TreeInfo):Bool;
+
+	var cond:java.util.regex.Pattern$Node;
+
+	var yes:java.util.regex.Pattern$Node;
+
+	var not:java.util.regex.Pattern$Node;
+}

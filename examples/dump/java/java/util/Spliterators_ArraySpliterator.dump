@@ -1,0 +1,19 @@
+@:realPath("java.util.Spliterators_ArraySpliterator") @:used @:native("java.util.Spliterators$ArraySpliterator") @:libType
+extern class java.util.Spliterators$ArraySpliterator<T:Dynamic> implements java.util.Spliterator<java.util.Spliterators_ArraySpliterator.T> {
+
+	function new(param1:java.NativeArray<Dynamic>, param2:Int):Void;
+
+	function new(param1:java.NativeArray<Dynamic>, param2:Int, param3:Int, param4:Int):Void;
+
+	function trySplit():java.util.Spliterator<java.util.Spliterators_ArraySpliterator.T>;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	function getComparator():java.util.Comparator<Dynamic>;
+}

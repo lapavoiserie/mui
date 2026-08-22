@@ -1,0 +1,9 @@
+@:directlyUsed @:used
+enum aui.state.StateAction {
+	Increment(state:Dynamic, ?amount:Null<Dynamic>);
+	Decrement(state:Dynamic, ?amount:Null<Dynamic>);
+	SetValue(state:Dynamic, value:Dynamic);
+	Toggle(state:Dynamic);
+	Append(state:Dynamic, value:Dynamic);
+	Animated(action:aui.state.StateAction, curve:aui.state.AnimationCurve);
+}

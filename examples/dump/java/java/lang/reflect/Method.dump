@@ -1,0 +1,75 @@
+@:realPath("java.lang.reflect.Method") @:used @:native("java.lang.reflect.Method") @:libType
+extern class java.lang.reflect.Method extends java.lang.reflect.Executable {
+
+	function new(param1:java.lang.Class<Dynamic>, param2:java.lang.String, param3:java.NativeArray<java.lang.Class<Dynamic>>, param4:java.lang.Class<Dynamic>, param5:java.NativeArray<java.lang.Class<Dynamic>>, param6:Int, param7:Int, param8:java.lang.String, param9:java.NativeArray<java.types.Int8>, param10:java.NativeArray<java.types.Int8>, param11:java.NativeArray<java.types.Int8>):Void;
+
+	function getGenericInfo():sun.reflect.generics.repository.MethodRepository;
+
+	function copy():java.lang.reflect.Method;
+
+	function getRoot():java.lang.reflect.Executable;
+
+	function hasGenericInformation():Bool;
+
+	function getAnnotationBytes():java.NativeArray<java.types.Int8>;
+
+	function getDeclaringClass():java.lang.Class<Dynamic>;
+
+	function getName():java.lang.String;
+
+	function getModifiers():Int;
+
+	function getTypeParameters():java.NativeArray<java.lang.reflect.TypeVariable<java.lang.reflect.Method>>;
+
+	function getReturnType():java.lang.Class<Dynamic>;
+
+	function getGenericReturnType():java.lang.reflect.Type;
+
+	function getParameterTypes():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getParameterCount():Int;
+
+	function getGenericParameterTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function getExceptionTypes():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getGenericExceptionTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function specificToStringHeader(param1:java.lang.StringBuilder):Void;
+
+	function toGenericString():java.lang.String;
+
+	function specificToGenericStringHeader(param1:java.lang.StringBuilder):Void;
+
+	function invoke(param1:Dynamic, param2:haxe.Rest<Dynamic>):Dynamic;
+
+	function isBridge():Bool;
+
+	function isVarArgs():Bool;
+
+	function isSynthetic():Bool;
+
+	function isDefault():Bool;
+
+	function getMethodAccessor():sun.reflect.MethodAccessor;
+
+	function setMethodAccessor(param1:sun.reflect.MethodAccessor):Void;
+
+	function getDefaultValue():Dynamic;
+
+	function getAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.T>):getAnnotation.T;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getParameterAnnotations():java.NativeArray<java.NativeArray<java.lang.annotation.Annotation>>;
+
+	function getAnnotatedReturnType():java.lang.reflect.AnnotatedType;
+
+	function handleParameterNumberMismatch(param1:Int, param2:Int):Void;
+}

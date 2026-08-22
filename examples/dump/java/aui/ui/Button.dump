@@ -1,0 +1,22 @@
+@:used
+class aui.ui.Button extends aui.View {
+
+	public function new(label:java.lang.String, stateAction:Null<aui.state.StateAction> = null) {
+		super();
+		this.viewType = "Button";
+		this.label = label;
+		this.stateAction = stateAction;
+	}
+
+	public var label:java.lang.String;
+
+	public var labelView:Null<aui.View>;
+
+	public var stateAction:Null<aui.state.StateAction>;
+
+	public static function withView(labelView:aui.View, stateAction:Null<aui.state.StateAction> = null) {
+		var btn = new aui.ui.Button("", stateAction);
+		btn.labelView = labelView;
+		return btn;
+	}
+}

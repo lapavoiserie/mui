@@ -1,0 +1,7 @@
+@:realPath("java.security.ProtectionDomain_3") @:used @:native("java.security.ProtectionDomain$3") @:libType
+extern class java.security.ProtectionDomain$3 implements sun.misc.JavaSecurityProtectionDomainAccess {
+
+	function new():Void;
+
+	function getProtectionDomainCache():sun.misc.JavaSecurityProtectionDomainAccess$ProtectionDomainCache;
+}

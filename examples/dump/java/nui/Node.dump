@@ -1,0 +1,48 @@
+@:directlyUsed @:used
+class nui.Node {
+
+	public function new(type:java.lang.String, key:Null<java.lang.String> = null) {
+		this.type = type;
+		this.key = key;
+		this.props = new haxe.ds.StringMap();
+		this.modifiers = [];
+		this.children = [];
+		this.childrenThunk = null;
+	}
+
+	public var type:java.lang.String;
+
+	public var key:Null<java.lang.String>;
+
+	public var props:Map<java.lang.String, nui.PropValue>;
+
+	public var modifiers:Array<nui.Modifier>;
+
+	public var children:Array<nui.Node>;
+
+	public var childrenThunk:Null<() -> Array<nui.Node>>;
+
+	public function prop(key:java.lang.String, value:nui.PropValue) {
+		cast cast this.props.set(key, value);
+		return this;
+	}
+
+	public function modifier(m:nui.Modifier) {
+		this.modifiers.push(m);
+		return this;
+	}
+
+	public function child(node:nui.Node) {
+		this.children.push(node);
+		return this;
+	}
+
+	public function resolveChildren() {
+		if ((this.childrenThunk != null)) this.children = this.childrenThunk();
+		return this.children;
+	}
+
+	public function toString() {
+		return "Node(" + this.type + (if ((this.key != null)) "#" + this.key else "") + ", " + this.children.length + " children)";
+	}
+}

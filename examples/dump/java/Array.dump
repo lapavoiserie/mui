@@ -1,0 +1,409 @@
+@:directlyUsed @:used @:classCode("\n\tpublic Array(T[] _native)\n\t{\n\t\tthis.__a = _native;\n\t\tthis.length = _native.length;\n\t}\n") @:coreApi
+class Array<T> implements ArrayAccess<Array.T> {
+
+	public function new() {
+		this.length = 0;
+		this.__a = new java.NativeArray(0);
+	}
+
+	public var length(default,null):Int;
+
+	var __a:java.NativeArray<Array.T>;
+
+	function getNative() {
+		var a = new java.NativeArray(this.length);
+		java.lang.System.arraycopy(this.__a, 0, a, 0, this.length);
+		return a;
+	}
+
+	public function concat(a:Array<Array.T>) {
+		var length = this.length;
+		var len = length + a.length;
+		var retarr = new java.NativeArray(len);
+		java.lang.System.arraycopy(this.__a, 0, retarr, 0, length);
+		java.lang.System.arraycopy(a.__a, 0, retarr, length, a.length);
+		return Array.ofNative(retarr);
+	}
+
+	function concatNative(a:java.NativeArray<Array.T>) {
+		var __a = this.__a;
+		var length = this.length;
+		var len = length + a.length;
+		if ((__a.length >= len)) java.lang.System.arraycopy(a, 0, __a, length, length) else {
+			var newarr = new java.NativeArray(len);
+			java.lang.System.arraycopy(__a, 0, newarr, 0, length);
+			java.lang.System.arraycopy(a, 0, newarr, length, a.length);
+			this.__a = newarr;
+		};
+		this.length = len;
+	}
+
+	public function join(sep:java.lang.String) {
+		var buf = new StringBuf();
+		var i = -1;
+		var first = true;
+		var length = this.length;
+		while ((++ i < length)) {
+			if ((first)) first = false else buf.add(sep);
+			buf.add(this.__a[i]);
+		};
+		return buf.toString();
+	}
+
+	public function pop() {
+		var __a = this.__a;
+		var length = this.length;
+		if ((length > 0)) {
+			var val = __a[-- length];
+			__a[length] = null;
+			this.length = length;
+			return val;
+		} else return null;
+	}
+
+	public function push(x:Array.T) {
+		var length = this.length;
+		if ((length >= this.__a.length)) {
+			var newLen = if ((length == 0)) 4 else length << 1;
+			var newarr = new java.NativeArray(newLen);
+			java.lang.System.arraycopy(this.__a, 0, newarr, 0, this.__a.length);
+			this.__a = newarr;
+		};
+		this.__a[length] = x;
+		return ++ this.length;
+	}
+
+	public function reverse() {
+		var i = 0;
+		var l = this.length;
+		var a = this.__a;
+		var half = l >> 1;
+		-- l;
+		while ((i < half)) {
+			var tmp = a[i];
+			a[i] = a[l - i];
+			a[l - i] = tmp;
+			++ i;
+		};
+	}
+
+	public function shift() {
+		var l = this.length;
+		if ((l == 0)) return null;
+		var a = this.__a;
+		var x = a[0];
+		-- l;
+		java.lang.System.arraycopy(a, 1, a, 0, this.length - 1);
+		a[l] = null;
+		this.length = l;
+		return x;
+	}
+
+	public function slice(pos:Int, end:Null<Int> = null) {
+		if ((pos < 0)) {
+			pos = this.length + pos;
+			if ((pos < 0)) pos = 0;
+		};
+		if ((end == null)) end = this.length else if ((end < 0)) end = this.length + end;
+		if ((end > this.length)) end = this.length;
+		var len = end - pos;
+		if ((len < 0)) return new Array();
+		var newarr = new java.NativeArray(len);
+		java.lang.System.arraycopy(this.__a, pos, newarr, 0, len);
+		return Array.ofNative(newarr);
+	}
+
+	public function sort(f:(Array.T, Array.T) -> Int) {
+		if ((this.length == 0)) return;
+		this.quicksort(0, this.length - 1, f);
+	}
+
+	function quicksort(lo:Int, hi:Int, f:(Array.T, Array.T) -> Int) {
+		var buf = this.__a;
+		var i = lo;
+		var j = hi;
+		var p = buf[i + j >> 1];
+		while ((i <= j)) {
+			while ((i < hi && f(buf[i], p) < 0)) ++ i;
+			while ((j > lo && f(buf[j], p) > 0)) -- j;
+			if ((i <= j)) {
+				var t = buf[i];
+				buf[i ++] = buf[j];
+				buf[j --] = t;
+			};
+		};
+		if ((lo < j)) this.quicksort(lo, j, f);
+		if ((i < hi)) this.quicksort(i, hi, f);
+	}
+
+	public function splice(pos:Int, len:Int) {
+		if ((len < 0)) return new Array();
+		if ((pos < 0)) {
+			pos = this.length + pos;
+			if ((pos < 0)) pos = 0;
+		};
+		if ((pos > this.length)) {
+			pos = 0;
+			len = 0;
+		} else if ((pos + len > this.length)) {
+			len = this.length - pos;
+			if ((len < 0)) len = 0;
+		};
+		var a = this.__a;
+		var ret = new java.NativeArray(len);
+		java.lang.System.arraycopy(a, pos, ret, 0, len);
+		var ret = Array.ofNative(ret);
+		var end = pos + len;
+		java.lang.System.arraycopy(a, end, a, pos, this.length - end);
+		this.length -= len;
+		while ((-- len >= 0)) a[this.length + len] = null;
+		return ret;
+	}
+
+	function spliceVoid(pos:Int, len:Int) {
+		if ((len < 0)) return;
+		if ((pos < 0)) {
+			pos = this.length + pos;
+			if ((pos < 0)) pos = 0;
+		};
+		if ((pos > this.length)) {
+			pos = 0;
+			len = 0;
+		} else if ((pos + len > this.length)) {
+			len = this.length - pos;
+			if ((len < 0)) len = 0;
+		};
+		var a = this.__a;
+		var end = pos + len;
+		java.lang.System.arraycopy(a, end, a, pos, this.length - end);
+		this.length -= len;
+		while ((-- len >= 0)) a[this.length + len] = null;
+	}
+
+	public function toString() {
+		if ((Array.__hx_toString_depth >= 5)) return "...";
+		++ Array.__hx_toString_depth;
+		try {
+			var s = this.__hx_toString();
+			-- Array.__hx_toString_depth;
+			return s;
+		} catch (_g:java.lang.Throwable) {
+			var e = cast haxe.Exception.caught(_g).unwrap();
+			-- Array.__hx_toString_depth;
+			throw @:wrappedException cast haxe.Exception.thrown(e);
+		};
+	}
+
+	function __hx_toString() {
+		var ret = new StringBuf();
+		var a = this.__a;
+		ret.add("[");
+		var first = true;
+		{
+			var _g = 0;
+			var _g1 = this.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				if ((first)) first = false else ret.add(",");
+				ret.add(a[i]);
+			};
+		};
+		ret.add("]");
+		return ret.toString();
+	}
+
+	public function unshift(x:Array.T) {
+		var __a = this.__a;
+		var length = this.length;
+		if ((length >= __a.length)) {
+			var newLen = (length << 1) + 1;
+			var newarr = new java.NativeArray(newLen);
+			java.lang.System.arraycopy(__a, 0, newarr, 1, length);
+			this.__a = newarr;
+		} else java.lang.System.arraycopy(__a, 0, __a, 1, length);
+		this.__a[0] = x;
+		++ this.length;
+	}
+
+	public function insert(pos:Int, x:Array.T) {
+		var l = this.length;
+		if ((pos < 0)) {
+			pos = l + pos;
+			if ((pos < 0)) pos = 0;
+		};
+		if ((pos >= l)) {
+			this.push(x);
+			return;
+		} else if ((pos == 0)) {
+			this.unshift(x);
+			return;
+		};
+		if ((l >= this.__a.length)) {
+			var newLen = (this.length << 1) + 1;
+			var newarr = new java.NativeArray(newLen);
+			java.lang.System.arraycopy(this.__a, 0, newarr, 0, pos);
+			newarr[pos] = x;
+			java.lang.System.arraycopy(this.__a, pos, newarr, pos + 1, l - pos);
+			this.__a = newarr;
+			++ this.length;
+		} else {
+			var __a = this.__a;
+			java.lang.System.arraycopy(__a, pos, __a, pos + 1, l - pos);
+			java.lang.System.arraycopy(__a, 0, __a, 0, pos);
+			__a[pos] = x;
+			++ this.length;
+		};
+	}
+
+	public function remove(x:Array.T) {
+		var __a = this.__a;
+		var i = -1;
+		var length = this.length;
+		while ((++ i < length)) if ((__a[i] == x)) {
+			java.lang.System.arraycopy(__a, i + 1, __a, i, length - i - 1);
+			__a[-- this.length] = null;
+			return true;
+		};
+		return false;
+	}
+
+	public function contains(x:Array.T) {
+		var __a = this.__a;
+		var i = -1;
+		var length = this.length;
+		while ((++ i < length)) if ((__a[i] == x)) return true;
+		return false;
+	}
+
+	public function indexOf(x:Array.T, fromIndex:Null<Int> = null) {
+		var len = this.length;
+		var a = this.__a;
+		var i = if ((fromIndex == null)) 0 else fromIndex;
+		if ((i < 0)) {
+			i += len;
+			if ((i < 0)) i = 0;
+		};
+		while ((i < len)) {
+			if ((a[i] == x)) return i;
+			++ i;
+		};
+		return -1;
+	}
+
+	public function lastIndexOf(x:Array.T, fromIndex:Null<Int> = null) {
+		var len = this.length;
+		var a = this.__a;
+		var i = if ((fromIndex == null)) len - 1 else fromIndex;
+		if ((i >= len)) i = len - 1 else if ((i < 0)) i += len;
+		while ((i >= 0)) {
+			if ((a[i] == x)) return i;
+			-- i;
+		};
+		return -1;
+	}
+
+	public function copy() {
+		var len = this.length;
+		var __a = this.__a;
+		var newarr = new java.NativeArray(len);
+		java.lang.System.arraycopy(__a, 0, newarr, 0, len);
+		return Array.ofNative(newarr);
+	}
+
+	@:maybeUsed
+	public inline function iterator() {
+		return new haxe.iterators.ArrayIterator(this);
+	}
+
+	public inline function keyValueIterator() {
+		return new haxe.iterators.ArrayKeyValueIterator(this);
+	}
+
+	public function resize(len:Int) {
+		if ((this.length < len)) {
+			if ((this.__a.length < len)) {
+				var newArr = new java.NativeArray(len);
+				if ((this.length > 0)) java.lang.System.arraycopy(this.__a, 0, newArr, 0, this.length);
+				this.__a = this.__a = newArr;
+			};
+			this.length = len;
+		} else if ((this.length > len)) this.spliceVoid(len, this.length - len);
+	}
+
+	public inline function map<S>(f:Array.T -> map.S) {
+		var ret = Array.alloc(this.length);
+		{
+			var _g = 0;
+			var _g1 = this.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				ret.__set(i, f(this.__get(i)));
+			};
+		};
+		return ret;
+	}
+
+	public inline function filter(f:Array.T -> Bool) {
+		var ret = [];
+		{
+			var _g = 0;
+			var _g1 = this.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				var elt = this.__get(i);
+				if ((f(elt))) ret.push(elt);
+			};
+		};
+		return ret;
+	}
+
+	function __get(idx:Int) {
+		var __a = this.__a;
+		if ((idx >= __a.length || idx < 0)) return null;
+		return __a[idx];
+	}
+
+	function __set(idx:Int, v:Array.T) {
+		var __a = this.__a;
+		if ((idx >= __a.length)) {
+			var newl = idx + 1;
+			if ((idx == __a.length)) newl = (idx << 1) + 1;
+			var newArr = new java.NativeArray(newl);
+			if ((this.length > 0)) java.lang.System.arraycopy(__a, 0, newArr, 0, this.length);
+			__a = newArr;
+			this.__a = __a;
+		};
+		if ((idx >= this.length)) this.length = idx + 1;
+		__a[idx] = v;
+	}
+
+	inline function __unsafe_get(idx:Int) {
+		return this.__a[idx];
+	}
+
+	inline function __unsafe_set(idx:Int, val:Array.T) {
+		return this.__a[idx] = val;
+	}
+
+	@:value(0) @:skipReflection
+	static var __hx_toString_depth:Int = 0;
+
+	@:value(4) @:skipReflection
+	static inline var __hx_defaultCapacity:Int = 4;
+
+	@:functionCode("\n\t\t\treturn new Array<X>(_native);\n\t")
+	static function ofNative<X>(native:java.NativeArray<ofNative.X>) {
+		var a = new Array();
+		a.length = native.length;
+		a.__a = native;
+		return a;
+	}
+
+	@:functionCode("\n\t\t\treturn new Array<Y>((Y[]) ((java.lang.Object)new java.lang.Object[size]));\n\t")
+	static function alloc<Y>(size:Int) {
+		var a = new Array();
+		a.length = size;
+		a.__a = new java.NativeArray(size);
+		return a;
+	}
+}

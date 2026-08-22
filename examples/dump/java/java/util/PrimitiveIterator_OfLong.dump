@@ -1,0 +1,17 @@
+@:realPath("java.util.PrimitiveIterator_OfLong") @:used @:native("java.util.PrimitiveIterator$OfLong") @:libType
+extern interface java.util.PrimitiveIterator$OfLong implements java.util.PrimitiveIterator<java.lang.Long, java.util.function.LongConsumer> {
+
+	function nextLong():haxe.Int64;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.LongConsumer):Void;
+
+	@:java.default
+	function forEachRemaining(param1:Dynamic):Void;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	@:java.default
+	function next():java.lang.Long;
+}

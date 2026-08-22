@@ -1,0 +1,21 @@
+@:realPath("java.time.format.DateTimePrintContext") @:used @:native("java.time.format.DateTimePrintContext") @:libType
+extern class java.time.format.DateTimePrintContext {
+
+	function new(param1:java.time.temporal.TemporalAccessor, param2:java.time.format.DateTimeFormatter):Void;
+
+	function getTemporal():java.time.temporal.TemporalAccessor;
+
+	function getLocale():java.util.Locale;
+
+	function getDecimalStyle():java.time.format.DecimalStyle;
+
+	function startOptional():Void;
+
+	function endOptional():Void;
+
+	function getValue<R:Dynamic>(param1:java.time.temporal.TemporalQuery<getValue.R>):getValue.R;
+
+	function getValue(param1:java.time.temporal.TemporalField):java.lang.Long;
+
+	function toString():java.lang.String;
+}

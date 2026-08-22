@@ -1,0 +1,28 @@
+@:directlyUsed @:used @:keep
+class aui.runtime.ViewRoot {
+
+	public function new(app:Dynamic) {
+		this.app = app;
+		this.root = null;
+		this.source = new aui.nui.ViewSource(null);
+	}
+
+	public var app(default,null):Dynamic;
+
+	public var root(default,null):aui.View;
+
+	public var source(default,null):aui.nui.ViewSource;
+
+	public function rebuild() {
+		if ((this.app == null)) return;
+		this.app.lifetime.beginPass();
+		this.root = this.app.body();
+		this.source = new aui.nui.ViewSource(this.root);
+		this.source.classify();
+		this.app.lifetime.endPass();
+	}
+
+	public function rootHandle() {
+		return this.root;
+	}
+}

@@ -1,0 +1,15 @@
+@:realPath("java.lang.RuntimeException") @:directlyUsed @:used @:native("java.lang.RuntimeException") @:libType
+extern class java.lang.RuntimeException extends java.lang.Exception {
+
+	function new():Void;
+
+	function new(param1:java.lang.String, param2:java.lang.Throwable, param3:Bool, param4:Bool):Void;
+
+	function new(param1:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

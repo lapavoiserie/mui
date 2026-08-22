@@ -1,0 +1,1 @@
+typedef haxe.PosInfos = { methodName : java.lang.String, lineNumber : Int, fileName : java.lang.String, ?customParams : Null<Array<Dynamic>>, className : java.lang.String }

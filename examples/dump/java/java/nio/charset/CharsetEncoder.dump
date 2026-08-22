@@ -1,0 +1,51 @@
+@:realPath("java.nio.charset.CharsetEncoder") @:native("java.nio.charset.CharsetEncoder") @:libType
+extern class java.nio.charset.CharsetEncoder {
+
+	function new(param1:java.nio.charset.Charset, param2:Single, param3:Single, param4:java.NativeArray<java.types.Int8>):Void;
+
+	function new(param1:java.nio.charset.Charset, param2:Single, param3:Single):Void;
+
+	function charset():java.nio.charset.Charset;
+
+	function replacement():java.NativeArray<java.types.Int8>;
+
+	function replaceWith(param1:java.NativeArray<java.types.Int8>):java.nio.charset.CharsetEncoder;
+
+	function implReplaceWith(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function isLegalReplacement(param1:java.NativeArray<java.types.Int8>):Bool;
+
+	function malformedInputAction():java.nio.charset.CodingErrorAction;
+
+	function onMalformedInput(param1:java.nio.charset.CodingErrorAction):java.nio.charset.CharsetEncoder;
+
+	function implOnMalformedInput(param1:java.nio.charset.CodingErrorAction):Void;
+
+	function unmappableCharacterAction():java.nio.charset.CodingErrorAction;
+
+	function onUnmappableCharacter(param1:java.nio.charset.CodingErrorAction):java.nio.charset.CharsetEncoder;
+
+	function implOnUnmappableCharacter(param1:java.nio.charset.CodingErrorAction):Void;
+
+	function averageBytesPerChar():Single;
+
+	function maxBytesPerChar():Single;
+
+	function encode(param1:java.nio.CharBuffer, param2:java.nio.ByteBuffer, param3:Bool):java.nio.charset.CoderResult;
+
+	function encode(param1:java.nio.CharBuffer):java.nio.ByteBuffer;
+
+	function flush(param1:java.nio.ByteBuffer):java.nio.charset.CoderResult;
+
+	function implFlush(param1:java.nio.ByteBuffer):java.nio.charset.CoderResult;
+
+	function reset():java.nio.charset.CharsetEncoder;
+
+	function implReset():Void;
+
+	function encodeLoop(param1:java.nio.CharBuffer, param2:java.nio.ByteBuffer):java.nio.charset.CoderResult;
+
+	function canEncode(param1:java.types.Char16):Bool;
+
+	function canEncode(param1:java.lang.CharSequence):Bool;
+}

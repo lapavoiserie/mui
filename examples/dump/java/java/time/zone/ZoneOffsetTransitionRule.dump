@@ -1,0 +1,37 @@
+@:realPath("java.time.zone.ZoneOffsetTransitionRule") @:native("java.time.zone.ZoneOffsetTransitionRule") @:libType
+extern class java.time.zone.ZoneOffsetTransitionRule implements java.io.Serializable {
+
+	function new(param1:java.time.Month, param2:Int, param3:java.time.DayOfWeek, param4:java.time.LocalTime, param5:Bool, param6:java.time.zone.ZoneOffsetTransitionRule$TimeDefinition, param7:java.time.ZoneOffset, param8:java.time.ZoneOffset, param9:java.time.ZoneOffset):Void;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	function getMonth():java.time.Month;
+
+	function getDayOfMonthIndicator():Int;
+
+	function getDayOfWeek():java.time.DayOfWeek;
+
+	function getLocalTime():java.time.LocalTime;
+
+	function isMidnightEndOfDay():Bool;
+
+	function getTimeDefinition():java.time.zone.ZoneOffsetTransitionRule$TimeDefinition;
+
+	function getStandardOffset():java.time.ZoneOffset;
+
+	function getOffsetBefore():java.time.ZoneOffset;
+
+	function getOffsetAfter():java.time.ZoneOffset;
+
+	function createTransition(param1:Int):java.time.zone.ZoneOffsetTransition;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function of(param1:java.time.Month, param2:Int, param3:java.time.DayOfWeek, param4:java.time.LocalTime, param5:Bool, param6:java.time.zone.ZoneOffsetTransitionRule$TimeDefinition, param7:java.time.ZoneOffset, param8:java.time.ZoneOffset, param9:java.time.ZoneOffset):java.time.zone.ZoneOffsetTransitionRule;
+
+	static function readExternal(param1:java.io.DataInput):java.time.zone.ZoneOffsetTransitionRule;
+}

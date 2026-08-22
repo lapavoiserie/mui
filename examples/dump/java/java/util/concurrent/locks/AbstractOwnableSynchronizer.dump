@@ -1,0 +1,9 @@
+@:realPath("java.util.concurrent.locks.AbstractOwnableSynchronizer") @:used @:native("java.util.concurrent.locks.AbstractOwnableSynchronizer") @:libType
+extern class java.util.concurrent.locks.AbstractOwnableSynchronizer implements java.io.Serializable {
+
+	function new():Void;
+
+	function setExclusiveOwnerThread(param1:java.lang.Thread):Void;
+
+	function getExclusiveOwnerThread():java.lang.Thread;
+}

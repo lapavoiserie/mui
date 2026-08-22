@@ -1,0 +1,5 @@
+@:realPath("java.sun.misc.JavaUtilZipFileAccess") @:used @:native("sun.misc.JavaUtilZipFileAccess") @:libType
+extern interface sun.misc.JavaUtilZipFileAccess {
+
+	function startsWithLocHeader(param1:java.util.zip.ZipFile):Bool;
+}

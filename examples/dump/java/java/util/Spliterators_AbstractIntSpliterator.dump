@@ -1,0 +1,15 @@
+@:realPath("java.util.Spliterators_AbstractIntSpliterator") @:used @:native("java.util.Spliterators$AbstractIntSpliterator") @:libType
+extern class java.util.Spliterators$AbstractIntSpliterator implements java.util.Spliterator$OfInt {
+
+	function new(param1:haxe.Int64, param2:Int):Void;
+
+	function trySplit():java.util.Spliterator$OfInt;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	static var MAX_BATCH(default,never):Int;
+
+	static var BATCH_UNIT(default,never):Int;
+}

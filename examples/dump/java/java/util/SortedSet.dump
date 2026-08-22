@@ -1,0 +1,18 @@
+@:realPath("java.util.SortedSet") @:used @:native("java.util.SortedSet") @:libType
+extern interface java.util.SortedSet<E:Dynamic> implements java.util.Set<java.util.SortedSet.E> {
+
+	function comparator():java.util.Comparator<Dynamic>;
+
+	function subSet(param1:java.util.SortedSet.E, param2:java.util.SortedSet.E):java.util.SortedSet<java.util.SortedSet.E>;
+
+	function headSet(param1:java.util.SortedSet.E):java.util.SortedSet<java.util.SortedSet.E>;
+
+	function tailSet(param1:java.util.SortedSet.E):java.util.SortedSet<java.util.SortedSet.E>;
+
+	function first():java.util.SortedSet.E;
+
+	function last():java.util.SortedSet.E;
+
+	@:java.default
+	function spliterator():java.util.Spliterator<java.util.SortedSet.E>;
+}

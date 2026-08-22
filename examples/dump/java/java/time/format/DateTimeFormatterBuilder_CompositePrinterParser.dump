@@ -1,0 +1,15 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_CompositePrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$CompositePrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$CompositePrinterParser implements java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser {
+
+	function new(param1:java.util.List<java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser>, param2:Bool):Void;
+
+	function new(param1:java.NativeArray<java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser>, param2:Bool):Void;
+
+	function withOptional(param1:Bool):java.time.format.DateTimeFormatterBuilder$CompositePrinterParser;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function parse(param1:java.time.format.DateTimeParseContext, param2:java.lang.CharSequence, param3:Int):Int;
+
+	function toString():java.lang.String;
+}

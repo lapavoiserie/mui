@@ -1,0 +1,5 @@
+@:realPath("java.util.function.DoubleSupplier") @:used @:native("java.util.function.DoubleSupplier") @:libType
+extern interface java.util.function.DoubleSupplier {
+
+	function getAsDouble():Float;
+}

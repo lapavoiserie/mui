@@ -1,0 +1,5 @@
+@:realPath("java.io.FilenameFilter") @:used @:native("java.io.FilenameFilter") @:libType
+extern interface java.io.FilenameFilter {
+
+	function accept(param1:java.io.File, param2:java.lang.String):Bool;
+}

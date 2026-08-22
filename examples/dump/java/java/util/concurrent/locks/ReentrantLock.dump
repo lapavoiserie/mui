@@ -1,0 +1,45 @@
+@:realPath("java.util.concurrent.locks.ReentrantLock") @:directlyUsed @:used @:native("java.util.concurrent.locks.ReentrantLock") @:libType
+extern class java.util.concurrent.locks.ReentrantLock implements java.util.concurrent.locks.Lock implements java.io.Serializable {
+
+	function new():Void;
+
+	function new(param1:Bool):Void;
+
+	function lock():Void;
+
+	function lockInterruptibly():Void;
+
+	function tryLock():Bool;
+
+	function tryLock(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):Bool;
+
+	function unlock():Void;
+
+	function newCondition():java.util.concurrent.locks.Condition;
+
+	function getHoldCount():Int;
+
+	function isHeldByCurrentThread():Bool;
+
+	function isLocked():Bool;
+
+	function isFair():Bool;
+
+	function getOwner():java.lang.Thread;
+
+	function hasQueuedThreads():Bool;
+
+	function hasQueuedThread(param1:java.lang.Thread):Bool;
+
+	function getQueueLength():Int;
+
+	function getQueuedThreads():java.util.Collection<java.lang.Thread>;
+
+	function hasWaiters(param1:java.util.concurrent.locks.Condition):Bool;
+
+	function getWaitQueueLength(param1:java.util.concurrent.locks.Condition):Int;
+
+	function getWaitingThreads(param1:java.util.concurrent.locks.Condition):java.util.Collection<java.lang.Thread>;
+
+	function toString():java.lang.String;
+}

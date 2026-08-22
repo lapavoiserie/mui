@@ -1,0 +1,31 @@
+@:realPath("java.io.ObjectInputStream_HandleTable") @:native("java.io.ObjectInputStream$HandleTable") @:libType
+extern class java.io.ObjectInputStream$HandleTable {
+
+	function new(param1:Int):Void;
+
+	function assign(param1:Dynamic):Int;
+
+	function markDependency(param1:Int, param2:Int):Void;
+
+	function markException(param1:Int, param2:java.lang.ClassNotFoundException):Void;
+
+	function finish(param1:Int):Void;
+
+	function setObject(param1:Int, param2:Dynamic):Void;
+
+	function lookupObject(param1:Int):Dynamic;
+
+	function lookupException(param1:Int):java.lang.ClassNotFoundException;
+
+	function clear():Void;
+
+	function size():Int;
+
+	var status:java.NativeArray<java.types.Int8>;
+
+	var entries:java.NativeArray<Dynamic>;
+
+	var deps:java.NativeArray<java.io.ObjectInputStream$HandleTable$HandleList>;
+
+	var lowDep:Int;
+}

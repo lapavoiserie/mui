@@ -1,0 +1,49 @@
+@:realPath("java.nio.channels.FileChannel") @:used @:native("java.nio.channels.FileChannel") @:libType
+extern class java.nio.channels.FileChannel extends java.nio.channels.spi.AbstractInterruptibleChannel implements java.nio.channels.SeekableByteChannel implements java.nio.channels.GatheringByteChannel implements java.nio.channels.ScatteringByteChannel {
+
+	function new():Void;
+
+	function read(param1:java.nio.ByteBuffer):Int;
+
+	function read(param1:java.nio.ByteBuffer, param2:haxe.Int64):Int;
+
+	function read(param1:java.NativeArray<java.nio.ByteBuffer>):haxe.Int64;
+
+	function read(param1:java.NativeArray<java.nio.ByteBuffer>, param2:Int, param3:Int):haxe.Int64;
+
+	function write(param1:java.nio.ByteBuffer):Int;
+
+	function write(param1:java.nio.ByteBuffer, param2:haxe.Int64):Int;
+
+	function write(param1:java.NativeArray<java.nio.ByteBuffer>):haxe.Int64;
+
+	function write(param1:java.NativeArray<java.nio.ByteBuffer>, param2:Int, param3:Int):haxe.Int64;
+
+	function position():haxe.Int64;
+
+	function position(param1:haxe.Int64):java.nio.channels.FileChannel;
+
+	function size():haxe.Int64;
+
+	function truncate(param1:haxe.Int64):java.nio.channels.FileChannel;
+
+	function force(param1:Bool):Void;
+
+	function transferTo(param1:haxe.Int64, param2:haxe.Int64, param3:java.nio.channels.WritableByteChannel):haxe.Int64;
+
+	function transferFrom(param1:java.nio.channels.ReadableByteChannel, param2:haxe.Int64, param3:haxe.Int64):haxe.Int64;
+
+	function map(param1:java.nio.channels.FileChannel$MapMode, param2:haxe.Int64, param3:haxe.Int64):java.nio.MappedByteBuffer;
+
+	function lock(param1:haxe.Int64, param2:haxe.Int64, param3:Bool):java.nio.channels.FileLock;
+
+	function lock():java.nio.channels.FileLock;
+
+	function tryLock(param1:haxe.Int64, param2:haxe.Int64, param3:Bool):java.nio.channels.FileLock;
+
+	function tryLock():java.nio.channels.FileLock;
+
+	static function open(param1:java.nio.file.Path, param2:java.util.Set<java.nio.file.OpenOption>, param3:haxe.Rest<java.nio.file.attribute.FileAttribute<Dynamic>>):java.nio.channels.FileChannel;
+
+	static function open(param1:java.nio.file.Path, param2:haxe.Rest<java.nio.file.OpenOption>):java.nio.channels.FileChannel;
+}

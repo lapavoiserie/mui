@@ -1,0 +1,64 @@
+@:realPath("java.nio.file.Path") @:used @:native("java.nio.file.Path") @:libType
+extern interface java.nio.file.Path implements java.nio.file.Watchable implements java.lang.Iterable<java.nio.file.Path> implements java.lang.Comparable<java.nio.file.Path> {
+
+	function getFileSystem():java.nio.file.FileSystem;
+
+	function isAbsolute():Bool;
+
+	function getRoot():java.nio.file.Path;
+
+	function getFileName():java.nio.file.Path;
+
+	function getParent():java.nio.file.Path;
+
+	function getNameCount():Int;
+
+	function getName(param1:Int):java.nio.file.Path;
+
+	function subpath(param1:Int, param2:Int):java.nio.file.Path;
+
+	function startsWith(param1:java.nio.file.Path):Bool;
+
+	function startsWith(param1:java.lang.String):Bool;
+
+	function endsWith(param1:java.nio.file.Path):Bool;
+
+	function endsWith(param1:java.lang.String):Bool;
+
+	function normalize():java.nio.file.Path;
+
+	function resolve(param1:java.nio.file.Path):java.nio.file.Path;
+
+	function resolve(param1:java.lang.String):java.nio.file.Path;
+
+	function resolveSibling(param1:java.nio.file.Path):java.nio.file.Path;
+
+	function resolveSibling(param1:java.lang.String):java.nio.file.Path;
+
+	function relativize(param1:java.nio.file.Path):java.nio.file.Path;
+
+	function toUri():java.net.URI;
+
+	function toAbsolutePath():java.nio.file.Path;
+
+	function toRealPath(param1:haxe.Rest<java.nio.file.LinkOption>):java.nio.file.Path;
+
+	function toFile():java.io.File;
+
+	function register(param1:java.nio.file.WatchService, param2:java.NativeArray<java.nio.file.WatchEvent$Kind<Dynamic>>, param3:haxe.Rest<java.nio.file.WatchEvent$Modifier>):java.nio.file.WatchKey;
+
+	function register(param1:java.nio.file.WatchService, param2:haxe.Rest<java.nio.file.WatchEvent$Kind<Dynamic>>):java.nio.file.WatchKey;
+
+	function iterator():java.util.Iterator<java.nio.file.Path>;
+
+	function compareTo(param1:java.nio.file.Path):Int;
+
+	@:java.default
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+}

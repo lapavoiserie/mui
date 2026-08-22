@@ -1,0 +1,35 @@
+@:realPath("java.util.concurrent.locks.AbstractQueuedSynchronizer_Node") @:native("java.util.concurrent.locks.AbstractQueuedSynchronizer$Node") @:libType
+extern class java.util.concurrent.locks.AbstractQueuedSynchronizer$Node {
+
+	function new():Void;
+
+	function new(param1:java.lang.Thread, param2:Int):Void;
+
+	function new(param1:java.lang.Thread, param2:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node):Void;
+
+	function isShared():Bool;
+
+	function predecessor():java.util.concurrent.locks.AbstractQueuedSynchronizer$Node;
+
+	var waitStatus:Int;
+
+	var prev:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node;
+
+	var next:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node;
+
+	var thread:java.lang.Thread;
+
+	var nextWaiter:java.util.concurrent.locks.AbstractQueuedSynchronizer$Node;
+
+	static var SHARED(default,never):java.util.concurrent.locks.AbstractQueuedSynchronizer$Node;
+
+	static var EXCLUSIVE(default,never):java.util.concurrent.locks.AbstractQueuedSynchronizer$Node;
+
+	static var CANCELLED(default,never):Int;
+
+	static var SIGNAL(default,never):Int;
+
+	static var CONDITION(default,never):Int;
+
+	static var PROPAGATE(default,never):Int;
+}

@@ -1,0 +1,20 @@
+@:realPath("java.util.HashMap_Values") @:used @:native("java.util.HashMap$Values") @:libType
+extern class java.util.HashMap$Values extends java.util.AbstractCollection<Dynamic> {
+
+	function new(param1:java.util.HashMap<Dynamic, Dynamic>):Void;
+
+	function size():Int;
+
+	function clear():Void;
+
+	function iterator():java.util.Iterator<Dynamic>;
+
+	function contains(param1:Dynamic):Bool;
+
+	function spliterator():java.util.Spliterator<Dynamic>;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.HashMap<Dynamic, Dynamic>;
+}

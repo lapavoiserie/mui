@@ -1,0 +1,115 @@
+@:realPath("java.lang.LongClass") @:directlyUsed @:used @:native("java.lang.Long")
+extern class java.lang.Long extends java.lang.Number implements java.lang.Comparable<java.lang.Long> {
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	function new(param1:java.lang.String):Void;
+
+	@:overload
+	function new(param1:haxe.Int64):Void;
+
+	@:overload
+	function compareTo(param1:Dynamic):Int;
+
+	@:overload
+	function compareTo(param1:java.lang.Long):Int;
+
+	@:overload
+	function equals(param1:Dynamic):Bool;
+
+	@:overload
+	function hashCode():Int;
+
+	@:overload
+	function toString():java.lang.String;
+
+	function doubleValue():Float;
+
+	function floatValue():Single;
+
+	function intValue():Int;
+
+	function longValue():haxe.Int64;
+
+	static var MAX_VALUE(default,never):haxe.Int64;
+
+	static var MIN_VALUE(default,never):haxe.Int64;
+
+	static var SIZE(default,never):Int;
+
+	static var TYPE(default,never):java.lang.Class<java.lang.Long>;
+
+	@:overload
+	static function bitCount(param1:haxe.Int64):Int;
+
+	@:overload
+	static function compare(param1:haxe.Int64, param2:haxe.Int64):Int;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function decode(param1:java.lang.String):java.lang.Long;
+
+	@:overload
+	static function getLong(param1:java.lang.String, param2:java.lang.Long):java.lang.Long;
+
+	@:overload
+	static function getLong(param1:java.lang.String, param2:haxe.Int64):java.lang.Long;
+
+	@:overload
+	static function getLong(param1:java.lang.String):java.lang.Long;
+
+	@:overload
+	static function highestOneBit(param1:haxe.Int64):haxe.Int64;
+
+	@:overload
+	static function lowestOneBit(param1:haxe.Int64):haxe.Int64;
+
+	@:overload
+	static function numberOfLeadingZeros(param1:haxe.Int64):Int;
+
+	@:overload
+	static function numberOfTrailingZeros(param1:haxe.Int64):Int;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function parseLong(param1:java.lang.String):haxe.Int64;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function parseLong(param1:java.lang.String, param2:Int):haxe.Int64;
+
+	@:overload
+	static function reverse(param1:haxe.Int64):haxe.Int64;
+
+	@:overload
+	static function reverseBytes(param1:haxe.Int64):haxe.Int64;
+
+	@:overload
+	static function rotateLeft(param1:haxe.Int64, param2:Int):haxe.Int64;
+
+	@:overload
+	static function rotateRight(param1:haxe.Int64, param2:Int):haxe.Int64;
+
+	@:overload
+	static function signum(param1:haxe.Int64):Int;
+
+	@:overload
+	static function toBinaryString(param1:haxe.Int64):java.lang.String;
+
+	@:overload
+	static function toHexString(param1:haxe.Int64):java.lang.String;
+
+	@:overload
+	static function toOctalString(param1:haxe.Int64):java.lang.String;
+
+	@:realPath("_toString") @:native("toString") @:overload
+	static function toString(param1:haxe.Int64):java.lang.String;
+
+	@:native("toString") @:overload
+	static function toString(param1:haxe.Int64, param2:Int):java.lang.String;
+
+	@:overload
+	static function valueOf(param1:haxe.Int64):java.lang.Long;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function valueOf(param1:java.lang.String):java.lang.Long;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function valueOf(param1:java.lang.String, param2:Int):java.lang.Long;
+}

@@ -1,0 +1,25 @@
+@:realPath("java.nio.file.attribute.FileTime") @:used @:native("java.nio.file.attribute.FileTime") @:libType
+extern class java.nio.file.attribute.FileTime implements java.lang.Comparable<java.nio.file.attribute.FileTime> {
+
+	function to(param1:java.util.concurrent.TimeUnit):haxe.Int64;
+
+	function toMillis():haxe.Int64;
+
+	function toInstant():java.time.Instant;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function compareTo(param1:java.nio.file.attribute.FileTime):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function toString():java.lang.String;
+
+	static function from(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.nio.file.attribute.FileTime;
+
+	static function from(param1:java.time.Instant):java.nio.file.attribute.FileTime;
+
+	static function fromMillis(param1:haxe.Int64):java.nio.file.attribute.FileTime;
+}

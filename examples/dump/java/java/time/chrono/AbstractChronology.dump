@@ -1,0 +1,59 @@
+@:realPath("java.time.chrono.AbstractChronology") @:used @:native("java.time.chrono.AbstractChronology") @:libType
+extern class java.time.chrono.AbstractChronology implements java.time.chrono.Chronology {
+
+	function new():Void;
+
+	function resolveDate(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveProlepticMonth(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):Void;
+
+	function resolveYearOfEra(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveYMD(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveYD(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveYMAA(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveYMAD(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveYAA(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveYAD(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	function resolveAligned(param1:java.time.chrono.ChronoLocalDate, param2:haxe.Int64, param3:haxe.Int64, param4:haxe.Int64):java.time.chrono.ChronoLocalDate;
+
+	function addFieldValue(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.temporal.ChronoField, param3:haxe.Int64):Void;
+
+	function compareTo(param1:java.time.chrono.Chronology):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function writeReplace():Dynamic;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	static function registerChrono(param1:java.time.chrono.Chronology):java.time.chrono.Chronology;
+
+	static function registerChrono(param1:java.time.chrono.Chronology, param2:java.lang.String):java.time.chrono.Chronology;
+
+	static function ofLocale(param1:java.util.Locale):java.time.chrono.Chronology;
+
+	static function of(param1:java.lang.String):java.time.chrono.Chronology;
+
+	static function getAvailableChronologies():java.util.Set<java.time.chrono.Chronology>;
+
+	static function readExternal(param1:java.io.DataInput):java.time.chrono.Chronology;
+
+	static var DATE_ORDER(default,never):java.util.Comparator<java.time.chrono.ChronoLocalDate>;
+
+	static var DATE_TIME_ORDER(default,never):java.util.Comparator<java.time.chrono.ChronoLocalDateTime<java.time.chrono.ChronoLocalDate>>;
+
+	static var INSTANT_ORDER(default,never):java.util.Comparator<java.time.chrono.ChronoZonedDateTime<Dynamic>>;
+}

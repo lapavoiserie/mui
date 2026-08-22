@@ -1,0 +1,7 @@
+@:realPath("java.sun.reflect.generics.tree.VoidDescriptor") @:used @:native("sun.reflect.generics.tree.VoidDescriptor") @:libType
+extern class sun.reflect.generics.tree.VoidDescriptor implements sun.reflect.generics.tree.ReturnType {
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+
+	static function make():sun.reflect.generics.tree.VoidDescriptor;
+}

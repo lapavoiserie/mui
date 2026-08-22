@@ -1,0 +1,17 @@
+@:realPath("java.nio.channels.spi.AbstractInterruptibleChannel") @:used @:native("java.nio.channels.spi.AbstractInterruptibleChannel") @:libType
+extern class java.nio.channels.spi.AbstractInterruptibleChannel implements java.nio.channels.Channel implements java.nio.channels.InterruptibleChannel {
+
+	function new():Void;
+
+	function close():Void;
+
+	function implCloseChannel():Void;
+
+	function isOpen():Bool;
+
+	function begin():Void;
+
+	function end(param1:Bool):Void;
+
+	static function blockedOn(param1:sun.nio.ch.Interruptible):Void;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.lang.reflect.GenericDeclaration") @:used @:native("java.lang.reflect.GenericDeclaration") @:libType
+extern interface java.lang.reflect.GenericDeclaration implements java.lang.reflect.AnnotatedElement {
+
+	function getTypeParameters():java.NativeArray<java.lang.reflect.TypeVariable<Dynamic>>;
+}

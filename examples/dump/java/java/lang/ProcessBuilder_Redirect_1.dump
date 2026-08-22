@@ -1,0 +1,9 @@
+@:realPath("java.lang.ProcessBuilder_Redirect_1") @:used @:native("java.lang.ProcessBuilder$Redirect$1") @:libType
+extern class java.lang.ProcessBuilder$Redirect$1 extends java.lang.ProcessBuilder$Redirect {
+
+	function new():Void;
+
+	function type():java.lang.ProcessBuilder$Redirect$Type;
+
+	function toString():java.lang.String;
+}

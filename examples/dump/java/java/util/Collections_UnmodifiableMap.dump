@@ -1,0 +1,57 @@
+@:realPath("java.util.Collections_UnmodifiableMap") @:used @:native("java.util.Collections$UnmodifiableMap") @:libType
+extern class java.util.Collections$UnmodifiableMap<K:Dynamic, V:Dynamic> implements java.io.Serializable implements java.util.Map<java.util.Collections_UnmodifiableMap.K, java.util.Collections_UnmodifiableMap.V> {
+
+	function new(param1:java.util.Map<java.util.Collections_UnmodifiableMap.K, java.util.Collections_UnmodifiableMap.V>):Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function get(param1:Dynamic):java.util.Collections_UnmodifiableMap.V;
+
+	function put(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.Collections_UnmodifiableMap.V):java.util.Collections_UnmodifiableMap.V;
+
+	function remove(param1:Dynamic):java.util.Collections_UnmodifiableMap.V;
+
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function putAll(param1:java.util.Map<java.util.Collections_UnmodifiableMap.K, java.util.Collections_UnmodifiableMap.V>):Void;
+
+	function clear():Void;
+
+	function keySet():java.util.Set<java.util.Collections_UnmodifiableMap.K>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.Collections_UnmodifiableMap.K, java.util.Collections_UnmodifiableMap.V>>;
+
+	function values():java.util.Collection<java.util.Collections_UnmodifiableMap.V>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function getOrDefault(param1:Dynamic, param2:java.util.Collections_UnmodifiableMap.V):java.util.Collections_UnmodifiableMap.V;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_UnmodifiableMap.V>):Void;
+
+	function putIfAbsent(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.Collections_UnmodifiableMap.V):java.util.Collections_UnmodifiableMap.V;
+
+	function replace(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.Collections_UnmodifiableMap.V, param3:java.util.Collections_UnmodifiableMap.V):Bool;
+
+	function replace(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.Collections_UnmodifiableMap.V):java.util.Collections_UnmodifiableMap.V;
+
+	function computeIfAbsent(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.function.Function<Dynamic, java.util.Collections_UnmodifiableMap.V>):java.util.Collections_UnmodifiableMap.V;
+
+	function computeIfPresent(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_UnmodifiableMap.V>):java.util.Collections_UnmodifiableMap.V;
+
+	function compute(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_UnmodifiableMap.V>):java.util.Collections_UnmodifiableMap.V;
+
+	function merge(param1:java.util.Collections_UnmodifiableMap.K, param2:java.util.Collections_UnmodifiableMap.V, param3:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_UnmodifiableMap.V>):java.util.Collections_UnmodifiableMap.V;
+}

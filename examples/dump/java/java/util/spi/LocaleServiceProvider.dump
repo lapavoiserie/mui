@@ -1,0 +1,9 @@
+@:realPath("java.util.spi.LocaleServiceProvider") @:used @:native("java.util.spi.LocaleServiceProvider") @:libType
+extern class java.util.spi.LocaleServiceProvider {
+
+	function new():Void;
+
+	function getAvailableLocales():java.NativeArray<java.util.Locale>;
+
+	function isSupportedLocale(param1:java.util.Locale):Bool;
+}

@@ -1,0 +1,462 @@
+@:realPath("jvm.Jvm") @:directlyUsed @:used @:keep @:native("haxe.jvm.Jvm")
+class haxe.jvm.Jvm {
+
+	public static function stringCompare(v1:java.lang.String, v2:java.lang.String) {
+		if ((v1 == null)) {
+			if ((v2 == null)) return 0 else return 1;
+		};
+		if ((v2 == null)) return -1;
+		return cast v1.compareTo(v2);
+	}
+
+	public static function compare<T>(v1:compare.T, v2:compare.T) {
+		return Reflect.compare(v1, v2);
+	}
+
+	public static function enumEq(v1:Dynamic, v2:Dynamic) {
+		if ((! haxe.jvm.Jvm.instanceof(v1, haxe.jvm.Enum))) return false;
+		if ((! haxe.jvm.Jvm.instanceof(v2, haxe.jvm.Enum))) return false;
+		return Type.enumEq(v1, v2);
+	}
+
+	public static function maybeEnumEq(v1:Dynamic, v2:Dynamic) {
+		if ((! haxe.jvm.Jvm.instanceof(v1, haxe.jvm.Enum))) return haxe.jvm.Jvm.compare(v1, v2) == 0;
+		if ((! haxe.jvm.Jvm.instanceof(v2, haxe.jvm.Enum))) return haxe.jvm.Jvm.compare(v1, v2) == 0;
+		return Type.enumEq(v1, v2);
+	}
+
+	public static function getArgumentTypes(args:java.NativeArray<Dynamic>) {
+		var argTypes = new java.NativeArray(args.length);
+		{
+			var _g = 0;
+			var _g1 = args.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				var arg = cast args[i];
+				argTypes[i] = if ((arg == null)) cast java.lang.Object else arg.getClass();
+			};
+		};
+		return argTypes;
+	}
+
+	@:value({ allowPadding : false })
+	public static function unifyCallArguments(args:java.NativeArray<Dynamic>, params:java.NativeArray<java.lang.Class<Dynamic>>, allowPadding:Null<Bool> = false) {
+		var allowPadding = if ((allowPadding == null)) false else cast allowPadding;
+		var callArgs;
+		if ((args.length < params.length)) {
+			var callArgs1 = new java.NativeArray(params.length);
+			java.lang.System.arraycopy(cast args, 0, cast callArgs1, 0, args.length);
+			callArgs = callArgs1;
+		} else {
+			var this1 = cast args;
+			var r = cast new java.NativeArray(cast this1.length);
+			java.lang.System.arraycopy(cast this1, 0, r, 0, cast this1.length);
+			callArgs = cast r;
+		};
+		if ((params.length < args.length)) return haxe.ds.Option.None;
+		{
+			var _g = 0;
+			var _g1 = params.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				var paramType = params[i];
+				if ((i >= args.length)) {
+					if ((paramType == cast Bool)) callArgs[i] = false else if ((paramType == cast Float)) callArgs[i] = 0.0 else if ((paramType == cast Int)) callArgs[i] = 0 else {
+						if ((! allowPadding)) return haxe.ds.Option.None;
+						callArgs[i] = null;
+					};
+					continue;
+				};
+				var argValue = args[i];
+				if ((argValue == null)) {
+					if ((paramType.isPrimitive())) {
+						if ((paramType == cast Bool)) callArgs[i] = false else if ((paramType == cast Float)) callArgs[i] = 0.0 else if ((paramType == cast Int)) callArgs[i] = 0 else throw @:wrappedException cast haxe.Exception.thrown("Unexpected basic type: " + Std.string(paramType));
+					} else callArgs[i] = null;
+					continue;
+				};
+				var argType = cast argValue.getClass();
+				var arg = haxe.jvm.Jvm.getWrapperClass(paramType);
+				if ((arg.isAssignableFrom(argType))) {
+					callArgs[i] = args[i];
+					continue;
+				};
+				if ((arg == cast java.lang.Double && argType == cast java.lang.Integer)) callArgs[i] = haxe.jvm.Jvm.numberToDouble(args[i]) else return haxe.ds.Option.None;
+			};
+		};
+		return haxe.ds.Option.Some(callArgs);
+	}
+
+	public static function call(func:haxe.jvm.Function, args:java.NativeArray<Dynamic>) {
+		return func.invokeDynamic(args);
+	}
+
+	public static function dynamicToByte<T>(d:dynamicToByte.T) {
+		if ((haxe.jvm.Jvm.instanceof(d, java.lang.Number))) return haxe.jvm.Jvm.numberToByte(cast d);
+		return null;
+	}
+
+	public static function dynamicToShort<T>(d:dynamicToShort.T) {
+		if ((haxe.jvm.Jvm.instanceof(d, java.lang.Number))) return haxe.jvm.Jvm.numberToShort(cast d);
+		return null;
+	}
+
+	public static function dynamicToInteger<T>(d:dynamicToInteger.T) {
+		if ((haxe.jvm.Jvm.instanceof(d, java.lang.Number))) return haxe.jvm.Jvm.numberToInteger(cast d);
+		return null;
+	}
+
+	public static function dynamicToLong<T>(d:dynamicToLong.T) {
+		if ((haxe.jvm.Jvm.instanceof(d, java.lang.Number))) return haxe.jvm.Jvm.numberToLong(cast d);
+		return null;
+	}
+
+	public static function dynamicToFloat<T>(d:dynamicToFloat.T) {
+		if ((haxe.jvm.Jvm.instanceof(d, java.lang.Number))) return haxe.jvm.Jvm.numberToFloat(cast d);
+		return null;
+	}
+
+	public static function dynamicToDouble<T>(d:dynamicToDouble.T) {
+		if ((haxe.jvm.Jvm.instanceof(d, java.lang.Number))) return haxe.jvm.Jvm.numberToDouble(cast d);
+		return null;
+	}
+
+	public static function numberToByte(n:java.lang.Number) {
+		if ((n == null)) return null else return java.lang.Byte.valueOf(n.byteValue());
+	}
+
+	public static function numberToShort(n:java.lang.Number) {
+		if ((n == null)) return null else return java.lang.Short.valueOf(n.shortValue());
+	}
+
+	public static function numberToInteger(n:java.lang.Number) {
+		if ((n == null)) return null else return n.intValue();
+	}
+
+	public static function numberToLong(n:java.lang.Number) {
+		if ((n == null)) return null else return java.lang.Long.valueOf(n.longValue());
+	}
+
+	public static function numberToFloat(n:java.lang.Number) {
+		if ((n == null)) return null else return java.lang.Float.valueOf(n.floatValue());
+	}
+
+	public static function numberToDouble(n:java.lang.Number) {
+		if ((n == null)) return null else return n.doubleValue();
+	}
+
+	public static function toByte(d:Dynamic) {
+		if ((d == null)) return 0 else return cast d.byteValue();
+	}
+
+	public static function toChar(d:Dynamic) {
+		if ((d == null)) return 0 else return cast cast d.charValue();
+	}
+
+	public static function toDouble(d:Dynamic) {
+		if ((d == null)) return 0. else return cast d.doubleValue();
+	}
+
+	public static function toFloat(d:Dynamic) {
+		if ((d == null)) return 0. else return cast d.floatValue();
+	}
+
+	public static function toInt(d:Dynamic) {
+		if ((d == null)) return 0 else return cast d.intValue();
+	}
+
+	public static function toLong(d:Dynamic) {
+		if ((d == null)) return 0 else return cast d.longValue();
+	}
+
+	public static function toShort(d:Dynamic) {
+		if ((d == null)) return 0 else return cast d.shortValue();
+	}
+
+	public static function toBoolean(d:Dynamic) {
+		if ((d == null)) return false else return cast cast d.booleanValue();
+	}
+
+	public static function getWrapperClass<S, T>(c:java.lang.Class<getWrapperClass.S>) {
+		if ((! c.isPrimitive())) return c;
+		if ((c == cast Int)) return cast java.lang.Integer else if ((c == cast Float)) return cast java.lang.Double else if ((c == cast Bool)) return cast java.lang.Boolean else return c;
+	}
+
+	public static function arrayRead(obj:Dynamic, index:Int) {
+		if ((haxe.jvm.Jvm.instanceof(obj, Array))) return cast obj[index];
+		throw @:wrappedException cast haxe.Exception.thrown("Cannot array-read on " + Std.string(obj));
+	}
+
+	public static function arrayWrite(obj:Dynamic, index:Int, value:Dynamic) {
+		if ((haxe.jvm.Jvm.instanceof(obj, Array))) {
+			cast obj[index] = value;
+			return;
+		};
+		throw @:wrappedException cast haxe.Exception.thrown("Cannot array-write on " + Std.string(obj));
+	}
+
+	public static function readFieldClosure(obj:Dynamic, name:java.lang.String, parameterTypes:java.NativeArray<java.lang.Class<Dynamic>>) {
+		var cl = cast obj.getClass();
+		var method = cl.getMethod(name, ... @:implicitCast cast cast parameterTypes);
+		if ((method.isBridge())) {
+			var _g = 0;
+			var _g1 = cl.getMethods();
+			while ((_g < _g1.length)) {
+				var meth = _g1[_g];
+				++ _g;
+				if ((meth.getName() == name && ! meth.isBridge() && method.getParameterTypes().length == parameterTypes.length)) {
+					method = meth;
+					break;
+				};
+			};
+		};
+		return new haxe.jvm.Closure(obj, method);
+	}
+
+	static function readStaticField<T>(cl:java.lang.Class<readStaticField.T>, name:java.lang.String) {
+		var methods = cl.getMethods();
+		{
+			var _g = 0;
+			while ((_g < methods.length)) {
+				var m = methods[_g];
+				++ _g;
+				if ((m.getName() == name && ! m.isSynthetic())) return new haxe.jvm.Closure(null, m);
+			};
+		};
+		try {
+			var field = cl.getField(name);
+			field.setAccessible(true);
+			return field.get(null);
+		} catch (_:java.lang.NoSuchFieldException) {
+			return null;
+		};
+	}
+
+	public static function readFieldNoObject(obj:Dynamic, name:java.lang.String) {
+		var cl = cast obj.getClass();
+		try {
+			var field = cl.getField(name);
+			field.setAccessible(true);
+			return field.get(obj);
+		} catch (_:java.lang.NoSuchFieldException) {
+			while ((cl != null)) {
+				var methods = cl.getMethods();
+				{
+					var _g = 0;
+					while ((_g < methods.length)) {
+						var m = methods[_g];
+						++ _g;
+						if ((m.getName() == name && ! m.isSynthetic())) return new haxe.jvm.Closure(obj, m);
+					};
+				};
+				cl = cl.getSuperclass();
+			};
+			return null;
+		};
+	}
+
+	public static function readField(obj:Dynamic, name:java.lang.String) {
+		if ((obj == null)) throw new java.lang.NullPointerException(name);
+		if ((name == null)) return null;
+		if ((haxe.jvm.Jvm.instanceof(obj, haxe.jvm.Object))) return cast obj._hx_getField(name);
+		if ((haxe.jvm.Jvm.instanceof(obj, java.lang.Class))) return haxe.jvm.Jvm.readStaticField(cast obj, name);
+		if ((haxe.jvm.Jvm.instanceof(obj, java.lang.String))) switch ((name)) {
+			case "charAt": {
+				var me = obj;
+				return function(index:Int) {
+					return haxe.jvm.StringExt.charAt(me, index);
+				};
+			};
+			case "charCodeAt": {
+				var me = obj;
+				return function(index:Int) {
+					return haxe.jvm.StringExt.charCodeAt(me, index);
+				};
+			};
+			case "indexOf": {
+				var me = obj;
+				return function(str:java.lang.String, startIndex:Null<Int>) {
+					return haxe.jvm.StringExt.indexOf(me, str, startIndex);
+				};
+			};
+			case "iterator": return function() {
+				return new haxe.iterators.StringIterator(obj);
+			};
+			case "keyValueIterator": return function() {
+				return new haxe.iterators.StringKeyValueIterator(obj);
+			};
+			case "lastIndexOf": {
+				var me = obj;
+				return function(str:java.lang.String) {
+					return haxe.jvm.StringExt.lastIndexOf(me, str, null);
+				};
+			};
+			case "length": return cast obj.length;
+			case "split": {
+				var me = obj;
+				return function(delimiter:java.lang.String) {
+					return haxe.jvm.StringExt.split(me, delimiter);
+				};
+			};
+			case "substr": {
+				var me = obj;
+				return function(pos:Int) {
+					return haxe.jvm.StringExt.substr(me, pos, null);
+				};
+			};
+			case "substring": {
+				var me = obj;
+				return function(startIndex:Int) {
+					return haxe.jvm.StringExt.substring(me, startIndex, null);
+				};
+			};
+			case "toLowerCase": {
+				var me = obj;
+				return function() {
+					return haxe.jvm.StringExt.toLowerCase(me);
+				};
+			};
+			case "toUpperCase": {
+				var me = obj;
+				return function() {
+					return haxe.jvm.StringExt.toUpperCase(me);
+				};
+			};
+		};
+		return haxe.jvm.Jvm.readFieldNoObject(obj, name);
+	}
+
+	public static function writeFieldNoObject<T>(obj:Dynamic, name:java.lang.String, value:writeFieldNoObject.T) {
+		try {
+			var cl = cast obj.getClass();
+			var field = cl.getField(name);
+			field.setAccessible(true);
+			try {
+				field.set(obj, value);
+			} catch (_:java.lang.IllegalArgumentException) {
+				if ((value == null)) field.setByte(obj, 0) else if ((field.getType() == cast Int && haxe.jvm.Jvm.instanceof(value, java.lang.Number))) field.setInt(obj, cast value.intValue());
+			};
+		} catch (_:java.lang.NoSuchFieldException) {
+			return;
+		};
+	}
+
+	public static function writeField<T>(obj:Dynamic, name:java.lang.String, value:writeField.T) {
+		if ((obj == null || name == null)) return;
+		if ((haxe.jvm.Jvm.instanceof(obj, haxe.jvm.Object))) {
+			cast obj._hx_setField(name, value);
+			return;
+		};
+		haxe.jvm.Jvm.writeFieldNoObject(obj, name, value);
+	}
+
+	public static function toString<T:java.lang.Object>(obj:toString.T) {
+		if ((obj == null)) return "null" else if ((haxe.jvm.Jvm.instanceof(obj, java.lang.Double))) {
+			var n = cast obj;
+			if ((n.doubleValue() == n.intValue())) return cast java.lang.Integer.valueOf(n.intValue()).toString();
+			return obj.toString();
+		} else return obj.toString();
+	}
+
+	public static function stringConcat<A:java.lang.Object, B:java.lang.Object>(a:stringConcat.A, b:stringConcat.B) {
+		return cast haxe.jvm.Jvm.toString(a).concat(haxe.jvm.Jvm.toString(b));
+	}
+
+	public static function opAdd<T1:java.lang.Object, T2:java.lang.Object>(a:opAdd.T1, b:opAdd.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.String) || haxe.jvm.Jvm.instanceof(b, java.lang.String))) return haxe.jvm.Jvm.stringConcat(a, b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double) || haxe.jvm.Jvm.instanceof(b, java.lang.Double))) return haxe.jvm.Jvm.toDouble(a) + haxe.jvm.Jvm.toDouble(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) + cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) + haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opSub<T1:java.lang.Object, T2:java.lang.Object>(a:opSub.T1, b:opSub.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double) || haxe.jvm.Jvm.instanceof(b, java.lang.Double))) return haxe.jvm.Jvm.toDouble(a) - haxe.jvm.Jvm.toDouble(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) - cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) - haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opMul<T1:java.lang.Object, T2:java.lang.Object>(a:opMul.T1, b:opMul.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double) || haxe.jvm.Jvm.instanceof(b, java.lang.Double))) return haxe.jvm.Jvm.toDouble(a) * haxe.jvm.Jvm.toDouble(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) * cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) * haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opDiv<T1:java.lang.Object, T2:java.lang.Object>(a:opDiv.T1, b:opDiv.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double) || haxe.jvm.Jvm.instanceof(b, java.lang.Double))) return haxe.jvm.Jvm.toDouble(a) / haxe.jvm.Jvm.toDouble(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) / cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) / haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opMod<T1:java.lang.Object, T2:java.lang.Object>(a:opMod.T1, b:opMod.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double) || haxe.jvm.Jvm.instanceof(b, java.lang.Double))) return haxe.jvm.Jvm.toDouble(a) % haxe.jvm.Jvm.toDouble(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) % cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) % haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opAnd<T1:java.lang.Object, T2:java.lang.Object>(a:opAnd.T1, b:opAnd.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) & cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) & haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opOr<T1:java.lang.Object, T2:java.lang.Object>(a:opOr.T1, b:opOr.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) | cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) | haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opXor<T1:java.lang.Object, T2:java.lang.Object>(a:opXor.T1, b:opXor.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) ^ cast haxe.jvm.Jvm.toLong(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) ^ haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opShl<T1:java.lang.Object, T2:java.lang.Object>(a:opShl.T1, b:opShl.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) << haxe.jvm.Jvm.toInt(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) << haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opShr<T1:java.lang.Object, T2:java.lang.Object>(a:opShr.T1, b:opShr.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) >> haxe.jvm.Jvm.toInt(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) >> haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opUshr<T1:java.lang.Object, T2:java.lang.Object>(a:opUshr.T1, b:opUshr.T2) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long) || haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) >>> haxe.jvm.Jvm.toInt(b);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer) || haxe.jvm.Jvm.instanceof(b, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) >>> haxe.jvm.Jvm.toInt(b);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opIncrement<T1:java.lang.Object>(a:opIncrement.T1) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double))) return haxe.jvm.Jvm.toDouble(a) + 1.;
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) + cast 1.;
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) + 1;
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opDecrement<T1:java.lang.Object>(a:opDecrement.T1) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double))) return haxe.jvm.Jvm.toDouble(a) - 1.;
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long))) return cast haxe.jvm.Jvm.toLong(a) - cast 1.;
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer))) return haxe.jvm.Jvm.toInt(a) - 1;
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opNeg<T1:java.lang.Object>(a:opNeg.T1) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double))) return - haxe.jvm.Jvm.toDouble(a);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long))) return haxe._Int64.Int64_Impl_.neg(haxe.jvm.Jvm.toLong(a));
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer))) return - haxe.jvm.Jvm.toInt(a);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+
+	public static function opNegBits<T1:java.lang.Object>(a:opNegBits.T1) {
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long))) return ~ cast haxe.jvm.Jvm.toLong(a);
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Integer))) return ~ haxe.jvm.Jvm.toInt(a);
+		throw @:wrappedException cast haxe.Exception.thrown("Invalid operation");
+	}
+}

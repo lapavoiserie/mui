@@ -1,0 +1,39 @@
+@:enum
+private class haxe.display._Display.Platform_Impl_ {
+
+	@:value(cast "cross") @:impl @:enum
+	public static inline var Cross:haxe.display.Platform = cast "cross";
+
+	@:value(cast "js") @:impl @:enum
+	public static inline var Js:haxe.display.Platform = cast "js";
+
+	@:value(cast "lua") @:impl @:enum
+	public static inline var Lua:haxe.display.Platform = cast "lua";
+
+	@:value(cast "neko") @:impl @:enum
+	public static inline var Neko:haxe.display.Platform = cast "neko";
+
+	@:value(cast "flash") @:impl @:enum
+	public static inline var Flash:haxe.display.Platform = cast "flash";
+
+	@:value(cast "php") @:impl @:enum
+	public static inline var Php:haxe.display.Platform = cast "php";
+
+	@:value(cast "cpp") @:impl @:enum
+	public static inline var Cpp:haxe.display.Platform = cast "cpp";
+
+	@:value(cast "cs") @:impl @:enum
+	public static inline var Cs:haxe.display.Platform = cast "cs";
+
+	@:value(cast "java") @:impl @:enum
+	public static inline var Java:haxe.display.Platform = cast "java";
+
+	@:value(cast "python") @:impl @:enum
+	public static inline var Python:haxe.display.Platform = cast "python";
+
+	@:value(cast "hl") @:impl @:enum
+	public static inline var Hl:haxe.display.Platform = cast "hl";
+
+	@:value(cast "eval") @:impl @:enum
+	public static inline var Eval:haxe.display.Platform = cast "eval";
+}

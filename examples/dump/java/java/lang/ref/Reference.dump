@@ -1,0 +1,19 @@
+@:realPath("java.lang.ref.Reference") @:used @:native("java.lang.ref.Reference") @:libType
+extern class java.lang.ref.Reference<T:Dynamic> {
+
+	function new(param1:java.lang.ref.Reference.T):Void;
+
+	function new(param1:java.lang.ref.Reference.T, param2:java.lang.ref.ReferenceQueue<Dynamic>):Void;
+
+	function get():java.lang.ref.Reference.T;
+
+	function clear():Void;
+
+	function isEnqueued():Bool;
+
+	function enqueue():Bool;
+
+	var queue:java.lang.ref.ReferenceQueue<Dynamic>;
+
+	var next:java.lang.ref.Reference<Dynamic>;
+}

@@ -1,0 +1,13 @@
+@:realPath("java.lang.ReflectiveOperationException") @:used @:native("java.lang.ReflectiveOperationException") @:libType
+extern class java.lang.ReflectiveOperationException extends java.lang.Exception {
+
+	function new():Void;
+
+	function new(param1:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

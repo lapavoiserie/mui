@@ -1,0 +1,7 @@
+@:realPath("java.io.File_TempDirectory") @:native("java.io.File$TempDirectory") @:libType
+extern class java.io.File$TempDirectory {
+
+	static function location():java.io.File;
+
+	static function generateFile(param1:java.lang.String, param2:java.lang.String, param3:java.io.File):java.io.File;
+}

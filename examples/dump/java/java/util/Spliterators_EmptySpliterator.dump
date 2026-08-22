@@ -1,0 +1,15 @@
+@:realPath("java.util.Spliterators_EmptySpliterator") @:used @:native("java.util.Spliterators$EmptySpliterator") @:libType
+extern class java.util.Spliterators$EmptySpliterator<T:Dynamic, S:java.util.Spliterator<java.util.Spliterators_EmptySpliterator.T>, C:Dynamic> {
+
+	function new():Void;
+
+	function trySplit():java.util.Spliterators_EmptySpliterator.S;
+
+	function tryAdvance(param1:java.util.Spliterators_EmptySpliterator.C):Bool;
+
+	function forEachRemaining(param1:java.util.Spliterators_EmptySpliterator.C):Void;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+}

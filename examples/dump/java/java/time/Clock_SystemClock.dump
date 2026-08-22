@@ -1,0 +1,19 @@
+@:realPath("java.time.Clock_SystemClock") @:used @:native("java.time.Clock$SystemClock") @:libType
+extern class java.time.Clock$SystemClock extends java.time.Clock implements java.io.Serializable {
+
+	function new(param1:java.time.ZoneId):Void;
+
+	function getZone():java.time.ZoneId;
+
+	function withZone(param1:java.time.ZoneId):java.time.Clock;
+
+	function millis():haxe.Int64;
+
+	function instant():java.time.Instant;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+}

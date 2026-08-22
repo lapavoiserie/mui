@@ -1,0 +1,119 @@
+@:realPath("java.util.HashMap") @:directlyUsed @:used @:native("java.util.HashMap") @:libType
+extern class java.util.HashMap<K:Dynamic, V:Dynamic> extends java.util.AbstractMap<java.util.HashMap.K, java.util.HashMap.V> implements java.io.Serializable implements java.lang.Cloneable implements java.util.Map<java.util.HashMap.K, java.util.HashMap.V> {
+
+	function new(param1:Int, param2:Single):Void;
+
+	function new(param1:java.util.Map<java.util.HashMap.K, java.util.HashMap.V>):Void;
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function putMapEntries(param1:java.util.Map<java.util.HashMap.K, java.util.HashMap.V>, param2:Bool):Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function get(param1:Dynamic):java.util.HashMap.V;
+
+	function getNode(param1:Int, param2:Dynamic):java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function put(param1:java.util.HashMap.K, param2:java.util.HashMap.V):java.util.HashMap.V;
+
+	function putVal(param1:Int, param2:java.util.HashMap.K, param3:java.util.HashMap.V, param4:Bool, param5:Bool):java.util.HashMap.V;
+
+	function resize():java.NativeArray<java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>>;
+
+	function treeifyBin(param1:java.NativeArray<java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>>, param2:Int):Void;
+
+	function putAll(param1:java.util.Map<java.util.HashMap.K, java.util.HashMap.V>):Void;
+
+	function remove(param1:Dynamic):java.util.HashMap.V;
+
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function removeNode(param1:Int, param2:Dynamic, param3:Dynamic, param4:Bool, param5:Bool):java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>;
+
+	function clear():Void;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function keySet():java.util.Set<java.util.HashMap.K>;
+
+	function values():java.util.Collection<java.util.HashMap.V>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.HashMap.K, java.util.HashMap.V>>;
+
+	function getOrDefault(param1:Dynamic, param2:java.util.HashMap.V):java.util.HashMap.V;
+
+	function putIfAbsent(param1:java.util.HashMap.K, param2:java.util.HashMap.V):java.util.HashMap.V;
+
+	function replace(param1:java.util.HashMap.K, param2:java.util.HashMap.V, param3:java.util.HashMap.V):Bool;
+
+	function replace(param1:java.util.HashMap.K, param2:java.util.HashMap.V):java.util.HashMap.V;
+
+	function computeIfAbsent(param1:java.util.HashMap.K, param2:java.util.function.Function<Dynamic, java.util.HashMap.V>):java.util.HashMap.V;
+
+	function computeIfPresent(param1:java.util.HashMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.HashMap.V>):java.util.HashMap.V;
+
+	function compute(param1:java.util.HashMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.HashMap.V>):java.util.HashMap.V;
+
+	function merge(param1:java.util.HashMap.K, param2:java.util.HashMap.V, param3:java.util.function.BiFunction<Dynamic, Dynamic, java.util.HashMap.V>):java.util.HashMap.V;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.HashMap.V>):Void;
+
+	function clone():Dynamic;
+
+	function loadFactor():Single;
+
+	function capacity():Int;
+
+	function newNode(param1:Int, param2:java.util.HashMap.K, param3:java.util.HashMap.V, param4:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>):java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>;
+
+	function replacementNode(param1:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>, param2:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>):java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>;
+
+	function newTreeNode(param1:Int, param2:java.util.HashMap.K, param3:java.util.HashMap.V, param4:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>):java.util.HashMap$TreeNode<java.util.HashMap.K, java.util.HashMap.V>;
+
+	function replacementTreeNode(param1:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>, param2:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>):java.util.HashMap$TreeNode<java.util.HashMap.K, java.util.HashMap.V>;
+
+	function reinitialize():Void;
+
+	function afterNodeAccess(param1:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>):Void;
+
+	function afterNodeInsertion(param1:Bool):Void;
+
+	function afterNodeRemoval(param1:java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>):Void;
+
+	function internalWriteEntries(param1:java.io.ObjectOutputStream):Void;
+
+	var table:java.NativeArray<java.util.HashMap$Node<java.util.HashMap.K, java.util.HashMap.V>>;
+
+	var modCount:Int;
+
+	var threshold:Int;
+
+	static function hash(param1:Dynamic):Int;
+
+	static function comparableClassFor(param1:Dynamic):java.lang.Class<Dynamic>;
+
+	static function compareComparables(param1:java.lang.Class<Dynamic>, param2:Dynamic, param3:Dynamic):Int;
+
+	static function tableSizeFor(param1:Int):Int;
+
+	static var DEFAULT_INITIAL_CAPACITY(default,never):Int;
+
+	static var MAXIMUM_CAPACITY(default,never):Int;
+
+	static var DEFAULT_LOAD_FACTOR(default,never):Single;
+
+	static var TREEIFY_THRESHOLD(default,never):Int;
+
+	static var UNTREEIFY_THRESHOLD(default,never):Int;
+
+	static var MIN_TREEIFY_CAPACITY(default,never):Int;
+}

@@ -1,0 +1,14 @@
+@:realPath("java.util.function.LongUnaryOperator") @:used @:native("java.util.function.LongUnaryOperator") @:libType
+extern interface java.util.function.LongUnaryOperator {
+
+	function applyAsLong(param1:haxe.Int64):haxe.Int64;
+
+	@:java.default
+	function compose(param1:java.util.function.LongUnaryOperator):java.util.function.LongUnaryOperator;
+
+	@:java.default
+	function andThen(param1:java.util.function.LongUnaryOperator):java.util.function.LongUnaryOperator;
+
+	@:java.default
+	static function identity():java.util.function.LongUnaryOperator;
+}

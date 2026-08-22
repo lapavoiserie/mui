@@ -1,0 +1,49 @@
+@:realPath("java.nio.charset.CharsetDecoder") @:native("java.nio.charset.CharsetDecoder") @:libType
+extern class java.nio.charset.CharsetDecoder {
+
+	function new(param1:java.nio.charset.Charset, param2:Single, param3:Single):Void;
+
+	function charset():java.nio.charset.Charset;
+
+	function replacement():java.lang.String;
+
+	function replaceWith(param1:java.lang.String):java.nio.charset.CharsetDecoder;
+
+	function implReplaceWith(param1:java.lang.String):Void;
+
+	function malformedInputAction():java.nio.charset.CodingErrorAction;
+
+	function onMalformedInput(param1:java.nio.charset.CodingErrorAction):java.nio.charset.CharsetDecoder;
+
+	function implOnMalformedInput(param1:java.nio.charset.CodingErrorAction):Void;
+
+	function unmappableCharacterAction():java.nio.charset.CodingErrorAction;
+
+	function onUnmappableCharacter(param1:java.nio.charset.CodingErrorAction):java.nio.charset.CharsetDecoder;
+
+	function implOnUnmappableCharacter(param1:java.nio.charset.CodingErrorAction):Void;
+
+	function averageCharsPerByte():Single;
+
+	function maxCharsPerByte():Single;
+
+	function decode(param1:java.nio.ByteBuffer, param2:java.nio.CharBuffer, param3:Bool):java.nio.charset.CoderResult;
+
+	function decode(param1:java.nio.ByteBuffer):java.nio.CharBuffer;
+
+	function flush(param1:java.nio.CharBuffer):java.nio.charset.CoderResult;
+
+	function implFlush(param1:java.nio.CharBuffer):java.nio.charset.CoderResult;
+
+	function reset():java.nio.charset.CharsetDecoder;
+
+	function implReset():Void;
+
+	function decodeLoop(param1:java.nio.ByteBuffer, param2:java.nio.CharBuffer):java.nio.charset.CoderResult;
+
+	function isAutoDetecting():Bool;
+
+	function isCharsetDetected():Bool;
+
+	function detectedCharset():java.nio.charset.Charset;
+}

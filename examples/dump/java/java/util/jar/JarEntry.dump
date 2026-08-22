@@ -1,0 +1,21 @@
+@:realPath("java.util.jar.JarEntry") @:used @:native("java.util.jar.JarEntry") @:libType
+extern class java.util.jar.JarEntry extends java.util.zip.ZipEntry {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.util.jar.JarEntry):Void;
+
+	function new(param1:java.util.zip.ZipEntry):Void;
+
+	function getAttributes():java.util.jar.Attributes;
+
+	function getCertificates():java.NativeArray<java.security.cert.Certificate>;
+
+	function getCodeSigners():java.NativeArray<java.security.CodeSigner>;
+
+	var attr:java.util.jar.Attributes;
+
+	var certs:java.NativeArray<java.security.cert.Certificate>;
+
+	var signers:java.NativeArray<java.security.CodeSigner>;
+}

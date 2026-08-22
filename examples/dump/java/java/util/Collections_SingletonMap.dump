@@ -1,0 +1,43 @@
+@:realPath("java.util.Collections_SingletonMap") @:used @:native("java.util.Collections$SingletonMap") @:libType
+extern class java.util.Collections$SingletonMap<K:Dynamic, V:Dynamic> extends java.util.AbstractMap<java.util.Collections_SingletonMap.K, java.util.Collections_SingletonMap.V> implements java.io.Serializable {
+
+	function new(param1:java.util.Collections_SingletonMap.K, param2:java.util.Collections_SingletonMap.V):Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function get(param1:Dynamic):java.util.Collections_SingletonMap.V;
+
+	function keySet():java.util.Set<java.util.Collections_SingletonMap.K>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.Collections_SingletonMap.K, java.util.Collections_SingletonMap.V>>;
+
+	function values():java.util.Collection<java.util.Collections_SingletonMap.V>;
+
+	function getOrDefault(param1:Dynamic, param2:java.util.Collections_SingletonMap.V):java.util.Collections_SingletonMap.V;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_SingletonMap.V>):Void;
+
+	function putIfAbsent(param1:java.util.Collections_SingletonMap.K, param2:java.util.Collections_SingletonMap.V):java.util.Collections_SingletonMap.V;
+
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function replace(param1:java.util.Collections_SingletonMap.K, param2:java.util.Collections_SingletonMap.V, param3:java.util.Collections_SingletonMap.V):Bool;
+
+	function replace(param1:java.util.Collections_SingletonMap.K, param2:java.util.Collections_SingletonMap.V):java.util.Collections_SingletonMap.V;
+
+	function computeIfAbsent(param1:java.util.Collections_SingletonMap.K, param2:java.util.function.Function<Dynamic, java.util.Collections_SingletonMap.V>):java.util.Collections_SingletonMap.V;
+
+	function computeIfPresent(param1:java.util.Collections_SingletonMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_SingletonMap.V>):java.util.Collections_SingletonMap.V;
+
+	function compute(param1:java.util.Collections_SingletonMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_SingletonMap.V>):java.util.Collections_SingletonMap.V;
+
+	function merge(param1:java.util.Collections_SingletonMap.K, param2:java.util.Collections_SingletonMap.V, param3:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_SingletonMap.V>):java.util.Collections_SingletonMap.V;
+}

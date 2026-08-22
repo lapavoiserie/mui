@@ -1,0 +1,11 @@
+@:realPath("java.util.concurrent.LinkedBlockingDeque_Node") @:used @:native("java.util.concurrent.LinkedBlockingDeque$Node") @:libType
+extern class java.util.concurrent.LinkedBlockingDeque$Node<E:Dynamic> {
+
+	function new(param1:java.util.concurrent.LinkedBlockingDeque_Node.E):Void;
+
+	var item:java.util.concurrent.LinkedBlockingDeque_Node.E;
+
+	var prev:java.util.concurrent.LinkedBlockingDeque$Node<java.util.concurrent.LinkedBlockingDeque_Node.E>;
+
+	var next:java.util.concurrent.LinkedBlockingDeque$Node<java.util.concurrent.LinkedBlockingDeque_Node.E>;
+}

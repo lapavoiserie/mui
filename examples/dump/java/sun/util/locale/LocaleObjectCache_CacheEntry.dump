@@ -1,0 +1,7 @@
+@:realPath("java.sun.util.locale.LocaleObjectCache_CacheEntry") @:used @:native("sun.util.locale.LocaleObjectCache$CacheEntry") @:libType
+extern class sun.util.locale.LocaleObjectCache$CacheEntry<K:Dynamic, V:Dynamic> extends java.lang.ref.SoftReference<java.sun.util.locale.LocaleObjectCache_CacheEntry.V> {
+
+	function new(param1:java.sun.util.locale.LocaleObjectCache_CacheEntry.K, param2:java.sun.util.locale.LocaleObjectCache_CacheEntry.V, param3:java.lang.ref.ReferenceQueue<java.sun.util.locale.LocaleObjectCache_CacheEntry.V>):Void;
+
+	function getKey():java.sun.util.locale.LocaleObjectCache_CacheEntry.K;
+}

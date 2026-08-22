@@ -1,0 +1,85 @@
+@:realPath("java.lang.reflect.Executable") @:used @:native("java.lang.reflect.Executable") @:libType
+extern class java.lang.reflect.Executable extends java.lang.reflect.AccessibleObject implements java.lang.reflect.Member implements java.lang.reflect.GenericDeclaration {
+
+	function new():Void;
+
+	function getAnnotationBytes():java.NativeArray<java.types.Int8>;
+
+	function getRoot():java.lang.reflect.Executable;
+
+	function hasGenericInformation():Bool;
+
+	function getGenericInfo():sun.reflect.generics.repository.ConstructorRepository;
+
+	function equalParamTypes(param1:java.NativeArray<java.lang.Class<Dynamic>>, param2:java.NativeArray<java.lang.Class<Dynamic>>):Bool;
+
+	function parseParameterAnnotations(param1:java.NativeArray<java.types.Int8>):java.NativeArray<java.NativeArray<java.lang.annotation.Annotation>>;
+
+	function separateWithCommas(param1:java.NativeArray<java.lang.Class<Dynamic>>, param2:java.lang.StringBuilder):Void;
+
+	function printModifiersIfNonzero(param1:java.lang.StringBuilder, param2:Int, param3:Bool):Void;
+
+	function sharedToString(param1:Int, param2:Bool, param3:java.NativeArray<java.lang.Class<Dynamic>>, param4:java.NativeArray<java.lang.Class<Dynamic>>):java.lang.String;
+
+	function specificToStringHeader(param1:java.lang.StringBuilder):Void;
+
+	function sharedToGenericString(param1:Int, param2:Bool):java.lang.String;
+
+	function specificToGenericStringHeader(param1:java.lang.StringBuilder):Void;
+
+	function getDeclaringClass():java.lang.Class<Dynamic>;
+
+	function getName():java.lang.String;
+
+	function getModifiers():Int;
+
+	function getTypeParameters():java.NativeArray<java.lang.reflect.TypeVariable<Dynamic>>;
+
+	function getParameterTypes():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getParameterCount():Int;
+
+	function getGenericParameterTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function getAllGenericParameterTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function getParameters():java.NativeArray<java.lang.reflect.Parameter>;
+
+	function hasRealParameterData():Bool;
+
+	function getTypeAnnotationBytes0():java.NativeArray<java.types.Int8>;
+
+	function getTypeAnnotationBytes():java.NativeArray<java.types.Int8>;
+
+	function getExceptionTypes():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getGenericExceptionTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function toGenericString():java.lang.String;
+
+	function isVarArgs():Bool;
+
+	function isSynthetic():Bool;
+
+	function getParameterAnnotations():java.NativeArray<java.NativeArray<java.lang.annotation.Annotation>>;
+
+	function sharedGetParameterAnnotations(param1:java.NativeArray<java.lang.Class<Dynamic>>, param2:java.NativeArray<java.types.Int8>):java.NativeArray<java.NativeArray<java.lang.annotation.Annotation>>;
+
+	function handleParameterNumberMismatch(param1:Int, param2:Int):Void;
+
+	function getAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.T>):getAnnotation.T;
+
+	function getAnnotationsByType<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotationsByType.T>):java.NativeArray<getAnnotationsByType.T>;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getAnnotatedReturnType():java.lang.reflect.AnnotatedType;
+
+	function getAnnotatedReturnType0(param1:java.lang.reflect.Type):java.lang.reflect.AnnotatedType;
+
+	function getAnnotatedReceiverType():java.lang.reflect.AnnotatedType;
+
+	function getAnnotatedParameterTypes():java.NativeArray<java.lang.reflect.AnnotatedType>;
+
+	function getAnnotatedExceptionTypes():java.NativeArray<java.lang.reflect.AnnotatedType>;
+}

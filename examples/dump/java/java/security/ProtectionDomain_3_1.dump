@@ -1,0 +1,12 @@
+@:realPath("java.security.ProtectionDomain_3_1") @:used @:native("java.security.ProtectionDomain$3$1") @:libType
+extern class java.security.ProtectionDomain$3$1 implements sun.misc.JavaSecurityProtectionDomainAccess$ProtectionDomainCache {
+
+	function new(param1:java.security.ProtectionDomain$3):Void;
+
+	function put(param1:java.security.ProtectionDomain, param2:java.security.PermissionCollection):Void;
+
+	function get(param1:java.security.ProtectionDomain):java.security.PermissionCollection;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.security.ProtectionDomain$3;
+}

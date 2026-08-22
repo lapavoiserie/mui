@@ -1,0 +1,27 @@
+@:realPath("java.util.Spliterators_LongIteratorSpliterator") @:used @:native("java.util.Spliterators$LongIteratorSpliterator") @:libType
+extern class java.util.Spliterators$LongIteratorSpliterator implements java.util.Spliterator$OfLong {
+
+	function new(param1:java.util.PrimitiveIterator$OfLong, param2:haxe.Int64, param3:Int):Void;
+
+	function new(param1:java.util.PrimitiveIterator$OfLong, param2:Int):Void;
+
+	function trySplit():java.util.Spliterator$OfLong;
+
+	function forEachRemaining(param1:java.util.function.LongConsumer):Void;
+
+	function forEachRemaining(param1:Dynamic):Void;
+
+	function tryAdvance(param1:java.util.function.LongConsumer):Bool;
+
+	function tryAdvance(param1:Dynamic):Bool;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	function getComparator():java.util.Comparator<Dynamic>;
+
+	static var BATCH_UNIT(default,never):Int;
+
+	static var MAX_BATCH(default,never):Int;
+}

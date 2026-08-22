@@ -1,0 +1,1 @@
+typedef mui.Binding = { ?requires : Null<Array<String>>, ?params : Null<Array<String>>, pack : Array<String>, ?optional : Null<Bool>, name : String, ?args : Null<Array<String>> }

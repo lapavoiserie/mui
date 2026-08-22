@@ -1,0 +1,44 @@
+@:directlyUsed @:used
+enum aui.modifiers.ViewModifier {
+	Padding(?value:Null<Float>);
+	PaddingHorizontal(value:Float);
+	PaddingVertical(value:Float);
+	Frame(?width:Null<Float>, ?height:Null<Float>, ?maxWidth:Null<Float>, ?maxHeight:Null<Float>, ?alignment:Null<aui.modifiers.Alignment>);
+	FillMaxWidth;
+	FillMaxHeight;
+	FillMaxSize;
+	Offset(x:Float, y:Float);
+	AspectRatio(?ratio:Null<Float>, ?contentMode:Null<aui.modifiers.ContentMode>);
+	Font(style:aui.modifiers.FontStyle);
+	Bold;
+	Italic;
+	LineLimit(lines:Int);
+	MultilineTextAlignment(alignment:aui.modifiers.TextAlignment);
+	ForegroundColor(color:aui.modifiers.ColorValue);
+	Background(color:aui.modifiers.ColorValue);
+	Opacity(value:Float);
+	CornerRadius(radius:Float);
+	ClipShape(shape:aui.modifiers.ShapeType);
+	Shadow(?color:Null<aui.modifiers.ColorValue>, ?radius:Null<Float>, ?x:Null<Float>, ?y:Null<Float>);
+	Blur(radius:Float);
+	ScaleEffect(scale:Float);
+	RotationEffect(degrees:Float);
+	Brightness(amount:Float);
+	Contrast(amount:Float);
+	Saturation(amount:Float);
+	Grayscale(amount:Float);
+	Border(color:aui.modifiers.ColorValue, ?width:Null<Float>);
+	Overlay(content:aui.View);
+	OnTapGesture(action:() -> Void);
+	OnLongPressGesture(action:() -> Void);
+	OnAppear(action:() -> Void);
+	OnDisappear(action:() -> Void);
+	Disabled(isDisabled:Bool);
+	Hidden;
+	Sheet(isPresented:aui.state.State<Bool>, content:aui.View);
+	Alert(title:java.lang.String, isPresented:aui.state.State<Bool>, ?message:Null<java.lang.String>);
+	NavigationTitle(title:java.lang.String);
+	Animation(curve:aui.modifiers.AnimationCurve);
+	AccessibilityLabel(label:java.lang.String);
+	AccessibilityHint(hint:java.lang.String);
+}

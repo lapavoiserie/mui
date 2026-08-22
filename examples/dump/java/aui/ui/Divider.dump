@@ -1,0 +1,8 @@
+@:used
+class aui.ui.Divider extends aui.View {
+
+	public function new() {
+		super();
+		this.viewType = "Divider";
+	}
+}

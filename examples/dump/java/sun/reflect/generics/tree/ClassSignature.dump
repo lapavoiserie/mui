@@ -1,0 +1,13 @@
+@:realPath("java.sun.reflect.generics.tree.ClassSignature") @:used @:native("sun.reflect.generics.tree.ClassSignature") @:libType
+extern class sun.reflect.generics.tree.ClassSignature implements sun.reflect.generics.tree.Signature {
+
+	function getFormalTypeParameters():java.NativeArray<sun.reflect.generics.tree.FormalTypeParameter>;
+
+	function getSuperclass():sun.reflect.generics.tree.ClassTypeSignature;
+
+	function getSuperInterfaces():java.NativeArray<sun.reflect.generics.tree.ClassTypeSignature>;
+
+	function accept(param1:sun.reflect.generics.visitor.Visitor<Dynamic>):Void;
+
+	static function make(param1:java.NativeArray<sun.reflect.generics.tree.FormalTypeParameter>, param2:sun.reflect.generics.tree.ClassTypeSignature, param3:java.NativeArray<sun.reflect.generics.tree.ClassTypeSignature>):sun.reflect.generics.tree.ClassSignature;
+}

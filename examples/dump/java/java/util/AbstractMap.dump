@@ -1,0 +1,37 @@
+@:realPath("java.util.AbstractMap") @:used @:native("java.util.AbstractMap") @:libType
+extern class java.util.AbstractMap<K:Dynamic, V:Dynamic> implements java.util.Map<java.util.AbstractMap.K, java.util.AbstractMap.V> {
+
+	function new():Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function get(param1:Dynamic):java.util.AbstractMap.V;
+
+	function put(param1:java.util.AbstractMap.K, param2:java.util.AbstractMap.V):java.util.AbstractMap.V;
+
+	function remove(param1:Dynamic):java.util.AbstractMap.V;
+
+	function putAll(param1:java.util.Map<java.util.AbstractMap.K, java.util.AbstractMap.V>):Void;
+
+	function clear():Void;
+
+	function keySet():java.util.Set<java.util.AbstractMap.K>;
+
+	function values():java.util.Collection<java.util.AbstractMap.V>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.AbstractMap.K, java.util.AbstractMap.V>>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function clone():Dynamic;
+}

@@ -1,0 +1,14 @@
+@:used
+class aui.ui.Toggle extends aui.View {
+
+	public function new(label:java.lang.String, isOnState:Null<aui.state.State<Bool>> = null) {
+		super();
+		this.viewType = "Toggle";
+		this.label = label;
+		this.isOnState = isOnState;
+	}
+
+	public var label:java.lang.String;
+
+	public var isOnState:Null<aui.state.State<Bool>>;
+}

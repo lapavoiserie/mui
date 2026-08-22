@@ -1,0 +1,9 @@
+@:realPath("java.util.regex.Pattern_Utype") @:used @:native("java.util.regex.Pattern$Utype") @:libType
+extern class java.util.regex.Pattern$Utype extends java.util.regex.Pattern$CharProperty {
+
+	function new(param1:java.util.regex.UnicodeProp):Void;
+
+	function isSatisfiedBy(param1:Int):Bool;
+
+	var uprop(default,ctor):java.util.regex.UnicodeProp;
+}

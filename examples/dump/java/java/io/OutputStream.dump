@@ -1,0 +1,15 @@
+@:realPath("java.io.OutputStream") @:used @:native("java.io.OutputStream") @:libType
+extern class java.io.OutputStream implements java.io.Closeable implements java.io.Flushable {
+
+	function new():Void;
+
+	function write(param1:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function flush():Void;
+
+	function close():Void;
+}

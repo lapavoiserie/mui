@@ -1,0 +1,7 @@
+@:realPath("java.util.regex.Pattern_Slice") @:used @:native("java.util.regex.Pattern$Slice") @:libType
+extern class java.util.regex.Pattern$Slice extends java.util.regex.Pattern$SliceNode {
+
+	function new(param1:java.NativeArray<Int>):Void;
+
+	function match(param1:java.util.regex.Matcher, param2:Int, param3:java.lang.CharSequence):Bool;
+}

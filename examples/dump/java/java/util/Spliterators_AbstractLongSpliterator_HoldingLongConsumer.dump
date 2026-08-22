@@ -1,0 +1,9 @@
+@:realPath("java.util.Spliterators_AbstractLongSpliterator_HoldingLongConsumer") @:used @:native("java.util.Spliterators$AbstractLongSpliterator$HoldingLongConsumer") @:libType
+extern class java.util.Spliterators$AbstractLongSpliterator$HoldingLongConsumer implements java.util.function.LongConsumer {
+
+	function new():Void;
+
+	function accept(param1:haxe.Int64):Void;
+
+	var value:haxe.Int64;
+}

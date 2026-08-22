@@ -1,0 +1,40 @@
+@:realPath("java.util.Properties") @:used @:native("java.util.Properties") @:libType
+extern class java.util.Properties extends java.util.Hashtable<Dynamic, Dynamic> {
+
+	function new():Void;
+
+	function new(param1:java.util.Properties):Void;
+
+	function setProperty(param1:java.lang.String, param2:java.lang.String):Dynamic;
+
+	function load(param1:java.io.Reader):Void;
+
+	function load(param1:java.io.InputStream):Void;
+
+	@:deprecated
+	function save(param1:java.io.OutputStream, param2:java.lang.String):Void;
+
+	function store(param1:java.io.Writer, param2:java.lang.String):Void;
+
+	function store(param1:java.io.OutputStream, param2:java.lang.String):Void;
+
+	function loadFromXML(param1:java.io.InputStream):Void;
+
+	function storeToXML(param1:java.io.OutputStream, param2:java.lang.String):Void;
+
+	function storeToXML(param1:java.io.OutputStream, param2:java.lang.String, param3:java.lang.String):Void;
+
+	function getProperty(param1:java.lang.String):java.lang.String;
+
+	function getProperty(param1:java.lang.String, param2:java.lang.String):java.lang.String;
+
+	function propertyNames():java.util.Enumeration<Dynamic>;
+
+	function stringPropertyNames():java.util.Set<java.lang.String>;
+
+	function list(param1:java.io.PrintStream):Void;
+
+	function list(param1:java.io.PrintWriter):Void;
+
+	var defaults:java.util.Properties;
+}

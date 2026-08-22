@@ -1,0 +1,11 @@
+@:realPath("java.nio.channels.FileChannel_MapMode") @:native("java.nio.channels.FileChannel$MapMode") @:libType
+extern class java.nio.channels.FileChannel$MapMode {
+
+	function toString():java.lang.String;
+
+	static var READ_ONLY(default,never):java.nio.channels.FileChannel$MapMode;
+
+	static var READ_WRITE(default,never):java.nio.channels.FileChannel$MapMode;
+
+	static var PRIVATE(default,never):java.nio.channels.FileChannel$MapMode;
+}

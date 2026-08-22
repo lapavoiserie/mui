@@ -1,0 +1,8 @@
+@:directlyUsed @:used
+class aui.ui.Spacer extends aui.View {
+
+	public function new() {
+		super();
+		this.viewType = "Spacer";
+	}
+}

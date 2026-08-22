@@ -1,0 +1,27 @@
+@:realPath("java.lang.Object") @:directlyUsed @:used @:native("java.lang.Object") @:libType
+extern class java.lang.Object {
+
+	function new():Void;
+
+	function getClass():java.lang.Class<Dynamic>;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function clone():Dynamic;
+
+	function toString():java.lang.String;
+
+	function notify():Void;
+
+	function notifyAll():Void;
+
+	function wait(param1:haxe.Int64):Void;
+
+	function wait():Void;
+
+	function wait(param1:haxe.Int64, param2:Int):Void;
+
+	function finalize():Void;
+}

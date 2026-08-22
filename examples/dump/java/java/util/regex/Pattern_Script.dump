@@ -1,0 +1,9 @@
+@:realPath("java.util.regex.Pattern_Script") @:used @:native("java.util.regex.Pattern$Script") @:libType
+extern class java.util.regex.Pattern$Script extends java.util.regex.Pattern$CharProperty {
+
+	function new(param1:java.lang.Character$UnicodeScript):Void;
+
+	function isSatisfiedBy(param1:Int):Bool;
+
+	var script(default,ctor):java.lang.Character$UnicodeScript;
+}

@@ -1,0 +1,33 @@
+@:realPath("java.sun.reflect.ConstantPool") @:used @:native("sun.reflect.ConstantPool") @:libType
+extern class sun.reflect.ConstantPool {
+
+	function new():Void;
+
+	function getSize():Int;
+
+	function getClassAt(param1:Int):java.lang.Class<Dynamic>;
+
+	function getClassAtIfLoaded(param1:Int):java.lang.Class<Dynamic>;
+
+	function getMethodAt(param1:Int):java.lang.reflect.Member;
+
+	function getMethodAtIfLoaded(param1:Int):java.lang.reflect.Member;
+
+	function getFieldAt(param1:Int):java.lang.reflect.Field;
+
+	function getFieldAtIfLoaded(param1:Int):java.lang.reflect.Field;
+
+	function getMemberRefInfoAt(param1:Int):java.NativeArray<java.lang.String>;
+
+	function getIntAt(param1:Int):Int;
+
+	function getLongAt(param1:Int):haxe.Int64;
+
+	function getFloatAt(param1:Int):Single;
+
+	function getDoubleAt(param1:Int):Float;
+
+	function getStringAt(param1:Int):java.lang.String;
+
+	function getUTF8At(param1:Int):java.lang.String;
+}

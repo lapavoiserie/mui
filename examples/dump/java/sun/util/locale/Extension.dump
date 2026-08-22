@@ -1,0 +1,17 @@
+@:realPath("java.sun.util.locale.Extension") @:native("sun.util.locale.Extension") @:libType
+extern class sun.util.locale.Extension {
+
+	function new(param1:java.types.Char16):Void;
+
+	function new(param1:java.types.Char16, param2:java.lang.String):Void;
+
+	function setValue(param1:java.lang.String):Void;
+
+	function getKey():java.types.Char16;
+
+	function getValue():java.lang.String;
+
+	function getID():java.lang.String;
+
+	function toString():java.lang.String;
+}

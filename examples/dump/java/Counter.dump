@@ -1,0 +1,68 @@
+@:used @:build(mui.macros.Surfaces.build()) @:autoBuild(mui.macros.Surfaces.build()) @:build(aui.macros.StateMacro.build()) @:autoBuild(aui.macros.StateMacro.build())
+class Counter extends aui.mui.App {
+
+	public function new() {
+		super();
+		this.count = new aui.state.State(0, "count");
+	}
+
+	var count:aui.state.State<Int>;
+
+	@:surface(Glance, optional)
+	function glance() {
+		var _gthis = this;
+		var __live = new aui.mui.Text("", null);
+		__live.liveBuild = function() {
+			return new aui.mui.Text("Count: " + _gthis.count.get(), null);
+		};
+		return __live;
+	}
+
+	@:surface(Auxiliary, optional)
+	function inspector() {
+		var _gthis = this;
+		var tmp = new aui.mui.Text("Inspector", null);
+		var __live = new aui.mui.Text("", null);
+		__live.liveBuild = function() {
+			return new aui.mui.Text("Count is " + _gthis.count.get(), null);
+		};
+		return new aui.mui.VStack([tmp, __live], 8);
+	}
+
+	public function body() {
+		var _gthis = this;
+		var tmp = new aui.ui.Spacer();
+		var tmp1 = new aui.mui.Text("Counter", null);
+		var __live = new aui.mui.Text("", null);
+		__live.liveBuild = function() {
+			return new aui.mui.Text("Count: " + _gthis.count.get(), null);
+		};
+		return new aui.mui.VStack([tmp, tmp1, __live, new aui.mui.HStack([new aui.mui.Button("-", this.__aui_action_0), new aui.mui.Button("Reset", this.__aui_action_1), new aui.mui.Button("+", this.__aui_action_2)], 8), new aui.ui.Spacer()], 10);
+	}
+
+	public function declaredSurfaces() {
+		var _gthis = this;
+		var tmp = mui.surface.SurfaceDecl.Tree(mui.surface.SurfaceRole.Glance, "glance", function() {
+			return _gthis.glance();
+		});
+		var tmp1 = mui.surface.SurfaceDecl.Tree(mui.surface.SurfaceRole.Auxiliary, "inspector", function() {
+			return _gthis.inspector();
+		});
+		return super.declaredSurfaces().concat([tmp, tmp1]);
+	}
+
+	public function __aui_action_0() {
+		this.count.set(this.count.get() - 1);
+	}
+
+	public function __aui_action_1() {
+		this.count.set(0);
+	}
+
+	public function __aui_action_2() {
+		this.count.set(this.count.get() + 1);
+	}
+
+	@:keep
+	static function main() {}
+}

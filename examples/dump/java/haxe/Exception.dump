@@ -1,0 +1,48 @@
+@:keep @:directlyUsed @:used @:coreApi
+class haxe.Exception extends java.lang.RuntimeException {
+
+	public function new(message:java.lang.String, previous:Null<haxe.Exception> = null, native:Null<Any> = null) {
+		super(message, cast if ((previous == null)) null else previous);
+		this.__previousException = previous;
+		if ((native != null && Std.isOfType(native, java.lang.Throwable))) {
+			this.__nativeException = @:implicitCast cast cast native;
+			this.setStackTrace(this.__nativeException.getStackTrace());
+		} else this.__nativeException = cast this;
+	}
+
+	public var message(get,never):java.lang.String;
+
+	@:noCompletion
+	var __nativeException:java.lang.Throwable;
+
+	@:noCompletion
+	var __previousException:Null<haxe.Exception>;
+
+	function unwrap() {
+		return this.__nativeException;
+	}
+
+	public function toString() {
+		return this.get_message();
+	}
+
+	function get_message() {
+		return this.getMessage();
+	}
+
+	static function caught(value:Any) {
+		if ((Std.isOfType(value, haxe.Exception))) return @:implicitCast cast cast value else if ((Std.isOfType(value, java.lang.Throwable))) return new haxe.Exception(@:implicitCast cast cast value.getMessage(), null, value) else return new haxe.ValueException(value, null, value);
+	}
+
+	static function thrown(value:Any) {
+		if ((Std.isOfType(value, haxe.Exception))) {
+			var native = @:implicitCast cast cast value.__nativeException;
+			if ((Std.isOfType(native, java.lang.RuntimeException))) return native else return value;
+		} else if ((Std.isOfType(value, java.lang.RuntimeException))) return value else if ((Std.isOfType(value, java.lang.Throwable))) return new haxe.Exception(@:implicitCast cast cast value.getMessage(), null, value) else {
+			var e = new haxe.ValueException(value, null, null);
+			var stack = e.getStackTrace();
+			if ((stack.length > 1)) e.setStackTrace(java.util.Arrays.copyOfRange(stack, 1, stack.length));
+			return e;
+		};
+	}
+}

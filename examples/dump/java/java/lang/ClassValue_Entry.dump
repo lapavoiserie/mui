@@ -1,0 +1,21 @@
+@:realPath("java.lang.ClassValue_Entry") @:native("java.lang.ClassValue$Entry") @:libType
+extern class java.lang.ClassValue$Entry<T:Dynamic> extends java.lang.ref.WeakReference<java.lang.ClassValue$Version<java.lang.ClassValue_Entry.T>> {
+
+	function new(param1:java.lang.ClassValue$Version<java.lang.ClassValue_Entry.T>, param2:java.lang.ClassValue_Entry.T):Void;
+
+	function new(param1:java.lang.ClassValue$Version<java.lang.ClassValue_Entry.T>):Void;
+
+	function value():java.lang.ClassValue_Entry.T;
+
+	function isPromise():Bool;
+
+	function version():java.lang.ClassValue$Version<java.lang.ClassValue_Entry.T>;
+
+	function classValueOrNull():java.lang.ClassValue<java.lang.ClassValue_Entry.T>;
+
+	function isLive():Bool;
+
+	function refreshVersion(param1:java.lang.ClassValue$Version<java.lang.ClassValue_Entry.T>):java.lang.ClassValue$Entry<java.lang.ClassValue_Entry.T>;
+
+	static var DEAD_ENTRY(default,never):java.lang.ClassValue$Entry<Dynamic>;
+}

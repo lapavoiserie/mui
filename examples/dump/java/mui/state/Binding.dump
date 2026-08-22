@@ -1,0 +1,1 @@
+typedef mui.state.Binding<T> = aui.mui.Binding<mui.state.Binding.T>

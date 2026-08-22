@@ -1,0 +1,5 @@
+@:realPath("java.util.function.ObjIntConsumer") @:used @:native("java.util.function.ObjIntConsumer") @:libType
+extern interface java.util.function.ObjIntConsumer<T:Dynamic> {
+
+	function accept(param1:java.util.function.ObjIntConsumer.T, param2:Int):Void;
+}

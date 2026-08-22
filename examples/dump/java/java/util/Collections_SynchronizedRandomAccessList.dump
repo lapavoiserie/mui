@@ -1,0 +1,9 @@
+@:realPath("java.util.Collections_SynchronizedRandomAccessList") @:used @:native("java.util.Collections$SynchronizedRandomAccessList") @:libType
+extern class java.util.Collections$SynchronizedRandomAccessList<E:Dynamic> extends java.util.Collections$SynchronizedList<java.util.Collections_SynchronizedRandomAccessList.E> implements java.util.RandomAccess {
+
+	function new(param1:java.util.List<java.util.Collections_SynchronizedRandomAccessList.E>):Void;
+
+	function new(param1:java.util.List<java.util.Collections_SynchronizedRandomAccessList.E>, param2:Dynamic):Void;
+
+	function subList(param1:Int, param2:Int):java.util.List<java.util.Collections_SynchronizedRandomAccessList.E>;
+}

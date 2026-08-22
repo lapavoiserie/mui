@@ -1,0 +1,7 @@
+@:realPath("java.lang.Thread_Caches") @:native("java.lang.Thread$Caches") @:libType
+extern class java.lang.Thread$Caches {
+
+	static var subclassAudits(default,never):java.util.concurrent.ConcurrentMap<java.lang.Thread$WeakClassKey, java.lang.Boolean>;
+
+	static var subclassAuditsQueue(default,never):java.lang.ref.ReferenceQueue<java.lang.Class<Dynamic>>;
+}

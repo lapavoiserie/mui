@@ -1,0 +1,17 @@
+@:realPath("java.util.Collections_UnmodifiableSortedSet") @:used @:native("java.util.Collections$UnmodifiableSortedSet") @:libType
+extern class java.util.Collections$UnmodifiableSortedSet<E:Dynamic> extends java.util.Collections$UnmodifiableSet<java.util.Collections_UnmodifiableSortedSet.E> implements java.io.Serializable implements java.util.SortedSet<java.util.Collections_UnmodifiableSortedSet.E> {
+
+	function new(param1:java.util.SortedSet<java.util.Collections_UnmodifiableSortedSet.E>):Void;
+
+	function comparator():java.util.Comparator<Dynamic>;
+
+	function subSet(param1:java.util.Collections_UnmodifiableSortedSet.E, param2:java.util.Collections_UnmodifiableSortedSet.E):java.util.SortedSet<java.util.Collections_UnmodifiableSortedSet.E>;
+
+	function headSet(param1:java.util.Collections_UnmodifiableSortedSet.E):java.util.SortedSet<java.util.Collections_UnmodifiableSortedSet.E>;
+
+	function tailSet(param1:java.util.Collections_UnmodifiableSortedSet.E):java.util.SortedSet<java.util.Collections_UnmodifiableSortedSet.E>;
+
+	function first():java.util.Collections_UnmodifiableSortedSet.E;
+
+	function last():java.util.Collections_UnmodifiableSortedSet.E;
+}

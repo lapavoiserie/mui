@@ -1,0 +1,1 @@
+typedef nui.Modifier = { type : java.lang.String, ?strings : Null<Array<java.lang.String>>, ?floats : Null<Array<Float>> }

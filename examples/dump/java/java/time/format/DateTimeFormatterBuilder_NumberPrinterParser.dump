@@ -1,0 +1,33 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_NumberPrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$NumberPrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$NumberPrinterParser implements java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser {
+
+	function new(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:java.time.format.SignStyle):Void;
+
+	function new(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:java.time.format.SignStyle, param5:Int):Void;
+
+	function withFixedWidth():java.time.format.DateTimeFormatterBuilder$NumberPrinterParser;
+
+	function withSubsequentWidth(param1:Int):java.time.format.DateTimeFormatterBuilder$NumberPrinterParser;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function getValue(param1:java.time.format.DateTimePrintContext, param2:haxe.Int64):haxe.Int64;
+
+	function isFixedWidth(param1:java.time.format.DateTimeParseContext):Bool;
+
+	function parse(param1:java.time.format.DateTimeParseContext, param2:java.lang.CharSequence, param3:Int):Int;
+
+	function setValue(param1:java.time.format.DateTimeParseContext, param2:haxe.Int64, param3:Int, param4:Int):Int;
+
+	function toString():java.lang.String;
+
+	var field(default,ctor):java.time.temporal.TemporalField;
+
+	var minWidth(default,ctor):Int;
+
+	var maxWidth(default,ctor):Int;
+
+	var subsequentWidth(default,ctor):Int;
+
+	static var EXCEED_POINTS(default,never):java.NativeArray<haxe.Int64>;
+}

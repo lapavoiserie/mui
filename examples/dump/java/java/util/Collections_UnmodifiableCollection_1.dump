@@ -1,0 +1,16 @@
+@:realPath("java.util.Collections_UnmodifiableCollection_1") @:used @:native("java.util.Collections$UnmodifiableCollection$1") @:libType
+extern class java.util.Collections$UnmodifiableCollection$1 implements java.util.Iterator<Dynamic> {
+
+	function new(param1:java.util.Collections$UnmodifiableCollection<Dynamic>):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function remove():Void;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.Collections$UnmodifiableCollection<Dynamic>;
+}

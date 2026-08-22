@@ -1,0 +1,7 @@
+@:realPath("java.io.EOFException") @:native("java.io.EOFException") @:libType
+extern class java.io.EOFException extends java.io.IOException {
+
+	function new():Void;
+
+	function new(param1:java.lang.String):Void;
+}

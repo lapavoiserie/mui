@@ -1,0 +1,33 @@
+@:realPath("java.sun.misc.URLClassPath_JarLoader_2") @:used @:native("sun.misc.URLClassPath$JarLoader$2") @:libType
+extern class sun.misc.URLClassPath$JarLoader$2 extends sun.misc.Resource {
+
+	function new(param1:sun.misc.URLClassPath$JarLoader, param2:java.lang.String, param3:java.net.URL, param4:java.util.jar.JarEntry):Void;
+
+	function getName():java.lang.String;
+
+	function getURL():java.net.URL;
+
+	function getCodeSourceURL():java.net.URL;
+
+	function getInputStream():java.io.InputStream;
+
+	function getContentLength():Int;
+
+	function getManifest():java.util.jar.Manifest;
+
+	function getCertificates():java.NativeArray<java.security.cert.Certificate>;
+
+	function getCodeSigners():java.NativeArray<java.security.CodeSigner>;
+
+	@:realPath("val_name") @:native("val$name")
+	var val$name(default,ctor):java.lang.String;
+
+	@:realPath("val_url") @:native("val$url")
+	var val$url(default,ctor):java.net.URL;
+
+	@:realPath("val_entry") @:native("val$entry")
+	var val$entry(default,ctor):java.util.jar.JarEntry;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):sun.misc.URLClassPath$JarLoader;
+}

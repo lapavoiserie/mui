@@ -1,0 +1,17 @@
+@:realPath("java.util.jar.JarFile_2") @:used @:native("java.util.jar.JarFile$2") @:libType
+extern class java.util.jar.JarFile$2 implements java.util.Enumeration<java.util.jar.JarEntry> {
+
+	function new(param1:java.util.jar.JarFile, param2:java.util.Enumeration<Dynamic>):Void;
+
+	function hasMoreElements():Bool;
+
+	function nextElement():java.util.jar.JarFile$JarFileEntry;
+
+	var entry:java.util.zip.ZipEntry;
+
+	@:realPath("val_enum_") @:native("val$enum_")
+	var val$enum_(default,ctor):java.util.Enumeration<Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.jar.JarFile;
+}

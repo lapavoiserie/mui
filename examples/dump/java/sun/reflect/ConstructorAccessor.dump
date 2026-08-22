@@ -1,0 +1,5 @@
+@:realPath("java.sun.reflect.ConstructorAccessor") @:used @:native("sun.reflect.ConstructorAccessor") @:libType
+extern interface sun.reflect.ConstructorAccessor {
+
+	function newInstance(param1:java.NativeArray<Dynamic>):Dynamic;
+}

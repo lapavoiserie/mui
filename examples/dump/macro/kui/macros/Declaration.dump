@@ -1,0 +1,1 @@
+typedef kui.macros.Declaration = { toolchains : Array<String>, platform : String, backend : String }

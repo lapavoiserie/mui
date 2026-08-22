@@ -1,0 +1,20 @@
+@:realPath("java.util.LinkedHashMap_LinkedHashIterator") @:used @:native("java.util.LinkedHashMap$LinkedHashIterator") @:libType
+extern class java.util.LinkedHashMap$LinkedHashIterator {
+
+	function new(param1:java.util.LinkedHashMap<Dynamic, Dynamic>):Void;
+
+	function hasNext():Bool;
+
+	function nextNode():java.util.LinkedHashMap$Entry<Dynamic, Dynamic>;
+
+	function remove():Void;
+
+	var next:java.util.LinkedHashMap$Entry<Dynamic, Dynamic>;
+
+	var current:java.util.LinkedHashMap$Entry<Dynamic, Dynamic>;
+
+	var expectedModCount:Int;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.LinkedHashMap<Dynamic, Dynamic>;
+}

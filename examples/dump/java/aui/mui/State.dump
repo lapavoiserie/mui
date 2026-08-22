@@ -1,0 +1,1 @@
+typedef aui.mui.State<T> = aui.state.State<aui.mui.State.T>

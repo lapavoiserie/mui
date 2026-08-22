@@ -1,0 +1,174 @@
+@:realPath("java.NativeString") @:directlyUsed @:used @:native("java.lang.String")
+extern class java.lang.String {
+
+	function charAt(index:Int):java.Char16;
+
+	function codePointAt(index:Int):Int;
+
+	function codePointBefore(index:Int):Int;
+
+	function codePointCount(beginIndex:Int, endIndex:Int):Int;
+
+	function compareTo(anotherString:java.lang.String):Int;
+
+	function compareToIgnoreCase(str:java.lang.String):Int;
+
+	function concat(str:java.lang.String):java.lang.String;
+
+	function contains(s:java.lang.CharSequence):Bool;
+
+	@:overload
+	function contentEquals(cs:java.lang.CharSequence):Bool;
+
+	@:overload
+	function contentEquals(sb:java.lang.StringBuffer):Bool;
+
+	function endsWith(suffix:java.lang.String):Bool;
+
+	function equals(anObject:Dynamic):Bool;
+
+	function equalsIgnoreCase(anotherString:java.lang.String):Bool;
+
+	@:overload
+	function getBytes():java.NativeArray<java.Int8>;
+
+	@:overload
+	function getBytes(charsetName:java.lang.String):java.NativeArray<java.Int8>;
+
+	@:deprecated @:overload
+	function getBytes(srcBegin:Int, srcEnd:Int, dst:java.NativeArray<java.Int8>, dstBegin:Int):Void;
+
+	@:overload
+	function getBytes(charset:java.nio.charset.Charset):java.NativeArray<java.Int8>;
+
+	function getChars(srcBegin:Int, srcEnd:Int, dst:java.NativeArray<java.Char16>, dstBegin:Int):Void;
+
+	function hashCode():Int;
+
+	@:overload
+	function indexOf(ch:Int):Int;
+
+	@:overload
+	function indexOf(str:java.lang.String, fromIndex:Int):Int;
+
+	@:overload
+	function indexOf(str:java.lang.String):Int;
+
+	@:overload
+	function indexOf(ch:Int, fromIndex:Int):Int;
+
+	function intern():java.lang.String;
+
+	function isEmpty():Bool;
+
+	@:overload
+	function lastIndexOf(ch:Int):Int;
+
+	@:overload
+	function lastIndexOf(str:java.lang.String, fromIndex:Int):Int;
+
+	@:overload
+	function lastIndexOf(str:java.lang.String):Int;
+
+	@:overload
+	function lastIndexOf(ch:Int, fromIndex:Int):Int;
+
+	function length():Int;
+
+	function matches(regex:java.lang.String):Bool;
+
+	function offsetByCodePoints(index:Int, codePointOffset:Int):Int;
+
+	@:overload
+	function regionMatches(ignoreCase:Bool, toffset:Int, other:java.lang.String, ooffset:Int, len:Int):Bool;
+
+	@:overload
+	function regionMatches(toffset:Int, other:java.lang.String, ooffset:Int, len:Int):Bool;
+
+	@:overload
+	function replace(oldChar:java.Char16, newChar:java.Char16):java.lang.String;
+
+	@:overload
+	function replace(target:java.lang.CharSequence, replacement:java.lang.CharSequence):java.lang.String;
+
+	function replaceAll(regex:java.lang.String, replacement:java.lang.String):java.lang.String;
+
+	function replaceFirst(regex:java.lang.String, replacement:java.lang.String):java.lang.String;
+
+	@:overload
+	function split(regex:java.lang.String):java.NativeArray<java.lang.String>;
+
+	@:overload
+	function split(regex:java.lang.String, limit:Int):java.NativeArray<java.lang.String>;
+
+	@:overload
+	function startsWith(prefix:java.lang.String):Bool;
+
+	@:overload
+	function startsWith(prefix:java.lang.String, toffset:Int):Bool;
+
+	function subSequence(beginIndex:Int, endIndex:Int):java.lang.CharSequence;
+
+	@:overload
+	function substring(beginIndex:Int):java.lang.String;
+
+	@:overload
+	function substring(beginIndex:Int, endIndex:Int):java.lang.String;
+
+	function toCharArray():java.NativeArray<java.Char16>;
+
+	@:overload
+	function toLowerCase():java.lang.String;
+
+	@:overload
+	function toLowerCase(locale:java.util.Locale):java.lang.String;
+
+	function toString():java.lang.String;
+
+	@:overload
+	function toUpperCase():java.lang.String;
+
+	@:overload
+	function toUpperCase(locale:java.util.Locale):java.lang.String;
+
+	function trim():java.lang.String;
+
+	@:overload
+	static function copyValueOf(data:java.NativeArray<java.Char16>):java.lang.String;
+
+	@:overload
+	static function copyValueOf(data:java.NativeArray<java.Char16>, offset:Int, count:Int):java.lang.String;
+
+	@:overload
+	static function format(l:java.util.Locale, format:java.lang.String, args:haxe.extern.Rest<Dynamic>):java.lang.String;
+
+	@:overload
+	static function format(format:java.lang.String, args:haxe.extern.Rest<Dynamic>):java.lang.String;
+
+	@:overload
+	static function valueOf(b:Bool):java.lang.String;
+
+	@:overload
+	static function valueOf(obj:java.lang.Object):java.lang.String;
+
+	@:overload
+	static function valueOf(l:haxe.Int64):java.lang.String;
+
+	@:overload
+	static function valueOf(i:Int):java.lang.String;
+
+	@:overload
+	static function valueOf(f:java.lang.String):java.lang.String;
+
+	@:overload
+	static function valueOf(d:Float):java.lang.String;
+
+	@:overload
+	static function valueOf(data:java.NativeArray<java.Char16>, offset:Int, count:Int):java.lang.String;
+
+	@:overload
+	static function valueOf(data:java.NativeArray<java.Char16>):java.lang.String;
+
+	@:overload
+	static function valueOf(c:java.Char16):java.lang.String;
+}

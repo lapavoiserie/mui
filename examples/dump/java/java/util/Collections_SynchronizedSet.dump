@@ -1,0 +1,11 @@
+@:realPath("java.util.Collections_SynchronizedSet") @:used @:native("java.util.Collections$SynchronizedSet") @:libType
+extern class java.util.Collections$SynchronizedSet<E:Dynamic> extends java.util.Collections$SynchronizedCollection<java.util.Collections_SynchronizedSet.E> implements java.util.Set<java.util.Collections_SynchronizedSet.E> {
+
+	function new(param1:java.util.Set<java.util.Collections_SynchronizedSet.E>):Void;
+
+	function new(param1:java.util.Set<java.util.Collections_SynchronizedSet.E>, param2:Dynamic):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+}

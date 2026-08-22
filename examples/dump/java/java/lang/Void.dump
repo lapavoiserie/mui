@@ -1,0 +1,5 @@
+@:realPath("java.lang.Void") @:used @:native("java.lang.Void") @:libType
+extern class java.lang.Void {
+
+	static var TYPE(default,never):java.lang.Class<java.lang.Void>;
+}

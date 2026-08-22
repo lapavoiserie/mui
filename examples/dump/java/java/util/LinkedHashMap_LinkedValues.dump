@@ -1,0 +1,20 @@
+@:realPath("java.util.LinkedHashMap_LinkedValues") @:used @:native("java.util.LinkedHashMap$LinkedValues") @:libType
+extern class java.util.LinkedHashMap$LinkedValues extends java.util.AbstractCollection<Dynamic> {
+
+	function new(param1:java.util.LinkedHashMap<Dynamic, Dynamic>):Void;
+
+	function size():Int;
+
+	function clear():Void;
+
+	function iterator():java.util.Iterator<Dynamic>;
+
+	function contains(param1:Dynamic):Bool;
+
+	function spliterator():java.util.Spliterator<Dynamic>;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.LinkedHashMap<Dynamic, Dynamic>;
+}

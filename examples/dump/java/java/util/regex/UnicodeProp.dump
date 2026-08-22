@@ -1,0 +1,22 @@
+@:realPath("java.util.regex.UnicodeProp") @:used @:flatEnum @:native("java.util.regex.UnicodeProp")
+extern enum java.util.regex.UnicodeProp {
+	ALPHABETIC;
+	LETTER;
+	IDEOGRAPHIC;
+	LOWERCASE;
+	UPPERCASE;
+	TITLECASE;
+	WHITE_SPACE;
+	CONTROL;
+	PUNCTUATION;
+	HEX_DIGIT;
+	ASSIGNED;
+	NONCHARACTER_CODE_POINT;
+	DIGIT;
+	ALNUM;
+	BLANK;
+	GRAPH;
+	PRINT;
+	WORD;
+	JOIN_CONTROL;
+}

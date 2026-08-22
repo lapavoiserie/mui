@@ -1,0 +1,9 @@
+@:realPath("java.io.ObjectStreamClass_WeakClassKey") @:native("java.io.ObjectStreamClass$WeakClassKey") @:libType
+extern class java.io.ObjectStreamClass$WeakClassKey extends java.lang.ref.WeakReference<java.lang.Class<Dynamic>> {
+
+	function new(param1:java.lang.Class<Dynamic>, param2:java.lang.ref.ReferenceQueue<java.lang.Class<Dynamic>>):Void;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+}

@@ -1,0 +1,289 @@
+class aui.macros.StateMacro {
+
+	@:has_untyped
+	public static function build() {
+		var fields = haxe.macro.Context.getBuildFields();
+		var newFields = [];
+		var stateInits = [];
+		var liftedClosures = [];
+		var liftCounter = [0];
+		var tryLiftClosure = function(closureExpr:haxe.macro.Expr) {
+			if (closureExpr == null) {
+				return closureExpr;
+			};
+			return @:ast(switch (closureExpr.expr) {
+	case EFunction(FAnonymous | FArrow, fun) if (fun.args.length == 0 && fun.expr != null):
+		var name = "__aui_action_" + (liftCounter++);
+		liftedClosures.push({ name : name, access : [APublic], kind : FFun({ args : [], ret : (TPath({ pack : [], name : "Void", params : [] }) : haxe.macro.Expr.ComplexType), expr : fun.expr }), pos : closureExpr.pos });
+		({ expr : EField({ expr : EConst(CIdent("this")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 1265, 1269) }, name, Normal), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 1265, 1275) } : haxe.macro.Expr);	
+	default:
+		closureExpr;	
+}) {
+				var ` = closureExpr.expr;
+				if (enumIndex ` == 11) {
+					var ` = `[0];
+					var ` = `[1];
+					if (` == null) {
+						closureExpr;
+					} else switch (enumIndex `) {
+						case 0, 2: {
+							{
+								var fun = `;
+								if (fun.args.length == 0 && fun.expr != null) {
+									var name = "__aui_action_" + (liftCounter[0] ++);
+									liftedClosures.push({name : name, access : [haxe.macro.Access.APublic], kind : haxe.macro.FieldType.FFun({args : [], ret : cast haxe.macro.ComplexType.TPath({pack : [], name : "Void", params : []}), expr : fun.expr}), pos : closureExpr.pos});
+									cast {expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("this")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 1265, 1269)}, name, haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 1265, 1275)};
+								} else {
+									closureExpr;
+								};
+							};
+						};
+						default: {
+							closureExpr;
+						}
+					};
+				} else {
+					closureExpr;
+				};
+			};
+		};
+		var liftClosuresInExpr = [null];
+		liftClosuresInExpr[0] = function(expr:haxe.macro.Expr) {
+			if (expr == null) {
+				return expr;
+			};
+			return @:ast(switch (expr.expr) {
+	case ENew(typePath, args) if (typePath.name == "Button" && args.length >= 2):
+		var newArgs = args.copy();
+		newArgs[1] = tryLiftClosure(newArgs[1]);
+		{ expr : ENew(typePath, newArgs), pos : expr.pos };	
+	default:
+		ExprTools.map(expr, liftClosuresInExpr);	
+}) {
+				var ` = expr.expr;
+				if (enumIndex ` == 8) {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var typePath = `;
+						var args = `;
+						if (typePath.name == "Button" && args.length >= 2) {
+							var newArgs = args.copy();
+							newArgs[1] = tryLiftClosure(newArgs[1]);
+							{expr : haxe.macro.ExprDef.ENew(typePath, newArgs), pos : expr.pos};
+						} else {
+							haxe.macro.ExprTools.map(expr, liftClosuresInExpr[0]);
+						};
+					};
+				} else {
+					haxe.macro.ExprTools.map(expr, liftClosuresInExpr[0]);
+				};
+			};
+		};
+		{
+			var ` = 0;
+			while (` < fields.length) {
+				var field = fields[`];
+				++ `;
+				var isState = false;
+				if (field.meta != null) {
+					{
+						var ` = 0;
+						var ` = field.meta;
+						while (` < `.length) {
+							var meta = `[`];
+							++ `;
+							if (meta.name == ":state") {
+								isState = true;
+								break;
+							};
+						};
+					};
+				};
+				if (isState) {
+					@:ast(switch (field.kind) {
+	case FVar(t, e):
+		var stateType = (TPath({ pack : ["aui", "state"], name : "State", params : [TPType(t)] }) : haxe.macro.Expr.ComplexType);
+		var fieldName = field.name;
+		var defaultExpr = e != null ? e : ({ expr : EConst(CIdent("null")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2177, 2181) } : haxe.macro.Expr);
+		field.kind = FVar(stateType, null);
+		field.meta = [];
+		stateInits.push(({ expr : EBinop(OpAssign, { expr : EField({ expr : EConst(CIdent("this")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2344, 2348) }, fieldName, Normal), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2344, 2359) }, { expr : ENew({ pack : ["aui", "state"], name : "State", params : [] }, [defaultExpr, haxe.macro.Context.makeExpr(fieldName, untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2399, 2408))]), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2362, 2410) }), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2344, 2410) } : haxe.macro.Expr));
+		newFields.push(field);	
+	default:
+		newFields.push(field);	
+}) {
+						var ` = field.kind;
+						if (enumIndex ` == 0) {
+							var ` = `[0];
+							var ` = `[1];
+							{
+								var t = `;
+								var e = `;
+								{
+									var stateType = cast haxe.macro.ComplexType.TPath({pack : ["aui", "state"], name : "State", params : [haxe.macro.TypeParam.TPType(t)]});
+									var fieldName = field.name;
+									var defaultExpr = if (e != null) {
+										e;
+									} else {
+										cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("null")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2177, 2181)};
+									};
+									field.kind = haxe.macro.FieldType.FVar(stateType, null);
+									field.meta = [];
+									stateInits.push(cast {expr : haxe.macro.ExprDef.EBinop(haxe.macro.Binop.OpAssign, {expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("this")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2344, 2348)}, fieldName, haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2344, 2359)}, {expr : haxe.macro.ExprDef.ENew({pack : ["aui", "state"], name : "State", params : []}, [defaultExpr, haxe.macro.Context.makeExpr(fieldName, $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2399, 2408))]), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2362, 2410)}), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 2344, 2410)});
+									newFields.push(field);
+								};
+							};
+						} else {
+							newFields.push(field);
+						};
+					};
+				} else {
+					@:ast(switch (field.kind) {
+	case FFun(f) if (f.expr != null):
+		f.expr = liftClosuresInExpr(f.expr);	
+	default:
+}) {
+						var ` = field.kind;
+						if (enumIndex ` == 1) {
+							var ` = `[0];
+							{
+								var f = `;
+								if (f.expr != null) {
+									f.expr = liftClosuresInExpr[0](f.expr);
+								} else {};
+							};
+						} else {};
+					};
+					newFields.push(field);
+				};
+			};
+		};
+		{
+			var ` = 0;
+			while (` < liftedClosures.length) {
+				var lc = liftedClosures[`];
+				++ `;
+				newFields.push(lc);
+			};
+		};
+		if (stateInits.length > 0) {
+			var hasConstructor = false;
+			{
+				var ` = 0;
+				while (` < newFields.length) {
+					var field = newFields[`];
+					++ `;
+					if (field.name == "new") {
+						hasConstructor = true;
+						@:ast(switch (field.kind) {
+	case FFun(f):
+		var statements = switch (f.expr) {
+			case null:
+				[];			
+			case { expr : EBlock(b) }:
+				b.copy();			
+			case e:
+				[e];			
+		};
+		var isSuper = statements.length > 0 && switch (statements[0].expr) {
+			case ECall({ expr : EConst(CIdent("super")) }, _):
+				true;			
+			case _:
+				false;			
+		};
+		f.expr = isSuper ? ({ expr : EBlock([statements[0]].concat(stateInits).concat(statements.slice(1))), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 4154, 4218) } : haxe.macro.Expr) : ({ expr : EBlock(stateInits.concat(statements)), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 4237, 4268) } : haxe.macro.Expr);	
+	default:
+}) {
+							var ` = field.kind;
+							if (enumIndex ` == 1) {
+								var ` = `[0];
+								{
+									var f = `;
+									{
+										var statements = @:ast(switch (f.expr) {
+	case null:
+		[];	
+	case { expr : EBlock(b) }:
+		b.copy();	
+	case e:
+		[e];	
+}) {
+											var ` = f.expr;
+											if (` == null) {
+												[];
+											} else {
+												var ` = `.expr;
+												var ` = `.pos;
+												if (enumIndex ` == 12) {
+													var ` = `[0];
+													{
+														var b = `;
+														{
+															b.copy();
+														};
+													};
+												} else {
+													var e = `;
+													{
+														[e];
+													};
+												};
+											};
+										};
+										var isSuper = statements.length > 0 && @:ast(switch (statements[0].expr) {
+	case ECall({ expr : EConst(CIdent("super")) }, _):
+		true;	
+	case _:
+		false;	
+}) {
+											var ` = statements[0].expr;
+											if (enumIndex ` == 7) {
+												var ` = `[0];
+												var ` = `[1];
+												{
+													var ` = `.expr;
+													var ` = `.pos;
+													if (enumIndex ` == 0) {
+														var ` = `[0];
+														if (enumIndex ` == 3) {
+															var ` = `[0];
+															if (` == "super") {
+																{
+																	true;
+																};
+															} else {
+																false;
+															};
+														} else {
+															false;
+														};
+													} else {
+														false;
+													};
+												};
+											} else {
+												false;
+											};
+										};
+										f.expr = if (isSuper) {
+											cast {expr : haxe.macro.ExprDef.EBlock([statements[0]].concat(stateInits).concat(statements.slice(1, null))), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 4154, 4218)};
+										} else {
+											cast {expr : haxe.macro.ExprDef.EBlock(stateInits.concat(statements)), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 4237, 4268)};
+										};
+									};
+								};
+							} else {};
+						};
+						break;
+					};
+				};
+			};
+			if (! hasConstructor) {
+				var initBlock = [cast {expr : haxe.macro.ExprDef.ECall({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("super")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 4381, 4386)}, []), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 4381, 4388)}].concat(stateInits);
+				newFields.push({name : "new", access : [haxe.macro.Access.APublic], kind : haxe.macro.FieldType.FFun({args : [], ret : null, expr : cast {expr : haxe.macro.ExprDef.EBlock(initBlock), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/StateMacro.hx", 4544, 4555)}}), pos : haxe.macro.Context.currentPos()});
+			};
+		};
+		return aui.macros.LiveProps.apply(newFields);
+	}
+}

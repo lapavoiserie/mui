@@ -1,0 +1,22 @@
+@:realPath("java.util.HashMap_HashIterator") @:used @:native("java.util.HashMap$HashIterator") @:libType
+extern class java.util.HashMap$HashIterator {
+
+	function new(param1:java.util.HashMap<Dynamic, Dynamic>):Void;
+
+	function hasNext():Bool;
+
+	function nextNode():java.util.HashMap$Node<Dynamic, Dynamic>;
+
+	function remove():Void;
+
+	var next:java.util.HashMap$Node<Dynamic, Dynamic>;
+
+	var current:java.util.HashMap$Node<Dynamic, Dynamic>;
+
+	var expectedModCount:Int;
+
+	var index:Int;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.HashMap<Dynamic, Dynamic>;
+}

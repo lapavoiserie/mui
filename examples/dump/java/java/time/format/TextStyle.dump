@@ -1,0 +1,9 @@
+@:realPath("java.time.format.TextStyle") @:used @:flatEnum @:native("java.time.format.TextStyle")
+extern enum java.time.format.TextStyle {
+	FULL;
+	FULL_STANDALONE;
+	SHORT;
+	SHORT_STANDALONE;
+	NARROW;
+	NARROW_STANDALONE;
+}

@@ -1,0 +1,15 @@
+@:realPath("java.util.regex.Pattern_TreeInfo") @:used @:native("java.util.regex.Pattern$TreeInfo") @:libType
+extern class java.util.regex.Pattern$TreeInfo {
+
+	function new():Void;
+
+	function reset():Void;
+
+	var minLength:Int;
+
+	var maxLength:Int;
+
+	var maxValid:Bool;
+
+	var deterministic:Bool;
+}

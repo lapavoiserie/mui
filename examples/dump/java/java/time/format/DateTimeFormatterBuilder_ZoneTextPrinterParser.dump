@@ -1,0 +1,9 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_ZoneTextPrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$ZoneTextPrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$ZoneTextPrinterParser extends java.time.format.DateTimeFormatterBuilder$ZoneIdPrinterParser {
+
+	function new(param1:java.time.format.TextStyle, param2:java.util.Set<java.time.ZoneId>):Void;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function getTree(param1:java.time.format.DateTimeParseContext):java.time.format.DateTimeFormatterBuilder$PrefixTree;
+}

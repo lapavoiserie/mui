@@ -1,0 +1,37 @@
+class kui.macros.Host {
+
+	@:value(null)
+	static var declared:Null<kui.macros.Declaration> = null;
+
+	public static function register(declaration:kui.macros.Declaration) kui.macros.Host.declared = declaration
+
+	public static function platform() {
+		var defined = haxe.macro.Context.definedValue("kui_platform");
+		if (defined != null) {
+			return defined;
+		};
+		return if (kui.macros.Host.declared == null) {
+			null;
+		} else {
+			kui.macros.Host.declared.platform;
+		};
+	}
+
+	public static function toolchains() {
+		var defined = haxe.macro.Context.definedValue("kui_toolchains");
+		if (defined != null) {
+			return defined.split(",");
+		};
+		return if (kui.macros.Host.declared == null) {
+			[];
+		} else {
+			kui.macros.Host.declared.toolchains;
+		};
+	}
+
+	public static function backend() return if (kui.macros.Host.declared == null) {
+		null;
+	} else {
+		kui.macros.Host.declared.backend;
+	}
+}

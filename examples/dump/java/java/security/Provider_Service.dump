@@ -1,0 +1,25 @@
+@:realPath("java.security.Provider_Service") @:native("java.security.Provider$Service") @:libType
+extern class java.security.Provider$Service {
+
+	function new(param1:java.security.Provider, param2:java.lang.String, param3:java.lang.String, param4:java.lang.String, param5:java.util.List<java.lang.String>, param6:java.util.Map<java.lang.String, java.lang.String>):Void;
+
+	function new(param1:java.security.Provider, param2:java.security.Provider$1):Void;
+
+	function addAttribute(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function getType():java.lang.String;
+
+	function getAlgorithm():java.lang.String;
+
+	function getProvider():java.security.Provider;
+
+	function getClassName():java.lang.String;
+
+	function getAttribute(param1:java.lang.String):java.lang.String;
+
+	function newInstance(param1:Dynamic):Dynamic;
+
+	function supportsParameter(param1:Dynamic):Bool;
+
+	function toString():java.lang.String;
+}

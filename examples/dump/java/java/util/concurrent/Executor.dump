@@ -1,0 +1,5 @@
+@:realPath("java.util.concurrent.Executor") @:used @:native("java.util.concurrent.Executor") @:libType
+extern interface java.util.concurrent.Executor {
+
+	function execute(param1:java.lang.Runnable):Void;
+}

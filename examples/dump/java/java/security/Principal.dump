@@ -1,0 +1,14 @@
+@:realPath("java.security.Principal") @:used @:native("java.security.Principal") @:libType
+extern interface java.security.Principal {
+
+	function equals(param1:Dynamic):Bool;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function getName():java.lang.String;
+
+	@:java.default
+	function implies(param1:javax.security.auth.Subject):Bool;
+}

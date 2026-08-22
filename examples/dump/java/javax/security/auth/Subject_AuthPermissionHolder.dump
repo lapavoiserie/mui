@@ -1,0 +1,19 @@
+@:realPath("java.javax.security.auth.Subject_AuthPermissionHolder") @:native("javax.security.auth.Subject$AuthPermissionHolder") @:libType
+extern class javax.security.auth.Subject$AuthPermissionHolder {
+
+	function new():Void;
+
+	static var DO_AS_PERMISSION(default,never):javax.security.auth.AuthPermission;
+
+	static var DO_AS_PRIVILEGED_PERMISSION(default,never):javax.security.auth.AuthPermission;
+
+	static var SET_READ_ONLY_PERMISSION(default,never):javax.security.auth.AuthPermission;
+
+	static var GET_SUBJECT_PERMISSION(default,never):javax.security.auth.AuthPermission;
+
+	static var MODIFY_PRINCIPALS_PERMISSION(default,never):javax.security.auth.AuthPermission;
+
+	static var MODIFY_PUBLIC_CREDENTIALS_PERMISSION(default,never):javax.security.auth.AuthPermission;
+
+	static var MODIFY_PRIVATE_CREDENTIALS_PERMISSION(default,never):javax.security.auth.AuthPermission;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.sun.reflect.generics.tree.Signature") @:used @:native("sun.reflect.generics.tree.Signature") @:libType
+extern interface sun.reflect.generics.tree.Signature implements sun.reflect.generics.tree.Tree {
+
+	function getFormalTypeParameters():java.NativeArray<sun.reflect.generics.tree.FormalTypeParameter>;
+}

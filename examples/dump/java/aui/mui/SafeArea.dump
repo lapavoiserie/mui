@@ -1,0 +1,12 @@
+@:used
+class aui.mui.SafeArea extends aui.ui.SafeArea {
+
+	public function new(content:Array<aui.View>) {
+		super(content);
+		this.padding(16);
+	}
+
+	public function safeArea() {
+		return this;
+	}
+}

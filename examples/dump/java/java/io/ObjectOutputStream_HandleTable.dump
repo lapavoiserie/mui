@@ -1,0 +1,13 @@
+@:realPath("java.io.ObjectOutputStream_HandleTable") @:native("java.io.ObjectOutputStream$HandleTable") @:libType
+extern class java.io.ObjectOutputStream$HandleTable {
+
+	function new(param1:Int, param2:Single):Void;
+
+	function assign(param1:Dynamic):Int;
+
+	function lookup(param1:Dynamic):Int;
+
+	function clear():Void;
+
+	function size():Int;
+}

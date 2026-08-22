@@ -1,0 +1,12 @@
+@:realPath("java.lang.Character_Subset") @:used @:realPath("java.lang.Character_Subset") @:javaNative @:native("java.lang.Character$Subset") @:javaCanonical("java.lang", "Character.Subset")
+extern class java.lang.Character$Subset {
+
+	@:overload
+	function equals(param1:Dynamic):Bool;
+
+	@:overload
+	function hashCode():Int;
+
+	@:overload
+	function toString():java.lang.String;
+}

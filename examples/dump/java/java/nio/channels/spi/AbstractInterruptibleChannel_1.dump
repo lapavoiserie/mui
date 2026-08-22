@@ -1,0 +1,10 @@
+@:realPath("java.nio.channels.spi.AbstractInterruptibleChannel_1") @:used @:native("java.nio.channels.spi.AbstractInterruptibleChannel$1") @:libType
+extern class java.nio.channels.spi.AbstractInterruptibleChannel$1 implements sun.nio.ch.Interruptible {
+
+	function new(param1:java.nio.channels.spi.AbstractInterruptibleChannel):Void;
+
+	function interrupt(param1:java.lang.Thread):Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.nio.channels.spi.AbstractInterruptibleChannel;
+}

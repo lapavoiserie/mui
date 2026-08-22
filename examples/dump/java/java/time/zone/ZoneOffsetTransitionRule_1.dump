@@ -1,0 +1,3 @@
+@:realPath("java.time.zone.ZoneOffsetTransitionRule_1") @:native("java.time.zone.ZoneOffsetTransitionRule$1") @:libType
+extern class java.time.zone.ZoneOffsetTransitionRule$1 {
+}

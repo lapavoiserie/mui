@@ -1,0 +1,17 @@
+@:realPath("java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry") @:used @:native("java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet$UnmodifiableEntry") @:libType
+extern class java.util.Collections$UnmodifiableMap$UnmodifiableEntrySet$UnmodifiableEntry<K:Dynamic, V:Dynamic> implements java.util.Map$Entry<java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.K, java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.V> {
+
+	function new(param1:java.util.Map$Entry<java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.K, java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.V>):Void;
+
+	function getKey():java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.K;
+
+	function getValue():java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.V;
+
+	function setValue(param1:java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.V):java.util.Collections_UnmodifiableMap_UnmodifiableEntrySet_UnmodifiableEntry.V;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function toString():java.lang.String;
+}

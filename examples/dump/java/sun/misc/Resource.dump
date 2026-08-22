@@ -1,0 +1,25 @@
+@:realPath("java.sun.misc.Resource") @:used @:native("sun.misc.Resource") @:libType
+extern class sun.misc.Resource {
+
+	function new():Void;
+
+	function getName():java.lang.String;
+
+	function getURL():java.net.URL;
+
+	function getCodeSourceURL():java.net.URL;
+
+	function getInputStream():java.io.InputStream;
+
+	function getContentLength():Int;
+
+	function getBytes():java.NativeArray<java.types.Int8>;
+
+	function getByteBuffer():java.nio.ByteBuffer;
+
+	function getManifest():java.util.jar.Manifest;
+
+	function getCertificates():java.NativeArray<java.security.cert.Certificate>;
+
+	function getCodeSigners():java.NativeArray<java.security.CodeSigner>;
+}

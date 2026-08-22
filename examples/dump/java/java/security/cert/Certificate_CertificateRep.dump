@@ -1,0 +1,7 @@
+@:realPath("java.security.cert.Certificate_CertificateRep") @:native("java.security.cert.Certificate$CertificateRep") @:libType
+extern class java.security.cert.Certificate$CertificateRep implements java.io.Serializable {
+
+	function new(param1:java.lang.String, param2:java.NativeArray<java.types.Int8>):Void;
+
+	function readResolve():Dynamic;
+}

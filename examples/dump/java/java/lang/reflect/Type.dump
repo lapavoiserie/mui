@@ -1,0 +1,6 @@
+@:realPath("java.lang.reflect.Type") @:used @:native("java.lang.reflect.Type") @:libType
+extern interface java.lang.reflect.Type {
+
+	@:java.default
+	function getTypeName():java.lang.String;
+}

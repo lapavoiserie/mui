@@ -1,0 +1,10 @@
+@:keep @:used
+class haxe.macro.Error extends haxe.Exception {
+
+	public function new(message:java.lang.String, pos:haxe.macro.Position, previous:Null<haxe.Exception> = null) {
+		super(message, if ((previous == null)) null else previous, null);
+		this.pos = pos;
+	}
+
+	public var pos:haxe.macro.Position;
+}

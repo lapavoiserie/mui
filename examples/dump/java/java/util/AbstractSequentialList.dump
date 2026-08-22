@@ -1,0 +1,19 @@
+@:realPath("java.util.AbstractSequentialList") @:used @:native("java.util.AbstractSequentialList") @:libType
+extern class java.util.AbstractSequentialList<E:Dynamic> extends java.util.AbstractList<java.util.AbstractSequentialList.E> {
+
+	function new():Void;
+
+	function get(param1:Int):java.util.AbstractSequentialList.E;
+
+	function set(param1:Int, param2:java.util.AbstractSequentialList.E):java.util.AbstractSequentialList.E;
+
+	function add(param1:Int, param2:java.util.AbstractSequentialList.E):Void;
+
+	function remove(param1:Int):java.util.AbstractSequentialList.E;
+
+	function addAll(param1:Int, param2:java.util.Collection<java.util.AbstractSequentialList.E>):Bool;
+
+	function iterator():java.util.Iterator<java.util.AbstractSequentialList.E>;
+
+	function listIterator(param1:Int):java.util.ListIterator<java.util.AbstractSequentialList.E>;
+}

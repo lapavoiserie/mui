@@ -1,0 +1,3 @@
+@:realPath("java.sun.util.locale.InternalLocaleBuilder_1") @:native("sun.util.locale.InternalLocaleBuilder$1") @:libType
+extern class sun.util.locale.InternalLocaleBuilder$1 {
+}

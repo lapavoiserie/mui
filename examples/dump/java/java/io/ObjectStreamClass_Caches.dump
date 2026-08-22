@@ -1,0 +1,7 @@
+@:realPath("java.io.ObjectStreamClass_Caches") @:native("java.io.ObjectStreamClass$Caches") @:libType
+extern class java.io.ObjectStreamClass$Caches {
+
+	static var localDescs(default,never):java.util.concurrent.ConcurrentMap<java.io.ObjectStreamClass$WeakClassKey, java.lang.ref.Reference<Dynamic>>;
+
+	static var reflectors(default,never):java.util.concurrent.ConcurrentMap<java.io.ObjectStreamClass$FieldReflectorKey, java.lang.ref.Reference<Dynamic>>;
+}

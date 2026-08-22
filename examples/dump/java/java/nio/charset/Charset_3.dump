@@ -1,0 +1,7 @@
+@:realPath("java.nio.charset.Charset_3") @:used @:native("java.nio.charset.Charset$3") @:libType
+extern class java.nio.charset.Charset$3 implements java.security.PrivilegedAction<java.util.SortedMap<java.lang.String, java.nio.charset.Charset>> {
+
+	function new():Void;
+
+	function run():java.util.SortedMap<java.lang.String, java.nio.charset.Charset>;
+}

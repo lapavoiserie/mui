@@ -1,0 +1,23 @@
+@:realPath("java.io.Console") @:used @:native("java.io.Console") @:libType
+extern class java.io.Console implements java.io.Flushable {
+
+	function new(param1:java.io.Console$1):Void;
+
+	function writer():java.io.PrintWriter;
+
+	function reader():java.io.Reader;
+
+	function format(param1:java.lang.String, param2:haxe.Rest<Dynamic>):java.io.Console;
+
+	function printf(param1:java.lang.String, param2:haxe.Rest<Dynamic>):java.io.Console;
+
+	function readLine(param1:java.lang.String, param2:haxe.Rest<Dynamic>):java.lang.String;
+
+	function readLine():java.lang.String;
+
+	function readPassword(param1:java.lang.String, param2:haxe.Rest<Dynamic>):java.NativeArray<java.types.Char16>;
+
+	function readPassword():java.NativeArray<java.types.Char16>;
+
+	function flush():Void;
+}

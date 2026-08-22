@@ -1,0 +1,47 @@
+@:realPath("java.sun.misc.URLClassPath") @:used @:native("sun.misc.URLClassPath") @:libType
+extern class sun.misc.URLClassPath {
+
+	function new(param1:java.NativeArray<java.net.URL>, param2:java.net.URLStreamHandlerFactory):Void;
+
+	function new(param1:java.NativeArray<java.net.URL>):Void;
+
+	function closeLoaders():java.util.List<java.io.IOException>;
+
+	function addURL(param1:java.net.URL):Void;
+
+	function getURLs():java.NativeArray<java.net.URL>;
+
+	function findResource(param1:java.lang.String, param2:Bool):java.net.URL;
+
+	function getResource(param1:java.lang.String, param2:Bool):sun.misc.Resource;
+
+	function getResource(param1:java.lang.String):sun.misc.Resource;
+
+	function findResources(param1:java.lang.String, param2:Bool):java.util.Enumeration<java.net.URL>;
+
+	function getResources(param1:java.lang.String, param2:Bool):java.util.Enumeration<sun.misc.Resource>;
+
+	function getResources(param1:java.lang.String):java.util.Enumeration<sun.misc.Resource>;
+
+	function initLookupCache(param1:java.lang.ClassLoader):Void;
+
+	function knownToNotExist(param1:java.lang.String):Bool;
+
+	function checkURL(param1:java.net.URL):java.net.URL;
+
+	var urls:java.util.Stack<java.net.URL>;
+
+	var loaders:java.util.ArrayList<sun.misc.URLClassPath$Loader>;
+
+	var lmap:java.util.HashMap<java.lang.String, sun.misc.URLClassPath$Loader>;
+
+	static function disableAllLookupCaches():Void;
+
+	static function pathToURLs(param1:java.lang.String):java.NativeArray<java.net.URL>;
+
+	static function check(param1:java.net.URL):Void;
+
+	static var USER_AGENT_JAVA_VERSION(default,never):java.lang.String;
+
+	static var JAVA_VERSION(default,never):java.lang.String;
+}

@@ -1,0 +1,137 @@
+@:realPath("java.nio.ByteBuffer") @:used @:native("java.nio.ByteBuffer") @:libType
+extern class java.nio.ByteBuffer extends java.nio.Buffer implements java.lang.Comparable<java.nio.ByteBuffer> {
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int, param5:java.NativeArray<java.types.Int8>, param6:Int):Void;
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int):Void;
+
+	function slice():java.nio.ByteBuffer;
+
+	function duplicate():java.nio.ByteBuffer;
+
+	function asReadOnlyBuffer():java.nio.ByteBuffer;
+
+	function get():java.types.Int8;
+
+	function get(param1:java.NativeArray<java.types.Int8>):java.nio.ByteBuffer;
+
+	function get(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):java.nio.ByteBuffer;
+
+	function get(param1:Int):java.types.Int8;
+
+	function put(param1:java.types.Int8):java.nio.ByteBuffer;
+
+	function put(param1:java.NativeArray<java.types.Int8>):java.nio.ByteBuffer;
+
+	function put(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):java.nio.ByteBuffer;
+
+	function put(param1:java.nio.ByteBuffer):java.nio.ByteBuffer;
+
+	function put(param1:Int, param2:java.types.Int8):java.nio.ByteBuffer;
+
+	function hasArray():Bool;
+
+	function array():java.NativeArray<java.types.Int8>;
+
+	function arrayOffset():Int;
+
+	function compact():java.nio.ByteBuffer;
+
+	function isDirect():Bool;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function compareTo(param1:java.nio.ByteBuffer):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function order():java.nio.ByteOrder;
+
+	function order(param1:java.nio.ByteOrder):java.nio.ByteBuffer;
+
+	function _get(param1:Int):java.types.Int8;
+
+	function _put(param1:Int, param2:java.types.Int8):Void;
+
+	function getChar():java.types.Char16;
+
+	function getChar(param1:Int):java.types.Char16;
+
+	function putChar(param1:java.types.Char16):java.nio.ByteBuffer;
+
+	function putChar(param1:Int, param2:java.types.Char16):java.nio.ByteBuffer;
+
+	function asCharBuffer():java.nio.CharBuffer;
+
+	function getShort():java.types.Int16;
+
+	function getShort(param1:Int):java.types.Int16;
+
+	function putShort(param1:java.types.Int16):java.nio.ByteBuffer;
+
+	function putShort(param1:Int, param2:java.types.Int16):java.nio.ByteBuffer;
+
+	function asShortBuffer():java.nio.ShortBuffer;
+
+	function getInt():Int;
+
+	function getInt(param1:Int):Int;
+
+	function putInt(param1:Int):java.nio.ByteBuffer;
+
+	function putInt(param1:Int, param2:Int):java.nio.ByteBuffer;
+
+	function asIntBuffer():java.nio.IntBuffer;
+
+	function getLong():haxe.Int64;
+
+	function getLong(param1:Int):haxe.Int64;
+
+	function putLong(param1:haxe.Int64):java.nio.ByteBuffer;
+
+	function putLong(param1:Int, param2:haxe.Int64):java.nio.ByteBuffer;
+
+	function asLongBuffer():java.nio.LongBuffer;
+
+	function getFloat():Single;
+
+	function getFloat(param1:Int):Single;
+
+	function putFloat(param1:Single):java.nio.ByteBuffer;
+
+	function putFloat(param1:Int, param2:Single):java.nio.ByteBuffer;
+
+	function asFloatBuffer():java.nio.FloatBuffer;
+
+	function getDouble():Float;
+
+	function getDouble(param1:Int):Float;
+
+	function putDouble(param1:Float):java.nio.ByteBuffer;
+
+	function putDouble(param1:Int, param2:Float):java.nio.ByteBuffer;
+
+	function asDoubleBuffer():java.nio.DoubleBuffer;
+
+	var hb(default,ctor):java.NativeArray<java.types.Int8>;
+
+	var offset(default,ctor):Int;
+
+	var isReadOnly:Bool;
+
+	var bigEndian:Bool;
+
+	var nativeByteOrder:Bool;
+
+	static function allocateDirect(param1:Int):java.nio.ByteBuffer;
+
+	static function allocate(param1:Int):java.nio.ByteBuffer;
+
+	static function wrap(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):java.nio.ByteBuffer;
+
+	static function wrap(param1:java.NativeArray<java.types.Int8>):java.nio.ByteBuffer;
+}

@@ -1,0 +1,37 @@
+@:realPath("java.lang.Class_MethodArray") @:native("java.lang.Class$MethodArray") @:libType
+extern class java.lang.Class$MethodArray {
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function hasDefaults():Bool;
+
+	function add(param1:java.lang.reflect.Method):Void;
+
+	function addAll(param1:java.NativeArray<java.lang.reflect.Method>):Void;
+
+	function addAll(param1:java.lang.Class$MethodArray):Void;
+
+	function addIfNotPresent(param1:java.lang.reflect.Method):Void;
+
+	function addAllIfNotPresent(param1:java.lang.Class$MethodArray):Void;
+
+	function addInterfaceMethods(param1:java.NativeArray<java.lang.reflect.Method>):Void;
+
+	function length():Int;
+
+	function get(param1:Int):java.lang.reflect.Method;
+
+	function getFirst():java.lang.reflect.Method;
+
+	function removeByNameAndDescriptor(param1:java.lang.reflect.Method):Void;
+
+	function compactAndTrim():Void;
+
+	function removeLessSpecifics():Void;
+
+	function getArray():java.NativeArray<java.lang.reflect.Method>;
+
+	static function hasMoreSpecificClass(param1:java.lang.reflect.Method, param2:java.lang.reflect.Method):Bool;
+}

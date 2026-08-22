@@ -1,0 +1,7 @@
+@:realPath("java.nio.channels.CompletionHandler") @:used @:native("java.nio.channels.CompletionHandler") @:libType
+extern interface java.nio.channels.CompletionHandler<V:Dynamic, A:Dynamic> {
+
+	function completed(param1:java.nio.channels.CompletionHandler.V, param2:java.nio.channels.CompletionHandler.A):Void;
+
+	function failed(param1:java.lang.Throwable, param2:java.nio.channels.CompletionHandler.A):Void;
+}

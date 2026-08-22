@@ -1,0 +1,7 @@
+@:used
+class aui.mui.TextInput extends aui.ui.TextField {
+
+	public function new(placeholder:java.lang.String, state:aui.mui.TextInputBinding) {
+		super(placeholder, cast state);
+	}
+}

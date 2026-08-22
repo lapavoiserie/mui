@@ -1,0 +1,21 @@
+@:realPath("java.util.HashMap_HashMapSpliterator") @:used @:native("java.util.HashMap$HashMapSpliterator") @:libType
+extern class java.util.HashMap$HashMapSpliterator<K:Dynamic, V:Dynamic> {
+
+	function new(param1:java.util.HashMap<java.util.HashMap_HashMapSpliterator.K, java.util.HashMap_HashMapSpliterator.V>, param2:Int, param3:Int, param4:Int, param5:Int):Void;
+
+	function getFence():Int;
+
+	function estimateSize():haxe.Int64;
+
+	var map(default,ctor):java.util.HashMap<java.util.HashMap_HashMapSpliterator.K, java.util.HashMap_HashMapSpliterator.V>;
+
+	var current:java.util.HashMap$Node<java.util.HashMap_HashMapSpliterator.K, java.util.HashMap_HashMapSpliterator.V>;
+
+	var index:Int;
+
+	var fence:Int;
+
+	var est:Int;
+
+	var expectedModCount:Int;
+}

@@ -1,0 +1,75 @@
+@:realPath("java.net.InetAddress") @:used @:native("java.net.InetAddress") @:libType
+extern class java.net.InetAddress implements java.io.Serializable {
+
+	function new():Void;
+
+	function holder():java.net.InetAddress$InetAddressHolder;
+
+	function isMulticastAddress():Bool;
+
+	function isAnyLocalAddress():Bool;
+
+	function isLoopbackAddress():Bool;
+
+	function isLinkLocalAddress():Bool;
+
+	function isSiteLocalAddress():Bool;
+
+	function isMCGlobal():Bool;
+
+	function isMCNodeLocal():Bool;
+
+	function isMCLinkLocal():Bool;
+
+	function isMCSiteLocal():Bool;
+
+	function isMCOrgLocal():Bool;
+
+	function isReachable(param1:Int):Bool;
+
+	function isReachable(param1:java.net.NetworkInterface, param2:Int, param3:Int):Bool;
+
+	function getHostName():java.lang.String;
+
+	function getHostName(param1:Bool):java.lang.String;
+
+	function getCanonicalHostName():java.lang.String;
+
+	function getAddress():java.NativeArray<java.types.Int8>;
+
+	function getHostAddress():java.lang.String;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function toString():java.lang.String;
+
+	static function getByAddress(param1:java.lang.String, param2:java.NativeArray<java.types.Int8>):java.net.InetAddress;
+
+	static function getByAddress(param1:java.NativeArray<java.types.Int8>):java.net.InetAddress;
+
+	static function getByName(param1:java.lang.String):java.net.InetAddress;
+
+	static function getAllByName(param1:java.lang.String):java.NativeArray<java.net.InetAddress>;
+
+	static function getLoopbackAddress():java.net.InetAddress;
+
+	static function getAllByName0(param1:java.lang.String, param2:Bool):java.NativeArray<java.net.InetAddress>;
+
+	static function getLocalHost():java.net.InetAddress;
+
+	static function anyLocalAddress():java.net.InetAddress;
+
+	static function loadImpl(param1:java.lang.String):java.net.InetAddressImpl;
+
+	static var IPv4(default,never):Int;
+
+	static var IPv6(default,never):Int;
+
+	static var preferIPv6Address:Bool;
+
+	static var unknown_array:java.NativeArray<java.net.InetAddress>;
+
+	static var impl:java.net.InetAddressImpl;
+}

@@ -1,0 +1,13 @@
+@:realPath("java.io.ObjectInputStream_ValidationList_Callback") @:native("java.io.ObjectInputStream$ValidationList$Callback") @:libType
+extern class java.io.ObjectInputStream$ValidationList$Callback {
+
+	function new(param1:java.io.ObjectInputValidation, param2:Int, param3:java.io.ObjectInputStream$ValidationList$Callback, param4:java.security.AccessControlContext):Void;
+
+	var obj(default,ctor):java.io.ObjectInputValidation;
+
+	var priority(default,ctor):Int;
+
+	var next:java.io.ObjectInputStream$ValidationList$Callback;
+
+	var acc(default,ctor):java.security.AccessControlContext;
+}

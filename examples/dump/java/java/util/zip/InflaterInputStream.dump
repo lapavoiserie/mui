@@ -1,0 +1,35 @@
+@:realPath("java.util.zip.InflaterInputStream") @:used @:native("java.util.zip.InflaterInputStream") @:libType
+extern class java.util.zip.InflaterInputStream extends java.io.FilterInputStream {
+
+	function new(param1:java.io.InputStream, param2:java.util.zip.Inflater, param3:Int):Void;
+
+	function new(param1:java.io.InputStream):Void;
+
+	function new(param1:java.io.InputStream, param2:java.util.zip.Inflater):Void;
+
+	function read():Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function available():Int;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function close():Void;
+
+	function fill():Void;
+
+	function markSupported():Bool;
+
+	function mark(param1:Int):Void;
+
+	function reset():Void;
+
+	var inf:java.util.zip.Inflater;
+
+	var buf:java.NativeArray<java.types.Int8>;
+
+	var len:Int;
+
+	var usesDefaultInflater:Bool;
+}

@@ -1,0 +1,11 @@
+@:realPath("java.lang.ClassValue_Version") @:native("java.lang.ClassValue$Version") @:libType
+extern class java.lang.ClassValue$Version<T:Dynamic> {
+
+	function new(param1:java.lang.ClassValue<java.lang.ClassValue_Version.T>):Void;
+
+	function classValue():java.lang.ClassValue<java.lang.ClassValue_Version.T>;
+
+	function promise():java.lang.ClassValue$Entry<java.lang.ClassValue_Version.T>;
+
+	function isLive():Bool;
+}

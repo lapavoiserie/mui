@@ -1,0 +1,9 @@
+@:realPath("java.net.InetAddress_2") @:used @:native("java.net.InetAddress$2") @:libType
+extern class java.net.InetAddress$2 implements sun.net.spi.nameservice.NameService {
+
+	function new():Void;
+
+	function lookupAllHostAddr(param1:java.lang.String):java.NativeArray<java.net.InetAddress>;
+
+	function getHostByAddr(param1:java.NativeArray<java.types.Int8>):java.lang.String;
+}

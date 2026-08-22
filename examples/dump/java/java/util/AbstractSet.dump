@@ -1,0 +1,11 @@
+@:realPath("java.util.AbstractSet") @:used @:native("java.util.AbstractSet") @:libType
+extern class java.util.AbstractSet<E:Dynamic> extends java.util.AbstractCollection<java.util.AbstractSet.E> implements java.util.Set<java.util.AbstractSet.E> {
+
+	function new():Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function removeAll(param1:java.util.Collection<Dynamic>):Bool;
+}

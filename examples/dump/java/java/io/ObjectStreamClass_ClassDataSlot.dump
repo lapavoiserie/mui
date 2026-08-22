@@ -1,0 +1,9 @@
+@:realPath("java.io.ObjectStreamClass_ClassDataSlot") @:native("java.io.ObjectStreamClass$ClassDataSlot") @:libType
+extern class java.io.ObjectStreamClass$ClassDataSlot {
+
+	function new(param1:java.io.ObjectStreamClass, param2:Bool):Void;
+
+	var desc(default,ctor):java.io.ObjectStreamClass;
+
+	var hasData(default,ctor):Bool;
+}

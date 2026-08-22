@@ -1,0 +1,9 @@
+@:realPath("java.util.Collections_EmptyEnumeration") @:used @:native("java.util.Collections$EmptyEnumeration") @:libType
+extern class java.util.Collections$EmptyEnumeration<E:Dynamic> implements java.util.Enumeration<java.util.Collections_EmptyEnumeration.E> {
+
+	function hasMoreElements():Bool;
+
+	function nextElement():java.util.Collections_EmptyEnumeration.E;
+
+	static var EMPTY_ENUMERATION(default,never):java.util.Collections$EmptyEnumeration<Dynamic>;
+}

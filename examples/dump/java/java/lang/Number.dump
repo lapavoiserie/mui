@@ -1,0 +1,17 @@
+@:realPath("java.lang.Number") @:directlyUsed @:used @:native("java.lang.Number") @:libType
+extern class java.lang.Number implements java.io.Serializable {
+
+	function new():Void;
+
+	function intValue():Int;
+
+	function longValue():haxe.Int64;
+
+	function floatValue():Single;
+
+	function doubleValue():Float;
+
+	function byteValue():java.types.Int8;
+
+	function shortValue():java.types.Int16;
+}

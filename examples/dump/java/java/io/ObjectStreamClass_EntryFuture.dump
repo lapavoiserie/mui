@@ -1,0 +1,11 @@
+@:realPath("java.io.ObjectStreamClass_EntryFuture") @:used @:native("java.io.ObjectStreamClass$EntryFuture") @:libType
+extern class java.io.ObjectStreamClass$EntryFuture {
+
+	function new(param1:java.io.ObjectStreamClass$1):Void;
+
+	function set(param1:Dynamic):Bool;
+
+	function get():Dynamic;
+
+	function getOwner():java.lang.Thread;
+}

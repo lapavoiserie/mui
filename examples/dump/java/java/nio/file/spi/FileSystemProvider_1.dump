@@ -1,0 +1,7 @@
+@:realPath("java.nio.file.spi.FileSystemProvider_1") @:used @:native("java.nio.file.spi.FileSystemProvider$1") @:libType
+extern class java.nio.file.spi.FileSystemProvider$1 implements java.security.PrivilegedAction<java.util.List<java.nio.file.spi.FileSystemProvider>> {
+
+	function new():Void;
+
+	function run():java.util.List<java.nio.file.spi.FileSystemProvider>;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.Init") @:used @:native("haxe.java.Init") @:keep
+class haxe.java.Init {
+
+	public static function init() {}
+}

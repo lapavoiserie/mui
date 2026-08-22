@@ -1,0 +1,23 @@
+@:realPath("java.lang.ThreadLocal") @:used @:native("java.lang.ThreadLocal") @:libType
+extern class java.lang.ThreadLocal<T:Dynamic> {
+
+	function new():Void;
+
+	function initialValue():java.lang.ThreadLocal.T;
+
+	function get():java.lang.ThreadLocal.T;
+
+	function set(param1:java.lang.ThreadLocal.T):Void;
+
+	function remove():Void;
+
+	function getMap(param1:java.lang.Thread):java.lang.ThreadLocal$ThreadLocalMap;
+
+	function createMap(param1:java.lang.Thread, param2:java.lang.ThreadLocal.T):Void;
+
+	function childValue(param1:java.lang.ThreadLocal.T):java.lang.ThreadLocal.T;
+
+	static function withInitial<S:Dynamic>(param1:java.util.function.Supplier<withInitial.S>):java.lang.ThreadLocal<withInitial.S>;
+
+	static function createInheritedMap(param1:java.lang.ThreadLocal$ThreadLocalMap):java.lang.ThreadLocal$ThreadLocalMap;
+}

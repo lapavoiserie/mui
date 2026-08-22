@@ -1,0 +1,32 @@
+@:realPath("java.util.Hashtable_Enumerator") @:used @:native("java.util.Hashtable$Enumerator") @:libType
+extern class java.util.Hashtable$Enumerator<T:Dynamic> implements java.util.Iterator<java.util.Hashtable_Enumerator.T> implements java.util.Enumeration<java.util.Hashtable_Enumerator.T> {
+
+	function new(param1:java.util.Hashtable<Dynamic, Dynamic>, param2:Int, param3:Bool):Void;
+
+	function hasMoreElements():Bool;
+
+	function nextElement():java.util.Hashtable_Enumerator.T;
+
+	function hasNext():Bool;
+
+	function next():java.util.Hashtable_Enumerator.T;
+
+	function remove():Void;
+
+	var table:java.NativeArray<java.util.Hashtable$Entry<Dynamic, Dynamic>>;
+
+	var index:Int;
+
+	var entry:java.util.Hashtable$Entry<Dynamic, Dynamic>;
+
+	var lastReturned:java.util.Hashtable$Entry<Dynamic, Dynamic>;
+
+	var type:Int;
+
+	var iterator:Bool;
+
+	var expectedModCount:Int;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.Hashtable<Dynamic, Dynamic>;
+}

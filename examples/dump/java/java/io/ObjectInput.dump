@@ -1,0 +1,17 @@
+@:realPath("java.io.ObjectInput") @:used @:native("java.io.ObjectInput") @:libType
+extern interface java.io.ObjectInput implements java.io.DataInput implements java.lang.AutoCloseable {
+
+	function readObject():Dynamic;
+
+	function read():Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>):Int;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function available():Int;
+
+	function close():Void;
+}

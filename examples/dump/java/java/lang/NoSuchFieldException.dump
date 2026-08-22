@@ -1,0 +1,7 @@
+@:realPath("java.lang.NoSuchFieldException") @:used @:directlyUsed @:native("java.lang.NoSuchFieldException") @:libType
+extern class java.lang.NoSuchFieldException extends java.lang.ReflectiveOperationException {
+
+	function new():Void;
+
+	function new(param1:java.lang.String):Void;
+}

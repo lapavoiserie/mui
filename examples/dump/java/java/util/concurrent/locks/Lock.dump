@@ -1,0 +1,15 @@
+@:realPath("java.util.concurrent.locks.Lock") @:used @:native("java.util.concurrent.locks.Lock") @:libType
+extern interface java.util.concurrent.locks.Lock {
+
+	function lock():Void;
+
+	function lockInterruptibly():Void;
+
+	function tryLock():Bool;
+
+	function tryLock(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):Bool;
+
+	function unlock():Void;
+
+	function newCondition():java.util.concurrent.locks.Condition;
+}

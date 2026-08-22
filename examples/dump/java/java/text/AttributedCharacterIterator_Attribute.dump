@@ -1,0 +1,21 @@
+@:realPath("java.text.AttributedCharacterIterator_Attribute") @:used @:native("java.text.AttributedCharacterIterator$Attribute") @:libType
+extern class java.text.AttributedCharacterIterator$Attribute implements java.io.Serializable {
+
+	function new(param1:java.lang.String):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function getName():java.lang.String;
+
+	function readResolve():Dynamic;
+
+	static var LANGUAGE(default,never):java.text.AttributedCharacterIterator$Attribute;
+
+	static var READING(default,never):java.text.AttributedCharacterIterator$Attribute;
+
+	static var INPUT_METHOD_SEGMENT(default,never):java.text.AttributedCharacterIterator$Attribute;
+}

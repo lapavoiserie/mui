@@ -1,0 +1,76 @@
+@:directlyUsed @:used
+class rui.Signal<T> {
+
+	public function new(initialValue:rui.Signal.T) {
+		this._value = initialValue;
+		this.checkObservable(this._value);
+	}
+
+	var _value:rui.Signal.T;
+
+	@:value([])
+	var _subscribers:Array<rui.Effect> = [];
+
+	public var value(get,set):rui.Signal.T;
+
+	function get_value() {
+		if ((rui.Effect.get_current() != null)) {
+			rui.Effect.get_current().addDependency(cast this);
+			this.subscribe(rui.Effect.get_current());
+		};
+		return this._value;
+	}
+
+	function set_value(newValue:rui.Signal.T) {
+		if ((this._value != newValue)) {
+			this.cleanupObservable(this._value);
+			this._value = newValue;
+			this.checkObservable(this._value);
+			this.notifySubscribers();
+		};
+		return this._value;
+	}
+
+	function checkObservable(v:Dynamic) {
+		if ((Std.isOfType(v, rui.Observable))) {
+			var obs = cast v;
+			obs.subscribe(this.notifySubscribers);
+		};
+	}
+
+	function cleanupObservable(v:Dynamic) {
+		if ((Std.isOfType(v, rui.Observable))) {
+			var obs = cast v;
+			obs.unsubscribe(this.notifySubscribers);
+		};
+	}
+
+	public function peek() {
+		return this._value;
+	}
+
+	public function subscribe(effect:rui.Effect) {
+		if ((this._subscribers.indexOf(effect, null) == -1)) this._subscribers.push(effect);
+	}
+
+	public function unsubscribe(effect:rui.Effect) {
+		this._subscribers.remove(effect);
+	}
+
+	public function dispose() {
+		this.cleanupObservable(this._value);
+		this._subscribers = [];
+	}
+
+	function notifySubscribers() {
+		var subs = this._subscribers.copy();
+		{
+			var _g = 0;
+			while ((_g < subs.length)) {
+				var sub = subs[_g];
+				++ _g;
+				sub.schedule();
+			};
+		};
+	}
+}

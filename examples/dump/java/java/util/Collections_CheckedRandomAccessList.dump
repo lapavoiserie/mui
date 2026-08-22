@@ -1,0 +1,7 @@
+@:realPath("java.util.Collections_CheckedRandomAccessList") @:used @:native("java.util.Collections$CheckedRandomAccessList") @:libType
+extern class java.util.Collections$CheckedRandomAccessList<E:Dynamic> extends java.util.Collections$CheckedList<java.util.Collections_CheckedRandomAccessList.E> implements java.util.RandomAccess {
+
+	function new(param1:java.util.List<java.util.Collections_CheckedRandomAccessList.E>, param2:java.lang.Class<java.util.Collections_CheckedRandomAccessList.E>):Void;
+
+	function subList(param1:Int, param2:Int):java.util.List<java.util.Collections_CheckedRandomAccessList.E>;
+}

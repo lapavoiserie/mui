@@ -1,0 +1,11 @@
+@:realPath("java.io.InvalidClassException") @:native("java.io.InvalidClassException") @:libType
+extern class java.io.InvalidClassException extends java.io.ObjectStreamException {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function getMessage():java.lang.String;
+
+	var classname:java.lang.String;
+}

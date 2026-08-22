@@ -1,0 +1,9 @@
+@:realPath("java.util.regex.Pattern_Ctype") @:used @:native("java.util.regex.Pattern$Ctype") @:libType
+extern class java.util.regex.Pattern$Ctype extends java.util.regex.Pattern$BmpCharProperty {
+
+	function new(param1:Int):Void;
+
+	function isSatisfiedBy(param1:Int):Bool;
+
+	var ctype(default,ctor):Int;
+}

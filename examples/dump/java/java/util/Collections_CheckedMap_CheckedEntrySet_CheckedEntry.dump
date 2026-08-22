@@ -1,0 +1,17 @@
+@:realPath("java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry") @:used @:native("java.util.Collections$CheckedMap$CheckedEntrySet$CheckedEntry") @:libType
+extern class java.util.Collections$CheckedMap$CheckedEntrySet$CheckedEntry<K:Dynamic, V:Dynamic, T:Dynamic> implements java.util.Map$Entry<java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.K, java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.V> {
+
+	function new(param1:java.util.Map$Entry<java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.K, java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.V>, param2:java.lang.Class<java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.T>):Void;
+
+	function getKey():java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.K;
+
+	function getValue():java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.V;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function setValue(param1:java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.V):java.util.Collections_CheckedMap_CheckedEntrySet_CheckedEntry.V;
+
+	function equals(param1:Dynamic):Bool;
+}

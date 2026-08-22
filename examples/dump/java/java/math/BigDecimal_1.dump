@@ -1,0 +1,7 @@
+@:realPath("java.math.BigDecimal_1") @:used @:native("java.math.BigDecimal$1") @:libType
+extern class java.math.BigDecimal$1 extends java.lang.ThreadLocal<java.math.BigDecimal$StringBuilderHelper> {
+
+	function new():Void;
+
+	function initialValue():java.math.BigDecimal$StringBuilderHelper;
+}

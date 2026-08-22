@@ -1,0 +1,17 @@
+@:used
+private class aui.mui._ToggleBinding.ToggleBinding_Impl_ {
+
+	@:noCompletion
+	public static inline function _new(v:aui.state.State<Bool>) {
+		return cast v;
+	}
+
+	@:from
+	static inline function fromState(s:aui.state.State<Bool>) {
+		return cast s;
+	}
+
+	public static inline function unwrap(this1:aui.state.State<Bool>) {
+		return this1;
+	}
+}

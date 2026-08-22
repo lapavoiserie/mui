@@ -1,0 +1,67 @@
+@:realPath("java.lang.ShortClass") @:directlyUsed @:used @:native("java.lang.Short")
+extern class java.lang.Short extends java.lang.Number implements java.lang.Comparable<java.lang.Short> {
+
+	@:overload
+	function new(param1:java.types.Int16):Void;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	function new(param1:java.lang.String):Void;
+
+	@:overload
+	function compareTo(param1:java.lang.Short):Int;
+
+	@:overload
+	function compareTo(param1:Dynamic):Int;
+
+	@:overload
+	function equals(param1:Dynamic):Bool;
+
+	@:overload
+	function hashCode():Int;
+
+	@:overload
+	function toString():java.lang.String;
+
+	function doubleValue():Float;
+
+	function floatValue():Single;
+
+	function intValue():Int;
+
+	function longValue():haxe.Int64;
+
+	static var MAX_VALUE(default,never):java.types.Int16;
+
+	static var MIN_VALUE(default,never):java.types.Int16;
+
+	static var SIZE(default,never):Int;
+
+	static var TYPE(default,never):java.lang.Class<java.lang.Short>;
+
+	@:overload
+	static function compare(param1:java.types.Int16, param2:java.types.Int16):Int;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function decode(param1:java.lang.String):java.lang.Short;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function parseShort(param1:java.lang.String, param2:Int):java.types.Int16;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function parseShort(param1:java.lang.String):java.types.Int16;
+
+	@:overload
+	static function reverseBytes(param1:java.types.Int16):java.types.Int16;
+
+	@:realPath("_toString") @:native("toString") @:overload
+	static function toString(param1:java.types.Int16):java.lang.String;
+
+	@:overload
+	static function valueOf(param1:java.types.Int16):java.lang.Short;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function valueOf(param1:java.lang.String):java.lang.Short;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function valueOf(param1:java.lang.String, param2:Int):java.lang.Short;
+}

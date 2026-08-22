@@ -1,0 +1,100 @@
+@:realPath("java.util.stream.IntStream") @:used @:native("java.util.stream.IntStream") @:libType
+extern interface java.util.stream.IntStream implements java.util.stream.BaseStream<java.lang.Integer, java.util.stream.IntStream> {
+
+	function filter(param1:java.util.function.IntPredicate):java.util.stream.IntStream;
+
+	function map(param1:java.util.function.IntUnaryOperator):java.util.stream.IntStream;
+
+	function mapToObj<U:Dynamic>(param1:java.util.function.IntFunction<mapToObj.U>):java.util.stream.Stream<mapToObj.U>;
+
+	function mapToLong(param1:java.util.function.IntToLongFunction):java.util.stream.LongStream;
+
+	function mapToDouble(param1:java.util.function.IntToDoubleFunction):java.util.stream.DoubleStream;
+
+	function flatMap(param1:java.util.function.IntFunction<java.util.stream.IntStream>):java.util.stream.IntStream;
+
+	function distinct():java.util.stream.IntStream;
+
+	function sorted():java.util.stream.IntStream;
+
+	function peek(param1:java.util.function.IntConsumer):java.util.stream.IntStream;
+
+	function limit(param1:haxe.Int64):java.util.stream.IntStream;
+
+	function skip(param1:haxe.Int64):java.util.stream.IntStream;
+
+	function forEach(param1:java.util.function.IntConsumer):Void;
+
+	function forEachOrdered(param1:java.util.function.IntConsumer):Void;
+
+	function toArray():java.NativeArray<Int>;
+
+	function reduce(param1:Int, param2:java.util.function.IntBinaryOperator):Int;
+
+	function reduce(param1:java.util.function.IntBinaryOperator):java.util.OptionalInt;
+
+	function collect<R:Dynamic>(param1:java.util.function.Supplier<collect.R>, param2:java.util.function.ObjIntConsumer<collect.R>, param3:java.util.function.BiConsumer<collect.R, collect.R>):collect.R;
+
+	function sum():Int;
+
+	function min():java.util.OptionalInt;
+
+	function max():java.util.OptionalInt;
+
+	function count():haxe.Int64;
+
+	function average():java.util.OptionalDouble;
+
+	function summaryStatistics():java.util.IntSummaryStatistics;
+
+	function anyMatch(param1:java.util.function.IntPredicate):Bool;
+
+	function allMatch(param1:java.util.function.IntPredicate):Bool;
+
+	function noneMatch(param1:java.util.function.IntPredicate):Bool;
+
+	function findFirst():java.util.OptionalInt;
+
+	function findAny():java.util.OptionalInt;
+
+	function asLongStream():java.util.stream.LongStream;
+
+	function asDoubleStream():java.util.stream.DoubleStream;
+
+	function boxed():java.util.stream.Stream<java.lang.Integer>;
+
+	function sequential():java.util.stream.IntStream;
+
+	function parallel():java.util.stream.IntStream;
+
+	function iterator():java.util.PrimitiveIterator$OfInt;
+
+	function spliterator():java.util.Spliterator$OfInt;
+
+	@:java.default
+	static function builder():java.util.stream.IntStream$Builder;
+
+	@:java.default
+	static function empty():java.util.stream.IntStream;
+
+	@:java.default
+	static function of(param1:Int):java.util.stream.IntStream;
+
+	@:java.default
+	static function of(param1:java.NativeArray<Int>):java.util.stream.IntStream;
+
+	@:java.default
+	static function iterate(param1:Int, param2:java.util.function.IntUnaryOperator):java.util.stream.IntStream;
+
+	@:java.default
+	static function generate(param1:java.util.function.IntSupplier):java.util.stream.IntStream;
+
+	@:java.default
+	static function range(param1:Int, param2:Int):java.util.stream.IntStream;
+
+	@:java.default
+	static function rangeClosed(param1:Int, param2:Int):java.util.stream.IntStream;
+
+	@:java.default
+	static function concat(param1:java.util.stream.IntStream, param2:java.util.stream.IntStream):java.util.stream.IntStream;
+}

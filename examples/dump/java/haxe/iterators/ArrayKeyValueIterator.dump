@@ -1,0 +1,22 @@
+@:keep @:directlyUsed @:used @:ifFeature("anon_read.keyValueIterator", "dynamic_read.keyValueIterator")
+class haxe.iterators.ArrayKeyValueIterator<T> {
+
+	public inline function new(array:Array<haxe.iterators.ArrayKeyValueIterator.T>) {
+		this.array = array;
+	}
+
+	@:value(0)
+	var current:Int = 0;
+
+	var array:Array<haxe.iterators.ArrayKeyValueIterator.T>;
+
+	@:maybeUsed
+	public inline function hasNext() {
+		return this.current < this.array.length;
+	}
+
+	@:maybeUsed
+	public inline function next() {
+		return {value : this.array[this.current], key : this.current ++};
+	}
+}

@@ -1,0 +1,126 @@
+@:realPath("java.io.File") @:used @:native("java.io.File") @:libType
+extern class java.io.File implements java.lang.Comparable<java.io.File> implements java.io.Serializable {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.net.URI):Void;
+
+	function new(param1:java.io.File, param2:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function isInvalid():Bool;
+
+	function getPrefixLength():Int;
+
+	function getName():java.lang.String;
+
+	function getParent():java.lang.String;
+
+	function getParentFile():java.io.File;
+
+	function getPath():java.lang.String;
+
+	function isAbsolute():Bool;
+
+	function getAbsolutePath():java.lang.String;
+
+	function getAbsoluteFile():java.io.File;
+
+	function getCanonicalPath():java.lang.String;
+
+	function getCanonicalFile():java.io.File;
+
+	@:deprecated
+	function toURL():java.net.URL;
+
+	function toURI():java.net.URI;
+
+	function canRead():Bool;
+
+	function canWrite():Bool;
+
+	function exists():Bool;
+
+	function isDirectory():Bool;
+
+	function isFile():Bool;
+
+	function isHidden():Bool;
+
+	function lastModified():haxe.Int64;
+
+	function length():haxe.Int64;
+
+	function createNewFile():Bool;
+
+	function delete():Bool;
+
+	function deleteOnExit():Void;
+
+	function list():java.NativeArray<java.lang.String>;
+
+	function list(param1:java.io.FilenameFilter):java.NativeArray<java.lang.String>;
+
+	function listFiles():java.NativeArray<java.io.File>;
+
+	function listFiles(param1:java.io.FileFilter):java.NativeArray<java.io.File>;
+
+	function listFiles(param1:java.io.FilenameFilter):java.NativeArray<java.io.File>;
+
+	function mkdir():Bool;
+
+	function mkdirs():Bool;
+
+	function renameTo(param1:java.io.File):Bool;
+
+	function setLastModified(param1:haxe.Int64):Bool;
+
+	function setReadOnly():Bool;
+
+	function setWritable(param1:Bool, param2:Bool):Bool;
+
+	function setWritable(param1:Bool):Bool;
+
+	function setReadable(param1:Bool, param2:Bool):Bool;
+
+	function setReadable(param1:Bool):Bool;
+
+	function setExecutable(param1:Bool, param2:Bool):Bool;
+
+	function setExecutable(param1:Bool):Bool;
+
+	function canExecute():Bool;
+
+	function getTotalSpace():haxe.Int64;
+
+	function getFreeSpace():haxe.Int64;
+
+	function getUsableSpace():haxe.Int64;
+
+	function compareTo(param1:java.io.File):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function toPath():java.nio.file.Path;
+
+	static function listRoots():java.NativeArray<java.io.File>;
+
+	static function createTempFile(param1:java.lang.String, param2:java.lang.String, param3:java.io.File):java.io.File;
+
+	static function createTempFile(param1:java.lang.String, param2:java.lang.String):java.io.File;
+
+	static var separatorChar(default,never):java.types.Char16;
+
+	static var separator(default,never):java.lang.String;
+
+	static var pathSeparatorChar(default,never):java.types.Char16;
+
+	static var pathSeparator(default,never):java.lang.String;
+}

@@ -1,0 +1,83 @@
+@:realPath("java.util.zip.ZipConstants") @:used @:native("java.util.zip.ZipConstants") @:libType
+extern interface java.util.zip.ZipConstants {
+
+	static var LOCSIG(default,never):haxe.Int64;
+
+	static var EXTSIG(default,never):haxe.Int64;
+
+	static var CENSIG(default,never):haxe.Int64;
+
+	static var ENDSIG(default,never):haxe.Int64;
+
+	static var LOCHDR(default,never):Int;
+
+	static var EXTHDR(default,never):Int;
+
+	static var CENHDR(default,never):Int;
+
+	static var ENDHDR(default,never):Int;
+
+	static var LOCVER(default,never):Int;
+
+	static var LOCFLG(default,never):Int;
+
+	static var LOCHOW(default,never):Int;
+
+	static var LOCTIM(default,never):Int;
+
+	static var LOCCRC(default,never):Int;
+
+	static var LOCSIZ(default,never):Int;
+
+	static var LOCLEN(default,never):Int;
+
+	static var LOCNAM(default,never):Int;
+
+	static var LOCEXT(default,never):Int;
+
+	static var EXTCRC(default,never):Int;
+
+	static var EXTSIZ(default,never):Int;
+
+	static var EXTLEN(default,never):Int;
+
+	static var CENVEM(default,never):Int;
+
+	static var CENVER(default,never):Int;
+
+	static var CENFLG(default,never):Int;
+
+	static var CENHOW(default,never):Int;
+
+	static var CENTIM(default,never):Int;
+
+	static var CENCRC(default,never):Int;
+
+	static var CENSIZ(default,never):Int;
+
+	static var CENLEN(default,never):Int;
+
+	static var CENNAM(default,never):Int;
+
+	static var CENEXT(default,never):Int;
+
+	static var CENCOM(default,never):Int;
+
+	static var CENDSK(default,never):Int;
+
+	static var CENATT(default,never):Int;
+
+	static var CENATX(default,never):Int;
+
+	static var CENOFF(default,never):Int;
+
+	static var ENDSUB(default,never):Int;
+
+	static var ENDTOT(default,never):Int;
+
+	static var ENDSIZ(default,never):Int;
+
+	static var ENDOFF(default,never):Int;
+
+	static var ENDCOM(default,never):Int;
+}

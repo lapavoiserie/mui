@@ -1,0 +1,41 @@
+@:realPath("java.util.Collections_SynchronizedNavigableSet") @:used @:native("java.util.Collections$SynchronizedNavigableSet") @:libType
+extern class java.util.Collections$SynchronizedNavigableSet<E:Dynamic> extends java.util.Collections$SynchronizedSortedSet<java.util.Collections_SynchronizedNavigableSet.E> implements java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E> {
+
+	function new(param1:java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>):Void;
+
+	function new(param1:java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>, param2:Dynamic):Void;
+
+	function lower(param1:java.util.Collections_SynchronizedNavigableSet.E):java.util.Collections_SynchronizedNavigableSet.E;
+
+	function floor(param1:java.util.Collections_SynchronizedNavigableSet.E):java.util.Collections_SynchronizedNavigableSet.E;
+
+	function ceiling(param1:java.util.Collections_SynchronizedNavigableSet.E):java.util.Collections_SynchronizedNavigableSet.E;
+
+	function higher(param1:java.util.Collections_SynchronizedNavigableSet.E):java.util.Collections_SynchronizedNavigableSet.E;
+
+	function pollFirst():java.util.Collections_SynchronizedNavigableSet.E;
+
+	function pollLast():java.util.Collections_SynchronizedNavigableSet.E;
+
+	function descendingSet():java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>;
+
+	function descendingIterator():java.util.Iterator<java.util.Collections_SynchronizedNavigableSet.E>;
+
+	function subSet(param1:java.util.Collections_SynchronizedNavigableSet.E, param2:java.util.Collections_SynchronizedNavigableSet.E):java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>;
+
+	function subSet(param1:Dynamic, param2:Dynamic):java.util.SortedSet<Dynamic>;
+
+	function subSet(param1:java.util.Collections_SynchronizedNavigableSet.E, param2:Bool, param3:java.util.Collections_SynchronizedNavigableSet.E, param4:Bool):java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>;
+
+	function headSet(param1:java.util.Collections_SynchronizedNavigableSet.E):java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>;
+
+	function headSet(param1:Dynamic):java.util.SortedSet<Dynamic>;
+
+	function headSet(param1:java.util.Collections_SynchronizedNavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>;
+
+	function tailSet(param1:java.util.Collections_SynchronizedNavigableSet.E):java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>;
+
+	function tailSet(param1:Dynamic):java.util.SortedSet<Dynamic>;
+
+	function tailSet(param1:java.util.Collections_SynchronizedNavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.Collections_SynchronizedNavigableSet.E>;
+}

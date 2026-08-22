@@ -1,0 +1,75 @@
+@:realPath("java.lang.reflect.Constructor") @:used @:native("java.lang.reflect.Constructor") @:libType
+extern class java.lang.reflect.Constructor<T:Dynamic> extends java.lang.reflect.Executable {
+
+	function new(param1:java.lang.Class<java.lang.reflect.Constructor.T>, param2:java.NativeArray<java.lang.Class<Dynamic>>, param3:java.NativeArray<java.lang.Class<Dynamic>>, param4:Int, param5:Int, param6:java.lang.String, param7:java.NativeArray<java.types.Int8>, param8:java.NativeArray<java.types.Int8>):Void;
+
+	function getGenericInfo():sun.reflect.generics.repository.ConstructorRepository;
+
+	function getRoot():java.lang.reflect.Executable;
+
+	function copy():java.lang.reflect.Constructor<java.lang.reflect.Constructor.T>;
+
+	function hasGenericInformation():Bool;
+
+	function getAnnotationBytes():java.NativeArray<java.types.Int8>;
+
+	function getDeclaringClass():java.lang.Class<java.lang.reflect.Constructor.T>;
+
+	function getName():java.lang.String;
+
+	function getModifiers():Int;
+
+	function getTypeParameters():java.NativeArray<java.lang.reflect.TypeVariable<java.lang.reflect.Constructor<java.lang.reflect.Constructor.T>>>;
+
+	function getParameterTypes():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getParameterCount():Int;
+
+	function getGenericParameterTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function getExceptionTypes():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getGenericExceptionTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function specificToStringHeader(param1:java.lang.StringBuilder):Void;
+
+	function toGenericString():java.lang.String;
+
+	function specificToGenericStringHeader(param1:java.lang.StringBuilder):Void;
+
+	function newInstance(param1:haxe.Rest<Dynamic>):java.lang.reflect.Constructor.T;
+
+	function isVarArgs():Bool;
+
+	function isSynthetic():Bool;
+
+	function getConstructorAccessor():sun.reflect.ConstructorAccessor;
+
+	function setConstructorAccessor(param1:sun.reflect.ConstructorAccessor):Void;
+
+	function getSlot():Int;
+
+	function getSignature():java.lang.String;
+
+	function getRawAnnotations():java.NativeArray<java.types.Int8>;
+
+	function getRawParameterAnnotations():java.NativeArray<java.types.Int8>;
+
+	function getAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.T>):getAnnotation.T;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getParameterAnnotations():java.NativeArray<java.NativeArray<java.lang.annotation.Annotation>>;
+
+	function handleParameterNumberMismatch(param1:Int, param2:Int):Void;
+
+	function getAnnotatedReturnType():java.lang.reflect.AnnotatedType;
+
+	function getAnnotatedReceiverType():java.lang.reflect.AnnotatedType;
+}

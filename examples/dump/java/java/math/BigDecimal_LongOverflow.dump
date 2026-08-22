@@ -1,0 +1,5 @@
+@:realPath("java.math.BigDecimal_LongOverflow") @:native("java.math.BigDecimal$LongOverflow") @:libType
+extern class java.math.BigDecimal$LongOverflow {
+
+	static function check(param1:java.math.BigDecimal):Void;
+}

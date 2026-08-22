@@ -1,0 +1,11 @@
+@:realPath("java.security.Key") @:used @:native("java.security.Key") @:libType
+extern interface java.security.Key implements java.io.Serializable {
+
+	function getAlgorithm():java.lang.String;
+
+	function getFormat():java.lang.String;
+
+	function getEncoded():java.NativeArray<java.types.Int8>;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

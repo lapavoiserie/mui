@@ -1,0 +1,7 @@
+@:realPath("java.sun.reflect.generics.tree.BooleanSignature") @:used @:native("sun.reflect.generics.tree.BooleanSignature") @:libType
+extern class sun.reflect.generics.tree.BooleanSignature implements sun.reflect.generics.tree.BaseType {
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+
+	static function make():sun.reflect.generics.tree.BooleanSignature;
+}

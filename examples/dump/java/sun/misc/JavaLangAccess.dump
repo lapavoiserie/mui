@@ -1,0 +1,33 @@
+@:realPath("java.sun.misc.JavaLangAccess") @:used @:native("sun.misc.JavaLangAccess") @:libType
+extern interface sun.misc.JavaLangAccess {
+
+	function getConstantPool(param1:java.lang.Class<Dynamic>):sun.reflect.ConstantPool;
+
+	function casAnnotationType(param1:java.lang.Class<Dynamic>, param2:sun.reflect.annotation.AnnotationType, param3:sun.reflect.annotation.AnnotationType):Bool;
+
+	function getAnnotationType(param1:java.lang.Class<Dynamic>):sun.reflect.annotation.AnnotationType;
+
+	function getDeclaredAnnotationMap(param1:java.lang.Class<Dynamic>):java.util.Map<java.lang.Class<java.lang.annotation.Annotation>, java.lang.annotation.Annotation>;
+
+	function getRawClassAnnotations(param1:java.lang.Class<Dynamic>):java.NativeArray<java.types.Int8>;
+
+	function getRawClassTypeAnnotations(param1:java.lang.Class<Dynamic>):java.NativeArray<java.types.Int8>;
+
+	function getRawExecutableTypeAnnotations(param1:java.lang.reflect.Executable):java.NativeArray<java.types.Int8>;
+
+	function getEnumConstantsShared<E:EnumValue>(param1:java.lang.Class<getEnumConstantsShared.E>):java.NativeArray<getEnumConstantsShared.E>;
+
+	function blockedOn(param1:java.lang.Thread, param2:sun.nio.ch.Interruptible):Void;
+
+	function registerShutdownHook(param1:Int, param2:Bool, param3:java.lang.Runnable):Void;
+
+	function getStackTraceDepth(param1:java.lang.Throwable):Int;
+
+	function getStackTraceElement(param1:java.lang.Throwable, param2:Int):java.lang.StackTraceElement;
+
+	function newStringUnsafe(param1:java.NativeArray<java.types.Char16>):java.lang.String;
+
+	function newThreadWithAcc(param1:java.lang.Runnable, param2:java.security.AccessControlContext):java.lang.Thread;
+
+	function invokeFinalize(param1:Dynamic):Void;
+}

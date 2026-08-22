@@ -1,0 +1,11 @@
+@:realPath("java.util.Spliterators_EmptySpliterator_OfDouble") @:used @:native("java.util.Spliterators$EmptySpliterator$OfDouble") @:libType
+extern class java.util.Spliterators$EmptySpliterator$OfDouble extends java.util.Spliterators$EmptySpliterator<java.lang.Double, java.util.Spliterator$OfDouble, java.util.function.DoubleConsumer> implements java.util.Spliterator$OfDouble {
+
+	function new():Void;
+
+	function forEachRemaining(param1:java.util.function.DoubleConsumer):Void;
+
+	function tryAdvance(param1:java.util.function.DoubleConsumer):Bool;
+
+	function trySplit():java.util.Spliterator$OfDouble;
+}

@@ -1,0 +1,80 @@
+@:realPath("java.time.chrono.Chronology") @:used @:native("java.time.chrono.Chronology") @:libType
+extern interface java.time.chrono.Chronology implements java.lang.Comparable<java.time.chrono.Chronology> {
+
+	function getId():java.lang.String;
+
+	function getCalendarType():java.lang.String;
+
+	@:java.default
+	function date(param1:java.time.chrono.Era, param2:Int, param3:Int, param4:Int):java.time.chrono.ChronoLocalDate;
+
+	function date(param1:java.time.temporal.TemporalAccessor):java.time.chrono.ChronoLocalDate;
+
+	function date(param1:Int, param2:Int, param3:Int):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function dateYearDay(param1:java.time.chrono.Era, param2:Int, param3:Int):java.time.chrono.ChronoLocalDate;
+
+	function dateYearDay(param1:Int, param2:Int):java.time.chrono.ChronoLocalDate;
+
+	function dateEpochDay(param1:haxe.Int64):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function dateNow():java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function dateNow(param1:java.time.Clock):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function dateNow(param1:java.time.ZoneId):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function localDateTime(param1:java.time.temporal.TemporalAccessor):java.time.chrono.ChronoLocalDateTime<java.time.chrono.ChronoLocalDate>;
+
+	@:java.default
+	function zonedDateTime(param1:java.time.temporal.TemporalAccessor):java.time.chrono.ChronoZonedDateTime<java.time.chrono.ChronoLocalDate>;
+
+	@:java.default
+	function zonedDateTime(param1:java.time.Instant, param2:java.time.ZoneId):java.time.chrono.ChronoZonedDateTime<java.time.chrono.ChronoLocalDate>;
+
+	function isLeapYear(param1:haxe.Int64):Bool;
+
+	function prolepticYear(param1:java.time.chrono.Era, param2:Int):Int;
+
+	function eraOf(param1:Int):java.time.chrono.Era;
+
+	function eras():java.util.List<java.time.chrono.Era>;
+
+	function range(param1:java.time.temporal.ChronoField):java.time.temporal.ValueRange;
+
+	@:java.default
+	function getDisplayName(param1:java.time.format.TextStyle, param2:java.util.Locale):java.lang.String;
+
+	function resolveDate(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.format.ResolverStyle):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function period(param1:Int, param2:Int, param3:Int):java.time.chrono.ChronoPeriod;
+
+	function compareTo(param1:java.time.chrono.Chronology):Int;
+
+	@:java.default
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	@:java.default
+	static function from(param1:java.time.temporal.TemporalAccessor):java.time.chrono.Chronology;
+
+	@:java.default
+	static function ofLocale(param1:java.util.Locale):java.time.chrono.Chronology;
+
+	@:java.default
+	static function of(param1:java.lang.String):java.time.chrono.Chronology;
+
+	@:java.default
+	static function getAvailableChronologies():java.util.Set<java.time.chrono.Chronology>;
+}

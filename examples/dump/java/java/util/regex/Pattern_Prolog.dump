@@ -1,0 +1,11 @@
+@:realPath("java.util.regex.Pattern_Prolog") @:used @:native("java.util.regex.Pattern$Prolog") @:libType
+extern class java.util.regex.Pattern$Prolog extends java.util.regex.Pattern$Node {
+
+	function new(param1:java.util.regex.Pattern$Loop):Void;
+
+	function match(param1:java.util.regex.Matcher, param2:Int, param3:java.lang.CharSequence):Bool;
+
+	function study(param1:java.util.regex.Pattern$TreeInfo):Bool;
+
+	var loop:java.util.regex.Pattern$Loop;
+}

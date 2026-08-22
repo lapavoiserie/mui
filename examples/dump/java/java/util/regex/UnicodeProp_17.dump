@@ -1,0 +1,3 @@
+@:realPath("java.util.regex.UnicodeProp_17") @:used @:flatEnum @:native("java.util.regex.UnicodeProp$17")
+extern enum java.util.regex.UnicodeProp$17 {
+}

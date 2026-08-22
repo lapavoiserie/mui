@@ -1,0 +1,32 @@
+@:realPath("java.util.ArrayList_SubList") @:used @:native("java.util.ArrayList$SubList") @:libType
+extern class java.util.ArrayList$SubList extends java.util.AbstractList<Dynamic> implements java.util.RandomAccess {
+
+	function new(param1:java.util.AbstractList<Dynamic>, param2:Int, param3:Int, param4:Int):Void;
+
+	function set(param1:Int, param2:Dynamic):Dynamic;
+
+	function get(param1:Int):Dynamic;
+
+	function size():Int;
+
+	function add(param1:Int, param2:Dynamic):Void;
+
+	function remove(param1:Int):Dynamic;
+
+	function removeRange(param1:Int, param2:Int):Void;
+
+	function addAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function addAll(param1:Int, param2:java.util.Collection<Dynamic>):Bool;
+
+	function iterator():java.util.Iterator<Dynamic>;
+
+	function listIterator(param1:Int):java.util.ListIterator<Dynamic>;
+
+	function subList(param1:Int, param2:Int):java.util.List<Dynamic>;
+
+	function spliterator():java.util.Spliterator<Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.ArrayList<Dynamic>;
+}

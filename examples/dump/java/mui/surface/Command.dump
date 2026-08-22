@@ -1,0 +1,20 @@
+@:used
+class mui.surface.Command {
+
+	public function new(label:java.lang.String, action:() -> Void) {
+		this.label = label;
+		this.action = action;
+		this.shortcut = null;
+	}
+
+	public var label(default,ctor):java.lang.String;
+
+	public var action(default,ctor):() -> Void;
+
+	public var shortcut:Null<java.lang.String>;
+
+	public function key(chord:java.lang.String) {
+		this.shortcut = chord;
+		return this;
+	}
+}

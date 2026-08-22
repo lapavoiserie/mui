@@ -1,0 +1,73 @@
+@:realPath("java.util.Hashtable") @:used @:native("java.util.Hashtable") @:libType
+extern class java.util.Hashtable<K:Dynamic, V:Dynamic> extends java.util.Dictionary<java.util.Hashtable.K, java.util.Hashtable.V> implements java.io.Serializable implements java.lang.Cloneable implements java.util.Map<java.util.Hashtable.K, java.util.Hashtable.V> {
+
+	function new(param1:Int, param2:Single):Void;
+
+	function new(param1:java.util.Map<java.util.Hashtable.K, java.util.Hashtable.V>):Void;
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function keys():java.util.Enumeration<java.util.Hashtable.K>;
+
+	function elements():java.util.Enumeration<java.util.Hashtable.V>;
+
+	function contains(param1:Dynamic):Bool;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function get(param1:Dynamic):java.util.Hashtable.V;
+
+	function rehash():Void;
+
+	function put(param1:java.util.Hashtable.K, param2:java.util.Hashtable.V):java.util.Hashtable.V;
+
+	function remove(param1:Dynamic):java.util.Hashtable.V;
+
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function putAll(param1:java.util.Map<java.util.Hashtable.K, java.util.Hashtable.V>):Void;
+
+	function clear():Void;
+
+	function clone():Dynamic;
+
+	function toString():java.lang.String;
+
+	function keySet():java.util.Set<java.util.Hashtable.K>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.Hashtable.K, java.util.Hashtable.V>>;
+
+	function values():java.util.Collection<java.util.Hashtable.V>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function getOrDefault(param1:Dynamic, param2:java.util.Hashtable.V):java.util.Hashtable.V;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Hashtable.V>):Void;
+
+	function putIfAbsent(param1:java.util.Hashtable.K, param2:java.util.Hashtable.V):java.util.Hashtable.V;
+
+	function replace(param1:java.util.Hashtable.K, param2:java.util.Hashtable.V, param3:java.util.Hashtable.V):Bool;
+
+	function replace(param1:java.util.Hashtable.K, param2:java.util.Hashtable.V):java.util.Hashtable.V;
+
+	function computeIfAbsent(param1:java.util.Hashtable.K, param2:java.util.function.Function<Dynamic, java.util.Hashtable.V>):java.util.Hashtable.V;
+
+	function computeIfPresent(param1:java.util.Hashtable.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Hashtable.V>):java.util.Hashtable.V;
+
+	function compute(param1:java.util.Hashtable.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Hashtable.V>):java.util.Hashtable.V;
+
+	function merge(param1:java.util.Hashtable.K, param2:java.util.Hashtable.V, param3:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Hashtable.V>):java.util.Hashtable.V;
+}

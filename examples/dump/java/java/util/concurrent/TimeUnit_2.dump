@@ -1,0 +1,3 @@
+@:realPath("java.util.concurrent.TimeUnit_2") @:used @:flatEnum @:native("java.util.concurrent.TimeUnit$2")
+extern enum java.util.concurrent.TimeUnit$2 {
+}

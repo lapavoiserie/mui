@@ -1,0 +1,36 @@
+@:realPath("java.util.Set") @:used @:native("java.util.Set") @:libType
+extern interface java.util.Set<E:Dynamic> implements java.util.Collection<java.util.Set.E> {
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function contains(param1:Dynamic):Bool;
+
+	function iterator():java.util.Iterator<java.util.Set.E>;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function add(param1:java.util.Set.E):Bool;
+
+	function remove(param1:Dynamic):Bool;
+
+	function containsAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function addAll(param1:java.util.Collection<java.util.Set.E>):Bool;
+
+	function retainAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function removeAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function clear():Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	@:java.default
+	function spliterator():java.util.Spliterator<java.util.Set.E>;
+}

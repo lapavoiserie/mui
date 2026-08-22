@@ -1,0 +1,241 @@
+@:used @:keep
+class aui.runtime.ViewNodeBridge {
+
+	@:value(null)
+	static var _primary:Null<aui.runtime.ViewRoot> = null;
+
+	@:value(null)
+	static var _orphan:Null<aui.nui.ViewSource> = null;
+
+	public static function setApp(app:Dynamic) {
+		aui.runtime.ViewNodeBridge._primary = new aui.runtime.ViewRoot(app);
+		aui.runtime.ViewNodeBridge._primary.rebuild();
+	}
+
+	public static function releaseApp() {
+		var root = aui.runtime.ViewNodeBridge._primary;
+		aui.runtime.ViewNodeBridge._primary = null;
+		if ((root == null)) return;
+		var value = cast root.app;
+		var app = if ((Std.isOfType(value, aui.App))) cast value else null;
+		if ((app != null)) app.release();
+	}
+
+	public static function primary() {
+		return aui.runtime.ViewNodeBridge._primary;
+	}
+
+	@:value(false)
+	static var _pumpBroken:Bool = false;
+
+	public static function pumpHaxeEvents() {
+		if ((aui.runtime.ViewNodeBridge._pumpBroken)) return;
+		try {
+			sys.thread._Thread.Thread_Impl_.get_events(cast sys.thread._Thread.HaxeThread.get(java.lang.Thread.currentThread())).progress();
+		} catch (_g:java.lang.Throwable) {
+			var e = cast haxe.Exception.caught(_g).unwrap();
+			{
+				aui.runtime.ViewNodeBridge._pumpBroken = true;
+				haxe.Log.trace("[aui] no Haxe event loop on this thread; haxe.Timer will not fire: " + Std.string(e), {fileName : "aui/runtime/ViewNodeBridge.hx", lineNumber : 109, className : "aui.runtime.ViewNodeBridge", methodName : "pumpHaxeEvents"});
+			};
+		};
+	}
+
+	public static function rebuild() {
+		if ((aui.runtime.ViewNodeBridge._primary != null)) aui.runtime.ViewNodeBridge._primary.rebuild();
+	}
+
+	public static function source() {
+		return aui.runtime.ViewNodeBridge.reader();
+	}
+
+	static function reader() {
+		if ((aui.runtime.ViewNodeBridge._primary != null)) return aui.runtime.ViewNodeBridge._primary.source;
+		if ((aui.runtime.ViewNodeBridge._orphan == null)) aui.runtime.ViewNodeBridge._orphan = new aui.nui.ViewSource(null);
+		return aui.runtime.ViewNodeBridge._orphan;
+	}
+
+	public static function getRoot() {
+		if ((aui.runtime.ViewNodeBridge._primary == null)) return null else return aui.runtime.ViewNodeBridge._primary.rootHandle();
+	}
+
+	public static function getType(node:Dynamic) {
+		return aui.runtime.ViewNodeBridge.reader().typeOf(cast node);
+	}
+
+	public static function childCount(node:Dynamic) {
+		return aui.runtime.ViewNodeBridge.reader().childCount(cast node);
+	}
+
+	public static function getChild(node:Dynamic, index:Int) {
+		return aui.runtime.ViewNodeBridge.reader().childAt(cast node, index);
+	}
+
+	public static function hasProperty(node:Dynamic, key:java.lang.String) {
+		return aui.runtime.ViewNodeBridge.reader().hasProp(cast node, key);
+	}
+
+	public static function getProperty(node:Dynamic, key:java.lang.String) {
+		return aui.runtime.ViewNodeBridge.reader().stringProp(cast node, key);
+	}
+
+	public static function getFloatProperty(node:Dynamic, key:java.lang.String) {
+		return aui.runtime.ViewNodeBridge.reader().floatProp(cast node, key);
+	}
+
+	public static function getBoolProperty(node:Dynamic, key:java.lang.String) {
+		return aui.runtime.ViewNodeBridge.reader().boolProp(cast node, key);
+	}
+
+	public static function modifierCount(node:Dynamic) {
+		return aui.runtime.ViewNodeBridge.reader().modifierCount(cast node);
+	}
+
+	public static function modifierType(node:Dynamic, index:Int) {
+		return aui.runtime.ViewNodeBridge.reader().modifierType(cast node, index);
+	}
+
+	public static function modifierFloat(node:Dynamic, index:Int, param:Int) {
+		return aui.runtime.ViewNodeBridge.reader().modifierFloat(cast node, index, param);
+	}
+
+	public static function modifierString(node:Dynamic, index:Int, param:Int) {
+		return aui.runtime.ViewNodeBridge.reader().modifierString(cast node, index, param);
+	}
+
+	public static function modifierHasParam(node:Dynamic, index:Int, param:Int) {
+		return aui.runtime.ViewNodeBridge.reader().modifierHasParam(cast node, index, param);
+	}
+
+	public static function actionId(node:Dynamic) {
+		return aui.runtime.ViewNodeBridge.reader().actionId(cast node);
+	}
+
+	public static function invokeAction(node:Dynamic) {
+		aui.runtime.ViewNodeBridge.reader().invokeAction(cast node);
+	}
+
+	static function valueOf(node:Dynamic) {
+		if ((node == null)) return null;
+		return aui.nui.ViewSource.resolveValue(cast node);
+	}
+
+	public static function getText(node:Dynamic) {
+		node = aui.runtime.ViewNodeBridge.valueOf(node);
+		if ((node == null)) return "";
+		var template = Reflect.field(node, "stateTemplate");
+		if ((template != null)) return aui.runtime.ViewNodeBridge.resolveTemplate(Std.string(template));
+		var content = Reflect.field(node, "content");
+		if ((content != null)) return Std.string(content) else return "";
+	}
+
+	static function resolveTemplate(template:java.lang.String) {
+		var out = new StringBuf();
+		var i = 0;
+		while ((i < template.length)) {
+			var open = haxe.jvm.StringExt.indexOf(template, "{", i);
+			if ((open < 0)) {
+				var len = null;
+				out.add(haxe.jvm.StringExt.substr(template, i, len));
+				break;
+			};
+			var close = haxe.jvm.StringExt.indexOf(template, "}", open);
+			if ((close < 0)) {
+				var len = null;
+				out.add(haxe.jvm.StringExt.substr(template, i, len));
+				break;
+			};
+			out.add(haxe.jvm.StringExt.substring(template, i, open));
+			var name = haxe.jvm.StringExt.substring(template, open + 1, close);
+			var state = aui.state.State.getByName(name);
+			out.add(if ((state == null)) "{" + name + "}" else Std.string(state.get()));
+			i = close + 1;
+		};
+		return out.toString();
+	}
+
+	public static function getButtonLabel(node:Dynamic) {
+		node = aui.runtime.ViewNodeBridge.valueOf(node);
+		if ((node == null)) return "";
+		var label = Reflect.field(node, "label");
+		if ((label != null)) return Std.string(label) else return "";
+	}
+
+	public static function sectionHeader(node:Dynamic) {
+		if ((node == null)) return "";
+		var header = Reflect.field(node, "header");
+		if ((header != null)) return Std.string(header) else return "";
+	}
+
+	public static function tabTitle(node:Dynamic, index:Int) {
+		return aui.runtime.ViewNodeBridge.reader().tabTitle(cast node, index);
+	}
+
+	public static function tabIcon(node:Dynamic, index:Int) {
+		return aui.runtime.ViewNodeBridge.reader().tabIcon(cast node, index);
+	}
+
+	public static function conditionValue(node:Dynamic) {
+		return aui.runtime.ViewNodeBridge.reader().conditionValue(cast node);
+	}
+
+	public static function fieldPlaceholder(node:Dynamic) {
+		node = aui.runtime.ViewNodeBridge.valueOf(node);
+		if ((node == null)) return "";
+		var p = Reflect.field(node, "placeholder");
+		if ((p != null)) return Std.string(p) else return "";
+	}
+
+	public static function fieldText(node:Dynamic) {
+		var st = aui.runtime.ViewNodeBridge.stateOf(node, "textState");
+		if ((st == null)) return "" else return Std.string(st.get());
+	}
+
+	public static function setFieldText(node:Dynamic, value:java.lang.String) {
+		var st = aui.runtime.ViewNodeBridge.stateOf(node, "textState");
+		if ((st != null)) st.set(value);
+	}
+
+	public static function toggleLabel(node:Dynamic) {
+		node = aui.runtime.ViewNodeBridge.valueOf(node);
+		if ((node == null)) return "";
+		var label = Reflect.field(node, "label");
+		if ((label != null)) return Std.string(label) else return "";
+	}
+
+	public static function toggleValue(node:Dynamic) {
+		var st = aui.runtime.ViewNodeBridge.stateOf(node, "isOnState");
+		if ((st == null)) return false else return st.get() == true;
+	}
+
+	public static function setToggleValue(node:Dynamic, value:Bool) {
+		var st = aui.runtime.ViewNodeBridge.stateOf(node, "isOnState");
+		if ((st != null)) st.set(value);
+	}
+
+	public static function sliderValue(node:Dynamic) {
+		var st = aui.runtime.ViewNodeBridge.stateOf(node, "valueState");
+		if ((st == null)) return 0.0;
+		var v = st.get();
+		if ((v == null)) return 0.0 else return cast v;
+	}
+
+	public static function setSliderValue(node:Dynamic, value:Float) {
+		var st = aui.runtime.ViewNodeBridge.stateOf(node, "valueState");
+		if ((st != null)) st.set(value);
+	}
+
+	public static function sliderMin(node:Dynamic) {
+		return aui.runtime.ViewNodeBridge.reader().floatProp(node, "min");
+	}
+
+	public static function sliderMax(node:Dynamic) {
+		return aui.runtime.ViewNodeBridge.reader().floatProp(node, "max");
+	}
+
+	static function stateOf(node:Dynamic, field:java.lang.String) {
+		if ((node == null)) return null;
+		var st = Reflect.field(node, field);
+		return st;
+	}
+}

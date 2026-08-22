@@ -1,0 +1,22 @@
+@:realPath("java.util.concurrent.LinkedBlockingDeque_AbstractItr") @:used @:native("java.util.concurrent.LinkedBlockingDeque$AbstractItr") @:libType
+extern class java.util.concurrent.LinkedBlockingDeque$AbstractItr implements java.util.Iterator<Dynamic> {
+
+	function new(param1:java.util.concurrent.LinkedBlockingDeque<Dynamic>):Void;
+
+	function firstNode():java.util.concurrent.LinkedBlockingDeque$Node<Dynamic>;
+
+	function nextNode(param1:java.util.concurrent.LinkedBlockingDeque$Node<Dynamic>):java.util.concurrent.LinkedBlockingDeque$Node<Dynamic>;
+
+	function advance():Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function remove():Void;
+
+	var nextItem:Dynamic;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.concurrent.LinkedBlockingDeque<Dynamic>;
+}

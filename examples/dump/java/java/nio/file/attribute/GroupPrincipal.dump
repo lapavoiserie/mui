@@ -1,0 +1,3 @@
+@:realPath("java.nio.file.attribute.GroupPrincipal") @:native("java.nio.file.attribute.GroupPrincipal") @:libType
+extern interface java.nio.file.attribute.GroupPrincipal implements java.nio.file.attribute.UserPrincipal {
+}

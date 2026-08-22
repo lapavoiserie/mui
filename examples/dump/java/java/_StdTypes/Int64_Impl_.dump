@@ -1,0 +1,98 @@
+private extern class java._StdTypes.Int64_Impl_ {
+
+	@:noExpr @:op(A + B)
+	static function addI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A + B)
+	static function add(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A * B)
+	static function mulI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A * B)
+	static function mul(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A % B)
+	static function modI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A % B)
+	static function mod(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A - B)
+	static function subI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A - B)
+	static function sub(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A / B)
+	static function divI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A / B)
+	static function div(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A | B)
+	static function orI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A | B)
+	static function or(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A ^ B)
+	static function xorI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A ^ B)
+	static function xor(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A & B)
+	static function andI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A & B)
+	static function and(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A << B)
+	static function shlI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A << B)
+	static function shl(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A >> B)
+	static function shrI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A >> B)
+	static function shr(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A >>> B)
+	static function ushrI(lhs:java.Int64, rhs:Int):java.Int64;
+
+	@:noExpr @:op(A >>> B)
+	static function ushr(lhs:java.Int64, rhs:java.Int64):java.Int64;
+
+	@:noExpr @:op(A > B)
+	static function gt(lhs:java.Int64, rhs:java.Int64):Bool;
+
+	@:noExpr @:op(A >= B)
+	static function gte(lhs:java.Int64, rhs:java.Int64):Bool;
+
+	@:noExpr @:op(A < B)
+	static function lt(lhs:java.Int64, rhs:java.Int64):Bool;
+
+	@:noExpr @:op(A <= B)
+	static function lte(lhs:java.Int64, rhs:java.Int64):Bool;
+
+	@:noExpr @:op(~A)
+	static function bneg(t:java.Int64):java.Int64;
+
+	@:noExpr @:op(-A)
+	static function neg(t:java.Int64):java.Int64;
+
+	@:noExpr @:op(++A)
+	static function preIncrement(t:java.Int64):java.Int64;
+
+	@:noExpr @:op(A++)
+	static function postIncrement(t:java.Int64):java.Int64;
+
+	@:noExpr @:op(--A)
+	static function preDecrement(t:java.Int64):java.Int64;
+
+	@:noExpr @:op(A--)
+	static function postDecrement(t:java.Int64):java.Int64;
+}

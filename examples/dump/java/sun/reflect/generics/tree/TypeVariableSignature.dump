@@ -1,0 +1,9 @@
+@:realPath("java.sun.reflect.generics.tree.TypeVariableSignature") @:used @:native("sun.reflect.generics.tree.TypeVariableSignature") @:libType
+extern class sun.reflect.generics.tree.TypeVariableSignature implements sun.reflect.generics.tree.FieldTypeSignature {
+
+	function getIdentifier():java.lang.String;
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+
+	static function make(param1:java.lang.String):sun.reflect.generics.tree.TypeVariableSignature;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.util.function.Supplier") @:used @:native("java.util.function.Supplier") @:libType
+extern interface java.util.function.Supplier<T:Dynamic> {
+
+	function get():java.util.function.Supplier.T;
+}

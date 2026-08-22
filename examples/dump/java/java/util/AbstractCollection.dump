@@ -1,0 +1,33 @@
+@:realPath("java.util.AbstractCollection") @:used @:native("java.util.AbstractCollection") @:libType
+extern class java.util.AbstractCollection<E:Dynamic> implements java.util.Collection<java.util.AbstractCollection.E> {
+
+	function new():Void;
+
+	function iterator():java.util.Iterator<java.util.AbstractCollection.E>;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function contains(param1:Dynamic):Bool;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function add(param1:java.util.AbstractCollection.E):Bool;
+
+	function remove(param1:Dynamic):Bool;
+
+	function containsAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function addAll(param1:java.util.Collection<java.util.AbstractCollection.E>):Bool;
+
+	function removeAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function retainAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function clear():Void;
+
+	function toString():java.lang.String;
+}

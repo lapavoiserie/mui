@@ -1,0 +1,21 @@
+@:realPath("java.util.regex.Pattern_Loop") @:used @:native("java.util.regex.Pattern$Loop") @:libType
+extern class java.util.regex.Pattern$Loop extends java.util.regex.Pattern$Node {
+
+	function new(param1:Int, param2:Int):Void;
+
+	function match(param1:java.util.regex.Matcher, param2:Int, param3:java.lang.CharSequence):Bool;
+
+	function matchInit(param1:java.util.regex.Matcher, param2:Int, param3:java.lang.CharSequence):Bool;
+
+	function study(param1:java.util.regex.Pattern$TreeInfo):Bool;
+
+	var body:java.util.regex.Pattern$Node;
+
+	var countIndex:Int;
+
+	var beginIndex:Int;
+
+	var cmin:Int;
+
+	var cmax:Int;
+}

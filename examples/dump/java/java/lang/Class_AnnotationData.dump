@@ -1,0 +1,11 @@
+@:realPath("java.lang.Class_AnnotationData") @:native("java.lang.Class$AnnotationData") @:libType
+extern class java.lang.Class$AnnotationData {
+
+	function new(param1:java.util.Map<java.lang.Class<java.lang.annotation.Annotation>, java.lang.annotation.Annotation>, param2:java.util.Map<java.lang.Class<java.lang.annotation.Annotation>, java.lang.annotation.Annotation>, param3:Int):Void;
+
+	var annotations(default,ctor):java.util.Map<java.lang.Class<java.lang.annotation.Annotation>, java.lang.annotation.Annotation>;
+
+	var declaredAnnotations(default,ctor):java.util.Map<java.lang.Class<java.lang.annotation.Annotation>, java.lang.annotation.Annotation>;
+
+	var redefinedCount(default,ctor):Int;
+}

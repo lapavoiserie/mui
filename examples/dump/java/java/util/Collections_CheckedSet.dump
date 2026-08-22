@@ -1,0 +1,9 @@
+@:realPath("java.util.Collections_CheckedSet") @:used @:native("java.util.Collections$CheckedSet") @:libType
+extern class java.util.Collections$CheckedSet<E:Dynamic> extends java.util.Collections$CheckedCollection<java.util.Collections_CheckedSet.E> implements java.io.Serializable implements java.util.Set<java.util.Collections_CheckedSet.E> {
+
+	function new(param1:java.util.Set<java.util.Collections_CheckedSet.E>, param2:java.lang.Class<java.util.Collections_CheckedSet.E>):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+}

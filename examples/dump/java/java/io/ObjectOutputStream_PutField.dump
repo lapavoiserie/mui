@@ -1,0 +1,26 @@
+@:realPath("java.io.ObjectOutputStream_PutField") @:used @:native("java.io.ObjectOutputStream$PutField") @:libType
+extern class java.io.ObjectOutputStream$PutField {
+
+	function new():Void;
+
+	function put(param1:java.lang.String, param2:Bool):Void;
+
+	function put(param1:java.lang.String, param2:Dynamic):Void;
+
+	function put(param1:java.lang.String, param2:Float):Void;
+
+	function put(param1:java.lang.String, param2:Single):Void;
+
+	function put(param1:java.lang.String, param2:haxe.Int64):Void;
+
+	function put(param1:java.lang.String, param2:Int):Void;
+
+	function put(param1:java.lang.String, param2:java.types.Int16):Void;
+
+	function put(param1:java.lang.String, param2:java.types.Char16):Void;
+
+	function put(param1:java.lang.String, param2:java.types.Int8):Void;
+
+	@:deprecated
+	function write(param1:java.io.ObjectOutput):Void;
+}

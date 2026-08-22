@@ -1,0 +1,9 @@
+@:realPath("java.lang.Throwable_WrappedPrintStream") @:used @:native("java.lang.Throwable$WrappedPrintStream") @:libType
+extern class java.lang.Throwable$WrappedPrintStream extends java.lang.Throwable$PrintStreamOrWriter {
+
+	function new(param1:java.io.PrintStream):Void;
+
+	function lock():Dynamic;
+
+	function println(param1:Dynamic):Void;
+}

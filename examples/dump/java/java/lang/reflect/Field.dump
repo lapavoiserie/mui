@@ -1,0 +1,73 @@
+@:realPath("java.lang.reflect.Field") @:used @:native("java.lang.reflect.Field") @:libType
+extern class java.lang.reflect.Field extends java.lang.reflect.AccessibleObject implements java.lang.reflect.Member {
+
+	function new(param1:java.lang.Class<Dynamic>, param2:java.lang.String, param3:java.lang.Class<Dynamic>, param4:Int, param5:Int, param6:java.lang.String, param7:java.NativeArray<java.types.Int8>):Void;
+
+	function copy():java.lang.reflect.Field;
+
+	function getDeclaringClass():java.lang.Class<Dynamic>;
+
+	function getName():java.lang.String;
+
+	function getModifiers():Int;
+
+	function isEnumConstant():Bool;
+
+	function isSynthetic():Bool;
+
+	function getType():java.lang.Class<Dynamic>;
+
+	function getGenericType():java.lang.reflect.Type;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function toGenericString():java.lang.String;
+
+	function get(param1:Dynamic):Dynamic;
+
+	function getBoolean(param1:Dynamic):Bool;
+
+	function getByte(param1:Dynamic):java.types.Int8;
+
+	function getChar(param1:Dynamic):java.types.Char16;
+
+	function getShort(param1:Dynamic):java.types.Int16;
+
+	function getInt(param1:Dynamic):Int;
+
+	function getLong(param1:Dynamic):haxe.Int64;
+
+	function getFloat(param1:Dynamic):Single;
+
+	function getDouble(param1:Dynamic):Float;
+
+	function set(param1:Dynamic, param2:Dynamic):Void;
+
+	function setBoolean(param1:Dynamic, param2:Bool):Void;
+
+	function setByte(param1:Dynamic, param2:java.types.Int8):Void;
+
+	function setChar(param1:Dynamic, param2:java.types.Char16):Void;
+
+	function setShort(param1:Dynamic, param2:java.types.Int16):Void;
+
+	function setInt(param1:Dynamic, param2:Int):Void;
+
+	function setLong(param1:Dynamic, param2:haxe.Int64):Void;
+
+	function setFloat(param1:Dynamic, param2:Single):Void;
+
+	function setDouble(param1:Dynamic, param2:Float):Void;
+
+	function getAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.T>):getAnnotation.T;
+
+	function getAnnotationsByType<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotationsByType.T>):java.NativeArray<getAnnotationsByType.T>;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getAnnotatedType():java.lang.reflect.AnnotatedType;
+}

@@ -1,0 +1,9 @@
+@:realPath("java.sun.reflect.generics.tree.ClassTypeSignature") @:used @:native("sun.reflect.generics.tree.ClassTypeSignature") @:libType
+extern class sun.reflect.generics.tree.ClassTypeSignature implements sun.reflect.generics.tree.FieldTypeSignature {
+
+	function getPath():java.util.List<sun.reflect.generics.tree.SimpleClassTypeSignature>;
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+
+	static function make(param1:java.util.List<sun.reflect.generics.tree.SimpleClassTypeSignature>):sun.reflect.generics.tree.ClassTypeSignature;
+}

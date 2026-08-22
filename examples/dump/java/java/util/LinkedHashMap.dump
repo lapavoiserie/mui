@@ -1,0 +1,57 @@
+@:realPath("java.util.LinkedHashMap") @:used @:native("java.util.LinkedHashMap") @:libType
+extern class java.util.LinkedHashMap<K:Dynamic, V:Dynamic> extends java.util.HashMap<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V> implements java.util.Map<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V> {
+
+	function new(param1:Int, param2:Single):Void;
+
+	function new(param1:Int, param2:Single, param3:Bool):Void;
+
+	function new(param1:java.util.Map<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):Void;
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function reinitialize():Void;
+
+	function newNode(param1:Int, param2:java.util.LinkedHashMap.K, param3:java.util.LinkedHashMap.V, param4:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>;
+
+	function replacementNode(param1:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>, param2:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>;
+
+	function newTreeNode(param1:Int, param2:java.util.LinkedHashMap.K, param3:java.util.LinkedHashMap.V, param4:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):java.util.HashMap$TreeNode<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>;
+
+	function replacementTreeNode(param1:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>, param2:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):java.util.HashMap$TreeNode<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>;
+
+	function afterNodeRemoval(param1:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):Void;
+
+	function afterNodeInsertion(param1:Bool):Void;
+
+	function afterNodeAccess(param1:java.util.HashMap$Node<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):Void;
+
+	function internalWriteEntries(param1:java.io.ObjectOutputStream):Void;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function get(param1:Dynamic):java.util.LinkedHashMap.V;
+
+	function getOrDefault(param1:Dynamic, param2:java.util.LinkedHashMap.V):java.util.LinkedHashMap.V;
+
+	function clear():Void;
+
+	function removeEldestEntry(param1:java.util.Map$Entry<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>):Bool;
+
+	function keySet():java.util.Set<java.util.LinkedHashMap.K>;
+
+	function values():java.util.Collection<java.util.LinkedHashMap.V>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>>;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.LinkedHashMap.V>):Void;
+
+	var head:java.util.LinkedHashMap$Entry<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>;
+
+	var tail:java.util.LinkedHashMap$Entry<java.util.LinkedHashMap.K, java.util.LinkedHashMap.V>;
+
+	var accessOrder(default,ctor):Bool;
+}

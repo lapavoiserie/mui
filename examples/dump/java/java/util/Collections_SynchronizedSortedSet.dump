@@ -1,0 +1,19 @@
+@:realPath("java.util.Collections_SynchronizedSortedSet") @:used @:native("java.util.Collections$SynchronizedSortedSet") @:libType
+extern class java.util.Collections$SynchronizedSortedSet<E:Dynamic> extends java.util.Collections$SynchronizedSet<java.util.Collections_SynchronizedSortedSet.E> implements java.util.SortedSet<java.util.Collections_SynchronizedSortedSet.E> {
+
+	function new(param1:java.util.SortedSet<java.util.Collections_SynchronizedSortedSet.E>):Void;
+
+	function new(param1:java.util.SortedSet<java.util.Collections_SynchronizedSortedSet.E>, param2:Dynamic):Void;
+
+	function comparator():java.util.Comparator<Dynamic>;
+
+	function subSet(param1:java.util.Collections_SynchronizedSortedSet.E, param2:java.util.Collections_SynchronizedSortedSet.E):java.util.SortedSet<java.util.Collections_SynchronizedSortedSet.E>;
+
+	function headSet(param1:java.util.Collections_SynchronizedSortedSet.E):java.util.SortedSet<java.util.Collections_SynchronizedSortedSet.E>;
+
+	function tailSet(param1:java.util.Collections_SynchronizedSortedSet.E):java.util.SortedSet<java.util.Collections_SynchronizedSortedSet.E>;
+
+	function first():java.util.Collections_SynchronizedSortedSet.E;
+
+	function last():java.util.Collections_SynchronizedSortedSet.E;
+}

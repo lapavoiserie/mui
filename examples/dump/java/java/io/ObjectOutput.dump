@@ -1,0 +1,15 @@
+@:realPath("java.io.ObjectOutput") @:used @:native("java.io.ObjectOutput") @:libType
+extern interface java.io.ObjectOutput implements java.io.DataOutput implements java.lang.AutoCloseable {
+
+	function writeObject(param1:Dynamic):Void;
+
+	function write(param1:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function flush():Void;
+
+	function close():Void;
+}

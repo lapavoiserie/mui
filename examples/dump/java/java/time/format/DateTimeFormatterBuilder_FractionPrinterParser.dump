@@ -1,0 +1,11 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_FractionPrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$FractionPrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$FractionPrinterParser implements java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser {
+
+	function new(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:Bool):Void;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function parse(param1:java.time.format.DateTimeParseContext, param2:java.lang.CharSequence, param3:Int):Int;
+
+	function toString():java.lang.String;
+}

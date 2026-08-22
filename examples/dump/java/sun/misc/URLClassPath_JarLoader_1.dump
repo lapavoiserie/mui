@@ -1,0 +1,10 @@
+@:realPath("java.sun.misc.URLClassPath_JarLoader_1") @:used @:native("sun.misc.URLClassPath$JarLoader$1") @:libType
+extern class sun.misc.URLClassPath$JarLoader$1 implements java.security.PrivilegedExceptionAction<java.lang.Void> {
+
+	function new(param1:sun.misc.URLClassPath$JarLoader):Void;
+
+	function run():java.lang.Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):sun.misc.URLClassPath$JarLoader;
+}

@@ -1,0 +1,15 @@
+@:realPath("jvm.Object") @:directlyUsed @:used @:keep @:native("haxe.jvm.Object") @:nativeGen
+class haxe.jvm.Object {
+
+	public function new() {}
+
+	@:jvm.synthetic
+	public function _hx_getField(name:java.lang.String) {
+		return haxe.jvm.Jvm.readFieldNoObject(this, name);
+	}
+
+	@:jvm.synthetic
+	public function _hx_setField(name:java.lang.String, value:Dynamic) {
+		haxe.jvm.Jvm.writeFieldNoObject(this, name, value);
+	}
+}

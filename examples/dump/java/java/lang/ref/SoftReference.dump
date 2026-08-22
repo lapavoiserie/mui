@@ -1,0 +1,9 @@
+@:realPath("java.lang.ref.SoftReference") @:used @:native("java.lang.ref.SoftReference") @:libType
+extern class java.lang.ref.SoftReference<T:Dynamic> extends java.lang.ref.Reference<java.lang.ref.SoftReference.T> {
+
+	function new(param1:java.lang.ref.SoftReference.T):Void;
+
+	function new(param1:java.lang.ref.SoftReference.T, param2:java.lang.ref.ReferenceQueue<Dynamic>):Void;
+
+	function get():java.lang.ref.SoftReference.T;
+}

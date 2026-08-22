@@ -1,0 +1,9 @@
+@:realPath("java.lang.reflect.ParameterizedType") @:used @:native("java.lang.reflect.ParameterizedType") @:libType
+extern interface java.lang.reflect.ParameterizedType implements java.lang.reflect.Type {
+
+	function getActualTypeArguments():java.NativeArray<java.lang.reflect.Type>;
+
+	function getRawType():java.lang.reflect.Type;
+
+	function getOwnerType():java.lang.reflect.Type;
+}

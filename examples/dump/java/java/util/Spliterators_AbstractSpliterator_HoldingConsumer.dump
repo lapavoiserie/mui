@@ -1,0 +1,9 @@
+@:realPath("java.util.Spliterators_AbstractSpliterator_HoldingConsumer") @:used @:native("java.util.Spliterators$AbstractSpliterator$HoldingConsumer") @:libType
+extern class java.util.Spliterators$AbstractSpliterator$HoldingConsumer<T:Dynamic> implements java.util.function.Consumer<java.util.Spliterators_AbstractSpliterator_HoldingConsumer.T> {
+
+	function new():Void;
+
+	function accept(param1:java.util.Spliterators_AbstractSpliterator_HoldingConsumer.T):Void;
+
+	var value:Dynamic;
+}

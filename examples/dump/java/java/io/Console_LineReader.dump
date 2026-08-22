@@ -1,0 +1,16 @@
+@:realPath("java.io.Console_LineReader") @:used @:native("java.io.Console$LineReader") @:libType
+extern class java.io.Console$LineReader extends java.io.Reader {
+
+	function new(param1:java.io.Console, param2:java.io.Reader):Void;
+
+	function close():Void;
+
+	function ready():Bool;
+
+	function read(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Int;
+
+	var leftoverLF:Bool;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.io.Console;
+}

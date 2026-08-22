@@ -1,0 +1,5 @@
+@:realPath("java.text.Format_Field") @:used @:native("java.text.Format$Field") @:libType
+extern class java.text.Format$Field extends java.text.AttributedCharacterIterator$Attribute {
+
+	function new(param1:java.lang.String):Void;
+}

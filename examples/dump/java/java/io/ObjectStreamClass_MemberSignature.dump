@@ -1,0 +1,15 @@
+@:realPath("java.io.ObjectStreamClass_MemberSignature") @:used @:native("java.io.ObjectStreamClass$MemberSignature") @:libType
+extern class java.io.ObjectStreamClass$MemberSignature {
+
+	function new(param1:java.lang.reflect.Field):Void;
+
+	function new(param1:java.lang.reflect.Method):Void;
+
+	function new(param1:java.lang.reflect.Constructor<Dynamic>):Void;
+
+	var member(default,ctor):java.lang.reflect.Member;
+
+	var name(default,ctor):java.lang.String;
+
+	var signature(default,ctor):java.lang.String;
+}

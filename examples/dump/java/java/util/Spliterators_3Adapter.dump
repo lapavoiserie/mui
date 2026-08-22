@@ -1,0 +1,18 @@
+@:realPath("java.util.Spliterators_3Adapter") @:used @:native("java.util.Spliterators$3Adapter") @:libType
+extern class java.util.Spliterators$3Adapter implements java.util.PrimitiveIterator$OfLong implements java.util.function.LongConsumer {
+
+	function new():Void;
+
+	function accept(param1:haxe.Int64):Void;
+
+	function hasNext():Bool;
+
+	function nextLong():haxe.Int64;
+
+	var valueReady:Bool;
+
+	var nextElement:haxe.Int64;
+
+	@:realPath("val_spliterator") @:native("val$spliterator")
+	var val$spliterator(default,ctor):java.util.Spliterator$OfLong;
+}

@@ -1,0 +1,45 @@
+@:realPath("java.util.zip.Inflater") @:used @:native("java.util.zip.Inflater") @:libType
+extern class java.util.zip.Inflater {
+
+	function new(param1:Bool):Void;
+
+	function new():Void;
+
+	function setInput(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function setInput(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function setDictionary(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function setDictionary(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function getRemaining():Int;
+
+	function needsInput():Bool;
+
+	function needsDictionary():Bool;
+
+	function finished():Bool;
+
+	function inflate(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function inflate(param1:java.NativeArray<java.types.Int8>):Int;
+
+	function getAdler():Int;
+
+	function getTotalIn():Int;
+
+	function getBytesRead():haxe.Int64;
+
+	function getTotalOut():Int;
+
+	function getBytesWritten():haxe.Int64;
+
+	function reset():Void;
+
+	function end():Void;
+
+	function finalize():Void;
+
+	function ended():Bool;
+}

@@ -1,0 +1,11 @@
+@:realPath("java.math.RoundingMode") @:used @:flatEnum @:native("java.math.RoundingMode")
+extern enum java.math.RoundingMode {
+	UP;
+	DOWN;
+	CEILING;
+	FLOOR;
+	HALF_UP;
+	HALF_DOWN;
+	HALF_EVEN;
+	UNNECESSARY;
+}

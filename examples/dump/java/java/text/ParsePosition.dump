@@ -1,0 +1,23 @@
+@:realPath("java.text.ParsePosition") @:native("java.text.ParsePosition") @:libType
+extern class java.text.ParsePosition {
+
+	function new(param1:Int):Void;
+
+	function getIndex():Int;
+
+	function setIndex(param1:Int):Void;
+
+	function setErrorIndex(param1:Int):Void;
+
+	function getErrorIndex():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	var index:Int;
+
+	var errorIndex:Int;
+}

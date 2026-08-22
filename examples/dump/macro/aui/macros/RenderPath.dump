@@ -1,0 +1,33 @@
+class aui.macros.RenderPath {
+
+	@:value("aui_static")
+	public static inline var STATIC_DEFINE:String = "aui_static";
+
+	@:value("aui_dynamic")
+	public static inline var DYNAMIC_DEFINE:String = "aui_dynamic";
+
+	@:value(null)
+	static var _isStatic:Null<Bool> = null;
+
+	public static function isStatic() {
+		if (aui.macros.RenderPath._isStatic == null) {
+			aui.macros.RenderPath._isStatic = aui.macros.RenderPath.resolve();
+		};
+		return aui.macros.RenderPath._isStatic;
+	}
+
+	public static function isDynamic() {
+		return ! aui.macros.RenderPath.isStatic();
+	}
+
+	static function resolve() {
+		if (! haxe.macro.Context.defined("aui_static")) {
+			return false;
+		};
+		if (haxe.macro.Context.defined("aui_dynamic")) {
+			haxe.macro.Context.error("[AUI] -D " + "aui_static" + " and -D " + "aui_dynamic" + " contradict each other.\n" + "  Drop -D " + "aui_static" + " for the dynamic renderer, which is the default,\n" + "  or drop -D " + "aui_dynamic" + " if the static path is really what you want.", haxe.macro.Context.currentPos(), null);
+		};
+		haxe.macro.Context.warning("[AUI] the static Compose path is decommissioned and unmaintained.\n" + "  It does not support ViewComponent nor fine-grained recomposition.\n" + "  Drop -D " + "aui_static" + " to use the dynamic renderer.", haxe.macro.Context.currentPos(), null);
+		return true;
+	}
+}

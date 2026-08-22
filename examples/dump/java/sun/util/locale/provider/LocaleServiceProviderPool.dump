@@ -1,0 +1,23 @@
+@:realPath("java.sun.util.locale.provider.LocaleServiceProviderPool") @:native("sun.util.locale.provider.LocaleServiceProviderPool") @:libType
+extern class sun.util.locale.provider.LocaleServiceProviderPool {
+
+	function getAvailableLocales():java.NativeArray<java.util.Locale>;
+
+	function hasProviders():Bool;
+
+	function getLocalizedObject<P:java.util.spi.LocaleServiceProvider, S:Dynamic>(param1:sun.util.locale.provider.LocaleServiceProviderPool$LocalizedObjectGetter<getLocalizedObject.P, getLocalizedObject.S>, param2:java.util.Locale, param3:haxe.Rest<Dynamic>):getLocalizedObject.S;
+
+	function getLocalizedObject<P:java.util.spi.LocaleServiceProvider, S:Dynamic>(param1:sun.util.locale.provider.LocaleServiceProviderPool$LocalizedObjectGetter<getLocalizedObject.P, getLocalizedObject.S>, param2:java.util.Locale, param3:java.lang.String, param4:haxe.Rest<Dynamic>):getLocalizedObject.S;
+
+	static function getPool(param1:java.lang.Class<java.util.spi.LocaleServiceProvider>):sun.util.locale.provider.LocaleServiceProviderPool;
+
+	static function config(param1:java.lang.Class<Dynamic>, param2:java.lang.String):Void;
+
+	static function getAllAvailableLocales():java.NativeArray<java.util.Locale>;
+
+	static function getLookupLocales(param1:java.util.Locale):java.util.List<java.util.Locale>;
+
+	static function getLookupLocale(param1:java.util.Locale):java.util.Locale;
+
+	static var spiClasses(default,never):java.NativeArray<java.lang.Class<java.util.spi.LocaleServiceProvider>>;
+}

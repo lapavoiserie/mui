@@ -1,0 +1,184 @@
+@:used
+class nui.PropValueTools {
+
+	public static function resolve(v:Null<nui.PropValue>) {
+		var current = v;
+		var guard = 0;
+		while ((current != null && guard ++ < 32)) if ((current == null)) return current else switch ((enumIndex current)) {
+			case 9: {
+				var thunk = current[0];
+				current = thunk();
+			};
+			default: return current
+		};
+		return current;
+	}
+
+	public static function equals(a:Null<nui.PropValue>, b:Null<nui.PropValue>) {
+		var ra = nui.PropValueTools.resolve(a);
+		var rb = nui.PropValueTools.resolve(b);
+		if ((ra == null || rb == null)) return ra == rb;
+		if ((ra == null)) return false else switch ((enumIndex ra)) {
+			case 0: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 0: {
+						var y = rb[0];
+						var x = _g;
+						return x == y;
+					};
+					default: return false
+				};
+			};
+			case 1: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 1: {
+						var y = rb[0];
+						var x = _g;
+						return x == y;
+					};
+					default: return false
+				};
+			};
+			case 2: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 2: {
+						var y = rb[0];
+						var x = _g;
+						return x == y;
+					};
+					default: return false
+				};
+			};
+			case 3: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 3: {
+						var y = rb[0];
+						var x = _g;
+						return x == y;
+					};
+					default: return false
+				};
+			};
+			case 4: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 4: {
+						var y = rb[0];
+						var x = _g;
+						return Reflect.compareMethods(x, y);
+					};
+					default: return false
+				};
+			};
+			case 5: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 5: {
+						var y = rb[0];
+						var x = _g;
+						return Reflect.compareMethods(x, y);
+					};
+					default: return false
+				};
+			};
+			case 6: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 6: {
+						var y = rb[0];
+						var x = _g;
+						return Reflect.compareMethods(x, y);
+					};
+					default: return false
+				};
+			};
+			case 7: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 7: {
+						var y = rb[0];
+						var x = _g;
+						return Reflect.compareMethods(x, y);
+					};
+					default: return false
+				};
+			};
+			case 8: {
+				var _g = ra[0];
+				if ((rb == null)) return false else switch ((enumIndex rb)) {
+					case 8: {
+						var y = rb[0];
+						var x = _g;
+						return Reflect.compareMethods(x, y);
+					};
+					default: return false
+				};
+			};
+			default: return false
+		};
+	}
+
+	@:value({ def : "" })
+	public static function asString(v:Null<nui.PropValue>, def:java.lang.String = "") {
+		if ((def == null)) def = "";
+		var r = nui.PropValueTools.resolve(v);
+		if ((r == null)) return def;
+		if ((r == null)) return def else switch ((enumIndex r)) {
+			case 0: {
+				var x = r[0];
+				return x;
+			};
+			default: return def
+		};
+	}
+
+	@:value({ def : 0 })
+	public static function asInt(v:Null<nui.PropValue>, def:Null<Int> = 0) {
+		var def = if ((def == null)) 0 else cast def;
+		var r = nui.PropValueTools.resolve(v);
+		if ((r == null)) return def;
+		if ((r == null)) return def else switch ((enumIndex r)) {
+			case 1: {
+				var x = r[0];
+				return x;
+			};
+			default: return def
+		};
+	}
+
+	@:value({ def : 0.0 })
+	public static function asFloat(v:Null<nui.PropValue>, def:Null<Float> = 0.0) {
+		var def = if ((def == null)) 0.0 else cast def;
+		var r = nui.PropValueTools.resolve(v);
+		if ((r == null)) return def;
+		if ((r == null)) return def else switch ((enumIndex r)) {
+			case 1: {
+				var x = r[0];
+				return x;
+			};
+			case 2: {
+				var x = r[0];
+				return x;
+			};
+			default: return def
+		};
+	}
+
+	@:value({ def : false })
+	public static function asBool(v:Null<nui.PropValue>, def:Null<Bool> = false) {
+		var def = if ((def == null)) false else cast def;
+		var r = nui.PropValueTools.resolve(v);
+		if ((r == null)) return def;
+		if ((r == null)) return def else switch ((enumIndex r)) {
+			case 3: {
+				var x = r[0];
+				return x;
+			};
+			default: return def
+		};
+	}
+}

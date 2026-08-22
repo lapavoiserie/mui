@@ -1,0 +1,147 @@
+@:realPath("java.time.LocalTime") @:used @:native("java.time.LocalTime") @:libType
+extern class java.time.LocalTime implements java.io.Serializable implements java.lang.Comparable<java.time.LocalTime> implements java.time.temporal.TemporalAdjuster implements java.time.temporal.Temporal {
+
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	function isSupported(param1:java.time.temporal.TemporalUnit):Bool;
+
+	function range(param1:java.time.temporal.TemporalField):java.time.temporal.ValueRange;
+
+	function get(param1:java.time.temporal.TemporalField):Int;
+
+	function getLong(param1:java.time.temporal.TemporalField):haxe.Int64;
+
+	function getHour():Int;
+
+	function getMinute():Int;
+
+	function getSecond():Int;
+
+	function getNano():Int;
+
+	function with(param1:java.time.temporal.TemporalAdjuster):java.time.LocalTime;
+
+	function with(param1:java.time.temporal.TemporalField, param2:haxe.Int64):java.time.LocalTime;
+
+	function withHour(param1:Int):java.time.LocalTime;
+
+	function withMinute(param1:Int):java.time.LocalTime;
+
+	function withSecond(param1:Int):java.time.LocalTime;
+
+	function withNano(param1:Int):java.time.LocalTime;
+
+	function truncatedTo(param1:java.time.temporal.TemporalUnit):java.time.LocalTime;
+
+	function plus(param1:java.time.temporal.TemporalAmount):java.time.LocalTime;
+
+	function plus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.LocalTime;
+
+	function plusHours(param1:haxe.Int64):java.time.LocalTime;
+
+	function plusMinutes(param1:haxe.Int64):java.time.LocalTime;
+
+	function plusSeconds(param1:haxe.Int64):java.time.LocalTime;
+
+	function plusNanos(param1:haxe.Int64):java.time.LocalTime;
+
+	function minus(param1:java.time.temporal.TemporalAmount):java.time.LocalTime;
+
+	function minus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.LocalTime;
+
+	function minusHours(param1:haxe.Int64):java.time.LocalTime;
+
+	function minusMinutes(param1:haxe.Int64):java.time.LocalTime;
+
+	function minusSeconds(param1:haxe.Int64):java.time.LocalTime;
+
+	function minusNanos(param1:haxe.Int64):java.time.LocalTime;
+
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	function adjustInto(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function until(param1:java.time.temporal.Temporal, param2:java.time.temporal.TemporalUnit):haxe.Int64;
+
+	function format(param1:java.time.format.DateTimeFormatter):java.lang.String;
+
+	function atDate(param1:java.time.LocalDate):java.time.LocalDateTime;
+
+	function atOffset(param1:java.time.ZoneOffset):java.time.OffsetTime;
+
+	function toSecondOfDay():Int;
+
+	function toNanoOfDay():haxe.Int64;
+
+	function compareTo(param1:java.time.LocalTime):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function isAfter(param1:java.time.LocalTime):Bool;
+
+	function isBefore(param1:java.time.LocalTime):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	static function now():java.time.LocalTime;
+
+	static function now(param1:java.time.Clock):java.time.LocalTime;
+
+	static function now(param1:java.time.ZoneId):java.time.LocalTime;
+
+	static function of(param1:Int, param2:Int):java.time.LocalTime;
+
+	static function of(param1:Int, param2:Int, param3:Int, param4:Int):java.time.LocalTime;
+
+	static function of(param1:Int, param2:Int, param3:Int):java.time.LocalTime;
+
+	static function ofSecondOfDay(param1:haxe.Int64):java.time.LocalTime;
+
+	static function ofNanoOfDay(param1:haxe.Int64):java.time.LocalTime;
+
+	static function from(param1:java.time.temporal.TemporalAccessor):java.time.LocalTime;
+
+	static function parse(param1:java.lang.CharSequence):java.time.LocalTime;
+
+	static function parse(param1:java.lang.CharSequence, param2:java.time.format.DateTimeFormatter):java.time.LocalTime;
+
+	static function readExternal(param1:java.io.DataInput):java.time.LocalTime;
+
+	static var MIN(default,never):java.time.LocalTime;
+
+	static var MAX(default,never):java.time.LocalTime;
+
+	static var MIDNIGHT(default,never):java.time.LocalTime;
+
+	static var NOON(default,never):java.time.LocalTime;
+
+	static var HOURS_PER_DAY(default,never):Int;
+
+	static var MINUTES_PER_HOUR(default,never):Int;
+
+	static var MINUTES_PER_DAY(default,never):Int;
+
+	static var SECONDS_PER_MINUTE(default,never):Int;
+
+	static var SECONDS_PER_HOUR(default,never):Int;
+
+	static var SECONDS_PER_DAY(default,never):Int;
+
+	static var MILLIS_PER_DAY(default,never):haxe.Int64;
+
+	static var MICROS_PER_DAY(default,never):haxe.Int64;
+
+	static var NANOS_PER_SECOND(default,never):haxe.Int64;
+
+	static var NANOS_PER_MINUTE(default,never):haxe.Int64;
+
+	static var NANOS_PER_HOUR(default,never):haxe.Int64;
+
+	static var NANOS_PER_DAY(default,never):haxe.Int64;
+}

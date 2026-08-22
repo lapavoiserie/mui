@@ -1,0 +1,75 @@
+@:realPath("java.util.regex.Pattern") @:directlyUsed @:used @:native("java.util.regex.Pattern") @:libType
+extern class java.util.regex.Pattern implements java.io.Serializable {
+
+	function pattern():java.lang.String;
+
+	function toString():java.lang.String;
+
+	function matcher(param1:java.lang.CharSequence):java.util.regex.Matcher;
+
+	function flags():Int;
+
+	function split(param1:java.lang.CharSequence, param2:Int):java.NativeArray<java.lang.String>;
+
+	function split(param1:java.lang.CharSequence):java.NativeArray<java.lang.String>;
+
+	function namedGroups():java.util.Map<java.lang.String, java.lang.Integer>;
+
+	function asPredicate():java.util.function.Predicate<java.lang.String>;
+
+	function splitAsStream(param1:java.lang.CharSequence):java.util.stream.Stream<java.lang.String>;
+
+	var root:java.util.regex.Pattern$Node;
+
+	var matchRoot:java.util.regex.Pattern$Node;
+
+	var buffer:java.NativeArray<Int>;
+
+	var groupNodes:java.NativeArray<java.util.regex.Pattern$GroupHead>;
+
+	var capturingGroupCount:Int;
+
+	var localCount:Int;
+
+	static function compile(param1:java.lang.String):java.util.regex.Pattern;
+
+	static function compile(param1:java.lang.String, param2:Int):java.util.regex.Pattern;
+
+	static function matches(param1:java.lang.String, param2:java.lang.CharSequence):Bool;
+
+	static function quote(param1:java.lang.String):java.lang.String;
+
+	static var UNIX_LINES(default,never):Int;
+
+	static var CASE_INSENSITIVE(default,never):Int;
+
+	static var COMMENTS(default,never):Int;
+
+	static var MULTILINE(default,never):Int;
+
+	static var LITERAL(default,never):Int;
+
+	static var DOTALL(default,never):Int;
+
+	static var UNICODE_CASE(default,never):Int;
+
+	static var CANON_EQ(default,never):Int;
+
+	static var UNICODE_CHARACTER_CLASS(default,never):Int;
+
+	static var MAX_REPS(default,never):Int;
+
+	static var GREEDY(default,never):Int;
+
+	static var LAZY(default,never):Int;
+
+	static var POSSESSIVE(default,never):Int;
+
+	static var INDEPENDENT(default,never):Int;
+
+	static var lookbehindEnd:java.util.regex.Pattern$Node;
+
+	static var accept:java.util.regex.Pattern$Node;
+
+	static var lastAccept:java.util.regex.Pattern$Node;
+}

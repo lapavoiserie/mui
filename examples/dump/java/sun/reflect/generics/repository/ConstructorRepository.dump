@@ -1,0 +1,13 @@
+@:realPath("java.sun.reflect.generics.repository.ConstructorRepository") @:used @:native("sun.reflect.generics.repository.ConstructorRepository") @:libType
+extern class sun.reflect.generics.repository.ConstructorRepository extends sun.reflect.generics.repository.GenericDeclRepository<sun.reflect.generics.tree.MethodTypeSignature> {
+
+	function new(param1:java.lang.String, param2:sun.reflect.generics.factory.GenericsFactory):Void;
+
+	function parse(param1:java.lang.String):sun.reflect.generics.tree.MethodTypeSignature;
+
+	function getParameterTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	function getExceptionTypes():java.NativeArray<java.lang.reflect.Type>;
+
+	static function make(param1:java.lang.String, param2:sun.reflect.generics.factory.GenericsFactory):sun.reflect.generics.repository.ConstructorRepository;
+}

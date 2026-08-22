@@ -1,0 +1,7 @@
+@:realPath("java.util.regex.Pattern_VertWS") @:used @:native("java.util.regex.Pattern$VertWS") @:libType
+extern class java.util.regex.Pattern$VertWS extends java.util.regex.Pattern$BmpCharProperty {
+
+	function new():Void;
+
+	function isSatisfiedBy(param1:Int):Bool;
+}

@@ -1,0 +1,7 @@
+@:realPath("java.lang.ClassLoader_ParallelLoaders") @:native("java.lang.ClassLoader$ParallelLoaders") @:libType
+extern class java.lang.ClassLoader$ParallelLoaders {
+
+	static function register(param1:java.lang.Class<java.lang.ClassLoader>):Bool;
+
+	static function isRegistered(param1:java.lang.Class<java.lang.ClassLoader>):Bool;
+}

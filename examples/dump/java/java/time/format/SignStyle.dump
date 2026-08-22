@@ -1,0 +1,8 @@
+@:realPath("java.time.format.SignStyle") @:used @:flatEnum @:native("java.time.format.SignStyle")
+extern enum java.time.format.SignStyle {
+	NORMAL;
+	ALWAYS;
+	NEVER;
+	NOT_NEGATIVE;
+	EXCEEDS_PAD;
+}

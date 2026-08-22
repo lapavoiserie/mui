@@ -1,0 +1,7 @@
+@:used
+class aui.mui.ScrollView extends aui.ui.ScrollView {
+
+	public function new(content:Array<aui.View>) {
+		super(content);
+	}
+}

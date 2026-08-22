@@ -1,0 +1,9 @@
+@:used
+class aui.ui.ScrollView extends aui.View {
+
+	public function new(content:Array<aui.View>) {
+		super();
+		this.viewType = "ScrollView";
+		this.children = content;
+	}
+}

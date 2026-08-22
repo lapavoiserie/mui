@@ -1,0 +1,86 @@
+@:realPath("java.time.chrono.ChronoLocalDate") @:used @:native("java.time.chrono.ChronoLocalDate") @:libType
+extern interface java.time.chrono.ChronoLocalDate implements java.lang.Comparable<java.time.chrono.ChronoLocalDate> implements java.time.temporal.TemporalAdjuster implements java.time.temporal.Temporal {
+
+	function getChronology():java.time.chrono.Chronology;
+
+	@:java.default
+	function getEra():java.time.chrono.Era;
+
+	@:java.default
+	function isLeapYear():Bool;
+
+	function lengthOfMonth():Int;
+
+	@:java.default
+	function lengthOfYear():Int;
+
+	@:java.default
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	@:java.default
+	function isSupported(param1:java.time.temporal.TemporalUnit):Bool;
+
+	@:java.default
+	function with(param1:java.time.temporal.TemporalAdjuster):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function with(param1:java.time.temporal.TemporalField, param2:haxe.Int64):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function plus(param1:java.time.temporal.TemporalAmount):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function plus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function minus(param1:java.time.temporal.TemporalAmount):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function minus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.chrono.ChronoLocalDate;
+
+	@:java.default
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	@:java.default
+	function adjustInto(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function until(param1:java.time.temporal.Temporal, param2:java.time.temporal.TemporalUnit):haxe.Int64;
+
+	function until(param1:java.time.chrono.ChronoLocalDate):java.time.chrono.ChronoPeriod;
+
+	@:java.default
+	function format(param1:java.time.format.DateTimeFormatter):java.lang.String;
+
+	@:java.default
+	function atTime(param1:java.time.LocalTime):java.time.chrono.ChronoLocalDateTime<Dynamic>;
+
+	@:java.default
+	function toEpochDay():haxe.Int64;
+
+	@:java.default
+	function compareTo(param1:java.time.chrono.ChronoLocalDate):Int;
+
+	@:java.default
+	function compareTo(param1:Dynamic):Int;
+
+	@:java.default
+	function isAfter(param1:java.time.chrono.ChronoLocalDate):Bool;
+
+	@:java.default
+	function isBefore(param1:java.time.chrono.ChronoLocalDate):Bool;
+
+	@:java.default
+	function isEqual(param1:java.time.chrono.ChronoLocalDate):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	@:java.default
+	static function timeLineOrder():java.util.Comparator<java.time.chrono.ChronoLocalDate>;
+
+	@:java.default
+	static function from(param1:java.time.temporal.TemporalAccessor):java.time.chrono.ChronoLocalDate;
+}

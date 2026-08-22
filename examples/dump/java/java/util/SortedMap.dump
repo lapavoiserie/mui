@@ -1,0 +1,21 @@
+@:realPath("java.util.SortedMap") @:used @:native("java.util.SortedMap") @:libType
+extern interface java.util.SortedMap<K:Dynamic, V:Dynamic> implements java.util.Map<java.util.SortedMap.K, java.util.SortedMap.V> {
+
+	function comparator():java.util.Comparator<Dynamic>;
+
+	function subMap(param1:java.util.SortedMap.K, param2:java.util.SortedMap.K):java.util.SortedMap<java.util.SortedMap.K, java.util.SortedMap.V>;
+
+	function headMap(param1:java.util.SortedMap.K):java.util.SortedMap<java.util.SortedMap.K, java.util.SortedMap.V>;
+
+	function tailMap(param1:java.util.SortedMap.K):java.util.SortedMap<java.util.SortedMap.K, java.util.SortedMap.V>;
+
+	function firstKey():java.util.SortedMap.K;
+
+	function lastKey():java.util.SortedMap.K;
+
+	function keySet():java.util.Set<java.util.SortedMap.K>;
+
+	function values():java.util.Collection<java.util.SortedMap.V>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.SortedMap.K, java.util.SortedMap.V>>;
+}

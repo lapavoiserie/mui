@@ -1,0 +1,15 @@
+@:directlyUsed @:used
+class aui.ui.Tab {
+
+	public function new(title:java.lang.String, icon:java.lang.String, content:aui.View) {
+		this.title = title;
+		this.icon = icon;
+		this.content = content;
+	}
+
+	public var title:java.lang.String;
+
+	public var icon:java.lang.String;
+
+	public var content:aui.View;
+}

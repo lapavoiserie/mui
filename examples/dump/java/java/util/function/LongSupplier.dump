@@ -1,0 +1,5 @@
+@:realPath("java.util.function.LongSupplier") @:used @:native("java.util.function.LongSupplier") @:libType
+extern interface java.util.function.LongSupplier {
+
+	function getAsLong():haxe.Int64;
+}

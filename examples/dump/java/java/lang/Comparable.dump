@@ -1,0 +1,5 @@
+@:realPath("java.lang.Comparable") @:used @:native("java.lang.Comparable") @:libType
+extern interface java.lang.Comparable<T:Dynamic> {
+
+	function compareTo(param1:java.lang.Comparable.T):Int;
+}

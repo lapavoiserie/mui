@@ -1,0 +1,31 @@
+@:realPath("java.math.MathContext") @:native("java.math.MathContext") @:libType
+extern class java.math.MathContext implements java.io.Serializable {
+
+	function new(param1:Int):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:Int, param2:java.math.RoundingMode):Void;
+
+	function getPrecision():Int;
+
+	function getRoundingMode():java.math.RoundingMode;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	var precision(default,ctor):Int;
+
+	var roundingMode(default,ctor):java.math.RoundingMode;
+
+	static var UNLIMITED(default,never):java.math.MathContext;
+
+	static var DECIMAL32(default,never):java.math.MathContext;
+
+	static var DECIMAL64(default,never):java.math.MathContext;
+
+	static var DECIMAL128(default,never):java.math.MathContext;
+}

@@ -1,0 +1,19 @@
+@:realPath("java.util.stream.Collector") @:used @:native("java.util.stream.Collector") @:libType
+extern interface java.util.stream.Collector<T:Dynamic, A:Dynamic, R:Dynamic> {
+
+	function supplier():java.util.function.Supplier<java.util.stream.Collector.A>;
+
+	function accumulator():java.util.function.BiConsumer<java.util.stream.Collector.A, java.util.stream.Collector.T>;
+
+	function combiner():java.util.function.BinaryOperator<java.util.stream.Collector.A>;
+
+	function finisher():java.util.function.Function<java.util.stream.Collector.A, java.util.stream.Collector.R>;
+
+	function characteristics():java.util.Set<java.util.stream.Collector$Characteristics>;
+
+	@:java.default
+	static function of<T:Dynamic, R:Dynamic>(param1:java.util.function.Supplier<of.R>, param2:java.util.function.BiConsumer<of.R, of.T>, param3:java.util.function.BinaryOperator<of.R>, param4:haxe.Rest<java.util.stream.Collector$Characteristics>):java.util.stream.Collector<of.T, of.R, of.R>;
+
+	@:java.default
+	static function of<T:Dynamic, A:Dynamic, R:Dynamic>(param1:java.util.function.Supplier<of.A>, param2:java.util.function.BiConsumer<of.A, of.T>, param3:java.util.function.BinaryOperator<of.A>, param4:java.util.function.Function<of.A, of.R>, param5:haxe.Rest<java.util.stream.Collector$Characteristics>):java.util.stream.Collector<of.T, of.A, of.R>;
+}

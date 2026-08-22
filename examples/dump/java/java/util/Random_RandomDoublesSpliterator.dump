@@ -1,0 +1,29 @@
+@:realPath("java.util.Random_RandomDoublesSpliterator") @:used @:native("java.util.Random$RandomDoublesSpliterator") @:libType
+extern class java.util.Random$RandomDoublesSpliterator implements java.util.Spliterator$OfDouble {
+
+	function new(param1:java.util.Random, param2:haxe.Int64, param3:haxe.Int64, param4:Float, param5:Float):Void;
+
+	function trySplit():java.util.Random$RandomDoublesSpliterator;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	function tryAdvance(param1:java.util.function.DoubleConsumer):Bool;
+
+	function tryAdvance(param1:Dynamic):Bool;
+
+	function forEachRemaining(param1:java.util.function.DoubleConsumer):Void;
+
+	function forEachRemaining(param1:Dynamic):Void;
+
+	var rng(default,ctor):java.util.Random;
+
+	var index:haxe.Int64;
+
+	var fence(default,ctor):haxe.Int64;
+
+	var origin(default,ctor):Float;
+
+	var bound(default,ctor):Float;
+}

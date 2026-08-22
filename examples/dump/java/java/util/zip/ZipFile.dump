@@ -1,0 +1,37 @@
+@:realPath("java.util.zip.ZipFile") @:used @:native("java.util.zip.ZipFile") @:libType
+extern class java.util.zip.ZipFile implements java.util.zip.ZipConstants implements java.io.Closeable {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.io.File, param2:java.nio.charset.Charset):Void;
+
+	function new(param1:java.lang.String, param2:java.nio.charset.Charset):Void;
+
+	function new(param1:java.io.File, param2:Int, param3:java.nio.charset.Charset):Void;
+
+	function new(param1:java.io.File):Void;
+
+	function new(param1:java.io.File, param2:Int):Void;
+
+	function getComment():java.lang.String;
+
+	function getEntry(param1:java.lang.String):java.util.zip.ZipEntry;
+
+	function getInputStream(param1:java.util.zip.ZipEntry):java.io.InputStream;
+
+	function getName():java.lang.String;
+
+	function entries():java.util.Enumeration<java.util.zip.ZipEntry>;
+
+	function stream():java.util.stream.Stream<java.util.zip.ZipEntry>;
+
+	function size():Int;
+
+	function close():Void;
+
+	function finalize():Void;
+
+	static var OPEN_READ(default,never):Int;
+
+	static var OPEN_DELETE(default,never):Int;
+}

@@ -1,0 +1,10 @@
+@:used @:flatEnum
+enum aui.state.AnimationCurve {
+	Default;
+	EaseIn;
+	EaseOut;
+	EaseInOut;
+	Spring;
+	Linear;
+	Bouncy;
+}

@@ -1,0 +1,18 @@
+@:enum
+private class haxe.display._JsonModuleTypes.JsonUnop_Impl_ {
+
+	@:value(cast "OpIncrement") @:impl @:enum
+	public static inline var OpIncrement:haxe.display.JsonUnop = cast "OpIncrement";
+
+	@:value(cast "OpDecrement") @:impl @:enum
+	public static inline var OpDecrement:haxe.display.JsonUnop = cast "OpDecrement";
+
+	@:value(cast "OpNot") @:impl @:enum
+	public static inline var OpNot:haxe.display.JsonUnop = cast "OpNot";
+
+	@:value(cast "OpNeg") @:impl @:enum
+	public static inline var OpNeg:haxe.display.JsonUnop = cast "OpNeg";
+
+	@:value(cast "OpNegBits") @:impl @:enum
+	public static inline var OpNegBits:haxe.display.JsonUnop = cast "OpNegBits";
+}

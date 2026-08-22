@@ -1,0 +1,14 @@
+@:realPath("java.net.URLEncoder") @:native("java.net.URLEncoder") @:libType
+extern class java.net.URLEncoder {
+
+	@:deprecated
+	static function encode(param1:java.lang.String):java.lang.String;
+
+	static function encode(param1:java.lang.String, param2:java.lang.String):java.lang.String;
+
+	static var dontNeedEncoding:java.util.BitSet;
+
+	static var caseDiff(default,never):Int;
+
+	static var dfltEncName:java.lang.String;
+}

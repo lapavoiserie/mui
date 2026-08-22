@@ -1,0 +1,229 @@
+@:directlyUsed @:used
+class aui.View {
+
+	public function new() {}
+
+	@:value("EmptyView")
+	public var viewType:java.lang.String = "EmptyView";
+
+	@:value([])
+	public var children:Array<aui.View> = [];
+
+	@:value([])
+	public var modifierChain:Array<aui.modifiers.ViewModifier> = [];
+
+	@:value(new Map())
+	public var properties:Map<java.lang.String, Dynamic> = new haxe.ds.StringMap();
+
+	@:value(null)
+	public var liveBuild:Null<() -> aui.View> = null;
+
+	public function body() {
+		return this;
+	}
+
+	public function padding(value:Null<Float> = null) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Padding(value));
+		return this;
+	}
+
+	public function frame(width:Null<Float> = null, height:Null<Float> = null, maxWidth:Null<Float> = null, maxHeight:Null<Float> = null, alignment:Null<aui.modifiers.Alignment> = null) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Frame(width, height, maxWidth, maxHeight, alignment));
+		return this;
+	}
+
+	public function offset(x:Float, y:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Offset(x, y));
+		return this;
+	}
+
+	public function aspectRatio(ratio:Null<Float> = null, contentMode:Null<aui.modifiers.ContentMode> = null) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.AspectRatio(ratio, contentMode));
+		return this;
+	}
+
+	public function font(style:aui.modifiers.FontStyle) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Font(style));
+		return this;
+	}
+
+	public function bold() {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Bold);
+		return this;
+	}
+
+	public function italic() {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Italic);
+		return this;
+	}
+
+	public function lineLimit(lines:Int) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.LineLimit(lines));
+		return this;
+	}
+
+	public function multilineTextAlignment(alignment:aui.modifiers.TextAlignment) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.MultilineTextAlignment(alignment));
+		return this;
+	}
+
+	public function foregroundColor(color:aui.modifiers.ColorValue) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.ForegroundColor(color));
+		return this;
+	}
+
+	public function background(color:aui.modifiers.ColorValue) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Background(color));
+		return this;
+	}
+
+	public function opacity(value:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Opacity(value));
+		return this;
+	}
+
+	public function cornerRadius(radius:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.CornerRadius(radius));
+		return this;
+	}
+
+	public function clipShape(shape:aui.modifiers.ShapeType) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.ClipShape(shape));
+		return this;
+	}
+
+	public function shadow(color:Null<aui.modifiers.ColorValue> = null, radius:Null<Float> = null, x:Null<Float> = null, y:Null<Float> = null) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Shadow(color, radius, x, y));
+		return this;
+	}
+
+	public function blur(radius:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Blur(radius));
+		return this;
+	}
+
+	public function scaleEffect(scale:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.ScaleEffect(scale));
+		return this;
+	}
+
+	public function rotationEffect(degrees:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.RotationEffect(degrees));
+		return this;
+	}
+
+	public function brightness(amount:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Brightness(amount));
+		return this;
+	}
+
+	public function contrast(amount:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Contrast(amount));
+		return this;
+	}
+
+	public function saturation(amount:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Saturation(amount));
+		return this;
+	}
+
+	public function grayscale(amount:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Grayscale(amount));
+		return this;
+	}
+
+	public function border(color:aui.modifiers.ColorValue, width:Null<Float> = null) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Border(color, width));
+		return this;
+	}
+
+	public function overlay(content:aui.View) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Overlay(content));
+		return this;
+	}
+
+	public function onTapGesture(action:() -> Void) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.OnTapGesture(action));
+		return this;
+	}
+
+	public function onLongPressGesture(action:() -> Void) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.OnLongPressGesture(action));
+		return this;
+	}
+
+	public function onAppear(action:() -> Void) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.OnAppear(action));
+		return this;
+	}
+
+	public function onDisappear(action:() -> Void) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.OnDisappear(action));
+		return this;
+	}
+
+	public function disabled(isDisabled:Bool) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Disabled(isDisabled));
+		return this;
+	}
+
+	public function hidden() {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Hidden);
+		return this;
+	}
+
+	public function fillMaxWidth() {
+		this.modifierChain.push(aui.modifiers.ViewModifier.FillMaxWidth);
+		return this;
+	}
+
+	public function fillMaxHeight() {
+		this.modifierChain.push(aui.modifiers.ViewModifier.FillMaxHeight);
+		return this;
+	}
+
+	public function fillMaxSize() {
+		this.modifierChain.push(aui.modifiers.ViewModifier.FillMaxSize);
+		return this;
+	}
+
+	public function paddingHorizontal(value:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.PaddingHorizontal(value));
+		return this;
+	}
+
+	public function paddingVertical(value:Float) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.PaddingVertical(value));
+		return this;
+	}
+
+	public function navigationTitle(title:java.lang.String) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.NavigationTitle(title));
+		return this;
+	}
+
+	public function sheet(isPresented:aui.state.State<Bool>, content:aui.View) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Sheet(isPresented, content));
+		return this;
+	}
+
+	public function alert(title:java.lang.String, isPresented:aui.state.State<Bool>, message:Null<java.lang.String> = null) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Alert(title, isPresented, message));
+		return this;
+	}
+
+	public function animation(curve:Null<aui.modifiers.AnimationCurve> = null) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.Animation(if ((curve != null)) curve else aui.modifiers.AnimationCurve.Default));
+		return this;
+	}
+
+	public function accessibilityLabel(label:java.lang.String) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.AccessibilityLabel(label));
+		return this;
+	}
+
+	public function accessibilityHint(hint:java.lang.String) {
+		this.modifierChain.push(aui.modifiers.ViewModifier.AccessibilityHint(hint));
+		return this;
+	}
+}

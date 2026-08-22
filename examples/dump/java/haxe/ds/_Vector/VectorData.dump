@@ -1,0 +1,1 @@
+private typedef haxe.ds._Vector.VectorData<T> = java.NativeArray<haxe.ds._Vector.VectorData.T>

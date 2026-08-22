@@ -1,0 +1,49 @@
+@:realPath("java.time.format.DateTimeParseContext") @:used @:native("java.time.format.DateTimeParseContext") @:libType
+extern class java.time.format.DateTimeParseContext {
+
+	function new(param1:java.time.format.DateTimeFormatter):Void;
+
+	function copy():java.time.format.DateTimeParseContext;
+
+	function getLocale():java.util.Locale;
+
+	function getDecimalStyle():java.time.format.DecimalStyle;
+
+	function getEffectiveChronology():java.time.chrono.Chronology;
+
+	function isCaseSensitive():Bool;
+
+	function setCaseSensitive(param1:Bool):Void;
+
+	function subSequenceEquals(param1:java.lang.CharSequence, param2:Int, param3:java.lang.CharSequence, param4:Int, param5:Int):Bool;
+
+	function charEquals(param1:java.types.Char16, param2:java.types.Char16):Bool;
+
+	function isStrict():Bool;
+
+	function setStrict(param1:Bool):Void;
+
+	function startOptional():Void;
+
+	function endOptional(param1:Bool):Void;
+
+	function toUnresolved():java.time.format.Parsed;
+
+	function toResolved(param1:java.time.format.ResolverStyle, param2:java.util.Set<java.time.temporal.TemporalField>):java.time.temporal.TemporalAccessor;
+
+	function getParsed(param1:java.time.temporal.TemporalField):java.lang.Long;
+
+	function setParsedField(param1:java.time.temporal.TemporalField, param2:haxe.Int64, param3:Int, param4:Int):Int;
+
+	function setParsed(param1:java.time.chrono.Chronology):Void;
+
+	function setParsed(param1:java.time.ZoneId):Void;
+
+	function addChronoChangedListener(param1:java.util.function.Consumer<java.time.chrono.Chronology>):Void;
+
+	function setParsedLeapSecond():Void;
+
+	function toString():java.lang.String;
+
+	static function charEqualsIgnoreCase(param1:java.types.Char16, param2:java.types.Char16):Bool;
+}

@@ -1,0 +1,262 @@
+@:directlyUsed @:used @:access(aui.nui.ViewSource)
+class aui.nui.Describe {
+
+	public static function describe(view:aui.View) {
+		if ((view == null)) return new nui.Node("VStack", null);
+		var expansion = [];
+		if ((aui.nui.Describe.expanded(view, expansion))) {
+			var root = new nui.Node("VStack", null);
+			{
+				var _g = 0;
+				while ((_g < expansion.length)) {
+					var child = expansion[_g];
+					++ _g;
+					root.child(child);
+				};
+			};
+			return root;
+		};
+		return aui.nui.Describe.node(view);
+	}
+
+	@:value(new ViewSource(null))
+	static var invoker(default,never):aui.nui.ViewSource = new aui.nui.ViewSource(null);
+
+	static function expanded(view:aui.View, into:Array<nui.Node>) {
+		if ((view == null)) return true;
+		var resolved = aui.nui.ViewSource.resolve(view);
+		if ((resolved != view)) {
+			if ((resolved != null && ! aui.nui.Describe.expanded(resolved, into))) into.push(aui.nui.Describe.node(resolved));
+			return true;
+		};
+		if ((view.viewType == "ConditionalView")) {
+			var cond = cast view.conditionState;
+			if ((cond == null)) return true;
+			var c = cast view;
+			var taken = if ((cond.get())) c.thenView else c.elseView;
+			if ((taken != null && ! aui.nui.Describe.expanded(taken, into))) into.push(aui.nui.Describe.node(taken));
+			return true;
+		};
+		if ((view.viewType == "ForEach")) {
+			var items = aui.nui.ViewSource.forEachItems(view);
+			if ((items != null)) {
+				var _g = 0;
+				while ((_g < items.length)) {
+					var item = items[_g];
+					++ _g;
+					if ((item == null)) continue;
+					if ((! aui.nui.Describe.expanded(item, into))) into.push(aui.nui.Describe.node(item));
+				};
+			};
+			return true;
+		};
+		return false;
+	}
+
+	static function node(view:aui.View) {
+		var v = aui.nui.ViewSource.resolveValue(view);
+		if ((v == null)) return new nui.Node("VStack", null);
+		var out;
+		var _g = v.viewType;
+		switch ((_g)) {
+			case "Button": {
+				var b = cast v;
+				var out1 = nui.PropValue.PCallback(function() {
+					aui.nui.Describe.invoker.invokeAction(view);
+				});
+				out = new nui.Node("Button", null).prop("label", nui.PropValue.PString(b.label)).prop("onClick", out1);
+			};
+			case "Divider": out = new nui.Node("Divider", null);
+			case "HStack": {
+				var stack = cast v;
+				var n = new nui.Node("HStack", null);
+				if ((stack.spacing != null)) n.prop("spacing", nui.PropValue.PFloat(stack.spacing));
+				out = aui.nui.Describe.withChildren(n, v);
+			};
+			case "ProgressView": {
+				var p = cast v;
+				var n = new nui.Node("ProgressView", null);
+				if ((p.progressState != null)) n.prop("value", nui.PropValue.PFloat(p.progressState.get()));
+				out = n;
+			};
+			case "SafeArea": out = aui.nui.Describe.withChildren(new nui.Node("VStack", null), v);
+			case "ScrollView": out = aui.nui.Describe.withChildren(new nui.Node("ScrollView", null), v);
+			case "Slider": {
+				var s = cast v;
+				var cell = s.valueState;
+				var n = new nui.Node("Slider", null).prop("min", nui.PropValue.PFloat(s.min)).prop("max", nui.PropValue.PFloat(s.max));
+				if ((cell != null)) {
+					n.prop("value", nui.PropValue.PFloat(cell.get()));
+					n.prop("onValue", nui.PropValue.PCallbackFloat(function(x:Float) {
+						cell.set(x);
+					}));
+				};
+				out = n;
+			};
+			case "Spacer": out = new nui.Node("Spacer", null);
+			case "TabView": {
+				haxe.Log.trace("aui.nui.Describe: TabView flattened to its first tab", {fileName : "aui/nui/Describe.hx", lineNumber : 171, className : "aui.nui.Describe", methodName : "node"});
+				var tabs = aui.nui.ViewSource.tabsOf(v);
+				var n = new nui.Node("VStack", null);
+				if ((tabs != null && tabs.length > 0 && tabs[0].content != null)) {
+					var into = [];
+					if ((! aui.nui.Describe.expanded(tabs[0].content, into))) into.push(aui.nui.Describe.node(tabs[0].content));
+					{
+						var _g = 0;
+						while ((_g < into.length)) {
+							var child = into[_g];
+							++ _g;
+							n.child(child);
+						};
+					};
+				};
+				out = n;
+			};
+			case "Text": {
+				var t = cast v;
+				out = new nui.Node("Text", null).prop("text", nui.PropValue.PString(aui.nui.Describe.sampleText(t)));
+			};
+			case "TextField": {
+				var f = cast v;
+				var cell = f.textState;
+				var n = new nui.Node("TextInput", null).prop("placeholder", nui.PropValue.PString(f.placeholder));
+				if ((cell != null)) {
+					n.prop("text", nui.PropValue.PString(cell.get()));
+					n.prop("onText", nui.PropValue.PCallbackString(function(s:java.lang.String) {
+						cell.set(s);
+					}));
+				};
+				out = n;
+			};
+			case "Toggle": {
+				var t = cast v;
+				var cell = t.isOnState;
+				var n = new nui.Node("Toggle", null).prop("label", nui.PropValue.PString(t.label));
+				if ((cell != null)) {
+					n.prop("isOn", nui.PropValue.PBool(cell.get()));
+					n.prop("onToggle", nui.PropValue.PCallbackBool(function(on:Bool) {
+						cell.set(on);
+					}));
+				};
+				out = n;
+			};
+			case "VStack": {
+				var stack = cast v;
+				var n = new nui.Node("VStack", null);
+				if ((stack.spacing != null)) n.prop("spacing", nui.PropValue.PFloat(stack.spacing));
+				out = aui.nui.Describe.withChildren(n, v);
+			};
+			case "ZStack": out = aui.nui.Describe.withChildren(new nui.Node("ZStack", null), v);
+			default: {
+				var other = _g;
+				var startIndex = null;
+				var dot = haxe.jvm.StringExt.lastIndexOf(other, ".", startIndex);
+				var out1;
+				if ((dot >= 0)) {
+					var len = null;
+					out1 = haxe.jvm.StringExt.substr(other, dot + 1, len);
+				} else out1 = other;
+				out = aui.nui.Describe.withChildren(new nui.Node(out1, null), v);
+			}
+		};
+		aui.nui.Describe.describeModifiers(v, out);
+		return out;
+	}
+
+	static function sampleText(t:aui.ui.Text) {
+		if ((t.stateTemplate == null)) {
+			if ((t.content == null)) return "" else return t.content;
+		};
+		return new EReg("\\{([^}]+)\\}", "g").map(t.stateTemplate, function(r:EReg) {
+			var cell = aui.state.State.getByName(r.matched(1));
+			if ((cell == null)) return r.matched(0);
+			return Std.string(cell.get());
+		});
+	}
+
+	static function withChildren(out:nui.Node, view:aui.View) {
+		if ((view.children != null)) {
+			var _g = 0;
+			var _g1 = view.children;
+			while ((_g < _g1.length)) {
+				var child = _g1[_g];
+				++ _g;
+				if ((child == null)) continue;
+				var into = [];
+				if ((aui.nui.Describe.expanded(child, into))) {
+					var _g = 0;
+					while ((_g < into.length)) {
+						var n = into[_g];
+						++ _g;
+						out.child(n);
+					};
+				} else out.child(aui.nui.Describe.node(child));
+			};
+		};
+		return out;
+	}
+
+	static function describeModifiers(view:aui.View, out:nui.Node) {
+		if ((view.modifierChain == null)) return;
+		{
+			var _g = 0;
+			var _g1 = view.modifierChain;
+			while ((_g < _g1.length)) {
+				var m = _g1[_g];
+				++ _g;
+				var described;
+				switch ((enumIndex m)) {
+					case 0: {
+						var v = m[0];
+						described = {type : "padding", floats : if ((v == null)) [] else [v]};
+					};
+					case 1: {
+						var v = m[0];
+						described = {type : "paddingHorizontal", floats : [v]};
+					};
+					case 2: {
+						var v = m[0];
+						described = {type : "paddingVertical", floats : [v]};
+					};
+					case 9: {
+						var style = m[0];
+						described = {type : "font", strings : [Std.string(style)]};
+					};
+					case 10: described = {type : "bold"};
+					case 11: described = {type : "italic"};
+					case 14: {
+						var c = m[0];
+						described = {type : "foregroundColor", strings : [Std.string(c)]};
+					};
+					case 15: {
+						var c = m[0];
+						described = {type : "backgroundColor", strings : [Std.string(c)]};
+					};
+					case 16: {
+						var v = m[0];
+						described = {type : "opacity", floats : [v]};
+					};
+					case 17: {
+						var r = m[0];
+						described = {type : "cornerRadius", floats : [r]};
+					};
+					case 27: {
+						var c = m[0];
+						var w = m[1];
+						described = {type : "border", strings : [Std.string(c)], floats : if ((w == null)) [] else [w]};
+					};
+					case 29: {
+						var _g = m[0];
+						described = null;
+					};
+					case 30: {
+						var _g = m[0];
+						described = null;
+					};
+					default: described = null
+				};
+				if ((described != null)) out.modifier(described);
+			};
+		};
+	}
+}

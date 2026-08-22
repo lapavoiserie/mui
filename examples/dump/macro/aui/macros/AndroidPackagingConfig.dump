@@ -1,0 +1,1 @@
+typedef aui.macros.AndroidPackagingConfig = { ?useLegacyPackaging : Null<Bool>, ?jniLibs : Null<Dynamic>, ?extractNativeLibs : Null<Bool>, ?assets : Null<Dynamic>, ?abiFilters : Null<Array<String>> }

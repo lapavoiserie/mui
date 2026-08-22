@@ -1,0 +1,3 @@
+@:realPath("java.lang.Byte_ByteCache") @:realPath("java.lang.Byte_ByteCache") @:javaNative @:native("java.lang.Byte$ByteCache") @:javaCanonical("java.lang", "Byte.ByteCache")
+extern class java.lang.Byte$ByteCache {
+}

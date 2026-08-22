@@ -1,0 +1,75 @@
+@:realPath("java.net.URL") @:used @:native("java.net.URL") @:libType
+extern class java.net.URL implements java.io.Serializable {
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:Int, param4:java.lang.String):Void;
+
+	function new(param1:java.net.URL, param2:java.lang.String, param3:java.net.URLStreamHandler):Void;
+
+	function new(param1:java.net.URL, param2:java.lang.String):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:Int, param4:java.lang.String, param5:java.net.URLStreamHandler):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String):Void;
+
+	function set(param1:java.lang.String, param2:java.lang.String, param3:Int, param4:java.lang.String, param5:java.lang.String):Void;
+
+	function set(param1:java.lang.String, param2:java.lang.String, param3:Int, param4:java.lang.String, param5:java.lang.String, param6:java.lang.String, param7:java.lang.String, param8:java.lang.String):Void;
+
+	function getQuery():java.lang.String;
+
+	function getPath():java.lang.String;
+
+	function getUserInfo():java.lang.String;
+
+	function getAuthority():java.lang.String;
+
+	function getPort():Int;
+
+	function getDefaultPort():Int;
+
+	function getProtocol():java.lang.String;
+
+	function getHost():java.lang.String;
+
+	function getFile():java.lang.String;
+
+	function getRef():java.lang.String;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function sameFile(param1:java.net.URL):Bool;
+
+	function toString():java.lang.String;
+
+	function toExternalForm():java.lang.String;
+
+	function toURI():java.net.URI;
+
+	function openConnection():java.net.URLConnection;
+
+	function openConnection(param1:java.net.Proxy):java.net.URLConnection;
+
+	function openStream():java.io.InputStream;
+
+	function getContent():Dynamic;
+
+	function getContent(param1:java.NativeArray<java.lang.Class<Dynamic>>):Dynamic;
+
+	var hostAddress:java.net.InetAddress;
+
+	var handler:java.net.URLStreamHandler;
+
+	static function setURLStreamHandlerFactory(param1:java.net.URLStreamHandlerFactory):Void;
+
+	static function getURLStreamHandler(param1:java.lang.String):java.net.URLStreamHandler;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+
+	static var factory:java.net.URLStreamHandlerFactory;
+
+	static var handlers:java.util.Hashtable<java.lang.String, java.net.URLStreamHandler>;
+}

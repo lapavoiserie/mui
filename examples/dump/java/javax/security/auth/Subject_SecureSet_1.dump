@@ -1,0 +1,19 @@
+@:realPath("java.javax.security.auth.Subject_SecureSet_1") @:used @:native("javax.security.auth.Subject$SecureSet$1") @:libType
+extern class javax.security.auth.Subject$SecureSet$1 implements java.util.Iterator<Dynamic> {
+
+	function new(param1:javax.security.auth.Subject$SecureSet<Dynamic>, param2:java.util.LinkedList<Dynamic>):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function remove():Void;
+
+	var i:java.util.ListIterator<Dynamic>;
+
+	@:realPath("val_list") @:native("val$list")
+	var val$list(default,ctor):java.util.LinkedList<Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):javax.security.auth.Subject$SecureSet<Dynamic>;
+}

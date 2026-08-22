@@ -1,0 +1,77 @@
+@:realPath("java.util.Date") @:used @:native("java.util.Date") @:libType
+extern class java.util.Date implements java.lang.Comparable<java.util.Date> implements java.lang.Cloneable implements java.io.Serializable {
+
+	function new():Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int, param5:Int, param6:Int):Void;
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int, param5:Int):Void;
+
+	function new(param1:Int, param2:Int, param3:Int):Void;
+
+	function new(param1:haxe.Int64):Void;
+
+	function clone():Dynamic;
+
+	function getYear():Int;
+
+	function setYear(param1:Int):Void;
+
+	function getMonth():Int;
+
+	function setMonth(param1:Int):Void;
+
+	function getDate():Int;
+
+	function setDate(param1:Int):Void;
+
+	function getDay():Int;
+
+	function getHours():Int;
+
+	function setHours(param1:Int):Void;
+
+	function getMinutes():Int;
+
+	function setMinutes(param1:Int):Void;
+
+	function getSeconds():Int;
+
+	function setSeconds(param1:Int):Void;
+
+	function getTime():haxe.Int64;
+
+	function setTime(param1:haxe.Int64):Void;
+
+	function before(param1:java.util.Date):Bool;
+
+	function after(param1:java.util.Date):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function compareTo(param1:java.util.Date):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function toLocaleString():java.lang.String;
+
+	function toGMTString():java.lang.String;
+
+	function getTimezoneOffset():Int;
+
+	function toInstant():java.time.Instant;
+
+	static function UTC(param1:Int, param2:Int, param3:Int, param4:Int, param5:Int, param6:Int):haxe.Int64;
+
+	static function parse(param1:java.lang.String):haxe.Int64;
+
+	static function getMillisOf(param1:java.util.Date):haxe.Int64;
+
+	static function from(param1:java.time.Instant):java.util.Date;
+}

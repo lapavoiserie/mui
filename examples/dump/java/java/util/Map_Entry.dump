@@ -1,0 +1,25 @@
+@:realPath("java.util.Map_Entry") @:used @:native("java.util.Map$Entry") @:libType
+extern interface java.util.Map$Entry<K:Dynamic, V:Dynamic> {
+
+	function getKey():java.util.Map_Entry.K;
+
+	function getValue():java.util.Map_Entry.V;
+
+	function setValue(param1:java.util.Map_Entry.V):java.util.Map_Entry.V;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	@:java.default
+	static function comparingByKey<K:java.lang.Comparable<Dynamic>, V:Dynamic>():java.util.Comparator<java.util.Map$Entry<comparingByKey.K, comparingByKey.V>>;
+
+	@:java.default
+	static function comparingByKey<K:Dynamic, V:Dynamic>(param1:java.util.Comparator<Dynamic>):java.util.Comparator<java.util.Map$Entry<comparingByKey.K, comparingByKey.V>>;
+
+	@:java.default
+	static function comparingByValue<K:Dynamic, V:java.lang.Comparable<Dynamic>>():java.util.Comparator<java.util.Map$Entry<comparingByValue.K, comparingByValue.V>>;
+
+	@:java.default
+	static function comparingByValue<K:Dynamic, V:Dynamic>(param1:java.util.Comparator<Dynamic>):java.util.Comparator<java.util.Map$Entry<comparingByValue.K, comparingByValue.V>>;
+}

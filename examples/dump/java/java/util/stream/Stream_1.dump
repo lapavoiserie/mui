@@ -1,0 +1,17 @@
+@:realPath("java.util.stream.Stream_1") @:used @:native("java.util.stream.Stream$1") @:libType
+extern class java.util.stream.Stream$1 implements java.util.Iterator<Dynamic> {
+
+	function new(param1:Dynamic, param2:java.util.function.UnaryOperator<Dynamic>):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	var t:Dynamic;
+
+	@:realPath("val_seed") @:native("val$seed")
+	var val$seed(default,ctor):Dynamic;
+
+	@:realPath("val_f") @:native("val$f")
+	var val$f(default,ctor):java.util.function.UnaryOperator<Dynamic>;
+}

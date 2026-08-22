@@ -1,0 +1,80 @@
+@:realPath("java.io.ObjectInputStream_BlockDataInputStream") @:used @:native("java.io.ObjectInputStream$BlockDataInputStream") @:libType
+extern class java.io.ObjectInputStream$BlockDataInputStream extends java.io.InputStream implements java.io.DataInput {
+
+	function new(param1:java.io.ObjectInputStream, param2:java.io.InputStream):Void;
+
+	function setBlockDataMode(param1:Bool):Bool;
+
+	function getBlockDataMode():Bool;
+
+	function skipBlockData():Void;
+
+	function currentBlockRemaining():Int;
+
+	function peek():Int;
+
+	function peekByte():java.types.Int8;
+
+	function read():Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int, param4:Bool):Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function available():Int;
+
+	function close():Void;
+
+	function readFully(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function readFully(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int, param4:Bool):Void;
+
+	function readFully(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function skipBytes(param1:Int):Int;
+
+	function readBoolean():Bool;
+
+	function readByte():java.types.Int8;
+
+	function readUnsignedByte():Int;
+
+	function readChar():java.types.Char16;
+
+	function readShort():java.types.Int16;
+
+	function readUnsignedShort():Int;
+
+	function readInt():Int;
+
+	function readFloat():Single;
+
+	function readLong():haxe.Int64;
+
+	function readDouble():Float;
+
+	function readUTF():java.lang.String;
+
+	function readLine():java.lang.String;
+
+	function readBooleans(param1:java.NativeArray<Bool>, param2:Int, param3:Int):Void;
+
+	function readChars(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Void;
+
+	function readShorts(param1:java.NativeArray<java.types.Int16>, param2:Int, param3:Int):Void;
+
+	function readInts(param1:java.NativeArray<Int>, param2:Int, param3:Int):Void;
+
+	function readFloats(param1:java.NativeArray<Single>, param2:Int, param3:Int):Void;
+
+	function readLongs(param1:java.NativeArray<haxe.Int64>, param2:Int, param3:Int):Void;
+
+	function readDoubles(param1:java.NativeArray<Float>, param2:Int, param3:Int):Void;
+
+	function readLongUTF():java.lang.String;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.io.ObjectInputStream;
+}

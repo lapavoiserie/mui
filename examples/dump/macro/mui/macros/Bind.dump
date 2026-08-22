@@ -1,0 +1,304 @@
+class mui.macros.Bind {
+
+	public static function all() {
+		var backend = haxe.macro.Context.definedValue("mui_backend");
+		if (backend == null) {
+			haxe.macro.Context.error("mui requires -D mui_backend=<backend>, and the backend must " + "provide <backend>.mui.* — see mui.Contract", haxe.macro.Context.currentPos(), null);
+			return;
+		};
+		var pos = haxe.macro.Context.currentPos();
+		rui.macros.ViewRule.register(backend + ".mui.App", "body", true);
+		rui.macros.ViewRule.registerMeta(backend + ".mui.App", ":surface", true);
+		{
+			var ` = 0;
+			var ` = mui.Contract.BINDINGS;
+			while (` < `.length) {
+				var binding = `[`];
+				++ `;
+				if (binding.optional == true) {
+					var here = backend + ".mui." + binding.name;
+					if ((try {
+						haxe.macro.Context.getType(here);
+					} catch (`:Dynamic) {
+						{};
+						{};
+						if (true) {
+							{};
+							null;
+						} else throw `;
+					}) == null) {
+						continue;
+					};
+				};
+				var params = if (binding.params == null) {
+					[];
+				} else {
+					binding.params;
+				};
+				haxe.macro.Context.defineType({pack : binding.pack, name : binding.name, pos : pos, params : {
+					var ` = [];
+					{
+						var ` = 0;
+						while (` < params.length) {
+							var p = params[`];
+							++ `;
+							`.push({name : p});
+						};
+					};
+					`;
+				}, kind : haxe.macro.TypeDefKind.TDAlias(haxe.macro.ComplexType.TPath({pack : [backend, "mui"], name : binding.name, params : {
+					var ` = [];
+					{
+						var ` = 0;
+						while (` < params.length) {
+							var p = params[`];
+							++ `;
+							`.push(haxe.macro.TypeParam.TPType(haxe.macro.ComplexType.TPath({pack : [], name : p})));
+						};
+					};
+					`;
+				}})), fields : []}, null);
+			};
+		};
+		mui.macros.Bind.ownsMain(backend);
+		haxe.macro.Context.onAfterTyping(function(_:Array<haxe.macro.ModuleType>) mui.macros.Bind.verify(backend, pos));
+	}
+
+	static function ownsMain(backend:String) {
+		var app = try {
+			haxe.macro.Context.getType(backend + ".mui.App");
+		} catch (`:Dynamic) {
+			{};
+			{};
+			if (true) {
+				{};
+				null;
+			} else throw `;
+		};
+		if (app == null) {
+			return;
+		};
+		@:ast(switch (Context.follow(app)) {
+	case TInst(t, _):
+		if (t.get().meta.has(":muiOwnsMain")) haxe.macro.Compiler.define("mui_owns_main");	
+	case _:
+}) {
+			var ` = haxe.macro.Context.follow(app, null);
+			if (enumIndex ` == 2) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var t = `;
+					{
+						if (t.get().meta.has(":muiOwnsMain")) {
+							haxe.macro.Compiler.define("mui_owns_main", null);
+						};
+					};
+				};
+			} else {};
+		};
+	}
+
+	static function verify(backend:String, pos:haxe.macro.Position) {
+		{
+			var ` = 0;
+			var ` = mui.Contract.BINDINGS;
+			while (` < `.length) {
+				var binding = `[`];
+				++ `;
+				var path = backend + ".mui." + binding.name;
+				var type = try {
+					haxe.macro.Context.getType(path);
+				} catch (`:Dynamic) {
+					{};
+					{};
+					if (true) {
+						{};
+						null;
+					} else throw `;
+				};
+				if (type == null) {
+					if (binding.optional == true) {
+						continue;
+					};
+					haxe.macro.Context.error("backend \"" + backend + "\" does not provide " + path + " — " + "mui.Contract lists " + binding.name, pos, null);
+					continue;
+				};
+				mui.macros.Bind.checkRequired(backend, binding, type, pos);
+				mui.macros.Bind.check(backend, binding, type, pos);
+			};
+		};
+	}
+
+	static function checkRequired(backend:String, binding:mui.Binding, type:haxe.macro.Type, pos:haxe.macro.Position) {
+		if (binding.requires == null) {
+			return;
+		};
+		var cls = @:ast(switch (Context.follow(type)) {
+	case TInst(t, _):
+		t.get();	
+	case _:
+		null;	
+}) {
+			var ` = haxe.macro.Context.follow(type, null);
+			if (enumIndex ` == 2) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var t = `;
+					{
+						t.get();
+					};
+				};
+			} else {
+				null;
+			};
+		};
+		if (cls == null) {
+			return;
+		};
+		{
+			var ` = 0;
+			var ` = binding.requires;
+			while (` < `.length) {
+				var name = `[`];
+				++ `;
+				if (! mui.macros.Bind.hasField(cls, name)) {
+					haxe.macro.Context.error("" + backend + ".mui." + binding.name + " has no \"" + name + "\" — " + "mui.Contract requires it", pos, null);
+				};
+			};
+		};
+	}
+
+	static function hasField(cls:Null<haxe.macro.ClassType>, name:String) {
+		var at = cls;
+		while (at != null) {
+			{
+				var ` = 0;
+				var ` = at.fields.get();
+				while (` < `.length) {
+					var field = `[`];
+					++ `;
+					if (field.name == name) {
+						return true;
+					};
+				};
+			};
+			at = if (at.superClass == null) {
+				null;
+			} else {
+				at.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function check(backend:String, binding:mui.Binding, type:haxe.macro.Type, pos:haxe.macro.Position) {
+		if (binding.args == null) {
+			return;
+		};
+		var cls = @:ast(switch (Context.follow(type)) {
+	case TInst(t, _):
+		t.get();	
+	case _:
+		null;	
+}) {
+			var ` = haxe.macro.Context.follow(type, null);
+			if (enumIndex ` == 2) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var t = `;
+					{
+						t.get();
+					};
+				};
+			} else {
+				null;
+			};
+		};
+		if (cls == null || cls.constructor == null) {
+			haxe.macro.Context.error("" + backend + ".mui." + binding.name + " has no constructor — " + "mui.Contract states one", pos, null);
+			return;
+		};
+		var args = @:ast(switch (Context.follow(cls.constructor.get().type)) {
+	case TFun(a, _):
+		a;	
+	case _:
+		null;	
+}) {
+			var ` = haxe.macro.Context.follow(cls.constructor.get().type, null);
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var a = `;
+					{
+						a;
+					};
+				};
+			} else {
+				null;
+			};
+		};
+		if (args == null) {
+			return;
+		};
+		if (args.length < binding.args.length) {
+			haxe.macro.Context.error("" + backend + ".mui." + binding.name + " takes " + args.length + " argument(s), " + "mui.Contract says " + binding.args.length, pos, null);
+			return;
+		};
+		{
+			var ` = binding.args.length;
+			var ` = args.length;
+			while (` < `) {
+				var i = ` ++;
+				if (args[i].opt) {
+					continue;
+				};
+				haxe.macro.Context.error("" + backend + ".mui." + binding.name + " argument " + i + 1 + " is required, " + "and mui.Contract does not name it — an argument past the contract " + "has to be optional", pos, null);
+				return;
+			};
+		};
+		{
+			var ` = 0;
+			var ` = binding.args.length;
+			while (` < `) {
+				var i = ` ++;
+				var wanted = binding.args[i];
+				if (wanted == "*") {
+					continue;
+				};
+				var optional = StringTools.startsWith(wanted, "?");
+				if (optional) {
+					wanted = wanted.substr(1, null);
+				};
+				if (args[i].opt != optional) {
+					haxe.macro.Context.error("" + backend + ".mui." + binding.name + " argument " + i + 1 + " is " + (if (args[i].opt) {
+						"optional";
+					} else {
+						"required";
+					}) + ", mui.Contract says it is " + (if (optional) {
+						"optional";
+					} else {
+						"required";
+					}), pos, null);
+					continue;
+				};
+				var got = haxe.macro.TypeTools.toString(args[i].t);
+				if (StringTools.startsWith(got, "Null<") && StringTools.endsWith(got, ">")) {
+					got = got.substr(5, got.length - 6);
+				};
+				var expected = StringTools.replace(wanted, "View", backend + ".View");
+				if (expected == wanted) {
+					expected = wanted;
+				};
+				if (mui.macros.Bind.normalise(got) != mui.macros.Bind.normalise(expected) && mui.macros.Bind.normalise(got) != mui.macros.Bind.normalise(wanted)) {
+					haxe.macro.Context.error("" + backend + ".mui." + binding.name + " argument " + i + 1 + " is " + got + ", " + "mui.Contract says " + wanted, pos, null);
+				};
+			};
+		};
+	}
+
+	static function normalise(s:String) return StringTools.replace(StringTools.replace(s, " ", ""), "\t", "")
+}

@@ -1,0 +1,5 @@
+@:realPath("java.sun.reflect.generics.tree.TypeTree") @:used @:native("sun.reflect.generics.tree.TypeTree") @:libType
+extern interface sun.reflect.generics.tree.TypeTree implements sun.reflect.generics.tree.Tree {
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+}

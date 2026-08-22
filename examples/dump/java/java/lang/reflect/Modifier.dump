@@ -1,0 +1,85 @@
+@:realPath("java.lang.reflect.Modifier") @:directlyUsed @:used @:native("java.lang.reflect.Modifier") @:libType
+extern class java.lang.reflect.Modifier {
+
+	function new():Void;
+
+	static function isPublic(param1:Int):Bool;
+
+	static function isPrivate(param1:Int):Bool;
+
+	static function isProtected(param1:Int):Bool;
+
+	static function isStatic(param1:Int):Bool;
+
+	static function isFinal(param1:Int):Bool;
+
+	static function isSynchronized(param1:Int):Bool;
+
+	static function isVolatile(param1:Int):Bool;
+
+	static function isTransient(param1:Int):Bool;
+
+	static function isNative(param1:Int):Bool;
+
+	static function isInterface(param1:Int):Bool;
+
+	static function isAbstract(param1:Int):Bool;
+
+	static function isStrict(param1:Int):Bool;
+
+	static function toString(param1:Int):java.lang.String;
+
+	static function isSynthetic(param1:Int):Bool;
+
+	static function isMandated(param1:Int):Bool;
+
+	static function classModifiers():Int;
+
+	static function interfaceModifiers():Int;
+
+	static function constructorModifiers():Int;
+
+	static function methodModifiers():Int;
+
+	static function fieldModifiers():Int;
+
+	static function parameterModifiers():Int;
+
+	static var PUBLIC(default,never):Int;
+
+	static var PRIVATE(default,never):Int;
+
+	static var PROTECTED(default,never):Int;
+
+	static var STATIC(default,never):Int;
+
+	static var FINAL(default,never):Int;
+
+	static var SYNCHRONIZED(default,never):Int;
+
+	static var VOLATILE(default,never):Int;
+
+	static var TRANSIENT(default,never):Int;
+
+	static var NATIVE(default,never):Int;
+
+	static var INTERFACE(default,never):Int;
+
+	static var ABSTRACT(default,never):Int;
+
+	static var STRICT(default,never):Int;
+
+	static var BRIDGE(default,never):Int;
+
+	static var VARARGS(default,never):Int;
+
+	static var SYNTHETIC(default,never):Int;
+
+	static var ANNOTATION(default,never):Int;
+
+	static var ENUM(default,never):Int;
+
+	static var MANDATED(default,never):Int;
+
+	static var ACCESS_MODIFIERS(default,never):Int;
+}

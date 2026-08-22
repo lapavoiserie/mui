@@ -1,0 +1,3 @@
+@:realPath("java.util.WeakHashMap_1") @:used @:native("java.util.WeakHashMap$1") @:libType
+extern class java.util.WeakHashMap$1 {
+}

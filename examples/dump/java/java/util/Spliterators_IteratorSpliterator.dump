@@ -1,0 +1,25 @@
+@:realPath("java.util.Spliterators_IteratorSpliterator") @:used @:native("java.util.Spliterators$IteratorSpliterator") @:libType
+extern class java.util.Spliterators$IteratorSpliterator<T:Dynamic> implements java.util.Spliterator<java.util.Spliterators_IteratorSpliterator.T> {
+
+	function new(param1:java.util.Collection<java.util.Spliterators_IteratorSpliterator.T>, param2:Int):Void;
+
+	function new(param1:java.util.Iterator<java.util.Spliterators_IteratorSpliterator.T>, param2:Int):Void;
+
+	function new(param1:java.util.Iterator<java.util.Spliterators_IteratorSpliterator.T>, param2:haxe.Int64, param3:Int):Void;
+
+	function trySplit():java.util.Spliterator<java.util.Spliterators_IteratorSpliterator.T>;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	function getComparator():java.util.Comparator<Dynamic>;
+
+	static var BATCH_UNIT(default,never):Int;
+
+	static var MAX_BATCH(default,never):Int;
+}

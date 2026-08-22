@@ -1,0 +1,9 @@
+@:realPath("java.io.Console_2") @:used @:native("java.io.Console$2") @:libType
+extern class java.io.Console$2 implements sun.misc.JavaIOAccess {
+
+	function new():Void;
+
+	function console():java.io.Console;
+
+	function charset():java.nio.charset.Charset;
+}

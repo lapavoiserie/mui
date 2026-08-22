@@ -1,0 +1,17 @@
+@:used
+class aui.ui.ConditionalView extends aui.View {
+
+	public function new(conditionState:aui.state.State<Bool>, thenView:aui.View, elseView:Null<aui.View> = null) {
+		super();
+		this.viewType = "ConditionalView";
+		this.conditionState = conditionState;
+		this.thenView = thenView;
+		this.elseView = elseView;
+	}
+
+	public var conditionState:Null<aui.state.State<Bool>>;
+
+	public var thenView:aui.View;
+
+	public var elseView:Null<aui.View>;
+}

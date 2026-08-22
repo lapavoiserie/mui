@@ -1,0 +1,7 @@
+@:realPath("java.io.ObjectStreamClass_ExceptionInfo") @:native("java.io.ObjectStreamClass$ExceptionInfo") @:libType
+extern class java.io.ObjectStreamClass$ExceptionInfo {
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function newInvalidClassException():java.io.InvalidClassException;
+}

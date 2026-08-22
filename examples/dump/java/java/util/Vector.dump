@@ -1,0 +1,117 @@
+@:realPath("java.util.Vector") @:used @:native("java.util.Vector") @:libType
+extern class java.util.Vector<E:Dynamic> extends java.util.AbstractList<java.util.Vector.E> implements java.io.Serializable implements java.lang.Cloneable implements java.util.RandomAccess implements java.util.List<java.util.Vector.E> {
+
+	function new(param1:Int, param2:Int):Void;
+
+	function new(param1:java.util.Collection<java.util.Vector.E>):Void;
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function copyInto(param1:java.NativeArray<Dynamic>):Void;
+
+	function trimToSize():Void;
+
+	function ensureCapacity(param1:Int):Void;
+
+	function setSize(param1:Int):Void;
+
+	function capacity():Int;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function elements():java.util.Enumeration<java.util.Vector.E>;
+
+	function contains(param1:Dynamic):Bool;
+
+	function indexOf(param1:Dynamic):Int;
+
+	function indexOf(param1:Dynamic, param2:Int):Int;
+
+	function lastIndexOf(param1:Dynamic):Int;
+
+	function lastIndexOf(param1:Dynamic, param2:Int):Int;
+
+	function elementAt(param1:Int):java.util.Vector.E;
+
+	function firstElement():java.util.Vector.E;
+
+	function lastElement():java.util.Vector.E;
+
+	function setElementAt(param1:java.util.Vector.E, param2:Int):Void;
+
+	function removeElementAt(param1:Int):Void;
+
+	function insertElementAt(param1:java.util.Vector.E, param2:Int):Void;
+
+	function addElement(param1:java.util.Vector.E):Void;
+
+	function removeElement(param1:Dynamic):Bool;
+
+	function removeAllElements():Void;
+
+	function clone():Dynamic;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function elementData(param1:Int):java.util.Vector.E;
+
+	function get(param1:Int):java.util.Vector.E;
+
+	function set(param1:Int, param2:java.util.Vector.E):java.util.Vector.E;
+
+	function add(param1:java.util.Vector.E):Bool;
+
+	function add(param1:Int, param2:java.util.Vector.E):Void;
+
+	function remove(param1:Dynamic):Bool;
+
+	function remove(param1:Int):java.util.Vector.E;
+
+	function clear():Void;
+
+	function containsAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function addAll(param1:java.util.Collection<java.util.Vector.E>):Bool;
+
+	function addAll(param1:Int, param2:java.util.Collection<java.util.Vector.E>):Bool;
+
+	function removeAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function retainAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function subList(param1:Int, param2:Int):java.util.List<java.util.Vector.E>;
+
+	function removeRange(param1:Int, param2:Int):Void;
+
+	function listIterator(param1:Int):java.util.ListIterator<java.util.Vector.E>;
+
+	function listIterator():java.util.ListIterator<java.util.Vector.E>;
+
+	function iterator():java.util.Iterator<java.util.Vector.E>;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function removeIf(param1:java.util.function.Predicate<Dynamic>):Bool;
+
+	function replaceAll(param1:java.util.function.UnaryOperator<java.util.Vector.E>):Void;
+
+	function sort(param1:java.util.Comparator<Dynamic>):Void;
+
+	function spliterator():java.util.Spliterator<java.util.Vector.E>;
+
+	var elementCount:Int;
+
+	var capacityIncrement:Int;
+}

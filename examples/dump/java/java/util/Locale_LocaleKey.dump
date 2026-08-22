@@ -1,0 +1,9 @@
+@:realPath("java.util.Locale_LocaleKey") @:used @:native("java.util.Locale$LocaleKey") @:libType
+extern class java.util.Locale$LocaleKey {
+
+	function new(param1:sun.util.locale.BaseLocale, param2:sun.util.locale.LocaleExtensions, param3:java.util.Locale$1):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+}

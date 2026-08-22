@@ -1,0 +1,7 @@
+@:used @:flatEnum
+enum mui.ui.TextScale {
+	Title;
+	Subtitle;
+	Body;
+	Caption;
+}

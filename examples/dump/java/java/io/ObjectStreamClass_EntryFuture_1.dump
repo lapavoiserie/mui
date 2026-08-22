@@ -1,0 +1,10 @@
+@:realPath("java.io.ObjectStreamClass_EntryFuture_1") @:used @:native("java.io.ObjectStreamClass$EntryFuture$1") @:libType
+extern class java.io.ObjectStreamClass$EntryFuture$1 implements java.security.PrivilegedAction<java.lang.Void> {
+
+	function new(param1:java.io.ObjectStreamClass$EntryFuture):Void;
+
+	function run():java.lang.Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.io.ObjectStreamClass$EntryFuture;
+}

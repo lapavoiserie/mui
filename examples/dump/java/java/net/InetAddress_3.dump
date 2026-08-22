@@ -1,0 +1,10 @@
+@:realPath("java.net.InetAddress_3") @:used @:native("java.net.InetAddress$3") @:libType
+extern class java.net.InetAddress$3 implements java.security.PrivilegedExceptionAction<sun.net.spi.nameservice.NameService> {
+
+	function new(param1:java.lang.String):Void;
+
+	function run():sun.net.spi.nameservice.NameService;
+
+	@:realPath("val_providerName") @:native("val$providerName")
+	var val$providerName(default,ctor):java.lang.String;
+}

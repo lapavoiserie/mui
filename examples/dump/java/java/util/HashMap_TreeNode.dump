@@ -1,0 +1,45 @@
+@:realPath("java.util.HashMap_TreeNode") @:used @:native("java.util.HashMap$TreeNode") @:libType
+extern class java.util.HashMap$TreeNode<K:Dynamic, V:Dynamic> extends java.util.LinkedHashMap$Entry<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V> {
+
+	function new(param1:Int, param2:java.util.HashMap_TreeNode.K, param3:java.util.HashMap_TreeNode.V, param4:java.util.HashMap$Node<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>):Void;
+
+	function root():java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	function find(param1:Int, param2:Dynamic, param3:java.lang.Class<Dynamic>):java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	function getTreeNode(param1:Int, param2:Dynamic):java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	function treeify(param1:java.NativeArray<java.util.HashMap$Node<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>>):Void;
+
+	function untreeify(param1:java.util.HashMap<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>):java.util.HashMap$Node<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	function putTreeVal(param1:java.util.HashMap<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>, param2:java.NativeArray<java.util.HashMap$Node<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>>, param3:Int, param4:java.util.HashMap_TreeNode.K, param5:java.util.HashMap_TreeNode.V):java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	function removeTreeNode(param1:java.util.HashMap<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>, param2:java.NativeArray<java.util.HashMap$Node<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>>, param3:Bool):Void;
+
+	function split(param1:java.util.HashMap<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>, param2:java.NativeArray<java.util.HashMap$Node<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>>, param3:Int, param4:Int):Void;
+
+	var parent:java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	var left:java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	var right:java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	var prev:java.util.HashMap$TreeNode<java.util.HashMap_TreeNode.K, java.util.HashMap_TreeNode.V>;
+
+	var red:Bool;
+
+	static function moveRootToFront<K:Dynamic, V:Dynamic>(param1:java.NativeArray<java.util.HashMap$Node<moveRootToFront.K, moveRootToFront.V>>, param2:java.util.HashMap$TreeNode<moveRootToFront.K, moveRootToFront.V>):Void;
+
+	static function tieBreakOrder(param1:Dynamic, param2:Dynamic):Int;
+
+	static function rotateLeft<K:Dynamic, V:Dynamic>(param1:java.util.HashMap$TreeNode<rotateLeft.K, rotateLeft.V>, param2:java.util.HashMap$TreeNode<rotateLeft.K, rotateLeft.V>):java.util.HashMap$TreeNode<rotateLeft.K, rotateLeft.V>;
+
+	static function rotateRight<K:Dynamic, V:Dynamic>(param1:java.util.HashMap$TreeNode<rotateRight.K, rotateRight.V>, param2:java.util.HashMap$TreeNode<rotateRight.K, rotateRight.V>):java.util.HashMap$TreeNode<rotateRight.K, rotateRight.V>;
+
+	static function balanceInsertion<K:Dynamic, V:Dynamic>(param1:java.util.HashMap$TreeNode<balanceInsertion.K, balanceInsertion.V>, param2:java.util.HashMap$TreeNode<balanceInsertion.K, balanceInsertion.V>):java.util.HashMap$TreeNode<balanceInsertion.K, balanceInsertion.V>;
+
+	static function balanceDeletion<K:Dynamic, V:Dynamic>(param1:java.util.HashMap$TreeNode<balanceDeletion.K, balanceDeletion.V>, param2:java.util.HashMap$TreeNode<balanceDeletion.K, balanceDeletion.V>):java.util.HashMap$TreeNode<balanceDeletion.K, balanceDeletion.V>;
+
+	static function checkInvariants<K:Dynamic, V:Dynamic>(param1:java.util.HashMap$TreeNode<checkInvariants.K, checkInvariants.V>):Bool;
+}

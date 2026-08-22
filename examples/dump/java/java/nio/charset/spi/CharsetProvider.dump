@@ -1,0 +1,9 @@
+@:realPath("java.nio.charset.spi.CharsetProvider") @:used @:native("java.nio.charset.spi.CharsetProvider") @:libType
+extern class java.nio.charset.spi.CharsetProvider {
+
+	function new():Void;
+
+	function charsets():java.util.Iterator<java.nio.charset.Charset>;
+
+	function charsetForName(param1:java.lang.String):java.nio.charset.Charset;
+}

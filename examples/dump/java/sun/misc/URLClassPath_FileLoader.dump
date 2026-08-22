@@ -1,0 +1,9 @@
+@:realPath("java.sun.misc.URLClassPath_FileLoader") @:used @:native("sun.misc.URLClassPath$FileLoader") @:libType
+extern class sun.misc.URLClassPath$FileLoader extends sun.misc.URLClassPath$Loader {
+
+	function new(param1:java.net.URL):Void;
+
+	function findResource(param1:java.lang.String, param2:Bool):java.net.URL;
+
+	function getResource(param1:java.lang.String, param2:Bool):sun.misc.Resource;
+}

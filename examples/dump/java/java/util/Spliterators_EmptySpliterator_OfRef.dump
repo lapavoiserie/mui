@@ -1,0 +1,9 @@
+@:realPath("java.util.Spliterators_EmptySpliterator_OfRef") @:used @:native("java.util.Spliterators$EmptySpliterator$OfRef") @:libType
+extern class java.util.Spliterators$EmptySpliterator$OfRef<T:Dynamic> extends java.util.Spliterators$EmptySpliterator<java.util.Spliterators_EmptySpliterator_OfRef.T, java.util.Spliterator<java.util.Spliterators_EmptySpliterator_OfRef.T>, java.util.function.Consumer<Dynamic>> implements java.util.Spliterator<java.util.Spliterators_EmptySpliterator_OfRef.T> {
+
+	function new():Void;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+}

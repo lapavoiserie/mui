@@ -1,0 +1,33 @@
+@:realPath("java.util.NavigableSet") @:used @:native("java.util.NavigableSet") @:libType
+extern interface java.util.NavigableSet<E:Dynamic> implements java.util.SortedSet<java.util.NavigableSet.E> {
+
+	function lower(param1:java.util.NavigableSet.E):java.util.NavigableSet.E;
+
+	function floor(param1:java.util.NavigableSet.E):java.util.NavigableSet.E;
+
+	function ceiling(param1:java.util.NavigableSet.E):java.util.NavigableSet.E;
+
+	function higher(param1:java.util.NavigableSet.E):java.util.NavigableSet.E;
+
+	function pollFirst():java.util.NavigableSet.E;
+
+	function pollLast():java.util.NavigableSet.E;
+
+	function iterator():java.util.Iterator<java.util.NavigableSet.E>;
+
+	function descendingSet():java.util.NavigableSet<java.util.NavigableSet.E>;
+
+	function descendingIterator():java.util.Iterator<java.util.NavigableSet.E>;
+
+	function subSet(param1:java.util.NavigableSet.E, param2:Bool, param3:java.util.NavigableSet.E, param4:Bool):java.util.NavigableSet<java.util.NavigableSet.E>;
+
+	function subSet(param1:java.util.NavigableSet.E, param2:java.util.NavigableSet.E):java.util.SortedSet<java.util.NavigableSet.E>;
+
+	function headSet(param1:java.util.NavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.NavigableSet.E>;
+
+	function headSet(param1:java.util.NavigableSet.E):java.util.SortedSet<java.util.NavigableSet.E>;
+
+	function tailSet(param1:java.util.NavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.NavigableSet.E>;
+
+	function tailSet(param1:java.util.NavigableSet.E):java.util.SortedSet<java.util.NavigableSet.E>;
+}

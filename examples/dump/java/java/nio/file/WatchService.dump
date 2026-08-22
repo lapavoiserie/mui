@@ -1,0 +1,11 @@
+@:realPath("java.nio.file.WatchService") @:used @:native("java.nio.file.WatchService") @:libType
+extern interface java.nio.file.WatchService implements java.io.Closeable {
+
+	function close():Void;
+
+	function poll():java.nio.file.WatchKey;
+
+	function poll(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.nio.file.WatchKey;
+
+	function take():java.nio.file.WatchKey;
+}

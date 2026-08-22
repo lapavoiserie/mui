@@ -1,0 +1,54 @@
+@:keep @:directlyUsed @:used @:coreApi
+class Reflect {
+
+	public static function field(o:Dynamic, field:java.lang.String) {
+		if ((o == null)) return null;
+		return haxe.jvm.Jvm.readField(o, field);
+	}
+
+	public static function callMethod(o:Dynamic, func:haxe.Function, args:Array<Dynamic>) {
+		return haxe.jvm.Jvm.call(cast func, args.getNative());
+	}
+
+	public static function isFunction(f:Dynamic) {
+		return haxe.jvm.Jvm.instanceof(f, haxe.jvm.Function);
+	}
+
+	public static function compare<T>(a:compare.T, b:compare.T) {
+		if ((haxe.jvm.Jvm.referenceEquals(a, b))) return 0;
+		if ((a == null)) return -1;
+		if ((b == null)) return 1;
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.Number) && haxe.jvm.Jvm.instanceof(b, java.lang.Number))) {
+			var a = cast a;
+			var b = cast b;
+			if ((haxe.jvm.Jvm.instanceof(a, java.math.BigDecimal) || haxe.jvm.Jvm.instanceof(a, java.math.BigInteger) || (haxe.jvm.Jvm.instanceof(b, java.math.BigDecimal) || haxe.jvm.Jvm.instanceof(b, java.math.BigInteger)))) return new java.math.BigDecimal(cast a.toString()).compareTo(cast a.toString());
+			if ((haxe.jvm.Jvm.instanceof(a, java.lang.Long))) {
+				if ((haxe.jvm.Jvm.instanceof(b, java.lang.Double))) return new java.math.BigDecimal(a.longValue()).compareTo(new java.math.BigDecimal(b.doubleValue())) else if ((haxe.jvm.Jvm.instanceof(b, java.lang.Float))) return new java.math.BigDecimal(a.longValue()).compareTo(new java.math.BigDecimal(b.floatValue())) else return java.lang.Long.compare(a.longValue(), b.longValue());
+			};
+			if ((haxe.jvm.Jvm.instanceof(b, java.lang.Long))) return -1 * (if ((haxe.jvm.Jvm.instanceof(a, java.lang.Double))) new java.math.BigDecimal(b.longValue()).compareTo(new java.math.BigDecimal(a.doubleValue())) else if ((haxe.jvm.Jvm.instanceof(a, java.lang.Float))) new java.math.BigDecimal(b.longValue()).compareTo(new java.math.BigDecimal(a.floatValue())) else java.lang.Long.compare(b.longValue(), a.longValue()));
+			return java.lang.Double.compare(a.doubleValue(), b.doubleValue());
+		};
+		if ((haxe.jvm.Jvm.instanceof(a, java.lang.String))) {
+			if ((! haxe.jvm.Jvm.instanceof(b, java.lang.String))) return -1;
+			return cast a.compareTo(cast b);
+		};
+		return -1;
+	}
+
+	public static function compareMethods(f1:Dynamic, f2:Dynamic) {
+		if ((f1 == f2)) return true;
+		if ((f1 == null || f2 == null)) return false;
+		var c1 = cast f1.getClass();
+		if ((c1 != cast f2.getClass())) return false;
+		if ((Std.isOfType(f1, haxe.jvm.Function))) {
+			if ((! Std.isOfType(f2, haxe.jvm.Function))) return false;
+			return cast f1.equals(f2);
+		};
+		return false;
+	}
+
+	public static function isEnumValue(v:Dynamic) {
+		if ((v == null)) return false;
+		return Type.isEnumValueClass(cast v.getClass());
+	}
+}

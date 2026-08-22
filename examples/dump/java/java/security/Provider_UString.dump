@@ -1,0 +1,15 @@
+@:realPath("java.security.Provider_UString") @:native("java.security.Provider$UString") @:libType
+extern class java.security.Provider$UString {
+
+	function new(param1:java.lang.String):Void;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function toString():java.lang.String;
+
+	var string(default,ctor):java.lang.String;
+
+	var lowerString(default,ctor):java.lang.String;
+}

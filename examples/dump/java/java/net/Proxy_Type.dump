@@ -1,0 +1,6 @@
+@:realPath("java.net.Proxy_Type") @:used @:flatEnum @:native("java.net.Proxy$Type")
+extern enum java.net.Proxy$Type {
+	DIRECT;
+	HTTP;
+	SOCKS;
+}

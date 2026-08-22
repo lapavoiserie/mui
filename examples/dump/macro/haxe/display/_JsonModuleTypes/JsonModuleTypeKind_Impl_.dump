@@ -1,0 +1,15 @@
+@:enum
+private class haxe.display._JsonModuleTypes.JsonModuleTypeKind_Impl_ {
+
+	@:value(cast "class") @:impl @:enum
+	public static inline var Class:haxe.display.JsonModuleTypeKind<haxe.display.JsonClass> = cast "class";
+
+	@:value(cast "enum") @:impl @:enum
+	public static inline var Enum:haxe.display.JsonModuleTypeKind<haxe.display.JsonEnum> = cast "enum";
+
+	@:value(cast "typedef") @:impl @:enum
+	public static inline var Typedef:haxe.display.JsonModuleTypeKind<haxe.display.JsonTypedef> = cast "typedef";
+
+	@:value(cast "abstract") @:impl @:enum
+	public static inline var Abstract:haxe.display.JsonModuleTypeKind<haxe.display.JsonAbstract> = cast "abstract";
+}

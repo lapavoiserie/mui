@@ -1,0 +1,62 @@
+@:realPath("java.util.List") @:used @:native("java.util.List") @:libType
+extern interface java.util.List<E:Dynamic> implements java.util.Collection<java.util.List.E> {
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function contains(param1:Dynamic):Bool;
+
+	function iterator():java.util.Iterator<java.util.List.E>;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function add(param1:java.util.List.E):Bool;
+
+	function add(param1:Int, param2:java.util.List.E):Void;
+
+	function remove(param1:Dynamic):Bool;
+
+	function remove(param1:Int):java.util.List.E;
+
+	function containsAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function addAll(param1:java.util.Collection<java.util.List.E>):Bool;
+
+	function addAll(param1:Int, param2:java.util.Collection<java.util.List.E>):Bool;
+
+	function removeAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function retainAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	@:java.default
+	function replaceAll(param1:java.util.function.UnaryOperator<java.util.List.E>):Void;
+
+	@:java.default
+	function sort(param1:java.util.Comparator<Dynamic>):Void;
+
+	function clear():Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function get(param1:Int):java.util.List.E;
+
+	function set(param1:Int, param2:java.util.List.E):java.util.List.E;
+
+	function indexOf(param1:Dynamic):Int;
+
+	function lastIndexOf(param1:Dynamic):Int;
+
+	function listIterator():java.util.ListIterator<java.util.List.E>;
+
+	function listIterator(param1:Int):java.util.ListIterator<java.util.List.E>;
+
+	function subList(param1:Int, param2:Int):java.util.List<java.util.List.E>;
+
+	@:java.default
+	function spliterator():java.util.Spliterator<java.util.List.E>;
+}

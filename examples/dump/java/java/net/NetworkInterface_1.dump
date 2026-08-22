@@ -1,0 +1,7 @@
+@:realPath("java.net.NetworkInterface_1") @:used @:native("java.net.NetworkInterface$1") @:libType
+extern class java.net.NetworkInterface$1 implements java.security.PrivilegedAction<java.lang.Void> {
+
+	function new():Void;
+
+	function run():java.lang.Void;
+}

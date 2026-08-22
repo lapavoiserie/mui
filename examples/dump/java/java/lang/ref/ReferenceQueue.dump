@@ -1,0 +1,17 @@
+@:realPath("java.lang.ref.ReferenceQueue") @:used @:native("java.lang.ref.ReferenceQueue") @:libType
+extern class java.lang.ref.ReferenceQueue<T:Dynamic> {
+
+	function new():Void;
+
+	function enqueue(param1:java.lang.ref.Reference<java.lang.ref.ReferenceQueue.T>):Bool;
+
+	function poll():java.lang.ref.Reference<java.lang.ref.ReferenceQueue.T>;
+
+	function remove(param1:haxe.Int64):java.lang.ref.Reference<java.lang.ref.ReferenceQueue.T>;
+
+	function remove():java.lang.ref.Reference<java.lang.ref.ReferenceQueue.T>;
+
+	static var NULL:java.lang.ref.ReferenceQueue<Dynamic>;
+
+	static var ENQUEUED:java.lang.ref.ReferenceQueue<Dynamic>;
+}

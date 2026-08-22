@@ -1,0 +1,5 @@
+@:realPath("java.lang.ClassValue_Identity") @:native("java.lang.ClassValue$Identity") @:libType
+extern class java.lang.ClassValue$Identity {
+
+	function new():Void;
+}

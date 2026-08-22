@@ -1,0 +1,5 @@
+@:realPath("java.sun.util.locale.provider.LocaleServiceProviderPool_AllAvailableLocales") @:native("sun.util.locale.provider.LocaleServiceProviderPool$AllAvailableLocales") @:libType
+extern class sun.util.locale.provider.LocaleServiceProviderPool$AllAvailableLocales {
+
+	static var allAvailableLocales(default,never):java.NativeArray<java.util.Locale>;
+}

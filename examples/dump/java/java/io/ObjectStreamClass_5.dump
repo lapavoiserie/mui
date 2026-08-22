@@ -1,0 +1,9 @@
+@:realPath("java.io.ObjectStreamClass_5") @:used @:native("java.io.ObjectStreamClass$5") @:libType
+extern class java.io.ObjectStreamClass$5 implements java.util.Comparator<java.io.ObjectStreamClass$MemberSignature> {
+
+	function new():Void;
+
+	function compare(param1:java.io.ObjectStreamClass$MemberSignature, param2:java.io.ObjectStreamClass$MemberSignature):Int;
+
+	function compare(param1:Dynamic, param2:Dynamic):Int;
+}

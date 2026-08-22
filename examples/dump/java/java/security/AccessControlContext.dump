@@ -1,0 +1,35 @@
+@:realPath("java.security.AccessControlContext") @:used @:native("java.security.AccessControlContext") @:libType
+extern class java.security.AccessControlContext {
+
+	function new(param1:java.NativeArray<java.security.ProtectionDomain>):Void;
+
+	function new(param1:java.NativeArray<java.security.ProtectionDomain>, param2:java.security.AccessControlContext):Void;
+
+	function new(param1:java.NativeArray<java.security.ProtectionDomain>, param2:Bool):Void;
+
+	function new(param1:java.security.ProtectionDomain, param2:java.security.DomainCombiner, param3:java.security.AccessControlContext, param4:java.security.AccessControlContext, param5:java.NativeArray<java.security.Permission>):Void;
+
+	function new(param1:java.security.AccessControlContext, param2:java.security.DomainCombiner):Void;
+
+	function getContext():java.NativeArray<java.security.ProtectionDomain>;
+
+	function isPrivileged():Bool;
+
+	function getAssignedCombiner():java.security.DomainCombiner;
+
+	function getDomainCombiner():java.security.DomainCombiner;
+
+	function getCombiner():java.security.DomainCombiner;
+
+	function isAuthorized():Bool;
+
+	function checkPermission(param1:java.security.Permission):Void;
+
+	function optimize():java.security.AccessControlContext;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	static function getDebug():sun.security.util.Debug;
+}

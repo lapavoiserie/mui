@@ -1,0 +1,14 @@
+@:realPath("java.lang.ProcessBuilder_Redirect_3") @:used @:native("java.lang.ProcessBuilder$Redirect$3") @:libType
+extern class java.lang.ProcessBuilder$Redirect$3 extends java.lang.ProcessBuilder$Redirect {
+
+	function new(param1:java.io.File):Void;
+
+	function type():java.lang.ProcessBuilder$Redirect$Type;
+
+	function file():java.io.File;
+
+	function toString():java.lang.String;
+
+	@:realPath("val_file") @:native("val$file")
+	var val$file(default,ctor):java.io.File;
+}

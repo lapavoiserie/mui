@@ -1,0 +1,33 @@
+@:realPath("java.util.Optional") @:used @:native("java.util.Optional") @:libType
+extern class java.util.Optional<T:Dynamic> {
+
+	function get():java.util.Optional.T;
+
+	function isPresent():Bool;
+
+	function ifPresent(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function filter(param1:java.util.function.Predicate<Dynamic>):java.util.Optional<java.util.Optional.T>;
+
+	function map<U:Dynamic>(param1:java.util.function.Function<Dynamic, map.U>):java.util.Optional<map.U>;
+
+	function flatMap<U:Dynamic>(param1:java.util.function.Function<Dynamic, java.util.Optional<flatMap.U>>):java.util.Optional<flatMap.U>;
+
+	function orElse(param1:java.util.Optional.T):java.util.Optional.T;
+
+	function orElseGet(param1:java.util.function.Supplier<java.util.Optional.T>):java.util.Optional.T;
+
+	function orElseThrow<X:java.lang.Throwable>(param1:java.util.function.Supplier<orElseThrow.X>):java.util.Optional.T;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function empty<T:Dynamic>():java.util.Optional<empty.T>;
+
+	static function of<T:Dynamic>(param1:of.T):java.util.Optional<of.T>;
+
+	static function ofNullable<T:Dynamic>(param1:ofNullable.T):java.util.Optional<ofNullable.T>;
+}

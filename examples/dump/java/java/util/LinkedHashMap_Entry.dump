@@ -1,0 +1,9 @@
+@:realPath("java.util.LinkedHashMap_Entry") @:used @:native("java.util.LinkedHashMap$Entry") @:libType
+extern class java.util.LinkedHashMap$Entry<K:Dynamic, V:Dynamic> extends java.util.HashMap$Node<java.util.LinkedHashMap_Entry.K, java.util.LinkedHashMap_Entry.V> {
+
+	function new(param1:Int, param2:java.util.LinkedHashMap_Entry.K, param3:java.util.LinkedHashMap_Entry.V, param4:java.util.HashMap$Node<java.util.LinkedHashMap_Entry.K, java.util.LinkedHashMap_Entry.V>):Void;
+
+	var before:java.util.LinkedHashMap$Entry<java.util.LinkedHashMap_Entry.K, java.util.LinkedHashMap_Entry.V>;
+
+	var after:java.util.LinkedHashMap$Entry<java.util.LinkedHashMap_Entry.K, java.util.LinkedHashMap_Entry.V>;
+}

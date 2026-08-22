@@ -1,0 +1,7 @@
+@:realPath("java.sun.reflect.ReflectionFactory_GetReflectionFactoryAction") @:used @:native("sun.reflect.ReflectionFactory$GetReflectionFactoryAction") @:libType
+extern class sun.reflect.ReflectionFactory$GetReflectionFactoryAction implements java.security.PrivilegedAction<sun.reflect.ReflectionFactory> {
+
+	function new():Void;
+
+	function run():sun.reflect.ReflectionFactory;
+}

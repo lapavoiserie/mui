@@ -1,0 +1,5 @@
+@:realPath("java.util.Arrays_LegacyMergeSort") @:native("java.util.Arrays$LegacyMergeSort") @:libType
+extern class java.util.Arrays$LegacyMergeSort {
+
+	function new():Void;
+}

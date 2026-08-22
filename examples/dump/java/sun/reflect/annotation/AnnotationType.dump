@@ -1,0 +1,19 @@
+@:realPath("java.sun.reflect.annotation.AnnotationType") @:used @:native("sun.reflect.annotation.AnnotationType") @:libType
+extern class sun.reflect.annotation.AnnotationType {
+
+	function memberTypes():java.util.Map<java.lang.String, java.lang.Class<Dynamic>>;
+
+	function members():java.util.Map<java.lang.String, java.lang.reflect.Method>;
+
+	function memberDefaults():java.util.Map<java.lang.String, Dynamic>;
+
+	function retention():java.lang.annotation.RetentionPolicy;
+
+	function isInherited():Bool;
+
+	function toString():java.lang.String;
+
+	static function getInstance(param1:java.lang.Class<java.lang.annotation.Annotation>):sun.reflect.annotation.AnnotationType;
+
+	static function invocationHandlerReturnType(param1:java.lang.Class<Dynamic>):java.lang.Class<Dynamic>;
+}

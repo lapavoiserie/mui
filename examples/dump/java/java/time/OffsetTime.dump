@@ -1,0 +1,119 @@
+@:realPath("java.time.OffsetTime") @:used @:native("java.time.OffsetTime") @:libType
+extern class java.time.OffsetTime implements java.io.Serializable implements java.lang.Comparable<java.time.OffsetTime> implements java.time.temporal.TemporalAdjuster implements java.time.temporal.Temporal {
+
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	function isSupported(param1:java.time.temporal.TemporalUnit):Bool;
+
+	function range(param1:java.time.temporal.TemporalField):java.time.temporal.ValueRange;
+
+	function get(param1:java.time.temporal.TemporalField):Int;
+
+	function getLong(param1:java.time.temporal.TemporalField):haxe.Int64;
+
+	function getOffset():java.time.ZoneOffset;
+
+	function withOffsetSameLocal(param1:java.time.ZoneOffset):java.time.OffsetTime;
+
+	function withOffsetSameInstant(param1:java.time.ZoneOffset):java.time.OffsetTime;
+
+	function toLocalTime():java.time.LocalTime;
+
+	function getHour():Int;
+
+	function getMinute():Int;
+
+	function getSecond():Int;
+
+	function getNano():Int;
+
+	function with(param1:java.time.temporal.TemporalAdjuster):java.time.OffsetTime;
+
+	function with(param1:java.time.temporal.TemporalField, param2:haxe.Int64):java.time.OffsetTime;
+
+	function withHour(param1:Int):java.time.OffsetTime;
+
+	function withMinute(param1:Int):java.time.OffsetTime;
+
+	function withSecond(param1:Int):java.time.OffsetTime;
+
+	function withNano(param1:Int):java.time.OffsetTime;
+
+	function truncatedTo(param1:java.time.temporal.TemporalUnit):java.time.OffsetTime;
+
+	function plus(param1:java.time.temporal.TemporalAmount):java.time.OffsetTime;
+
+	function plus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.OffsetTime;
+
+	function plusHours(param1:haxe.Int64):java.time.OffsetTime;
+
+	function plusMinutes(param1:haxe.Int64):java.time.OffsetTime;
+
+	function plusSeconds(param1:haxe.Int64):java.time.OffsetTime;
+
+	function plusNanos(param1:haxe.Int64):java.time.OffsetTime;
+
+	function minus(param1:java.time.temporal.TemporalAmount):java.time.OffsetTime;
+
+	function minus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.OffsetTime;
+
+	function minusHours(param1:haxe.Int64):java.time.OffsetTime;
+
+	function minusMinutes(param1:haxe.Int64):java.time.OffsetTime;
+
+	function minusSeconds(param1:haxe.Int64):java.time.OffsetTime;
+
+	function minusNanos(param1:haxe.Int64):java.time.OffsetTime;
+
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	function adjustInto(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function until(param1:java.time.temporal.Temporal, param2:java.time.temporal.TemporalUnit):haxe.Int64;
+
+	function format(param1:java.time.format.DateTimeFormatter):java.lang.String;
+
+	function atDate(param1:java.time.LocalDate):java.time.OffsetDateTime;
+
+	function compareTo(param1:java.time.OffsetTime):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function isAfter(param1:java.time.OffsetTime):Bool;
+
+	function isBefore(param1:java.time.OffsetTime):Bool;
+
+	function isEqual(param1:java.time.OffsetTime):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function writeExternal(param1:java.io.ObjectOutput):Void;
+
+	static function now():java.time.OffsetTime;
+
+	static function now(param1:java.time.Clock):java.time.OffsetTime;
+
+	static function now(param1:java.time.ZoneId):java.time.OffsetTime;
+
+	static function of(param1:java.time.LocalTime, param2:java.time.ZoneOffset):java.time.OffsetTime;
+
+	static function of(param1:Int, param2:Int, param3:Int, param4:Int, param5:java.time.ZoneOffset):java.time.OffsetTime;
+
+	static function ofInstant(param1:java.time.Instant, param2:java.time.ZoneId):java.time.OffsetTime;
+
+	static function from(param1:java.time.temporal.TemporalAccessor):java.time.OffsetTime;
+
+	static function parse(param1:java.lang.CharSequence):java.time.OffsetTime;
+
+	static function parse(param1:java.lang.CharSequence, param2:java.time.format.DateTimeFormatter):java.time.OffsetTime;
+
+	static function readExternal(param1:java.io.ObjectInput):java.time.OffsetTime;
+
+	static var MIN(default,never):java.time.OffsetTime;
+
+	static var MAX(default,never):java.time.OffsetTime;
+}

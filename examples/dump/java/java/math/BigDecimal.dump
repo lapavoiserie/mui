@@ -1,0 +1,193 @@
+@:realPath("java.math.BigDecimal") @:directlyUsed @:used @:native("java.math.BigDecimal") @:libType
+extern class java.math.BigDecimal extends java.lang.Number implements java.lang.Comparable<java.math.BigDecimal> {
+
+	function new(param1:java.math.BigInteger, param2:haxe.Int64, param3:Int, param4:Int):Void;
+
+	function new(param1:haxe.Int64, param2:java.math.MathContext):Void;
+
+	function new(param1:haxe.Int64):Void;
+
+	function new(param1:Int, param2:java.math.MathContext):Void;
+
+	function new(param1:Int):Void;
+
+	function new(param1:java.math.BigInteger, param2:Int, param3:java.math.MathContext):Void;
+
+	function new(param1:java.math.BigInteger, param2:Int):Void;
+
+	function new(param1:java.math.BigInteger, param2:java.math.MathContext):Void;
+
+	function new(param1:java.math.BigInteger):Void;
+
+	function new(param1:Float, param2:java.math.MathContext):Void;
+
+	function new(param1:Float):Void;
+
+	function new(param1:java.lang.String, param2:java.math.MathContext):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.NativeArray<java.types.Char16>, param2:java.math.MathContext):Void;
+
+	function new(param1:java.NativeArray<java.types.Char16>):Void;
+
+	function new(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int, param4:java.math.MathContext):Void;
+
+	function new(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Void;
+
+	function add(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function add(param1:java.math.BigDecimal, param2:java.math.MathContext):java.math.BigDecimal;
+
+	function subtract(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function subtract(param1:java.math.BigDecimal, param2:java.math.MathContext):java.math.BigDecimal;
+
+	function multiply(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function multiply(param1:java.math.BigDecimal, param2:java.math.MathContext):java.math.BigDecimal;
+
+	function divide(param1:java.math.BigDecimal, param2:Int, param3:Int):java.math.BigDecimal;
+
+	function divide(param1:java.math.BigDecimal, param2:java.math.MathContext):java.math.BigDecimal;
+
+	function divide(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function divide(param1:java.math.BigDecimal, param2:java.math.RoundingMode):java.math.BigDecimal;
+
+	function divide(param1:java.math.BigDecimal, param2:Int):java.math.BigDecimal;
+
+	function divide(param1:java.math.BigDecimal, param2:Int, param3:java.math.RoundingMode):java.math.BigDecimal;
+
+	function divideToIntegralValue(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function divideToIntegralValue(param1:java.math.BigDecimal, param2:java.math.MathContext):java.math.BigDecimal;
+
+	function remainder(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function remainder(param1:java.math.BigDecimal, param2:java.math.MathContext):java.math.BigDecimal;
+
+	function divideAndRemainder(param1:java.math.BigDecimal):java.NativeArray<java.math.BigDecimal>;
+
+	function divideAndRemainder(param1:java.math.BigDecimal, param2:java.math.MathContext):java.NativeArray<java.math.BigDecimal>;
+
+	function pow(param1:Int):java.math.BigDecimal;
+
+	function pow(param1:Int, param2:java.math.MathContext):java.math.BigDecimal;
+
+	function abs():java.math.BigDecimal;
+
+	function abs(param1:java.math.MathContext):java.math.BigDecimal;
+
+	function negate():java.math.BigDecimal;
+
+	function negate(param1:java.math.MathContext):java.math.BigDecimal;
+
+	function plus():java.math.BigDecimal;
+
+	function plus(param1:java.math.MathContext):java.math.BigDecimal;
+
+	function signum():Int;
+
+	function scale():Int;
+
+	function precision():Int;
+
+	function unscaledValue():java.math.BigInteger;
+
+	function round(param1:java.math.MathContext):java.math.BigDecimal;
+
+	function setScale(param1:Int, param2:java.math.RoundingMode):java.math.BigDecimal;
+
+	function setScale(param1:Int):java.math.BigDecimal;
+
+	function setScale(param1:Int, param2:Int):java.math.BigDecimal;
+
+	function movePointLeft(param1:Int):java.math.BigDecimal;
+
+	function movePointRight(param1:Int):java.math.BigDecimal;
+
+	function scaleByPowerOfTen(param1:Int):java.math.BigDecimal;
+
+	function stripTrailingZeros():java.math.BigDecimal;
+
+	function compareTo(param1:java.math.BigDecimal):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function min(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function max(param1:java.math.BigDecimal):java.math.BigDecimal;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function toEngineeringString():java.lang.String;
+
+	function toPlainString():java.lang.String;
+
+	function toBigInteger():java.math.BigInteger;
+
+	function toBigIntegerExact():java.math.BigInteger;
+
+	function longValue():haxe.Int64;
+
+	function longValueExact():haxe.Int64;
+
+	function intValue():Int;
+
+	function intValueExact():Int;
+
+	function shortValueExact():java.types.Int16;
+
+	function byteValueExact():java.types.Int8;
+
+	function floatValue():Single;
+
+	function doubleValue():Float;
+
+	function ulp():java.math.BigDecimal;
+
+	static function valueOf(param1:haxe.Int64, param2:Int):java.math.BigDecimal;
+
+	static function valueOf(param1:Float):java.math.BigDecimal;
+
+	static function valueOf(param1:java.math.BigInteger, param2:Int, param3:Int):java.math.BigDecimal;
+
+	static function valueOf(param1:haxe.Int64, param2:Int, param3:Int):java.math.BigDecimal;
+
+	static function valueOf(param1:haxe.Int64):java.math.BigDecimal;
+
+	static function zeroValueOf(param1:Int):java.math.BigDecimal;
+
+	static function longDigitLength(param1:haxe.Int64):Int;
+
+	static function scaledTenPow(param1:Int, param2:Int, param3:Int):java.math.BigDecimal;
+
+	static var INFLATED(default,never):haxe.Int64;
+
+	static var ZERO(default,never):java.math.BigDecimal;
+
+	static var ONE(default,never):java.math.BigDecimal;
+
+	static var TEN(default,never):java.math.BigDecimal;
+
+	static var ROUND_UP(default,never):Int;
+
+	static var ROUND_DOWN(default,never):Int;
+
+	static var ROUND_CEILING(default,never):Int;
+
+	static var ROUND_FLOOR(default,never):Int;
+
+	static var ROUND_HALF_UP(default,never):Int;
+
+	static var ROUND_HALF_DOWN(default,never):Int;
+
+	static var ROUND_HALF_EVEN(default,never):Int;
+
+	static var ROUND_UNNECESSARY(default,never):Int;
+}

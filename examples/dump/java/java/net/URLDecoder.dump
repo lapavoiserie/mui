@@ -1,0 +1,12 @@
+@:realPath("java.net.URLDecoder") @:native("java.net.URLDecoder") @:libType
+extern class java.net.URLDecoder {
+
+	function new():Void;
+
+	@:deprecated
+	static function decode(param1:java.lang.String):java.lang.String;
+
+	static function decode(param1:java.lang.String, param2:java.lang.String):java.lang.String;
+
+	static var dfltEncName:java.lang.String;
+}

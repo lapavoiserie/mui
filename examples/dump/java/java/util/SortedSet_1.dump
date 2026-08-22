@@ -1,0 +1,10 @@
+@:realPath("java.util.SortedSet_1") @:used @:native("java.util.SortedSet$1") @:libType
+extern class java.util.SortedSet$1 extends java.util.Spliterators$IteratorSpliterator<Dynamic> {
+
+	function new(param1:java.util.SortedSet<Dynamic>, param2:java.util.Collection<Dynamic>, param3:Int):Void;
+
+	function getComparator():java.util.Comparator<Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.SortedSet<Dynamic>;
+}

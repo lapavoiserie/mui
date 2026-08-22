@@ -1,0 +1,22 @@
+@:realPath("java.util.Spliterator_OfDouble") @:used @:native("java.util.Spliterator$OfDouble") @:libType
+extern interface java.util.Spliterator$OfDouble implements java.util.Spliterator$OfPrimitive<java.lang.Double, java.util.function.DoubleConsumer, java.util.Spliterator$OfDouble> {
+
+	function trySplit():java.util.Spliterator$OfDouble;
+
+	function tryAdvance(param1:java.util.function.DoubleConsumer):Bool;
+
+	@:java.default
+	function tryAdvance(param1:Dynamic):Bool;
+
+	@:java.default
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.DoubleConsumer):Void;
+
+	@:java.default
+	function forEachRemaining(param1:Dynamic):Void;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+}

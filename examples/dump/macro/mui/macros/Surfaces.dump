@@ -1,0 +1,452 @@
+class mui.macros.Surfaces {
+
+	@:has_untyped
+	public static function build() {
+		var fields = haxe.macro.Context.getBuildFields();
+		var decls = [];
+		var seen = {
+			{};
+			new haxe.ds.StringMap();
+		};
+		mui.macros.Surfaces.inheritedDeclarations(seen);
+		{
+			var ` = 0;
+			while (` < fields.length) {
+				var f = fields[`];
+				++ `;
+				var entries = {
+					var ` = [];
+					{
+						var ` = 0;
+						var ` = f.meta;
+						while (` < `.length) {
+							var m = `[`];
+							++ `;
+							if (m.name == ":surface") {
+								`.push(m);
+							};
+						};
+					};
+					`;
+				};
+				if (entries.length == 0) {
+					continue;
+				};
+				if (entries.length > 1) {
+					haxe.macro.Context.error("One @:surface per method — a method declares one surface.", f.pos, null);
+				};
+				var m = entries[0];
+				var fn = @:ast(switch (f.kind) {
+	case FFun(fn):
+		fn;	
+	case _:
+		Context.error("@:surface goes on a method — the method's body is the surface's content.", f.pos);
+		continue;	
+}) {
+					var ` = f.kind;
+					if (enumIndex ` == 1) {
+						var ` = `[0];
+						{
+							var fn = `;
+							{
+								fn;
+							};
+						};
+					} else {
+						haxe.macro.Context.error("@:surface goes on a method — the method's body is the surface's content.", f.pos, null);
+						continue;
+					};
+				};
+				if (fn.args.length != 0) {
+					haxe.macro.Context.error("@:surface method \"" + f.name + "\" must take no arguments: " + "the framework calls it inside the surface's own effect.", f.pos, null);
+					continue;
+				};
+				if (f.access != null && f.access.contains(haxe.macro.Access.AStatic)) {
+					haxe.macro.Context.error("@:surface method \"" + f.name + "\" cannot be static: " + "a surface reads the application's state.", f.pos, null);
+					continue;
+				};
+				var parsed = mui.macros.Surfaces.parse(m, f.name, f.pos);
+				if (parsed == null) {
+					continue;
+				};
+				mui.macros.Surfaces.checkHosted(parsed, f.name, f.pos);
+				var key = parsed.role + "/" + parsed.id;
+				if (seen.exists(key)) {
+					haxe.macro.Context.error("Surface " + parsed.role + " \"" + parsed.id + "\" is already declared by " + cast seen.get(key) + ". " + "Ids are stable identity — pin a different one with @:surface(" + parsed.role + ", \"other-id\").", f.pos, null);
+					continue;
+				};
+				{
+					var value = "method \"" + f.name + "\"";
+					seen.set(key, value);
+				};
+				decls.push(mui.macros.Surfaces.declFor(parsed.role, parsed.id, f));
+			};
+		};
+		if (decls.length == 0) {
+			return fields;
+		};
+		var list = {expr : haxe.macro.ExprDef.EArrayDecl(decls), pos : haxe.macro.Context.currentPos()};
+		fields.push({name : "declaredSurfaces", access : [haxe.macro.Access.APublic, haxe.macro.Access.AOverride], pos : haxe.macro.Context.currentPos(), doc : "Collected from this class's @:surface methods by mui.macros.Surfaces.", kind : haxe.macro.FieldType.FFun({args : [], ret : cast haxe.macro.ComplexType.TPath({pack : [], name : "Array", params : [haxe.macro.TypeParam.TPType(haxe.macro.ComplexType.TPath({pack : ["mui", "surface"], name : "SurfaceDecl", params : []}))]}), expr : cast {expr : haxe.macro.ExprDef.EReturn({expr : haxe.macro.ExprDef.ECall({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.ECall({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("super")), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 4113, 4118)}, "declaredSurfaces", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 4113, 4135)}, []), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 4113, 4137)}, "concat", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 4113, 4144)}, [list]), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 4113, 4154)}), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 4106, 4154)}})});
+		return fields;
+	}
+
+	static function parse(m:haxe.macro.MetadataEntry, methodName:String, pos:haxe.macro.Position) {
+		var roles = mui.macros.Surfaces.roleNames();
+		if (m.params == null || m.params.length == 0) {
+			haxe.macro.Context.error("@:surface names a role: @:surface(" + mui.macros.Surfaces.sayRoles(roles) + ").", pos, null);
+			return null;
+		};
+		if (m.params.length > 3) {
+			haxe.macro.Context.error("@:surface takes a role, optionally an id, optionally `optional` — nothing more.", pos, null);
+			return null;
+		};
+		var role = @:ast(switch (m.params[0].expr) {
+	case EConst(CIdent(name)) if (roles.contains(name)):
+		name;	
+	case EConst(CIdent(name)):
+		Context.error("\"$name\" is not a mui.surface.SurfaceRole. Roles: ${sayRoles(roles)}.", m.params[0].pos);
+		return null;	
+	case _:
+		Context.error("@:surface's first argument is a role name: @:surface(${sayRoles(roles)}).", m.params[0].pos);
+		return null;	
+}) {
+			var ` = m.params[0].expr;
+			if (enumIndex ` == 0) {
+				var ` = `[0];
+				if (enumIndex ` == 3) {
+					var ` = `[0];
+					{
+						var name = `;
+						if (roles.contains(name)) {
+							name;
+						} else {
+							var name = `;
+							{
+								haxe.macro.Context.error("\"" + name + "\" is not a mui.surface.SurfaceRole. Roles: " + mui.macros.Surfaces.sayRoles(roles) + ".", m.params[0].pos, null);
+								return null;
+							};
+						};
+					};
+				} else {
+					haxe.macro.Context.error("@:surface's first argument is a role name: @:surface(" + mui.macros.Surfaces.sayRoles(roles) + ").", m.params[0].pos, null);
+					return null;
+				};
+			} else {
+				haxe.macro.Context.error("@:surface's first argument is a role name: @:surface(" + mui.macros.Surfaces.sayRoles(roles) + ").", m.params[0].pos, null);
+				return null;
+			};
+		};
+		if (role == "Primary") {
+			haxe.macro.Context.error("Primary is implicit: it is body(). Remove @:surface(Primary).", pos, null);
+			return null;
+		};
+		if (role == "Notification") {
+			haxe.macro.Context.error("Notification has no declaration form yet — it arrives with the " + "detached-surface subsystem (P4).", pos, null);
+			return null;
+		};
+		var id = methodName;
+		var optional = false;
+		{
+			var ` = 1;
+			var ` = m.params.length;
+			while (` < `) {
+				var i = ` ++;
+				@:ast(switch (m.params[i].expr) {
+	case EConst(CString(s, _)):
+		id = s;	
+	case EConst(CIdent("optional")):
+		optional = true;	
+	case _:
+		Context.error("After the role, @:surface takes the surface's id as a string " + "and/or `optional`.", m.params[i].pos);
+		return null;	
+}) {
+					var ` = m.params[i].expr;
+					if (enumIndex ` == 0) {
+						var ` = `[0];
+						switch (enumIndex `) {
+							case 2: {
+								var ` = `[0];
+								var ` = `[1];
+								{
+									var s = `;
+									{
+										id = s;
+									};
+								};
+							};
+							case 3: {
+								var ` = `[0];
+								if (` == "optional") {
+									{
+										optional = true;
+									};
+								} else {
+									haxe.macro.Context.error("After the role, @:surface takes the surface's id as a string " + "and/or `optional`.", m.params[i].pos, null);
+									return null;
+								};
+							};
+							default: {
+								haxe.macro.Context.error("After the role, @:surface takes the surface's id as a string " + "and/or `optional`.", m.params[i].pos, null);
+								return null;
+							}
+						};
+					} else {
+						haxe.macro.Context.error("After the role, @:surface takes the surface's id as a string " + "and/or `optional`.", m.params[i].pos, null);
+						return null;
+					};
+				};
+			};
+		};
+		return {role : role, id : id, optional : optional};
+	}
+
+	static function checkHosted(parsed:mui.macros.Parsed, methodName:String, pos:haxe.macro.Position) {
+		if (parsed.optional) {
+			return;
+		};
+		var hosted = mui.macros.Surfaces.hostedRoles();
+		var backend = if (haxe.macro.Context.defined("mui_backend")) {
+			haxe.macro.Context.definedValue("mui_backend");
+		} else {
+			"this backend";
+		};
+		if (hosted == null) {
+			haxe.macro.Context.warning("" + backend + " states no @:hostedRoles on its mui.App, so surface " + "declarations cannot be checked against it.", pos, null);
+			return;
+		};
+		if (parsed.role == "Companion" && ! haxe.macro.Context.defined("mui_cafos")) {
+			haxe.macro.Context.error("a Companion surface is served over the network by cafos, which is off in " + "this build: \"" + parsed.id + "\" would be declared but never reachable.\n" + "  Turn it on for this build with -D " + "mui_cafos" + " (and cafos on the classpath), " + "or mark the declaration optional.", pos, null);
+			return;
+		};
+		if (hosted.contains(parsed.role)) {
+			return;
+		};
+		haxe.macro.Context.error("" + backend + " hosts no " + parsed.role + ": surface \"" + parsed.id + "\" would fly nowhere here" + (if (hosted.length == 0) {
+			" (it hosts no declared surface at all)";
+		} else {
+			" (it hosts " + hosted.join(", ") + ")";
+		}) + ". Accept that with @:surface(" + parsed.role + ", optional), or build for a backend that hosts it.", pos, null);
+	}
+
+	@:value("mui_cafos")
+	public static inline var CAFOS_DEFINE:String = "mui_cafos";
+
+	static function hostedRoles() {
+		var cls = haxe.macro.Context.getLocalClass();
+		if (cls == null) {
+			return null;
+		};
+		var at = if (cls.get().superClass == null) {
+			null;
+		} else {
+			cls.get().superClass.t.get();
+		};
+		while (at != null) {
+			if (at.meta.has(":hostedRoles")) {
+				var out = [];
+				{
+					var ` = 0;
+					var ` = at.meta.extract(":hostedRoles");
+					while (` < `.length) {
+						var m = `[`];
+						++ `;
+						if (m.params == null) {
+							continue;
+						};
+						{
+							var ` = 0;
+							var ` = m.params;
+							while (` < `.length) {
+								var p = `[`];
+								++ `;
+								@:ast(switch (p.expr) {
+	case EConst(CIdent(name)):
+		out.push(name);	
+	case EConst(CString(name, _)):
+		out.push(name);	
+	case _:
+}) {
+									var ` = p.expr;
+									if (enumIndex ` == 0) {
+										var ` = `[0];
+										switch (enumIndex `) {
+											case 2: {
+												var ` = `[0];
+												var ` = `[1];
+												{
+													var name = `;
+													{
+														out.push(name);
+													};
+												};
+											};
+											case 3: {
+												var ` = `[0];
+												{
+													var name = `;
+													{
+														out.push(name);
+													};
+												};
+											};
+											default: {}
+										};
+									} else {};
+								};
+							};
+						};
+					};
+				};
+				return out;
+			};
+			at = if (at.superClass == null) {
+				null;
+			} else {
+				at.superClass.t.get();
+			};
+		};
+		return null;
+	}
+
+	@:has_untyped
+	static function declFor(role:String, id:String, f:haxe.macro.Field) {
+		var call = {expr : haxe.macro.ExprDef.ECall({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("this")), pos : f.pos}, f.name, null), pos : f.pos}, []), pos : f.pos};
+		var thunk = cast {expr : haxe.macro.ExprDef.EFunction(haxe.macro.FunctionKind.FAnonymous, {args : [], ret : null, expr : {expr : haxe.macro.ExprDef.EReturn(call), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10719, 10734)}, params : []}), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10708, 10734)};
+		return if (role == "Commands") {
+			cast {expr : haxe.macro.ExprDef.ECall({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("mui")), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10781, 10784)}, "surface", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10781, 10792)}, "SurfaceDecl", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10781, 10804)}, "CommandSet", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10781, 10815)}, [haxe.macro.Context.makeExpr(id, $__mk_pos__("../src/mui/macros/Surfaces.hx", 10819, 10821)), thunk]), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10781, 10834)};
+		} else {
+			var roleExpr = {expr : haxe.macro.ExprDef.EField(cast {expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("mui")), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10890, 10893)}, "surface", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10890, 10901)}, "SurfaceRole", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10890, 10913)}, role, null), pos : f.pos};
+			cast {expr : haxe.macro.ExprDef.ECall({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("mui")), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10944, 10947)}, "surface", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10944, 10955)}, "SurfaceDecl", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10944, 10967)}, "Tree", haxe.macro.EFieldKind.Normal), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10944, 10972)}, [roleExpr, haxe.macro.Context.makeExpr(id, $__mk_pos__("../src/mui/macros/Surfaces.hx", 10990, 10992)), thunk]), pos : $__mk_pos__("../src/mui/macros/Surfaces.hx", 10944, 11005)};
+		};
+	}
+
+	static function inheritedDeclarations(seen:Map<String, String>) {
+		var cls = haxe.macro.Context.getLocalClass();
+		if (cls == null) {
+			return;
+		};
+		var at = if (cls.get().superClass == null) {
+			null;
+		} else {
+			cls.get().superClass.t.get();
+		};
+		while (at != null) {
+			{
+				var ` = 0;
+				var ` = at.fields.get();
+				while (` < `.length) {
+					var field = `[`];
+					++ `;
+					if (! field.meta.has(":surface")) {
+						continue;
+					};
+					{
+						var ` = 0;
+						var ` = field.meta.extract(":surface");
+						while (` < `.length) {
+							var m = `[`];
+							++ `;
+							var role = @:ast(switch (m.params[0].expr) {
+	case EConst(CIdent(name)):
+		name;	
+	case _:
+		continue;	
+}) {
+								var ` = m.params[0].expr;
+								if (enumIndex ` == 0) {
+									var ` = `[0];
+									if (enumIndex ` == 3) {
+										var ` = `[0];
+										{
+											var name = `;
+											{
+												name;
+											};
+										};
+									} else {
+										continue;
+									};
+								} else {
+									continue;
+								};
+							};
+							var id = field.name;
+							if (m.params.length == 2) {
+								@:ast(switch (m.params[1].expr) {
+	case EConst(CString(s, _)):
+		id = s;	
+	case _:
+}) {
+									var ` = m.params[1].expr;
+									if (enumIndex ` == 0) {
+										var ` = `[0];
+										if (enumIndex ` == 2) {
+											var ` = `[0];
+											var ` = `[1];
+											{
+												var s = `;
+												{
+													id = s;
+												};
+											};
+										} else {};
+									} else {};
+								};
+							};
+							{
+								var value = at.name;
+								seen.set(role + "/" + id, value);
+							};
+						};
+					};
+				};
+			};
+			at = if (at.superClass == null) {
+				null;
+			} else {
+				at.superClass.t.get();
+			};
+		};
+	}
+
+	static function roleNames() {
+		return @:ast(switch (Context.follow(Context.getType("mui.surface.SurfaceRole"))) {
+	case TEnum(ref, _):
+		ref.get().names;	
+	case _:
+		[];	
+}) {
+			var ` = haxe.macro.Context.follow(haxe.macro.Context.getType("mui.surface.SurfaceRole"), null);
+			if (enumIndex ` == 1) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var ref = `;
+					{
+						ref.get().names;
+					};
+				};
+			} else {
+				[];
+			};
+		};
+	}
+
+	static function sayRoles(roles:Array<String>) return {
+		var ` = [];
+		{
+			var ` = 0;
+			var ` = roles;
+			while (` < `.length) {
+				var v = `[`];
+				++ `;
+				if (function(r:String) {
+					return r != "Primary" && r != "Notification";
+				}(v)) {
+					`.push(v);
+				};
+			};
+		};
+		`;
+	}.join(" | ")
+}

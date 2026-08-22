@@ -1,0 +1,45 @@
+@:realPath("java.util.Collections_SetFromMap") @:used @:native("java.util.Collections$SetFromMap") @:libType
+extern class java.util.Collections$SetFromMap<E:Dynamic> extends java.util.AbstractSet<java.util.Collections_SetFromMap.E> implements java.io.Serializable implements java.util.Set<java.util.Collections_SetFromMap.E> {
+
+	function new(param1:java.util.Map<java.util.Collections_SetFromMap.E, java.lang.Boolean>):Void;
+
+	function clear():Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function contains(param1:Dynamic):Bool;
+
+	function remove(param1:Dynamic):Bool;
+
+	function add(param1:java.util.Collections_SetFromMap.E):Bool;
+
+	function iterator():java.util.Iterator<java.util.Collections_SetFromMap.E>;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function containsAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function removeAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function retainAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function removeIf(param1:java.util.function.Predicate<Dynamic>):Bool;
+
+	function spliterator():java.util.Spliterator<java.util.Collections_SetFromMap.E>;
+
+	function stream():java.util.stream.Stream<java.util.Collections_SetFromMap.E>;
+
+	function parallelStream():java.util.stream.Stream<java.util.Collections_SetFromMap.E>;
+}

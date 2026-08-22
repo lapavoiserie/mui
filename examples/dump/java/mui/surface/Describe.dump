@@ -1,0 +1,14 @@
+@:directlyUsed @:used
+class mui.surface.Describe {
+
+	@:value(null)
+	public static var impl:Null<mui.View -> nui.Node> = null;
+
+	public static function describe(view:mui.View) {
+		if ((mui.surface.Describe.impl == null)) {
+			haxe.Log.trace("mui.surface.Describe: this backend installed no describer; " + "detached surfaces cannot be served from it", {fileName : "../src/mui/surface/Describe.hx", lineNumber : 39, className : "mui.surface.Describe", methodName : "describe"});
+			return null;
+		};
+		return mui.surface.Describe.impl(view);
+	}
+}

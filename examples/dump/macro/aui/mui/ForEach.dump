@@ -1,0 +1,7 @@
+class aui.mui.ForEach {
+
+	@:has_untyped
+	public static macro function build(items:haxe.macro.Expr, builder:haxe.macro.Expr) {
+		return cast {expr : haxe.macro.ExprDef.ENew({pack : ["aui", "ui"], name : "ForEach", params : []}, [items, builder]), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/mui/ForEach.hx", 558, 594)};
+	}
+}

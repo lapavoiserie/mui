@@ -1,0 +1,47 @@
+@:realPath("java.javax.security.auth.Subject") @:used @:native("javax.security.auth.Subject") @:libType
+extern class javax.security.auth.Subject implements java.io.Serializable {
+
+	function new():Void;
+
+	function new(param1:Bool, param2:java.util.Set<java.security.Principal>, param3:java.util.Set<Dynamic>, param4:java.util.Set<Dynamic>):Void;
+
+	function setReadOnly():Void;
+
+	function isReadOnly():Bool;
+
+	function getPrincipals():java.util.Set<java.security.Principal>;
+
+	function getPrincipals<T:java.security.Principal>(param1:java.lang.Class<getPrincipals.T>):java.util.Set<getPrincipals.T>;
+
+	function getPublicCredentials():java.util.Set<Dynamic>;
+
+	function getPublicCredentials<T:Dynamic>(param1:java.lang.Class<getPublicCredentials.T>):java.util.Set<getPublicCredentials.T>;
+
+	function getPrivateCredentials():java.util.Set<Dynamic>;
+
+	function getPrivateCredentials<T:Dynamic>(param1:java.lang.Class<getPrivateCredentials.T>):java.util.Set<getPrivateCredentials.T>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function toString():java.lang.String;
+
+	function toString(param1:Bool):java.lang.String;
+
+	function hashCode():Int;
+
+	var principals:java.util.Set<java.security.Principal>;
+
+	var pubCredentials:java.util.Set<Dynamic>;
+
+	var privCredentials:java.util.Set<Dynamic>;
+
+	static function getSubject(param1:java.security.AccessControlContext):javax.security.auth.Subject;
+
+	static function doAs<T:Dynamic>(param1:javax.security.auth.Subject, param2:java.security.PrivilegedAction<doAs.T>):doAs.T;
+
+	static function doAs<T:Dynamic>(param1:javax.security.auth.Subject, param2:java.security.PrivilegedExceptionAction<doAs.T>):doAs.T;
+
+	static function doAsPrivileged<T:Dynamic>(param1:javax.security.auth.Subject, param2:java.security.PrivilegedAction<doAsPrivileged.T>, param3:java.security.AccessControlContext):doAsPrivileged.T;
+
+	static function doAsPrivileged<T:Dynamic>(param1:javax.security.auth.Subject, param2:java.security.PrivilegedExceptionAction<doAsPrivileged.T>, param3:java.security.AccessControlContext):doAsPrivileged.T;
+}

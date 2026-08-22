@@ -1,0 +1,19 @@
+@:realPath("java.math.BigDecimal_StringBuilderHelper") @:used @:native("java.math.BigDecimal$StringBuilderHelper") @:libType
+extern class java.math.BigDecimal$StringBuilderHelper {
+
+	function new():Void;
+
+	function getStringBuilder():java.lang.StringBuilder;
+
+	function getCompactCharArray():java.NativeArray<java.types.Char16>;
+
+	function putIntCompact(param1:haxe.Int64):Int;
+
+	var sb(default,ctor):java.lang.StringBuilder;
+
+	var cmpCharArray(default,ctor):java.NativeArray<java.types.Char16>;
+
+	static var DIGIT_TENS(default,never):java.NativeArray<java.types.Char16>;
+
+	static var DIGIT_ONES(default,never):java.NativeArray<java.types.Char16>;
+}

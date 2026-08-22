@@ -1,0 +1,35 @@
+@:realPath("java.util.Collections_UnmodifiableList") @:used @:native("java.util.Collections$UnmodifiableList") @:libType
+extern class java.util.Collections$UnmodifiableList<E:Dynamic> extends java.util.Collections$UnmodifiableCollection<java.util.Collections_UnmodifiableList.E> implements java.util.List<java.util.Collections_UnmodifiableList.E> {
+
+	function new(param1:java.util.List<java.util.Collections_UnmodifiableList.E>):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function get(param1:Int):java.util.Collections_UnmodifiableList.E;
+
+	function set(param1:Int, param2:java.util.Collections_UnmodifiableList.E):java.util.Collections_UnmodifiableList.E;
+
+	function add(param1:Int, param2:java.util.Collections_UnmodifiableList.E):Void;
+
+	function remove(param1:Int):java.util.Collections_UnmodifiableList.E;
+
+	function indexOf(param1:Dynamic):Int;
+
+	function lastIndexOf(param1:Dynamic):Int;
+
+	function addAll(param1:Int, param2:java.util.Collection<java.util.Collections_UnmodifiableList.E>):Bool;
+
+	function replaceAll(param1:java.util.function.UnaryOperator<java.util.Collections_UnmodifiableList.E>):Void;
+
+	function sort(param1:java.util.Comparator<Dynamic>):Void;
+
+	function listIterator():java.util.ListIterator<java.util.Collections_UnmodifiableList.E>;
+
+	function listIterator(param1:Int):java.util.ListIterator<java.util.Collections_UnmodifiableList.E>;
+
+	function subList(param1:Int, param2:Int):java.util.List<java.util.Collections_UnmodifiableList.E>;
+
+	var list(default,ctor):java.util.List<java.util.Collections_UnmodifiableList.E>;
+}

@@ -1,0 +1,7 @@
+@:realPath("java.net.InetAddress_1") @:used @:native("java.net.InetAddress$1") @:libType
+extern class java.net.InetAddress$1 implements java.security.PrivilegedAction<java.lang.Void> {
+
+	function new():Void;
+
+	function run():java.lang.Void;
+}

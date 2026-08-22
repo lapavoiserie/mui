@@ -1,0 +1,11 @@
+@:realPath("java.util.Collections_ReverseComparator") @:used @:native("java.util.Collections$ReverseComparator") @:libType
+extern class java.util.Collections$ReverseComparator implements java.io.Serializable implements java.util.Comparator<java.lang.Comparable<Dynamic>> {
+
+	function compare(param1:java.lang.Comparable<Dynamic>, param2:java.lang.Comparable<Dynamic>):Int;
+
+	function compare(param1:Dynamic, param2:Dynamic):Int;
+
+	function reversed():java.util.Comparator<java.lang.Comparable<Dynamic>>;
+
+	static var REVERSE_ORDER(default,never):java.util.Collections$ReverseComparator;
+}

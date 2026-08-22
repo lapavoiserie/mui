@@ -1,0 +1,8 @@
+@:realPath("java.lang.Package_1PackageInfoProxy") @:native("java.lang.Package$1PackageInfoProxy") @:libType
+extern class java.lang.Package$1PackageInfoProxy {
+
+	function new(param1:java.lang.Package):Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.lang.Package;
+}

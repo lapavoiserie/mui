@@ -1,0 +1,5 @@
+@:realPath("java.nio.channels.InterruptibleChannel") @:used @:native("java.nio.channels.InterruptibleChannel") @:libType
+extern interface java.nio.channels.InterruptibleChannel implements java.nio.channels.Channel {
+
+	function close():Void;
+}

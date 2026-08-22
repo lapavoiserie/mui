@@ -1,0 +1,72 @@
+@:realPath("java.io.ObjectInputStream") @:used @:native("java.io.ObjectInputStream") @:libType
+extern class java.io.ObjectInputStream extends java.io.InputStream implements java.io.ObjectInput implements java.io.ObjectStreamConstants {
+
+	function new(param1:java.io.InputStream):Void;
+
+	function new():Void;
+
+	function readObject():Dynamic;
+
+	function readObjectOverride():Dynamic;
+
+	function readUnshared():Dynamic;
+
+	function defaultReadObject():Void;
+
+	function readFields():java.io.ObjectInputStream$GetField;
+
+	function registerValidation(param1:java.io.ObjectInputValidation, param2:Int):Void;
+
+	function resolveClass(param1:java.io.ObjectStreamClass):java.lang.Class<Dynamic>;
+
+	function resolveProxyClass(param1:java.NativeArray<java.lang.String>):java.lang.Class<Dynamic>;
+
+	function resolveObject(param1:Dynamic):Dynamic;
+
+	function enableResolveObject(param1:Bool):Bool;
+
+	function readStreamHeader():Void;
+
+	function readClassDescriptor():java.io.ObjectStreamClass;
+
+	function read():Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function available():Int;
+
+	function close():Void;
+
+	function readBoolean():Bool;
+
+	function readByte():java.types.Int8;
+
+	function readUnsignedByte():Int;
+
+	function readChar():java.types.Char16;
+
+	function readShort():java.types.Int16;
+
+	function readUnsignedShort():Int;
+
+	function readInt():Int;
+
+	function readLong():haxe.Int64;
+
+	function readFloat():Single;
+
+	function readDouble():Float;
+
+	function readFully(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function readFully(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function skipBytes(param1:Int):Int;
+
+	@:deprecated
+	function readLine():java.lang.String;
+
+	function readUTF():java.lang.String;
+
+	function readTypeString():java.lang.String;
+}

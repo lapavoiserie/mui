@@ -1,0 +1,10 @@
+@:realPath("java.net.URI_Parser") @:native("java.net.URI$Parser") @:libType
+extern class java.net.URI$Parser {
+
+	function new(param1:java.net.URI, param2:java.lang.String):Void;
+
+	function parse(param1:Bool):Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.net.URI;
+}

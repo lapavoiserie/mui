@@ -1,0 +1,1 @@
+private typedef haxe.ds._ObjectMap.HashType = Int

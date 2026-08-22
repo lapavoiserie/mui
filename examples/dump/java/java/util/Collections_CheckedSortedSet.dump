@@ -1,0 +1,17 @@
+@:realPath("java.util.Collections_CheckedSortedSet") @:used @:native("java.util.Collections$CheckedSortedSet") @:libType
+extern class java.util.Collections$CheckedSortedSet<E:Dynamic> extends java.util.Collections$CheckedSet<java.util.Collections_CheckedSortedSet.E> implements java.io.Serializable implements java.util.SortedSet<java.util.Collections_CheckedSortedSet.E> {
+
+	function new(param1:java.util.SortedSet<java.util.Collections_CheckedSortedSet.E>, param2:java.lang.Class<java.util.Collections_CheckedSortedSet.E>):Void;
+
+	function comparator():java.util.Comparator<Dynamic>;
+
+	function first():java.util.Collections_CheckedSortedSet.E;
+
+	function last():java.util.Collections_CheckedSortedSet.E;
+
+	function subSet(param1:java.util.Collections_CheckedSortedSet.E, param2:java.util.Collections_CheckedSortedSet.E):java.util.SortedSet<java.util.Collections_CheckedSortedSet.E>;
+
+	function headSet(param1:java.util.Collections_CheckedSortedSet.E):java.util.SortedSet<java.util.Collections_CheckedSortedSet.E>;
+
+	function tailSet(param1:java.util.Collections_CheckedSortedSet.E):java.util.SortedSet<java.util.Collections_CheckedSortedSet.E>;
+}

@@ -1,0 +1,52 @@
+@:realPath("jvm.Closure") @:directlyUsed @:used @:native("haxe.jvm.Closure") @:nativeGen @:keep
+class haxe.jvm.Closure extends haxe.jvm.ClosureDispatch {
+
+	public function new(context:Null<Dynamic>, method:java.lang.reflect.Method) {
+		super();
+		this.context = context;
+		this.method = method;
+		this.isStatic = (method.getModifiers() & java.lang.reflect.Modifier.STATIC) != 0;
+		this.params = method.getParameterTypes();
+	}
+
+	public var context:Dynamic;
+
+	public var method:java.lang.reflect.Method;
+
+	var isStatic:Bool;
+
+	var params:java.NativeArray<java.lang.Class<Dynamic>>;
+
+	public function bindTo(context:Dynamic) {
+		return new haxe.jvm.Closure(context, this.method);
+	}
+
+	public function equals(other:java.lang.Object) {
+		if ((! haxe.jvm.Jvm.instanceof(other, haxe.jvm.Closure))) return false;
+		var other = cast other;
+		if ((this.context == other.context)) return this.method == other.method else return false;
+	}
+
+	public function invokeDynamic(args:java.NativeArray<Dynamic>) {
+		if ((this.isStatic && this.context != null)) {
+			var newArgs = new java.NativeArray(args.length + 1);
+			java.lang.System.arraycopy(cast args, 0, cast newArgs, 1, args.length);
+			newArgs[0] = this.context;
+			args = newArgs;
+		};
+		var args1;
+		var _g = haxe.jvm.Jvm.unifyCallArguments(args, this.params, true);
+		switch ((@:exhaustive enumIndex _g)) {
+			case 0: {
+				var args = _g[0];
+				args1 = args;
+			};
+			case 1: args1 = args;
+		};
+		try {
+			return this.method.invoke(this.context, ... @:implicitCast cast cast args1);
+		} catch (e:java.lang.reflect.InvocationTargetException) {
+			throw @:wrappedException cast haxe.Exception.thrown(e.getCause());
+		};
+	}
+}

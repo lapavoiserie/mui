@@ -1,0 +1,67 @@
+@:realPath("java.io.ObjectOutputStream_BlockDataOutputStream") @:used @:native("java.io.ObjectOutputStream$BlockDataOutputStream") @:libType
+extern class java.io.ObjectOutputStream$BlockDataOutputStream extends java.io.OutputStream implements java.io.DataOutput {
+
+	function new(param1:java.io.OutputStream):Void;
+
+	function setBlockDataMode(param1:Bool):Bool;
+
+	function getBlockDataMode():Bool;
+
+	function write(param1:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int, param4:Bool):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function flush():Void;
+
+	function close():Void;
+
+	function drain():Void;
+
+	function writeBoolean(param1:Bool):Void;
+
+	function writeByte(param1:Int):Void;
+
+	function writeChar(param1:Int):Void;
+
+	function writeShort(param1:Int):Void;
+
+	function writeInt(param1:Int):Void;
+
+	function writeFloat(param1:Single):Void;
+
+	function writeLong(param1:haxe.Int64):Void;
+
+	function writeDouble(param1:Float):Void;
+
+	function writeBytes(param1:java.lang.String):Void;
+
+	function writeChars(param1:java.lang.String):Void;
+
+	function writeChars(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Void;
+
+	function writeUTF(param1:java.lang.String):Void;
+
+	function writeUTF(param1:java.lang.String, param2:haxe.Int64):Void;
+
+	function writeBooleans(param1:java.NativeArray<Bool>, param2:Int, param3:Int):Void;
+
+	function writeShorts(param1:java.NativeArray<java.types.Int16>, param2:Int, param3:Int):Void;
+
+	function writeInts(param1:java.NativeArray<Int>, param2:Int, param3:Int):Void;
+
+	function writeFloats(param1:java.NativeArray<Single>, param2:Int, param3:Int):Void;
+
+	function writeLongs(param1:java.NativeArray<haxe.Int64>, param2:Int, param3:Int):Void;
+
+	function writeDoubles(param1:java.NativeArray<Float>, param2:Int, param3:Int):Void;
+
+	function getUTFLength(param1:java.lang.String):haxe.Int64;
+
+	function writeLongUTF(param1:java.lang.String):Void;
+
+	function writeLongUTF(param1:java.lang.String, param2:haxe.Int64):Void;
+}

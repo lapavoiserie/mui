@@ -1,0 +1,13 @@
+@:directlyUsed @:used
+enum nui.PropValue {
+	PString(v:java.lang.String);
+	PInt(v:Int);
+	PFloat(v:Float);
+	PBool(v:Bool);
+	PCallback(fn:() -> Void);
+	PCallbackString(fn:java.lang.String -> Void);
+	PCallbackFloat(fn:Float -> Void);
+	PCallbackInt(fn:Int -> Void);
+	PCallbackBool(fn:Bool -> Void);
+	PReactive(thunk:() -> nui.PropValue);
+}

@@ -1,0 +1,11 @@
+@:realPath("java.security.Provider_ServiceKey") @:native("java.security.Provider$ServiceKey") @:libType
+extern class java.security.Provider$ServiceKey {
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:Bool, param4:java.security.Provider$1):Void;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function matches(param1:java.lang.String, param2:java.lang.String):Bool;
+}

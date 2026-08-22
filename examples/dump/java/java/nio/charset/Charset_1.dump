@@ -1,0 +1,17 @@
+@:realPath("java.nio.charset.Charset_1") @:used @:native("java.nio.charset.Charset$1") @:libType
+extern class java.nio.charset.Charset$1 implements java.util.Iterator<java.nio.charset.spi.CharsetProvider> {
+
+	function new():Void;
+
+	function hasNext():Bool;
+
+	function next():java.nio.charset.spi.CharsetProvider;
+
+	function remove():Void;
+
+	var cl:java.lang.ClassLoader;
+
+	var sl:java.util.ServiceLoader<java.nio.charset.spi.CharsetProvider>;
+
+	var i:java.util.Iterator<java.nio.charset.spi.CharsetProvider>;
+}

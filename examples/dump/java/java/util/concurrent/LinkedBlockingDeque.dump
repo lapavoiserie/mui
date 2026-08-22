@@ -1,0 +1,111 @@
+@:realPath("java.util.concurrent.LinkedBlockingDeque") @:directlyUsed @:used @:native("java.util.concurrent.LinkedBlockingDeque") @:libType
+extern class java.util.concurrent.LinkedBlockingDeque<E:Dynamic> extends java.util.AbstractQueue<java.util.concurrent.LinkedBlockingDeque.E> implements java.io.Serializable implements java.util.concurrent.BlockingDeque<java.util.concurrent.LinkedBlockingDeque.E> {
+
+	function new():Void;
+
+	function new(param1:java.util.Collection<java.util.concurrent.LinkedBlockingDeque.E>):Void;
+
+	function new(param1:Int):Void;
+
+	function unlink(param1:java.util.concurrent.LinkedBlockingDeque$Node<java.util.concurrent.LinkedBlockingDeque.E>):Void;
+
+	function addFirst(param1:java.util.concurrent.LinkedBlockingDeque.E):Void;
+
+	function addLast(param1:java.util.concurrent.LinkedBlockingDeque.E):Void;
+
+	function offerFirst(param1:java.util.concurrent.LinkedBlockingDeque.E):Bool;
+
+	function offerFirst(param1:java.util.concurrent.LinkedBlockingDeque.E, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):Bool;
+
+	function offerLast(param1:java.util.concurrent.LinkedBlockingDeque.E):Bool;
+
+	function offerLast(param1:java.util.concurrent.LinkedBlockingDeque.E, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):Bool;
+
+	function putFirst(param1:java.util.concurrent.LinkedBlockingDeque.E):Void;
+
+	function putLast(param1:java.util.concurrent.LinkedBlockingDeque.E):Void;
+
+	function removeFirst():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function removeLast():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function pollFirst():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function pollFirst(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.LinkedBlockingDeque.E;
+
+	function pollLast():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function pollLast(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.LinkedBlockingDeque.E;
+
+	function takeFirst():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function takeLast():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function getFirst():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function getLast():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function peekFirst():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function peekLast():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function removeFirstOccurrence(param1:Dynamic):Bool;
+
+	function removeLastOccurrence(param1:Dynamic):Bool;
+
+	function add(param1:java.util.concurrent.LinkedBlockingDeque.E):Bool;
+
+	function offer(param1:java.util.concurrent.LinkedBlockingDeque.E):Bool;
+
+	function offer(param1:java.util.concurrent.LinkedBlockingDeque.E, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):Bool;
+
+	function put(param1:java.util.concurrent.LinkedBlockingDeque.E):Void;
+
+	function remove():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function remove(param1:Dynamic):Bool;
+
+	function poll():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function poll(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.LinkedBlockingDeque.E;
+
+	function take():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function element():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function peek():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function remainingCapacity():Int;
+
+	function drainTo(param1:java.util.Collection<Dynamic>):Int;
+
+	function drainTo(param1:java.util.Collection<Dynamic>, param2:Int):Int;
+
+	function push(param1:java.util.concurrent.LinkedBlockingDeque.E):Void;
+
+	function pop():java.util.concurrent.LinkedBlockingDeque.E;
+
+	function size():Int;
+
+	function contains(param1:Dynamic):Bool;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function toString():java.lang.String;
+
+	function clear():Void;
+
+	function iterator():java.util.Iterator<java.util.concurrent.LinkedBlockingDeque.E>;
+
+	function descendingIterator():java.util.Iterator<java.util.concurrent.LinkedBlockingDeque.E>;
+
+	function spliterator():java.util.Spliterator<java.util.concurrent.LinkedBlockingDeque.E>;
+
+	var first:java.util.concurrent.LinkedBlockingDeque$Node<java.util.concurrent.LinkedBlockingDeque.E>;
+
+	var last:java.util.concurrent.LinkedBlockingDeque$Node<java.util.concurrent.LinkedBlockingDeque.E>;
+
+	var lock(default,ctor):java.util.concurrent.locks.ReentrantLock;
+}

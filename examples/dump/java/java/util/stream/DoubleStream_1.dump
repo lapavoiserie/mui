@@ -1,0 +1,17 @@
+@:realPath("java.util.stream.DoubleStream_1") @:used @:native("java.util.stream.DoubleStream$1") @:libType
+extern class java.util.stream.DoubleStream$1 implements java.util.PrimitiveIterator$OfDouble {
+
+	function new(param1:Float, param2:java.util.function.DoubleUnaryOperator):Void;
+
+	function hasNext():Bool;
+
+	function nextDouble():Float;
+
+	var t:Float;
+
+	@:realPath("val_seed") @:native("val$seed")
+	var val$seed(default,ctor):Float;
+
+	@:realPath("val_f") @:native("val$f")
+	var val$f(default,ctor):java.util.function.DoubleUnaryOperator;
+}

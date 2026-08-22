@@ -1,0 +1,5 @@
+@:realPath("jvm.annotation.EnumReflectionInformation") @:directlyUsed @:used @:annotation @:native("haxe.jvm.annotation.EnumReflectionInformation") @:keep
+interface haxe.jvm.annotation.EnumReflectionInformation implements java.lang.annotation.Annotation {
+
+	function constructorNames():java.NativeArray<java.lang.String>;
+}

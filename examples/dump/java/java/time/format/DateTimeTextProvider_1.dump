@@ -1,0 +1,9 @@
+@:realPath("java.time.format.DateTimeTextProvider_1") @:used @:native("java.time.format.DateTimeTextProvider$1") @:libType
+extern class java.time.format.DateTimeTextProvider$1 implements java.util.Comparator<java.util.Map$Entry<java.lang.String, java.lang.Long>> {
+
+	function new():Void;
+
+	function compare(param1:java.util.Map$Entry<java.lang.String, java.lang.Long>, param2:java.util.Map$Entry<java.lang.String, java.lang.Long>):Int;
+
+	function compare(param1:Dynamic, param2:Dynamic):Int;
+}

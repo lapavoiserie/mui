@@ -1,0 +1,17 @@
+@:realPath("java.util.concurrent.locks.Condition") @:used @:native("java.util.concurrent.locks.Condition") @:libType
+extern interface java.util.concurrent.locks.Condition {
+
+	function await():Void;
+
+	function await(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):Bool;
+
+	function awaitUninterruptibly():Void;
+
+	function awaitNanos(param1:haxe.Int64):haxe.Int64;
+
+	function awaitUntil(param1:java.util.Date):Bool;
+
+	function signal():Void;
+
+	function signalAll():Void;
+}

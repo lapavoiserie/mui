@@ -1,0 +1,389 @@
+@:directlyUsed @:used
+class aui.nui.ViewSource implements nui.NodeSource<aui.View> {
+
+	public function new(root:aui.View) {
+		this._root = root;
+		this._actions = [];
+	}
+
+	var _root(default,ctor):aui.View;
+
+	var _actions(default,ctor):Array<aui.View>;
+
+	public function classify() {
+		this.visit(this._root, 0);
+	}
+
+	function visit(n:aui.View, depth:Int) {
+		if ((n == null || depth > 512)) return;
+		var count = this.childCount(n);
+		{
+			var _g = 0;
+			var _g1 = count;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				this.visit(this.childAt(n, i), depth + 1);
+			};
+		};
+	}
+
+	var _children:haxe.ds.ObjectMap<aui.View, Array<aui.View>>;
+
+	var _wrapped:haxe.ds.ObjectMap<aui.View, aui.View>;
+
+	public function root() {
+		return this._root;
+	}
+
+	public function rebuild() {}
+
+	public function typeOf(n:aui.View) {
+		n = this.resolveWalked(n);
+		if ((n == null)) return "";
+		var vt = n.viewType;
+		if ((vt == null)) return "";
+		var startIndex = null;
+		var dot = haxe.jvm.StringExt.lastIndexOf(vt, ".", startIndex);
+		if ((dot >= 0)) {
+			var len = null;
+			return haxe.jvm.StringExt.substr(vt, dot + 1, len);
+		} else return vt;
+	}
+
+	public function keyOf(n:aui.View) {
+		return null;
+	}
+
+	public function childCount(n:aui.View) {
+		n = this.resolveWalked(n);
+		if ((n == null)) return 0;
+		var tabs = aui.nui.ViewSource.tabsOf(n);
+		if ((tabs != null)) return tabs.length;
+		if ((n.viewType == "ConditionalView")) {
+			if ((Reflect.field(n, "elseView") == null)) return 1 else return 2;
+		};
+		return this.childrenOf(n).length;
+	}
+
+	public function childAt(n:aui.View, index:Int) {
+		n = this.resolveWalked(n);
+		if ((n == null || index < 0)) return null;
+		var tabs = aui.nui.ViewSource.tabsOf(n);
+		if ((tabs != null)) {
+			if ((index < tabs.length)) return tabs[index].content else return null;
+		};
+		if ((n.viewType == "ConditionalView")) switch ((index)) {
+			case 0: return cast Reflect.field(n, "thenView");
+			case 1: return cast Reflect.field(n, "elseView");
+			default: return null
+		};
+		var children = this.childrenOf(n);
+		if ((index >= children.length)) return null else return children[index];
+	}
+
+	function resolveWalked(n:aui.View) {
+		var resolved = aui.nui.ViewSource.resolve(n);
+		if ((resolved == null || resolved.viewType != "ForEach")) return resolved;
+		if ((this._wrapped == null)) this._wrapped = new haxe.ds.ObjectMap();
+		var cached = this._wrapped.get(resolved);
+		if ((cached != null)) return cached;
+		var items = aui.nui.ViewSource.forEachItems(resolved);
+		var stack = new aui.ui.VStack(null, null, if ((items == null)) [] else items);
+		this._wrapped.set(resolved, stack);
+		return stack;
+	}
+
+	function childrenOf(n:aui.View) {
+		if ((n.children == null || n.children.length == 0)) return [];
+		if ((this._children == null)) this._children = new haxe.ds.ObjectMap();
+		var cached = this._children.get(n);
+		if ((cached != null)) return cached;
+		var out = [];
+		var expanded = false;
+		{
+			var _g = 0;
+			var _g1 = n.children;
+			while ((_g < _g1.length)) {
+				var child = _g1[_g];
+				++ _g;
+				var items = aui.nui.ViewSource.forEachItems(child);
+				if ((items == null)) out.push(child) else {
+					expanded = true;
+					{
+						var _g = 0;
+						while ((_g < items.length)) {
+							var item = items[_g];
+							++ _g;
+							out.push(item);
+						};
+					};
+				};
+			};
+		};
+		var result = if ((expanded)) out else n.children;
+		this._children.set(n, result);
+		return result;
+	}
+
+	public function tabTitle(n:aui.View, index:Int) {
+		var tabs = aui.nui.ViewSource.tabsOf(n);
+		if ((tabs == null || index < 0 || index >= tabs.length)) return "";
+		return tabs[index].title;
+	}
+
+	public function tabIcon(n:aui.View, index:Int) {
+		var tabs = aui.nui.ViewSource.tabsOf(n);
+		if ((tabs == null || index < 0 || index >= tabs.length)) return "";
+		return tabs[index].icon;
+	}
+
+	public function conditionValue(n:aui.View) {
+		n = aui.nui.ViewSource.resolve(n);
+		if ((n == null)) return false;
+		var st = Reflect.field(n, "conditionState");
+		if ((st == null)) return false else return st.get() == true;
+	}
+
+	public function hasProp(n:aui.View, key:java.lang.String) {
+		n = aui.nui.ViewSource.valueOf(n);
+		if ((n == null || n.properties == null)) return false;
+		return cast cast n.properties.exists(key);
+	}
+
+	public function stringProp(n:aui.View, key:java.lang.String) {
+		var val = aui.nui.ViewSource.rawValue(aui.nui.ViewSource.valueOf(n), key);
+		if ((val == null)) return "";
+		if ((Reflect.isEnumValue(val))) return Type.enumConstructor(val) else return Std.string(val);
+	}
+
+	public function intProp(n:aui.View, key:java.lang.String) {
+		var val = aui.nui.ViewSource.rawValue(aui.nui.ViewSource.valueOf(n), key);
+		if ((val == null)) return 0;
+		if ((Std.isOfType(val, Int))) return val;
+		if ((Std.isOfType(val, Float))) return Std.int(val);
+		var parsed = Std.parseInt(Std.string(val));
+		if ((parsed == null)) return 0 else return parsed;
+	}
+
+	public function floatProp(n:aui.View, key:java.lang.String) {
+		var val = aui.nui.ViewSource.rawValue(aui.nui.ViewSource.valueOf(n), key);
+		if ((val == null)) return 0.0;
+		if ((Std.isOfType(val, Float) || Std.isOfType(val, Int))) return val;
+		var parsed = Std.parseFloat(Std.string(val));
+		if ((java.lang.Math.isNaN(parsed))) return 0.0 else return parsed;
+	}
+
+	public function boolProp(n:aui.View, key:java.lang.String) {
+		var val = aui.nui.ViewSource.rawValue(aui.nui.ViewSource.valueOf(n), key);
+		if ((val == null)) return false;
+		if ((Std.isOfType(val, Bool))) return val;
+		return Std.string(val) == "true";
+	}
+
+	public function modifierCount(n:aui.View) {
+		n = aui.nui.ViewSource.resolve(n);
+		if ((n == null || n.modifierChain == null)) return 0;
+		return n.modifierChain.length;
+	}
+
+	public function modifierType(n:aui.View, index:Int) {
+		n = aui.nui.ViewSource.resolve(n);
+		if ((n == null || n.modifierChain == null || index < 0 || index >= n.modifierChain.length)) return "";
+		return Type.enumConstructor(n.modifierChain[index]);
+	}
+
+	public function modifierFloat(n:aui.View, index:Int, param:Int) {
+		n = aui.nui.ViewSource.resolve(n);
+		if ((n == null || n.modifierChain == null || index < 0 || index >= n.modifierChain.length)) return 0.0;
+		var params = Type.enumParameters(n.modifierChain[index]);
+		if ((param < 0 || param >= params.length)) return 0.0;
+		var val = params[param];
+		if ((Std.isOfType(val, Float))) return val;
+		if ((Std.isOfType(val, Int))) return cast (val,Int) * 1.0;
+		return 0.0;
+	}
+
+	public function modifierString(n:aui.View, index:Int, param:Int) {
+		n = aui.nui.ViewSource.resolve(n);
+		if ((n == null || n.modifierChain == null || index < 0 || index >= n.modifierChain.length)) return "";
+		var params = Type.enumParameters(n.modifierChain[index]);
+		if ((param < 0 || param >= params.length)) return "";
+		return Std.string(params[param]);
+	}
+
+	public function modifierHasParam(n:aui.View, index:Int, param:Int) {
+		n = aui.nui.ViewSource.resolve(n);
+		if ((n == null || n.modifierChain == null || index < 0 || index >= n.modifierChain.length)) return false;
+		var params = Type.enumParameters(n.modifierChain[index]);
+		if ((param < 0 || param >= params.length)) return false;
+		return params[param] != null;
+	}
+
+	public function actionId(n:aui.View) {
+		n = aui.nui.ViewSource.resolve(n);
+		if ((aui.nui.ViewSource.actionOf(n) == null && aui.nui.ViewSource.tapOf(n) == null)) return -1;
+		var i = this._actions.indexOf(n, null);
+		if ((i >= 0)) return i;
+		this._actions.push(n);
+		return this._actions.length - 1;
+	}
+
+	public function invokeActionId(id:Int) {
+		if ((id < 0 || id >= this._actions.length)) return;
+		this.invokeAction(this._actions[id]);
+	}
+
+	public function invokeAction(n:aui.View) {
+		n = aui.nui.ViewSource.resolve(n);
+		var declared = aui.nui.ViewSource.actionOf(n);
+		if ((declared != null)) {
+			aui.nui.ViewSource.apply(declared);
+			return;
+		};
+		var tap = aui.nui.ViewSource.tapOf(n);
+		if ((tap != null)) tap();
+	}
+
+	static function forEachItems(n:aui.View) {
+		if ((n == null || n.viewType != "ForEach")) return null;
+		var builder = Reflect.field(n, "builder");
+		if ((builder == null || ! Reflect.isFunction(builder))) return [];
+		var source = Reflect.field(n, "itemsState");
+		if ((source == null)) return [];
+		if ((Std.isOfType(source, aui.state.State))) source = cast source.get();
+		if ((source == null)) return [];
+		var items = [];
+		if ((Std.isOfType(source, Array))) items = cast source else {
+			var makeIterator = Reflect.field(source, "iterator");
+			if ((! Reflect.isFunction(makeIterator))) return [];
+			var iter = Reflect.callMethod(source, makeIterator, []);
+			while ((iter.hasNext())) items.push(iter.next());
+		};
+		var out = [];
+		{
+			var _g = 0;
+			while ((_g < items.length)) {
+				var item = items[_g];
+				++ _g;
+				var view = Reflect.callMethod(null, builder, [item]);
+				if ((view != null)) out.push(cast view);
+			};
+		};
+		return out;
+	}
+
+	static function tabsOf(n:aui.View) {
+		if ((n == null || n.viewType != "TabView")) return null;
+		var tabs = Reflect.field(n, "tabs");
+		if ((tabs == null)) return null else return cast tabs;
+	}
+
+	static function resolve(n:aui.View) {
+		var current = n;
+		while ((Std.isOfType(current, aui.ViewComponent))) {
+			var comp = cast current;
+			var inner = comp.expand();
+			if ((inner == null || inner == current)) return current;
+			current = inner;
+		};
+		return current;
+	}
+
+	public static function resolveValue(n:aui.View) {
+		if ((n == null)) return null;
+		n = aui.nui.ViewSource.resolve(n);
+		if ((n == null)) return null;
+		if ((n.liveBuild != null)) return cast n.liveBuild() else return n;
+	}
+
+	static function valueOf(n:aui.View) {
+		return aui.nui.ViewSource.resolveValue(n);
+	}
+
+	static function rawValue(n:aui.View, key:java.lang.String) {
+		if ((n == null)) return null;
+		if ((n.properties != null)) {
+			var fromMap = cast cast n.properties.get(key);
+			if ((fromMap != null)) return fromMap;
+		};
+		return Reflect.field(n, key);
+	}
+
+	static function actionOf(n:aui.View) {
+		if ((n == null)) return null;
+		var a = Reflect.field(n, "stateAction");
+		if ((a == null)) return null else return cast a;
+	}
+
+	static function tapOf(n:aui.View) {
+		if ((n == null || n.modifierChain == null)) return null;
+		{
+			var _g = 0;
+			var _g1 = n.modifierChain;
+			while ((_g < _g1.length)) {
+				var modifier = _g1[_g];
+				++ _g;
+				switch ((enumIndex modifier)) {
+					case 29: {
+						var action = modifier[0];
+						return action;
+					};
+					default: {}
+				};
+			};
+		};
+		return null;
+	}
+
+	static function apply(action:Null<aui.state.StateAction>) {
+		if ((action == null)) return;
+		switch ((@:exhaustive enumIndex action)) {
+			case 0: {
+				var state = action[0];
+				var amount = action[1];
+				{
+					var st = state;
+					st.set(st.get() + (if ((amount == null)) 1 else amount));
+				};
+			};
+			case 1: {
+				var state = action[0];
+				var amount = action[1];
+				{
+					var st = state;
+					st.set(st.get() - (if ((amount == null)) 1 else amount));
+				};
+			};
+			case 2: {
+				var state = action[0];
+				var value = action[1];
+				{
+					var st = state;
+					st.set(value);
+				};
+			};
+			case 3: {
+				var state = action[0];
+				{
+					var st = state;
+					st.set(! st.get());
+				};
+			};
+			case 4: {
+				var state = action[0];
+				var value = action[1];
+				{
+					var st = state;
+					st.set(st.get() + value);
+				};
+			};
+			case 5: {
+				var _g = action[1];
+				{
+					var inner = action[0];
+					aui.nui.ViewSource.apply(inner);
+				};
+			};
+		};
+	}
+}

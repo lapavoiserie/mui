@@ -1,0 +1,9 @@
+@:realPath("java.time.format.DateTimeTextProvider_LocaleStore") @:used @:native("java.time.format.DateTimeTextProvider$LocaleStore") @:libType
+extern class java.time.format.DateTimeTextProvider$LocaleStore {
+
+	function new(param1:java.util.Map<java.time.format.TextStyle, java.util.Map<java.lang.Long, java.lang.String>>):Void;
+
+	function getText(param1:haxe.Int64, param2:java.time.format.TextStyle):java.lang.String;
+
+	function getTextIterator(param1:java.time.format.TextStyle):java.util.Iterator<java.util.Map$Entry<java.lang.String, java.lang.Long>>;
+}

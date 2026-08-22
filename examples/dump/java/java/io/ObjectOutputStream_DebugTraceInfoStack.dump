@@ -1,0 +1,13 @@
+@:realPath("java.io.ObjectOutputStream_DebugTraceInfoStack") @:native("java.io.ObjectOutputStream$DebugTraceInfoStack") @:libType
+extern class java.io.ObjectOutputStream$DebugTraceInfoStack {
+
+	function new():Void;
+
+	function clear():Void;
+
+	function pop():Void;
+
+	function push(param1:java.lang.String):Void;
+
+	function toString():java.lang.String;
+}

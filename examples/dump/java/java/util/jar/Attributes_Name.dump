@@ -1,0 +1,48 @@
+@:realPath("java.util.jar.Attributes_Name") @:native("java.util.jar.Attributes$Name") @:libType
+extern class java.util.jar.Attributes$Name {
+
+	function new(param1:java.lang.String):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static var MANIFEST_VERSION(default,never):java.util.jar.Attributes$Name;
+
+	static var SIGNATURE_VERSION(default,never):java.util.jar.Attributes$Name;
+
+	static var CONTENT_TYPE(default,never):java.util.jar.Attributes$Name;
+
+	static var CLASS_PATH(default,never):java.util.jar.Attributes$Name;
+
+	static var MAIN_CLASS(default,never):java.util.jar.Attributes$Name;
+
+	static var SEALED(default,never):java.util.jar.Attributes$Name;
+
+	static var EXTENSION_LIST(default,never):java.util.jar.Attributes$Name;
+
+	static var EXTENSION_NAME(default,never):java.util.jar.Attributes$Name;
+
+	@:deprecated
+	static var EXTENSION_INSTALLATION(default,never):java.util.jar.Attributes$Name;
+
+	static var IMPLEMENTATION_TITLE(default,never):java.util.jar.Attributes$Name;
+
+	static var IMPLEMENTATION_VERSION(default,never):java.util.jar.Attributes$Name;
+
+	static var IMPLEMENTATION_VENDOR(default,never):java.util.jar.Attributes$Name;
+
+	@:deprecated
+	static var IMPLEMENTATION_VENDOR_ID(default,never):java.util.jar.Attributes$Name;
+
+	@:deprecated
+	static var IMPLEMENTATION_URL(default,never):java.util.jar.Attributes$Name;
+
+	static var SPECIFICATION_TITLE(default,never):java.util.jar.Attributes$Name;
+
+	static var SPECIFICATION_VERSION(default,never):java.util.jar.Attributes$Name;
+
+	static var SPECIFICATION_VENDOR(default,never):java.util.jar.Attributes$Name;
+}

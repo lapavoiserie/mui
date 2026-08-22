@@ -1,0 +1,69 @@
+@:realPath("java.security.Provider") @:used @:native("java.security.Provider") @:libType
+extern class java.security.Provider extends java.util.Properties {
+
+	function new(param1:java.lang.String, param2:Float, param3:java.lang.String):Void;
+
+	function getName():java.lang.String;
+
+	function getVersion():Float;
+
+	function getInfo():java.lang.String;
+
+	function toString():java.lang.String;
+
+	function clear():Void;
+
+	function load(param1:java.io.InputStream):Void;
+
+	function putAll(param1:java.util.Map<Dynamic, Dynamic>):Void;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<Dynamic, Dynamic>>;
+
+	function keySet():java.util.Set<Dynamic>;
+
+	function values():java.util.Collection<Dynamic>;
+
+	function put(param1:Dynamic, param2:Dynamic):Dynamic;
+
+	function putIfAbsent(param1:Dynamic, param2:Dynamic):Dynamic;
+
+	function remove(param1:Dynamic):Dynamic;
+
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function replace(param1:Dynamic, param2:Dynamic, param3:Dynamic):Bool;
+
+	function replace(param1:Dynamic, param2:Dynamic):Dynamic;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, Dynamic>):Void;
+
+	function compute(param1:Dynamic, param2:java.util.function.BiFunction<Dynamic, Dynamic, Dynamic>):Dynamic;
+
+	function computeIfAbsent(param1:Dynamic, param2:java.util.function.Function<Dynamic, Dynamic>):Dynamic;
+
+	function computeIfPresent(param1:Dynamic, param2:java.util.function.BiFunction<Dynamic, Dynamic, Dynamic>):Dynamic;
+
+	function merge(param1:Dynamic, param2:Dynamic, param3:java.util.function.BiFunction<Dynamic, Dynamic, Dynamic>):Dynamic;
+
+	function get(param1:Dynamic):Dynamic;
+
+	function getOrDefault(param1:Dynamic, param2:Dynamic):Dynamic;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function keys():java.util.Enumeration<Dynamic>;
+
+	function elements():java.util.Enumeration<Dynamic>;
+
+	function getProperty(param1:java.lang.String):java.lang.String;
+
+	function getService(param1:java.lang.String, param2:java.lang.String):java.security.Provider$Service;
+
+	function getServices():java.util.Set<java.security.Provider$Service>;
+
+	function putService(param1:java.security.Provider$Service):Void;
+
+	function removeService(param1:java.security.Provider$Service):Void;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

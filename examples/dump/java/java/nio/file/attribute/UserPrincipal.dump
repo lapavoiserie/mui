@@ -1,0 +1,3 @@
+@:realPath("java.nio.file.attribute.UserPrincipal") @:native("java.nio.file.attribute.UserPrincipal") @:libType
+extern interface java.nio.file.attribute.UserPrincipal implements java.security.Principal {
+}

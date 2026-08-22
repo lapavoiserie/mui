@@ -1,0 +1,12 @@
+@:realPath("java.net.NetworkInterface_2") @:used @:native("java.net.NetworkInterface$2") @:libType
+extern class java.net.NetworkInterface$2 implements java.util.Enumeration<java.net.NetworkInterface> {
+
+	function new(param1:java.NativeArray<java.net.NetworkInterface>):Void;
+
+	function nextElement():java.net.NetworkInterface;
+
+	function hasMoreElements():Bool;
+
+	@:realPath("val_netifs") @:native("val$netifs")
+	var val$netifs(default,ctor):java.NativeArray<java.net.NetworkInterface>;
+}

@@ -1,0 +1,119 @@
+@:realPath("java.util.regex.Matcher") @:used @:native("java.util.regex.Matcher") @:libType
+extern class java.util.regex.Matcher implements java.util.regex.MatchResult {
+
+	function new():Void;
+
+	function new(param1:java.util.regex.Pattern, param2:java.lang.CharSequence):Void;
+
+	function pattern():java.util.regex.Pattern;
+
+	function toMatchResult():java.util.regex.MatchResult;
+
+	function usePattern(param1:java.util.regex.Pattern):java.util.regex.Matcher;
+
+	function reset():java.util.regex.Matcher;
+
+	function reset(param1:java.lang.CharSequence):java.util.regex.Matcher;
+
+	function start():Int;
+
+	function start(param1:java.lang.String):Int;
+
+	function start(param1:Int):Int;
+
+	function end():Int;
+
+	function end(param1:java.lang.String):Int;
+
+	function end(param1:Int):Int;
+
+	function group():java.lang.String;
+
+	function group(param1:java.lang.String):java.lang.String;
+
+	function group(param1:Int):java.lang.String;
+
+	function groupCount():Int;
+
+	function matches():Bool;
+
+	function find():Bool;
+
+	function find(param1:Int):Bool;
+
+	function lookingAt():Bool;
+
+	function appendReplacement(param1:java.lang.StringBuffer, param2:java.lang.String):java.util.regex.Matcher;
+
+	function appendTail(param1:java.lang.StringBuffer):java.lang.StringBuffer;
+
+	function replaceAll(param1:java.lang.String):java.lang.String;
+
+	function replaceFirst(param1:java.lang.String):java.lang.String;
+
+	function region(param1:Int, param2:Int):java.util.regex.Matcher;
+
+	function regionStart():Int;
+
+	function regionEnd():Int;
+
+	function hasTransparentBounds():Bool;
+
+	function useTransparentBounds(param1:Bool):java.util.regex.Matcher;
+
+	function hasAnchoringBounds():Bool;
+
+	function useAnchoringBounds(param1:Bool):java.util.regex.Matcher;
+
+	function toString():java.lang.String;
+
+	function hitEnd():Bool;
+
+	function requireEnd():Bool;
+
+	function search(param1:Int):Bool;
+
+	function match(param1:Int, param2:Int):Bool;
+
+	function getTextLength():Int;
+
+	function getSubSequence(param1:Int, param2:Int):java.lang.CharSequence;
+
+	function charAt(param1:Int):java.types.Char16;
+
+	function getMatchedGroupIndex(param1:java.lang.String):Int;
+
+	var parentPattern:java.util.regex.Pattern;
+
+	var groups:java.NativeArray<Int>;
+
+	var from:Int;
+
+	var to:Int;
+
+	var lookbehindTo:Int;
+
+	var text:java.lang.CharSequence;
+
+	var acceptMode:Int;
+
+	var first:Int;
+
+	var last:Int;
+
+	var oldLast:Int;
+
+	var lastAppendPosition:Int;
+
+	var locals:java.NativeArray<Int>;
+
+	var transparentBounds:Bool;
+
+	var anchoringBounds:Bool;
+
+	static function quoteReplacement(param1:java.lang.String):java.lang.String;
+
+	static var ENDANCHOR(default,never):Int;
+
+	static var NOANCHOR(default,never):Int;
+}

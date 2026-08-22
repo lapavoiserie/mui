@@ -1,0 +1,7 @@
+@:realPath("java.nio.charset.CoderResult_1") @:used @:native("java.nio.charset.CoderResult$1") @:libType
+extern class java.nio.charset.CoderResult$1 extends java.nio.charset.CoderResult$Cache {
+
+	function new():Void;
+
+	function create(param1:Int):java.nio.charset.CoderResult;
+}

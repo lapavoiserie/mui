@@ -1,0 +1,38 @@
+@:directlyUsed @:used @:autoBuild(aui.macros.StateMacro.build())
+class aui.App {
+
+	public function new() {}
+
+	@:value("HaxeApp")
+	public var appName:java.lang.String = "HaxeApp";
+
+	@:value("com.haxe.app")
+	public var bundleIdentifier:java.lang.String = "com.haxe.app";
+
+	@:value("com.haxe.app")
+	public var packageName:java.lang.String = "com.haxe.app";
+
+	@:value(24)
+	public var minSdk:Int = 24;
+
+	@:value(35)
+	public var targetSdk:Int = 35;
+
+	@:value(35)
+	public var compileSdk:Int = 35;
+
+	@:value(new rui.Lifetime())
+	public var lifetime(default,ctor):rui.Lifetime = new rui.Lifetime();
+
+	public function body() {
+		return new aui.View();
+	}
+
+	public function onAndroidContextReady(nativeLibraryDir:java.lang.String, filesDir:java.lang.String, assets:Dynamic) {}
+
+	public function release() {
+		this.lifetime.release();
+	}
+
+	public static function main() {}
+}

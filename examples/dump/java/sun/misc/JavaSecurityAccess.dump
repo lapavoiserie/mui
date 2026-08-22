@@ -1,0 +1,7 @@
+@:realPath("java.sun.misc.JavaSecurityAccess") @:used @:native("sun.misc.JavaSecurityAccess") @:libType
+extern interface sun.misc.JavaSecurityAccess {
+
+	function doIntersectionPrivilege<T:Dynamic>(param1:java.security.PrivilegedAction<doIntersectionPrivilege.T>, param2:java.security.AccessControlContext, param3:java.security.AccessControlContext):doIntersectionPrivilege.T;
+
+	function doIntersectionPrivilege<T:Dynamic>(param1:java.security.PrivilegedAction<doIntersectionPrivilege.T>, param2:java.security.AccessControlContext):doIntersectionPrivilege.T;
+}

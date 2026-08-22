@@ -1,0 +1,3 @@
+@:realPath("java.lang.Cloneable") @:directlyUsed @:used @:native("java.lang.Cloneable") @:libType
+extern interface java.lang.Cloneable {
+}

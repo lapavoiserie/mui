@@ -1,0 +1,10 @@
+@:realPath("java.lang.ClassLoader_3") @:used @:native("java.lang.ClassLoader$3") @:libType
+extern class java.lang.ClassLoader$3 implements java.security.PrivilegedAction<Dynamic> {
+
+	function new(param1:java.io.File):Void;
+
+	function run():Dynamic;
+
+	@:realPath("val_file") @:native("val$file")
+	var val$file(default,ctor):java.io.File;
+}

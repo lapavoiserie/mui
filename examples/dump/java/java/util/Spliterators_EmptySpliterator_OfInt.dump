@@ -1,0 +1,11 @@
+@:realPath("java.util.Spliterators_EmptySpliterator_OfInt") @:used @:native("java.util.Spliterators$EmptySpliterator$OfInt") @:libType
+extern class java.util.Spliterators$EmptySpliterator$OfInt extends java.util.Spliterators$EmptySpliterator<java.lang.Integer, java.util.Spliterator$OfInt, java.util.function.IntConsumer> implements java.util.Spliterator$OfInt {
+
+	function new():Void;
+
+	function forEachRemaining(param1:java.util.function.IntConsumer):Void;
+
+	function tryAdvance(param1:java.util.function.IntConsumer):Bool;
+
+	function trySplit():java.util.Spliterator$OfInt;
+}

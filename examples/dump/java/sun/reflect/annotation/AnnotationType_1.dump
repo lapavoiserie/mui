@@ -1,0 +1,13 @@
+@:realPath("java.sun.reflect.annotation.AnnotationType_1") @:used @:native("sun.reflect.annotation.AnnotationType$1") @:libType
+extern class sun.reflect.annotation.AnnotationType$1 implements java.security.PrivilegedAction<java.NativeArray<java.lang.reflect.Method>> {
+
+	function new(param1:sun.reflect.annotation.AnnotationType, param2:java.lang.Class<Dynamic>):Void;
+
+	function run():java.NativeArray<java.lang.reflect.Method>;
+
+	@:realPath("val_annotationClass") @:native("val$annotationClass")
+	var val$annotationClass(default,ctor):java.lang.Class<Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):sun.reflect.annotation.AnnotationType;
+}

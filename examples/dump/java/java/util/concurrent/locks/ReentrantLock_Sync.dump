@@ -1,0 +1,21 @@
+@:realPath("java.util.concurrent.locks.ReentrantLock_Sync") @:used @:native("java.util.concurrent.locks.ReentrantLock$Sync") @:libType
+extern class java.util.concurrent.locks.ReentrantLock$Sync extends java.util.concurrent.locks.AbstractQueuedSynchronizer {
+
+	function new():Void;
+
+	function lock():Void;
+
+	function nonfairTryAcquire(param1:Int):Bool;
+
+	function tryRelease(param1:Int):Bool;
+
+	function isHeldExclusively():Bool;
+
+	function newCondition():java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject;
+
+	function getOwner():java.lang.Thread;
+
+	function getHoldCount():Int;
+
+	function isLocked():Bool;
+}

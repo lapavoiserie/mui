@@ -1,0 +1,22 @@
+@:realPath("java.util.Spliterator_OfInt") @:used @:native("java.util.Spliterator$OfInt") @:libType
+extern interface java.util.Spliterator$OfInt implements java.util.Spliterator$OfPrimitive<java.lang.Integer, java.util.function.IntConsumer, java.util.Spliterator$OfInt> {
+
+	function trySplit():java.util.Spliterator$OfInt;
+
+	function tryAdvance(param1:java.util.function.IntConsumer):Bool;
+
+	@:java.default
+	function tryAdvance(param1:Dynamic):Bool;
+
+	@:java.default
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.IntConsumer):Void;
+
+	@:java.default
+	function forEachRemaining(param1:Dynamic):Void;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+}

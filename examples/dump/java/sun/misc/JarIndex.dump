@@ -1,0 +1,27 @@
+@:realPath("java.sun.misc.JarIndex") @:native("sun.misc.JarIndex") @:libType
+extern class sun.misc.JarIndex {
+
+	function new():Void;
+
+	function new(param1:java.NativeArray<java.lang.String>):Void;
+
+	function new(param1:java.io.InputStream):Void;
+
+	function getJarFiles():java.NativeArray<java.lang.String>;
+
+	function get(param1:java.lang.String):java.util.LinkedList<java.lang.String>;
+
+	function add(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function write(param1:java.io.OutputStream):Void;
+
+	function read(param1:java.io.InputStream):Void;
+
+	function merge(param1:sun.misc.JarIndex, param2:java.lang.String):Void;
+
+	static function getJarIndex(param1:java.util.jar.JarFile):sun.misc.JarIndex;
+
+	static function getJarIndex(param1:java.util.jar.JarFile, param2:sun.misc.MetaIndex):sun.misc.JarIndex;
+
+	static var INDEX_NAME(default,never):java.lang.String;
+}

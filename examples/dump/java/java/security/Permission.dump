@@ -1,0 +1,21 @@
+@:realPath("java.security.Permission") @:used @:native("java.security.Permission") @:libType
+extern class java.security.Permission implements java.security.Guard implements java.io.Serializable {
+
+	function new(param1:java.lang.String):Void;
+
+	function checkGuard(param1:Dynamic):Void;
+
+	function implies(param1:java.security.Permission):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function getName():java.lang.String;
+
+	function getActions():java.lang.String;
+
+	function newPermissionCollection():java.security.PermissionCollection;
+
+	function toString():java.lang.String;
+}

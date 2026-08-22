@@ -1,0 +1,55 @@
+@:realPath("java.time.ZoneOffset") @:used @:native("java.time.ZoneOffset") @:libType
+extern class java.time.ZoneOffset extends java.time.ZoneId implements java.io.Serializable implements java.lang.Comparable<java.time.ZoneOffset> implements java.time.temporal.TemporalAdjuster implements java.time.temporal.TemporalAccessor {
+
+	function getTotalSeconds():Int;
+
+	function getId():java.lang.String;
+
+	function getRules():java.time.zone.ZoneRules;
+
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	function range(param1:java.time.temporal.TemporalField):java.time.temporal.ValueRange;
+
+	function get(param1:java.time.temporal.TemporalField):Int;
+
+	function getLong(param1:java.time.temporal.TemporalField):haxe.Int64;
+
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	function adjustInto(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function compareTo(param1:java.time.ZoneOffset):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function write(param1:java.io.DataOutput):Void;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	static function of(param1:java.lang.String):java.time.ZoneOffset;
+
+	static function ofHours(param1:Int):java.time.ZoneOffset;
+
+	static function ofHoursMinutes(param1:Int, param2:Int):java.time.ZoneOffset;
+
+	static function ofHoursMinutesSeconds(param1:Int, param2:Int, param3:Int):java.time.ZoneOffset;
+
+	static function from(param1:java.time.temporal.TemporalAccessor):java.time.ZoneOffset;
+
+	static function ofTotalSeconds(param1:Int):java.time.ZoneOffset;
+
+	static function readExternal(param1:java.io.DataInput):java.time.ZoneOffset;
+
+	static var UTC(default,never):java.time.ZoneOffset;
+
+	static var MIN(default,never):java.time.ZoneOffset;
+
+	static var MAX(default,never):java.time.ZoneOffset;
+}

@@ -1,0 +1,1 @@
+typedef haxe.macro.BaseType = { pos : haxe.macro.Position, params : Array<haxe.macro.TypeParameter>, pack : Array<java.lang.String>, name : java.lang.String, module : java.lang.String, meta : haxe.macro.MetaAccess, isPrivate : Bool, isExtern : Bool, exclude : () -> Void, doc : Null<java.lang.String> }

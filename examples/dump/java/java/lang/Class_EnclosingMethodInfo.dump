@@ -1,0 +1,17 @@
+@:realPath("java.lang.Class_EnclosingMethodInfo") @:native("java.lang.Class$EnclosingMethodInfo") @:libType
+extern class java.lang.Class$EnclosingMethodInfo {
+
+	function new(param1:java.NativeArray<Dynamic>, param2:java.lang.Class$1):Void;
+
+	function isPartial():Bool;
+
+	function isConstructor():Bool;
+
+	function isMethod():Bool;
+
+	function getEnclosingClass():java.lang.Class<Dynamic>;
+
+	function getName():java.lang.String;
+
+	function getDescriptor():java.lang.String;
+}

@@ -1,0 +1,7 @@
+@:realPath("java.nio.channels.ScatteringByteChannel") @:used @:native("java.nio.channels.ScatteringByteChannel") @:libType
+extern interface java.nio.channels.ScatteringByteChannel implements java.nio.channels.ReadableByteChannel {
+
+	function read(param1:java.NativeArray<java.nio.ByteBuffer>, param2:Int, param3:Int):haxe.Int64;
+
+	function read(param1:java.NativeArray<java.nio.ByteBuffer>):haxe.Int64;
+}

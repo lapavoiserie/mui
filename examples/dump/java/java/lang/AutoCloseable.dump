@@ -1,0 +1,5 @@
+@:realPath("java.lang.AutoCloseable") @:used @:native("java.lang.AutoCloseable") @:libType
+extern interface java.lang.AutoCloseable {
+
+	function close():Void;
+}

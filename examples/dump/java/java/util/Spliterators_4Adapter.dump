@@ -1,0 +1,18 @@
+@:realPath("java.util.Spliterators_4Adapter") @:used @:native("java.util.Spliterators$4Adapter") @:libType
+extern class java.util.Spliterators$4Adapter implements java.util.PrimitiveIterator$OfDouble implements java.util.function.DoubleConsumer {
+
+	function new():Void;
+
+	function accept(param1:Float):Void;
+
+	function hasNext():Bool;
+
+	function nextDouble():Float;
+
+	var valueReady:Bool;
+
+	var nextElement:Float;
+
+	@:realPath("val_spliterator") @:native("val$spliterator")
+	var val$spliterator(default,ctor):java.util.Spliterator$OfDouble;
+}

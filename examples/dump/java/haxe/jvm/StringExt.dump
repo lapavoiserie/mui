@@ -1,0 +1,83 @@
+@:realPath("jvm.StringExt") @:directlyUsed @:used @:native("haxe.jvm.StringExt") @:keep
+class haxe.jvm.StringExt {
+
+	public static function fromCharCode(code:Int) {
+		var a = new java.NativeArray(1);
+		a[0] = code;
+		return new java.lang.String(a, 0, 1);
+	}
+
+	public static function charAt(me:java.lang.String, index:Int) {
+		if ((index >= me.length || index < 0)) return "" else return java.lang.Character.toString(cast me.charAt(index));
+	}
+
+	public static function charCodeAt(me:java.lang.String, index:Int) {
+		if ((index >= me.length || index < 0)) return null else return cast (cast me.charAt(index),Int);
+	}
+
+	public static function indexOf(me:java.lang.String, str:java.lang.String, startIndex:Null<Int>) {
+		if ((startIndex == null)) return cast me.indexOf(str) else return cast me.indexOf(str, startIndex);
+	}
+
+	public static function lastIndexOf(me:java.lang.String, str:java.lang.String, startIndex:Null<Int> = null) {
+		if ((str == "")) {
+			if ((startIndex == null || startIndex > me.length)) return me.length else return startIndex;
+		};
+		if ((startIndex == null || startIndex > me.length || startIndex < 0)) startIndex = me.length - 1;
+		return cast me.lastIndexOf(str, startIndex);
+	}
+
+	public static function split(me:java.lang.String, delimiter:java.lang.String) {
+		var ret = [];
+		if ((delimiter.length == 0)) {
+			var _g = 0;
+			var _g1 = me.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				ret.push(haxe.jvm.StringExt.charAt(me, i));
+			};
+		} else {
+			var start = 0;
+			var pos = haxe.jvm.StringExt.indexOf(me, delimiter, start);
+			while ((pos >= 0)) {
+				ret.push(cast me.substring(start, pos));
+				start = pos + delimiter.length;
+				pos = haxe.jvm.StringExt.indexOf(me, delimiter, start);
+			};
+			ret.push(cast me.substring(start));
+		};
+		return ret;
+	}
+
+	public static function substr(me:java.lang.String, pos:Int, len:Null<Int> = null) {
+		var len = if ((len == null)) me.length else len;
+		if ((pos != 0 && len < 0)) return "";
+		if ((pos < 0)) {
+			pos = me.length + pos;
+			if ((pos < 0)) pos = 0;
+		} else if ((len < 0)) len = me.length + len - pos;
+		if ((pos + len > me.length)) len = me.length - pos;
+		if ((pos < 0 || len <= 0)) return "";
+		return cast me.substring(pos, pos + len);
+	}
+
+	public static function substring(me:java.lang.String, startIndex:Int, endIndex:Null<Int> = null) {
+		var endIndex = if ((endIndex == null)) me.length else endIndex;
+		if ((endIndex < 0)) endIndex = 0 else if ((endIndex > me.length)) endIndex = me.length;
+		if ((startIndex < 0)) startIndex = 0 else if ((startIndex > me.length)) startIndex = me.length;
+		if ((startIndex > endIndex)) {
+			var tmp = startIndex;
+			startIndex = endIndex;
+			endIndex = tmp;
+		};
+		return cast me.substring(startIndex, endIndex);
+	}
+
+	public static function toLowerCase(me:java.lang.String) {
+		return me.toLowerCase();
+	}
+
+	public static function toUpperCase(me:java.lang.String) {
+		return me.toUpperCase();
+	}
+}

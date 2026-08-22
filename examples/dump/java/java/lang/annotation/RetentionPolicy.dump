@@ -1,0 +1,6 @@
+@:realPath("java.lang.annotation.RetentionPolicy") @:used @:flatEnum @:native("java.lang.annotation.RetentionPolicy")
+extern enum java.lang.annotation.RetentionPolicy {
+	SOURCE;
+	CLASS;
+	RUNTIME;
+}

@@ -1,0 +1,23 @@
+@:realPath("java.lang.Process") @:native("java.lang.Process") @:libType
+extern class java.lang.Process {
+
+	function new():Void;
+
+	function getOutputStream():java.io.OutputStream;
+
+	function getInputStream():java.io.InputStream;
+
+	function getErrorStream():java.io.InputStream;
+
+	function waitFor():Int;
+
+	function waitFor(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):Bool;
+
+	function exitValue():Int;
+
+	function destroy():Void;
+
+	function destroyForcibly():java.lang.Process;
+
+	function isAlive():Bool;
+}

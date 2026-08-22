@@ -1,0 +1,35 @@
+@:used
+class mui.surface.SurfaceDeclTools {
+
+	public static function roleOf(decl:mui.surface.SurfaceDecl) {
+		switch ((@:exhaustive enumIndex decl)) {
+			case 0: {
+				var _g = decl[1];
+				var _g = decl[2];
+				var role = decl[0];
+				return role;
+			};
+			case 1: {
+				var _g = decl[0];
+				var _g = decl[1];
+				return mui.surface.SurfaceRole.Commands;
+			};
+		};
+	}
+
+	public static function idOf(decl:mui.surface.SurfaceDecl) {
+		switch ((@:exhaustive enumIndex decl)) {
+			case 0: {
+				var _g = decl[0];
+				var _g = decl[2];
+				var id = decl[1];
+				return id;
+			};
+			case 1: {
+				var _g = decl[1];
+				var id = decl[0];
+				return id;
+			};
+		};
+	}
+}

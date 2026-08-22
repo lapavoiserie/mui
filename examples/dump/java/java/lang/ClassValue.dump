@@ -1,0 +1,29 @@
+@:realPath("java.lang.ClassValue") @:native("java.lang.ClassValue") @:libType
+extern class java.lang.ClassValue<T:Dynamic> {
+
+	function new():Void;
+
+	function computeValue(param1:java.lang.Class<Dynamic>):java.lang.ClassValue.T;
+
+	function get(param1:java.lang.Class<Dynamic>):java.lang.ClassValue.T;
+
+	function remove(param1:java.lang.Class<Dynamic>):Void;
+
+	function put(param1:java.lang.Class<Dynamic>, param2:java.lang.ClassValue.T):Void;
+
+	function castEntry(param1:java.lang.ClassValue$Entry<Dynamic>):java.lang.ClassValue$Entry<java.lang.ClassValue.T>;
+
+	function match(param1:java.lang.ClassValue$Entry<Dynamic>):Bool;
+
+	function version():java.lang.ClassValue$Version<java.lang.ClassValue.T>;
+
+	function bumpVersion():Void;
+
+	var hashCodeForCache(default,ctor):Int;
+
+	var identity(default,ctor):java.lang.ClassValue$Identity;
+
+	static function makeEntry<T:Dynamic>(param1:java.lang.ClassValue$Version<makeEntry.T>, param2:makeEntry.T):java.lang.ClassValue$Entry<makeEntry.T>;
+
+	static var HASH_MASK(default,never):Int;
+}

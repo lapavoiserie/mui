@@ -1,0 +1,32 @@
+@:realPath("java.io.ObjectInputStream_GetFieldImpl") @:used @:native("java.io.ObjectInputStream$GetFieldImpl") @:libType
+extern class java.io.ObjectInputStream$GetFieldImpl extends java.io.ObjectInputStream$GetField {
+
+	function new(param1:java.io.ObjectInputStream, param2:java.io.ObjectStreamClass):Void;
+
+	function getObjectStreamClass():java.io.ObjectStreamClass;
+
+	function defaulted(param1:java.lang.String):Bool;
+
+	function get(param1:java.lang.String, param2:Bool):Bool;
+
+	function get(param1:java.lang.String, param2:Dynamic):Dynamic;
+
+	function get(param1:java.lang.String, param2:Float):Float;
+
+	function get(param1:java.lang.String, param2:haxe.Int64):haxe.Int64;
+
+	function get(param1:java.lang.String, param2:Single):Single;
+
+	function get(param1:java.lang.String, param2:Int):Int;
+
+	function get(param1:java.lang.String, param2:java.types.Int16):java.types.Int16;
+
+	function get(param1:java.lang.String, param2:java.types.Char16):java.types.Char16;
+
+	function get(param1:java.lang.String, param2:java.types.Int8):java.types.Int8;
+
+	function readFields():Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.io.ObjectInputStream;
+}

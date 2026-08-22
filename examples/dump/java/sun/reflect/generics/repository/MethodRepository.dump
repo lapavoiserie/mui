@@ -1,0 +1,7 @@
+@:realPath("java.sun.reflect.generics.repository.MethodRepository") @:used @:native("sun.reflect.generics.repository.MethodRepository") @:libType
+extern class sun.reflect.generics.repository.MethodRepository extends sun.reflect.generics.repository.ConstructorRepository {
+
+	function getReturnType():java.lang.reflect.Type;
+
+	static function make(param1:java.lang.String, param2:sun.reflect.generics.factory.GenericsFactory):sun.reflect.generics.repository.MethodRepository;
+}

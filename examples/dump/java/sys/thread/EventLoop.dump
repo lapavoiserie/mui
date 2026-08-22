@@ -1,0 +1,183 @@
+@:keep @:directlyUsed @:used @:coreApi
+class sys.thread.EventLoop {
+
+	public function new() {
+		this.isMainThread = ! sys.thread.EventLoop.CREATED;
+		sys.thread.EventLoop.CREATED = true;
+	}
+
+	@:value(new Mutex())
+	var mutex(default,ctor):haxe.java.vm.Mutex = new haxe.java.vm.Mutex();
+
+	@:value(new Array<Null<Void -> Void>>())
+	var oneTimeEvents(default,ctor):Array<Null<() -> Void>> = new Array();
+
+	@:value(0)
+	var oneTimeEventsIdx:Int = 0;
+
+	@:value(new Lock())
+	var waitLock(default,ctor):sys.thread.Lock = new sys.thread.Lock();
+
+	@:value(0)
+	var promisedEventsCount:Int = 0;
+
+	var regularEvents:Null<sys.thread._EventLoop.RegularEvent>;
+
+	var isMainThread:Bool;
+
+	public function progress() {
+		var now = Sys.time();
+		var regularsToRun = [];
+		var eventsToRunIdx = 0;
+		var nextEventAt = -1;
+		this.mutex.acquire();
+		while ((this.waitLock.wait(0.0))) {};
+		var current = this.regularEvents;
+		while ((current != null)) {
+			if ((current.nextRunTime <= now)) {
+				regularsToRun[eventsToRunIdx ++] = current;
+				current.nextRunTime += current.interval;
+				nextEventAt = -2;
+			} else if ((nextEventAt == -1 || current.nextRunTime < nextEventAt)) nextEventAt = current.nextRunTime;
+			current = current.next;
+		};
+		this.mutex.release();
+		var _g = 0;
+		var _g1 = eventsToRunIdx;
+		while ((_g < _g1)) {
+			var i = _g ++;
+			if ((! regularsToRun[i].cancelled)) regularsToRun[i].run();
+			regularsToRun[i] = null;
+		};
+		eventsToRunIdx = 0;
+		var oneTimersToRun = [];
+		this.mutex.acquire();
+		var _g_current = 0;
+		var _g_array = this.oneTimeEvents;
+		while ((_g_current < _g_array.length)) {
+			var _g_value = _g_array[_g_current];
+			var _g_key = _g_current ++;
+			var i = _g_key;
+			var event = _g_value;
+			if ((event == null)) break else {
+				oneTimersToRun[eventsToRunIdx ++] = event;
+				this.oneTimeEvents[i] = null;
+			};
+		};
+		this.oneTimeEventsIdx = 0;
+		var hasPromisedEvents = this.promisedEventsCount > 0;
+		this.mutex.release();
+		var _g = 0;
+		var _g1 = eventsToRunIdx;
+		while ((_g < _g1)) {
+			var i = _g ++;
+			oneTimersToRun[i]();
+			oneTimersToRun[i] = null;
+		};
+		if ((this.isMainThread)) {
+			var next = haxe.MainLoop.tick();
+			if ((haxe.MainLoop.hasEvents())) {
+				++ eventsToRunIdx;
+				if ((nextEventAt > next)) nextEventAt = next;
+			};
+		};
+		if ((eventsToRunIdx > 0)) nextEventAt = -2;
+		var _g_nextEventAt = nextEventAt;
+		var _g_anyTime = hasPromisedEvents;
+		var _g = _g_anyTime;
+		var _g1 = _g_nextEventAt;
+		switch ((_g1)) {
+			case -2: return sys.thread.NextEventTime.Now;
+			case -1: if ((_g)) return sys.thread.NextEventTime.AnyTime(null) else return sys.thread.NextEventTime.Never;
+			default: if ((_g)) {
+				var time = _g1;
+				return sys.thread.NextEventTime.AnyTime(time);
+			} else {
+				var time = _g1;
+				return sys.thread.NextEventTime.At(time);
+			}
+		};
+	}
+
+	public function loop() {
+		var recycleRegular = [];
+		var recycleOneTimers = [];
+		@:loopLabel(1) while ((true)) {
+			var now = Sys.time();
+			var regularsToRun = recycleRegular;
+			var eventsToRunIdx = 0;
+			var nextEventAt = -1;
+			this.mutex.acquire();
+			while ((this.waitLock.wait(0.0))) {};
+			var current = this.regularEvents;
+			while ((current != null)) {
+				if ((current.nextRunTime <= now)) {
+					regularsToRun[eventsToRunIdx ++] = current;
+					current.nextRunTime += current.interval;
+					nextEventAt = -2;
+				} else if ((nextEventAt == -1 || current.nextRunTime < nextEventAt)) nextEventAt = current.nextRunTime;
+				current = current.next;
+			};
+			this.mutex.release();
+			var _g = 0;
+			var _g1 = eventsToRunIdx;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				if ((! regularsToRun[i].cancelled)) regularsToRun[i].run();
+				regularsToRun[i] = null;
+			};
+			eventsToRunIdx = 0;
+			var oneTimersToRun = recycleOneTimers;
+			this.mutex.acquire();
+			var _g_current = 0;
+			var _g_array = this.oneTimeEvents;
+			while ((_g_current < _g_array.length)) {
+				var _g_value = _g_array[_g_current];
+				var _g_key = _g_current ++;
+				var i = _g_key;
+				var event = _g_value;
+				if ((event == null)) break else {
+					oneTimersToRun[eventsToRunIdx ++] = event;
+					this.oneTimeEvents[i] = null;
+				};
+			};
+			this.oneTimeEventsIdx = 0;
+			var hasPromisedEvents = this.promisedEventsCount > 0;
+			this.mutex.release();
+			var _g = 0;
+			var _g1 = eventsToRunIdx;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				oneTimersToRun[i]();
+				oneTimersToRun[i] = null;
+			};
+			if ((this.isMainThread)) {
+				var next = haxe.MainLoop.tick();
+				if ((haxe.MainLoop.hasEvents())) {
+					++ eventsToRunIdx;
+					if ((nextEventAt > next)) nextEventAt = next;
+				};
+			};
+			if ((eventsToRunIdx > 0)) nextEventAt = -2;
+			var r_nextEventAt = nextEventAt;
+			var r_anyTime = hasPromisedEvents;
+			{
+				var _g = r_anyTime;
+				var _g1 = r_nextEventAt;
+				switch ((_g1)) {
+					case -2: {};
+					case -1: if ((_g)) this.waitLock.wait(null) else @:loopLabel(1) break;
+					default: {
+						var time = _g1;
+						{
+							var timeout = time - Sys.time();
+							this.waitLock.wait(java.lang.Math.max(0, timeout));
+						};
+					}
+				};
+			};
+		};
+	}
+
+	static var CREATED:Bool;
+}

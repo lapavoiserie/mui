@@ -1,0 +1,78 @@
+@:enum
+private class haxe.display._JsonModuleTypes.JsonBinopKind_Impl_ {
+
+	@:value(cast "OpAdd") @:impl @:enum
+	public static inline var OpAdd:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpAdd";
+
+	@:value(cast "OpMult") @:impl @:enum
+	public static inline var OpMult:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpMult";
+
+	@:value(cast "OpDiv") @:impl @:enum
+	public static inline var OpDiv:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpDiv";
+
+	@:value(cast "OpSub") @:impl @:enum
+	public static inline var OpSub:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpSub";
+
+	@:value(cast "OpAssign") @:impl @:enum
+	public static inline var OpAssign:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpAssign";
+
+	@:value(cast "OpEq") @:impl @:enum
+	public static inline var OpEq:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpEq";
+
+	@:value(cast "OpNotEq") @:impl @:enum
+	public static inline var OpNotEq:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpNotEq";
+
+	@:value(cast "OpGt") @:impl @:enum
+	public static inline var OpGt:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpGt";
+
+	@:value(cast "OpGte") @:impl @:enum
+	public static inline var OpGte:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpGte";
+
+	@:value(cast "OpLt") @:impl @:enum
+	public static inline var OpLt:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpLt";
+
+	@:value(cast "OpLte") @:impl @:enum
+	public static inline var OpLte:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpLte";
+
+	@:value(cast "OpAnd") @:impl @:enum
+	public static inline var OpAnd:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpAnd";
+
+	@:value(cast "OpOr") @:impl @:enum
+	public static inline var OpOr:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpOr";
+
+	@:value(cast "OpXor") @:impl @:enum
+	public static inline var OpXor:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpXor";
+
+	@:value(cast "OpBoolAnd") @:impl @:enum
+	public static inline var OpBoolAnd:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpBoolAnd";
+
+	@:value(cast "OpBoolOr") @:impl @:enum
+	public static inline var OpBoolOr:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpBoolOr";
+
+	@:value(cast "OpShl") @:impl @:enum
+	public static inline var OpShl:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpShl";
+
+	@:value(cast "OpShr") @:impl @:enum
+	public static inline var OpShr:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpShr";
+
+	@:value(cast "OpUShr") @:impl @:enum
+	public static inline var OpUShr:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpUShr";
+
+	@:value(cast "OpMod") @:impl @:enum
+	public static inline var OpMod:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpMod";
+
+	@:value(cast "OpAssignOp") @:impl @:enum
+	public static inline var OpAssignOp:haxe.display.JsonBinopKind<haxe.display.JsonBinop<Dynamic>> = cast "OpAssignOp";
+
+	@:value(cast "OpInterval") @:impl @:enum
+	public static inline var OpInterval:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpInterval";
+
+	@:value(cast "OpArrow") @:impl @:enum
+	public static inline var OpArrow:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpArrow";
+
+	@:value(cast "OpIn") @:impl @:enum
+	public static inline var OpIn:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpIn";
+
+	@:value(cast "OpNullCoal") @:impl @:enum
+	public static inline var OpNullCoal:haxe.display.JsonBinopKind<haxe.display.JsonBinopKind.T> = cast "OpNullCoal";
+}

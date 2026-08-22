@@ -1,0 +1,35 @@
+@:realPath("java.time.temporal.ValueRange") @:used @:native("java.time.temporal.ValueRange") @:libType
+extern class java.time.temporal.ValueRange implements java.io.Serializable {
+
+	function isFixed():Bool;
+
+	function getMinimum():haxe.Int64;
+
+	function getLargestMinimum():haxe.Int64;
+
+	function getSmallestMaximum():haxe.Int64;
+
+	function getMaximum():haxe.Int64;
+
+	function isIntValue():Bool;
+
+	function isValidValue(param1:haxe.Int64):Bool;
+
+	function isValidIntValue(param1:haxe.Int64):Bool;
+
+	function checkValidValue(param1:haxe.Int64, param2:java.time.temporal.TemporalField):haxe.Int64;
+
+	function checkValidIntValue(param1:haxe.Int64, param2:java.time.temporal.TemporalField):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function of(param1:haxe.Int64, param2:haxe.Int64):java.time.temporal.ValueRange;
+
+	static function of(param1:haxe.Int64, param2:haxe.Int64, param3:haxe.Int64, param4:haxe.Int64):java.time.temporal.ValueRange;
+
+	static function of(param1:haxe.Int64, param2:haxe.Int64, param3:haxe.Int64):java.time.temporal.ValueRange;
+}

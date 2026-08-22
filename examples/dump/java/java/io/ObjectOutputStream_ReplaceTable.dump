@@ -1,0 +1,13 @@
+@:realPath("java.io.ObjectOutputStream_ReplaceTable") @:native("java.io.ObjectOutputStream$ReplaceTable") @:libType
+extern class java.io.ObjectOutputStream$ReplaceTable {
+
+	function new(param1:Int, param2:Single):Void;
+
+	function assign(param1:Dynamic, param2:Dynamic):Void;
+
+	function lookup(param1:Dynamic):Dynamic;
+
+	function clear():Void;
+
+	function size():Int;
+}

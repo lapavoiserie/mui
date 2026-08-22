@@ -1,0 +1,65 @@
+@:realPath("java.util.Random") @:used @:native("java.util.Random") @:libType
+extern class java.util.Random implements java.io.Serializable {
+
+	function new():Void;
+
+	function new(param1:haxe.Int64):Void;
+
+	function setSeed(param1:haxe.Int64):Void;
+
+	function next(param1:Int):Int;
+
+	function nextBytes(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function internalNextLong(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	function internalNextInt(param1:Int, param2:Int):Int;
+
+	function internalNextDouble(param1:Float, param2:Float):Float;
+
+	function nextInt():Int;
+
+	function nextInt(param1:Int):Int;
+
+	function nextLong():haxe.Int64;
+
+	function nextBoolean():Bool;
+
+	function nextFloat():Single;
+
+	function nextDouble():Float;
+
+	function nextGaussian():Float;
+
+	function ints(param1:haxe.Int64):java.util.stream.IntStream;
+
+	function ints(param1:Int, param2:Int):java.util.stream.IntStream;
+
+	function ints(param1:haxe.Int64, param2:Int, param3:Int):java.util.stream.IntStream;
+
+	function ints():java.util.stream.IntStream;
+
+	function longs(param1:haxe.Int64):java.util.stream.LongStream;
+
+	function longs(param1:haxe.Int64, param2:haxe.Int64):java.util.stream.LongStream;
+
+	function longs(param1:haxe.Int64, param2:haxe.Int64, param3:haxe.Int64):java.util.stream.LongStream;
+
+	function longs():java.util.stream.LongStream;
+
+	function doubles(param1:haxe.Int64):java.util.stream.DoubleStream;
+
+	function doubles(param1:Float, param2:Float):java.util.stream.DoubleStream;
+
+	function doubles(param1:haxe.Int64, param2:Float, param3:Float):java.util.stream.DoubleStream;
+
+	function doubles():java.util.stream.DoubleStream;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+
+	static var BadBound(default,never):java.lang.String;
+
+	static var BadRange(default,never):java.lang.String;
+
+	static var BadSize(default,never):java.lang.String;
+}

@@ -1,0 +1,35 @@
+@:realPath("java.sun.util.locale.LocaleExtensions") @:native("sun.util.locale.LocaleExtensions") @:libType
+extern class sun.util.locale.LocaleExtensions {
+
+	function new(param1:java.util.Map<sun.util.locale.InternalLocaleBuilder$CaseInsensitiveChar, java.lang.String>, param2:java.util.Set<sun.util.locale.InternalLocaleBuilder$CaseInsensitiveString>, param3:java.util.Map<sun.util.locale.InternalLocaleBuilder$CaseInsensitiveString, java.lang.String>):Void;
+
+	function getKeys():java.util.Set<java.lang.Character>;
+
+	function getExtension(param1:java.lang.Character):sun.util.locale.Extension;
+
+	function getExtensionValue(param1:java.lang.Character):java.lang.String;
+
+	function getUnicodeLocaleAttributes():java.util.Set<java.lang.String>;
+
+	function getUnicodeLocaleKeys():java.util.Set<java.lang.String>;
+
+	function getUnicodeLocaleType(param1:java.lang.String):java.lang.String;
+
+	function isEmpty():Bool;
+
+	function toString():java.lang.String;
+
+	function getID():java.lang.String;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	static function isValidKey(param1:java.types.Char16):Bool;
+
+	static function isValidUnicodeLocaleKey(param1:java.lang.String):Bool;
+
+	static var CALENDAR_JAPANESE(default,never):sun.util.locale.LocaleExtensions;
+
+	static var NUMBER_THAI(default,never):sun.util.locale.LocaleExtensions;
+}

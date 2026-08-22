@@ -1,0 +1,10 @@
+@:realPath("java.lang.System_1") @:used @:native("java.lang.System$1") @:libType
+extern class java.lang.System$1 implements java.security.PrivilegedAction<Dynamic> {
+
+	function new(param1:java.lang.SecurityManager):Void;
+
+	function run():Dynamic;
+
+	@:realPath("val_s") @:native("val$s")
+	var val$s(default,ctor):java.lang.SecurityManager;
+}

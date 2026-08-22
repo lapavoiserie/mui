@@ -1,0 +1,433 @@
+@:realPath("java.lang.Character_UnicodeBlock") @:used @:realPath("java.lang.Character_UnicodeBlock") @:javaNative @:native("java.lang.Character$UnicodeBlock") @:javaCanonical("java.lang", "Character.UnicodeBlock")
+extern class java.lang.Character$UnicodeBlock extends java.lang.Character$Subset {
+
+	static var AEGEAN_NUMBERS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ALCHEMICAL_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ALPHABETIC_PRESENTATION_FORMS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ANCIENT_GREEK_MUSICAL_NOTATION(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ANCIENT_GREEK_NUMBERS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ANCIENT_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ARABIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ARABIC_PRESENTATION_FORMS_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ARABIC_PRESENTATION_FORMS_B(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ARABIC_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ARMENIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ARROWS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var AVESTAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BALINESE(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BAMUM(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BAMUM_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BASIC_LATIN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BATAK(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BENGALI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BLOCK_ELEMENTS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BOPOMOFO(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BOPOMOFO_EXTENDED(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BOX_DRAWING(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BRAHMI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BRAILLE_PATTERNS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BUGINESE(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BUHID(default,never):java.lang.Character$UnicodeBlock;
+
+	static var BYZANTINE_MUSICAL_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CARIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CHAM(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CHEROKEE(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_COMPATIBILITY(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_COMPATIBILITY_FORMS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_COMPATIBILITY_IDEOGRAPHS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_RADICALS_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_STROKES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_SYMBOLS_AND_PUNCTUATION(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_UNIFIED_IDEOGRAPHS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D(default,never):java.lang.Character$UnicodeBlock;
+
+	static var COMBINING_DIACRITICAL_MARKS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var COMBINING_DIACRITICAL_MARKS_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var COMBINING_HALF_MARKS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var COMBINING_MARKS_FOR_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var COMMON_INDIC_NUMBER_FORMS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CONTROL_PICTURES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var COPTIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var COUNTING_ROD_NUMERALS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CUNEIFORM(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CUNEIFORM_NUMBERS_AND_PUNCTUATION(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CURRENCY_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CYPRIOT_SYLLABARY(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CYRILLIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CYRILLIC_EXTENDED_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CYRILLIC_EXTENDED_B(default,never):java.lang.Character$UnicodeBlock;
+
+	static var CYRILLIC_SUPPLEMENTARY(default,never):java.lang.Character$UnicodeBlock;
+
+	static var DESERET(default,never):java.lang.Character$UnicodeBlock;
+
+	static var DEVANAGARI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var DEVANAGARI_EXTENDED(default,never):java.lang.Character$UnicodeBlock;
+
+	static var DINGBATS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var DOMINO_TILES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var EGYPTIAN_HIEROGLYPHS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var EMOTICONS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ENCLOSED_ALPHANUMERICS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ENCLOSED_ALPHANUMERIC_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ENCLOSED_CJK_LETTERS_AND_MONTHS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ENCLOSED_IDEOGRAPHIC_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ETHIOPIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ETHIOPIC_EXTENDED(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ETHIOPIC_EXTENDED_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ETHIOPIC_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GENERAL_PUNCTUATION(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GEOMETRIC_SHAPES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GEORGIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GEORGIAN_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GLAGOLITIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GOTHIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GREEK(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GREEK_EXTENDED(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GUJARATI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var GURMUKHI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HALFWIDTH_AND_FULLWIDTH_FORMS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HANGUL_COMPATIBILITY_JAMO(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HANGUL_JAMO(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HANGUL_JAMO_EXTENDED_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HANGUL_JAMO_EXTENDED_B(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HANGUL_SYLLABLES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HANUNOO(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HEBREW(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HIGH_PRIVATE_USE_SURROGATES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HIGH_SURROGATES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var HIRAGANA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var IDEOGRAPHIC_DESCRIPTION_CHARACTERS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var IMPERIAL_ARAMAIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var INSCRIPTIONAL_PAHLAVI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var INSCRIPTIONAL_PARTHIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var IPA_EXTENSIONS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var JAVANESE(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KAITHI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KANA_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KANBUN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KANGXI_RADICALS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KANNADA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KATAKANA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KATAKANA_PHONETIC_EXTENSIONS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KAYAH_LI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KHAROSHTHI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KHMER(default,never):java.lang.Character$UnicodeBlock;
+
+	static var KHMER_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LAO(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LATIN_1_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LATIN_EXTENDED_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LATIN_EXTENDED_ADDITIONAL(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LATIN_EXTENDED_B(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LATIN_EXTENDED_C(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LATIN_EXTENDED_D(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LEPCHA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LETTERLIKE_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LIMBU(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LINEAR_B_IDEOGRAMS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LINEAR_B_SYLLABARY(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LISU(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LOW_SURROGATES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LYCIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var LYDIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MAHJONG_TILES(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MALAYALAM(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MANDAIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MATHEMATICAL_ALPHANUMERIC_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MATHEMATICAL_OPERATORS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MEETEI_MAYEK(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MISCELLANEOUS_MATHEMATICAL_SYMBOLS_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MISCELLANEOUS_MATHEMATICAL_SYMBOLS_B(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MISCELLANEOUS_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MISCELLANEOUS_SYMBOLS_AND_ARROWS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MISCELLANEOUS_SYMBOLS_AND_PICTOGRAPHS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MISCELLANEOUS_TECHNICAL(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MODIFIER_TONE_LETTERS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MONGOLIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MUSICAL_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MYANMAR(default,never):java.lang.Character$UnicodeBlock;
+
+	static var MYANMAR_EXTENDED_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var NEW_TAI_LUE(default,never):java.lang.Character$UnicodeBlock;
+
+	static var NKO(default,never):java.lang.Character$UnicodeBlock;
+
+	static var NUMBER_FORMS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OGHAM(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OLD_ITALIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OLD_PERSIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OLD_SOUTH_ARABIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OLD_TURKIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OL_CHIKI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OPTICAL_CHARACTER_RECOGNITION(default,never):java.lang.Character$UnicodeBlock;
+
+	static var ORIYA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var OSMANYA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var PHAGS_PA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var PHAISTOS_DISC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var PHOENICIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var PHONETIC_EXTENSIONS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var PHONETIC_EXTENSIONS_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var PLAYING_CARDS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var PRIVATE_USE_AREA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var REJANG(default,never):java.lang.Character$UnicodeBlock;
+
+	static var RUMI_NUMERAL_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var RUNIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SAMARITAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SAURASHTRA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SHAVIAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SINHALA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SMALL_FORM_VARIANTS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SPACING_MODIFIER_LETTERS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SPECIALS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUNDANESE(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUPERSCRIPTS_AND_SUBSCRIPTS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUPPLEMENTAL_ARROWS_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUPPLEMENTAL_ARROWS_B(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUPPLEMENTAL_MATHEMATICAL_OPERATORS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUPPLEMENTAL_PUNCTUATION(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUPPLEMENTARY_PRIVATE_USE_AREA_A(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SUPPLEMENTARY_PRIVATE_USE_AREA_B(default,never):java.lang.Character$UnicodeBlock;
+
+	@:deprecated
+	static var SURROGATES_AREA:java.lang.Character$UnicodeBlock;
+
+	static var SYLOTI_NAGRI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var SYRIAC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAGALOG(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAGBANWA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAGS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAI_LE(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAI_THAM(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAI_VIET(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAI_XUAN_JING_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TAMIL(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TELUGU(default,never):java.lang.Character$UnicodeBlock;
+
+	static var THAANA(default,never):java.lang.Character$UnicodeBlock;
+
+	static var THAI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TIBETAN(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TIFINAGH(default,never):java.lang.Character$UnicodeBlock;
+
+	static var TRANSPORT_AND_MAP_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var UGARITIC(default,never):java.lang.Character$UnicodeBlock;
+
+	static var UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED(default,never):java.lang.Character$UnicodeBlock;
+
+	static var VAI(default,never):java.lang.Character$UnicodeBlock;
+
+	static var VARIATION_SELECTORS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var VARIATION_SELECTORS_SUPPLEMENT(default,never):java.lang.Character$UnicodeBlock;
+
+	static var VEDIC_EXTENSIONS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var VERTICAL_FORMS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var YIJING_HEXAGRAM_SYMBOLS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var YI_RADICALS(default,never):java.lang.Character$UnicodeBlock;
+
+	static var YI_SYLLABLES(default,never):java.lang.Character$UnicodeBlock;
+
+	@:overload
+	static function forName(param1:java.lang.String):java.lang.Character$UnicodeBlock;
+
+	@:overload
+	static function of(param1:java.types.Char16):java.lang.Character$UnicodeBlock;
+
+	@:overload
+	static function of(param1:Int):java.lang.Character$UnicodeBlock;
+}

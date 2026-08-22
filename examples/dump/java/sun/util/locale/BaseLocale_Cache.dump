@@ -1,0 +1,13 @@
+@:realPath("java.sun.util.locale.BaseLocale_Cache") @:used @:native("sun.util.locale.BaseLocale$Cache") @:libType
+extern class sun.util.locale.BaseLocale$Cache extends sun.util.locale.LocaleObjectCache<sun.util.locale.BaseLocale$Key, sun.util.locale.BaseLocale> {
+
+	function new():Void;
+
+	function normalizeKey(param1:sun.util.locale.BaseLocale$Key):sun.util.locale.BaseLocale$Key;
+
+	function normalizeKey(param1:Dynamic):Dynamic;
+
+	function createObject(param1:sun.util.locale.BaseLocale$Key):sun.util.locale.BaseLocale;
+
+	function createObject(param1:Dynamic):Dynamic;
+}

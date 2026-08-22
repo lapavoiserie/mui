@@ -1,0 +1,7 @@
+@:realPath("java.io.Console_1") @:used @:native("java.io.Console$1") @:libType
+extern class java.io.Console$1 implements java.lang.Runnable {
+
+	function new():Void;
+
+	function run():Void;
+}

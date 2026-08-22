@@ -1,0 +1,85 @@
+@:keep @:directlyUsed @:used @:coreApi
+class EReg {
+
+	@:overload
+	public function new(r:java.lang.String, opt:java.lang.String) {
+		this.initialize(EReg.compilePattern(r, opt));
+	}
+
+	@:overload
+	function new(compiledPattern:haxe.jvm.CompiledPattern) {
+		this.initialize(compiledPattern);
+	}
+
+	var matcher:java.util.regex.Matcher;
+
+	var cur:java.lang.String;
+
+	var isGlobal:Bool;
+
+	function initialize(compiledPattern:haxe.jvm.CompiledPattern) {
+		this.matcher = compiledPattern.pattern.matcher("");
+		this.isGlobal = compiledPattern.isGlobal;
+	}
+
+	public function matched(n:Int) {
+		if ((n == 0)) return this.matcher.group() else return this.matcher.group(n);
+	}
+
+	public function matchedPos() {
+		var start = this.matcher.start();
+		return {pos : start, len : this.matcher.end() - start};
+	}
+
+	@:value({ len : -1 })
+	public function matchSub(s:java.lang.String, pos:Int, len:Null<Int> = -1) {
+		var len = if ((len == null)) -1 else cast len;
+		this.matcher = this.matcher.reset(if ((len < 0)) s else haxe.jvm.StringExt.substr(s, 0, pos + len));
+		this.cur = s;
+		return this.matcher.find(pos);
+	}
+
+	public function map(s:java.lang.String, f:EReg -> java.lang.String) {
+		var offset = 0;
+		var buf = new StringBuf();
+		do ({
+			if ((offset >= s.length)) break else if ((! this.matchSub(s, offset, null))) {
+				var len = null;
+				buf.add(haxe.jvm.StringExt.substr(s, offset, len));
+				break;
+			};
+			var p = this.matchedPos();
+			buf.add(haxe.jvm.StringExt.substr(s, offset, cast p.pos - offset));
+			buf.add(f(this));
+			if ((p.len == 0)) {
+				buf.add(haxe.jvm.StringExt.substr(s, p.pos, 1));
+				offset = p.pos + 1;
+			} else offset = p.pos + p.len;
+		}) while((this.isGlobal));
+		if ((! this.isGlobal && offset > 0 && offset < s.length)) {
+			var len = null;
+			buf.add(haxe.jvm.StringExt.substr(s, offset, len));
+		};
+		return buf.toString();
+	}
+
+	static function compilePattern(r:java.lang.String, opt:java.lang.String) {
+		var flags = 0;
+		var isGlobal = false;
+		{
+			var _g = 0;
+			var _g1 = opt.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				switch ((if ((i < opt.length)) cast (cast opt.charAt(i),Int) else -1)) {
+					case 103: isGlobal = true;
+					case 105: flags |= java.util.regex.Pattern.CASE_INSENSITIVE;
+					case 109: flags |= java.util.regex.Pattern.MULTILINE;
+					case 115: flags |= java.util.regex.Pattern.DOTALL;
+				};
+			};
+		};
+		flags |= java.util.regex.Pattern.UNICODE_CASE;
+		return new haxe.jvm.CompiledPattern(java.util.regex.Pattern.compile(r, flags), isGlobal);
+	}
+}

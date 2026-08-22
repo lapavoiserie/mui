@@ -1,0 +1,18 @@
+@:realPath("java.lang.CharSequence_1CharIterator") @:used @:native("java.lang.CharSequence$1CharIterator") @:libType
+extern class java.lang.CharSequence$1CharIterator implements java.util.PrimitiveIterator$OfInt {
+
+	function new(param1:java.lang.CharSequence):Void;
+
+	function hasNext():Bool;
+
+	function nextInt():Int;
+
+	function forEachRemaining(param1:java.util.function.IntConsumer):Void;
+
+	function forEachRemaining(param1:Dynamic):Void;
+
+	var cur:Int;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.lang.CharSequence;
+}

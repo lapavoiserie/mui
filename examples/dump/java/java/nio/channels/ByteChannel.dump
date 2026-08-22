@@ -1,0 +1,3 @@
+@:realPath("java.nio.channels.ByteChannel") @:used @:native("java.nio.channels.ByteChannel") @:libType
+extern interface java.nio.channels.ByteChannel implements java.nio.channels.ReadableByteChannel implements java.nio.channels.WritableByteChannel {
+}

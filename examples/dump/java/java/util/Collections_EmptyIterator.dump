@@ -1,0 +1,15 @@
+@:realPath("java.util.Collections_EmptyIterator") @:used @:native("java.util.Collections$EmptyIterator") @:libType
+extern class java.util.Collections$EmptyIterator<E:Dynamic> implements java.util.Iterator<java.util.Collections_EmptyIterator.E> {
+
+	function new(param1:java.util.Collections$1):Void;
+
+	function hasNext():Bool;
+
+	function next():java.util.Collections_EmptyIterator.E;
+
+	function remove():Void;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	static var EMPTY_ITERATOR(default,never):java.util.Collections$EmptyIterator<Dynamic>;
+}

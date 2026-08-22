@@ -1,0 +1,19 @@
+@:realPath("java.util.Dictionary") @:used @:native("java.util.Dictionary") @:libType
+extern class java.util.Dictionary<K:Dynamic, V:Dynamic> {
+
+	function new():Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function keys():java.util.Enumeration<java.util.Dictionary.K>;
+
+	function elements():java.util.Enumeration<java.util.Dictionary.V>;
+
+	function get(param1:Dynamic):java.util.Dictionary.V;
+
+	function put(param1:java.util.Dictionary.K, param2:java.util.Dictionary.V):java.util.Dictionary.V;
+
+	function remove(param1:Dynamic):java.util.Dictionary.V;
+}

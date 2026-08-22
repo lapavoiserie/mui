@@ -1,0 +1,14 @@
+@:directlyUsed @:used @:autoBuild(rui.ObservableMacro.build())
+interface rui.Observable {
+
+	@:compilerGenerated @:noCompletion
+	function get_uuid():java.lang.String;
+
+	var uuid(get,never):java.lang.String;
+
+	function subscribe(listener:() -> Void):Void;
+
+	function unsubscribe(listener:() -> Void):Void;
+
+	function onPropChange(listener:(java.lang.String, Dynamic) -> Void):Void;
+}

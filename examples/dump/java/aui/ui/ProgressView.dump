@@ -1,0 +1,14 @@
+@:used
+class aui.ui.ProgressView extends aui.View {
+
+	public function new(progressState:Null<aui.state.State<Float>> = null) {
+		super();
+		this.viewType = "ProgressView";
+		this.progressState = progressState;
+		this.isIndeterminate = progressState == null;
+	}
+
+	public var progressState:Null<aui.state.State<Float>>;
+
+	public var isIndeterminate:Bool;
+}

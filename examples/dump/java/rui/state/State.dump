@@ -1,0 +1,62 @@
+@:used
+class rui.state.State<T> {
+
+	public function new(initialValue:rui.state.State.T, name:Null<java.lang.String> = null) {
+		this._sig = new rui.Signal(initialValue);
+		this._name = if ((name != null)) name else "";
+	}
+
+	var _sig(default,ctor):rui.Signal<rui.state.State.T>;
+
+	var _name(default,ctor):java.lang.String;
+
+	var _sink:Null<rui.state.State.T -> Void>;
+
+	public var name(get,never):java.lang.String;
+
+	function get_name() {
+		return this._name;
+	}
+
+	public var value(get,set):rui.state.State.T;
+
+	function get_value() {
+		return this._sig.get_value();
+	}
+
+	function set_value(v:rui.state.State.T) {
+		this.set(v);
+		return v;
+	}
+
+	public function get() {
+		return this._sig.get_value();
+	}
+
+	public function peek() {
+		return this._sig.peek();
+	}
+
+	public function set(v:rui.state.State.T) {
+		if ((this._sig.peek() == v)) return;
+		this._sig.set_value(v);
+		if ((this._sink != null)) this._sink(v);
+	}
+
+	public function applyExternal(v:rui.state.State.T) {
+		this._sig.set_value(v);
+	}
+
+	public function setPlatformSink(sink:Null<rui.state.State.T -> Void>) {
+		this._sink = sink;
+	}
+
+	public function dispose() {
+		this._sig.dispose();
+		this._sink = null;
+	}
+
+	public function toString() {
+		return Std.string(this.peek());
+	}
+}

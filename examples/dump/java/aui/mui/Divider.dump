@@ -1,0 +1,7 @@
+@:used
+class aui.mui.Divider extends aui.ui.Divider {
+
+	public function new() {
+		super();
+	}
+}

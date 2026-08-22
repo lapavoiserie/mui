@@ -1,0 +1,22 @@
+@:realPath("java.util.Spliterator_OfLong") @:used @:native("java.util.Spliterator$OfLong") @:libType
+extern interface java.util.Spliterator$OfLong implements java.util.Spliterator$OfPrimitive<java.lang.Long, java.util.function.LongConsumer, java.util.Spliterator$OfLong> {
+
+	function trySplit():java.util.Spliterator$OfLong;
+
+	function tryAdvance(param1:java.util.function.LongConsumer):Bool;
+
+	@:java.default
+	function tryAdvance(param1:Dynamic):Bool;
+
+	@:java.default
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.LongConsumer):Void;
+
+	@:java.default
+	function forEachRemaining(param1:Dynamic):Void;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+}

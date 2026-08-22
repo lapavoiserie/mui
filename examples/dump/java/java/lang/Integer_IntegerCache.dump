@@ -1,0 +1,3 @@
+@:realPath("java.lang.Integer_IntegerCache") @:realPath("java.lang.Integer_IntegerCache") @:javaNative @:native("java.lang.Integer$IntegerCache") @:javaCanonical("java.lang", "Integer.IntegerCache")
+extern class java.lang.Integer$IntegerCache {
+}

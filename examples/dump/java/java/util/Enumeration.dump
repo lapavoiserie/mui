@@ -1,0 +1,7 @@
+@:realPath("java.util.Enumeration") @:used @:native("java.util.Enumeration") @:libType
+extern interface java.util.Enumeration<E:Dynamic> {
+
+	function hasMoreElements():Bool;
+
+	function nextElement():java.util.Enumeration.E;
+}

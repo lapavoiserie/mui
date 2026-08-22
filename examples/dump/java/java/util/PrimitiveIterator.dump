@@ -1,0 +1,5 @@
+@:realPath("java.util.PrimitiveIterator") @:used @:native("java.util.PrimitiveIterator") @:libType
+extern interface java.util.PrimitiveIterator<T:Dynamic, T_CONS:Dynamic> implements java.util.Iterator<java.util.PrimitiveIterator.T> {
+
+	function forEachRemaining(param1:java.util.PrimitiveIterator.T_CONS):Void;
+}

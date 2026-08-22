@@ -1,0 +1,9 @@
+@:realPath("java.sun.misc.MetaIndex") @:native("sun.misc.MetaIndex") @:libType
+extern class sun.misc.MetaIndex {
+
+	function mayContain(param1:java.lang.String):Bool;
+
+	static function forJar(param1:java.io.File):sun.misc.MetaIndex;
+
+	static function registerDirectory(param1:java.io.File):Void;
+}

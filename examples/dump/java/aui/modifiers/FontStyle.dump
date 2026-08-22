@@ -1,0 +1,19 @@
+@:directlyUsed @:used
+enum aui.modifiers.FontStyle {
+	DisplayLarge;
+	DisplayMedium;
+	DisplaySmall;
+	HeadlineLarge;
+	HeadlineMedium;
+	HeadlineSmall;
+	TitleLarge;
+	TitleMedium;
+	TitleSmall;
+	BodyLarge;
+	BodyMedium;
+	BodySmall;
+	LabelLarge;
+	LabelMedium;
+	LabelSmall;
+	CustomFont(name:java.lang.String, size:Float);
+}

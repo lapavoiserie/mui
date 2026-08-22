@@ -1,0 +1,11 @@
+@:realPath("java.sun.reflect.generics.tree.Wildcard") @:used @:native("sun.reflect.generics.tree.Wildcard") @:libType
+extern class sun.reflect.generics.tree.Wildcard implements sun.reflect.generics.tree.TypeArgument {
+
+	function getUpperBounds():java.NativeArray<sun.reflect.generics.tree.FieldTypeSignature>;
+
+	function getLowerBounds():java.NativeArray<sun.reflect.generics.tree.FieldTypeSignature>;
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+
+	static function make(param1:java.NativeArray<sun.reflect.generics.tree.FieldTypeSignature>, param2:java.NativeArray<sun.reflect.generics.tree.FieldTypeSignature>):sun.reflect.generics.tree.Wildcard;
+}

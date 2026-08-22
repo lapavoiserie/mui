@@ -1,0 +1,87 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder") @:used @:native("java.time.format.DateTimeFormatterBuilder") @:libType
+extern class java.time.format.DateTimeFormatterBuilder {
+
+	function new():Void;
+
+	function parseCaseSensitive():java.time.format.DateTimeFormatterBuilder;
+
+	function parseCaseInsensitive():java.time.format.DateTimeFormatterBuilder;
+
+	function parseStrict():java.time.format.DateTimeFormatterBuilder;
+
+	function parseLenient():java.time.format.DateTimeFormatterBuilder;
+
+	function parseDefaulting(param1:java.time.temporal.TemporalField, param2:haxe.Int64):java.time.format.DateTimeFormatterBuilder;
+
+	function appendValue(param1:java.time.temporal.TemporalField):java.time.format.DateTimeFormatterBuilder;
+
+	function appendValue(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:java.time.format.SignStyle):java.time.format.DateTimeFormatterBuilder;
+
+	function appendValue(param1:java.time.temporal.TemporalField, param2:Int):java.time.format.DateTimeFormatterBuilder;
+
+	function appendValueReduced(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:Int):java.time.format.DateTimeFormatterBuilder;
+
+	function appendValueReduced(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:java.time.chrono.ChronoLocalDate):java.time.format.DateTimeFormatterBuilder;
+
+	function appendFraction(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:Bool):java.time.format.DateTimeFormatterBuilder;
+
+	function appendText(param1:java.time.temporal.TemporalField):java.time.format.DateTimeFormatterBuilder;
+
+	function appendText(param1:java.time.temporal.TemporalField, param2:java.util.Map<java.lang.Long, java.lang.String>):java.time.format.DateTimeFormatterBuilder;
+
+	function appendText(param1:java.time.temporal.TemporalField, param2:java.time.format.TextStyle):java.time.format.DateTimeFormatterBuilder;
+
+	function appendInstant():java.time.format.DateTimeFormatterBuilder;
+
+	function appendInstant(param1:Int):java.time.format.DateTimeFormatterBuilder;
+
+	function appendOffsetId():java.time.format.DateTimeFormatterBuilder;
+
+	function appendOffset(param1:java.lang.String, param2:java.lang.String):java.time.format.DateTimeFormatterBuilder;
+
+	function appendLocalizedOffset(param1:java.time.format.TextStyle):java.time.format.DateTimeFormatterBuilder;
+
+	function appendZoneId():java.time.format.DateTimeFormatterBuilder;
+
+	function appendZoneRegionId():java.time.format.DateTimeFormatterBuilder;
+
+	function appendZoneOrOffsetId():java.time.format.DateTimeFormatterBuilder;
+
+	function appendZoneText(param1:java.time.format.TextStyle):java.time.format.DateTimeFormatterBuilder;
+
+	function appendZoneText(param1:java.time.format.TextStyle, param2:java.util.Set<java.time.ZoneId>):java.time.format.DateTimeFormatterBuilder;
+
+	function appendChronologyId():java.time.format.DateTimeFormatterBuilder;
+
+	function appendChronologyText(param1:java.time.format.TextStyle):java.time.format.DateTimeFormatterBuilder;
+
+	function appendLocalized(param1:java.time.format.FormatStyle, param2:java.time.format.FormatStyle):java.time.format.DateTimeFormatterBuilder;
+
+	function appendLiteral(param1:java.types.Char16):java.time.format.DateTimeFormatterBuilder;
+
+	function appendLiteral(param1:java.lang.String):java.time.format.DateTimeFormatterBuilder;
+
+	function append(param1:java.time.format.DateTimeFormatter):java.time.format.DateTimeFormatterBuilder;
+
+	function appendOptional(param1:java.time.format.DateTimeFormatter):java.time.format.DateTimeFormatterBuilder;
+
+	function appendPattern(param1:java.lang.String):java.time.format.DateTimeFormatterBuilder;
+
+	function padNext(param1:Int):java.time.format.DateTimeFormatterBuilder;
+
+	function padNext(param1:Int, param2:java.types.Char16):java.time.format.DateTimeFormatterBuilder;
+
+	function optionalStart():java.time.format.DateTimeFormatterBuilder;
+
+	function optionalEnd():java.time.format.DateTimeFormatterBuilder;
+
+	function toFormatter():java.time.format.DateTimeFormatter;
+
+	function toFormatter(param1:java.time.format.ResolverStyle, param2:java.time.chrono.Chronology):java.time.format.DateTimeFormatter;
+
+	function toFormatter(param1:java.util.Locale):java.time.format.DateTimeFormatter;
+
+	static function getLocalizedDateTimePattern(param1:java.time.format.FormatStyle, param2:java.time.format.FormatStyle, param3:java.time.chrono.Chronology, param4:java.util.Locale):java.lang.String;
+
+	static var LENGTH_SORT(default,never):java.util.Comparator<java.lang.String>;
+}

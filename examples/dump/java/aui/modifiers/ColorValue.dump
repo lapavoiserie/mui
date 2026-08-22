@@ -1,0 +1,18 @@
+@:used
+enum aui.modifiers.ColorValue {
+	Primary;
+	Secondary;
+	Accent;
+	Red;
+	Orange;
+	Yellow;
+	Green;
+	Blue;
+	Purple;
+	Pink;
+	White;
+	Black;
+	Gray;
+	Transparent;
+	Custom(hex:java.lang.String);
+}

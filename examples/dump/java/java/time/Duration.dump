@@ -1,0 +1,111 @@
+@:realPath("java.time.Duration") @:used @:native("java.time.Duration") @:libType
+extern class java.time.Duration implements java.io.Serializable implements java.lang.Comparable<java.time.Duration> implements java.time.temporal.TemporalAmount {
+
+	function get(param1:java.time.temporal.TemporalUnit):haxe.Int64;
+
+	function getUnits():java.util.List<java.time.temporal.TemporalUnit>;
+
+	function isZero():Bool;
+
+	function isNegative():Bool;
+
+	function getSeconds():haxe.Int64;
+
+	function getNano():Int;
+
+	function withSeconds(param1:haxe.Int64):java.time.Duration;
+
+	function withNanos(param1:Int):java.time.Duration;
+
+	function plus(param1:java.time.Duration):java.time.Duration;
+
+	function plus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.Duration;
+
+	function plusDays(param1:haxe.Int64):java.time.Duration;
+
+	function plusHours(param1:haxe.Int64):java.time.Duration;
+
+	function plusMinutes(param1:haxe.Int64):java.time.Duration;
+
+	function plusSeconds(param1:haxe.Int64):java.time.Duration;
+
+	function plusMillis(param1:haxe.Int64):java.time.Duration;
+
+	function plusNanos(param1:haxe.Int64):java.time.Duration;
+
+	function minus(param1:java.time.Duration):java.time.Duration;
+
+	function minus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.Duration;
+
+	function minusDays(param1:haxe.Int64):java.time.Duration;
+
+	function minusHours(param1:haxe.Int64):java.time.Duration;
+
+	function minusMinutes(param1:haxe.Int64):java.time.Duration;
+
+	function minusSeconds(param1:haxe.Int64):java.time.Duration;
+
+	function minusMillis(param1:haxe.Int64):java.time.Duration;
+
+	function minusNanos(param1:haxe.Int64):java.time.Duration;
+
+	function multipliedBy(param1:haxe.Int64):java.time.Duration;
+
+	function dividedBy(param1:haxe.Int64):java.time.Duration;
+
+	function negated():java.time.Duration;
+
+	function abs():java.time.Duration;
+
+	function addTo(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function subtractFrom(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function toDays():haxe.Int64;
+
+	function toHours():haxe.Int64;
+
+	function toMinutes():haxe.Int64;
+
+	function toMillis():haxe.Int64;
+
+	function toNanos():haxe.Int64;
+
+	function compareTo(param1:java.time.Duration):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	static function ofDays(param1:haxe.Int64):java.time.Duration;
+
+	static function ofHours(param1:haxe.Int64):java.time.Duration;
+
+	static function ofMinutes(param1:haxe.Int64):java.time.Duration;
+
+	static function ofSeconds(param1:haxe.Int64):java.time.Duration;
+
+	static function ofSeconds(param1:haxe.Int64, param2:haxe.Int64):java.time.Duration;
+
+	static function ofMillis(param1:haxe.Int64):java.time.Duration;
+
+	static function ofNanos(param1:haxe.Int64):java.time.Duration;
+
+	static function of(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.Duration;
+
+	static function from(param1:java.time.temporal.TemporalAmount):java.time.Duration;
+
+	static function parse(param1:java.lang.CharSequence):java.time.Duration;
+
+	static function between(param1:java.time.temporal.Temporal, param2:java.time.temporal.Temporal):java.time.Duration;
+
+	static function readExternal(param1:java.io.DataInput):java.time.Duration;
+
+	static var ZERO(default,never):java.time.Duration;
+}

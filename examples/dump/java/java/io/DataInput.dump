@@ -1,0 +1,33 @@
+@:realPath("java.io.DataInput") @:used @:native("java.io.DataInput") @:libType
+extern interface java.io.DataInput {
+
+	function readFully(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function readFully(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function skipBytes(param1:Int):Int;
+
+	function readBoolean():Bool;
+
+	function readByte():java.types.Int8;
+
+	function readUnsignedByte():Int;
+
+	function readShort():java.types.Int16;
+
+	function readUnsignedShort():Int;
+
+	function readChar():java.types.Char16;
+
+	function readInt():Int;
+
+	function readLong():haxe.Int64;
+
+	function readFloat():Single;
+
+	function readDouble():Float;
+
+	function readLine():java.lang.String;
+
+	function readUTF():java.lang.String;
+}

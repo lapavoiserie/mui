@@ -1,0 +1,23 @@
+@:realPath("java.sun.security.util.Debug") @:used @:native("sun.security.util.Debug") @:libType
+extern class sun.security.util.Debug {
+
+	function new():Void;
+
+	function println(param1:java.lang.String):Void;
+
+	function println():Void;
+
+	static function Help():Void;
+
+	static function getInstance(param1:java.lang.String):sun.security.util.Debug;
+
+	static function getInstance(param1:java.lang.String, param2:java.lang.String):sun.security.util.Debug;
+
+	static function isOn(param1:java.lang.String):Bool;
+
+	static function println(param1:java.lang.String, param2:java.lang.String):Void;
+
+	static function toHexString(param1:java.math.BigInteger):java.lang.String;
+
+	static function toString(param1:java.NativeArray<java.types.Int8>):java.lang.String;
+}

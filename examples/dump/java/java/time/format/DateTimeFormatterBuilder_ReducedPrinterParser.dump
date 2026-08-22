@@ -1,0 +1,21 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_ReducedPrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$ReducedPrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$ReducedPrinterParser extends java.time.format.DateTimeFormatterBuilder$NumberPrinterParser {
+
+	function new(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:Int, param5:java.time.chrono.ChronoLocalDate):Void;
+
+	function new(param1:java.time.temporal.TemporalField, param2:Int, param3:Int, param4:Int, param5:java.time.chrono.ChronoLocalDate, param6:Int, param7:java.time.format.DateTimeFormatterBuilder$1):Void;
+
+	function getValue(param1:java.time.format.DateTimePrintContext, param2:haxe.Int64):haxe.Int64;
+
+	function setValue(param1:java.time.format.DateTimeParseContext, param2:haxe.Int64, param3:Int, param4:Int):Int;
+
+	function withFixedWidth():java.time.format.DateTimeFormatterBuilder$ReducedPrinterParser;
+
+	function withSubsequentWidth(param1:Int):java.time.format.DateTimeFormatterBuilder$ReducedPrinterParser;
+
+	function isFixedWidth(param1:java.time.format.DateTimeParseContext):Bool;
+
+	function toString():java.lang.String;
+
+	static var BASE_DATE(default,never):java.time.LocalDate;
+}

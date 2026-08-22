@@ -1,0 +1,15 @@
+@:realPath("java.lang.reflect.Member") @:used @:native("java.lang.reflect.Member") @:libType
+extern interface java.lang.reflect.Member {
+
+	function getDeclaringClass():java.lang.Class<Dynamic>;
+
+	function getName():java.lang.String;
+
+	function getModifiers():Int;
+
+	function isSynthetic():Bool;
+
+	static var PUBLIC(default,never):Int;
+
+	static var DECLARED(default,never):Int;
+}

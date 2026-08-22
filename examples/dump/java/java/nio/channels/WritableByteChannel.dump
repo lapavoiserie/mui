@@ -1,0 +1,5 @@
+@:realPath("java.nio.channels.WritableByteChannel") @:used @:native("java.nio.channels.WritableByteChannel") @:libType
+extern interface java.nio.channels.WritableByteChannel implements java.nio.channels.Channel {
+
+	function write(param1:java.nio.ByteBuffer):Int;
+}

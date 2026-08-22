@@ -9,17 +9,26 @@ import mui.ui.Spacer;
 class Counter extends App {
     @:state var count:Int = 0;
 
-    // A read-at-a-glance summary: the Sailfish cover, hosted by qui. The
-    // other backends host no Glance, and this example is built for all of
-    // them — so it says `optional`, which is the application accepting, in
-    // its own source, that this surface flies nowhere on those targets. Drop
-    // the word and a cui or wui build stops, naming the role: that is the
-    // point of the check.
+    // A read-at-a-glance summary: the Sailfish cover, hosted by qui, and the
+    // Android App Widget, hosted by aui. The other backends host no Glance,
+    // and this example is built for all of them — so it says `optional`,
+    // which is the application accepting, in its own source, that this
+    // surface flies nowhere on those targets. Drop the word and a cui or wui
+    // build stops, naming the role: that is the point of the check.
+    //
+    // The button is here to be tapped from the home screen. Nothing about it
+    // is widget-specific: it is the ordinary vocabulary, and its closure runs
+    // in the application's process when the tap comes back as an action id.
+    // A cover that only displays strips it — degradation the host performs,
+    // not something the declaration has to know.
     //
     // The method name is the surface's stable id: Tree(Glance, "glance", …).
     @:surface(Glance, optional)
     function glance():View {
-        return new Text('Count: ${count.get()}');
+        return new VStack([
+            new Text('Count: ${count.get()}'),
+            new Button("+1", function() count.set(count.get() + 1)),
+        ], 8);
     }
 
     // An Auxiliary window: a second top-level window on wui and sui, each

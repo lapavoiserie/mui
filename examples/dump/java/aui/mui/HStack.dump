@@ -1,0 +1,7 @@
+@:directlyUsed @:used
+class aui.mui.HStack extends aui.ui.HStack {
+
+	public function new(content:Array<aui.View>, spacing:Null<Float> = null) {
+		super(null, if ((spacing == null)) null else spacing, content);
+	}
+}

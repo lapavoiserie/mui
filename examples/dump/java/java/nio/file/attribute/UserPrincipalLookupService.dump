@@ -1,0 +1,9 @@
+@:realPath("java.nio.file.attribute.UserPrincipalLookupService") @:native("java.nio.file.attribute.UserPrincipalLookupService") @:libType
+extern class java.nio.file.attribute.UserPrincipalLookupService {
+
+	function new():Void;
+
+	function lookupPrincipalByName(param1:java.lang.String):java.nio.file.attribute.UserPrincipal;
+
+	function lookupPrincipalByGroupName(param1:java.lang.String):java.nio.file.attribute.GroupPrincipal;
+}

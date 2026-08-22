@@ -1,0 +1,11 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_WeekBasedFieldPrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$WeekBasedFieldPrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$WeekBasedFieldPrinterParser implements java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser {
+
+	function new(param1:java.types.Char16, param2:Int):Void;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function parse(param1:java.time.format.DateTimeParseContext, param2:java.lang.CharSequence, param3:Int):Int;
+
+	function toString():java.lang.String;
+}

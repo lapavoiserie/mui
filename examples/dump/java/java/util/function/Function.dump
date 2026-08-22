@@ -1,0 +1,14 @@
+@:realPath("java.util.function.Function") @:used @:native("java.util.function.Function") @:libType
+extern interface java.util.function.Function<T:Dynamic, R:Dynamic> {
+
+	function apply(param1:java.util.function.Function.T):java.util.function.Function.R;
+
+	@:java.default
+	function compose<V:Dynamic>(param1:java.util.function.Function<Dynamic, java.util.function.Function.T>):java.util.function.Function<compose.V, java.util.function.Function.R>;
+
+	@:java.default
+	function andThen<V:Dynamic>(param1:java.util.function.Function<Dynamic, andThen.V>):java.util.function.Function<java.util.function.Function.T, andThen.V>;
+
+	@:java.default
+	static function identity<T:Dynamic>():java.util.function.Function<identity.T, identity.T>;
+}

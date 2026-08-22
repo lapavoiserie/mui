@@ -1,0 +1,1 @@
+private typedef sys.thread._Thread.ThreadImpl = sys.thread._Thread.HaxeThread

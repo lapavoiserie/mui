@@ -1,0 +1,25 @@
+@:realPath("java.util.HashMap_Node") @:used @:native("java.util.HashMap$Node") @:libType
+extern class java.util.HashMap$Node<K:Dynamic, V:Dynamic> implements java.util.Map$Entry<java.util.HashMap_Node.K, java.util.HashMap_Node.V> {
+
+	function new(param1:Int, param2:java.util.HashMap_Node.K, param3:java.util.HashMap_Node.V, param4:java.util.HashMap$Node<java.util.HashMap_Node.K, java.util.HashMap_Node.V>):Void;
+
+	function getKey():java.util.HashMap_Node.K;
+
+	function getValue():java.util.HashMap_Node.V;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function setValue(param1:java.util.HashMap_Node.V):java.util.HashMap_Node.V;
+
+	function equals(param1:Dynamic):Bool;
+
+	var hash(default,ctor):Int;
+
+	var key(default,ctor):java.util.HashMap_Node.K;
+
+	var value:java.util.HashMap_Node.V;
+
+	var next:java.util.HashMap$Node<java.util.HashMap_Node.K, java.util.HashMap_Node.V>;
+}

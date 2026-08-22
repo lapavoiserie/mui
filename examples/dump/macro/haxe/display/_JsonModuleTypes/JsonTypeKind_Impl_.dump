@@ -1,0 +1,27 @@
+@:enum
+private class haxe.display._JsonModuleTypes.JsonTypeKind_Impl_ {
+
+	@:value(cast "TMono") @:impl @:enum
+	public static inline var TMono:haxe.display.JsonTypeKind<haxe.display.JsonTypeKind.T> = cast "TMono";
+
+	@:value(cast "TInst") @:impl @:enum
+	public static inline var TInst:haxe.display.JsonTypeKind<haxe.display.JsonTypePathWithParams> = cast "TInst";
+
+	@:value(cast "TEnum") @:impl @:enum
+	public static inline var TEnum:haxe.display.JsonTypeKind<haxe.display.JsonTypePathWithParams> = cast "TEnum";
+
+	@:value(cast "TType") @:impl @:enum
+	public static inline var TType:haxe.display.JsonTypeKind<haxe.display.JsonTypePathWithParams> = cast "TType";
+
+	@:value(cast "TAbstract") @:impl @:enum
+	public static inline var TAbstract:haxe.display.JsonTypeKind<haxe.display.JsonTypePathWithParams> = cast "TAbstract";
+
+	@:value(cast "TFun") @:impl @:enum
+	public static inline var TFun:haxe.display.JsonTypeKind<haxe.display.JsonFunctionSignature> = cast "TFun";
+
+	@:value(cast "TAnonymous") @:impl @:enum
+	public static inline var TAnonymous:haxe.display.JsonTypeKind<haxe.display.JsonAnon> = cast "TAnonymous";
+
+	@:value(cast "TDynamic") @:impl @:enum
+	public static inline var TDynamic:haxe.display.JsonTypeKind<Null<haxe.display.JsonType<Dynamic>>> = cast "TDynamic";
+}

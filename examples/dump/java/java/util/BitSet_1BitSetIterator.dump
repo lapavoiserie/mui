@@ -1,0 +1,14 @@
+@:realPath("java.util.BitSet_1BitSetIterator") @:used @:native("java.util.BitSet$1BitSetIterator") @:libType
+extern class java.util.BitSet$1BitSetIterator implements java.util.PrimitiveIterator$OfInt {
+
+	function new(param1:java.util.BitSet):Void;
+
+	function hasNext():Bool;
+
+	function nextInt():Int;
+
+	var next:Int;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.BitSet;
+}

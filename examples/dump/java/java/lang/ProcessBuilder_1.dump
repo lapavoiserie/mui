@@ -1,0 +1,3 @@
+@:realPath("java.lang.ProcessBuilder_1") @:used @:native("java.lang.ProcessBuilder$1") @:libType
+extern class java.lang.ProcessBuilder$1 {
+}

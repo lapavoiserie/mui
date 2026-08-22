@@ -1,0 +1,23 @@
+@:realPath("java.security.cert.CertPath") @:native("java.security.cert.CertPath") @:libType
+extern class java.security.cert.CertPath implements java.io.Serializable {
+
+	function new(param1:java.lang.String):Void;
+
+	function getType():java.lang.String;
+
+	function getEncodings():java.util.Iterator<java.lang.String>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function getEncoded():java.NativeArray<java.types.Int8>;
+
+	function getEncoded(param1:java.lang.String):java.NativeArray<java.types.Int8>;
+
+	function getCertificates():java.util.List<java.security.cert.Certificate>;
+
+	function writeReplace():Dynamic;
+}

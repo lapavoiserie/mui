@@ -1,0 +1,9 @@
+@:realPath("java.lang.Class_Atomic") @:native("java.lang.Class$Atomic") @:libType
+extern class java.lang.Class$Atomic {
+
+	static function casReflectionData<T:Dynamic>(param1:java.lang.Class<Dynamic>, param2:java.lang.ref.SoftReference<java.lang.Class$ReflectionData<casReflectionData.T>>, param3:java.lang.ref.SoftReference<java.lang.Class$ReflectionData<casReflectionData.T>>):Bool;
+
+	static function casAnnotationType<T:Dynamic>(param1:java.lang.Class<Dynamic>, param2:sun.reflect.annotation.AnnotationType, param3:sun.reflect.annotation.AnnotationType):Bool;
+
+	static function casAnnotationData<T:Dynamic>(param1:java.lang.Class<Dynamic>, param2:java.lang.Class$AnnotationData, param3:java.lang.Class$AnnotationData):Bool;
+}

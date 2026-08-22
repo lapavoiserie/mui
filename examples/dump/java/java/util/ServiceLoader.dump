@@ -1,0 +1,15 @@
+@:realPath("java.util.ServiceLoader") @:used @:native("java.util.ServiceLoader") @:libType
+extern class java.util.ServiceLoader<S:Dynamic> implements java.lang.Iterable<java.util.ServiceLoader.S> {
+
+	function reload():Void;
+
+	function iterator():java.util.Iterator<java.util.ServiceLoader.S>;
+
+	function toString():java.lang.String;
+
+	static function load<S:Dynamic>(param1:java.lang.Class<load.S>, param2:java.lang.ClassLoader):java.util.ServiceLoader<load.S>;
+
+	static function load<S:Dynamic>(param1:java.lang.Class<load.S>):java.util.ServiceLoader<load.S>;
+
+	static function loadInstalled<S:Dynamic>(param1:java.lang.Class<loadInstalled.S>):java.util.ServiceLoader<loadInstalled.S>;
+}

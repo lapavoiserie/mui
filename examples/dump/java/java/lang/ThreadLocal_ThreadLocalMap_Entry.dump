@@ -1,0 +1,7 @@
+@:realPath("java.lang.ThreadLocal_ThreadLocalMap_Entry") @:native("java.lang.ThreadLocal$ThreadLocalMap$Entry") @:libType
+extern class java.lang.ThreadLocal$ThreadLocalMap$Entry extends java.lang.ref.WeakReference<java.lang.ThreadLocal<Dynamic>> {
+
+	function new(param1:java.lang.ThreadLocal<Dynamic>, param2:Dynamic):Void;
+
+	var value:Dynamic;
+}

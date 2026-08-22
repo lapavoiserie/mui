@@ -1,0 +1,7 @@
+@:realPath("java.math.BigDecimal_UnsafeHolder") @:native("java.math.BigDecimal$UnsafeHolder") @:libType
+extern class java.math.BigDecimal$UnsafeHolder {
+
+	static function setIntCompactVolatile(param1:java.math.BigDecimal, param2:haxe.Int64):Void;
+
+	static function setIntValVolatile(param1:java.math.BigDecimal, param2:java.math.BigInteger):Void;
+}

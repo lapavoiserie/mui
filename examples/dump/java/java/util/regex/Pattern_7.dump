@@ -1,0 +1,13 @@
+@:realPath("java.util.regex.Pattern_7") @:used @:native("java.util.regex.Pattern$7") @:libType
+extern class java.util.regex.Pattern$7 extends java.util.regex.Pattern$CharProperty {
+
+	function new(param1:java.util.regex.Pattern$CharProperty, param2:java.util.regex.Pattern$CharProperty):Void;
+
+	function isSatisfiedBy(param1:Int):Bool;
+
+	@:realPath("val_rhs") @:native("val$rhs")
+	var val$rhs(default,ctor):java.util.regex.Pattern$CharProperty;
+
+	@:realPath("val_lhs") @:native("val$lhs")
+	var val$lhs(default,ctor):java.util.regex.Pattern$CharProperty;
+}

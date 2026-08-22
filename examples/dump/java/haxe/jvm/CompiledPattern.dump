@@ -1,0 +1,13 @@
+@:realPath("jvm.CompiledPattern") @:keep @:directlyUsed @:used @:structInit @:native("haxe.jvm.CompiledPattern")
+class haxe.jvm.CompiledPattern {
+
+	@:compilerGenerated @:inheritDoc
+	public function new(pattern:java.util.regex.Pattern, isGlobal:Bool) {
+		this.pattern = pattern;
+		this.isGlobal = isGlobal;
+	}
+
+	public var pattern(default,ctor):java.util.regex.Pattern;
+
+	public var isGlobal(default,ctor):Bool;
+}

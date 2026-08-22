@@ -1,0 +1,127 @@
+@:realPath("java.net.URLConnection") @:used @:native("java.net.URLConnection") @:libType
+extern class java.net.URLConnection {
+
+	function new(param1:java.net.URL):Void;
+
+	function connect():Void;
+
+	function setConnectTimeout(param1:Int):Void;
+
+	function getConnectTimeout():Int;
+
+	function setReadTimeout(param1:Int):Void;
+
+	function getReadTimeout():Int;
+
+	function getURL():java.net.URL;
+
+	function getContentLength():Int;
+
+	function getContentLengthLong():haxe.Int64;
+
+	function getContentType():java.lang.String;
+
+	function getContentEncoding():java.lang.String;
+
+	function getExpiration():haxe.Int64;
+
+	function getDate():haxe.Int64;
+
+	function getLastModified():haxe.Int64;
+
+	function getHeaderField(param1:java.lang.String):java.lang.String;
+
+	function getHeaderField(param1:Int):java.lang.String;
+
+	function getHeaderFields():java.util.Map<java.lang.String, java.util.List<java.lang.String>>;
+
+	function getHeaderFieldInt(param1:java.lang.String, param2:Int):Int;
+
+	function getHeaderFieldLong(param1:java.lang.String, param2:haxe.Int64):haxe.Int64;
+
+	function getHeaderFieldDate(param1:java.lang.String, param2:haxe.Int64):haxe.Int64;
+
+	function getHeaderFieldKey(param1:Int):java.lang.String;
+
+	function getContent():Dynamic;
+
+	function getContent(param1:java.NativeArray<java.lang.Class<Dynamic>>):Dynamic;
+
+	function getPermission():java.security.Permission;
+
+	function getInputStream():java.io.InputStream;
+
+	function getOutputStream():java.io.OutputStream;
+
+	function toString():java.lang.String;
+
+	function setDoInput(param1:Bool):Void;
+
+	function getDoInput():Bool;
+
+	function setDoOutput(param1:Bool):Void;
+
+	function getDoOutput():Bool;
+
+	function setAllowUserInteraction(param1:Bool):Void;
+
+	function getAllowUserInteraction():Bool;
+
+	function setUseCaches(param1:Bool):Void;
+
+	function getUseCaches():Bool;
+
+	function setIfModifiedSince(param1:haxe.Int64):Void;
+
+	function getIfModifiedSince():haxe.Int64;
+
+	function getDefaultUseCaches():Bool;
+
+	function setDefaultUseCaches(param1:Bool):Void;
+
+	function setRequestProperty(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function addRequestProperty(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function getRequestProperty(param1:java.lang.String):java.lang.String;
+
+	function getRequestProperties():java.util.Map<java.lang.String, java.util.List<java.lang.String>>;
+
+	function getContentHandler():java.net.ContentHandler;
+
+	var url:java.net.URL;
+
+	var doInput:Bool;
+
+	var doOutput:Bool;
+
+	var allowUserInteraction:Bool;
+
+	var useCaches:Bool;
+
+	var ifModifiedSince:haxe.Int64;
+
+	var connected:Bool;
+
+	static function getFileNameMap():java.net.FileNameMap;
+
+	static function setFileNameMap(param1:java.net.FileNameMap):Void;
+
+	static function setDefaultAllowUserInteraction(param1:Bool):Void;
+
+	static function getDefaultAllowUserInteraction():Bool;
+
+	@:deprecated
+	static function setDefaultRequestProperty(param1:java.lang.String, param2:java.lang.String):Void;
+
+	@:deprecated
+	static function getDefaultRequestProperty(param1:java.lang.String):java.lang.String;
+
+	static function setContentHandlerFactory(param1:java.net.ContentHandlerFactory):Void;
+
+	static function guessContentTypeFromName(param1:java.lang.String):java.lang.String;
+
+	static function guessContentTypeFromStream(param1:java.io.InputStream):java.lang.String;
+
+	static var factory:java.net.ContentHandlerFactory;
+}

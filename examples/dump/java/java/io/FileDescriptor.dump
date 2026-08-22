@@ -1,0 +1,20 @@
+@:realPath("java.io.FileDescriptor") @:used @:native("java.io.FileDescriptor") @:libType
+extern class java.io.FileDescriptor {
+
+	function new():Void;
+
+	function valid():Bool;
+
+	function sync():Void;
+
+	function attach(param1:java.io.Closeable):Void;
+
+	function closeAll(param1:java.io.Closeable):Void;
+
+	@:realPath("_in") @:native("in")
+	static var in(default,never):java.io.FileDescriptor;
+
+	static var out(default,never):java.io.FileDescriptor;
+
+	static var err(default,never):java.io.FileDescriptor;
+}

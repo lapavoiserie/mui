@@ -1,0 +1,7 @@
+@:used
+class aui.mui.Toggle extends aui.ui.Toggle {
+
+	public function new(label:java.lang.String, state:aui.mui.ToggleBinding) {
+		super(label, cast state);
+	}
+}

@@ -1,0 +1,37 @@
+@:realPath("java.sun.util.locale.InternalLocaleBuilder") @:native("sun.util.locale.InternalLocaleBuilder") @:libType
+extern class sun.util.locale.InternalLocaleBuilder {
+
+	function new():Void;
+
+	function setLanguage(param1:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function setScript(param1:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function setRegion(param1:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function setVariant(param1:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function addUnicodeLocaleAttribute(param1:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function removeUnicodeLocaleAttribute(param1:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function setUnicodeLocaleKeyword(param1:java.lang.String, param2:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function setExtension(param1:java.types.Char16, param2:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function setExtensions(param1:java.lang.String):sun.util.locale.InternalLocaleBuilder;
+
+	function setLanguageTag(param1:sun.util.locale.LanguageTag):sun.util.locale.InternalLocaleBuilder;
+
+	function setLocale(param1:sun.util.locale.BaseLocale, param2:sun.util.locale.LocaleExtensions):sun.util.locale.InternalLocaleBuilder;
+
+	function clear():sun.util.locale.InternalLocaleBuilder;
+
+	function clearExtensions():sun.util.locale.InternalLocaleBuilder;
+
+	function getBaseLocale():sun.util.locale.BaseLocale;
+
+	function getLocaleExtensions():sun.util.locale.LocaleExtensions;
+
+	static function removePrivateuseVariant(param1:java.lang.String):java.lang.String;
+}

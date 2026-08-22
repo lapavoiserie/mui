@@ -1,0 +1,15 @@
+@:realPath("java.time.Month") @:used @:flatEnum @:native("java.time.Month")
+extern enum java.time.Month {
+	JANUARY;
+	FEBRUARY;
+	MARCH;
+	APRIL;
+	MAY;
+	JUNE;
+	JULY;
+	AUGUST;
+	SEPTEMBER;
+	OCTOBER;
+	NOVEMBER;
+	DECEMBER;
+}

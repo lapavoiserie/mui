@@ -1,0 +1,15 @@
+@:realPath("java.util.Vector_VectorSpliterator") @:used @:native("java.util.Vector$VectorSpliterator") @:libType
+extern class java.util.Vector$VectorSpliterator<E:Dynamic> implements java.util.Spliterator<java.util.Vector_VectorSpliterator.E> {
+
+	function new(param1:java.util.Vector<java.util.Vector_VectorSpliterator.E>, param2:java.NativeArray<Dynamic>, param3:Int, param4:Int, param5:Int):Void;
+
+	function trySplit():java.util.Spliterator<java.util.Vector_VectorSpliterator.E>;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+}

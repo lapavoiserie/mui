@@ -1,0 +1,5 @@
+@:realPath("java.time.temporal.TemporalAdjuster") @:used @:native("java.time.temporal.TemporalAdjuster") @:libType
+extern interface java.time.temporal.TemporalAdjuster {
+
+	function adjustInto(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+}

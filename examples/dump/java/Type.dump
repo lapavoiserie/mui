@@ -1,0 +1,47 @@
+@:keep @:directlyUsed @:used @:coreApi
+class Type {
+
+	static function isEnumValueClass<T>(c:java.lang.Class<isEnumValueClass.T>) {
+		return c.isAnnotationPresent(cast haxe.jvm.annotation.EnumValueReflectionInformation);
+	}
+
+	public static function getEnum(o:EnumValue) {
+		if ((o == null)) return null;
+		var c = cast o.getClass().getSuperclass();
+		if ((! c.isAnnotationPresent(cast haxe.jvm.annotation.EnumReflectionInformation))) return null;
+		return cast c;
+	}
+
+	public static function getEnumConstructs(e:Enum<Dynamic>) {
+		var clInfo = cast haxe.jvm.annotation.EnumReflectionInformation;
+		var annotation = cast e.getAnnotation(clInfo);
+		if ((annotation != null)) return Array.ofNative(annotation.constructorNames());
+		var vals = haxe.EnumTools.values(e);
+		var ret = [];
+		{
+			var _g = 0;
+			var _g1 = vals.length;
+			while ((_g < _g1)) {
+				var i = _g ++;
+				ret[i] = vals[i].name();
+			};
+		};
+		return ret;
+	}
+
+	public static function enumEq<T>(a:enumEq.T, b:enumEq.T) {
+		if ((a == null)) return b == null;
+		var a = cast a;
+		var b = cast b;
+		return a.equals(b);
+	}
+
+	public static function enumConstructor(e:EnumValue) {
+		return cast e.name();
+	}
+
+	public static function enumParameters(e:EnumValue) {
+		var a = cast e._hx_getParameters();
+		return Array.ofNative(a);
+	}
+}

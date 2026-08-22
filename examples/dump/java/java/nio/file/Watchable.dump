@@ -1,0 +1,7 @@
+@:realPath("java.nio.file.Watchable") @:used @:native("java.nio.file.Watchable") @:libType
+extern interface java.nio.file.Watchable {
+
+	function register(param1:java.nio.file.WatchService, param2:java.NativeArray<java.nio.file.WatchEvent$Kind<Dynamic>>, param3:haxe.Rest<java.nio.file.WatchEvent$Modifier>):java.nio.file.WatchKey;
+
+	function register(param1:java.nio.file.WatchService, param2:haxe.Rest<java.nio.file.WatchEvent$Kind<Dynamic>>):java.nio.file.WatchKey;
+}

@@ -1,0 +1,64 @@
+@:realPath("java.util.Map") @:used @:native("java.util.Map") @:libType
+extern interface java.util.Map<K:Dynamic, V:Dynamic> {
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function get(param1:Dynamic):java.util.Map.V;
+
+	function put(param1:java.util.Map.K, param2:java.util.Map.V):java.util.Map.V;
+
+	function remove(param1:Dynamic):java.util.Map.V;
+
+	@:java.default
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function putAll(param1:java.util.Map<java.util.Map.K, java.util.Map.V>):Void;
+
+	function clear():Void;
+
+	function keySet():java.util.Set<java.util.Map.K>;
+
+	function values():java.util.Collection<java.util.Map.V>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.Map.K, java.util.Map.V>>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	@:java.default
+	function getOrDefault(param1:Dynamic, param2:java.util.Map.V):java.util.Map.V;
+
+	@:java.default
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	@:java.default
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Map.V>):Void;
+
+	@:java.default
+	function putIfAbsent(param1:java.util.Map.K, param2:java.util.Map.V):java.util.Map.V;
+
+	@:java.default
+	function replace(param1:java.util.Map.K, param2:java.util.Map.V, param3:java.util.Map.V):Bool;
+
+	@:java.default
+	function replace(param1:java.util.Map.K, param2:java.util.Map.V):java.util.Map.V;
+
+	@:java.default
+	function computeIfAbsent(param1:java.util.Map.K, param2:java.util.function.Function<Dynamic, java.util.Map.V>):java.util.Map.V;
+
+	@:java.default
+	function computeIfPresent(param1:java.util.Map.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Map.V>):java.util.Map.V;
+
+	@:java.default
+	function compute(param1:java.util.Map.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Map.V>):java.util.Map.V;
+
+	@:java.default
+	function merge(param1:java.util.Map.K, param2:java.util.Map.V, param3:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Map.V>):java.util.Map.V;
+}

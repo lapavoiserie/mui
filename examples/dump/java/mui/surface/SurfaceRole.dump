@@ -1,0 +1,10 @@
+@:directlyUsed @:used @:flatEnum
+enum mui.surface.SurfaceRole {
+	Primary;
+	Glance;
+	Preferences;
+	Commands;
+	Notification;
+	Auxiliary;
+	Companion;
+}

@@ -1,0 +1,27 @@
+@:realPath("java.time.format.Parsed") @:used @:native("java.time.format.Parsed") @:libType
+extern class java.time.format.Parsed implements java.time.temporal.TemporalAccessor {
+
+	function new():Void;
+
+	function copy():java.time.format.Parsed;
+
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	function getLong(param1:java.time.temporal.TemporalField):haxe.Int64;
+
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	function resolve(param1:java.time.format.ResolverStyle, param2:java.util.Set<java.time.temporal.TemporalField>):java.time.temporal.TemporalAccessor;
+
+	function toString():java.lang.String;
+
+	var fieldValues(default,ctor):java.util.Map<java.time.temporal.TemporalField, java.lang.Long>;
+
+	var zone:java.time.ZoneId;
+
+	var chrono:java.time.chrono.Chronology;
+
+	var leapSecond:Bool;
+
+	var excessDays:java.time.Period;
+}

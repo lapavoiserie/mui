@@ -1,0 +1,3 @@
+@:realPath("java.lang.Long_LongCache") @:realPath("java.lang.Long_LongCache") @:javaNative @:native("java.lang.Long$LongCache") @:javaCanonical("java.lang", "Long.LongCache")
+extern class java.lang.Long$LongCache {
+}

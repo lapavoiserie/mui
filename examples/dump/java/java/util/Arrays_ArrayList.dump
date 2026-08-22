@@ -1,0 +1,27 @@
+@:realPath("java.util.Arrays_ArrayList") @:used @:native("java.util.Arrays$ArrayList") @:libType
+extern class java.util.Arrays$ArrayList<E:Dynamic> extends java.util.AbstractList<java.util.Arrays_ArrayList.E> implements java.io.Serializable implements java.util.RandomAccess {
+
+	function new(param1:java.NativeArray<java.util.Arrays_ArrayList.E>):Void;
+
+	function size():Int;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function get(param1:Int):java.util.Arrays_ArrayList.E;
+
+	function set(param1:Int, param2:java.util.Arrays_ArrayList.E):java.util.Arrays_ArrayList.E;
+
+	function indexOf(param1:Dynamic):Int;
+
+	function contains(param1:Dynamic):Bool;
+
+	function spliterator():java.util.Spliterator<java.util.Arrays_ArrayList.E>;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.UnaryOperator<java.util.Arrays_ArrayList.E>):Void;
+
+	function sort(param1:java.util.Comparator<Dynamic>):Void;
+}

@@ -1,0 +1,7 @@
+@:realPath("java.nio.file.attribute.FileAttribute") @:used @:native("java.nio.file.attribute.FileAttribute") @:libType
+extern interface java.nio.file.attribute.FileAttribute<T:Dynamic> {
+
+	function name():java.lang.String;
+
+	function value():java.nio.file.attribute.FileAttribute.T;
+}

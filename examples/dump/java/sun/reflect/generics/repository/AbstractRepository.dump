@@ -1,0 +1,11 @@
+@:realPath("java.sun.reflect.generics.repository.AbstractRepository") @:used @:native("sun.reflect.generics.repository.AbstractRepository") @:libType
+extern class sun.reflect.generics.repository.AbstractRepository<T:sun.reflect.generics.tree.Tree> {
+
+	function new(param1:java.lang.String, param2:sun.reflect.generics.factory.GenericsFactory):Void;
+
+	function getTree():java.sun.reflect.generics.repository.AbstractRepository.T;
+
+	function getReifier():sun.reflect.generics.visitor.Reifier;
+
+	function parse(param1:java.lang.String):java.sun.reflect.generics.repository.AbstractRepository.T;
+}

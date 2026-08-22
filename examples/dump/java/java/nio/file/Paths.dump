@@ -1,0 +1,7 @@
+@:realPath("java.nio.file.Paths") @:native("java.nio.file.Paths") @:libType
+extern class java.nio.file.Paths {
+
+	static function get(param1:java.lang.String, param2:haxe.Rest<java.lang.String>):java.nio.file.Path;
+
+	static function get(param1:java.net.URI):java.nio.file.Path;
+}

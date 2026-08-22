@@ -1,0 +1,13 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_ZoneIdPrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$ZoneIdPrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$ZoneIdPrinterParser implements java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser {
+
+	function new(param1:java.time.temporal.TemporalQuery<java.time.ZoneId>, param2:java.lang.String):Void;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function getTree(param1:java.time.format.DateTimeParseContext):java.time.format.DateTimeFormatterBuilder$PrefixTree;
+
+	function parse(param1:java.time.format.DateTimeParseContext, param2:java.lang.CharSequence, param3:Int):Int;
+
+	function toString():java.lang.String;
+}

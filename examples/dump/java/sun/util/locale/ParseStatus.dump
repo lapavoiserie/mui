@@ -1,0 +1,21 @@
+@:realPath("java.sun.util.locale.ParseStatus") @:native("sun.util.locale.ParseStatus") @:libType
+extern class sun.util.locale.ParseStatus {
+
+	function new():Void;
+
+	function reset():Void;
+
+	function isError():Bool;
+
+	function getErrorIndex():Int;
+
+	function getParseLength():Int;
+
+	function getErrorMessage():java.lang.String;
+
+	var parseLength:Int;
+
+	var errorIndex:Int;
+
+	var errorMsg:java.lang.String;
+}

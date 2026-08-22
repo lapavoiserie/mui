@@ -1,0 +1,88 @@
+@:realPath("java.util.stream.Stream") @:used @:native("java.util.stream.Stream") @:libType
+extern interface java.util.stream.Stream<T:Dynamic> implements java.util.stream.BaseStream<java.util.stream.Stream.T, java.util.stream.Stream<java.util.stream.Stream.T>> {
+
+	function filter(param1:java.util.function.Predicate<Dynamic>):java.util.stream.Stream<java.util.stream.Stream.T>;
+
+	function map<R:Dynamic>(param1:java.util.function.Function<Dynamic, map.R>):java.util.stream.Stream<map.R>;
+
+	function mapToInt(param1:java.util.function.ToIntFunction<Dynamic>):java.util.stream.IntStream;
+
+	function mapToLong(param1:java.util.function.ToLongFunction<Dynamic>):java.util.stream.LongStream;
+
+	function mapToDouble(param1:java.util.function.ToDoubleFunction<Dynamic>):java.util.stream.DoubleStream;
+
+	function flatMap<R:Dynamic>(param1:java.util.function.Function<Dynamic, java.util.stream.Stream<flatMap.R>>):java.util.stream.Stream<flatMap.R>;
+
+	function flatMapToInt(param1:java.util.function.Function<Dynamic, java.util.stream.IntStream>):java.util.stream.IntStream;
+
+	function flatMapToLong(param1:java.util.function.Function<Dynamic, java.util.stream.LongStream>):java.util.stream.LongStream;
+
+	function flatMapToDouble(param1:java.util.function.Function<Dynamic, java.util.stream.DoubleStream>):java.util.stream.DoubleStream;
+
+	function distinct():java.util.stream.Stream<java.util.stream.Stream.T>;
+
+	function sorted():java.util.stream.Stream<java.util.stream.Stream.T>;
+
+	function sorted(param1:java.util.Comparator<Dynamic>):java.util.stream.Stream<java.util.stream.Stream.T>;
+
+	function peek(param1:java.util.function.Consumer<Dynamic>):java.util.stream.Stream<java.util.stream.Stream.T>;
+
+	function limit(param1:haxe.Int64):java.util.stream.Stream<java.util.stream.Stream.T>;
+
+	function skip(param1:haxe.Int64):java.util.stream.Stream<java.util.stream.Stream.T>;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function forEachOrdered(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<A:Dynamic>(param1:java.util.function.IntFunction<java.NativeArray<toArray.A>>):java.NativeArray<toArray.A>;
+
+	function reduce(param1:java.util.stream.Stream.T, param2:java.util.function.BinaryOperator<java.util.stream.Stream.T>):java.util.stream.Stream.T;
+
+	function reduce<U:Dynamic>(param1:reduce.U, param2:java.util.function.BiFunction<reduce.U, Dynamic, reduce.U>, param3:java.util.function.BinaryOperator<reduce.U>):reduce.U;
+
+	function reduce(param1:java.util.function.BinaryOperator<java.util.stream.Stream.T>):java.util.Optional<java.util.stream.Stream.T>;
+
+	function collect<R:Dynamic>(param1:java.util.function.Supplier<collect.R>, param2:java.util.function.BiConsumer<collect.R, Dynamic>, param3:java.util.function.BiConsumer<collect.R, collect.R>):collect.R;
+
+	function collect<R:Dynamic, A:Dynamic>(param1:java.util.stream.Collector<Dynamic, collect.A, collect.R>):collect.R;
+
+	function min(param1:java.util.Comparator<Dynamic>):java.util.Optional<java.util.stream.Stream.T>;
+
+	function max(param1:java.util.Comparator<Dynamic>):java.util.Optional<java.util.stream.Stream.T>;
+
+	function count():haxe.Int64;
+
+	function anyMatch(param1:java.util.function.Predicate<Dynamic>):Bool;
+
+	function allMatch(param1:java.util.function.Predicate<Dynamic>):Bool;
+
+	function noneMatch(param1:java.util.function.Predicate<Dynamic>):Bool;
+
+	function findFirst():java.util.Optional<java.util.stream.Stream.T>;
+
+	function findAny():java.util.Optional<java.util.stream.Stream.T>;
+
+	@:java.default
+	static function builder<T:Dynamic>():java.util.stream.Stream$Builder<builder.T>;
+
+	@:java.default
+	static function empty<T:Dynamic>():java.util.stream.Stream<empty.T>;
+
+	@:java.default
+	static function of<T:Dynamic>(param1:of.T):java.util.stream.Stream<of.T>;
+
+	@:java.default
+	static function of<T:Dynamic>(param1:haxe.Rest<of.T>):java.util.stream.Stream<of.T>;
+
+	@:java.default
+	static function iterate<T:Dynamic>(param1:iterate.T, param2:java.util.function.UnaryOperator<iterate.T>):java.util.stream.Stream<iterate.T>;
+
+	@:java.default
+	static function generate<T:Dynamic>(param1:java.util.function.Supplier<generate.T>):java.util.stream.Stream<generate.T>;
+
+	@:java.default
+	static function concat<T:Dynamic>(param1:java.util.stream.Stream<concat.T>, param2:java.util.stream.Stream<concat.T>):java.util.stream.Stream<concat.T>;
+}

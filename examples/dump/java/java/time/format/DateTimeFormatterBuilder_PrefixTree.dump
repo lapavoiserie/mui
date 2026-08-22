@@ -1,0 +1,35 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_PrefixTree") @:used @:native("java.time.format.DateTimeFormatterBuilder$PrefixTree") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$PrefixTree {
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.time.format.DateTimeFormatterBuilder$PrefixTree, param4:java.time.format.DateTimeFormatterBuilder$1):Void;
+
+	function copyTree():java.time.format.DateTimeFormatterBuilder$PrefixTree;
+
+	function add(param1:java.lang.String, param2:java.lang.String):Bool;
+
+	function match(param1:java.lang.CharSequence, param2:Int, param3:Int):java.lang.String;
+
+	function match(param1:java.lang.CharSequence, param2:java.text.ParsePosition):java.lang.String;
+
+	function toKey(param1:java.lang.String):java.lang.String;
+
+	function newNode(param1:java.lang.String, param2:java.lang.String, param3:java.time.format.DateTimeFormatterBuilder$PrefixTree):java.time.format.DateTimeFormatterBuilder$PrefixTree;
+
+	function isEqual(param1:java.types.Char16, param2:java.types.Char16):Bool;
+
+	function prefixOf(param1:java.lang.CharSequence, param2:Int, param3:Int):Bool;
+
+	var key:java.lang.String;
+
+	var value:java.lang.String;
+
+	var c0:java.types.Char16;
+
+	var child:java.time.format.DateTimeFormatterBuilder$PrefixTree;
+
+	var sibling:java.time.format.DateTimeFormatterBuilder$PrefixTree;
+
+	static function newTree(param1:java.time.format.DateTimeParseContext):java.time.format.DateTimeFormatterBuilder$PrefixTree;
+
+	static function newTree(param1:java.util.Set<java.lang.String>, param2:java.time.format.DateTimeParseContext):java.time.format.DateTimeFormatterBuilder$PrefixTree;
+}

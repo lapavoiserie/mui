@@ -1,0 +1,13 @@
+@:realPath("java.nio.MappedByteBuffer") @:used @:native("java.nio.MappedByteBuffer") @:libType
+extern class java.nio.MappedByteBuffer extends java.nio.ByteBuffer {
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int, param5:java.io.FileDescriptor):Void;
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int):Void;
+
+	function isLoaded():Bool;
+
+	function load():java.nio.MappedByteBuffer;
+
+	function force():java.nio.MappedByteBuffer;
+}

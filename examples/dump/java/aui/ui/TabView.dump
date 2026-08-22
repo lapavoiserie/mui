@@ -1,0 +1,11 @@
+@:used
+class aui.ui.TabView extends aui.View {
+
+	public function new(tabs:Array<aui.ui.Tab>) {
+		super();
+		this.viewType = "TabView";
+		this.tabs = tabs;
+	}
+
+	public var tabs:Array<aui.ui.Tab>;
+}

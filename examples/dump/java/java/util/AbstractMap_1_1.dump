@@ -1,0 +1,14 @@
+@:realPath("java.util.AbstractMap_1_1") @:used @:native("java.util.AbstractMap$1$1") @:libType
+extern class java.util.AbstractMap$1$1 implements java.util.Iterator<Dynamic> {
+
+	function new(param1:java.util.AbstractMap$1):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function remove():Void;
+
+	@:realPath("this_1") @:native("this$1")
+	var this$1(default,ctor):java.util.AbstractMap$1;
+}

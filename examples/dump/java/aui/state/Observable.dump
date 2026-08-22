@@ -1,0 +1,18 @@
+@:used
+class aui.state.Observable {
+
+	public function new() {}
+
+	@:value([])
+	var _changedProperties:Array<java.lang.String> = [];
+
+	public function notifyPropertyChanged(propertyName:java.lang.String) {
+		if ((this._changedProperties.indexOf(propertyName, null) == -1)) this._changedProperties.push(propertyName);
+	}
+
+	public function consumeChanges() {
+		var changes = this._changedProperties.copy();
+		this._changedProperties = [];
+		return changes;
+	}
+}

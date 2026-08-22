@@ -1,0 +1,2 @@
+@:used @:native("") @:transitive @:forwardStatics @:forward
+abstract java.lang.Double from java.lang.Double to java.lang.Double {}

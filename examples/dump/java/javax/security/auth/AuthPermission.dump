@@ -1,0 +1,7 @@
+@:realPath("java.javax.security.auth.AuthPermission") @:used @:native("javax.security.auth.AuthPermission") @:libType
+extern class javax.security.auth.AuthPermission extends java.security.BasicPermission {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+}

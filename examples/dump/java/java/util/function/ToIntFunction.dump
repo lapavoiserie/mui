@@ -1,0 +1,5 @@
+@:realPath("java.util.function.ToIntFunction") @:used @:native("java.util.function.ToIntFunction") @:libType
+extern interface java.util.function.ToIntFunction<T:Dynamic> {
+
+	function applyAsInt(param1:java.util.function.ToIntFunction.T):Int;
+}

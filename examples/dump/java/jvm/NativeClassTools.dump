@@ -1,0 +1,8 @@
+extern class jvm.NativeClassTools {
+
+	static inline function native<T>(c:Class<native.T>):java.lang.Class<native.T>;
+
+	static inline function haxe<T>(c:java.lang.Class<haxe.T>):Class<haxe.T>;
+
+	static inline function haxeEnum<T>(c:java.lang.Class<haxeEnum.T>):Enum<haxeEnum.T>;
+}

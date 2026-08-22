@@ -1,0 +1,17 @@
+@:realPath("java.time.format.DateTimeTextProvider") @:used @:native("java.time.format.DateTimeTextProvider") @:libType
+extern class java.time.format.DateTimeTextProvider {
+
+	function new():Void;
+
+	function getText(param1:java.time.temporal.TemporalField, param2:haxe.Int64, param3:java.time.format.TextStyle, param4:java.util.Locale):java.lang.String;
+
+	function getText(param1:java.time.chrono.Chronology, param2:java.time.temporal.TemporalField, param3:haxe.Int64, param4:java.time.format.TextStyle, param5:java.util.Locale):java.lang.String;
+
+	function getTextIterator(param1:java.time.temporal.TemporalField, param2:java.time.format.TextStyle, param3:java.util.Locale):java.util.Iterator<java.util.Map$Entry<java.lang.String, java.lang.Long>>;
+
+	function getTextIterator(param1:java.time.chrono.Chronology, param2:java.time.temporal.TemporalField, param3:java.time.format.TextStyle, param4:java.util.Locale):java.util.Iterator<java.util.Map$Entry<java.lang.String, java.lang.Long>>;
+
+	static function getInstance():java.time.format.DateTimeTextProvider;
+
+	static function getLocalizedResource<T:Dynamic>(param1:java.lang.String, param2:java.util.Locale):getLocalizedResource.T;
+}

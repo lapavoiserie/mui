@@ -1,0 +1,29 @@
+@:realPath("java.io.Reader") @:used @:native("java.io.Reader") @:libType
+extern class java.io.Reader implements java.lang.Readable implements java.io.Closeable {
+
+	function new():Void;
+
+	function new(param1:Dynamic):Void;
+
+	function read(param1:java.nio.CharBuffer):Int;
+
+	function read(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Int;
+
+	function read(param1:java.NativeArray<java.types.Char16>):Int;
+
+	function read():Int;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function ready():Bool;
+
+	function markSupported():Bool;
+
+	function mark(param1:Int):Void;
+
+	function reset():Void;
+
+	function close():Void;
+
+	var lock:Dynamic;
+}

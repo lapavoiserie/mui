@@ -1,0 +1,33 @@
+@:enum
+private class haxe.display._JsonModuleTypes.JsonClassKindKind_Impl_ {
+
+	@:value(cast "KNormal") @:impl @:enum
+	public static inline var KNormal:haxe.display.JsonClassKindKind<haxe.display.JsonClassKindKind.T> = cast "KNormal";
+
+	@:value(cast "KTypeParameter") @:impl @:enum
+	public static inline var KTypeParameter:haxe.display.JsonClassKindKind<haxe.display.JsonTypes> = cast "KTypeParameter";
+
+	@:value(cast "KExtension") @:impl @:enum
+	public static inline var KExtension:haxe.display.JsonClassKindKind<haxe.display.JsonTypePathWithParams> = cast "KExtension";
+
+	@:value(cast "KExpr") @:impl @:enum
+	public static inline var KExpr:haxe.display.JsonClassKindKind<haxe.display.JsonExpr> = cast "KExpr";
+
+	@:value(cast "KGeneric") @:impl @:enum
+	public static inline var KGeneric:haxe.display.JsonClassKindKind<haxe.display.JsonClassKindKind.T> = cast "KGeneric";
+
+	@:value(cast "KGenericInstance") @:impl @:enum
+	public static inline var KGenericInstance:haxe.display.JsonClassKindKind<haxe.display.JsonTypePathWithParams> = cast "KGenericInstance";
+
+	@:value(cast "KMacroType") @:impl @:enum
+	public static inline var KMacroType:haxe.display.JsonClassKindKind<haxe.display.JsonClassKindKind.T> = cast "KMacroType";
+
+	@:value(cast "KAbstractImpl") @:impl @:enum
+	public static inline var KAbstractImpl:haxe.display.JsonClassKindKind<haxe.display.JsonTypePath> = cast "KAbstractImpl";
+
+	@:value(cast "KGenericBuild") @:impl @:enum
+	public static inline var KGenericBuild:haxe.display.JsonClassKindKind<haxe.display.JsonClassKindKind.T> = cast "KGenericBuild";
+
+	@:value(cast "KModuleFields") @:impl @:enum
+	public static inline var KModuleFields:haxe.display.JsonClassKindKind<haxe.display.JsonModulePath> = cast "KModuleFields";
+}

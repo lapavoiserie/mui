@@ -1,0 +1,37 @@
+@:keep @:directlyUsed @:used @:coreApi
+class haxe.ds.StringMap<T> implements haxe.IMap<java.lang.String, haxe.ds.StringMap.T> {
+
+	@:overload
+	public function new() {
+		this.hashMap = new java.util.HashMap();
+	}
+
+	@:overload
+	function new(hashMap:java.util.HashMap<java.lang.String, haxe.ds.StringMap.T>) {
+		this.hashMap = hashMap;
+	}
+
+	var hashMap:java.util.HashMap<java.lang.String, haxe.ds.StringMap.T>;
+
+	public function set(key:java.lang.String, value:haxe.ds.StringMap.T) {
+		this.hashMap.put(key, value);
+	}
+
+	public function get(key:java.lang.String) {
+		return this.hashMap.get(key);
+	}
+
+	public function exists(key:java.lang.String) {
+		return this.hashMap.containsKey(key);
+	}
+
+	public function remove(key:java.lang.String) {
+		var has = this.exists(key);
+		this.hashMap.remove(key);
+		return has;
+	}
+
+	public function copy() {
+		return new haxe.ds.StringMap(this.hashMap.clone());
+	}
+}

@@ -1,0 +1,99 @@
+@:realPath("java.util.LinkedList") @:used @:native("java.util.LinkedList") @:libType
+extern class java.util.LinkedList<E:Dynamic> extends java.util.AbstractSequentialList<java.util.LinkedList.E> implements java.io.Serializable implements java.lang.Cloneable implements java.util.Deque<java.util.LinkedList.E> implements java.util.List<java.util.LinkedList.E> {
+
+	function new():Void;
+
+	function new(param1:java.util.Collection<java.util.LinkedList.E>):Void;
+
+	function linkLast(param1:java.util.LinkedList.E):Void;
+
+	function linkBefore(param1:java.util.LinkedList.E, param2:java.util.LinkedList$Node<java.util.LinkedList.E>):Void;
+
+	function unlink(param1:java.util.LinkedList$Node<java.util.LinkedList.E>):java.util.LinkedList.E;
+
+	function getFirst():java.util.LinkedList.E;
+
+	function getLast():java.util.LinkedList.E;
+
+	function removeFirst():java.util.LinkedList.E;
+
+	function removeLast():java.util.LinkedList.E;
+
+	function addFirst(param1:java.util.LinkedList.E):Void;
+
+	function addLast(param1:java.util.LinkedList.E):Void;
+
+	function contains(param1:Dynamic):Bool;
+
+	function size():Int;
+
+	function add(param1:java.util.LinkedList.E):Bool;
+
+	function add(param1:Int, param2:java.util.LinkedList.E):Void;
+
+	function remove(param1:Dynamic):Bool;
+
+	function remove():java.util.LinkedList.E;
+
+	function remove(param1:Int):java.util.LinkedList.E;
+
+	function addAll(param1:java.util.Collection<java.util.LinkedList.E>):Bool;
+
+	function addAll(param1:Int, param2:java.util.Collection<java.util.LinkedList.E>):Bool;
+
+	function clear():Void;
+
+	function get(param1:Int):java.util.LinkedList.E;
+
+	function set(param1:Int, param2:java.util.LinkedList.E):java.util.LinkedList.E;
+
+	function node(param1:Int):java.util.LinkedList$Node<java.util.LinkedList.E>;
+
+	function indexOf(param1:Dynamic):Int;
+
+	function lastIndexOf(param1:Dynamic):Int;
+
+	function peek():java.util.LinkedList.E;
+
+	function element():java.util.LinkedList.E;
+
+	function poll():java.util.LinkedList.E;
+
+	function offer(param1:java.util.LinkedList.E):Bool;
+
+	function offerFirst(param1:java.util.LinkedList.E):Bool;
+
+	function offerLast(param1:java.util.LinkedList.E):Bool;
+
+	function peekFirst():java.util.LinkedList.E;
+
+	function peekLast():java.util.LinkedList.E;
+
+	function pollFirst():java.util.LinkedList.E;
+
+	function pollLast():java.util.LinkedList.E;
+
+	function push(param1:java.util.LinkedList.E):Void;
+
+	function pop():java.util.LinkedList.E;
+
+	function removeFirstOccurrence(param1:Dynamic):Bool;
+
+	function removeLastOccurrence(param1:Dynamic):Bool;
+
+	function listIterator(param1:Int):java.util.ListIterator<java.util.LinkedList.E>;
+
+	function descendingIterator():java.util.Iterator<java.util.LinkedList.E>;
+
+	function clone():Dynamic;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function spliterator():java.util.Spliterator<java.util.LinkedList.E>;
+
+	var first:java.util.LinkedList$Node<java.util.LinkedList.E>;
+
+	var last:java.util.LinkedList$Node<java.util.LinkedList.E>;
+}

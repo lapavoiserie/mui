@@ -1,0 +1,15 @@
+@:keep @:directlyUsed @:used
+private class sys.thread._Thread.Thread_Impl_ {
+
+	public static var events(get,never):sys.thread.EventLoop;
+
+	static function get_events(this1:sys.thread._Thread.ThreadImpl) {
+		if ((this1.events == null)) throw new sys.thread.NoEventLoopException(null, null);
+		return this1.events;
+	}
+
+	@:keep
+	static function processEvents() {
+		cast cast sys.thread._Thread.HaxeThread.get(java.lang.Thread.currentThread()).events.loop();
+	}
+}

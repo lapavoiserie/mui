@@ -1,0 +1,394 @@
+@:realPath("java.lang.CharacterClass") @:directlyUsed @:used @:native("java.lang.Character")
+extern class java.lang.Character implements java.lang.Comparable<java.lang.Character> {
+
+	@:overload
+	function new(param1:java.types.Char16):Void;
+
+	@:overload
+	function charValue():java.types.Char16;
+
+	@:overload
+	function compareTo(param1:java.lang.Character):Int;
+
+	@:overload
+	function compareTo(param1:Dynamic):Int;
+
+	@:overload
+	function equals(param1:Dynamic):Bool;
+
+	@:overload
+	function hashCode():Int;
+
+	@:overload
+	function toString():java.lang.String;
+
+	static var COMBINING_SPACING_MARK(default,never):java.types.Char16;
+
+	static var CONNECTOR_PUNCTUATION(default,never):java.types.Char16;
+
+	static var CONTROL(default,never):java.types.Char16;
+
+	static var CURRENCY_SYMBOL(default,never):java.types.Char16;
+
+	static var DASH_PUNCTUATION(default,never):java.types.Char16;
+
+	static var DECIMAL_DIGIT_NUMBER(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_ARABIC_NUMBER(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_BOUNDARY_NEUTRAL(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_COMMON_NUMBER_SEPARATOR(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_EUROPEAN_NUMBER(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_EUROPEAN_NUMBER_SEPARATOR(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_EUROPEAN_NUMBER_TERMINATOR(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_LEFT_TO_RIGHT(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_LEFT_TO_RIGHT_EMBEDDING(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_LEFT_TO_RIGHT_OVERRIDE(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_NONSPACING_MARK(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_OTHER_NEUTRALS(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_PARAGRAPH_SEPARATOR(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_POP_DIRECTIONAL_FORMAT(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_RIGHT_TO_LEFT(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_SEGMENT_SEPARATOR(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_UNDEFINED(default,never):java.types.Char16;
+
+	static var DIRECTIONALITY_WHITESPACE(default,never):java.types.Char16;
+
+	static var ENCLOSING_MARK(default,never):java.types.Char16;
+
+	static var END_PUNCTUATION(default,never):java.types.Char16;
+
+	static var FINAL_QUOTE_PUNCTUATION(default,never):java.types.Char16;
+
+	static var FORMAT(default,never):java.types.Char16;
+
+	static var INITIAL_QUOTE_PUNCTUATION(default,never):java.types.Char16;
+
+	static var LETTER_NUMBER(default,never):java.types.Char16;
+
+	static var LINE_SEPARATOR(default,never):java.types.Char16;
+
+	static var LOWERCASE_LETTER(default,never):java.types.Char16;
+
+	static var MATH_SYMBOL(default,never):java.types.Char16;
+
+	static var MAX_CODE_POINT(default,never):Int;
+
+	static var MAX_HIGH_SURROGATE(default,never):java.types.Char16;
+
+	static var MAX_LOW_SURROGATE(default,never):java.types.Char16;
+
+	static var MAX_RADIX(default,never):Int;
+
+	static var MAX_SURROGATE(default,never):java.types.Char16;
+
+	static var MAX_VALUE(default,never):java.types.Char16;
+
+	static var MIN_CODE_POINT(default,never):Int;
+
+	static var MIN_HIGH_SURROGATE(default,never):java.types.Char16;
+
+	static var MIN_LOW_SURROGATE(default,never):java.types.Char16;
+
+	static var MIN_RADIX(default,never):Int;
+
+	static var MIN_SUPPLEMENTARY_CODE_POINT(default,never):Int;
+
+	static var MIN_SURROGATE(default,never):java.types.Char16;
+
+	static var MIN_VALUE(default,never):java.types.Char16;
+
+	static var MODIFIER_LETTER(default,never):java.types.Char16;
+
+	static var MODIFIER_SYMBOL(default,never):java.types.Char16;
+
+	static var NON_SPACING_MARK(default,never):java.types.Char16;
+
+	static var OTHER_LETTER(default,never):java.types.Char16;
+
+	static var OTHER_NUMBER(default,never):java.types.Char16;
+
+	static var OTHER_PUNCTUATION(default,never):java.types.Char16;
+
+	static var OTHER_SYMBOL(default,never):java.types.Char16;
+
+	static var PARAGRAPH_SEPARATOR(default,never):java.types.Char16;
+
+	static var PRIVATE_USE(default,never):java.types.Char16;
+
+	static var SIZE(default,never):Int;
+
+	static var SPACE_SEPARATOR(default,never):java.types.Char16;
+
+	static var START_PUNCTUATION(default,never):java.types.Char16;
+
+	static var SURROGATE(default,never):java.types.Char16;
+
+	static var TITLECASE_LETTER(default,never):java.types.Char16;
+
+	static var TYPE(default,never):java.lang.Class<java.lang.Character>;
+
+	static var UNASSIGNED(default,never):java.types.Char16;
+
+	static var UPPERCASE_LETTER(default,never):java.types.Char16;
+
+	@:overload
+	static function charCount(param1:Int):Int;
+
+	@:overload
+	static function codePointAt(param1:java.lang.CharSequence, param2:Int):Int;
+
+	@:overload
+	static function codePointAt(param1:java.NativeArray<java.types.Char16>, param2:Int):Int;
+
+	@:overload
+	static function codePointAt(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Int;
+
+	@:overload
+	static function codePointBefore(param1:java.lang.CharSequence, param2:Int):Int;
+
+	@:overload
+	static function codePointBefore(param1:java.NativeArray<java.types.Char16>, param2:Int):Int;
+
+	@:overload
+	static function codePointBefore(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Int;
+
+	@:overload
+	static function codePointCount(param1:java.lang.CharSequence, param2:Int, param3:Int):Int;
+
+	@:overload
+	static function codePointCount(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):Int;
+
+	@:overload
+	static function compare(param1:java.types.Char16, param2:java.types.Char16):Int;
+
+	@:overload
+	static function digit(param1:java.types.Char16, param2:Int):Int;
+
+	@:overload
+	static function digit(param1:Int, param2:Int):Int;
+
+	@:overload
+	static function forDigit(param1:Int, param2:Int):java.types.Char16;
+
+	@:overload
+	static function getDirectionality(param1:java.types.Char16):java.types.Char16;
+
+	@:overload
+	static function getDirectionality(param1:Int):java.types.Char16;
+
+	@:overload
+	static function getName(param1:Int):java.lang.String;
+
+	@:overload
+	static function getNumericValue(param1:java.types.Char16):Int;
+
+	@:overload
+	static function getNumericValue(param1:Int):Int;
+
+	@:overload
+	static function getType(param1:java.types.Char16):Int;
+
+	@:overload
+	static function getType(param1:Int):Int;
+
+	@:overload
+	static function highSurrogate(param1:Int):java.types.Char16;
+
+	@:overload
+	static function isAlphabetic(param1:Int):Bool;
+
+	@:overload
+	static function isBmpCodePoint(param1:Int):Bool;
+
+	@:overload
+	static function isDefined(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isDefined(param1:Int):Bool;
+
+	@:overload
+	static function isDigit(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isDigit(param1:Int):Bool;
+
+	@:overload
+	static function isHighSurrogate(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isISOControl(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isISOControl(param1:Int):Bool;
+
+	@:overload
+	static function isIdentifierIgnorable(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isIdentifierIgnorable(param1:Int):Bool;
+
+	@:overload
+	static function isIdeographic(param1:Int):Bool;
+
+	@:overload
+	static function isJavaIdentifierPart(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isJavaIdentifierPart(param1:Int):Bool;
+
+	@:overload
+	static function isJavaIdentifierStart(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isJavaIdentifierStart(param1:Int):Bool;
+
+	@:overload @:deprecated
+	static function isJavaLetter(param1:java.types.Char16):Bool;
+
+	@:overload @:deprecated
+	static function isJavaLetterOrDigit(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isLetter(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isLetter(param1:Int):Bool;
+
+	@:overload
+	static function isLetterOrDigit(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isLetterOrDigit(param1:Int):Bool;
+
+	@:overload
+	static function isLowSurrogate(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isLowerCase(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isLowerCase(param1:Int):Bool;
+
+	@:overload
+	static function isMirrored(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isMirrored(param1:Int):Bool;
+
+	@:overload @:deprecated
+	static function isSpace(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isSpaceChar(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isSpaceChar(param1:Int):Bool;
+
+	@:overload
+	static function isSupplementaryCodePoint(param1:Int):Bool;
+
+	@:overload
+	static function isSurrogate(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isSurrogatePair(param1:java.types.Char16, param2:java.types.Char16):Bool;
+
+	@:overload
+	static function isTitleCase(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isTitleCase(param1:Int):Bool;
+
+	@:overload
+	static function isUnicodeIdentifierPart(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isUnicodeIdentifierPart(param1:Int):Bool;
+
+	@:overload
+	static function isUnicodeIdentifierStart(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isUnicodeIdentifierStart(param1:Int):Bool;
+
+	@:overload
+	static function isUpperCase(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isUpperCase(param1:Int):Bool;
+
+	@:overload
+	static function isValidCodePoint(param1:Int):Bool;
+
+	@:overload
+	static function isWhitespace(param1:java.types.Char16):Bool;
+
+	@:overload
+	static function isWhitespace(param1:Int):Bool;
+
+	@:overload
+	static function lowSurrogate(param1:Int):java.types.Char16;
+
+	@:overload
+	static function offsetByCodePoints(param1:java.lang.CharSequence, param2:Int, param3:Int):Int;
+
+	@:overload
+	static function offsetByCodePoints(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int, param4:Int, param5:Int):Int;
+
+	@:overload
+	static function reverseBytes(param1:java.types.Char16):java.types.Char16;
+
+	@:overload
+	static function toChars(param1:Int, param2:java.NativeArray<java.types.Char16>, param3:Int):Int;
+
+	@:overload
+	static function toChars(param1:Int):java.NativeArray<java.types.Char16>;
+
+	@:overload
+	static function toCodePoint(param1:java.types.Char16, param2:java.types.Char16):Int;
+
+	@:overload
+	static function toLowerCase(param1:java.types.Char16):java.types.Char16;
+
+	@:overload
+	static function toLowerCase(param1:Int):Int;
+
+	@:realPath("_toString") @:native("toString") @:overload
+	static function toString(param1:java.types.Char16):java.lang.String;
+
+	@:overload
+	static function toTitleCase(param1:java.types.Char16):java.types.Char16;
+
+	@:overload
+	static function toTitleCase(param1:Int):Int;
+
+	@:overload
+	static function toUpperCase(param1:java.types.Char16):java.types.Char16;
+
+	@:overload
+	static function toUpperCase(param1:Int):Int;
+
+	@:overload
+	static function valueOf(param1:java.types.Char16):java.lang.Character;
+}

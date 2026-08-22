@@ -1,0 +1,47 @@
+@:realPath("java.lang.ProcessBuilder") @:native("java.lang.ProcessBuilder") @:libType
+extern class java.lang.ProcessBuilder {
+
+	function new(param1:java.util.List<java.lang.String>):Void;
+
+	function new(param1:haxe.Rest<java.lang.String>):Void;
+
+	function command(param1:java.util.List<java.lang.String>):java.lang.ProcessBuilder;
+
+	function command():java.util.List<java.lang.String>;
+
+	function command(param1:haxe.Rest<java.lang.String>):java.lang.ProcessBuilder;
+
+	function environment():java.util.Map<java.lang.String, java.lang.String>;
+
+	function environment(param1:java.NativeArray<java.lang.String>):java.lang.ProcessBuilder;
+
+	function directory():java.io.File;
+
+	function directory(param1:java.io.File):java.lang.ProcessBuilder;
+
+	function redirectInput(param1:java.lang.ProcessBuilder$Redirect):java.lang.ProcessBuilder;
+
+	function redirectInput():java.lang.ProcessBuilder$Redirect;
+
+	function redirectInput(param1:java.io.File):java.lang.ProcessBuilder;
+
+	function redirectOutput(param1:java.lang.ProcessBuilder$Redirect):java.lang.ProcessBuilder;
+
+	function redirectOutput():java.lang.ProcessBuilder$Redirect;
+
+	function redirectOutput(param1:java.io.File):java.lang.ProcessBuilder;
+
+	function redirectError(param1:java.lang.ProcessBuilder$Redirect):java.lang.ProcessBuilder;
+
+	function redirectError():java.lang.ProcessBuilder$Redirect;
+
+	function redirectError(param1:java.io.File):java.lang.ProcessBuilder;
+
+	function inheritIO():java.lang.ProcessBuilder;
+
+	function redirectErrorStream():Bool;
+
+	function redirectErrorStream(param1:Bool):java.lang.ProcessBuilder;
+
+	function start():java.lang.Process;
+}

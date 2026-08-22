@@ -1,0 +1,20 @@
+@:realPath("java.util.Collections_CheckedMap_CheckedEntrySet_1") @:used @:native("java.util.Collections$CheckedMap$CheckedEntrySet$1") @:libType
+extern class java.util.Collections$CheckedMap$CheckedEntrySet$1 implements java.util.Iterator<java.util.Map$Entry<Dynamic, Dynamic>> {
+
+	function new(param1:java.util.Collections$CheckedMap$CheckedEntrySet<Dynamic, Dynamic>, param2:java.util.Iterator<Dynamic>, param3:java.lang.Class<Dynamic>):Void;
+
+	function hasNext():Bool;
+
+	function remove():Void;
+
+	function next():java.util.Map$Entry<Dynamic, Dynamic>;
+
+	@:realPath("val_i") @:native("val$i")
+	var val$i(default,ctor):java.util.Iterator<Dynamic>;
+
+	@:realPath("val_valueType") @:native("val$valueType")
+	var val$valueType(default,ctor):java.lang.Class<Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.Collections$CheckedMap$CheckedEntrySet<Dynamic, Dynamic>;
+}

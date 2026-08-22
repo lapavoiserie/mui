@@ -1,0 +1,2 @@
+@:used @:notNull @:runtimeValue @:coreType
+abstract java.Int64 from Int  from Float {}

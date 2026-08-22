@@ -1,0 +1,49 @@
+@:realPath("java.util.concurrent.atomic.AtomicInteger") @:used @:native("java.util.concurrent.atomic.AtomicInteger") @:libType
+extern class java.util.concurrent.atomic.AtomicInteger extends java.lang.Number implements java.io.Serializable {
+
+	function new(param1:Int):Void;
+
+	function new():Void;
+
+	function get():Int;
+
+	function set(param1:Int):Void;
+
+	function lazySet(param1:Int):Void;
+
+	function getAndSet(param1:Int):Int;
+
+	function compareAndSet(param1:Int, param2:Int):Bool;
+
+	function weakCompareAndSet(param1:Int, param2:Int):Bool;
+
+	function getAndIncrement():Int;
+
+	function getAndDecrement():Int;
+
+	function getAndAdd(param1:Int):Int;
+
+	function incrementAndGet():Int;
+
+	function decrementAndGet():Int;
+
+	function addAndGet(param1:Int):Int;
+
+	function getAndUpdate(param1:java.util.function.IntUnaryOperator):Int;
+
+	function updateAndGet(param1:java.util.function.IntUnaryOperator):Int;
+
+	function getAndAccumulate(param1:Int, param2:java.util.function.IntBinaryOperator):Int;
+
+	function accumulateAndGet(param1:Int, param2:java.util.function.IntBinaryOperator):Int;
+
+	function toString():java.lang.String;
+
+	function intValue():Int;
+
+	function longValue():haxe.Int64;
+
+	function floatValue():Single;
+
+	function doubleValue():Float;
+}

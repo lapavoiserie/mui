@@ -1,0 +1,39 @@
+@:realPath("java.time.chrono.ChronoPeriod") @:used @:native("java.time.chrono.ChronoPeriod") @:libType
+extern interface java.time.chrono.ChronoPeriod implements java.time.temporal.TemporalAmount {
+
+	function get(param1:java.time.temporal.TemporalUnit):haxe.Int64;
+
+	function getUnits():java.util.List<java.time.temporal.TemporalUnit>;
+
+	function getChronology():java.time.chrono.Chronology;
+
+	@:java.default
+	function isZero():Bool;
+
+	@:java.default
+	function isNegative():Bool;
+
+	function plus(param1:java.time.temporal.TemporalAmount):java.time.chrono.ChronoPeriod;
+
+	function minus(param1:java.time.temporal.TemporalAmount):java.time.chrono.ChronoPeriod;
+
+	function multipliedBy(param1:Int):java.time.chrono.ChronoPeriod;
+
+	@:java.default
+	function negated():java.time.chrono.ChronoPeriod;
+
+	function normalized():java.time.chrono.ChronoPeriod;
+
+	function addTo(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function subtractFrom(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	@:java.default
+	static function between(param1:java.time.chrono.ChronoLocalDate, param2:java.time.chrono.ChronoLocalDate):java.time.chrono.ChronoPeriod;
+}

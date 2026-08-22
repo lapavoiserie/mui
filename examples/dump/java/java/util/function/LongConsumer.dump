@@ -1,0 +1,8 @@
+@:realPath("java.util.function.LongConsumer") @:used @:native("java.util.function.LongConsumer") @:libType
+extern interface java.util.function.LongConsumer {
+
+	function accept(param1:haxe.Int64):Void;
+
+	@:java.default
+	function andThen(param1:java.util.function.LongConsumer):java.util.function.LongConsumer;
+}

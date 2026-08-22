@@ -1,0 +1,33 @@
+@:realPath("java.sun.reflect.LangReflectAccess") @:used @:native("sun.reflect.LangReflectAccess") @:libType
+extern interface sun.reflect.LangReflectAccess {
+
+	function newField(param1:java.lang.Class<Dynamic>, param2:java.lang.String, param3:java.lang.Class<Dynamic>, param4:Int, param5:Int, param6:java.lang.String, param7:java.NativeArray<java.types.Int8>):java.lang.reflect.Field;
+
+	function newMethod(param1:java.lang.Class<Dynamic>, param2:java.lang.String, param3:java.NativeArray<java.lang.Class<Dynamic>>, param4:java.lang.Class<Dynamic>, param5:java.NativeArray<java.lang.Class<Dynamic>>, param6:Int, param7:Int, param8:java.lang.String, param9:java.NativeArray<java.types.Int8>, param10:java.NativeArray<java.types.Int8>, param11:java.NativeArray<java.types.Int8>):java.lang.reflect.Method;
+
+	function newConstructor<T:Dynamic>(param1:java.lang.Class<newConstructor.T>, param2:java.NativeArray<java.lang.Class<Dynamic>>, param3:java.NativeArray<java.lang.Class<Dynamic>>, param4:Int, param5:Int, param6:java.lang.String, param7:java.NativeArray<java.types.Int8>, param8:java.NativeArray<java.types.Int8>):java.lang.reflect.Constructor<newConstructor.T>;
+
+	function getMethodAccessor(param1:java.lang.reflect.Method):sun.reflect.MethodAccessor;
+
+	function setMethodAccessor(param1:java.lang.reflect.Method, param2:sun.reflect.MethodAccessor):Void;
+
+	function getConstructorAccessor(param1:java.lang.reflect.Constructor<Dynamic>):sun.reflect.ConstructorAccessor;
+
+	function setConstructorAccessor(param1:java.lang.reflect.Constructor<Dynamic>, param2:sun.reflect.ConstructorAccessor):Void;
+
+	function getExecutableTypeAnnotationBytes(param1:java.lang.reflect.Executable):java.NativeArray<java.types.Int8>;
+
+	function getConstructorSlot(param1:java.lang.reflect.Constructor<Dynamic>):Int;
+
+	function getConstructorSignature(param1:java.lang.reflect.Constructor<Dynamic>):java.lang.String;
+
+	function getConstructorAnnotations(param1:java.lang.reflect.Constructor<Dynamic>):java.NativeArray<java.types.Int8>;
+
+	function getConstructorParameterAnnotations(param1:java.lang.reflect.Constructor<Dynamic>):java.NativeArray<java.types.Int8>;
+
+	function copyMethod(param1:java.lang.reflect.Method):java.lang.reflect.Method;
+
+	function copyField(param1:java.lang.reflect.Field):java.lang.reflect.Field;
+
+	function copyConstructor<T:Dynamic>(param1:java.lang.reflect.Constructor<copyConstructor.T>):java.lang.reflect.Constructor<copyConstructor.T>;
+}

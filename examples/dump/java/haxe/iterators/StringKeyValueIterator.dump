@@ -1,0 +1,9 @@
+@:keep @:directlyUsed @:used
+class haxe.iterators.StringKeyValueIterator {
+
+	public inline function new(s:java.lang.String) {
+		this.s = s;
+	}
+
+	var s:java.lang.String;
+}

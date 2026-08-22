@@ -1,0 +1,7 @@
+@:realPath("java.lang.ThreadLocal_ThreadLocalMap") @:native("java.lang.ThreadLocal$ThreadLocalMap") @:libType
+extern class java.lang.ThreadLocal$ThreadLocalMap {
+
+	function new(param1:java.lang.ThreadLocal<Dynamic>, param2:Dynamic):Void;
+
+	function new(param1:java.lang.ThreadLocal$ThreadLocalMap, param2:java.lang.ThreadLocal$1):Void;
+}

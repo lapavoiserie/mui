@@ -1,0 +1,15 @@
+@:realPath("java.util.Queue") @:used @:native("java.util.Queue") @:libType
+extern interface java.util.Queue<E:Dynamic> implements java.util.Collection<java.util.Queue.E> {
+
+	function add(param1:java.util.Queue.E):Bool;
+
+	function offer(param1:java.util.Queue.E):Bool;
+
+	function remove():java.util.Queue.E;
+
+	function poll():java.util.Queue.E;
+
+	function element():java.util.Queue.E;
+
+	function peek():java.util.Queue.E;
+}

@@ -1,0 +1,73 @@
+@:realPath("java.sun.util.locale.LanguageTag") @:native("sun.util.locale.LanguageTag") @:libType
+extern class sun.util.locale.LanguageTag {
+
+	function getLanguage():java.lang.String;
+
+	function getExtlangs():java.util.List<java.lang.String>;
+
+	function getScript():java.lang.String;
+
+	function getRegion():java.lang.String;
+
+	function getVariants():java.util.List<java.lang.String>;
+
+	function getExtensions():java.util.List<java.lang.String>;
+
+	function getPrivateuse():java.lang.String;
+
+	function toString():java.lang.String;
+
+	static function parse(param1:java.lang.String, param2:sun.util.locale.ParseStatus):sun.util.locale.LanguageTag;
+
+	static function parseLocale(param1:sun.util.locale.BaseLocale, param2:sun.util.locale.LocaleExtensions):sun.util.locale.LanguageTag;
+
+	static function isLanguage(param1:java.lang.String):Bool;
+
+	static function isExtlang(param1:java.lang.String):Bool;
+
+	static function isScript(param1:java.lang.String):Bool;
+
+	static function isRegion(param1:java.lang.String):Bool;
+
+	static function isVariant(param1:java.lang.String):Bool;
+
+	static function isExtensionSingleton(param1:java.lang.String):Bool;
+
+	static function isExtensionSingletonChar(param1:java.types.Char16):Bool;
+
+	static function isExtensionSubtag(param1:java.lang.String):Bool;
+
+	static function isPrivateusePrefix(param1:java.lang.String):Bool;
+
+	static function isPrivateusePrefixChar(param1:java.types.Char16):Bool;
+
+	static function isPrivateuseSubtag(param1:java.lang.String):Bool;
+
+	static function canonicalizeLanguage(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizeExtlang(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizeScript(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizeRegion(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizeVariant(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizeExtension(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizeExtensionSingleton(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizeExtensionSubtag(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizePrivateuse(param1:java.lang.String):java.lang.String;
+
+	static function canonicalizePrivateuseSubtag(param1:java.lang.String):java.lang.String;
+
+	static var SEP(default,never):java.lang.String;
+
+	static var PRIVATEUSE(default,never):java.lang.String;
+
+	static var UNDETERMINED(default,never):java.lang.String;
+
+	static var PRIVUSE_VARIANT_PREFIX(default,never):java.lang.String;
+}

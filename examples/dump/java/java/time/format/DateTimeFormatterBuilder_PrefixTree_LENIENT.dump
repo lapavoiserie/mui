@@ -1,0 +1,9 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_PrefixTree_LENIENT") @:used @:native("java.time.format.DateTimeFormatterBuilder$PrefixTree$LENIENT") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$PrefixTree$LENIENT extends java.time.format.DateTimeFormatterBuilder$PrefixTree$CI {
+
+	function newNode(param1:java.lang.String, param2:java.lang.String, param3:java.time.format.DateTimeFormatterBuilder$PrefixTree):java.time.format.DateTimeFormatterBuilder$PrefixTree$CI;
+
+	function toKey(param1:java.lang.String):java.lang.String;
+
+	function match(param1:java.lang.CharSequence, param2:java.text.ParsePosition):java.lang.String;
+}

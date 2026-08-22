@@ -1,0 +1,7 @@
+@:realPath("java.util.Properties_XmlSupport") @:native("java.util.Properties$XmlSupport") @:libType
+extern class java.util.Properties$XmlSupport {
+
+	static function load(param1:java.util.Properties, param2:java.io.InputStream):Void;
+
+	static function save(param1:java.util.Properties, param2:java.io.OutputStream, param3:java.lang.String, param4:java.lang.String):Void;
+}

@@ -1,0 +1,11 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_PrefixTree_CI") @:used @:native("java.time.format.DateTimeFormatterBuilder$PrefixTree$CI") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$PrefixTree$CI extends java.time.format.DateTimeFormatterBuilder$PrefixTree {
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.time.format.DateTimeFormatterBuilder$PrefixTree, param4:java.time.format.DateTimeFormatterBuilder$1):Void;
+
+	function newNode(param1:java.lang.String, param2:java.lang.String, param3:java.time.format.DateTimeFormatterBuilder$PrefixTree):java.time.format.DateTimeFormatterBuilder$PrefixTree$CI;
+
+	function isEqual(param1:java.types.Char16, param2:java.types.Char16):Bool;
+
+	function prefixOf(param1:java.lang.CharSequence, param2:Int, param3:Int):Bool;
+}

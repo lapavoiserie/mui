@@ -1,0 +1,9 @@
+@:realPath("java.lang.Appendable") @:used @:native("java.lang.Appendable") @:libType
+extern interface java.lang.Appendable {
+
+	function append(param1:java.lang.CharSequence):java.lang.Appendable;
+
+	function append(param1:java.types.Char16):java.lang.Appendable;
+
+	function append(param1:java.lang.CharSequence, param2:Int, param3:Int):java.lang.Appendable;
+}

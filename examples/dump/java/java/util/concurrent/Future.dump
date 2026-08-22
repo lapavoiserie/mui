@@ -1,0 +1,13 @@
+@:realPath("java.util.concurrent.Future") @:used @:native("java.util.concurrent.Future") @:libType
+extern interface java.util.concurrent.Future<V:Dynamic> {
+
+	function cancel(param1:Bool):Bool;
+
+	function isCancelled():Bool;
+
+	function isDone():Bool;
+
+	function get():java.util.concurrent.Future.V;
+
+	function get(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.Future.V;
+}

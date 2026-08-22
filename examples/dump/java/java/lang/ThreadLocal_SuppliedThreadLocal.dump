@@ -1,0 +1,7 @@
+@:realPath("java.lang.ThreadLocal_SuppliedThreadLocal") @:used @:native("java.lang.ThreadLocal$SuppliedThreadLocal") @:libType
+extern class java.lang.ThreadLocal$SuppliedThreadLocal<T:Dynamic> extends java.lang.ThreadLocal<java.lang.ThreadLocal_SuppliedThreadLocal.T> {
+
+	function new(param1:java.util.function.Supplier<java.lang.ThreadLocal_SuppliedThreadLocal.T>):Void;
+
+	function initialValue():java.lang.ThreadLocal_SuppliedThreadLocal.T;
+}

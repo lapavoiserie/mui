@@ -1,0 +1,61 @@
+@:realPath("java.io.ObjectStreamConstants") @:used @:native("java.io.ObjectStreamConstants") @:libType
+extern interface java.io.ObjectStreamConstants {
+
+	static var STREAM_MAGIC(default,never):java.types.Int16;
+
+	static var STREAM_VERSION(default,never):java.types.Int16;
+
+	static var TC_BASE(default,never):java.types.Int8;
+
+	static var TC_NULL(default,never):java.types.Int8;
+
+	static var TC_REFERENCE(default,never):java.types.Int8;
+
+	static var TC_CLASSDESC(default,never):java.types.Int8;
+
+	static var TC_OBJECT(default,never):java.types.Int8;
+
+	static var TC_STRING(default,never):java.types.Int8;
+
+	static var TC_ARRAY(default,never):java.types.Int8;
+
+	static var TC_CLASS(default,never):java.types.Int8;
+
+	static var TC_BLOCKDATA(default,never):java.types.Int8;
+
+	static var TC_ENDBLOCKDATA(default,never):java.types.Int8;
+
+	static var TC_RESET(default,never):java.types.Int8;
+
+	static var TC_BLOCKDATALONG(default,never):java.types.Int8;
+
+	static var TC_EXCEPTION(default,never):java.types.Int8;
+
+	static var TC_LONGSTRING(default,never):java.types.Int8;
+
+	static var TC_PROXYCLASSDESC(default,never):java.types.Int8;
+
+	static var TC_ENUM(default,never):java.types.Int8;
+
+	static var TC_MAX(default,never):java.types.Int8;
+
+	static var baseWireHandle(default,never):Int;
+
+	static var SC_WRITE_METHOD(default,never):java.types.Int8;
+
+	static var SC_BLOCK_DATA(default,never):java.types.Int8;
+
+	static var SC_SERIALIZABLE(default,never):java.types.Int8;
+
+	static var SC_EXTERNALIZABLE(default,never):java.types.Int8;
+
+	static var SC_ENUM(default,never):java.types.Int8;
+
+	static var SUBSTITUTION_PERMISSION(default,never):java.io.SerializablePermission;
+
+	static var SUBCLASS_IMPLEMENTATION_PERMISSION(default,never):java.io.SerializablePermission;
+
+	static var PROTOCOL_VERSION_1(default,never):Int;
+
+	static var PROTOCOL_VERSION_2(default,never):Int;
+}

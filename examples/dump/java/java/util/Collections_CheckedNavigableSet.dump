@@ -1,0 +1,39 @@
+@:realPath("java.util.Collections_CheckedNavigableSet") @:used @:native("java.util.Collections$CheckedNavigableSet") @:libType
+extern class java.util.Collections$CheckedNavigableSet<E:Dynamic> extends java.util.Collections$CheckedSortedSet<java.util.Collections_CheckedNavigableSet.E> implements java.io.Serializable implements java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E> {
+
+	function new(param1:java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>, param2:java.lang.Class<java.util.Collections_CheckedNavigableSet.E>):Void;
+
+	function lower(param1:java.util.Collections_CheckedNavigableSet.E):java.util.Collections_CheckedNavigableSet.E;
+
+	function floor(param1:java.util.Collections_CheckedNavigableSet.E):java.util.Collections_CheckedNavigableSet.E;
+
+	function ceiling(param1:java.util.Collections_CheckedNavigableSet.E):java.util.Collections_CheckedNavigableSet.E;
+
+	function higher(param1:java.util.Collections_CheckedNavigableSet.E):java.util.Collections_CheckedNavigableSet.E;
+
+	function pollFirst():java.util.Collections_CheckedNavigableSet.E;
+
+	function pollLast():java.util.Collections_CheckedNavigableSet.E;
+
+	function descendingSet():java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>;
+
+	function descendingIterator():java.util.Iterator<java.util.Collections_CheckedNavigableSet.E>;
+
+	function subSet(param1:java.util.Collections_CheckedNavigableSet.E, param2:java.util.Collections_CheckedNavigableSet.E):java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>;
+
+	function subSet(param1:Dynamic, param2:Dynamic):java.util.SortedSet<Dynamic>;
+
+	function subSet(param1:java.util.Collections_CheckedNavigableSet.E, param2:Bool, param3:java.util.Collections_CheckedNavigableSet.E, param4:Bool):java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>;
+
+	function headSet(param1:java.util.Collections_CheckedNavigableSet.E):java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>;
+
+	function headSet(param1:Dynamic):java.util.SortedSet<Dynamic>;
+
+	function headSet(param1:java.util.Collections_CheckedNavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>;
+
+	function tailSet(param1:java.util.Collections_CheckedNavigableSet.E):java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>;
+
+	function tailSet(param1:Dynamic):java.util.SortedSet<Dynamic>;
+
+	function tailSet(param1:java.util.Collections_CheckedNavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.Collections_CheckedNavigableSet.E>;
+}

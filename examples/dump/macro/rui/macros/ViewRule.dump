@@ -1,0 +1,571 @@
+class rui.macros.ViewRule {
+
+	@:value(false)
+	static var registered:Bool = false;
+
+	@:value([])
+	static var targets:Array<{ rawCells : Bool, pack : String, name : String, method : Null<String>, meta : Null<String> }> = [];
+
+	@:value({ rawCells : false })
+	public static function register(appType:String, viewMethod:String, rawCells:Bool = false) {
+		var pack = appType.split(".");
+		var name = pack.pop();
+		rui.macros.ViewRule.targets.push({name : name, pack : pack.join("."), method : viewMethod, meta : null, rawCells : rawCells});
+		rui.macros.ViewRule.hook();
+	}
+
+	@:value({ rawCells : false })
+	public static function registerMeta(appType:String, metaName:String, rawCells:Bool = false) {
+		var pack = appType.split(".");
+		var name = pack.pop();
+		rui.macros.ViewRule.targets.push({name : name, pack : pack.join("."), method : null, meta : metaName, rawCells : rawCells});
+		rui.macros.ViewRule.hook();
+	}
+
+	static function hook() {
+		if (rui.macros.ViewRule.registered) {
+			return;
+		};
+		rui.macros.ViewRule.registered = true;
+		haxe.macro.Context.onAfterTyping(function(types:Array<haxe.macro.ModuleType>) {
+			{
+				var ` = 0;
+				while (` < types.length) {
+					var mt = types[`];
+					++ `;
+					@:ast(switch (mt) {
+	case TClassDecl(ref):
+		var cls = ref.get();
+		if (isFramework(cls)) continue;
+		for (t  in  targets) if (isApp(cls, t.name, t.pack)) {
+			if (t.method != null) checkView(cls, t.method, t.rawCells);
+			if (t.meta != null) checkMeta(cls, t.meta, t.rawCells);
+		};	
+	default:
+}) if (enumIndex mt == 0) {
+						var ` = mt[0];
+						{
+							var ref = `;
+							{
+								var cls = ref.get();
+								if (rui.macros.ViewRule.isFramework(cls)) {
+									continue;
+								};
+								{
+									var ` = 0;
+									var ` = rui.macros.ViewRule.targets;
+									while (` < `.length) {
+										var t = `[`];
+										++ `;
+										if (rui.macros.ViewRule.isApp(cls, t.name, t.pack)) {
+											if (t.method != null) {
+												rui.macros.ViewRule.checkView(cls, t.method, t.rawCells);
+											};
+											if (t.meta != null) {
+												rui.macros.ViewRule.checkMeta(cls, t.meta, t.rawCells);
+											};
+										};
+									};
+								};
+							};
+						};
+					} else {};
+				};
+			};
+		});
+	}
+
+	static function isApp(cls:haxe.macro.ClassType, appName:String, appPack:String) {
+		var current = if (cls.superClass == null) {
+			null;
+		} else {
+			cls.superClass.t.get();
+		};
+		while (current != null) {
+			if (current.name == appName && current.pack.join(".") == appPack) {
+				return true;
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function isFramework(cls:haxe.macro.ClassType) {
+		var root = if (cls.pack.length == 0) {
+			"";
+		} else {
+			cls.pack[0];
+		};
+		return @:ast(switch (root) {
+	case "rui" | "nui" | "mui" | "wui" | "cui" | "sui" | "aui" | "qui" | "pui" | "kui":
+		true;	
+	case _:
+		false;	
+}) switch (root) {
+			case "aui", "cui", "kui", "mui", "nui", "pui", "qui", "rui", "sui", "wui": {
+				{
+					true;
+				};
+			};
+			default: {
+				false;
+			}
+		};
+	}
+
+	static function isLibrary(cls:haxe.macro.ClassType) {
+		var root = if (cls.pack.length == 0) {
+			"";
+		} else {
+			cls.pack[0];
+		};
+		return @:ast(switch (root) {
+	case "rui" | "nui" | "mui" | "wui" | "cui" | "sui" | "aui" | "qui" | "pui" | "kui":
+		true;	
+	case "" | "haxe" | "sys" | "cpp" | "js" | "python" | "neko" | "php" | "lua" | "eval":
+		true;	
+	case _:
+		false;	
+}) switch (root) {
+			case "", "cpp", "eval", "haxe", "js", "lua", "neko", "php", "python", "sys": {
+				{
+					true;
+				};
+			};
+			case "aui", "cui", "kui", "mui", "nui", "pui", "qui", "rui", "sui", "wui": {
+				{
+					true;
+				};
+			};
+			default: {
+				false;
+			}
+		};
+	}
+
+	static function checkView(cls:haxe.macro.ClassType, viewMethod:String, rawCells:Bool) {
+		{
+			var ` = 0;
+			var ` = cls.fields.get();
+			while (` < `.length) {
+				var field = `[`];
+				++ `;
+				if (field.name != viewMethod) {
+					continue;
+				};
+				var e = field.expr();
+				if (e != null) {
+					rui.macros.ViewRule.walk(e, cls, rawCells);
+				};
+			};
+		};
+	}
+
+	static function checkMeta(cls:haxe.macro.ClassType, metaName:String, rawCells:Bool) {
+		{
+			var ` = 0;
+			var ` = cls.fields.get();
+			while (` < `.length) {
+				var field = `[`];
+				++ `;
+				if (! field.meta.has(metaName)) {
+					continue;
+				};
+				var e = field.expr();
+				if (e != null) {
+					rui.macros.ViewRule.walk(e, cls, rawCells);
+				};
+			};
+		};
+	}
+
+	static function walk(e:haxe.macro.TypedExpr, owner:haxe.macro.ClassType, rawCells:Bool) {
+		if (e == null) {
+			return;
+		};
+		@:ast(switch (e.expr) {
+	case TFunction(fn) if (isVoid(fn.t)):
+		return;	
+	case _:
+}) {
+			var ` = e.expr;
+			if (enumIndex ` == 12) {
+				var ` = `[0];
+				{
+					var fn = `;
+					if (rui.macros.ViewRule.isVoid(fn.t)) {
+						return;
+					} else {};
+				};
+			} else {};
+		};
+		if (rawCells) {
+			@:ast(switch (e.expr) {
+	case TField(o, _):
+		switch (haxe.macro.TypeTools.follow(o.t)) {
+			case TInst(c, _) if (c.toString() == "rui.Signal" || c.toString() == "rui.state.State"):
+				var cell = switch (o.expr) {
+					case TLocal(v):
+						v.name;					
+					case TField(_, fa):
+						fieldOf(fa) == null ? "it" : fieldOf(fa).name;					
+					case _:
+						"it";					
+				};
+				Context.error("A view may not read a raw ${c.toString()}.\n" + "  \"$cell\" notifies its subscribers, and on backends that rebuild from\n" + "  their own dirty flag nothing subscribes the tree: the screen would\n" + "  quietly never update. Declare \"$cell\" @:state instead.", e.pos);			
+			case _:
+		};	
+	case _:
+}) {
+				var ` = e.expr;
+				if (enumIndex ` == 4) {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var o = `;
+						{
+							@:ast(switch (haxe.macro.TypeTools.follow(o.t)) {
+	case TInst(c, _) if (c.toString() == "rui.Signal" || c.toString() == "rui.state.State"):
+		var cell = switch (o.expr) {
+			case TLocal(v):
+				v.name;			
+			case TField(_, fa):
+				fieldOf(fa) == null ? "it" : fieldOf(fa).name;			
+			case _:
+				"it";			
+		};
+		Context.error("A view may not read a raw ${c.toString()}.\n" + "  \"$cell\" notifies its subscribers, and on backends that rebuild from\n" + "  their own dirty flag nothing subscribes the tree: the screen would\n" + "  quietly never update. Declare \"$cell\" @:state instead.", e.pos);	
+	case _:
+}) {
+								var ` = {
+									var t = o.t;
+									var once = null;
+									haxe.macro.Context.follow(t, once);
+								};
+								if (enumIndex ` == 2) {
+									var ` = `[0];
+									var ` = `[1];
+									{
+										var c = `;
+										if (c.toString() == "rui.Signal" || c.toString() == "rui.state.State") {
+											var cell = @:ast(switch (o.expr) {
+	case TLocal(v):
+		v.name;	
+	case TField(_, fa):
+		fieldOf(fa) == null ? "it" : fieldOf(fa).name;	
+	case _:
+		"it";	
+}) {
+												var ` = o.expr;
+												switch (enumIndex `) {
+													case 1: {
+														var ` = `[0];
+														{
+															var v = `;
+															{
+																v.name;
+															};
+														};
+													};
+													case 4: {
+														var ` = `[0];
+														var ` = `[1];
+														{
+															var fa = `;
+															{
+																if (rui.macros.ViewRule.fieldOf(fa) == null) {
+																	"it";
+																} else {
+																	rui.macros.ViewRule.fieldOf(fa).name;
+																};
+															};
+														};
+													};
+													default: {
+														"it";
+													}
+												};
+											};
+											haxe.macro.Context.error("A view may not read a raw " + c.toString() + ".\n" + "  \"" + cell + "\" notifies its subscribers, and on backends that rebuild from\n" + "  their own dirty flag nothing subscribes the tree: the screen would\n" + "  quietly never update. Declare \"" + cell + "\" @:state instead.", e.pos, null);
+										} else {};
+									};
+								} else {};
+							};
+						};
+					};
+				} else {};
+			};
+		};
+		@:ast(switch (e.expr) {
+	case TField(_, fa):
+		var cf = fieldOf(fa);
+		if (cf != null && declaredBy(fa, owner) && !isCallable(cf)) {
+			if (!acceptable(cf)) {
+				Context.error("A view may only read what is immutable or observable.\n" + "  \"${cf.name}\" is a plain mutable field, so nothing can tell the view\n" + "  when it changes: what is on screen would quietly go stale.\n" + "  Make it `final`, declare it @:state, or use ImmutableList.", cf.pos);
+			};
+		};	
+	case _:
+}) {
+			var ` = e.expr;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var fa = `;
+					{
+						var cf = rui.macros.ViewRule.fieldOf(fa);
+						if (cf != null && rui.macros.ViewRule.declaredBy(fa, owner) && ! rui.macros.ViewRule.isCallable(cf)) {
+							if (! rui.macros.ViewRule.acceptable(cf)) {
+								haxe.macro.Context.error("A view may only read what is immutable or observable.\n" + "  \"" + cf.name + "\" is a plain mutable field, so nothing can tell the view\n" + "  when it changes: what is on screen would quietly go stale.\n" + "  Make it `final`, declare it @:state, or use ImmutableList.", cf.pos, null);
+							};
+						};
+					};
+				};
+			} else {};
+		};
+		haxe.macro.TypedExprTools.iter(e, function(sub:haxe.macro.TypedExpr) rui.macros.ViewRule.walk(sub, owner, rawCells));
+	}
+
+	static function isVoid(t:haxe.macro.Type) {
+		return @:ast(switch (t.follow()) {
+	case TAbstract(ref, _):
+		ref.get().name == "Void" && ref.get().pack.length == 0;	
+	case _:
+		false;	
+}) {
+			var ` = {
+				var once = null;
+				haxe.macro.Context.follow(t, once);
+			};
+			if (enumIndex ` == 8) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var ref = `;
+					{
+						ref.get().name == "Void" && ref.get().pack.length == 0;
+					};
+				};
+			} else {
+				false;
+			};
+		};
+	}
+
+	static function fieldOf(fa:haxe.macro.FieldAccess) {
+		return @:ast(switch (fa) {
+	case FInstance(_, _, cf):
+		cf.get();	
+	case FStatic(_, cf):
+		cf.get();	
+	case FClosure(_, cf):
+		cf.get();	
+	case _:
+		null;	
+}) switch (enumIndex fa) {
+			case 0: {
+				var ` = fa[0];
+				var ` = fa[1];
+				var ` = fa[2];
+				{
+					var cf = `;
+					{
+						cf.get();
+					};
+				};
+			};
+			case 1: {
+				var ` = fa[0];
+				var ` = fa[1];
+				{
+					var cf = `;
+					{
+						cf.get();
+					};
+				};
+			};
+			case 4: {
+				var ` = fa[0];
+				var ` = fa[1];
+				{
+					var cf = `;
+					{
+						cf.get();
+					};
+				};
+			};
+			default: {
+				null;
+			}
+		};
+	}
+
+	static function declaredBy(fa:haxe.macro.FieldAccess, owner:haxe.macro.ClassType) {
+		var holder = @:ast(switch (fa) {
+	case FInstance(ref, _, _):
+		ref.get();	
+	case FStatic(ref, _):
+		ref.get();	
+	case FClosure(_, _):
+		owner;	
+	case _:
+		null;	
+}) switch (enumIndex fa) {
+			case 0: {
+				var ` = fa[0];
+				var ` = fa[1];
+				var ` = fa[2];
+				{
+					var ref = `;
+					{
+						ref.get();
+					};
+				};
+			};
+			case 1: {
+				var ` = fa[0];
+				var ` = fa[1];
+				{
+					var ref = `;
+					{
+						ref.get();
+					};
+				};
+			};
+			case 4: {
+				var ` = fa[0];
+				var ` = fa[1];
+				{
+					owner;
+				};
+			};
+			default: {
+				null;
+			}
+		};
+		if (holder == null) {
+			return false;
+		};
+		var current = owner;
+		while (current != null) {
+			if (rui.macros.ViewRule.isFramework(current)) {
+				return false;
+			};
+			if (current.name == holder.name && current.pack.join(".") == holder.pack.join(".")) {
+				return true;
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function isCallable(cf:haxe.macro.ClassField) {
+		return @:ast(switch (cf.type.follow()) {
+	case TFun(_, _):
+		true;	
+	case _:
+		false;	
+}) {
+			var ` = {
+				var t = cf.type;
+				var once = null;
+				haxe.macro.Context.follow(t, once);
+			};
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					true;
+				};
+			} else {
+				false;
+			};
+		};
+	}
+
+	static function acceptable(cf:haxe.macro.ClassField) {
+		if (cf.isFinal) {
+			return true;
+		};
+		return @:ast(switch (cf.type.follow()) {
+	case TInst(ref, _):
+		isReactive(ref.get());	
+	case _:
+		false;	
+}) {
+			var ` = {
+				var t = cf.type;
+				var once = null;
+				haxe.macro.Context.follow(t, once);
+			};
+			if (enumIndex ` == 2) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var ref = `;
+					{
+						rui.macros.ViewRule.isReactive(ref.get());
+					};
+				};
+			} else {
+				false;
+			};
+		};
+	}
+
+	static function isReactive(cls:haxe.macro.ClassType) {
+		var current = cls;
+		while (current != null) {
+			var path = current.pack.join(".") + "." + current.name;
+			if (path == "rui.state.State") {
+				return true;
+			};
+			if (path == "rui.structures.ImmutableList") {
+				return true;
+			};
+			{
+				var ` = 0;
+				var ` = current.interfaces;
+				while (` < `.length) {
+					var i = `[`];
+					++ `;
+					if (rui.macros.ViewRule.implementsObservable(i.t.get())) {
+						return true;
+					};
+				};
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function implementsObservable(iface:haxe.macro.ClassType) {
+		if (iface.pack.join(".") + "." + iface.name == "rui.Observable") {
+			return true;
+		};
+		{
+			var ` = 0;
+			var ` = iface.interfaces;
+			while (` < `.length) {
+				var i = `[`];
+				++ `;
+				if (rui.macros.ViewRule.implementsObservable(i.t.get())) {
+					return true;
+				};
+			};
+		};
+		return false;
+	}
+}

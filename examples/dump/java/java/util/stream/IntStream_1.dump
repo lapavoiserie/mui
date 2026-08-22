@@ -1,0 +1,17 @@
+@:realPath("java.util.stream.IntStream_1") @:used @:native("java.util.stream.IntStream$1") @:libType
+extern class java.util.stream.IntStream$1 implements java.util.PrimitiveIterator$OfInt {
+
+	function new(param1:Int, param2:java.util.function.IntUnaryOperator):Void;
+
+	function hasNext():Bool;
+
+	function nextInt():Int;
+
+	var t:Int;
+
+	@:realPath("val_seed") @:native("val$seed")
+	var val$seed(default,ctor):Int;
+
+	@:realPath("val_f") @:native("val$f")
+	var val$f(default,ctor):java.util.function.IntUnaryOperator;
+}

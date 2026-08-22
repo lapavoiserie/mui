@@ -1,0 +1,5 @@
+@:realPath("java.io.Flushable") @:used @:native("java.io.Flushable") @:libType
+extern interface java.io.Flushable {
+
+	function flush():Void;
+}

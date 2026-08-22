@@ -1,0 +1,3 @@
+@:realPath("java.time.format.DateTimeTextProvider_2") @:native("java.time.format.DateTimeTextProvider$2") @:libType
+extern class java.time.format.DateTimeTextProvider$2 {
+}

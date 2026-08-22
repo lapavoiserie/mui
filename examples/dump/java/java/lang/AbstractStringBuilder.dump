@@ -1,0 +1,117 @@
+@:realPath("java.lang.AbstractStringBuilder") @:used @:native("java.lang.AbstractStringBuilder") @:libType
+extern class java.lang.AbstractStringBuilder implements java.lang.Appendable implements java.lang.CharSequence {
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function length():Int;
+
+	function capacity():Int;
+
+	function ensureCapacity(param1:Int):Void;
+
+	function expandCapacity(param1:Int):Void;
+
+	function trimToSize():Void;
+
+	function setLength(param1:Int):Void;
+
+	function charAt(param1:Int):java.types.Char16;
+
+	function codePointAt(param1:Int):Int;
+
+	function codePointBefore(param1:Int):Int;
+
+	function codePointCount(param1:Int, param2:Int):Int;
+
+	function offsetByCodePoints(param1:Int, param2:Int):Int;
+
+	function getChars(param1:Int, param2:Int, param3:java.NativeArray<java.types.Char16>, param4:Int):Void;
+
+	function setCharAt(param1:Int, param2:java.types.Char16):Void;
+
+	function append(param1:Dynamic):java.lang.AbstractStringBuilder;
+
+	function append(param1:Float):java.lang.AbstractStringBuilder;
+
+	function append(param1:Single):java.lang.AbstractStringBuilder;
+
+	function append(param1:haxe.Int64):java.lang.AbstractStringBuilder;
+
+	function append(param1:Int):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.types.Char16):java.lang.AbstractStringBuilder;
+
+	function append(param1:Bool):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.NativeArray<java.types.Char16>):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.lang.CharSequence, param2:Int, param3:Int):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.lang.CharSequence):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.lang.AbstractStringBuilder):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.lang.StringBuffer):java.lang.AbstractStringBuilder;
+
+	function append(param1:java.lang.String):java.lang.AbstractStringBuilder;
+
+	function delete(param1:Int, param2:Int):java.lang.AbstractStringBuilder;
+
+	function appendCodePoint(param1:Int):java.lang.AbstractStringBuilder;
+
+	function deleteCharAt(param1:Int):java.lang.AbstractStringBuilder;
+
+	function replace(param1:Int, param2:Int, param3:java.lang.String):java.lang.AbstractStringBuilder;
+
+	function substring(param1:Int):java.lang.String;
+
+	function substring(param1:Int, param2:Int):java.lang.String;
+
+	function subSequence(param1:Int, param2:Int):java.lang.CharSequence;
+
+	function insert(param1:Int, param2:java.NativeArray<java.types.Char16>, param3:Int, param4:Int):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:Float):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:Single):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:haxe.Int64):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:Int):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:java.types.Char16):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:Bool):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:java.lang.CharSequence, param3:Int, param4:Int):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:java.lang.CharSequence):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:java.NativeArray<java.types.Char16>):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:java.lang.String):java.lang.AbstractStringBuilder;
+
+	function insert(param1:Int, param2:Dynamic):java.lang.AbstractStringBuilder;
+
+	function indexOf(param1:java.lang.String):Int;
+
+	function indexOf(param1:java.lang.String, param2:Int):Int;
+
+	function lastIndexOf(param1:java.lang.String):Int;
+
+	function lastIndexOf(param1:java.lang.String, param2:Int):Int;
+
+	function reverse():java.lang.AbstractStringBuilder;
+
+	function toString():java.lang.String;
+
+	function getValue():java.NativeArray<java.types.Char16>;
+
+	var value:java.NativeArray<java.types.Char16>;
+
+	var count:Int;
+}

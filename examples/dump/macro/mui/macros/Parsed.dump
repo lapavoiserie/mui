@@ -1,0 +1,1 @@
+typedef mui.macros.Parsed = { role : String, optional : Bool, id : String }

@@ -1,0 +1,17 @@
+@:realPath("java.util.regex.MatchResult") @:used @:native("java.util.regex.MatchResult") @:libType
+extern interface java.util.regex.MatchResult {
+
+	function start():Int;
+
+	function start(param1:Int):Int;
+
+	function end():Int;
+
+	function end(param1:Int):Int;
+
+	function group():java.lang.String;
+
+	function group(param1:Int):java.lang.String;
+
+	function groupCount():Int;
+}

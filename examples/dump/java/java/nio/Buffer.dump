@@ -1,0 +1,63 @@
+@:realPath("java.nio.Buffer") @:used @:native("java.nio.Buffer") @:libType
+extern class java.nio.Buffer {
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int):Void;
+
+	function capacity():Int;
+
+	function position():Int;
+
+	function position(param1:Int):java.nio.Buffer;
+
+	function limit():Int;
+
+	function limit(param1:Int):java.nio.Buffer;
+
+	function mark():java.nio.Buffer;
+
+	function reset():java.nio.Buffer;
+
+	function clear():java.nio.Buffer;
+
+	function flip():java.nio.Buffer;
+
+	function rewind():java.nio.Buffer;
+
+	function remaining():Int;
+
+	function hasRemaining():Bool;
+
+	function isReadOnly():Bool;
+
+	function hasArray():Bool;
+
+	function array():Dynamic;
+
+	function arrayOffset():Int;
+
+	function isDirect():Bool;
+
+	function nextGetIndex():Int;
+
+	function nextGetIndex(param1:Int):Int;
+
+	function nextPutIndex():Int;
+
+	function nextPutIndex(param1:Int):Int;
+
+	function checkIndex(param1:Int):Int;
+
+	function checkIndex(param1:Int, param2:Int):Int;
+
+	function markValue():Int;
+
+	function truncate():Void;
+
+	function discardMark():Void;
+
+	var address:haxe.Int64;
+
+	static function checkBounds(param1:Int, param2:Int, param3:Int):Void;
+
+	static var SPLITERATOR_CHARACTERISTICS(default,never):Int;
+}

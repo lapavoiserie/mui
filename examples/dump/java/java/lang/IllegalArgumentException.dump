@@ -1,0 +1,11 @@
+@:realPath("java.lang.IllegalArgumentException") @:used @:directlyUsed @:native("java.lang.IllegalArgumentException") @:libType
+extern class java.lang.IllegalArgumentException extends java.lang.RuntimeException {
+
+	function new():Void;
+
+	function new(param1:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.Throwable):Void;
+
+	function new(param1:java.lang.String):Void;
+}

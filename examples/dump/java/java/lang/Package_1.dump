@@ -1,0 +1,13 @@
+@:realPath("java.lang.Package_1") @:used @:native("java.lang.Package$1") @:libType
+extern class java.lang.Package$1 implements java.security.PrivilegedAction<java.lang.Package> {
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function run():java.lang.Package;
+
+	@:realPath("val_iname") @:native("val$iname")
+	var val$iname(default,ctor):java.lang.String;
+
+	@:realPath("val_fn") @:native("val$fn")
+	var val$fn(default,ctor):java.lang.String;
+}

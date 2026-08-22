@@ -1,0 +1,14 @@
+@:used
+class aui.ui.TextField extends aui.View {
+
+	public function new(placeholder:java.lang.String, textState:Null<aui.state.State<java.lang.String>> = null) {
+		super();
+		this.viewType = "TextField";
+		this.placeholder = placeholder;
+		this.textState = textState;
+	}
+
+	public var placeholder:java.lang.String;
+
+	public var textState:Null<aui.state.State<java.lang.String>>;
+}

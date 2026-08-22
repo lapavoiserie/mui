@@ -1,0 +1,8 @@
+@:directlyUsed @:used
+class aui.mui.Button extends aui.ui.Button {
+
+	public function new(label:java.lang.String, action:Null<() -> Void> = null) {
+		super(label, null);
+		if ((action != null)) this.onTapGesture(action);
+	}
+}

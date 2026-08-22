@@ -1,0 +1,6 @@
+class aui.kui.Platform {
+
+	public static function registerWithKui() {
+		kui.macros.Host.register({platform : "android", toolchains : ["gradle"], backend : "aui"});
+	}
+}

@@ -1,0 +1,59 @@
+@:realPath("java.util.Collections_CheckedMap") @:used @:native("java.util.Collections$CheckedMap") @:libType
+extern class java.util.Collections$CheckedMap<K:Dynamic, V:Dynamic> implements java.io.Serializable implements java.util.Map<java.util.Collections_CheckedMap.K, java.util.Collections_CheckedMap.V> {
+
+	function new(param1:java.util.Map<java.util.Collections_CheckedMap.K, java.util.Collections_CheckedMap.V>, param2:java.lang.Class<java.util.Collections_CheckedMap.K>, param3:java.lang.Class<java.util.Collections_CheckedMap.V>):Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function get(param1:Dynamic):java.util.Collections_CheckedMap.V;
+
+	function remove(param1:Dynamic):java.util.Collections_CheckedMap.V;
+
+	function remove(param1:Dynamic, param2:Dynamic):Bool;
+
+	function clear():Void;
+
+	function keySet():java.util.Set<java.util.Collections_CheckedMap.K>;
+
+	function values():java.util.Collection<java.util.Collections_CheckedMap.V>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function put(param1:java.util.Collections_CheckedMap.K, param2:java.util.Collections_CheckedMap.V):java.util.Collections_CheckedMap.V;
+
+	function putAll(param1:java.util.Map<java.util.Collections_CheckedMap.K, java.util.Collections_CheckedMap.V>):Void;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.Collections_CheckedMap.K, java.util.Collections_CheckedMap.V>>;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_CheckedMap.V>):Void;
+
+	function putIfAbsent(param1:java.util.Collections_CheckedMap.K, param2:java.util.Collections_CheckedMap.V):java.util.Collections_CheckedMap.V;
+
+	function replace(param1:java.util.Collections_CheckedMap.K, param2:java.util.Collections_CheckedMap.V, param3:java.util.Collections_CheckedMap.V):Bool;
+
+	function replace(param1:java.util.Collections_CheckedMap.K, param2:java.util.Collections_CheckedMap.V):java.util.Collections_CheckedMap.V;
+
+	function computeIfAbsent(param1:java.util.Collections_CheckedMap.K, param2:java.util.function.Function<Dynamic, java.util.Collections_CheckedMap.V>):java.util.Collections_CheckedMap.V;
+
+	function computeIfPresent(param1:java.util.Collections_CheckedMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_CheckedMap.V>):java.util.Collections_CheckedMap.V;
+
+	function compute(param1:java.util.Collections_CheckedMap.K, param2:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_CheckedMap.V>):java.util.Collections_CheckedMap.V;
+
+	function merge(param1:java.util.Collections_CheckedMap.K, param2:java.util.Collections_CheckedMap.V, param3:java.util.function.BiFunction<Dynamic, Dynamic, java.util.Collections_CheckedMap.V>):java.util.Collections_CheckedMap.V;
+
+	var keyType(default,ctor):java.lang.Class<java.util.Collections_CheckedMap.K>;
+
+	var valueType(default,ctor):java.lang.Class<java.util.Collections_CheckedMap.V>;
+}

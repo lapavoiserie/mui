@@ -1,0 +1,3 @@
+@:realPath("jvm.EmptyConstructor") @:keep @:native("haxe.jvm.EmptyConstructor")
+class haxe.jvm.EmptyConstructor {
+}

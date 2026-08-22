@@ -1,0 +1,34 @@
+@:keep @:directlyUsed @:used
+private class sys.thread._Thread.HaxeThread {
+
+	function new() {}
+
+	public var events(default,null):Null<sys.thread.EventLoop>;
+
+	static var nativeThreads:java.util.Map<java.lang._Thread.JavaThread, sys.thread._Thread.HaxeThread>;
+
+	static var mainJavaThread:java.lang._Thread.JavaThread;
+
+	static var mainHaxeThread:sys.thread._Thread.HaxeThread;
+
+	public static function get(javaThread:java.lang._Thread.JavaThread) {
+		if ((javaThread == sys.thread._Thread.HaxeThread.mainJavaThread)) return sys.thread._Thread.HaxeThread.mainHaxeThread else if ((Std.isOfType(javaThread, sys.thread._Thread.NativeHaxeThread))) return cast javaThread.haxeThread else {
+			var _g = sys.thread._Thread.HaxeThread.nativeThreads.get(javaThread);
+			if ((_g == null)) {
+				var hx = new sys.thread._Thread.HaxeThread();
+				sys.thread._Thread.HaxeThread.nativeThreads.put(javaThread, hx);
+				return hx;
+			} else {
+				var hx = _g;
+				return hx;
+			};
+		};
+	}
+
+	static function __init__() {
+		sys.thread._Thread.HaxeThread.nativeThreads = java.util.Collections.synchronizedMap(new java.util.WeakHashMap());
+		sys.thread._Thread.HaxeThread.mainJavaThread = java.lang.Thread.currentThread();
+		sys.thread._Thread.HaxeThread.mainHaxeThread = new sys.thread._Thread.HaxeThread();
+		sys.thread._Thread.HaxeThread.mainHaxeThread.events = new sys.thread.EventLoop();
+	}
+}

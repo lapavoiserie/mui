@@ -1,0 +1,10 @@
+@:realPath("java.util.Spliterator_OfPrimitive") @:used @:native("java.util.Spliterator$OfPrimitive") @:libType
+extern interface java.util.Spliterator$OfPrimitive<T:Dynamic, T_CONS:Dynamic, T_SPLITR:java.util.Spliterator$OfPrimitive<java.util.Spliterator_OfPrimitive.T, java.util.Spliterator_OfPrimitive.T_CONS, java.util.Spliterator_OfPrimitive.T_SPLITR>> implements java.util.Spliterator<java.util.Spliterator_OfPrimitive.T> {
+
+	function trySplit():java.util.Spliterator_OfPrimitive.T_SPLITR;
+
+	function tryAdvance(param1:java.util.Spliterator_OfPrimitive.T_CONS):Bool;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.Spliterator_OfPrimitive.T_CONS):Void;
+}

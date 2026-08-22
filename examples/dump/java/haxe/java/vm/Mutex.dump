@@ -1,0 +1,18 @@
+@:realPath("sys.thread.Mutex") @:keep @:directlyUsed @:used @:coreApi @:native("haxe.java.vm.Mutex")
+class haxe.java.vm.Mutex {
+
+	public function new() {
+		this.lock = new java.util.concurrent.locks.ReentrantLock();
+	}
+
+	@:private
+	var lock:java.util.concurrent.locks.ReentrantLock;
+
+	public function acquire() {
+		this.lock.lock();
+	}
+
+	public function release() {
+		this.lock.unlock();
+	}
+}

@@ -1,0 +1,31 @@
+@:realPath("java.io.DataOutput") @:used @:native("java.io.DataOutput") @:libType
+extern interface java.io.DataOutput {
+
+	function write(param1:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function writeBoolean(param1:Bool):Void;
+
+	function writeByte(param1:Int):Void;
+
+	function writeShort(param1:Int):Void;
+
+	function writeChar(param1:Int):Void;
+
+	function writeInt(param1:Int):Void;
+
+	function writeLong(param1:haxe.Int64):Void;
+
+	function writeFloat(param1:Single):Void;
+
+	function writeDouble(param1:Float):Void;
+
+	function writeBytes(param1:java.lang.String):Void;
+
+	function writeChars(param1:java.lang.String):Void;
+
+	function writeUTF(param1:java.lang.String):Void;
+}

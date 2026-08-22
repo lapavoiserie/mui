@@ -1,0 +1,9 @@
+@:realPath("java.lang.ProcessBuilder_NullInputStream") @:used @:native("java.lang.ProcessBuilder$NullInputStream") @:libType
+extern class java.lang.ProcessBuilder$NullInputStream extends java.io.InputStream {
+
+	function read():Int;
+
+	function available():Int;
+
+	static var INSTANCE(default,never):java.lang.ProcessBuilder$NullInputStream;
+}

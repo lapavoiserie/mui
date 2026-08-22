@@ -1,0 +1,15 @@
+@:enum
+private class haxe.display._JsonModuleTypes.JsonMethodKind_Impl_ {
+
+	@:value(cast "MethNormal") @:impl @:enum
+	public static inline var MethNormal:haxe.display.JsonMethodKind = cast "MethNormal";
+
+	@:value(cast "MethInline") @:impl @:enum
+	public static inline var MethInline:haxe.display.JsonMethodKind = cast "MethInline";
+
+	@:value(cast "MethDynamic") @:impl @:enum
+	public static inline var MethDynamic:haxe.display.JsonMethodKind = cast "MethDynamic";
+
+	@:value(cast "MethMacro") @:impl @:enum
+	public static inline var MethMacro:haxe.display.JsonMethodKind = cast "MethMacro";
+}

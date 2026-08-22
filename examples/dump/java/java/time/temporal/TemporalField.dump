@@ -1,0 +1,29 @@
+@:realPath("java.time.temporal.TemporalField") @:used @:native("java.time.temporal.TemporalField") @:libType
+extern interface java.time.temporal.TemporalField {
+
+	@:java.default
+	function getDisplayName(param1:java.util.Locale):java.lang.String;
+
+	function getBaseUnit():java.time.temporal.TemporalUnit;
+
+	function getRangeUnit():java.time.temporal.TemporalUnit;
+
+	function range():java.time.temporal.ValueRange;
+
+	function isDateBased():Bool;
+
+	function isTimeBased():Bool;
+
+	function isSupportedBy(param1:java.time.temporal.TemporalAccessor):Bool;
+
+	function rangeRefinedBy(param1:java.time.temporal.TemporalAccessor):java.time.temporal.ValueRange;
+
+	function getFrom(param1:java.time.temporal.TemporalAccessor):haxe.Int64;
+
+	function adjustInto<R:java.time.temporal.Temporal>(param1:adjustInto.R, param2:haxe.Int64):adjustInto.R;
+
+	@:java.default
+	function resolve(param1:java.util.Map<java.time.temporal.TemporalField, java.lang.Long>, param2:java.time.temporal.TemporalAccessor, param3:java.time.format.ResolverStyle):java.time.temporal.TemporalAccessor;
+
+	function toString():java.lang.String;
+}

@@ -1,0 +1,7 @@
+@:realPath("java.sun.net.spi.nameservice.NameService") @:used @:native("sun.net.spi.nameservice.NameService") @:libType
+extern interface sun.net.spi.nameservice.NameService {
+
+	function lookupAllHostAddr(param1:java.lang.String):java.NativeArray<java.net.InetAddress>;
+
+	function getHostByAddr(param1:java.NativeArray<java.types.Int8>):java.lang.String;
+}

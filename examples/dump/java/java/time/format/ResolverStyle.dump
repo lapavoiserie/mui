@@ -1,0 +1,6 @@
+@:realPath("java.time.format.ResolverStyle") @:used @:flatEnum @:native("java.time.format.ResolverStyle")
+extern enum java.time.format.ResolverStyle {
+	STRICT;
+	SMART;
+	LENIENT;
+}

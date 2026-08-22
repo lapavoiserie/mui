@@ -1,0 +1,10 @@
+@:realPath("java.util.WeakHashMap_ValueIterator") @:used @:native("java.util.WeakHashMap$ValueIterator") @:libType
+extern class java.util.WeakHashMap$ValueIterator extends java.util.WeakHashMap$HashIterator<Dynamic> {
+
+	function new(param1:java.util.WeakHashMap<Dynamic, Dynamic>, param2:java.util.WeakHashMap$1):Void;
+
+	function next():Dynamic;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.WeakHashMap<Dynamic, Dynamic>;
+}

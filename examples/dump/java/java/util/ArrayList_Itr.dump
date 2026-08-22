@@ -1,0 +1,24 @@
+@:realPath("java.util.ArrayList_Itr") @:used @:native("java.util.ArrayList$Itr") @:libType
+extern class java.util.ArrayList$Itr implements java.util.Iterator<Dynamic> {
+
+	function new(param1:java.util.ArrayList<Dynamic>, param2:java.util.ArrayList$1):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function remove():Void;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function checkForComodification():Void;
+
+	var cursor:Int;
+
+	var lastRet:Int;
+
+	var expectedModCount:Int;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.ArrayList<Dynamic>;
+}

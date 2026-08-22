@@ -1,0 +1,9 @@
+@:realPath("java.sun.reflect.generics.tree.ArrayTypeSignature") @:used @:native("sun.reflect.generics.tree.ArrayTypeSignature") @:libType
+extern class sun.reflect.generics.tree.ArrayTypeSignature implements sun.reflect.generics.tree.FieldTypeSignature {
+
+	function getComponentType():sun.reflect.generics.tree.TypeSignature;
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+
+	static function make(param1:sun.reflect.generics.tree.TypeSignature):sun.reflect.generics.tree.ArrayTypeSignature;
+}

@@ -1,0 +1,6 @@
+@:directlyUsed @:used @:flatEnum
+enum aui.ui.HorizontalAlignment {
+	Start;
+	Center;
+	End;
+}

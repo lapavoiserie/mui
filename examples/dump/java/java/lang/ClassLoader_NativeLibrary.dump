@@ -1,0 +1,25 @@
+@:realPath("java.lang.ClassLoader_NativeLibrary") @:native("java.lang.ClassLoader$NativeLibrary") @:libType
+extern class java.lang.ClassLoader$NativeLibrary {
+
+	function new(param1:java.lang.Class<Dynamic>, param2:java.lang.String, param3:Bool):Void;
+
+	function load(param1:java.lang.String, param2:Bool):Void;
+
+	function find(param1:java.lang.String):haxe.Int64;
+
+	function unload(param1:java.lang.String, param2:Bool):Void;
+
+	function finalize():Void;
+
+	var handle:haxe.Int64;
+
+	var name:java.lang.String;
+
+	var isBuiltin:Bool;
+
+	var loaded:Bool;
+
+	static function findBuiltinLib(param1:java.lang.String):java.lang.String;
+
+	static function getFromClass():java.lang.Class<Dynamic>;
+}

@@ -1,0 +1,3 @@
+@:realPath("jvm.ClosureDispatch") @:directlyUsed @:used @:native("haxe.jvm.ClosureDispatch")
+extern class haxe.jvm.ClosureDispatch extends haxe.jvm.Function {
+}

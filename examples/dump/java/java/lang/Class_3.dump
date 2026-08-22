@@ -1,0 +1,7 @@
+@:realPath("java.lang.Class_3") @:used @:native("java.lang.Class$3") @:libType
+extern class java.lang.Class$3 implements java.security.PrivilegedAction<java.lang.Void> {
+
+	function new():Void;
+
+	function run():java.lang.Void;
+}

@@ -1,0 +1,21 @@
+@:keep @:used
+private class sys.thread._EventLoop.RegularEvent {
+
+	public function new(run:() -> Void, nextRunTime:Float, interval:Float) {
+		this.run = run;
+		this.nextRunTime = nextRunTime;
+		this.interval = interval;
+	}
+
+	public var nextRunTime:Float;
+
+	public var interval(default,ctor):Float;
+
+	public var run(default,ctor):() -> Void;
+
+	@:maybeUsed
+	public var next:Null<sys.thread._EventLoop.RegularEvent>;
+
+	@:value(false)
+	public var cancelled:Bool = false;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.util.function.IntToDoubleFunction") @:used @:native("java.util.function.IntToDoubleFunction") @:libType
+extern interface java.util.function.IntToDoubleFunction {
+
+	function applyAsDouble(param1:Int):Float;
+}

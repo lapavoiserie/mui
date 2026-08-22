@@ -1,0 +1,29 @@
+@:realPath("java.util.Random_RandomIntsSpliterator") @:used @:native("java.util.Random$RandomIntsSpliterator") @:libType
+extern class java.util.Random$RandomIntsSpliterator implements java.util.Spliterator$OfInt {
+
+	function new(param1:java.util.Random, param2:haxe.Int64, param3:haxe.Int64, param4:Int, param5:Int):Void;
+
+	function trySplit():java.util.Random$RandomIntsSpliterator;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	function tryAdvance(param1:java.util.function.IntConsumer):Bool;
+
+	function tryAdvance(param1:Dynamic):Bool;
+
+	function forEachRemaining(param1:java.util.function.IntConsumer):Void;
+
+	function forEachRemaining(param1:Dynamic):Void;
+
+	var rng(default,ctor):java.util.Random;
+
+	var index:haxe.Int64;
+
+	var fence(default,ctor):haxe.Int64;
+
+	var origin(default,ctor):Int;
+
+	var bound(default,ctor):Int;
+}

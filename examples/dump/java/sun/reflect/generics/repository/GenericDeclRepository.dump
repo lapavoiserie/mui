@@ -1,0 +1,7 @@
+@:realPath("java.sun.reflect.generics.repository.GenericDeclRepository") @:used @:native("sun.reflect.generics.repository.GenericDeclRepository") @:libType
+extern class sun.reflect.generics.repository.GenericDeclRepository<S:sun.reflect.generics.tree.Signature> extends sun.reflect.generics.repository.AbstractRepository<java.sun.reflect.generics.repository.GenericDeclRepository.S> {
+
+	function new(param1:java.lang.String, param2:sun.reflect.generics.factory.GenericsFactory):Void;
+
+	function getTypeParameters():java.NativeArray<java.lang.reflect.TypeVariable<Dynamic>>;
+}

@@ -1,0 +1,23 @@
+@:realPath("java.io.InputStream") @:used @:native("java.io.InputStream") @:libType
+extern class java.io.InputStream implements java.io.Closeable {
+
+	function new():Void;
+
+	function read():Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Int;
+
+	function read(param1:java.NativeArray<java.types.Int8>):Int;
+
+	function skip(param1:haxe.Int64):haxe.Int64;
+
+	function available():Int;
+
+	function close():Void;
+
+	function mark(param1:Int):Void;
+
+	function reset():Void;
+
+	function markSupported():Bool;
+}

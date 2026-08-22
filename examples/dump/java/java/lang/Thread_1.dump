@@ -1,0 +1,10 @@
+@:realPath("java.lang.Thread_1") @:used @:native("java.lang.Thread$1") @:libType
+extern class java.lang.Thread$1 implements java.security.PrivilegedAction<java.lang.Boolean> {
+
+	function new(param1:java.lang.Class<Dynamic>):Void;
+
+	function run():java.lang.Boolean;
+
+	@:realPath("val_subcl") @:native("val$subcl")
+	var val$subcl(default,ctor):java.lang.Class<Dynamic>;
+}

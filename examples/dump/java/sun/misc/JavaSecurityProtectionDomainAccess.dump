@@ -1,0 +1,5 @@
+@:realPath("java.sun.misc.JavaSecurityProtectionDomainAccess") @:used @:native("sun.misc.JavaSecurityProtectionDomainAccess") @:libType
+extern interface sun.misc.JavaSecurityProtectionDomainAccess {
+
+	function getProtectionDomainCache():sun.misc.JavaSecurityProtectionDomainAccess$ProtectionDomainCache;
+}

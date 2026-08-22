@@ -1,0 +1,5 @@
+@:realPath("java.time.Duration_DurationUnits") @:native("java.time.Duration$DurationUnits") @:libType
+extern class java.time.Duration$DurationUnits {
+
+	static var UNITS(default,never):java.util.List<java.time.temporal.TemporalUnit>;
+}

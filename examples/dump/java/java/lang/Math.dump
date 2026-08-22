@@ -1,0 +1,161 @@
+@:realPath("java.lang.Math") @:native("java.lang.Math") @:libType
+extern class java.lang.Math {
+
+	static function sin(param1:Float):Float;
+
+	static function cos(param1:Float):Float;
+
+	static function tan(param1:Float):Float;
+
+	static function asin(param1:Float):Float;
+
+	static function acos(param1:Float):Float;
+
+	static function atan(param1:Float):Float;
+
+	static function toRadians(param1:Float):Float;
+
+	static function toDegrees(param1:Float):Float;
+
+	static function exp(param1:Float):Float;
+
+	static function log(param1:Float):Float;
+
+	static function log10(param1:Float):Float;
+
+	static function sqrt(param1:Float):Float;
+
+	static function cbrt(param1:Float):Float;
+
+	static function IEEEremainder(param1:Float, param2:Float):Float;
+
+	static function ceil(param1:Float):Float;
+
+	static function floor(param1:Float):Float;
+
+	static function rint(param1:Float):Float;
+
+	static function atan2(param1:Float, param2:Float):Float;
+
+	static function pow(param1:Float, param2:Float):Float;
+
+	static function round(param1:Single):Int;
+
+	static function round(param1:Float):haxe.Int64;
+
+	static function random():Float;
+
+	static function addExact(param1:Int, param2:Int):Int;
+
+	static function addExact(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	static function subtractExact(param1:Int, param2:Int):Int;
+
+	static function subtractExact(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	static function multiplyExact(param1:Int, param2:Int):Int;
+
+	static function multiplyExact(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	static function incrementExact(param1:Int):Int;
+
+	static function incrementExact(param1:haxe.Int64):haxe.Int64;
+
+	static function decrementExact(param1:Int):Int;
+
+	static function decrementExact(param1:haxe.Int64):haxe.Int64;
+
+	static function negateExact(param1:Int):Int;
+
+	static function negateExact(param1:haxe.Int64):haxe.Int64;
+
+	static function toIntExact(param1:haxe.Int64):Int;
+
+	static function floorDiv(param1:Int, param2:Int):Int;
+
+	static function floorDiv(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	static function floorMod(param1:Int, param2:Int):Int;
+
+	static function floorMod(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	static function abs(param1:Int):Int;
+
+	static function abs(param1:Float):Float;
+
+	static function abs(param1:Single):Single;
+
+	static function abs(param1:haxe.Int64):haxe.Int64;
+
+	static function max(param1:Int, param2:Int):Int;
+
+	static function max(param1:Float, param2:Float):Float;
+
+	static function max(param1:Single, param2:Single):Single;
+
+	static function max(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	static function min(param1:Int, param2:Int):Int;
+
+	static function min(param1:Float, param2:Float):Float;
+
+	static function min(param1:Single, param2:Single):Single;
+
+	static function min(param1:haxe.Int64, param2:haxe.Int64):haxe.Int64;
+
+	static function ulp(param1:Float):Float;
+
+	static function ulp(param1:Single):Single;
+
+	static function signum(param1:Float):Float;
+
+	static function signum(param1:Single):Single;
+
+	static function sinh(param1:Float):Float;
+
+	static function cosh(param1:Float):Float;
+
+	static function tanh(param1:Float):Float;
+
+	static function hypot(param1:Float, param2:Float):Float;
+
+	static function expm1(param1:Float):Float;
+
+	static function log1p(param1:Float):Float;
+
+	static function copySign(param1:Float, param2:Float):Float;
+
+	static function copySign(param1:Single, param2:Single):Single;
+
+	static function getExponent(param1:Single):Int;
+
+	static function getExponent(param1:Float):Int;
+
+	static function nextAfter(param1:Float, param2:Float):Float;
+
+	static function nextAfter(param1:Single, param2:Float):Single;
+
+	static function nextUp(param1:Float):Float;
+
+	static function nextUp(param1:Single):Single;
+
+	static function nextDown(param1:Float):Float;
+
+	static function nextDown(param1:Single):Single;
+
+	static function scalb(param1:Float, param2:Int):Float;
+
+	static function scalb(param1:Single, param2:Int):Single;
+
+	static function powerOfTwoD(param1:Int):Float;
+
+	static function powerOfTwoF(param1:Int):Single;
+
+	static var E(default,never):Float;
+
+	static var PI(default,never):Float;
+
+	static var twoToTheDoubleScaleUp:Float;
+
+	static var twoToTheDoubleScaleDown:Float;
+}

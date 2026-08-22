@@ -1,0 +1,10 @@
+@:realPath("java.nio.charset.Charset_2") @:used @:native("java.nio.charset.Charset$2") @:libType
+extern class java.nio.charset.Charset$2 implements java.security.PrivilegedAction<java.nio.charset.Charset> {
+
+	function new(param1:java.lang.String):Void;
+
+	function run():java.nio.charset.Charset;
+
+	@:realPath("val_charsetName") @:native("val$charsetName")
+	var val$charsetName(default,ctor):java.lang.String;
+}

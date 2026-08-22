@@ -1,0 +1,35 @@
+@:realPath("java.io.ObjectStreamField") @:used @:native("java.io.ObjectStreamField") @:libType
+extern class java.io.ObjectStreamField implements java.lang.Comparable<Dynamic> {
+
+	function new(param1:java.lang.String, param2:java.lang.Class<Dynamic>):Void;
+
+	function new(param1:java.lang.reflect.Field, param2:Bool, param3:Bool):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:Bool):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.Class<Dynamic>, param3:Bool):Void;
+
+	function getName():java.lang.String;
+
+	function getType():java.lang.Class<Dynamic>;
+
+	function getTypeCode():java.types.Char16;
+
+	function getTypeString():java.lang.String;
+
+	function getOffset():Int;
+
+	function setOffset(param1:Int):Void;
+
+	function isPrimitive():Bool;
+
+	function isUnshared():Bool;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function toString():java.lang.String;
+
+	function getField():java.lang.reflect.Field;
+
+	function getSignature():java.lang.String;
+}

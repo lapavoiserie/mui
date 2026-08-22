@@ -1,0 +1,147 @@
+@:realPath("java.time.LocalDate") @:used @:native("java.time.LocalDate") @:libType
+extern class java.time.LocalDate implements java.time.temporal.Temporal implements java.time.temporal.TemporalAdjuster implements java.time.chrono.ChronoLocalDate implements java.io.Serializable {
+
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	function isSupported(param1:java.time.temporal.TemporalUnit):Bool;
+
+	function range(param1:java.time.temporal.TemporalField):java.time.temporal.ValueRange;
+
+	function get(param1:java.time.temporal.TemporalField):Int;
+
+	function getLong(param1:java.time.temporal.TemporalField):haxe.Int64;
+
+	function getChronology():java.time.chrono.IsoChronology;
+
+	function getEra():java.time.chrono.Era;
+
+	function getYear():Int;
+
+	function getMonthValue():Int;
+
+	function getMonth():java.time.Month;
+
+	function getDayOfMonth():Int;
+
+	function getDayOfYear():Int;
+
+	function getDayOfWeek():java.time.DayOfWeek;
+
+	function isLeapYear():Bool;
+
+	function lengthOfMonth():Int;
+
+	function lengthOfYear():Int;
+
+	function with(param1:java.time.temporal.TemporalAdjuster):java.time.LocalDate;
+
+	function with(param1:java.time.temporal.TemporalField, param2:haxe.Int64):java.time.LocalDate;
+
+	function withYear(param1:Int):java.time.LocalDate;
+
+	function withMonth(param1:Int):java.time.LocalDate;
+
+	function withDayOfMonth(param1:Int):java.time.LocalDate;
+
+	function withDayOfYear(param1:Int):java.time.LocalDate;
+
+	function plus(param1:java.time.temporal.TemporalAmount):java.time.LocalDate;
+
+	function plus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.LocalDate;
+
+	function plusYears(param1:haxe.Int64):java.time.LocalDate;
+
+	function plusMonths(param1:haxe.Int64):java.time.LocalDate;
+
+	function plusWeeks(param1:haxe.Int64):java.time.LocalDate;
+
+	function plusDays(param1:haxe.Int64):java.time.LocalDate;
+
+	function minus(param1:java.time.temporal.TemporalAmount):java.time.LocalDate;
+
+	function minus(param1:haxe.Int64, param2:java.time.temporal.TemporalUnit):java.time.LocalDate;
+
+	function minusYears(param1:haxe.Int64):java.time.LocalDate;
+
+	function minusMonths(param1:haxe.Int64):java.time.LocalDate;
+
+	function minusWeeks(param1:haxe.Int64):java.time.LocalDate;
+
+	function minusDays(param1:haxe.Int64):java.time.LocalDate;
+
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	function adjustInto(param1:java.time.temporal.Temporal):java.time.temporal.Temporal;
+
+	function until(param1:java.time.temporal.Temporal, param2:java.time.temporal.TemporalUnit):haxe.Int64;
+
+	function until(param1:java.time.chrono.ChronoLocalDate):java.time.Period;
+
+	function daysUntil(param1:java.time.LocalDate):haxe.Int64;
+
+	function format(param1:java.time.format.DateTimeFormatter):java.lang.String;
+
+	function atTime(param1:java.time.LocalTime):java.time.LocalDateTime;
+
+	function atTime(param1:java.time.OffsetTime):java.time.OffsetDateTime;
+
+	function atTime(param1:Int, param2:Int, param3:Int, param4:Int):java.time.LocalDateTime;
+
+	function atTime(param1:Int, param2:Int, param3:Int):java.time.LocalDateTime;
+
+	function atTime(param1:Int, param2:Int):java.time.LocalDateTime;
+
+	function atStartOfDay():java.time.LocalDateTime;
+
+	function atStartOfDay(param1:java.time.ZoneId):java.time.ZonedDateTime;
+
+	function toEpochDay():haxe.Int64;
+
+	function compareTo(param1:java.time.chrono.ChronoLocalDate):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function compareTo0(param1:java.time.LocalDate):Int;
+
+	function isAfter(param1:java.time.chrono.ChronoLocalDate):Bool;
+
+	function isBefore(param1:java.time.chrono.ChronoLocalDate):Bool;
+
+	function isEqual(param1:java.time.chrono.ChronoLocalDate):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function writeExternal(param1:java.io.DataOutput):Void;
+
+	static function now():java.time.LocalDate;
+
+	static function now(param1:java.time.Clock):java.time.LocalDate;
+
+	static function now(param1:java.time.ZoneId):java.time.LocalDate;
+
+	static function of(param1:Int, param2:java.time.Month, param3:Int):java.time.LocalDate;
+
+	static function of(param1:Int, param2:Int, param3:Int):java.time.LocalDate;
+
+	static function ofYearDay(param1:Int, param2:Int):java.time.LocalDate;
+
+	static function ofEpochDay(param1:haxe.Int64):java.time.LocalDate;
+
+	static function from(param1:java.time.temporal.TemporalAccessor):java.time.LocalDate;
+
+	static function parse(param1:java.lang.CharSequence):java.time.LocalDate;
+
+	static function parse(param1:java.lang.CharSequence, param2:java.time.format.DateTimeFormatter):java.time.LocalDate;
+
+	static function readExternal(param1:java.io.DataInput):java.time.LocalDate;
+
+	static var MIN(default,never):java.time.LocalDate;
+
+	static var MAX(default,never):java.time.LocalDate;
+
+	static var DAYS_0000_TO_1970(default,never):haxe.Int64;
+}

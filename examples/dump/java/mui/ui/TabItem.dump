@@ -1,0 +1,1 @@
+typedef mui.ui.TabItem = { label : java.lang.String, content : mui.View }

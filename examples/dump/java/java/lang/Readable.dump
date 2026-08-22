@@ -1,0 +1,5 @@
+@:realPath("java.lang.Readable") @:used @:native("java.lang.Readable") @:libType
+extern interface java.lang.Readable {
+
+	function read(param1:java.nio.CharBuffer):Int;
+}

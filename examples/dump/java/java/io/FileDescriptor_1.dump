@@ -1,0 +1,13 @@
+@:realPath("java.io.FileDescriptor_1") @:used @:native("java.io.FileDescriptor$1") @:libType
+extern class java.io.FileDescriptor$1 implements sun.misc.JavaIOFileDescriptorAccess {
+
+	function new():Void;
+
+	function set(param1:java.io.FileDescriptor, param2:Int):Void;
+
+	function get(param1:java.io.FileDescriptor):Int;
+
+	function setHandle(param1:java.io.FileDescriptor, param2:haxe.Int64):Void;
+
+	function getHandle(param1:java.io.FileDescriptor):haxe.Int64;
+}

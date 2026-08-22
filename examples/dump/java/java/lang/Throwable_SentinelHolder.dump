@@ -1,0 +1,7 @@
+@:realPath("java.lang.Throwable_SentinelHolder") @:native("java.lang.Throwable$SentinelHolder") @:libType
+extern class java.lang.Throwable$SentinelHolder {
+
+	static var STACK_TRACE_ELEMENT_SENTINEL(default,never):java.lang.StackTraceElement;
+
+	static var STACK_TRACE_SENTINEL(default,never):java.NativeArray<java.lang.StackTraceElement>;
+}

@@ -1,0 +1,27 @@
+@:realPath("java.util.concurrent.ExecutorService") @:used @:native("java.util.concurrent.ExecutorService") @:libType
+extern interface java.util.concurrent.ExecutorService implements java.util.concurrent.Executor {
+
+	function shutdown():Void;
+
+	function shutdownNow():java.util.List<java.lang.Runnable>;
+
+	function isShutdown():Bool;
+
+	function isTerminated():Bool;
+
+	function awaitTermination(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):Bool;
+
+	function submit<T:Dynamic>(param1:java.util.concurrent.Callable<submit.T>):java.util.concurrent.Future<submit.T>;
+
+	function submit(param1:java.lang.Runnable):java.util.concurrent.Future<Dynamic>;
+
+	function submit<T:Dynamic>(param1:java.lang.Runnable, param2:submit.T):java.util.concurrent.Future<submit.T>;
+
+	function invokeAll<T:Dynamic>(param1:java.util.Collection<java.util.concurrent.Callable<invokeAll.T>>):java.util.List<java.util.concurrent.Future<invokeAll.T>>;
+
+	function invokeAll<T:Dynamic>(param1:java.util.Collection<java.util.concurrent.Callable<invokeAll.T>>, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):java.util.List<java.util.concurrent.Future<invokeAll.T>>;
+
+	function invokeAny<T:Dynamic>(param1:java.util.Collection<java.util.concurrent.Callable<invokeAny.T>>):invokeAny.T;
+
+	function invokeAny<T:Dynamic>(param1:java.util.Collection<java.util.concurrent.Callable<invokeAny.T>>, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):invokeAny.T;
+}

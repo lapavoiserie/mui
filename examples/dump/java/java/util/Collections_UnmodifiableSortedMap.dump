@@ -1,0 +1,17 @@
+@:realPath("java.util.Collections_UnmodifiableSortedMap") @:used @:native("java.util.Collections$UnmodifiableSortedMap") @:libType
+extern class java.util.Collections$UnmodifiableSortedMap<K:Dynamic, V:Dynamic> extends java.util.Collections$UnmodifiableMap<java.util.Collections_UnmodifiableSortedMap.K, java.util.Collections_UnmodifiableSortedMap.V> implements java.io.Serializable implements java.util.SortedMap<java.util.Collections_UnmodifiableSortedMap.K, java.util.Collections_UnmodifiableSortedMap.V> {
+
+	function new(param1:java.util.SortedMap<java.util.Collections_UnmodifiableSortedMap.K, java.util.Collections_UnmodifiableSortedMap.V>):Void;
+
+	function comparator():java.util.Comparator<Dynamic>;
+
+	function subMap(param1:java.util.Collections_UnmodifiableSortedMap.K, param2:java.util.Collections_UnmodifiableSortedMap.K):java.util.SortedMap<java.util.Collections_UnmodifiableSortedMap.K, java.util.Collections_UnmodifiableSortedMap.V>;
+
+	function headMap(param1:java.util.Collections_UnmodifiableSortedMap.K):java.util.SortedMap<java.util.Collections_UnmodifiableSortedMap.K, java.util.Collections_UnmodifiableSortedMap.V>;
+
+	function tailMap(param1:java.util.Collections_UnmodifiableSortedMap.K):java.util.SortedMap<java.util.Collections_UnmodifiableSortedMap.K, java.util.Collections_UnmodifiableSortedMap.V>;
+
+	function firstKey():java.util.Collections_UnmodifiableSortedMap.K;
+
+	function lastKey():java.util.Collections_UnmodifiableSortedMap.K;
+}

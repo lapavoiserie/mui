@@ -1,0 +1,10 @@
+@:realPath("java.util.LinkedHashMap_LinkedEntryIterator") @:used @:native("java.util.LinkedHashMap$LinkedEntryIterator") @:libType
+extern class java.util.LinkedHashMap$LinkedEntryIterator extends java.util.LinkedHashMap$LinkedHashIterator implements java.util.Iterator<java.util.Map$Entry<Dynamic, Dynamic>> {
+
+	function new(param1:java.util.LinkedHashMap<Dynamic, Dynamic>):Void;
+
+	function next():java.util.Map$Entry<Dynamic, Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.LinkedHashMap<Dynamic, Dynamic>;
+}

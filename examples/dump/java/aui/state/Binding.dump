@@ -1,0 +1,28 @@
+@:used
+class aui.state.Binding<T> {
+
+	public function new(getter:() -> aui.state.Binding.T, setter:aui.state.Binding.T -> Void) {
+		this.getter = getter;
+		this.setter = setter;
+	}
+
+	public var getter:() -> aui.state.Binding.T;
+
+	public var setter:aui.state.Binding.T -> Void;
+
+	public function get() {
+		return this.getter();
+	}
+
+	public function set(v:aui.state.Binding.T) {
+		this.setter(v);
+	}
+
+	public static function fromState<T>(state:aui.state.State<fromState.T>) {
+		return new aui.state.Binding(function() {
+			return state.get();
+		}, function(v:fromState.T) {
+			state.set(v);
+		});
+	}
+}

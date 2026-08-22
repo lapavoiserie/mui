@@ -1,0 +1,25 @@
+@:realPath("java.lang.Class_ReflectionData") @:native("java.lang.Class$ReflectionData") @:libType
+extern class java.lang.Class$ReflectionData<T:Dynamic> {
+
+	function new(param1:Int):Void;
+
+	var declaredFields:java.NativeArray<java.lang.reflect.Field>;
+
+	var publicFields:java.NativeArray<java.lang.reflect.Field>;
+
+	var declaredMethods:java.NativeArray<java.lang.reflect.Method>;
+
+	var publicMethods:java.NativeArray<java.lang.reflect.Method>;
+
+	var declaredConstructors:java.NativeArray<java.lang.reflect.Constructor<java.lang.Class_ReflectionData.T>>;
+
+	var publicConstructors:java.NativeArray<java.lang.reflect.Constructor<java.lang.Class_ReflectionData.T>>;
+
+	var declaredPublicFields:java.NativeArray<java.lang.reflect.Field>;
+
+	var declaredPublicMethods:java.NativeArray<java.lang.reflect.Method>;
+
+	var interfaces:java.NativeArray<java.lang.Class<Dynamic>>;
+
+	var redefinedCount(default,ctor):Int;
+}

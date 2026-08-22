@@ -1,0 +1,16 @@
+@:realPath("java.util.ServiceLoader_1") @:used @:native("java.util.ServiceLoader$1") @:libType
+extern class java.util.ServiceLoader$1 implements java.util.Iterator<Dynamic> {
+
+	function new(param1:java.util.ServiceLoader<Dynamic>):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	function remove():Void;
+
+	var knownProviders:java.util.Iterator<java.util.Map$Entry<java.lang.String, Dynamic>>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.ServiceLoader<Dynamic>;
+}

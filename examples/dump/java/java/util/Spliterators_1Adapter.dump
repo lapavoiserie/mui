@@ -1,0 +1,18 @@
+@:realPath("java.util.Spliterators_1Adapter") @:used @:native("java.util.Spliterators$1Adapter") @:libType
+extern class java.util.Spliterators$1Adapter implements java.util.function.Consumer<Dynamic> implements java.util.Iterator<Dynamic> {
+
+	function new():Void;
+
+	function accept(param1:Dynamic):Void;
+
+	function hasNext():Bool;
+
+	function next():Dynamic;
+
+	var valueReady:Bool;
+
+	var nextElement:Dynamic;
+
+	@:realPath("val_spliterator") @:native("val$spliterator")
+	var val$spliterator(default,ctor):java.util.Spliterator<Dynamic>;
+}

@@ -1,0 +1,94 @@
+@:realPath("java.lang.FloatClass") @:directlyUsed @:used @:native("java.lang.Float")
+extern class java.lang.Float extends java.lang.Number implements java.lang.Comparable<java.lang.Float> {
+
+	@:overload
+	function new(param1:Single):Void;
+
+	@:overload
+	function new(param1:Float):Void;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	function new(param1:java.lang.String):Void;
+
+	@:overload
+	function compareTo(param1:java.lang.Float):Int;
+
+	@:overload
+	function compareTo(param1:Dynamic):Int;
+
+	@:overload
+	function equals(param1:Dynamic):Bool;
+
+	@:overload
+	function hashCode():Int;
+
+	@:overload
+	function isInfinite():Bool;
+
+	@:overload
+	function isNaN():Bool;
+
+	@:overload
+	function toString():java.lang.String;
+
+	function doubleValue():java.lang.Float;
+
+	function floatValue():Single;
+
+	function intValue():Int;
+
+	function longValue():haxe.Int64;
+
+	static var MAX_EXPONENT(default,never):Int;
+
+	static var MAX_VALUE(default,never):Single;
+
+	static var MIN_EXPONENT(default,never):Int;
+
+	static var MIN_NORMAL(default,never):Single;
+
+	static var MIN_VALUE(default,never):Single;
+
+	static var NEGATIVE_INFINITY(default,never):Single;
+
+	static var NaN(default,never):Single;
+
+	static var POSITIVE_INFINITY(default,never):Single;
+
+	static var SIZE(default,never):Int;
+
+	static var TYPE(default,never):java.lang.Class<Float>;
+
+	@:overload
+	static function compare(param1:Single, param2:Single):Int;
+
+	@:overload
+	static function floatToIntBits(param1:Single):Int;
+
+	@:overload
+	static function floatToRawIntBits(param1:Single):Int;
+
+	@:overload
+	static function intBitsToFloat(param1:Int):Single;
+
+	@:realPath("_isInfinite") @:native("isInfinite") @:overload
+	static function isInfinite(param1:Single):Bool;
+
+	@:realPath("_isNaN") @:native("isNaN") @:overload
+	static function isNaN(param1:Single):Bool;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function parseFloat(param1:java.lang.String):Single;
+
+	@:overload
+	static function toHexString(param1:Single):java.lang.String;
+
+	@:realPath("_toString") @:native("toString") @:overload
+	static function toString(param1:Single):java.lang.String;
+
+	@:overload
+	static function valueOf(param1:Single):java.lang.Float;
+
+	@:overload @:throws("java.lang.NumberFormatException")
+	static function valueOf(param1:java.lang.String):java.lang.Float;
+}

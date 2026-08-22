@@ -1,0 +1,17 @@
+@:realPath("java.sun.misc.URLClassPath_Loader") @:used @:native("sun.misc.URLClassPath$Loader") @:libType
+extern class sun.misc.URLClassPath$Loader implements java.io.Closeable {
+
+	function new(param1:java.net.URL):Void;
+
+	function getBaseURL():java.net.URL;
+
+	function findResource(param1:java.lang.String, param2:Bool):java.net.URL;
+
+	function getResource(param1:java.lang.String, param2:Bool):sun.misc.Resource;
+
+	function getResource(param1:java.lang.String):sun.misc.Resource;
+
+	function close():Void;
+
+	function getClassPath():java.NativeArray<java.net.URL>;
+}

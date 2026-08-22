@@ -1,0 +1,12 @@
+@:realPath("java.lang.ClassLoader_2") @:used @:native("java.lang.ClassLoader$2") @:libType
+extern class java.lang.ClassLoader$2 implements java.util.Enumeration<java.net.URL> {
+
+	function new(param1:java.util.Enumeration<Dynamic>):Void;
+
+	function nextElement():java.net.URL;
+
+	function hasMoreElements():Bool;
+
+	@:realPath("val_e") @:native("val$e")
+	var val$e(default,ctor):java.util.Enumeration<Dynamic>;
+}

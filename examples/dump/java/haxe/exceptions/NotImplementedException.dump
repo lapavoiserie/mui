@@ -1,0 +1,9 @@
+@:keep @:used
+class haxe.exceptions.NotImplementedException extends haxe.exceptions.PosException {
+
+	@:value({ message : "Not implemented" })
+	public function new(message:java.lang.String = "Not implemented", previous:Null<haxe.Exception> = null, pos:Null<haxe.PosInfos> = null) {
+		super(if ((message == null)) "Not implemented" else message, if ((previous == null)) null else previous, if ((pos == null)) null else pos);
+		if ((message == null)) message = "Not implemented";
+	}
+}

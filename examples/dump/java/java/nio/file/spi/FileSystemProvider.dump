@@ -1,0 +1,61 @@
+@:realPath("java.nio.file.spi.FileSystemProvider") @:used @:native("java.nio.file.spi.FileSystemProvider") @:libType
+extern class java.nio.file.spi.FileSystemProvider {
+
+	function new():Void;
+
+	function getScheme():java.lang.String;
+
+	function newFileSystem(param1:java.net.URI, param2:java.util.Map<java.lang.String, Dynamic>):java.nio.file.FileSystem;
+
+	function newFileSystem(param1:java.nio.file.Path, param2:java.util.Map<java.lang.String, Dynamic>):java.nio.file.FileSystem;
+
+	function getFileSystem(param1:java.net.URI):java.nio.file.FileSystem;
+
+	function getPath(param1:java.net.URI):java.nio.file.Path;
+
+	function newInputStream(param1:java.nio.file.Path, param2:haxe.Rest<java.nio.file.OpenOption>):java.io.InputStream;
+
+	function newOutputStream(param1:java.nio.file.Path, param2:haxe.Rest<java.nio.file.OpenOption>):java.io.OutputStream;
+
+	function newFileChannel(param1:java.nio.file.Path, param2:java.util.Set<java.nio.file.OpenOption>, param3:haxe.Rest<java.nio.file.attribute.FileAttribute<Dynamic>>):java.nio.channels.FileChannel;
+
+	function newAsynchronousFileChannel(param1:java.nio.file.Path, param2:java.util.Set<java.nio.file.OpenOption>, param3:java.util.concurrent.ExecutorService, param4:haxe.Rest<java.nio.file.attribute.FileAttribute<Dynamic>>):java.nio.channels.AsynchronousFileChannel;
+
+	function newByteChannel(param1:java.nio.file.Path, param2:java.util.Set<java.nio.file.OpenOption>, param3:haxe.Rest<java.nio.file.attribute.FileAttribute<Dynamic>>):java.nio.channels.SeekableByteChannel;
+
+	function newDirectoryStream(param1:java.nio.file.Path, param2:java.nio.file.DirectoryStream$Filter<Dynamic>):java.nio.file.DirectoryStream<java.nio.file.Path>;
+
+	function createDirectory(param1:java.nio.file.Path, param2:haxe.Rest<java.nio.file.attribute.FileAttribute<Dynamic>>):Void;
+
+	function createSymbolicLink(param1:java.nio.file.Path, param2:java.nio.file.Path, param3:haxe.Rest<java.nio.file.attribute.FileAttribute<Dynamic>>):Void;
+
+	function createLink(param1:java.nio.file.Path, param2:java.nio.file.Path):Void;
+
+	function delete(param1:java.nio.file.Path):Void;
+
+	function deleteIfExists(param1:java.nio.file.Path):Bool;
+
+	function readSymbolicLink(param1:java.nio.file.Path):java.nio.file.Path;
+
+	function copy(param1:java.nio.file.Path, param2:java.nio.file.Path, param3:haxe.Rest<java.nio.file.CopyOption>):Void;
+
+	function move(param1:java.nio.file.Path, param2:java.nio.file.Path, param3:haxe.Rest<java.nio.file.CopyOption>):Void;
+
+	function isSameFile(param1:java.nio.file.Path, param2:java.nio.file.Path):Bool;
+
+	function isHidden(param1:java.nio.file.Path):Bool;
+
+	function getFileStore(param1:java.nio.file.Path):java.nio.file.FileStore;
+
+	function checkAccess(param1:java.nio.file.Path, param2:haxe.Rest<java.nio.file.AccessMode>):Void;
+
+	function getFileAttributeView<V:java.nio.file.attribute.FileAttributeView>(param1:java.nio.file.Path, param2:java.lang.Class<getFileAttributeView.V>, param3:haxe.Rest<java.nio.file.LinkOption>):getFileAttributeView.V;
+
+	function readAttributes<A:java.nio.file.attribute.BasicFileAttributes>(param1:java.nio.file.Path, param2:java.lang.Class<readAttributes.A>, param3:haxe.Rest<java.nio.file.LinkOption>):readAttributes.A;
+
+	function readAttributes(param1:java.nio.file.Path, param2:java.lang.String, param3:haxe.Rest<java.nio.file.LinkOption>):java.util.Map<java.lang.String, Dynamic>;
+
+	function setAttribute(param1:java.nio.file.Path, param2:java.lang.String, param3:Dynamic, param4:haxe.Rest<java.nio.file.LinkOption>):Void;
+
+	static function installedProviders():java.util.List<java.nio.file.spi.FileSystemProvider>;
+}

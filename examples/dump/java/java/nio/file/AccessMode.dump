@@ -1,0 +1,6 @@
+@:realPath("java.nio.file.AccessMode") @:used @:flatEnum @:native("java.nio.file.AccessMode")
+extern enum java.nio.file.AccessMode {
+	READ;
+	WRITE;
+	EXECUTE;
+}

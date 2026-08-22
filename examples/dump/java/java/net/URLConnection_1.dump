@@ -1,0 +1,7 @@
+@:realPath("java.net.URLConnection_1") @:used @:native("java.net.URLConnection$1") @:libType
+extern class java.net.URLConnection$1 implements java.net.FileNameMap {
+
+	function new():Void;
+
+	function getContentTypeFor(param1:java.lang.String):java.lang.String;
+}

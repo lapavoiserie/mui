@@ -1,0 +1,55 @@
+@:realPath("java.lang.Package") @:used @:native("java.lang.Package") @:libType
+extern class java.lang.Package implements java.lang.reflect.AnnotatedElement {
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String, param4:java.lang.String, param5:java.lang.String, param6:java.lang.String, param7:java.lang.String, param8:java.net.URL, param9:java.lang.ClassLoader):Void;
+
+	function new(param1:java.lang.String, param2:java.util.jar.Manifest, param3:java.net.URL, param4:java.lang.ClassLoader, param5:java.lang.Package$1):Void;
+
+	function getName():java.lang.String;
+
+	function getSpecificationTitle():java.lang.String;
+
+	function getSpecificationVersion():java.lang.String;
+
+	function getSpecificationVendor():java.lang.String;
+
+	function getImplementationTitle():java.lang.String;
+
+	function getImplementationVersion():java.lang.String;
+
+	function getImplementationVendor():java.lang.String;
+
+	function isSealed():Bool;
+
+	function isSealed(param1:java.net.URL):Bool;
+
+	function isCompatibleWith(param1:java.lang.String):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function getAnnotation<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.A>):getAnnotation.A;
+
+	function isAnnotationPresent(param1:java.lang.Class<java.lang.annotation.Annotation>):Bool;
+
+	function getAnnotationsByType<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotationsByType.A>):java.NativeArray<getAnnotationsByType.A>;
+
+	function getAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getDeclaredAnnotation<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotation.A>):getDeclaredAnnotation.A;
+
+	function getDeclaredAnnotationsByType<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotationsByType.A>):java.NativeArray<getDeclaredAnnotationsByType.A>;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	static function getPackage(param1:java.lang.String):java.lang.Package;
+
+	static function getPackage(param1:java.lang.Class<Dynamic>):java.lang.Package;
+
+	static function getPackages():java.NativeArray<java.lang.Package>;
+
+	static function getSystemPackage(param1:java.lang.String):java.lang.Package;
+
+	static function getSystemPackages():java.NativeArray<java.lang.Package>;
+}

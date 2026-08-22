@@ -1,0 +1,18 @@
+@:keep @:directlyUsed @:used
+private class sys.thread._Thread.NativeHaxeThread extends java.lang.Thread {
+
+	public function new(haxeThread:sys.thread._Thread.HaxeThread, job:() -> Void, withEventLoop:Bool) {
+		super(cast cast job);
+		this.haxeThread = haxeThread;
+		this.withEventLoop = withEventLoop;
+	}
+
+	public var haxeThread(default,ctor):sys.thread._Thread.HaxeThread;
+
+	var withEventLoop(default,ctor):Bool;
+
+	public function run() {
+		super.run();
+		if ((this.withEventLoop)) this.haxeThread.events.loop();
+	}
+}

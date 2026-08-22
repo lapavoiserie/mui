@@ -1,0 +1,15 @@
+@:realPath("java.util.AbstractQueue") @:used @:native("java.util.AbstractQueue") @:libType
+extern class java.util.AbstractQueue<E:Dynamic> extends java.util.AbstractCollection<java.util.AbstractQueue.E> implements java.util.Queue<java.util.AbstractQueue.E> {
+
+	function new():Void;
+
+	function add(param1:java.util.AbstractQueue.E):Bool;
+
+	function remove():java.util.AbstractQueue.E;
+
+	function element():java.util.AbstractQueue.E;
+
+	function clear():Void;
+
+	function addAll(param1:java.util.Collection<java.util.AbstractQueue.E>):Bool;
+}

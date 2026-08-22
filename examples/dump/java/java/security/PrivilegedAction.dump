@@ -1,0 +1,5 @@
+@:realPath("java.security.PrivilegedAction") @:used @:native("java.security.PrivilegedAction") @:libType
+extern interface java.security.PrivilegedAction<T:Dynamic> {
+
+	function run():java.security.PrivilegedAction.T;
+}

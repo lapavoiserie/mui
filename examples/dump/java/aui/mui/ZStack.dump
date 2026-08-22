@@ -1,0 +1,7 @@
+@:used
+class aui.mui.ZStack extends aui.ui.ZStack {
+
+	public function new(content:Array<aui.View>) {
+		super(null, content);
+	}
+}

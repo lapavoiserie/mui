@@ -1,0 +1,37 @@
+@:realPath("java.util.Collections_EmptyList") @:used @:native("java.util.Collections$EmptyList") @:libType
+extern class java.util.Collections$EmptyList<E:Dynamic> extends java.util.AbstractList<java.util.Collections_EmptyList.E> implements java.io.Serializable implements java.util.RandomAccess {
+
+	function new(param1:java.util.Collections$1):Void;
+
+	function iterator():java.util.Iterator<java.util.Collections_EmptyList.E>;
+
+	function listIterator():java.util.ListIterator<java.util.Collections_EmptyList.E>;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function contains(param1:Dynamic):Bool;
+
+	function containsAll(param1:java.util.Collection<Dynamic>):Bool;
+
+	function toArray():java.NativeArray<Dynamic>;
+
+	function toArray<T:Dynamic>(param1:java.NativeArray<toArray.T>):java.NativeArray<toArray.T>;
+
+	function get(param1:Int):java.util.Collections_EmptyList.E;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function removeIf(param1:java.util.function.Predicate<Dynamic>):Bool;
+
+	function replaceAll(param1:java.util.function.UnaryOperator<java.util.Collections_EmptyList.E>):Void;
+
+	function sort(param1:java.util.Comparator<Dynamic>):Void;
+
+	function forEach(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function spliterator():java.util.Spliterator<java.util.Collections_EmptyList.E>;
+}

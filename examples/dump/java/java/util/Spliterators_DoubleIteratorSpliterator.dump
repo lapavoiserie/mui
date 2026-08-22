@@ -1,0 +1,27 @@
+@:realPath("java.util.Spliterators_DoubleIteratorSpliterator") @:used @:native("java.util.Spliterators$DoubleIteratorSpliterator") @:libType
+extern class java.util.Spliterators$DoubleIteratorSpliterator implements java.util.Spliterator$OfDouble {
+
+	function new(param1:java.util.PrimitiveIterator$OfDouble, param2:haxe.Int64, param3:Int):Void;
+
+	function new(param1:java.util.PrimitiveIterator$OfDouble, param2:Int):Void;
+
+	function trySplit():java.util.Spliterator$OfDouble;
+
+	function forEachRemaining(param1:java.util.function.DoubleConsumer):Void;
+
+	function forEachRemaining(param1:Dynamic):Void;
+
+	function tryAdvance(param1:java.util.function.DoubleConsumer):Bool;
+
+	function tryAdvance(param1:Dynamic):Bool;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	function getComparator():java.util.Comparator<Dynamic>;
+
+	static var BATCH_UNIT(default,never):Int;
+
+	static var MAX_BATCH(default,never):Int;
+}

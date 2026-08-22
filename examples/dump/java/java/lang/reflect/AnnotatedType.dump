@@ -1,0 +1,5 @@
+@:realPath("java.lang.reflect.AnnotatedType") @:used @:native("java.lang.reflect.AnnotatedType") @:libType
+extern interface java.lang.reflect.AnnotatedType implements java.lang.reflect.AnnotatedElement {
+
+	function getType():java.lang.reflect.Type;
+}

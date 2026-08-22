@@ -1,0 +1,56 @@
+@:keep @:directlyUsed @:used @:coreApi
+class StringBuf {
+
+	public function new() {
+		this.b = new java.lang.StringBuilder();
+	}
+
+	var b:java.lang.StringBuilder;
+
+	public function add<T>(x:add.T) {
+		if ((haxe.jvm.Jvm.instanceof(x, java.lang.Double))) this.b.append(haxe.jvm.Jvm.toString(cast x)) else this.b.append(x);
+	}
+
+	@:realPath("addOpt") @:overload @:native("add") @:ifFeature("StringBuf.add")
+	function add(v:Bool) {
+		this.b.append(v);
+	}
+
+	@:overload @:native("add") @:ifFeature("StringBuf.add")
+	function add(v:java.lang.String) {
+		this.b.append(v);
+	}
+
+	@:overload @:native("add") @:ifFeature("StringBuf.add")
+	function add(v:haxe.Int64) {
+		this.b.append(v);
+	}
+
+	@:overload @:native("add") @:ifFeature("StringBuf.add")
+	function add(v:Int) {
+		this.b.append(v);
+	}
+
+	@:overload @:native("add") @:ifFeature("StringBuf.add")
+	function add(v:Single) {
+		this.b.append(v);
+	}
+
+	@:overload @:native("add") @:ifFeature("StringBuf.add")
+	function add(v:Float) {
+		this.b.append(v);
+	}
+
+	@:overload @:native("add") @:ifFeature("StringBuf.add")
+	function add(v:java.types.Char16) {
+		this.b.append(v);
+	}
+
+	public function addChar(c:Int) {
+		this.b.appendCodePoint(c);
+	}
+
+	public function toString() {
+		return this.b.toString();
+	}
+}

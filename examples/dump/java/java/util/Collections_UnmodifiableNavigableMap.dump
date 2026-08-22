@@ -1,0 +1,41 @@
+@:realPath("java.util.Collections_UnmodifiableNavigableMap") @:used @:native("java.util.Collections$UnmodifiableNavigableMap") @:libType
+extern class java.util.Collections$UnmodifiableNavigableMap<K:Dynamic, V:Dynamic> extends java.util.Collections$UnmodifiableSortedMap<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V> implements java.io.Serializable implements java.util.NavigableMap<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V> {
+
+	function new(param1:java.util.NavigableMap<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>):Void;
+
+	function lowerKey(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Collections_UnmodifiableNavigableMap.K;
+
+	function floorKey(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Collections_UnmodifiableNavigableMap.K;
+
+	function ceilingKey(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Collections_UnmodifiableNavigableMap.K;
+
+	function higherKey(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Collections_UnmodifiableNavigableMap.K;
+
+	function lowerEntry(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function floorEntry(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function ceilingEntry(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function higherEntry(param1:java.util.Collections_UnmodifiableNavigableMap.K):java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function firstEntry():java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function lastEntry():java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function pollFirstEntry():java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function pollLastEntry():java.util.Map$Entry<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function descendingMap():java.util.NavigableMap<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function navigableKeySet():java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableMap.K>;
+
+	function descendingKeySet():java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableMap.K>;
+
+	function subMap(param1:java.util.Collections_UnmodifiableNavigableMap.K, param2:Bool, param3:java.util.Collections_UnmodifiableNavigableMap.K, param4:Bool):java.util.NavigableMap<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function headMap(param1:java.util.Collections_UnmodifiableNavigableMap.K, param2:Bool):java.util.NavigableMap<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+
+	function tailMap(param1:java.util.Collections_UnmodifiableNavigableMap.K, param2:Bool):java.util.NavigableMap<java.util.Collections_UnmodifiableNavigableMap.K, java.util.Collections_UnmodifiableNavigableMap.V>;
+}

@@ -1,0 +1,7 @@
+@:directlyUsed @:used
+class aui.mui.VStack extends aui.ui.VStack {
+
+	public function new(content:Array<aui.View>, spacing:Null<Float> = null) {
+		super(null, if ((spacing == null)) null else spacing, content);
+	}
+}

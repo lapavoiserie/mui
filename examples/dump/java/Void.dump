@@ -1,0 +1,2 @@
+@:used @:runtimeValue @:coreType
+abstract Void {}

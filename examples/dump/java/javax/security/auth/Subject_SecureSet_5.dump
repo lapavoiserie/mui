@@ -1,0 +1,13 @@
+@:realPath("java.javax.security.auth.Subject_SecureSet_5") @:used @:native("javax.security.auth.Subject$SecureSet$5") @:libType
+extern class javax.security.auth.Subject$SecureSet$5 implements java.security.PrivilegedAction<Dynamic> {
+
+	function new(param1:javax.security.auth.Subject$SecureSet<Dynamic>, param2:java.util.Iterator<Dynamic>):Void;
+
+	function run():Dynamic;
+
+	@:realPath("val_e") @:native("val$e")
+	var val$e(default,ctor):java.util.Iterator<Dynamic>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):javax.security.auth.Subject$SecureSet<Dynamic>;
+}

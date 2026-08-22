@@ -1,0 +1,53 @@
+@:realPath("java.util.WeakHashMap") @:directlyUsed @:used @:native("java.util.WeakHashMap") @:libType
+extern class java.util.WeakHashMap<K:Dynamic, V:Dynamic> extends java.util.AbstractMap<java.util.WeakHashMap.K, java.util.WeakHashMap.V> implements java.util.Map<java.util.WeakHashMap.K, java.util.WeakHashMap.V> {
+
+	function new(param1:Int, param2:Single):Void;
+
+	function new(param1:java.util.Map<java.util.WeakHashMap.K, java.util.WeakHashMap.V>):Void;
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function hash(param1:Dynamic):Int;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function get(param1:Dynamic):java.util.WeakHashMap.V;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function getEntry(param1:Dynamic):java.util.WeakHashMap$Entry<java.util.WeakHashMap.K, java.util.WeakHashMap.V>;
+
+	function put(param1:java.util.WeakHashMap.K, param2:java.util.WeakHashMap.V):java.util.WeakHashMap.V;
+
+	function resize(param1:Int):Void;
+
+	function putAll(param1:java.util.Map<java.util.WeakHashMap.K, java.util.WeakHashMap.V>):Void;
+
+	function remove(param1:Dynamic):java.util.WeakHashMap.V;
+
+	function removeMapping(param1:Dynamic):Bool;
+
+	function clear():Void;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function keySet():java.util.Set<java.util.WeakHashMap.K>;
+
+	function values():java.util.Collection<java.util.WeakHashMap.V>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<java.util.WeakHashMap.K, java.util.WeakHashMap.V>>;
+
+	function forEach(param1:java.util.function.BiConsumer<Dynamic, Dynamic>):Void;
+
+	function replaceAll(param1:java.util.function.BiFunction<Dynamic, Dynamic, java.util.WeakHashMap.V>):Void;
+
+	var table:java.NativeArray<java.util.WeakHashMap$Entry<java.util.WeakHashMap.K, java.util.WeakHashMap.V>>;
+
+	var modCount:Int;
+
+	static function unmaskNull(param1:Dynamic):Dynamic;
+}

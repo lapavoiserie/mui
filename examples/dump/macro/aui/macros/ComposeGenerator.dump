@@ -1,0 +1,5128 @@
+class aui.macros.ComposeGenerator {
+
+	@:value(null)
+	static var _appClass:Null<String> = null;
+
+	@:value(null)
+	static var _appModule:Null<String> = null;
+
+	@:value([])
+	static var _appCandidates:Array<{ parent : Null<String>, name : String, module : String }> = [];
+
+	@:value([])
+	static var _observableClasses:Array<String> = [];
+
+	@:value([])
+	static var _viewComponents:Array<String> = [];
+
+	@:value("android/app/src/main/kotlin/com/aui/generated")
+	static var _outputDir:String = "android/app/src/main/kotlin/com/aui/generated";
+
+	@:value(0)
+	static var _indent:Int = 0;
+
+	@:value([])
+	static var _stateFields:Array<{ type : String, name : String, defaultValue : String }> = [];
+
+	@:value([])
+	static var _navRoutes:Array<{ id : String, bodyExpr : haxe.macro.TypedExpr }> = [];
+
+	@:value(0)
+	static var _nextRouteId:Int = 0;
+
+	@:value(false)
+	static var _hasNavigation:Bool = false;
+
+	@:value(false)
+	static var _hasTabView:Bool = false;
+
+	@:value(new Map())
+	static var _localBindings:Map<Int, haxe.macro.TypedExpr> = {
+		{};
+		new haxe.ds.IntMap();
+	};
+
+	@:value(new Map())
+	static var _lambdaParamIds:Map<Int, String> = {
+		{};
+		new haxe.ds.IntMap();
+	};
+
+	public static function register() {
+		haxe.macro.Compiler.define("android", null);
+		rui.macros.ViewRule.register("aui.App", "body", null);
+		if (haxe.macro.Context.defined("mui")) {
+			haxe.macro.Compiler.keep("aui.mui.GlanceBridge", null, null);
+		};
+		var isDynamic = aui.macros.RenderPath.isDynamic();
+		if (isDynamic) {
+			haxe.macro.Context.getModule("aui.runtime.ViewNodeBridge");
+		};
+		if (isDynamic) {
+			haxe.macro.Context.onAfterTyping(aui.macros.ComposeGenerator.checkDynamicCoverage);
+		};
+		haxe.macro.Context.onAfterTyping(function(modules:Array<haxe.macro.ModuleType>) {
+			{
+				var ` = 0;
+				while (` < modules.length) {
+					var module = modules[`];
+					++ `;
+					@:ast(switch (module) {
+	case TClassDecl(ref):
+		var cls = ref.get();
+		var fullName = cls.pack.join(".") + (cls.pack.length > 0 ? "." : "") + cls.name;
+		var superClass = cls.superClass;
+		while (superClass != null) {
+			var superRef = superClass.t.get();
+			var superName = superRef.pack.join(".") + (superRef.pack.length > 0 ? "." : "") + superRef.name;
+			if (superName == "aui.App") {
+				_appCandidates.push({ name : fullName, module : cls.module, parent : parentName(cls) });
+				break;
+			};
+			superClass = superRef.superClass;
+		};
+		var superClass2 = cls.superClass;
+		while (superClass2 != null) {
+			var superRef = superClass2.t.get();
+			var superName = superRef.pack.join(".") + (superRef.pack.length > 0 ? "." : "") + superRef.name;
+			if (superName == "aui.state.Observable") {
+				_observableClasses.push(fullName);
+				break;
+			};
+			superClass2 = superRef.superClass;
+		};	
+	default:
+}) if (enumIndex module == 0) {
+						var ` = module[0];
+						{
+							var ref = `;
+							{
+								var cls = ref.get();
+								var fullName = cls.pack.join(".") + (if (cls.pack.length > 0) {
+									".";
+								} else {
+									"";
+								}) + cls.name;
+								var superClass = cls.superClass;
+								while (superClass != null) {
+									var superRef = superClass.t.get();
+									var superName = superRef.pack.join(".") + (if (superRef.pack.length > 0) {
+										".";
+									} else {
+										"";
+									}) + superRef.name;
+									if (superName == "aui.App") {
+										aui.macros.ComposeGenerator._appCandidates.push({name : fullName, module : cls.module, parent : aui.macros.ComposeGenerator.parentName(cls)});
+										break;
+									};
+									superClass = superRef.superClass;
+								};
+								var superClass2 = cls.superClass;
+								while (superClass2 != null) {
+									var superRef = superClass2.t.get();
+									var superName = superRef.pack.join(".") + (if (superRef.pack.length > 0) {
+										".";
+									} else {
+										"";
+									}) + superRef.name;
+									if (superName == "aui.state.Observable") {
+										aui.macros.ComposeGenerator._observableClasses.push(fullName);
+										break;
+									};
+									superClass2 = superRef.superClass;
+								};
+							};
+						};
+					} else {};
+				};
+			};
+		});
+		haxe.macro.Context.onAfterGenerate(function() {
+			aui.macros.ComposeGenerator.resolveApp();
+			if (aui.macros.ComposeGenerator._appClass == null) {
+				return;
+			};
+			aui.macros.ComposeGenerator.generateComposeFiles();
+		});
+	}
+
+	static function parentName(cls:haxe.macro.ClassType) {
+		if (cls.superClass == null) {
+			return null;
+		};
+		var p = cls.superClass.t.get();
+		return p.pack.join(".") + (if (p.pack.length > 0) {
+			".";
+		} else {
+			"";
+		}) + p.name;
+	}
+
+	static function resolveApp() {
+		if (aui.macros.ComposeGenerator._appCandidates.length == 0) {
+			return;
+		};
+		var extended = {
+			{};
+			new haxe.ds.StringMap();
+		};
+		{
+			var ` = 0;
+			var ` = aui.macros.ComposeGenerator._appCandidates;
+			while (` < `.length) {
+				var candidate = `[`];
+				++ `;
+				if (candidate.parent != null) {
+					{
+						var key = candidate.parent;
+						extended.set(key, true);
+					};
+				};
+			};
+		};
+		{
+			var ` = 0;
+			var ` = aui.macros.ComposeGenerator._appCandidates;
+			while (` < `.length) {
+				var candidate = `[`];
+				++ `;
+				if (! {
+					var key = candidate.name;
+					extended.exists(key);
+				}) {
+					aui.macros.ComposeGenerator._appClass = candidate.name;
+					aui.macros.ComposeGenerator._appModule = candidate.module;
+					return;
+				};
+			};
+		};
+		aui.macros.ComposeGenerator._appClass = aui.macros.ComposeGenerator._appCandidates[0].name;
+		aui.macros.ComposeGenerator._appModule = aui.macros.ComposeGenerator._appCandidates[0].module;
+		haxe.macro.Context.warning("[AUI] several application classes found; building " + aui.macros.ComposeGenerator._appClass, haxe.macro.Context.currentPos(), null);
+	}
+
+	static function generateComposeFiles() {
+		aui.macros.ComposeGenerator.ensureDir(aui.macros.ComposeGenerator._outputDir);
+		var appType = haxe.macro.Context.getType(aui.macros.ComposeGenerator._appClass);
+		var appName = "HaxeApp";
+		var packageName = "com.haxe.app";
+		var minSdk = 24;
+		var targetSdk = 35;
+		var compileSdk = 35;
+		var androidConfig = null;
+		if (sys.FileSystem.exists("aui.json")) {
+			try {
+				var json = {
+					var text = sys.io.File.getContent("aui.json");
+					new haxe.format.JsonParser(text).doParse();
+				};
+				if (json.appName != null) {
+					appName = json.appName;
+				};
+				if (json.packageName != null) {
+					packageName = json.packageName;
+				};
+				if (json.minSdk != null) {
+					minSdk = json.minSdk;
+				};
+				if (json.targetSdk != null) {
+					targetSdk = json.targetSdk;
+				};
+				if (json.compileSdk != null) {
+					compileSdk = json.compileSdk;
+				};
+				if (json.android != null) {
+					androidConfig = json.android;
+				};
+			} catch (`:Dynamic) {
+				{};
+				{};
+				if (true) {
+					{};
+					{};
+				} else throw `;
+			};
+		};
+		aui.macros.ComposeGenerator._stateFields = aui.macros.ComposeGenerator.collectStateFields(appType);
+		var firstGenerate = ! sys.FileSystem.exists("android/build.gradle.kts");
+		var declaresGlance = aui.macros.ComposeGenerator.declaresGlanceSurface(appType);
+		aui.macros.GradleProject.generate({appName : appName, packageName : packageName, minSdk : minSdk, targetSdk : targetSdk, compileSdk : compileSdk, android : androidConfig, glanceWidget : cast declaresGlance});
+		if (firstGenerate) {
+			haxe.macro.Context.warning("[AUI] Generated Android project in android/", haxe.macro.Context.currentPos(), null);
+		};
+		aui.macros.ComposeGenerator.generateMainActivity(packageName, appName);
+		if (declaresGlance) {
+			haxe.macro.Context.getType("aui.mui.GlanceBridge");
+			aui.macros.ComposeGenerator.generateGlanceWidget(packageName, aui.macros.ComposeGenerator.appJvmName());
+		};
+		var screen = aui.macros.ComposeGenerator._outputDir + "/MainScreen.kt";
+		if (aui.macros.RenderPath.isStatic()) {
+			aui.macros.ComposeGenerator.generateMainScreen(packageName, appType);
+		} else {
+			if (sys.FileSystem.exists(screen)) {
+				sys.FileSystem.deleteFile(screen);
+			};
+		};
+		aui.macros.ComposeGenerator.writeAuiRuntimeKotlin();
+		if (androidConfig != null) {
+			aui.macros.ComposeGenerator.syncNativeBundle(androidConfig);
+		};
+		haxe.macro.Context.warning("[AUI] Generated Compose files in " + aui.macros.ComposeGenerator._outputDir, haxe.macro.Context.currentPos(), null);
+	}
+
+	static function declaresGlanceSurface(appType:haxe.macro.Type) {
+		var at = @:ast(switch (appType) {
+	case TInst(ref, _):
+		ref.get();	
+	case _:
+		null;	
+}) if (enumIndex appType == 2) {
+			var ` = appType[0];
+			var ` = appType[1];
+			{
+				var ref = `;
+				{
+					ref.get();
+				};
+			};
+		} else {
+			null;
+		};
+		while (at != null) {
+			{
+				var ` = 0;
+				var ` = at.fields.get();
+				while (` < `.length) {
+					var field = `[`];
+					++ `;
+					if (! field.meta.has(":surface")) {
+						continue;
+					};
+					{
+						var ` = 0;
+						var ` = field.meta.extract(":surface");
+						while (` < `.length) {
+							var m = `[`];
+							++ `;
+							if (m.params == null || m.params.length == 0) {
+								continue;
+							};
+							@:ast(switch (m.params[0].expr) {
+	case EConst(CIdent("Glance")):
+		return true;	
+	case _:
+}) {
+								var ` = m.params[0].expr;
+								if (enumIndex ` == 0) {
+									var ` = `[0];
+									if (enumIndex ` == 3) {
+										var ` = `[0];
+										if (` == "Glance") {
+											{
+												return true;
+											};
+										} else {};
+									} else {};
+								} else {};
+							};
+						};
+					};
+				};
+			};
+			at = if (at.superClass == null) {
+				null;
+			} else {
+				at.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function generateGlanceWidget(packageName:String, jvmApp:String) {
+		var lines = ["package " + packageName, "", "import android.content.Context", "import androidx.compose.runtime.Composable", "import androidx.compose.ui.unit.dp", "import androidx.glance.GlanceModifier", "import androidx.glance.appwidget.GlanceAppWidget", "import androidx.glance.appwidget.GlanceAppWidgetReceiver", "import androidx.glance.appwidget.provideContent", "import androidx.glance.GlanceId", "import androidx.glance.layout.Column", "import androidx.glance.layout.Row", "import androidx.glance.layout.padding", "import androidx.glance.text.Text", "import org.json.JSONArray", "import org.json.JSONObject", "", "/**", " * Draws the application's @:surface(Glance) declaration as an App", " * Widget.", " *", " * The content is a SNAPSHOT: aui.mui.GlanceBridge samples the", " * surface into JSON — the same shape a Companion frame carries over", " * the network — and inflateNode below turns it into Glance", " * composables. Nothing live crosses, because nothing live can: the", " * launcher draws this, from RemoteViews, when the system decides an", " * update is due.", " *", " * The running app is sampled when there is one, so a widget", " * refreshed while the app is open shows what the app shows. With no", " * app running, one is constructed and its initial state rendered —", " * honestly: persisting state across process death is the", " * application's business.", " */", "class AuiGlanceWidget : GlanceAppWidget() {", "    override suspend fun provideGlance(context: Context, id: GlanceId) {", "        val json = aui.mui.GlanceBridge.sampleLive()", "            ?: aui.mui.GlanceBridge.sampleOf(" + jvmApp + "())", "        provideContent {", "            if (json == null) {", "                // A declaration this backend hosts but the app does not", "                // make: say so rather than draw an empty rectangle.", "                Text(\"no Glance surface\")", "            } else {", "                InflateNode(JSONObject(json))", "            }", "        }", "    }", "", "    /**", "     * One snapshot node, as Glance composables.", "     *", "     * The vocabulary is the canonical mui one the describers emit —", "     * VStack/HStack/Text — not Compose's, so this walk reads the same", "     * trees a cui or wui sink would.", "     */", "    @Composable", "    private fun InflateNode(node: JSONObject) {", "        val type = node.optString(\"type\")", "        val props = node.optJSONObject(\"props\")", "        when (type) {", "            \"VStack\" -> Column(modifier = GlanceModifier.padding(8.dp)) { Children(node) }", "            \"HStack\" -> Row(modifier = GlanceModifier.padding(8.dp)) { Children(node) }", "            \"Text\" -> Text(props?.optString(\"text\") ?: \"\")", "            // A Button in a snapshot is a label plus an action id. The", "            // first slice draws the label; the tap comes next.", "            \"Button\" -> Text(props?.optString(\"label\") ?: \"\")", "            // A type this widget has no drawing for is named, not", "            // dropped: the tree arrived as DATA, so a surprise here is", "            // a fact about the sender, not a mistake in this build.", "            else -> Text(\"?\" + type)", "        }", "    }", "", "    @Composable", "    private fun Children(node: JSONObject) {", "        val kids: JSONArray = node.optJSONArray(\"children\") ?: return", "        for (i in 0 until kids.length()) {", "            InflateNode(kids.getJSONObject(i))", "        }", "    }", "", "}", "", "class AuiGlanceReceiver : GlanceAppWidgetReceiver() {", "    override val glanceAppWidget: GlanceAppWidget = AuiGlanceWidget()", "}", ""];
+		sys.io.File.saveContent(aui.macros.ComposeGenerator._outputDir + "/AuiGlanceWidget.kt", lines.join("\n"));
+	}
+
+	static function collectStateFields(appType:haxe.macro.Type) {
+		var fields = [];
+		@:ast(switch (appType) {
+	case TInst(ref, _):
+		var cls = ref.get();
+		for (field  in  cls.fields.get()) {
+			switch (field.type) {
+				case TInst(tref, params):
+					var typeName = tref.get().pack.join(".") + (tref.get().pack.length > 0 ? "." : "") + tref.get().name;
+					if (typeName == "aui.state.State" && params.length > 0) {
+						var kotlinType = haxeTypeToKotlin(params[0]);
+						fields.push({ name : field.name, type : kotlinType, defaultValue : getDefaultForKotlinType(kotlinType) });
+					};				
+				default:
+			};
+		};
+		var ctor = cls.constructor;
+		if (ctor != null) {
+			var ctorExpr = ctor.get().expr();
+			if (ctorExpr != null) {
+				scanConstructorForDefaults(ctorExpr, fields);
+			};
+		};	
+	default:
+}) if (enumIndex appType == 2) {
+			var ` = appType[0];
+			var ` = appType[1];
+			{
+				var ref = `;
+				{
+					var cls = ref.get();
+					{
+						var ` = 0;
+						var ` = cls.fields.get();
+						while (` < `.length) {
+							var field = `[`];
+							++ `;
+							@:ast(switch (field.type) {
+	case TInst(tref, params):
+		var typeName = tref.get().pack.join(".") + (tref.get().pack.length > 0 ? "." : "") + tref.get().name;
+		if (typeName == "aui.state.State" && params.length > 0) {
+			var kotlinType = haxeTypeToKotlin(params[0]);
+			fields.push({ name : field.name, type : kotlinType, defaultValue : getDefaultForKotlinType(kotlinType) });
+		};	
+	default:
+}) {
+								var ` = field.type;
+								if (enumIndex ` == 2) {
+									var ` = `[0];
+									var ` = `[1];
+									{
+										var tref = `;
+										var params = `;
+										{
+											var typeName = tref.get().pack.join(".") + (if (tref.get().pack.length > 0) {
+												".";
+											} else {
+												"";
+											}) + tref.get().name;
+											if (typeName == "aui.state.State" && params.length > 0) {
+												var kotlinType = aui.macros.ComposeGenerator.haxeTypeToKotlin(params[0]);
+												fields.push({name : field.name, type : kotlinType, defaultValue : aui.macros.ComposeGenerator.getDefaultForKotlinType(kotlinType)});
+											};
+										};
+									};
+								} else {};
+							};
+						};
+					};
+					var ctor = cls.constructor;
+					if (ctor != null) {
+						var ctorExpr = ctor.get().expr();
+						if (ctorExpr != null) {
+							aui.macros.ComposeGenerator.scanConstructorForDefaults(ctorExpr, fields);
+						};
+					};
+				};
+			};
+		} else {};
+		return fields;
+	}
+
+	static function scanConstructorForDefaults(expr:haxe.macro.TypedExpr, fields:Array<{ type : String, name : String, defaultValue : String }>) {
+		if (expr == null) {
+			return;
+		};
+		@:ast(switch (expr.expr) {
+	case TFunction(tf):
+		scanConstructorForDefaults(tf.expr, fields);	
+	case TBlock(exprs):
+		for (e  in  exprs) {
+			scanConstructorForDefaults(e, fields);
+		};	
+	case TBinop(op, e1, e2):
+		var fieldName:Null<String> = null;
+		switch (e1.expr) {
+			case TField(_, fa):
+				fieldName = getFieldName(fa);			
+			default:
+		};
+		if (fieldName != null) {
+			var newExpr = findNewState(e2);
+			if (newExpr != null) {
+				var found = false;
+				for (i  in  0 ... fields.length) {
+					if (fields[i].name == fieldName) {
+						fields[i] = { name : fields[i].name, type : fields[i].type, defaultValue : newExpr };
+						found = true;
+						break;
+					};
+				};
+			};
+		};
+		scanConstructorForDefaults(e2, fields);	
+	default:
+}) {
+			var ` = expr.expr;
+			switch (enumIndex `) {
+				case 3: {
+					var ` = `[0];
+					var ` = `[1];
+					var ` = `[2];
+					{
+						var op = `;
+						var e1 = `;
+						var e2 = `;
+						{
+							var fieldName = null;
+							@:ast(switch (e1.expr) {
+	case TField(_, fa):
+		fieldName = getFieldName(fa);	
+	default:
+}) {
+								var ` = e1.expr;
+								if (enumIndex ` == 4) {
+									var ` = `[0];
+									var ` = `[1];
+									{
+										var fa = `;
+										{
+											fieldName = aui.macros.ComposeGenerator.getFieldName(fa);
+										};
+									};
+								} else {};
+							};
+							if (fieldName != null) {
+								var newExpr = aui.macros.ComposeGenerator.findNewState(e2);
+								if (newExpr != null) {
+									var found = false;
+									{
+										var ` = 0;
+										var ` = fields.length;
+										while (` < `) {
+											var i = ` ++;
+											if (fields[i].name == fieldName) {
+												fields[i] = {name : fields[i].name, type : fields[i].type, defaultValue : newExpr};
+												found = true;
+												break;
+											};
+										};
+									};
+								};
+							};
+							aui.macros.ComposeGenerator.scanConstructorForDefaults(e2, fields);
+						};
+					};
+				};
+				case 12: {
+					var ` = `[0];
+					{
+						var tf = `;
+						{
+							aui.macros.ComposeGenerator.scanConstructorForDefaults(tf.expr, fields);
+						};
+					};
+				};
+				case 14: {
+					var ` = `[0];
+					{
+						var exprs = `;
+						{
+							{
+								var ` = 0;
+								while (` < exprs.length) {
+									var e = exprs[`];
+									++ `;
+									aui.macros.ComposeGenerator.scanConstructorForDefaults(e, fields);
+								};
+							};
+						};
+					};
+				};
+				default: {}
+			};
+		};
+	}
+
+	static function findNewState(expr:haxe.macro.TypedExpr) {
+		if (expr == null) {
+			return null;
+		};
+		@:ast(switch (expr.expr) {
+	case TNew(classRef, _, args):
+		var cls = classRef.get();
+		var name = cls.pack.join(".") + (cls.pack.length > 0 ? "." : "") + cls.name;
+		if (name == "aui.state.State" && args.length >= 1) {
+			return extractDefaultValue(args[0]);
+		};
+		return null;	
+	case TBlock(exprs):
+		for (e  in  exprs) {
+			var r = findNewState(e);
+			if (r != null) return r;
+		};
+		return null;	
+	case TReturn(e):
+		return findNewState(e);	
+	default:
+		return null;	
+}) {
+			var ` = expr.expr;
+			switch (enumIndex `) {
+				case 10: {
+					var ` = `[0];
+					var ` = `[1];
+					var ` = `[2];
+					{
+						var classRef = `;
+						var args = `;
+						{
+							var cls = classRef.get();
+							var name = cls.pack.join(".") + (if (cls.pack.length > 0) {
+								".";
+							} else {
+								"";
+							}) + cls.name;
+							if (name == "aui.state.State" && args.length >= 1) {
+								return aui.macros.ComposeGenerator.extractDefaultValue(args[0]);
+							};
+							return null;
+						};
+					};
+				};
+				case 14: {
+					var ` = `[0];
+					{
+						var exprs = `;
+						{
+							{
+								var ` = 0;
+								while (` < exprs.length) {
+									var e = exprs[`];
+									++ `;
+									var r = aui.macros.ComposeGenerator.findNewState(e);
+									if (r != null) {
+										return r;
+									};
+								};
+							};
+							return null;
+						};
+					};
+				};
+				case 20: {
+					var ` = `[0];
+					{
+						var e = `;
+						{
+							return aui.macros.ComposeGenerator.findNewState(e);
+						};
+					};
+				};
+				default: {
+					return null;
+				}
+			};
+		};
+	}
+
+	static function extractDefaultValue(expr:haxe.macro.TypedExpr) {
+		if (expr == null) {
+			return null;
+		};
+		@:ast(switch (expr.expr) {
+	case TConst(c):
+		switch (c) {
+			case TInt(i):
+				return Std.string(i);			
+			case TFloat(f):
+				return f + "f";			
+			case TString(s):
+				return "\"${escapeString(s)}\"";			
+			case TBool(b):
+				return b ? "true" : "false";			
+			default:
+				return null;			
+		};	
+	case TNew(_, _, args):
+		if (args.length > 0) return extractDefaultValue(args[0]);
+		return null;	
+	case TFunction(tf):
+		return extractDefaultValue(tf.expr);	
+	case TReturn(e):
+		if (e != null) return extractDefaultValue(e);
+		return null;	
+	case TBlock(exprs):
+		for (e  in  exprs) {
+			var v = extractDefaultValue(e);
+			if (v != null) return v;
+		};
+		return null;	
+	default:
+		return null;	
+}) {
+			var ` = expr.expr;
+			switch (enumIndex `) {
+				case 0: {
+					var ` = `[0];
+					{
+						var c = `;
+						{
+							@:ast(switch (c) {
+	case TInt(i):
+		return Std.string(i);	
+	case TFloat(f):
+		return f + "f";	
+	case TString(s):
+		return "\"${escapeString(s)}\"";	
+	case TBool(b):
+		return b ? "true" : "false";	
+	default:
+		return null;	
+}) switch (enumIndex c) {
+								case 0: {
+									var ` = c[0];
+									{
+										var i = `;
+										{
+											return Std.string(i);
+										};
+									};
+								};
+								case 1: {
+									var ` = c[0];
+									{
+										var f = `;
+										{
+											return f + "f";
+										};
+									};
+								};
+								case 2: {
+									var ` = c[0];
+									{
+										var s = `;
+										{
+											return "\"" + aui.macros.ComposeGenerator.escapeString(s) + "\"";
+										};
+									};
+								};
+								case 3: {
+									var ` = c[0];
+									{
+										var b = `;
+										{
+											return if (b) {
+												"true";
+											} else {
+												"false";
+											};
+										};
+									};
+								};
+								default: {
+									return null;
+								}
+							};
+						};
+					};
+				};
+				case 10: {
+					var ` = `[0];
+					var ` = `[1];
+					var ` = `[2];
+					{
+						var args = `;
+						{
+							if (args.length > 0) {
+								return aui.macros.ComposeGenerator.extractDefaultValue(args[0]);
+							};
+							return null;
+						};
+					};
+				};
+				case 12: {
+					var ` = `[0];
+					{
+						var tf = `;
+						{
+							return aui.macros.ComposeGenerator.extractDefaultValue(tf.expr);
+						};
+					};
+				};
+				case 14: {
+					var ` = `[0];
+					{
+						var exprs = `;
+						{
+							{
+								var ` = 0;
+								while (` < exprs.length) {
+									var e = exprs[`];
+									++ `;
+									var v = aui.macros.ComposeGenerator.extractDefaultValue(e);
+									if (v != null) {
+										return v;
+									};
+								};
+							};
+							return null;
+						};
+					};
+				};
+				case 20: {
+					var ` = `[0];
+					{
+						var e = `;
+						{
+							if (e != null) {
+								return aui.macros.ComposeGenerator.extractDefaultValue(e);
+							};
+							return null;
+						};
+					};
+				};
+				default: {
+					return null;
+				}
+			};
+		};
+	}
+
+	static function jvmClassName(haxeName:String) {
+		return if ((haxeName.indexOf(".", null) < 0)) {
+			"haxe.root." + haxeName;
+		} else {
+			haxeName;
+		};
+	}
+
+	static function appJvmName() {
+		return aui.macros.ComposeGenerator.jvmClassName(aui.macros.ComposeGenerator._appClass);
+	}
+
+	static function stateKotlinType(name:String) {
+		{
+			var ` = 0;
+			var ` = aui.macros.ComposeGenerator._stateFields;
+			while (` < `.length) {
+				var sf = `[`];
+				++ `;
+				if (sf.name == name) {
+					return sf.type;
+				};
+			};
+		};
+		return "Any?";
+	}
+
+	static function stateRead(name:String) {
+		return "(app." + name + ".get() as " + aui.macros.ComposeGenerator.stateKotlinType(name) + ")";
+	}
+
+	static function stateReadForInterp(name:String) {
+		return "app." + name + ".get()";
+	}
+
+	static function stateAssign(name:String, valueExpr:String) {
+		return "app." + name + ".set(" + valueExpr + ")";
+	}
+
+	static function generateMainActivity(packageName:String, appName:String) {
+		var jvmApp = aui.macros.ComposeGenerator.appJvmName();
+		var lines = ["package " + packageName, "", "import android.os.Bundle", "import androidx.activity.ComponentActivity", "import androidx.activity.compose.setContent", "import androidx.activity.viewModels", "import androidx.compose.material3.MaterialTheme", "import androidx.compose.material3.Surface", "import androidx.lifecycle.ViewModel", "", "/**", " * Holds the Haxe App across configuration changes.", " *", " * Android destroys and recreates the Activity when the device", " * rotates. Building the app in onCreate therefore built a SECOND", " * one on every rotation: its @:state fields went back to their", " * initialisers (the counter you were looking at reset itself), the", " * previous instance's effects kept running with nobody watching,", " * and aui.state.State's name registry silently repointed to the", " * newest cells.", " *", " * A ViewModel outlives configuration changes and is cleared only", " * when the Activity is really finishing — which is exactly the", " * distinction the app needs, and the one Android does not make for", " * you. onCleared is therefore the one place release() belongs.", " */", "class AuiAppHolder : ViewModel() {", "    var app: " + jvmApp + "? = null", "", "    override fun onCleared() {", "        super.onCleared()", "        aui.runtime.ViewNodeBridge.releaseApp()", "        app = null", "    }", "}", "", "class MainActivity : ComponentActivity() {", "    private val holder: AuiAppHolder by viewModels()", "", "    override fun onCreate(savedInstanceState: Bundle?) {", "        super.onCreate(savedInstanceState)", "        // The retained app, or a new one the first time round. On a", "        // rotation this branch is not taken: same instance, same", "        // @:state cells, same effects — the screen comes back where", "        // it was.", "        // A val, not a var: the composition lambda below captures it,", "        // and a captured var would lose its smart cast to non-null.", "        val app = holder.app ?: run {", "            // Constructing it initializes its @:state fields, each", "            // backed by a Compose MutableState via aui.state.StateBridge.", "            val fresh = " + jvmApp + "()", "            // AUI lifecycle hook: invoked once before composition, gives", "            // the app a chance to bootstrap with the Android Context", "            // (extract assets, set up symlinks, register JNI bridges).", "            // Once per app, not once per Activity — and read from the", "            // application context, never this Activity: what the app is", "            // handed here it may hold, and it now outlives the Activity", "            // that created it.", "            fresh.onAndroidContextReady(", "                applicationInfo.nativeLibraryDir,", "                applicationContext.filesDir.absolutePath,", "                applicationContext.assets", "            )", "            holder.app = fresh", "            fresh", "        }"];
+		if (aui.macros.RenderPath.isDynamic()) {
+			lines.push("        // Hand the app to the Haxe-side tree reader, which");
+			lines.push("        // DynamicRoot() walks through nui's pull contract.");
+			lines.push("        aui.runtime.ViewNodeBridge.setApp(app)");
+			lines.push("        setContent {");
+			lines.push("            MaterialTheme {");
+			lines.push("                Surface {");
+			lines.push("                    aui.runtime.DynamicRoot()");
+			lines.push("                }");
+			lines.push("            }");
+			lines.push("        }");
+		} else {
+			lines.push("        setContent {");
+			lines.push("            MaterialTheme {");
+			lines.push("                Surface {");
+			lines.push("                    MainScreen(app)");
+			lines.push("                }");
+			lines.push("            }");
+			lines.push("        }");
+		};
+		lines.push("    }");
+		lines.push("}");
+		lines.push("");
+		sys.io.File.saveContent(aui.macros.ComposeGenerator._outputDir + "/MainActivity.kt", lines.join("\n"));
+	}
+
+	static function generateMainScreen(packageName:String, appType:haxe.macro.Type) {
+		var bodyExpr = null;
+		@:ast(switch (appType) {
+	case TInst(ref, _):
+		var cls = ref.get();
+		for (field  in  cls.fields.get()) {
+			if (field.name == "body") {
+				bodyExpr = field.expr();
+				break;
+			};
+		};	
+	default:
+}) if (enumIndex appType == 2) {
+			var ` = appType[0];
+			var ` = appType[1];
+			{
+				var ref = `;
+				{
+					var cls = ref.get();
+					{
+						var ` = 0;
+						var ` = cls.fields.get();
+						while (` < `.length) {
+							var field = `[`];
+							++ `;
+							if (field.name == "body") {
+								bodyExpr = field.expr();
+								break;
+							};
+						};
+					};
+				};
+			};
+		} else {};
+		aui.macros.ComposeGenerator._navRoutes = [];
+		aui.macros.ComposeGenerator._nextRouteId = 0;
+		aui.macros.ComposeGenerator._hasNavigation = false;
+		aui.macros.ComposeGenerator._hasTabView = false;
+		if (bodyExpr != null) {
+			aui.macros.ComposeGenerator.scanForNavigation(bodyExpr);
+		};
+		var buf = new StringBuf();
+		buf.add("package " + packageName + "\n\n");
+		var imports = ["androidx.compose.foundation.layout.*", "androidx.compose.foundation.lazy.LazyColumn", "androidx.compose.foundation.lazy.items", "androidx.compose.foundation.rememberScrollState", "androidx.compose.foundation.verticalScroll", "androidx.compose.material.icons.Icons", "androidx.compose.material.icons.filled.*", "androidx.compose.material3.*", "androidx.compose.runtime.*", "androidx.compose.ui.Alignment", "androidx.compose.ui.Modifier", "androidx.compose.ui.unit.dp", "androidx.compose.ui.unit.sp", "androidx.compose.ui.graphics.Color", "androidx.compose.ui.graphics.vector.ImageVector", "androidx.compose.ui.text.font.FontWeight", "androidx.compose.ui.text.font.FontStyle", "androidx.compose.ui.text.style.TextAlign", "androidx.compose.ui.text.input.PasswordVisualTransformation", "androidx.compose.foundation.background", "androidx.compose.foundation.border", "androidx.compose.foundation.clickable", "androidx.compose.foundation.shape.RoundedCornerShape", "androidx.compose.foundation.shape.CircleShape", "androidx.compose.ui.draw.*"];
+		if (aui.macros.ComposeGenerator._hasNavigation) {
+			imports.push("androidx.navigation.compose.NavHost");
+			imports.push("androidx.navigation.compose.composable");
+			imports.push("androidx.navigation.compose.rememberNavController");
+		};
+		{
+			var ` = 0;
+			while (` < imports.length) {
+				var imp = imports[`];
+				++ `;
+				buf.add("import " + imp + "\n");
+			};
+		};
+		buf.add("\n");
+		buf.add("@Composable\n");
+		buf.add("fun MainScreen(app: " + aui.macros.ComposeGenerator.appJvmName() + ") {\n");
+		if (aui.macros.ComposeGenerator._hasNavigation) {
+			buf.add("    val navController = rememberNavController()\n\n");
+		};
+		if (bodyExpr != null) {
+			aui.macros.ComposeGenerator._indent = 1;
+			buf.add(aui.macros.ComposeGenerator.translateTypedExpr(bodyExpr));
+		} else {
+			buf.add("    Text(\"Hello from AUI!\")\n");
+		};
+		buf.add("}\n");
+		sys.io.File.saveContent(aui.macros.ComposeGenerator._outputDir + "/MainScreen.kt", buf.toString());
+	}
+
+	static function scanForNavigation(expr:haxe.macro.TypedExpr) {
+		if (expr == null) {
+			return;
+		};
+		@:ast(switch (expr.expr) {
+	case TNew(classRef, _, args):
+		var cls = classRef.get();
+		var fullName = cls.pack.join(".") + (cls.pack.length > 0 ? "." : "") + cls.name;
+		if (fullName == "aui.ui.NavigationStack") {
+			_hasNavigation = true;
+		};
+		if (fullName == "aui.ui.TabView") {
+			_hasTabView = true;
+		};
+		if (fullName == "aui.ui.NavigationLink" && args.length >= 2) {
+			var routeId = "screen_" + _nextRouteId++;
+			_navRoutes.push({ id : routeId, bodyExpr : args[1] });
+		};
+		for (arg  in  args) scanForNavigation(arg);	
+	case TCall(func, args):
+		scanForNavigation(func);
+		for (arg  in  args) scanForNavigation(arg);	
+	case TBlock(exprs):
+		for (e  in  exprs) scanForNavigation(e);	
+	case TFunction(tf):
+		scanForNavigation(tf.expr);	
+	case TReturn(e):
+		if (e != null) scanForNavigation(e);	
+	case TField(e, _):
+		scanForNavigation(e);	
+	case TArrayDecl(exprs):
+		for (e  in  exprs) scanForNavigation(e);	
+	default:
+}) {
+			var ` = expr.expr;
+			switch (enumIndex `) {
+				case 4: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var e = `;
+						{
+							aui.macros.ComposeGenerator.scanForNavigation(e);
+						};
+					};
+				};
+				case 8: {
+					var ` = `[0];
+					{
+						var exprs = `;
+						{
+							{
+								var ` = 0;
+								while (` < exprs.length) {
+									var e = exprs[`];
+									++ `;
+									aui.macros.ComposeGenerator.scanForNavigation(e);
+								};
+							};
+						};
+					};
+				};
+				case 9: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var func = `;
+						var args = `;
+						{
+							aui.macros.ComposeGenerator.scanForNavigation(func);
+							{
+								var ` = 0;
+								while (` < args.length) {
+									var arg = args[`];
+									++ `;
+									aui.macros.ComposeGenerator.scanForNavigation(arg);
+								};
+							};
+						};
+					};
+				};
+				case 10: {
+					var ` = `[0];
+					var ` = `[1];
+					var ` = `[2];
+					{
+						var classRef = `;
+						var args = `;
+						{
+							var cls = classRef.get();
+							var fullName = cls.pack.join(".") + (if (cls.pack.length > 0) {
+								".";
+							} else {
+								"";
+							}) + cls.name;
+							if (fullName == "aui.ui.NavigationStack") {
+								aui.macros.ComposeGenerator._hasNavigation = true;
+							};
+							if (fullName == "aui.ui.TabView") {
+								aui.macros.ComposeGenerator._hasTabView = true;
+							};
+							if (fullName == "aui.ui.NavigationLink" && args.length >= 2) {
+								var routeId = "screen_" + aui.macros.ComposeGenerator._nextRouteId ++;
+								aui.macros.ComposeGenerator._navRoutes.push({id : routeId, bodyExpr : args[1]});
+							};
+							{
+								var ` = 0;
+								while (` < args.length) {
+									var arg = args[`];
+									++ `;
+									aui.macros.ComposeGenerator.scanForNavigation(arg);
+								};
+							};
+						};
+					};
+				};
+				case 12: {
+					var ` = `[0];
+					{
+						var tf = `;
+						{
+							aui.macros.ComposeGenerator.scanForNavigation(tf.expr);
+						};
+					};
+				};
+				case 14: {
+					var ` = `[0];
+					{
+						var exprs = `;
+						{
+							{
+								var ` = 0;
+								while (` < exprs.length) {
+									var e = exprs[`];
+									++ `;
+									aui.macros.ComposeGenerator.scanForNavigation(e);
+								};
+							};
+						};
+					};
+				};
+				case 20: {
+					var ` = `[0];
+					{
+						var e = `;
+						{
+							if (e != null) {
+								aui.macros.ComposeGenerator.scanForNavigation(e);
+							};
+						};
+					};
+				};
+				default: {}
+			};
+		};
+	}
+
+	static function returnsView(field:haxe.macro.ClassField) {
+		@:ast(switch (field.type) {
+	case TFun(_, ret):
+		switch (ret) {
+			case TInst(ref, _):
+				var cls = ref.get();
+				if (cls.name == "View" && cls.pack.join(".") == "aui") return true;
+				var sc = cls.superClass;
+				while (sc != null) {
+					var scCls = sc.t.get();
+					if (scCls.name == "View" && scCls.pack.join(".") == "aui") return true;
+					sc = scCls.superClass;
+				};			
+			default:
+		};	
+	default:
+}) {
+			var ` = field.type;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var ret = `;
+					{
+						@:ast(switch (ret) {
+	case TInst(ref, _):
+		var cls = ref.get();
+		if (cls.name == "View" && cls.pack.join(".") == "aui") return true;
+		var sc = cls.superClass;
+		while (sc != null) {
+			var scCls = sc.t.get();
+			if (scCls.name == "View" && scCls.pack.join(".") == "aui") return true;
+			sc = scCls.superClass;
+		};	
+	default:
+}) if (enumIndex ret == 2) {
+							var ` = ret[0];
+							var ` = ret[1];
+							{
+								var ref = `;
+								{
+									var cls = ref.get();
+									if (cls.name == "View" && cls.pack.join(".") == "aui") {
+										return true;
+									};
+									var sc = cls.superClass;
+									while (sc != null) {
+										var scCls = sc.t.get();
+										if (scCls.name == "View" && scCls.pack.join(".") == "aui") {
+											return true;
+										};
+										sc = scCls.superClass;
+									};
+								};
+							};
+						} else {};
+					};
+				};
+			} else {};
+		};
+		return false;
+	}
+
+	static function tryInlineViewCall(func:haxe.macro.TypedExpr, args:Array<haxe.macro.TypedExpr>) {
+		@:ast(switch (func.expr) {
+	case TField(_, fa):
+		switch (fa) {
+			case FInstance(_, _, fieldRef):
+				var field = fieldRef.get();
+				if (isModifierMethod(field.name)) return null;
+				if (isFrameworkMethod(field.name)) return null;
+				if (returnsView(field)) return inlineViewFunction(field, args);			
+			case FStatic(_, fieldRef):
+				var field = fieldRef.get();
+				if (isModifierMethod(field.name)) return null;
+				if (returnsView(field)) return inlineViewFunction(field, args);			
+			case FClosure(_, fieldRef):
+				var field = fieldRef.get();
+				if (isModifierMethod(field.name)) return null;
+				if (returnsView(field)) return inlineViewFunction(field, args);			
+			default:
+		};	
+	default:
+}) {
+			var ` = func.expr;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var fa = `;
+					{
+						@:ast(switch (fa) {
+	case FInstance(_, _, fieldRef):
+		var field = fieldRef.get();
+		if (isModifierMethod(field.name)) return null;
+		if (isFrameworkMethod(field.name)) return null;
+		if (returnsView(field)) return inlineViewFunction(field, args);	
+	case FStatic(_, fieldRef):
+		var field = fieldRef.get();
+		if (isModifierMethod(field.name)) return null;
+		if (returnsView(field)) return inlineViewFunction(field, args);	
+	case FClosure(_, fieldRef):
+		var field = fieldRef.get();
+		if (isModifierMethod(field.name)) return null;
+		if (returnsView(field)) return inlineViewFunction(field, args);	
+	default:
+}) switch (enumIndex fa) {
+							case 0: {
+								var ` = fa[0];
+								var ` = fa[1];
+								var ` = fa[2];
+								{
+									var fieldRef = `;
+									{
+										var field = fieldRef.get();
+										if (aui.macros.ComposeGenerator.isModifierMethod(field.name)) {
+											return null;
+										};
+										if (aui.macros.ComposeGenerator.isFrameworkMethod(field.name)) {
+											return null;
+										};
+										if (aui.macros.ComposeGenerator.returnsView(field)) {
+											return aui.macros.ComposeGenerator.inlineViewFunction(field, args);
+										};
+									};
+								};
+							};
+							case 1: {
+								var ` = fa[0];
+								var ` = fa[1];
+								{
+									var fieldRef = `;
+									{
+										var field = fieldRef.get();
+										if (aui.macros.ComposeGenerator.isModifierMethod(field.name)) {
+											return null;
+										};
+										if (aui.macros.ComposeGenerator.returnsView(field)) {
+											return aui.macros.ComposeGenerator.inlineViewFunction(field, args);
+										};
+									};
+								};
+							};
+							case 4: {
+								var ` = fa[0];
+								var ` = fa[1];
+								{
+									var fieldRef = `;
+									{
+										var field = fieldRef.get();
+										if (aui.macros.ComposeGenerator.isModifierMethod(field.name)) {
+											return null;
+										};
+										if (aui.macros.ComposeGenerator.returnsView(field)) {
+											return aui.macros.ComposeGenerator.inlineViewFunction(field, args);
+										};
+									};
+								};
+							};
+							default: {}
+						};
+					};
+				};
+			} else {};
+		};
+		return null;
+	}
+
+	static function isFrameworkMethod(name:String) {
+		return ["body", "push", "pop", "get", "set", "toString", "new"].indexOf(name, null) != -1;
+	}
+
+	static function inlineViewFunction(field:haxe.macro.ClassField, args:Array<haxe.macro.TypedExpr>) {
+		var funcExpr = field.expr();
+		if (funcExpr == null) {
+			return null;
+		};
+		var savedBindings = {
+			var this = aui.macros.ComposeGenerator._localBindings;
+			cast cast cast this.copy();
+		};
+		@:ast(switch (funcExpr.expr) {
+	case TFunction(f):
+		for (i  in  0 ... f.args.length) {
+			if (i < args.length) {
+				_localBindings.set(f.args[i].v.id, args[i]);
+			};
+		};	
+	default:
+}) {
+			var ` = funcExpr.expr;
+			if (enumIndex ` == 12) {
+				var ` = `[0];
+				{
+					var f = `;
+					{
+						{
+							var ` = 0;
+							var ` = f.args.length;
+							while (` < `) {
+								var i = ` ++;
+								if (i < args.length) {
+									{
+										var this = aui.macros.ComposeGenerator._localBindings;
+										var key = f.args[i].v.id;
+										cast this.set(key, args[i]);
+									};
+								};
+							};
+						};
+					};
+				};
+			} else {};
+		};
+		var result = aui.macros.ComposeGenerator.translateTypedExpr(funcExpr);
+		aui.macros.ComposeGenerator._localBindings = savedBindings;
+		return result;
+	}
+
+	static function translateTypedExpr(expr:haxe.macro.TypedExpr) {
+		if (expr == null) {
+			return "";
+		};
+		@:ast(switch (expr.expr) {
+	case TFunction(tfunc):
+		return translateTypedExpr(tfunc.expr);	
+	case TReturn(e):
+		if (e != null) return translateTypedExpr(e);
+		return "";	
+	case TNew(classRef, _, args):
+		var cls = classRef.get();
+		var fullName = resolveAuiClassName(cls);
+		return translateViewWithModifiers(fullName, args, []);	
+	case TBlock(exprs):
+		var buf = new StringBuf();
+		for (e  in  exprs) {
+			buf.add(translateTypedExpr(e));
+		};
+		return buf.toString();	
+	case TCall(func, args):
+		var staticResult = tryTranslateStaticCall(func, args);
+		if (staticResult != null) return staticResult;
+		var inlined = tryInlineViewCall(func, args);
+		if (inlined != null) return inlined;
+		switch (func.expr) {
+			case TField(innerExpr, fa):
+				var fieldName = getFieldName(fa);
+				if (isModifierMethod(fieldName)) {
+					var modifiers:Array<{ var name : String; var args : Array<TypedExpr>}> = [];
+					modifiers.push({ name : fieldName, args : args });
+					var baseExpr = unwrapModifierChain(innerExpr, modifiers);
+					modifiers.reverse();
+					switch (baseExpr.expr) {
+						case TCall(bFunc, bArgs):
+							var staticBase = tryTranslateStaticCallWithMods(bFunc, bArgs, modifiers);
+							if (staticBase != null) return staticBase;						
+						default:
+					};
+					switch (baseExpr.expr) {
+						case TNew(classRef, _, ctorArgs):
+							var cls = classRef.get();
+							var fullName = resolveAuiClassName(cls);
+							return translateViewWithModifiers(fullName, ctorArgs, modifiers);						
+						default:
+							return translateTypedExpr(baseExpr);						
+					};
+				};
+				return translateTypedExpr(func);			
+			default:
+				return translateTypedExpr(func);			
+		};	
+	case TConst(c):
+		switch (c) {
+			case TString(s):
+				return "\"${escapeString(s)}\"";			
+			case TInt(i):
+				return Std.string(i);			
+			case TFloat(f):
+				return f;			
+			case TBool(b):
+				return b ? "true" : "false";			
+			case TNull:
+				return "null";			
+			default:
+				return "";			
+		};	
+	case TLocal(v):
+		if (_lambdaParamIds.exists(v.id)) {
+			return _lambdaParamIds.get(v.id);
+		};
+		if (_localBindings.exists(v.id)) {
+			return translateTypedExpr(_localBindings.get(v.id));
+		};
+		return "";	
+	case TField(e, fa):
+		return translateTypedExpr(e);	
+	default:
+		return "";	
+}) {
+			var ` = expr.expr;
+			switch (enumIndex `) {
+				case 0: {
+					var ` = `[0];
+					{
+						var c = `;
+						{
+							@:ast(switch (c) {
+	case TString(s):
+		return "\"${escapeString(s)}\"";	
+	case TInt(i):
+		return Std.string(i);	
+	case TFloat(f):
+		return f;	
+	case TBool(b):
+		return b ? "true" : "false";	
+	case TNull:
+		return "null";	
+	default:
+		return "";	
+}) switch (enumIndex c) {
+								case 0: {
+									var ` = c[0];
+									{
+										var i = `;
+										{
+											return Std.string(i);
+										};
+									};
+								};
+								case 1: {
+									var ` = c[0];
+									{
+										var f = `;
+										{
+											return f;
+										};
+									};
+								};
+								case 2: {
+									var ` = c[0];
+									{
+										var s = `;
+										{
+											return "\"" + aui.macros.ComposeGenerator.escapeString(s) + "\"";
+										};
+									};
+								};
+								case 3: {
+									var ` = c[0];
+									{
+										var b = `;
+										{
+											return if (b) {
+												"true";
+											} else {
+												"false";
+											};
+										};
+									};
+								};
+								case 4: {
+									{
+										return "null";
+									};
+								};
+								default: {
+									return "";
+								}
+							};
+						};
+					};
+				};
+				case 1: {
+					var ` = `[0];
+					{
+						var v = `;
+						{
+							if ({
+								var this = aui.macros.ComposeGenerator._lambdaParamIds;
+								var key = v.id;
+								cast this.exists(key);
+							}) {
+								return {
+									var this = aui.macros.ComposeGenerator._lambdaParamIds;
+									var key = v.id;
+									cast this.get(key);
+								};
+							};
+							if ({
+								var this = aui.macros.ComposeGenerator._localBindings;
+								var key = v.id;
+								cast this.exists(key);
+							}) {
+								return aui.macros.ComposeGenerator.translateTypedExpr({
+									var this = aui.macros.ComposeGenerator._localBindings;
+									var key = v.id;
+									cast this.get(key);
+								});
+							};
+							return "";
+						};
+					};
+				};
+				case 4: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var e = `;
+						var fa = `;
+						{
+							return aui.macros.ComposeGenerator.translateTypedExpr(e);
+						};
+					};
+				};
+				case 9: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var func = `;
+						var args = `;
+						{
+							var staticResult = aui.macros.ComposeGenerator.tryTranslateStaticCall(func, args);
+							if (staticResult != null) {
+								return staticResult;
+							};
+							var inlined = aui.macros.ComposeGenerator.tryInlineViewCall(func, args);
+							if (inlined != null) {
+								return inlined;
+							};
+							@:ast(switch (func.expr) {
+	case TField(innerExpr, fa):
+		var fieldName = getFieldName(fa);
+		if (isModifierMethod(fieldName)) {
+			var modifiers:Array<{ var name : String; var args : Array<TypedExpr>}> = [];
+			modifiers.push({ name : fieldName, args : args });
+			var baseExpr = unwrapModifierChain(innerExpr, modifiers);
+			modifiers.reverse();
+			switch (baseExpr.expr) {
+				case TCall(bFunc, bArgs):
+					var staticBase = tryTranslateStaticCallWithMods(bFunc, bArgs, modifiers);
+					if (staticBase != null) return staticBase;				
+				default:
+			};
+			switch (baseExpr.expr) {
+				case TNew(classRef, _, ctorArgs):
+					var cls = classRef.get();
+					var fullName = resolveAuiClassName(cls);
+					return translateViewWithModifiers(fullName, ctorArgs, modifiers);				
+				default:
+					return translateTypedExpr(baseExpr);				
+			};
+		};
+		return translateTypedExpr(func);	
+	default:
+		return translateTypedExpr(func);	
+}) {
+								var ` = func.expr;
+								if (enumIndex ` == 4) {
+									var ` = `[0];
+									var ` = `[1];
+									{
+										var innerExpr = `;
+										var fa = `;
+										{
+											var fieldName = aui.macros.ComposeGenerator.getFieldName(fa);
+											if (aui.macros.ComposeGenerator.isModifierMethod(fieldName)) {
+												var modifiers = [];
+												modifiers.push({name : fieldName, args : args});
+												var baseExpr = aui.macros.ComposeGenerator.unwrapModifierChain(innerExpr, modifiers);
+												modifiers.reverse();
+												@:ast(switch (baseExpr.expr) {
+	case TCall(bFunc, bArgs):
+		var staticBase = tryTranslateStaticCallWithMods(bFunc, bArgs, modifiers);
+		if (staticBase != null) return staticBase;	
+	default:
+}) {
+													var ` = baseExpr.expr;
+													if (enumIndex ` == 9) {
+														var ` = `[0];
+														var ` = `[1];
+														{
+															var bFunc = `;
+															var bArgs = `;
+															{
+																var staticBase = aui.macros.ComposeGenerator.tryTranslateStaticCallWithMods(bFunc, bArgs, modifiers);
+																if (staticBase != null) {
+																	return staticBase;
+																};
+															};
+														};
+													} else {};
+												};
+												@:ast(switch (baseExpr.expr) {
+	case TNew(classRef, _, ctorArgs):
+		var cls = classRef.get();
+		var fullName = resolveAuiClassName(cls);
+		return translateViewWithModifiers(fullName, ctorArgs, modifiers);	
+	default:
+		return translateTypedExpr(baseExpr);	
+}) {
+													var ` = baseExpr.expr;
+													if (enumIndex ` == 10) {
+														var ` = `[0];
+														var ` = `[1];
+														var ` = `[2];
+														{
+															var classRef = `;
+															var ctorArgs = `;
+															{
+																var cls = classRef.get();
+																var fullName = aui.macros.ComposeGenerator.resolveAuiClassName(cls);
+																return aui.macros.ComposeGenerator.translateViewWithModifiers(fullName, ctorArgs, modifiers);
+															};
+														};
+													} else {
+														return aui.macros.ComposeGenerator.translateTypedExpr(baseExpr);
+													};
+												};
+											};
+											return aui.macros.ComposeGenerator.translateTypedExpr(func);
+										};
+									};
+								} else {
+									return aui.macros.ComposeGenerator.translateTypedExpr(func);
+								};
+							};
+						};
+					};
+				};
+				case 10: {
+					var ` = `[0];
+					var ` = `[1];
+					var ` = `[2];
+					{
+						var classRef = `;
+						var args = `;
+						{
+							var cls = classRef.get();
+							var fullName = aui.macros.ComposeGenerator.resolveAuiClassName(cls);
+							return aui.macros.ComposeGenerator.translateViewWithModifiers(fullName, args, []);
+						};
+					};
+				};
+				case 12: {
+					var ` = `[0];
+					{
+						var tfunc = `;
+						{
+							return aui.macros.ComposeGenerator.translateTypedExpr(tfunc.expr);
+						};
+					};
+				};
+				case 14: {
+					var ` = `[0];
+					{
+						var exprs = `;
+						{
+							var buf = new StringBuf();
+							{
+								var ` = 0;
+								while (` < exprs.length) {
+									var e = exprs[`];
+									++ `;
+									buf.add(aui.macros.ComposeGenerator.translateTypedExpr(e));
+								};
+							};
+							return buf.toString();
+						};
+					};
+				};
+				case 20: {
+					var ` = `[0];
+					{
+						var e = `;
+						{
+							if (e != null) {
+								return aui.macros.ComposeGenerator.translateTypedExpr(e);
+							};
+							return "";
+						};
+					};
+				};
+				default: {
+					return "";
+				}
+			};
+		};
+	}
+
+	static function tryTranslateStaticCall(func:haxe.macro.TypedExpr, args:Array<haxe.macro.TypedExpr>) {
+		@:ast(switch (func.expr) {
+	case TField(_, fa):
+		var fieldName = getFieldName(fa);
+		if (fieldName == "withState" && args.length > 0) {
+			return translateTextWithState(args[0], []);
+		};	
+	default:
+}) {
+			var ` = func.expr;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var fa = `;
+					{
+						var fieldName = aui.macros.ComposeGenerator.getFieldName(fa);
+						if (fieldName == "withState" && args.length > 0) {
+							return aui.macros.ComposeGenerator.translateTextWithState(args[0], []);
+						};
+					};
+				};
+			} else {};
+		};
+		return null;
+	}
+
+	static function tryTranslateStaticCallWithMods(func:haxe.macro.TypedExpr, args:Array<haxe.macro.TypedExpr>, modifiers:Array<{ name : String, args : Array<haxe.macro.TypedExpr> }>) {
+		@:ast(switch (func.expr) {
+	case TField(_, fa):
+		var fieldName = getFieldName(fa);
+		if (fieldName == "withState" && args.length > 0) {
+			return translateTextWithState(args[0], modifiers);
+		};	
+	default:
+}) {
+			var ` = func.expr;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var fa = `;
+					{
+						var fieldName = aui.macros.ComposeGenerator.getFieldName(fa);
+						if (fieldName == "withState" && args.length > 0) {
+							return aui.macros.ComposeGenerator.translateTextWithState(args[0], modifiers);
+						};
+					};
+				};
+			} else {};
+		};
+		return null;
+	}
+
+	static function translateTextWithState(templateExpr:haxe.macro.TypedExpr, modifiers:Array<{ name : String, args : Array<haxe.macro.TypedExpr> }>) {
+		var indent = aui.macros.ComposeGenerator.getIndent();
+		var template = "";
+		@:ast(switch (templateExpr.expr) {
+	case TConst(TString(s)):
+		template = s;	
+	default:
+		template = translateTypedExpr(templateExpr);	
+}) {
+			var ` = templateExpr.expr;
+			if (enumIndex ` == 0) {
+				var ` = `[0];
+				if (enumIndex ` == 2) {
+					var ` = `[0];
+					{
+						var s = `;
+						{
+							template = s;
+						};
+					};
+				} else {
+					template = aui.macros.ComposeGenerator.translateTypedExpr(templateExpr);
+				};
+			} else {
+				template = aui.macros.ComposeGenerator.translateTypedExpr(templateExpr);
+			};
+		};
+		var reg = new EReg("\\{([^}]+)\\}", "g");
+		var kotlinStr = reg.map(template, function(r:EReg) {
+			var ref = r.matched(1);
+			{
+				var ` = 0;
+				var ` = aui.macros.ComposeGenerator._stateFields;
+				while (` < `.length) {
+					var sf = `[`];
+					++ `;
+					if (sf.name == ref) {
+						return "${" + aui.macros.ComposeGenerator.stateReadForInterp(ref) + "}";
+					};
+				};
+			};
+			return "$" + ref;
+		});
+		var hasBold = false;
+		var hasItalic = false;
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "bold") {
+					hasBold = true;
+				};
+				if (mod.name == "italic") {
+					hasItalic = true;
+				};
+			};
+		};
+		var layoutMods = aui.macros.ComposeGenerator.buildModifierChain(modifiers);
+		var buf = new StringBuf();
+		buf.add(indent + "Text(\n");
+		buf.add(indent + "    text = \"" + kotlinStr + "\"");
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "foregroundColor" && mod.args.length > 0) {
+					buf.add(",\n" + indent + "    color = " + aui.macros.ComposeGenerator.translateColorArg(mod.args[0]));
+				};
+			};
+		};
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "font" && mod.args.length > 0) {
+					var fontInfo = aui.macros.ComposeGenerator.translateFontArg(mod.args[0]);
+					if (fontInfo.style != null) {
+						buf.add(",\n" + indent + "    style = " + fontInfo.style);
+					};
+				};
+			};
+		};
+		if (hasBold) {
+			buf.add(",\n" + indent + "    fontWeight = FontWeight.Bold");
+		};
+		if (hasItalic) {
+			buf.add(",\n" + indent + "    fontStyle = FontStyle.Italic");
+		};
+		if (layoutMods.length > 0) {
+			buf.add(",\n" + indent + "    modifier = " + layoutMods);
+		};
+		buf.add("\n" + indent + ")\n");
+		return buf.toString();
+	}
+
+	static function unwrapModifierChain(expr:haxe.macro.TypedExpr, modifiers:Array<{ name : String, args : Array<haxe.macro.TypedExpr> }>) {
+		@:ast(switch (expr.expr) {
+	case TCall(func, args):
+		switch (func.expr) {
+			case TField(innerExpr, fa):
+				var fieldName = getFieldName(fa);
+				if (isModifierMethod(fieldName)) {
+					modifiers.push({ name : fieldName, args : args });
+					return unwrapModifierChain(innerExpr, modifiers);
+				};			
+			default:
+		};	
+	default:
+}) {
+			var ` = expr.expr;
+			if (enumIndex ` == 9) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var func = `;
+					var args = `;
+					{
+						@:ast(switch (func.expr) {
+	case TField(innerExpr, fa):
+		var fieldName = getFieldName(fa);
+		if (isModifierMethod(fieldName)) {
+			modifiers.push({ name : fieldName, args : args });
+			return unwrapModifierChain(innerExpr, modifiers);
+		};	
+	default:
+}) {
+							var ` = func.expr;
+							if (enumIndex ` == 4) {
+								var ` = `[0];
+								var ` = `[1];
+								{
+									var innerExpr = `;
+									var fa = `;
+									{
+										var fieldName = aui.macros.ComposeGenerator.getFieldName(fa);
+										if (aui.macros.ComposeGenerator.isModifierMethod(fieldName)) {
+											modifiers.push({name : fieldName, args : args});
+											return aui.macros.ComposeGenerator.unwrapModifierChain(innerExpr, modifiers);
+										};
+									};
+								};
+							} else {};
+						};
+					};
+				};
+			} else {};
+		};
+		return expr;
+	}
+
+	static function getFieldName(fa:haxe.macro.FieldAccess) {
+		@:ast(switch (fa) {
+	case FInstance(_, _, cf):
+		return cf.get().name;	
+	case FStatic(_, cf):
+		return cf.get().name;	
+	case FAnon(cf):
+		return cf.get().name;	
+	case FClosure(_, cf):
+		return cf.get().name;	
+	case FDynamic(s):
+		return s;	
+	case FEnum(_, ef):
+		return ef.name;	
+}) switch (@:exhaustive enumIndex fa) {
+			case 0: {
+				var ` = fa[0];
+				var ` = fa[1];
+				var ` = fa[2];
+				{
+					var cf = `;
+					{
+						return cf.get().name;
+					};
+				};
+			};
+			case 1: {
+				var ` = fa[0];
+				var ` = fa[1];
+				{
+					var cf = `;
+					{
+						return cf.get().name;
+					};
+				};
+			};
+			case 2: {
+				var ` = fa[0];
+				{
+					var cf = `;
+					{
+						return cf.get().name;
+					};
+				};
+			};
+			case 3: {
+				var ` = fa[0];
+				{
+					var s = `;
+					{
+						return s;
+					};
+				};
+			};
+			case 4: {
+				var ` = fa[0];
+				var ` = fa[1];
+				{
+					var cf = `;
+					{
+						return cf.get().name;
+					};
+				};
+			};
+			case 5: {
+				var ` = fa[0];
+				var ` = fa[1];
+				{
+					var ef = `;
+					{
+						return ef.name;
+					};
+				};
+			};
+		};
+	}
+
+	static function isModifierMethod(name:String) {
+		return ["padding", "paddingHorizontal", "paddingVertical", "frame", "fillMaxWidth", "fillMaxHeight", "fillMaxSize", "offset", "aspectRatio", "font", "bold", "italic", "lineLimit", "multilineTextAlignment", "foregroundColor", "background", "opacity", "cornerRadius", "clipShape", "shadow", "blur", "scaleEffect", "rotationEffect", "brightness", "contrast", "saturation", "grayscale", "border", "overlay", "onTapGesture", "onLongPressGesture", "onAppear", "onDisappear", "disabled", "hidden", "sheet", "alert", "navigationTitle", "animation", "accessibilityLabel", "accessibilityHint"].indexOf(name, null) != -1;
+	}
+
+	static function resolveAuiClassName(cls:haxe.macro.ClassType) {
+		var fullName = cls.pack.join(".") + (if (cls.pack.length > 0) {
+			".";
+		} else {
+			"";
+		}) + cls.name;
+		if (StringTools.startsWith(fullName, "aui.")) {
+			return fullName;
+		};
+		var sc = cls.superClass;
+		while (sc != null) {
+			var scCls = sc.t.get();
+			var scName = scCls.pack.join(".") + (if (scCls.pack.length > 0) {
+				".";
+			} else {
+				"";
+			}) + scCls.name;
+			if (StringTools.startsWith(scName, "aui.")) {
+				return scName;
+			};
+			sc = scCls.superClass;
+		};
+		return fullName;
+	}
+
+	static function translateViewWithModifiers(fullName:String, args:Array<haxe.macro.TypedExpr>, modifiers:Array<{ name : String, args : Array<haxe.macro.TypedExpr> }>) {
+		var indent = aui.macros.ComposeGenerator.getIndent();
+		var modStr = aui.macros.ComposeGenerator.buildModifierChain(modifiers);
+		var prefix = "";
+		var suffix = "";
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "sheet" && mod.args.length >= 2) {
+					var stateName = aui.macros.ComposeGenerator.extractStateFieldName(mod.args[0]);
+					if (stateName != null) {
+						prefix += indent + "if (" + aui.macros.ComposeGenerator.stateRead(stateName) + ") {\n";
+						prefix += indent + "    ModalBottomSheet(onDismissRequest = { " + aui.macros.ComposeGenerator.stateAssign(stateName, "false") + " }) {\n";
+						aui.macros.ComposeGenerator._indent += 2;
+						prefix += aui.macros.ComposeGenerator.translateTypedExpr(mod.args[1]);
+						aui.macros.ComposeGenerator._indent -= 2;
+						prefix += indent + "    }\n";
+						prefix += indent + "}\n";
+					};
+				};
+				if (mod.name == "alert" && mod.args.length >= 2) {
+					var title = aui.macros.ComposeGenerator.translateTypedExpr(mod.args[0]);
+					var stateName = aui.macros.ComposeGenerator.extractStateFieldName(mod.args[1]);
+					var message = if (mod.args.length >= 3) {
+						aui.macros.ComposeGenerator.translateTypedExpr(mod.args[2]);
+					} else {
+						"null";
+					};
+					if (stateName != null) {
+						prefix += indent + "if (" + aui.macros.ComposeGenerator.stateRead(stateName) + ") {\n";
+						prefix += indent + "    AlertDialog(\n";
+						prefix += indent + "        onDismissRequest = { " + aui.macros.ComposeGenerator.stateAssign(stateName, "false") + " },\n";
+						prefix += indent + "        title = { Text(" + title + ") },\n";
+						if (message != "null") {
+							prefix += indent + "        text = { Text(" + message + ") },\n";
+						};
+						prefix += indent + "        confirmButton = { TextButton(onClick = { " + aui.macros.ComposeGenerator.stateAssign(stateName, "false") + " }) { Text(\"OK\") } }\n";
+						prefix += indent + "    )\n";
+						prefix += indent + "}\n";
+					};
+				};
+			};
+		};
+		var viewCode = "";
+		@:ast(switch (fullName) {
+	case "aui.ui.Text":
+		viewCode = generateText(args, modifiers, indent);	
+	case "aui.ui.VStack":
+		viewCode = generateContainer("Column", args, modStr, indent);	
+	case "aui.ui.HStack":
+		viewCode = generateContainer("Row", args, modStr, indent);	
+	case "aui.ui.ZStack":
+		viewCode = generateContainer("Box", args, modStr, indent);	
+	case "aui.ui.Spacer":
+		viewCode = modStr.length > 0 ? indent + "Spacer(modifier = " + modStr + ")\n" : indent + "Spacer(modifier = Modifier.weight(1f))\n";	
+	case "aui.ui.Button":
+		viewCode = generateButton(args, modStr, indent);	
+	case "aui.ui.Divider":
+		viewCode = modStr.length > 0 ? indent + "HorizontalDivider(modifier = " + modStr + ")\n" : indent + "HorizontalDivider()\n";	
+	case "aui.ui.TextField":
+		viewCode = generateTextField(args, modStr, indent);	
+	case "aui.ui.Toggle":
+		viewCode = generateToggle(args, modStr, indent);	
+	case "aui.ui.Slider":
+		viewCode = generateSlider(args, modStr, indent);	
+	case "aui.ui.ScrollView":
+		viewCode = generateScrollView(args, modStr, indent);	
+	case "aui.ui.Image":
+		viewCode = generateImage(args, modStr, indent);	
+	case "aui.ui.ConditionalView":
+		viewCode = generateConditionalView(args, indent);	
+	case "aui.ui.NavigationStack":
+		viewCode = generateNavigationStack(args, modStr, indent);	
+	case "aui.ui.NavigationLink":
+		viewCode = generateNavigationLink(args, modStr, indent);	
+	case "aui.ui.TabView":
+		viewCode = generateTabView(args, modStr, indent);	
+	case "aui.ui.ForEach":
+		viewCode = generateForEach(args, indent);	
+	case "aui.ui.Section":
+		viewCode = generateSection(args, modStr, indent);	
+	case "aui.ui.LazyColumn":
+		viewCode = generateLazyColumn(args, modStr, indent);	
+	case "aui.ui.ProgressView":
+		viewCode = generateProgressView(args, modStr, indent);	
+	case "aui.ui.Card":
+		viewCode = generateCard(args, modStr, indent);	
+	case "aui.ui.SafeArea" | "mui.ui.SafeArea":
+		var safeMod = modStr.length > 0 ? "Modifier.safeDrawingPadding().then($modStr)" : "Modifier.safeDrawingPadding()";
+		viewCode = generateContainer("Column", args, safeMod, indent);	
+	default:
+		if (StringTools.endsWith(fullName, "ViewComponent") || isComponentName(fullName)) {
+			Context.error("The static path cannot render a ViewComponent (\"" + fullName + "\").\n" + "  It would need a composable of its own, carrying the component's state.\n" + "  Drop -D " + RenderPath.STATIC_DEFINE + " -- the dynamic renderer, which is\n" + "  the default, expands components.", Context.currentPos());
+		};
+		Context.error("The static path cannot render \"" + fullName + "\".\n" + "  Only aui's own view types are emitted to Kotlin here.\n" + "  Drop -D " + RenderPath.STATIC_DEFINE + ", or compose from types aui provides.", Context.currentPos());
+		viewCode = "";	
+}) switch (fullName) {
+			case "aui.ui.Button": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateButton(args, modStr, indent);
+				};
+			};
+			case "aui.ui.Card": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateCard(args, modStr, indent);
+				};
+			};
+			case "aui.ui.ConditionalView": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateConditionalView(args, indent);
+				};
+			};
+			case "aui.ui.Divider": {
+				{
+					viewCode = if (modStr.length > 0) {
+						indent + "HorizontalDivider(modifier = " + modStr + ")\n";
+					} else {
+						indent + "HorizontalDivider()\n";
+					};
+				};
+			};
+			case "aui.ui.ForEach": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateForEach(args, indent);
+				};
+			};
+			case "aui.ui.HStack": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateContainer("Row", args, modStr, indent);
+				};
+			};
+			case "aui.ui.Image": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateImage(args, modStr, indent);
+				};
+			};
+			case "aui.ui.LazyColumn": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateLazyColumn(args, modStr, indent);
+				};
+			};
+			case "aui.ui.NavigationLink": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateNavigationLink(args, modStr, indent);
+				};
+			};
+			case "aui.ui.NavigationStack": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateNavigationStack(args, modStr, indent);
+				};
+			};
+			case "aui.ui.ProgressView": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateProgressView(args, modStr, indent);
+				};
+			};
+			case "aui.ui.ScrollView": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateScrollView(args, modStr, indent);
+				};
+			};
+			case "aui.ui.Section": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateSection(args, modStr, indent);
+				};
+			};
+			case "aui.ui.Slider": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateSlider(args, modStr, indent);
+				};
+			};
+			case "aui.ui.Spacer": {
+				{
+					viewCode = if (modStr.length > 0) {
+						indent + "Spacer(modifier = " + modStr + ")\n";
+					} else {
+						indent + "Spacer(modifier = Modifier.weight(1f))\n";
+					};
+				};
+			};
+			case "aui.ui.TabView": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateTabView(args, modStr, indent);
+				};
+			};
+			case "aui.ui.Text": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateText(args, modifiers, indent);
+				};
+			};
+			case "aui.ui.TextField": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateTextField(args, modStr, indent);
+				};
+			};
+			case "aui.ui.Toggle": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateToggle(args, modStr, indent);
+				};
+			};
+			case "aui.ui.VStack": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateContainer("Column", args, modStr, indent);
+				};
+			};
+			case "aui.ui.ZStack": {
+				{
+					viewCode = aui.macros.ComposeGenerator.generateContainer("Box", args, modStr, indent);
+				};
+			};
+			case "aui.ui.SafeArea", "mui.ui.SafeArea": {
+				{
+					var safeMod = if (modStr.length > 0) {
+						"Modifier.safeDrawingPadding().then(" + modStr + ")";
+					} else {
+						"Modifier.safeDrawingPadding()";
+					};
+					viewCode = aui.macros.ComposeGenerator.generateContainer("Column", args, safeMod, indent);
+				};
+			};
+			default: {
+				if (StringTools.endsWith(fullName, "ViewComponent") || aui.macros.ComposeGenerator.isComponentName(fullName)) {
+					haxe.macro.Context.error("The static path cannot render a ViewComponent (\"" + fullName + "\").\n" + "  It would need a composable of its own, carrying the component's state.\n" + "  Drop -D " + "aui_static" + " -- the dynamic renderer, which is\n" + "  the default, expands components.", haxe.macro.Context.currentPos(), null);
+				};
+				haxe.macro.Context.error("The static path cannot render \"" + fullName + "\".\n" + "  Only aui's own view types are emitted to Kotlin here.\n" + "  Drop -D " + "aui_static" + ", or compose from types aui provides.", haxe.macro.Context.currentPos(), null);
+				viewCode = "";
+			}
+		};
+		return prefix + viewCode;
+	}
+
+	static function generateText(args:Array<haxe.macro.TypedExpr>, modifiers:Array<{ name : String, args : Array<haxe.macro.TypedExpr> }>, indent:String) {
+		var textContent = "\"\"";
+		if (args.length > 0) {
+			textContent = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+		};
+		var hasBold = false;
+		var hasItalic = false;
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "bold") {
+					hasBold = true;
+				};
+				if (mod.name == "italic") {
+					hasItalic = true;
+				};
+			};
+		};
+		var layoutMods = aui.macros.ComposeGenerator.buildModifierChain(modifiers);
+		var buf = new StringBuf();
+		buf.add(indent + "Text(\n");
+		buf.add(indent + "    text = " + textContent);
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "foregroundColor" && mod.args.length > 0) {
+					buf.add(",\n" + indent + "    color = " + aui.macros.ComposeGenerator.translateColorArg(mod.args[0]));
+				};
+			};
+		};
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "font" && mod.args.length > 0) {
+					var fontInfo = aui.macros.ComposeGenerator.translateFontArg(mod.args[0]);
+					if (fontInfo.style != null) {
+						buf.add(",\n" + indent + "    style = " + fontInfo.style);
+					};
+				};
+			};
+		};
+		if (hasBold) {
+			buf.add(",\n" + indent + "    fontWeight = FontWeight.Bold");
+		};
+		if (hasItalic) {
+			buf.add(",\n" + indent + "    fontStyle = FontStyle.Italic");
+		};
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				if (mod.name == "multilineTextAlignment" && mod.args.length > 0) {
+					buf.add(",\n" + indent + "    textAlign = " + aui.macros.ComposeGenerator.translateTextAlignArg(mod.args[0]));
+				};
+			};
+		};
+		if (layoutMods.length > 0) {
+			buf.add(",\n" + indent + "    modifier = " + layoutMods);
+		};
+		buf.add("\n" + indent + ")\n");
+		return buf.toString();
+	}
+
+	static function generateContainer(composeName:String, args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var contentArg = null;
+		var spacingArg = null;
+		{
+			var ` = 0;
+			while (` < args.length) {
+				var arg = args[`];
+				++ `;
+				@:ast(switch (arg.expr) {
+	case TArrayDecl(_):
+		contentArg = arg;	
+	case TConst(TInt(_)), TConst(TFloat(_)):
+		spacingArg = arg;	
+	default:
+}) {
+					var ` = arg.expr;
+					switch (enumIndex `) {
+						case 0: {
+							var ` = `[0];
+							switch (enumIndex `) {
+								case 0: {
+									var ` = `[0];
+									{
+										spacingArg = arg;
+									};
+								};
+								case 1: {
+									var ` = `[0];
+									{
+										spacingArg = arg;
+									};
+								};
+								default: {}
+							};
+						};
+						case 8: {
+							var ` = `[0];
+							{
+								contentArg = arg;
+							};
+						};
+						default: {}
+					};
+				};
+			};
+		};
+		var params = new Array();
+		if (modStr.length > 0) {
+			params.push("modifier = " + modStr);
+		};
+		if (composeName == "Column") {
+			params.push("horizontalAlignment = Alignment.CenterHorizontally");
+		} else {
+			if (composeName == "Row") {
+				params.push("verticalAlignment = Alignment.CenterVertically");
+				if (spacingArg != null) {
+					params.push("horizontalArrangement = Arrangement.spacedBy(" + aui.macros.ComposeGenerator.translateTypedExpr(spacingArg) + ".dp)");
+				};
+			};
+		};
+		if (params.length > 0) {
+			buf.add(indent + composeName + "(\n");
+			{
+				var ` = 0;
+				var ` = params.length;
+				while (` < `) {
+					var i = ` ++;
+					buf.add(indent + "    " + params[i]);
+					if (i < params.length - 1) {
+						buf.add(",");
+					};
+					buf.add("\n");
+				};
+			};
+			buf.add(indent + ") {\n");
+		} else {
+			buf.add(indent + composeName + " {\n");
+		};
+		if (contentArg != null) {
+			@:ast(switch (contentArg.expr) {
+	case TArrayDecl(elements):
+		_indent++;
+		for (element  in  elements) buf.add(translateTypedExpr(element));
+		_indent--;	
+	default:
+}) {
+				var ` = contentArg.expr;
+				if (enumIndex ` == 8) {
+					var ` = `[0];
+					{
+						var elements = `;
+						{
+							aui.macros.ComposeGenerator._indent ++;
+							{
+								var ` = 0;
+								while (` < elements.length) {
+									var element = elements[`];
+									++ `;
+									buf.add(aui.macros.ComposeGenerator.translateTypedExpr(element));
+								};
+							};
+							aui.macros.ComposeGenerator._indent --;
+						};
+					};
+				} else {};
+			};
+		};
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateButton(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var label = "\"\"";
+		if (args.length > 0) {
+			label = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+		};
+		var actionCode = "{ }";
+		if (args.length >= 2) {
+			var sa = aui.macros.ComposeGenerator.translateStateAction(args[1]);
+			if (sa != null) {
+				actionCode = "{ " + sa + " }";
+			} else {
+				var mref = aui.macros.ComposeGenerator.translateMethodRef(args[1]);
+				if (mref != null) {
+					actionCode = "{ " + mref + " }";
+				};
+			};
+		};
+		buf.add(indent + "Button(\n");
+		buf.add(indent + "    onClick = " + actionCode);
+		if (modStr.length > 0) {
+			buf.add(",\n" + indent + "    modifier = " + modStr);
+		};
+		buf.add("\n" + indent + ") {\n");
+		buf.add(indent + "    Text(" + label + ")\n");
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function translateMethodRef(expr:haxe.macro.TypedExpr) {
+		if (expr == null) {
+			return null;
+		};
+		@:ast(switch (expr.expr) {
+	case TField(_, fa):
+		switch (fa) {
+			case FInstance(_, _, ref):
+				var f = ref.get();
+				switch (f.type) {
+					case TFun(_, _):
+						return "app." + f.name + "()";					
+					default:
+				};			
+			case FClosure(_, ref):
+				var f = ref.get();
+				switch (f.type) {
+					case TFun(_, _):
+						return "app." + f.name + "()";					
+					default:
+				};			
+			default:
+		};	
+	case TParenthesis(e):
+		return translateMethodRef(e);	
+	case TMeta(_, e):
+		return translateMethodRef(e);	
+	case TCast(e, _):
+		return translateMethodRef(e);	
+	default:
+}) {
+			var ` = expr.expr;
+			switch (enumIndex `) {
+				case 4: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var fa = `;
+						{
+							@:ast(switch (fa) {
+	case FInstance(_, _, ref):
+		var f = ref.get();
+		switch (f.type) {
+			case TFun(_, _):
+				return "app." + f.name + "()";			
+			default:
+		};	
+	case FClosure(_, ref):
+		var f = ref.get();
+		switch (f.type) {
+			case TFun(_, _):
+				return "app." + f.name + "()";			
+			default:
+		};	
+	default:
+}) switch (enumIndex fa) {
+								case 0: {
+									var ` = fa[0];
+									var ` = fa[1];
+									var ` = fa[2];
+									{
+										var ref = `;
+										{
+											var f = ref.get();
+											@:ast(switch (f.type) {
+	case TFun(_, _):
+		return "app." + f.name + "()";	
+	default:
+}) {
+												var ` = f.type;
+												if (enumIndex ` == 4) {
+													var ` = `[0];
+													var ` = `[1];
+													{
+														return "app." + f.name + "()";
+													};
+												} else {};
+											};
+										};
+									};
+								};
+								case 4: {
+									var ` = fa[0];
+									var ` = fa[1];
+									{
+										var ref = `;
+										{
+											var f = ref.get();
+											@:ast(switch (f.type) {
+	case TFun(_, _):
+		return "app." + f.name + "()";	
+	default:
+}) {
+												var ` = f.type;
+												if (enumIndex ` == 4) {
+													var ` = `[0];
+													var ` = `[1];
+													{
+														return "app." + f.name + "()";
+													};
+												} else {};
+											};
+										};
+									};
+								};
+								default: {}
+							};
+						};
+					};
+				};
+				case 6: {
+					var ` = `[0];
+					{
+						var e = `;
+						{
+							return aui.macros.ComposeGenerator.translateMethodRef(e);
+						};
+					};
+				};
+				case 24: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var e = `;
+						{
+							return aui.macros.ComposeGenerator.translateMethodRef(e);
+						};
+					};
+				};
+				case 25: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var e = `;
+						{
+							return aui.macros.ComposeGenerator.translateMethodRef(e);
+						};
+					};
+				};
+				default: {}
+			};
+		};
+		return null;
+	}
+
+	static function generateTextField(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var placeholder = "\"\"";
+		if (args.length > 0) {
+			placeholder = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+		};
+		var stateName = null;
+		if (args.length >= 2) {
+			stateName = aui.macros.ComposeGenerator.extractStateFieldName(args[1]);
+		};
+		if (stateName != null) {
+			buf.add(indent + "OutlinedTextField(\n");
+			buf.add(indent + "    value = " + aui.macros.ComposeGenerator.stateRead(stateName) + ",\n");
+			buf.add(indent + "    onValueChange = { " + aui.macros.ComposeGenerator.stateAssign(stateName, "it") + " },\n");
+			buf.add(indent + "    label = { Text(" + placeholder + ") }");
+			if (modStr.length > 0) {
+				buf.add(",\n" + indent + "    modifier = " + modStr);
+			} else {
+				buf.add(",\n" + indent + "    modifier = Modifier.fillMaxWidth()");
+			};
+			buf.add("\n" + indent + ")\n");
+		} else {
+			buf.add(indent + "OutlinedTextField(\n");
+			buf.add(indent + "    value = \"\",\n");
+			buf.add(indent + "    onValueChange = { },\n");
+			buf.add(indent + "    label = { Text(" + placeholder + ") }");
+			if (modStr.length > 0) {
+				buf.add(",\n" + indent + "    modifier = " + modStr);
+			};
+			buf.add("\n" + indent + ")\n");
+		};
+		return buf.toString();
+	}
+
+	static function generateToggle(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var label = "\"\"";
+		if (args.length > 0) {
+			label = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+		};
+		var stateName = null;
+		if (args.length >= 2) {
+			stateName = aui.macros.ComposeGenerator.extractStateFieldName(args[1]);
+		};
+		buf.add(indent + "Row(\n");
+		buf.add(indent + "    verticalAlignment = Alignment.CenterVertically");
+		if (modStr.length > 0) {
+			buf.add(",\n" + indent + "    modifier = " + modStr);
+		} else {
+			buf.add(",\n" + indent + "    modifier = Modifier.fillMaxWidth()");
+		};
+		buf.add("\n" + indent + ") {\n");
+		buf.add(indent + "    Text(text = " + label + ", modifier = Modifier.weight(1f))\n");
+		if (stateName != null) {
+			buf.add(indent + "    Switch(checked = " + aui.macros.ComposeGenerator.stateRead(stateName) + ", onCheckedChange = { " + aui.macros.ComposeGenerator.stateAssign(stateName, "it") + " })\n");
+		} else {
+			buf.add(indent + "    Switch(checked = false, onCheckedChange = { })\n");
+		};
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateSlider(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var indent2 = indent;
+		var buf = new StringBuf();
+		var stateName = null;
+		if (args.length >= 1) {
+			stateName = aui.macros.ComposeGenerator.extractStateFieldName(args[0]);
+		};
+		var mod = if (modStr.length > 0) {
+			modStr;
+		} else {
+			"Modifier.fillMaxWidth()";
+		};
+		if (stateName != null) {
+			buf.add(indent + "Slider(\n");
+			buf.add(indent + "    value = " + aui.macros.ComposeGenerator.stateRead(stateName) + ".toFloat(),\n");
+			buf.add(indent + "    onValueChange = { " + aui.macros.ComposeGenerator.stateAssign(stateName, "it") + " },\n");
+			buf.add(indent + "    modifier = " + mod + "\n");
+			buf.add(indent + ")\n");
+		} else {
+			buf.add(indent + "Slider(\n");
+			buf.add(indent + "    value = 0f,\n");
+			buf.add(indent + "    onValueChange = { },\n");
+			buf.add(indent + "    modifier = " + mod + "\n");
+			buf.add(indent + ")\n");
+		};
+		return buf.toString();
+	}
+
+	static function generateScrollView(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var mod = if (modStr.length > 0) {
+			modStr + ".verticalScroll(rememberScrollState())";
+		} else {
+			"Modifier.fillMaxSize().verticalScroll(rememberScrollState())";
+		};
+		buf.add(indent + "Column(\n");
+		buf.add(indent + "    modifier = " + mod + "\n");
+		buf.add(indent + ") {\n");
+		{
+			var ` = 0;
+			while (` < args.length) {
+				var arg = args[`];
+				++ `;
+				@:ast(switch (arg.expr) {
+	case TArrayDecl(elements):
+		_indent++;
+		for (element  in  elements) buf.add(translateTypedExpr(element));
+		_indent--;	
+	default:
+}) {
+					var ` = arg.expr;
+					if (enumIndex ` == 8) {
+						var ` = `[0];
+						{
+							var elements = `;
+							{
+								aui.macros.ComposeGenerator._indent ++;
+								{
+									var ` = 0;
+									while (` < elements.length) {
+										var element = elements[`];
+										++ `;
+										buf.add(aui.macros.ComposeGenerator.translateTypedExpr(element));
+									};
+								};
+								aui.macros.ComposeGenerator._indent --;
+							};
+						};
+					} else {};
+				};
+			};
+		};
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateImage(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var name = "\"\"";
+		if (args.length > 0) {
+			name = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+		};
+		var buf = new StringBuf();
+		buf.add(indent + "// Image: " + name + "\n");
+		buf.add(indent + "Icon(\n");
+		buf.add(indent + "    imageVector = Icons.Default.Star,\n");
+		buf.add(indent + "    contentDescription = " + name);
+		if (modStr.length > 0) {
+			buf.add(",\n" + indent + "    modifier = " + modStr);
+		};
+		buf.add("\n" + indent + ")\n");
+		return buf.toString();
+	}
+
+	static function generateConditionalView(args:Array<haxe.macro.TypedExpr>, indent:String) {
+		var buf = new StringBuf();
+		var stateName = null;
+		if (args.length >= 1) {
+			stateName = aui.macros.ComposeGenerator.extractStateFieldName(args[0]);
+		};
+		var condVar = if (stateName != null) {
+			aui.macros.ComposeGenerator.stateRead(stateName);
+		} else {
+			"false";
+		};
+		buf.add(indent + "if (" + condVar + ") {\n");
+		if (args.length >= 2) {
+			aui.macros.ComposeGenerator._indent ++;
+			buf.add(aui.macros.ComposeGenerator.translateTypedExpr(args[1]));
+			aui.macros.ComposeGenerator._indent --;
+		};
+		buf.add(indent + "}");
+		if (args.length >= 3) {
+			buf.add(" else {\n");
+			aui.macros.ComposeGenerator._indent ++;
+			buf.add(aui.macros.ComposeGenerator.translateTypedExpr(args[2]));
+			aui.macros.ComposeGenerator._indent --;
+			buf.add(indent + "}");
+		};
+		buf.add("\n");
+		return buf.toString();
+	}
+
+	static function generateNavigationStack(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		buf.add(indent + "NavHost(\n");
+		buf.add(indent + "    navController = navController,\n");
+		buf.add(indent + "    startDestination = \"home\"");
+		if (modStr.length > 0) {
+			buf.add(",\n" + indent + "    modifier = " + modStr);
+		};
+		buf.add("\n" + indent + ") {\n");
+		buf.add(indent + "    composable(\"home\") {\n");
+		if (args.length > 0) {
+			aui.macros.ComposeGenerator._indent += 2;
+			buf.add(aui.macros.ComposeGenerator.translateTypedExpr(args[0]));
+			aui.macros.ComposeGenerator._indent -= 2;
+		};
+		buf.add(indent + "    }\n");
+		{
+			var ` = 0;
+			var ` = aui.macros.ComposeGenerator._navRoutes;
+			while (` < `.length) {
+				var route = `[`];
+				++ `;
+				buf.add(indent + "    composable(\"" + route.id + "\") {\n");
+				aui.macros.ComposeGenerator._indent += 2;
+				buf.add(aui.macros.ComposeGenerator.translateTypedExpr(route.bodyExpr));
+				aui.macros.ComposeGenerator._indent -= 2;
+				buf.add(indent + "    }\n");
+			};
+		};
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateNavigationLink(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var label = "\"\"";
+		if (args.length > 0) {
+			label = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+		};
+		var routeId = "home";
+		if (args.length >= 2) {
+			{
+				var ` = 0;
+				var ` = aui.macros.ComposeGenerator._navRoutes;
+				while (` < `.length) {
+					var route = `[`];
+					++ `;
+					if (route.bodyExpr == args[1]) {
+						routeId = route.id;
+						break;
+					};
+				};
+			};
+		};
+		buf.add(indent + "Button(\n");
+		buf.add(indent + "    onClick = { navController.navigate(\"" + routeId + "\") }");
+		if (modStr.length > 0) {
+			buf.add(",\n" + indent + "    modifier = " + modStr);
+		};
+		buf.add("\n" + indent + ") {\n");
+		buf.add(indent + "    Text(" + label + ")\n");
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateTabView(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var tabs = [];
+		{
+			var ` = 0;
+			while (` < args.length) {
+				var arg = args[`];
+				++ `;
+				@:ast(switch (arg.expr) {
+	case TArrayDecl(elements):
+		for (el  in  elements) {
+			switch (el.expr) {
+				case TNew(classRef, _, tabArgs):
+					var cls = classRef.get();
+					var name = cls.pack.join(".") + (cls.pack.length > 0 ? "." : "") + cls.name;
+					if (name == "aui.ui.Tab" && tabArgs.length >= 3) {
+						tabs.push({ title : translateTypedExpr(tabArgs[0]), icon : extractStringValue(tabArgs[1]), bodyExpr : tabArgs[2] });
+					};				
+				default:
+			};
+		};	
+	default:
+}) {
+					var ` = arg.expr;
+					if (enumIndex ` == 8) {
+						var ` = `[0];
+						{
+							var elements = `;
+							{
+								{
+									var ` = 0;
+									while (` < elements.length) {
+										var el = elements[`];
+										++ `;
+										@:ast(switch (el.expr) {
+	case TNew(classRef, _, tabArgs):
+		var cls = classRef.get();
+		var name = cls.pack.join(".") + (cls.pack.length > 0 ? "." : "") + cls.name;
+		if (name == "aui.ui.Tab" && tabArgs.length >= 3) {
+			tabs.push({ title : translateTypedExpr(tabArgs[0]), icon : extractStringValue(tabArgs[1]), bodyExpr : tabArgs[2] });
+		};	
+	default:
+}) {
+											var ` = el.expr;
+											if (enumIndex ` == 10) {
+												var ` = `[0];
+												var ` = `[1];
+												var ` = `[2];
+												{
+													var classRef = `;
+													var tabArgs = `;
+													{
+														var cls = classRef.get();
+														var name = cls.pack.join(".") + (if (cls.pack.length > 0) {
+															".";
+														} else {
+															"";
+														}) + cls.name;
+														if (name == "aui.ui.Tab" && tabArgs.length >= 3) {
+															tabs.push({title : aui.macros.ComposeGenerator.translateTypedExpr(tabArgs[0]), icon : aui.macros.ComposeGenerator.extractStringValue(tabArgs[1]), bodyExpr : tabArgs[2]});
+														};
+													};
+												};
+											} else {};
+										};
+									};
+								};
+							};
+						};
+					} else {};
+				};
+			};
+		};
+		if (tabs.length == 0) {
+			return indent + "// Empty TabView\n";
+		};
+		buf.add(indent + "var selectedTab by remember { mutableStateOf(0) }\n\n");
+		buf.add(indent + "Scaffold(\n");
+		buf.add(indent + "    bottomBar = {\n");
+		buf.add(indent + "        NavigationBar {\n");
+		{
+			var ` = 0;
+			var ` = tabs.length;
+			while (` < `) {
+				var i = ` ++;
+				var tab = tabs[i];
+				var iconName = aui.macros.ComposeGenerator.mapIconName(tab.icon);
+				buf.add(indent + "            NavigationBarItem(\n");
+				buf.add(indent + "                selected = selectedTab == " + i + ",\n");
+				buf.add(indent + "                onClick = { selectedTab = " + i + " },\n");
+				buf.add(indent + "                icon = { Icon(Icons.Filled." + iconName + ", contentDescription = " + tab.title + ") },\n");
+				buf.add(indent + "                label = { Text(" + tab.title + ") }\n");
+				buf.add(indent + "            )\n");
+			};
+		};
+		buf.add(indent + "        }\n");
+		buf.add(indent + "    }\n");
+		buf.add(indent + ") { innerPadding ->\n");
+		buf.add(indent + "    when (selectedTab) {\n");
+		{
+			var ` = 0;
+			var ` = tabs.length;
+			while (` < `) {
+				var i = ` ++;
+				buf.add(indent + "        " + i + " -> {\n");
+				aui.macros.ComposeGenerator._indent += 3;
+				var savedIndent = aui.macros.ComposeGenerator._indent;
+				buf.add(indent + "            Column(modifier = Modifier.padding(innerPadding)) {\n");
+				aui.macros.ComposeGenerator._indent += 4;
+				buf.add(aui.macros.ComposeGenerator.translateTypedExpr(tabs[i].bodyExpr));
+				aui.macros.ComposeGenerator._indent = savedIndent;
+				buf.add(indent + "            }\n");
+				aui.macros.ComposeGenerator._indent -= 3;
+				buf.add(indent + "        }\n");
+			};
+		};
+		buf.add(indent + "    }\n");
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateForEach(args:Array<haxe.macro.TypedExpr>, indent:String) {
+		var buf = new StringBuf();
+		if (args.length < 2) {
+			return indent + "// ForEach: missing arguments\n";
+		};
+		var stateName = aui.macros.ComposeGenerator.extractStateFieldName(args[0]);
+		var collectionExpr = if (stateName != null) {
+			aui.macros.ComposeGenerator.stateRead(stateName);
+		} else {
+			"emptyList<Any>()";
+		};
+		var paramName = "item";
+		var paramId = -1;
+		var builderBody = null;
+		@:ast(switch (args[1].expr) {
+	case TFunction(tf):
+		if (tf.args.length > 0) {
+			paramName = tf.args[0].v.name;
+			paramId = tf.args[0].v.id;
+		};
+		builderBody = tf.expr;	
+	default:
+}) {
+			var ` = args[1].expr;
+			if (enumIndex ` == 12) {
+				var ` = `[0];
+				{
+					var tf = `;
+					{
+						if (tf.args.length > 0) {
+							paramName = tf.args[0].v.name;
+							paramId = tf.args[0].v.id;
+						};
+						builderBody = tf.expr;
+					};
+				};
+			} else {};
+		};
+		buf.add(indent + collectionExpr + ".forEachIndexed { index, " + paramName + " ->\n");
+		if (builderBody != null) {
+			var savedLambdaParams = {
+				var this = aui.macros.ComposeGenerator._lambdaParamIds;
+				cast cast cast this.copy();
+			};
+			if (paramId >= 0) {
+				{
+					var this = aui.macros.ComposeGenerator._lambdaParamIds;
+					cast this.set(paramId, paramName);
+				};
+			};
+			aui.macros.ComposeGenerator._indent ++;
+			buf.add(aui.macros.ComposeGenerator.translateTypedExpr(builderBody));
+			aui.macros.ComposeGenerator._indent --;
+			aui.macros.ComposeGenerator._lambdaParamIds = savedLambdaParams;
+		};
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateSection(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var header = null;
+		var contentArg = null;
+		{
+			var ` = 0;
+			while (` < args.length) {
+				var arg = args[`];
+				++ `;
+				@:ast(switch (arg.expr) {
+	case TConst(TString(s)):
+		header = s;	
+	case TArrayDecl(_):
+		contentArg = arg;	
+	default:
+}) {
+					var ` = arg.expr;
+					switch (enumIndex `) {
+						case 0: {
+							var ` = `[0];
+							if (enumIndex ` == 2) {
+								var ` = `[0];
+								{
+									var s = `;
+									{
+										header = s;
+									};
+								};
+							} else {};
+						};
+						case 8: {
+							var ` = `[0];
+							{
+								contentArg = arg;
+							};
+						};
+						default: {}
+					};
+				};
+			};
+		};
+		if (header != null) {
+			buf.add(indent + "Text(\n");
+			buf.add(indent + "    text = \"" + aui.macros.ComposeGenerator.escapeString(header) + "\",\n");
+			buf.add(indent + "    style = MaterialTheme.typography.titleMedium,\n");
+			buf.add(indent + "    color = MaterialTheme.colorScheme.primary,\n");
+			buf.add(indent + "    modifier = Modifier.padding(vertical = 8.dp)\n");
+			buf.add(indent + ")\n");
+		};
+		if (contentArg != null) {
+			@:ast(switch (contentArg.expr) {
+	case TArrayDecl(elements):
+		for (element  in  elements) {
+			buf.add(translateTypedExpr(element));
+		};	
+	default:
+}) {
+				var ` = contentArg.expr;
+				if (enumIndex ` == 8) {
+					var ` = `[0];
+					{
+						var elements = `;
+						{
+							{
+								var ` = 0;
+								while (` < elements.length) {
+									var element = elements[`];
+									++ `;
+									buf.add(aui.macros.ComposeGenerator.translateTypedExpr(element));
+								};
+							};
+						};
+					};
+				} else {};
+			};
+		};
+		if (header != null) {
+			buf.add(indent + "HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))\n");
+		};
+		return buf.toString();
+	}
+
+	static function generateLazyColumn(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var mod = if (modStr.length > 0) {
+			modStr;
+		} else {
+			"Modifier.fillMaxSize()";
+		};
+		buf.add(indent + "LazyColumn(\n");
+		buf.add(indent + "    modifier = " + mod + "\n");
+		buf.add(indent + ") {\n");
+		{
+			var ` = 0;
+			while (` < args.length) {
+				var arg = args[`];
+				++ `;
+				@:ast(switch (arg.expr) {
+	case TArrayDecl(elements):
+		for (element  in  elements) {
+			buf.add(indent + "    item {\n");
+			_indent += 2;
+			buf.add(translateTypedExpr(element));
+			_indent -= 2;
+			buf.add(indent + "    }\n");
+		};	
+	default:
+}) {
+					var ` = arg.expr;
+					if (enumIndex ` == 8) {
+						var ` = `[0];
+						{
+							var elements = `;
+							{
+								{
+									var ` = 0;
+									while (` < elements.length) {
+										var element = elements[`];
+										++ `;
+										buf.add(indent + "    item {\n");
+										aui.macros.ComposeGenerator._indent += 2;
+										buf.add(aui.macros.ComposeGenerator.translateTypedExpr(element));
+										aui.macros.ComposeGenerator._indent -= 2;
+										buf.add(indent + "    }\n");
+									};
+								};
+							};
+						};
+					} else {};
+				};
+			};
+		};
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function generateProgressView(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var stateName = null;
+		if (args.length >= 1) {
+			stateName = aui.macros.ComposeGenerator.extractStateFieldName(args[0]);
+		};
+		var mod = if (modStr.length > 0) {
+			modStr;
+		} else {
+			"Modifier";
+		};
+		if (stateName != null) {
+			return indent + "LinearProgressIndicator(\n" + indent + "    progress = { " + aui.macros.ComposeGenerator.stateRead(stateName) + ".toFloat() },\n" + indent + "    modifier = " + mod + ".fillMaxWidth()\n" + indent + ")\n";
+		};
+		return indent + "CircularProgressIndicator(" + (if (modStr.length > 0) {
+			"modifier = " + modStr;
+		} else {
+			"";
+		}) + ")\n";
+	}
+
+	static function generateCard(args:Array<haxe.macro.TypedExpr>, modStr:String, indent:String) {
+		var buf = new StringBuf();
+		var mod = if (modStr.length > 0) {
+			modStr + ".fillMaxWidth()";
+		} else {
+			"Modifier.fillMaxWidth()";
+		};
+		buf.add(indent + "Card(\n");
+		buf.add(indent + "    modifier = " + mod + "\n");
+		buf.add(indent + ") {\n");
+		{
+			var ` = 0;
+			while (` < args.length) {
+				var arg = args[`];
+				++ `;
+				@:ast(switch (arg.expr) {
+	case TArrayDecl(elements):
+		_indent++;
+		for (element  in  elements) buf.add(translateTypedExpr(element));
+		_indent--;	
+	default:
+}) {
+					var ` = arg.expr;
+					if (enumIndex ` == 8) {
+						var ` = `[0];
+						{
+							var elements = `;
+							{
+								aui.macros.ComposeGenerator._indent ++;
+								{
+									var ` = 0;
+									while (` < elements.length) {
+										var element = elements[`];
+										++ `;
+										buf.add(aui.macros.ComposeGenerator.translateTypedExpr(element));
+									};
+								};
+								aui.macros.ComposeGenerator._indent --;
+							};
+						};
+					} else {};
+				};
+			};
+		};
+		buf.add(indent + "}\n");
+		return buf.toString();
+	}
+
+	static function extractStringValue(expr:haxe.macro.TypedExpr) {
+		@:ast(switch (expr.expr) {
+	case TConst(TString(s)):
+		return s;	
+	default:
+		return "";	
+}) {
+			var ` = expr.expr;
+			if (enumIndex ` == 0) {
+				var ` = `[0];
+				if (enumIndex ` == 2) {
+					var ` = `[0];
+					{
+						var s = `;
+						{
+							return s;
+						};
+					};
+				} else {
+					return "";
+				};
+			} else {
+				return "";
+			};
+		};
+	}
+
+	static function mapIconName(icon:String) {
+		@:ast(switch (icon) {
+	case "house", "home":
+		return "Home";	
+	case "gear", "settings":
+		return "Settings";	
+	case "person", "profile":
+		return "Person";	
+	case "star", "favorite":
+		return "Star";	
+	case "search":
+		return "Search";	
+	case "list":
+		return "List";	
+	case "info":
+		return "Info";	
+	case "add", "plus":
+		return "Add";	
+	case "edit":
+		return "Edit";	
+	case "delete", "trash":
+		return "Delete";	
+	case "email", "mail":
+		return "Email";	
+	case "phone", "call":
+		return "Phone";	
+	default:
+		return "Star";	
+}) switch (icon) {
+			case "call", "phone": {
+				{
+					return "Phone";
+				};
+			};
+			case "edit": {
+				{
+					return "Edit";
+				};
+			};
+			case "favorite", "star": {
+				{
+					return "Star";
+				};
+			};
+			case "home", "house": {
+				{
+					return "Home";
+				};
+			};
+			case "info": {
+				{
+					return "Info";
+				};
+			};
+			case "list": {
+				{
+					return "List";
+				};
+			};
+			case "email", "mail": {
+				{
+					return "Email";
+				};
+			};
+			case "add", "plus": {
+				{
+					return "Add";
+				};
+			};
+			case "person", "profile": {
+				{
+					return "Person";
+				};
+			};
+			case "search": {
+				{
+					return "Search";
+				};
+			};
+			case "gear", "settings": {
+				{
+					return "Settings";
+				};
+			};
+			case "delete", "trash": {
+				{
+					return "Delete";
+				};
+			};
+			default: {
+				return "Star";
+			}
+		};
+	}
+
+	static function translateStateAction(expr:haxe.macro.TypedExpr) {
+		@:ast(switch (expr.expr) {
+	case TCall(func, args):
+		switch (func.expr) {
+			case TField(receiver, fa):
+				var methodName = getFieldName(fa);
+				var stateName = extractStateFieldName(receiver);
+				if (stateName == null) return null;
+				switch (methodName) {
+					case "inc":
+						var amount = args.length > 0 ? translateTypedExpr(args[0]) : "";
+						if (amount == "null" || amount == "") amount = "1";
+						return stateAssign(stateName, stateRead(stateName) + " + " + amount);					
+					case "dec":
+						var amount = args.length > 0 ? translateTypedExpr(args[0]) : "";
+						if (amount == "null" || amount == "") amount = "1";
+						return stateAssign(stateName, stateRead(stateName) + " - " + amount);					
+					case "setTo":
+						if (args.length > 0) {
+							var value = translateTypedExpr(args[0]);
+							return stateAssign(stateName, value);
+						};
+						return null;					
+					case "tog":
+						return stateAssign(stateName, "!" + stateRead(stateName));					
+					case "appendAction":
+						if (args.length > 0) {
+							var value = translateTypedExpr(args[0]);
+							return stateAssign(stateName, stateRead(stateName) + " + " + value);
+						};
+						return null;					
+					default:
+						return null;					
+				};			
+			default:
+		};	
+	default:
+}) {
+			var ` = expr.expr;
+			if (enumIndex ` == 9) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var func = `;
+					var args = `;
+					{
+						@:ast(switch (func.expr) {
+	case TField(receiver, fa):
+		var methodName = getFieldName(fa);
+		var stateName = extractStateFieldName(receiver);
+		if (stateName == null) return null;
+		switch (methodName) {
+			case "inc":
+				var amount = args.length > 0 ? translateTypedExpr(args[0]) : "";
+				if (amount == "null" || amount == "") amount = "1";
+				return stateAssign(stateName, stateRead(stateName) + " + " + amount);			
+			case "dec":
+				var amount = args.length > 0 ? translateTypedExpr(args[0]) : "";
+				if (amount == "null" || amount == "") amount = "1";
+				return stateAssign(stateName, stateRead(stateName) + " - " + amount);			
+			case "setTo":
+				if (args.length > 0) {
+					var value = translateTypedExpr(args[0]);
+					return stateAssign(stateName, value);
+				};
+				return null;			
+			case "tog":
+				return stateAssign(stateName, "!" + stateRead(stateName));			
+			case "appendAction":
+				if (args.length > 0) {
+					var value = translateTypedExpr(args[0]);
+					return stateAssign(stateName, stateRead(stateName) + " + " + value);
+				};
+				return null;			
+			default:
+				return null;			
+		};	
+	default:
+}) {
+							var ` = func.expr;
+							if (enumIndex ` == 4) {
+								var ` = `[0];
+								var ` = `[1];
+								{
+									var receiver = `;
+									var fa = `;
+									{
+										var methodName = aui.macros.ComposeGenerator.getFieldName(fa);
+										var stateName = aui.macros.ComposeGenerator.extractStateFieldName(receiver);
+										if (stateName == null) {
+											return null;
+										};
+										@:ast(switch (methodName) {
+	case "inc":
+		var amount = args.length > 0 ? translateTypedExpr(args[0]) : "";
+		if (amount == "null" || amount == "") amount = "1";
+		return stateAssign(stateName, stateRead(stateName) + " + " + amount);	
+	case "dec":
+		var amount = args.length > 0 ? translateTypedExpr(args[0]) : "";
+		if (amount == "null" || amount == "") amount = "1";
+		return stateAssign(stateName, stateRead(stateName) + " - " + amount);	
+	case "setTo":
+		if (args.length > 0) {
+			var value = translateTypedExpr(args[0]);
+			return stateAssign(stateName, value);
+		};
+		return null;	
+	case "tog":
+		return stateAssign(stateName, "!" + stateRead(stateName));	
+	case "appendAction":
+		if (args.length > 0) {
+			var value = translateTypedExpr(args[0]);
+			return stateAssign(stateName, stateRead(stateName) + " + " + value);
+		};
+		return null;	
+	default:
+		return null;	
+}) switch (methodName) {
+											case "appendAction": {
+												{
+													if (args.length > 0) {
+														var value = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+														return aui.macros.ComposeGenerator.stateAssign(stateName, aui.macros.ComposeGenerator.stateRead(stateName) + " + " + value);
+													};
+													return null;
+												};
+											};
+											case "dec": {
+												{
+													var amount = if (args.length > 0) {
+														aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+													} else {
+														"";
+													};
+													if (amount == "null" || amount == "") {
+														amount = "1";
+													};
+													return aui.macros.ComposeGenerator.stateAssign(stateName, aui.macros.ComposeGenerator.stateRead(stateName) + " - " + amount);
+												};
+											};
+											case "inc": {
+												{
+													var amount = if (args.length > 0) {
+														aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+													} else {
+														"";
+													};
+													if (amount == "null" || amount == "") {
+														amount = "1";
+													};
+													return aui.macros.ComposeGenerator.stateAssign(stateName, aui.macros.ComposeGenerator.stateRead(stateName) + " + " + amount);
+												};
+											};
+											case "setTo": {
+												{
+													if (args.length > 0) {
+														var value = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+														return aui.macros.ComposeGenerator.stateAssign(stateName, value);
+													};
+													return null;
+												};
+											};
+											case "tog": {
+												{
+													return aui.macros.ComposeGenerator.stateAssign(stateName, "!" + aui.macros.ComposeGenerator.stateRead(stateName));
+												};
+											};
+											default: {
+												return null;
+											}
+										};
+									};
+								};
+							} else {};
+						};
+					};
+				};
+			} else {};
+		};
+		return null;
+	}
+
+	static function extractStateFieldName(expr:haxe.macro.TypedExpr) {
+		if (expr == null) {
+			return null;
+		};
+		@:ast(switch (expr.expr) {
+	case TField(_, fa):
+		var name = getFieldName(fa);
+		for (sf  in  _stateFields) {
+			if (sf.name == name) return name;
+		};
+		return null;	
+	case TLocal(v):
+		if (_localBindings.exists(v.id)) {
+			return extractStateFieldName(_localBindings.get(v.id));
+		};
+		for (sf  in  _stateFields) {
+			if (sf.name == v.name) return v.name;
+		};
+		return null;	
+	case TCall(_, args):
+		for (a  in  args) {
+			var n = extractStateFieldName(a);
+			if (n != null) return n;
+		};
+		return null;	
+	case TCast(e, _):
+		return extractStateFieldName(e);	
+	case TParenthesis(e):
+		return extractStateFieldName(e);	
+	case TMeta(_, e):
+		return extractStateFieldName(e);	
+	default:
+		return null;	
+}) {
+			var ` = expr.expr;
+			switch (enumIndex `) {
+				case 1: {
+					var ` = `[0];
+					{
+						var v = `;
+						{
+							if ({
+								var this = aui.macros.ComposeGenerator._localBindings;
+								var key = v.id;
+								cast this.exists(key);
+							}) {
+								return aui.macros.ComposeGenerator.extractStateFieldName({
+									var this = aui.macros.ComposeGenerator._localBindings;
+									var key = v.id;
+									cast this.get(key);
+								});
+							};
+							{
+								var ` = 0;
+								var ` = aui.macros.ComposeGenerator._stateFields;
+								while (` < `.length) {
+									var sf = `[`];
+									++ `;
+									if (sf.name == v.name) {
+										return v.name;
+									};
+								};
+							};
+							return null;
+						};
+					};
+				};
+				case 4: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var fa = `;
+						{
+							var name = aui.macros.ComposeGenerator.getFieldName(fa);
+							{
+								var ` = 0;
+								var ` = aui.macros.ComposeGenerator._stateFields;
+								while (` < `.length) {
+									var sf = `[`];
+									++ `;
+									if (sf.name == name) {
+										return name;
+									};
+								};
+							};
+							return null;
+						};
+					};
+				};
+				case 6: {
+					var ` = `[0];
+					{
+						var e = `;
+						{
+							return aui.macros.ComposeGenerator.extractStateFieldName(e);
+						};
+					};
+				};
+				case 9: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var args = `;
+						{
+							{
+								var ` = 0;
+								while (` < args.length) {
+									var a = args[`];
+									++ `;
+									var n = aui.macros.ComposeGenerator.extractStateFieldName(a);
+									if (n != null) {
+										return n;
+									};
+								};
+							};
+							return null;
+						};
+					};
+				};
+				case 24: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var e = `;
+						{
+							return aui.macros.ComposeGenerator.extractStateFieldName(e);
+						};
+					};
+				};
+				case 25: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var e = `;
+						{
+							return aui.macros.ComposeGenerator.extractStateFieldName(e);
+						};
+					};
+				};
+				default: {
+					return null;
+				}
+			};
+		};
+	}
+
+	static function buildModifierChain(modifiers:Array<{ name : String, args : Array<haxe.macro.TypedExpr> }>) {
+		var parts = new Array();
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				var part = aui.macros.ComposeGenerator.translateSingleModifier(mod.name, mod.args);
+				if (part.length > 0) {
+					parts.push(part);
+				};
+			};
+		};
+		if (parts.length == 0) {
+			return "";
+		};
+		return "Modifier" + parts.join("");
+	}
+
+	static function translateSingleModifier(name:String, args:Array<haxe.macro.TypedExpr>) {
+		@:ast(switch (name) {
+	case "padding":
+		if (args.length > 0) {
+			var value = translateTypedExpr(args[0]);
+			if (value == "null" || value == "") return ".padding(16.dp)";
+			return ".padding(" + value + ".dp)";
+		};
+		return ".padding(16.dp)";	
+	case "background":
+		if (args.length > 0) return ".background(" + translateColorArg(args[0]) + ")";
+		return "";	
+	case "cornerRadius":
+		if (args.length > 0) return ".clip(RoundedCornerShape(" + translateTypedExpr(args[0]) + ".dp))";
+		return "";	
+	case "opacity":
+		if (args.length > 0) return ".alpha(" + translateTypedExpr(args[0]) + "f)";
+		return "";	
+	case "frame":
+		var parts = new Array<String>();
+		if (args.length > 0) parts.push("width = " + translateTypedExpr(args[0]) + ".dp");
+		if (args.length > 1) parts.push("height = " + translateTypedExpr(args[1]) + ".dp");
+		if (parts.length > 0) return ".size(" + parts.join(", ") + ")";
+		return "";	
+	case "offset":
+		if (args.length >= 2) return ".offset(x = " + translateTypedExpr(args[0]) + ".dp, y = " + translateTypedExpr(args[1]) + ".dp)";
+		return "";	
+	case "blur":
+		if (args.length > 0) return ".blur(" + translateTypedExpr(args[0]) + ".dp)";
+		return "";	
+	case "scaleEffect":
+		if (args.length > 0) return ".scale(" + translateTypedExpr(args[0]) + "f)";
+		return "";	
+	case "rotationEffect":
+		if (args.length > 0) return ".rotate(" + translateTypedExpr(args[0]) + "f)";
+		return "";	
+	case "hidden":
+		return ".alpha(0f)";	
+	case "disabled":
+		return "";	
+	case "shadow":
+		return ".shadow(elevation = 4.dp)";	
+	case "border":
+		if (args.length > 0) {
+			var color = translateColorArg(args[0]);
+			var width = args.length > 1 ? translateTypedExpr(args[1]) : "1";
+			return ".border(" + width + ".dp, " + color + ")";
+		};
+		return "";	
+	case "fillMaxWidth":
+		return ".fillMaxWidth()";	
+	case "fillMaxHeight":
+		return ".fillMaxHeight()";	
+	case "fillMaxSize":
+		return ".fillMaxSize()";	
+	case "paddingHorizontal":
+		if (args.length > 0) return ".padding(horizontal = " + translateTypedExpr(args[0]) + ".dp)";
+		return "";	
+	case "paddingVertical":
+		if (args.length > 0) return ".padding(vertical = " + translateTypedExpr(args[0]) + ".dp)";
+		return "";	
+	case "aspectRatio":
+		if (args.length > 0) {
+			var ratio = translateTypedExpr(args[0]);
+			if (ratio == "null") return ".aspectRatio(1f)";
+			return ".aspectRatio(" + ratio + "f)";
+		};
+		return ".aspectRatio(1f)";	
+	case "clipShape":
+		return ".clip(RoundedCornerShape(8.dp))";	
+	case "brightness":
+		return "";	
+	case "contrast":
+		return "";	
+	case "saturation":
+		return "";	
+	case "grayscale":
+		return "";	
+	case "onTapGesture":
+		return ".clickable { }";	
+	case "onLongPressGesture":
+		return "";	
+	case "onAppear":
+		return "";	
+	case "onDisappear":
+		return "";	
+	case "animation":
+		return ".animateContentSize()";	
+	case "font", "bold", "italic", "foregroundColor", "lineLimit", "multilineTextAlignment":
+		return "";	
+	case "sheet", "alert":
+		return "";	
+	case "navigationTitle":
+		return "";	
+	case "accessibilityLabel":
+		return "";	
+	case "accessibilityHint":
+		return "";	
+	default:
+		return "/* " + name + " */";	
+}) switch (name) {
+			case "accessibilityHint": {
+				{
+					return "";
+				};
+			};
+			case "accessibilityLabel": {
+				{
+					return "";
+				};
+			};
+			case "alert", "sheet": {
+				{
+					return "";
+				};
+			};
+			case "animation": {
+				{
+					return ".animateContentSize()";
+				};
+			};
+			case "aspectRatio": {
+				{
+					if (args.length > 0) {
+						var ratio = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+						if (ratio == "null") {
+							return ".aspectRatio(1f)";
+						};
+						return ".aspectRatio(" + ratio + "f)";
+					};
+					return ".aspectRatio(1f)";
+				};
+			};
+			case "background": {
+				{
+					if (args.length > 0) {
+						return ".background(" + aui.macros.ComposeGenerator.translateColorArg(args[0]) + ")";
+					};
+					return "";
+				};
+			};
+			case "blur": {
+				{
+					if (args.length > 0) {
+						return ".blur(" + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + ".dp)";
+					};
+					return "";
+				};
+			};
+			case "border": {
+				{
+					if (args.length > 0) {
+						var color = aui.macros.ComposeGenerator.translateColorArg(args[0]);
+						var width = if (args.length > 1) {
+							aui.macros.ComposeGenerator.translateTypedExpr(args[1]);
+						} else {
+							"1";
+						};
+						return ".border(" + width + ".dp, " + color + ")";
+					};
+					return "";
+				};
+			};
+			case "brightness": {
+				{
+					return "";
+				};
+			};
+			case "clipShape": {
+				{
+					return ".clip(RoundedCornerShape(8.dp))";
+				};
+			};
+			case "contrast": {
+				{
+					return "";
+				};
+			};
+			case "cornerRadius": {
+				{
+					if (args.length > 0) {
+						return ".clip(RoundedCornerShape(" + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + ".dp))";
+					};
+					return "";
+				};
+			};
+			case "disabled": {
+				{
+					return "";
+				};
+			};
+			case "fillMaxHeight": {
+				{
+					return ".fillMaxHeight()";
+				};
+			};
+			case "fillMaxSize": {
+				{
+					return ".fillMaxSize()";
+				};
+			};
+			case "fillMaxWidth": {
+				{
+					return ".fillMaxWidth()";
+				};
+			};
+			case "frame": {
+				{
+					var parts = new Array();
+					if (args.length > 0) {
+						parts.push("width = " + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + ".dp");
+					};
+					if (args.length > 1) {
+						parts.push("height = " + aui.macros.ComposeGenerator.translateTypedExpr(args[1]) + ".dp");
+					};
+					if (parts.length > 0) {
+						return ".size(" + parts.join(", ") + ")";
+					};
+					return "";
+				};
+			};
+			case "grayscale": {
+				{
+					return "";
+				};
+			};
+			case "hidden": {
+				{
+					return ".alpha(0f)";
+				};
+			};
+			case "bold", "font", "foregroundColor", "italic", "lineLimit", "multilineTextAlignment": {
+				{
+					return "";
+				};
+			};
+			case "navigationTitle": {
+				{
+					return "";
+				};
+			};
+			case "offset": {
+				{
+					if (args.length >= 2) {
+						return ".offset(x = " + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + ".dp, y = " + aui.macros.ComposeGenerator.translateTypedExpr(args[1]) + ".dp)";
+					};
+					return "";
+				};
+			};
+			case "onAppear": {
+				{
+					return "";
+				};
+			};
+			case "onDisappear": {
+				{
+					return "";
+				};
+			};
+			case "onLongPressGesture": {
+				{
+					return "";
+				};
+			};
+			case "onTapGesture": {
+				{
+					return ".clickable { }";
+				};
+			};
+			case "opacity": {
+				{
+					if (args.length > 0) {
+						return ".alpha(" + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + "f)";
+					};
+					return "";
+				};
+			};
+			case "padding": {
+				{
+					if (args.length > 0) {
+						var value = aui.macros.ComposeGenerator.translateTypedExpr(args[0]);
+						if (value == "null" || value == "") {
+							return ".padding(16.dp)";
+						};
+						return ".padding(" + value + ".dp)";
+					};
+					return ".padding(16.dp)";
+				};
+			};
+			case "paddingHorizontal": {
+				{
+					if (args.length > 0) {
+						return ".padding(horizontal = " + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + ".dp)";
+					};
+					return "";
+				};
+			};
+			case "paddingVertical": {
+				{
+					if (args.length > 0) {
+						return ".padding(vertical = " + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + ".dp)";
+					};
+					return "";
+				};
+			};
+			case "rotationEffect": {
+				{
+					if (args.length > 0) {
+						return ".rotate(" + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + "f)";
+					};
+					return "";
+				};
+			};
+			case "saturation": {
+				{
+					return "";
+				};
+			};
+			case "scaleEffect": {
+				{
+					if (args.length > 0) {
+						return ".scale(" + aui.macros.ComposeGenerator.translateTypedExpr(args[0]) + "f)";
+					};
+					return "";
+				};
+			};
+			case "shadow": {
+				{
+					return ".shadow(elevation = 4.dp)";
+				};
+			};
+			default: {
+				return "/* " + name + " */";
+			}
+		};
+	}
+
+	static function extractTextParams(modifiers:Array<{ name : String, args : Array<haxe.macro.TypedExpr> }>) {
+		var params = {
+			{};
+			new haxe.ds.StringMap();
+		};
+		{
+			var ` = 0;
+			while (` < modifiers.length) {
+				var mod = modifiers[`];
+				++ `;
+				@:ast(switch (mod.name) {
+	case "bold":
+		params.set("fontWeight", "FontWeight.Bold");	
+	case "italic":
+		params.set("fontStyle", "FontStyle.Italic");	
+	default:
+}) {
+					var ` = mod.name;
+					switch (`) {
+						case "bold": {
+							{
+								{
+									params.set("fontWeight", "FontWeight.Bold");
+								};
+							};
+						};
+						case "italic": {
+							{
+								{
+									params.set("fontStyle", "FontStyle.Italic");
+								};
+							};
+						};
+						default: {}
+					};
+				};
+			};
+		};
+		return params;
+	}
+
+	static function translateColorArg(expr:haxe.macro.TypedExpr) {
+		@:ast(switch (expr.expr) {
+	case TField(_, fa):
+		switch (getFieldName(fa)) {
+			case "Red":
+				return "Color.Red";			
+			case "Blue":
+				return "Color.Blue";			
+			case "Green":
+				return "Color.Green";			
+			case "Yellow":
+				return "Color.Yellow";			
+			case "Black":
+				return "Color.Black";			
+			case "White":
+				return "Color.White";			
+			case "Gray":
+				return "Color.Gray";			
+			case "Purple":
+				return "Color(0xFF9C27B0)";			
+			case "Pink":
+				return "Color(0xFFE91E63)";			
+			case "Orange":
+				return "Color(0xFFFF9800)";			
+			case "Transparent":
+				return "Color.Transparent";			
+			case "Primary":
+				return "MaterialTheme.colorScheme.primary";			
+			case "Secondary":
+				return "MaterialTheme.colorScheme.secondary";			
+			default:
+				return "Color.Unspecified";			
+		};	
+	default:
+		return "Color.Unspecified";	
+}) {
+			var ` = expr.expr;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var fa = `;
+					{
+						@:ast(switch (getFieldName(fa)) {
+	case "Red":
+		return "Color.Red";	
+	case "Blue":
+		return "Color.Blue";	
+	case "Green":
+		return "Color.Green";	
+	case "Yellow":
+		return "Color.Yellow";	
+	case "Black":
+		return "Color.Black";	
+	case "White":
+		return "Color.White";	
+	case "Gray":
+		return "Color.Gray";	
+	case "Purple":
+		return "Color(0xFF9C27B0)";	
+	case "Pink":
+		return "Color(0xFFE91E63)";	
+	case "Orange":
+		return "Color(0xFFFF9800)";	
+	case "Transparent":
+		return "Color.Transparent";	
+	case "Primary":
+		return "MaterialTheme.colorScheme.primary";	
+	case "Secondary":
+		return "MaterialTheme.colorScheme.secondary";	
+	default:
+		return "Color.Unspecified";	
+}) {
+							var ` = aui.macros.ComposeGenerator.getFieldName(fa);
+							switch (`) {
+								case "Black": {
+									{
+										return "Color.Black";
+									};
+								};
+								case "Blue": {
+									{
+										return "Color.Blue";
+									};
+								};
+								case "Gray": {
+									{
+										return "Color.Gray";
+									};
+								};
+								case "Green": {
+									{
+										return "Color.Green";
+									};
+								};
+								case "Orange": {
+									{
+										return "Color(0xFFFF9800)";
+									};
+								};
+								case "Pink": {
+									{
+										return "Color(0xFFE91E63)";
+									};
+								};
+								case "Primary": {
+									{
+										return "MaterialTheme.colorScheme.primary";
+									};
+								};
+								case "Purple": {
+									{
+										return "Color(0xFF9C27B0)";
+									};
+								};
+								case "Red": {
+									{
+										return "Color.Red";
+									};
+								};
+								case "Secondary": {
+									{
+										return "MaterialTheme.colorScheme.secondary";
+									};
+								};
+								case "Transparent": {
+									{
+										return "Color.Transparent";
+									};
+								};
+								case "White": {
+									{
+										return "Color.White";
+									};
+								};
+								case "Yellow": {
+									{
+										return "Color.Yellow";
+									};
+								};
+								default: {
+									return "Color.Unspecified";
+								}
+							};
+						};
+					};
+				};
+			} else {
+				return "Color.Unspecified";
+			};
+		};
+	}
+
+	static function translateFontArg(expr:haxe.macro.TypedExpr) {
+		@:ast(switch (expr.expr) {
+	case TField(_, fa):
+		switch (getFieldName(fa)) {
+			case "DisplayLarge":
+				return { fontSize : "57.sp", style : "MaterialTheme.typography.displayLarge" };			
+			case "DisplayMedium":
+				return { fontSize : "45.sp", style : "MaterialTheme.typography.displayMedium" };			
+			case "DisplaySmall":
+				return { fontSize : "36.sp", style : "MaterialTheme.typography.displaySmall" };			
+			case "HeadlineLarge":
+				return { fontSize : "32.sp", style : "MaterialTheme.typography.headlineLarge" };			
+			case "HeadlineMedium":
+				return { fontSize : "28.sp", style : "MaterialTheme.typography.headlineMedium" };			
+			case "HeadlineSmall":
+				return { fontSize : "24.sp", style : "MaterialTheme.typography.headlineSmall" };			
+			case "TitleLarge":
+				return { fontSize : "22.sp", style : "MaterialTheme.typography.titleLarge" };			
+			case "TitleMedium":
+				return { fontSize : "16.sp", style : "MaterialTheme.typography.titleMedium" };			
+			case "TitleSmall":
+				return { fontSize : "14.sp", style : "MaterialTheme.typography.titleSmall" };			
+			case "BodyLarge":
+				return { fontSize : "16.sp", style : "MaterialTheme.typography.bodyLarge" };			
+			case "BodyMedium":
+				return { fontSize : "14.sp", style : "MaterialTheme.typography.bodyMedium" };			
+			case "BodySmall":
+				return { fontSize : "12.sp", style : "MaterialTheme.typography.bodySmall" };			
+			case "LabelLarge":
+				return { fontSize : "14.sp", style : "MaterialTheme.typography.labelLarge" };			
+			case "LabelMedium":
+				return { fontSize : "12.sp", style : "MaterialTheme.typography.labelMedium" };			
+			case "LabelSmall":
+				return { fontSize : "11.sp", style : "MaterialTheme.typography.labelSmall" };			
+			default:
+				return { fontSize : null, style : null };			
+		};	
+	default:
+		return { fontSize : null, style : null };	
+}) {
+			var ` = expr.expr;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var fa = `;
+					{
+						@:ast(switch (getFieldName(fa)) {
+	case "DisplayLarge":
+		return { fontSize : "57.sp", style : "MaterialTheme.typography.displayLarge" };	
+	case "DisplayMedium":
+		return { fontSize : "45.sp", style : "MaterialTheme.typography.displayMedium" };	
+	case "DisplaySmall":
+		return { fontSize : "36.sp", style : "MaterialTheme.typography.displaySmall" };	
+	case "HeadlineLarge":
+		return { fontSize : "32.sp", style : "MaterialTheme.typography.headlineLarge" };	
+	case "HeadlineMedium":
+		return { fontSize : "28.sp", style : "MaterialTheme.typography.headlineMedium" };	
+	case "HeadlineSmall":
+		return { fontSize : "24.sp", style : "MaterialTheme.typography.headlineSmall" };	
+	case "TitleLarge":
+		return { fontSize : "22.sp", style : "MaterialTheme.typography.titleLarge" };	
+	case "TitleMedium":
+		return { fontSize : "16.sp", style : "MaterialTheme.typography.titleMedium" };	
+	case "TitleSmall":
+		return { fontSize : "14.sp", style : "MaterialTheme.typography.titleSmall" };	
+	case "BodyLarge":
+		return { fontSize : "16.sp", style : "MaterialTheme.typography.bodyLarge" };	
+	case "BodyMedium":
+		return { fontSize : "14.sp", style : "MaterialTheme.typography.bodyMedium" };	
+	case "BodySmall":
+		return { fontSize : "12.sp", style : "MaterialTheme.typography.bodySmall" };	
+	case "LabelLarge":
+		return { fontSize : "14.sp", style : "MaterialTheme.typography.labelLarge" };	
+	case "LabelMedium":
+		return { fontSize : "12.sp", style : "MaterialTheme.typography.labelMedium" };	
+	case "LabelSmall":
+		return { fontSize : "11.sp", style : "MaterialTheme.typography.labelSmall" };	
+	default:
+		return { fontSize : null, style : null };	
+}) {
+							var ` = aui.macros.ComposeGenerator.getFieldName(fa);
+							switch (`) {
+								case "BodyLarge": {
+									{
+										return {fontSize : "16.sp", style : "MaterialTheme.typography.bodyLarge"};
+									};
+								};
+								case "BodyMedium": {
+									{
+										return {fontSize : "14.sp", style : "MaterialTheme.typography.bodyMedium"};
+									};
+								};
+								case "BodySmall": {
+									{
+										return {fontSize : "12.sp", style : "MaterialTheme.typography.bodySmall"};
+									};
+								};
+								case "DisplayLarge": {
+									{
+										return {fontSize : "57.sp", style : "MaterialTheme.typography.displayLarge"};
+									};
+								};
+								case "DisplayMedium": {
+									{
+										return {fontSize : "45.sp", style : "MaterialTheme.typography.displayMedium"};
+									};
+								};
+								case "DisplaySmall": {
+									{
+										return {fontSize : "36.sp", style : "MaterialTheme.typography.displaySmall"};
+									};
+								};
+								case "HeadlineLarge": {
+									{
+										return {fontSize : "32.sp", style : "MaterialTheme.typography.headlineLarge"};
+									};
+								};
+								case "HeadlineMedium": {
+									{
+										return {fontSize : "28.sp", style : "MaterialTheme.typography.headlineMedium"};
+									};
+								};
+								case "HeadlineSmall": {
+									{
+										return {fontSize : "24.sp", style : "MaterialTheme.typography.headlineSmall"};
+									};
+								};
+								case "LabelLarge": {
+									{
+										return {fontSize : "14.sp", style : "MaterialTheme.typography.labelLarge"};
+									};
+								};
+								case "LabelMedium": {
+									{
+										return {fontSize : "12.sp", style : "MaterialTheme.typography.labelMedium"};
+									};
+								};
+								case "LabelSmall": {
+									{
+										return {fontSize : "11.sp", style : "MaterialTheme.typography.labelSmall"};
+									};
+								};
+								case "TitleLarge": {
+									{
+										return {fontSize : "22.sp", style : "MaterialTheme.typography.titleLarge"};
+									};
+								};
+								case "TitleMedium": {
+									{
+										return {fontSize : "16.sp", style : "MaterialTheme.typography.titleMedium"};
+									};
+								};
+								case "TitleSmall": {
+									{
+										return {fontSize : "14.sp", style : "MaterialTheme.typography.titleSmall"};
+									};
+								};
+								default: {
+									return {fontSize : null, style : null};
+								}
+							};
+						};
+					};
+				};
+			} else {
+				return {fontSize : null, style : null};
+			};
+		};
+	}
+
+	static function translateTextAlignArg(expr:haxe.macro.TypedExpr) {
+		@:ast(switch (expr.expr) {
+	case TField(_, fa):
+		switch (getFieldName(fa)) {
+			case "Start":
+				return "TextAlign.Start";			
+			case "Center":
+				return "TextAlign.Center";			
+			case "End":
+				return "TextAlign.End";			
+			default:
+				return "TextAlign.Start";			
+		};	
+	default:
+		return "TextAlign.Start";	
+}) {
+			var ` = expr.expr;
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var fa = `;
+					{
+						@:ast(switch (getFieldName(fa)) {
+	case "Start":
+		return "TextAlign.Start";	
+	case "Center":
+		return "TextAlign.Center";	
+	case "End":
+		return "TextAlign.End";	
+	default:
+		return "TextAlign.Start";	
+}) {
+							var ` = aui.macros.ComposeGenerator.getFieldName(fa);
+							switch (`) {
+								case "Center": {
+									{
+										return "TextAlign.Center";
+									};
+								};
+								case "End": {
+									{
+										return "TextAlign.End";
+									};
+								};
+								case "Start": {
+									{
+										return "TextAlign.Start";
+									};
+								};
+								default: {
+									return "TextAlign.Start";
+								}
+							};
+						};
+					};
+				};
+			} else {
+				return "TextAlign.Start";
+			};
+		};
+	}
+
+	static function writeAuiRuntimeKotlin() {
+		var stateDir = "android/app/src/main/kotlin/aui/state";
+		aui.macros.ComposeGenerator.ensureDir(stateDir);
+		var stateBridge = aui.macros.ComposeGenerator.locateAuiRuntimeFile("StateBridge.kt");
+		if (stateBridge != null) {
+			aui.macros.ComposeGenerator.copyIfNewer(stateBridge, stateDir + "/StateBridge.kt");
+		} else {
+			haxe.macro.Context.warning("[AUI] StateBridge.kt not found in aui/runtime/ — state bridge will be missing", haxe.macro.Context.currentPos(), null);
+		};
+		var runtimeDir = "android/app/src/main/kotlin/aui/runtime";
+		var rendererOut = runtimeDir + "/DynamicComposable.kt";
+		if (aui.macros.RenderPath.isDynamic()) {
+			aui.macros.ComposeGenerator.ensureDir(runtimeDir);
+			var renderer = aui.macros.ComposeGenerator.locateAuiRuntimeFile("DynamicComposable.kt");
+			if (renderer != null) {
+				aui.macros.ComposeGenerator.copyIfNewer(renderer, rendererOut);
+			} else {
+				haxe.macro.Context.warning("[AUI] DynamicComposable.kt not found in aui/runtime/ — the app will not link", haxe.macro.Context.currentPos(), null);
+			};
+		} else {
+			if (sys.FileSystem.exists(rendererOut)) {
+				sys.FileSystem.deleteFile(rendererOut);
+			};
+		};
+		var androidDir = "android/app/src/main/kotlin/aui/android";
+		aui.macros.ComposeGenerator.ensureDir(androidDir);
+		var androidIo = aui.macros.ComposeGenerator.locateAuiRuntimeFile("AndroidIo.kt");
+		if (androidIo != null) {
+			aui.macros.ComposeGenerator.copyIfNewer(androidIo, androidDir + "/AndroidIo.kt");
+		};
+	}
+
+	static function locateAuiRuntimeFile(name:String) {
+		try {
+			var anchor = sys.FileSystem.absolutePath(haxe.macro.Context.resolvePath("aui/state/State.hx"));
+			var dir = haxe.io.Path.directory(anchor);
+			dir = haxe.io.Path.directory(dir);
+			dir = haxe.io.Path.directory(dir);
+			dir = haxe.io.Path.directory(dir);
+			var candidate = dir + "/runtime/" + name;
+			if (sys.FileSystem.exists(candidate)) {
+				return candidate;
+			};
+		} catch (`:Dynamic) {
+			{};
+			{};
+			if (true) {
+				{};
+				{};
+			} else throw `;
+		};
+		return null;
+	}
+
+	static function syncNativeBundle(cfg:aui.macros.AndroidPackagingConfig) {
+		var copied = 0;
+		var skipped = 0;
+		var missing = [];
+		if (cfg.jniLibs != null) {
+			{
+				var ` = 0;
+				var ` = Reflect.fields(cfg.jniLibs);
+				while (` < `.length) {
+					var abi = `[`];
+					++ `;
+					var libsForAbi = Reflect.field(cfg.jniLibs, abi);
+					var destDir = "android/app/src/main/jniLibs/" + abi;
+					aui.macros.ComposeGenerator.ensureDir(destDir);
+					{
+						var ` = 0;
+						var ` = Reflect.fields(libsForAbi);
+						while (` < `.length) {
+							var destName = `[`];
+							++ `;
+							var srcPath = Reflect.field(libsForAbi, destName);
+							if (! sys.FileSystem.exists(srcPath)) {
+								missing.push("jniLibs[" + abi + "][" + destName + "] = " + srcPath);
+								continue;
+							};
+							var dstPath = destDir + "/" + destName;
+							if (aui.macros.ComposeGenerator.copyIfNewer(srcPath, dstPath)) {
+								copied ++;
+							} else {
+								skipped ++;
+							};
+						};
+					};
+				};
+			};
+		};
+		if (cfg.assets != null) {
+			{
+				var ` = 0;
+				var ` = Reflect.fields(cfg.assets);
+				while (` < `.length) {
+					var destSub = `[`];
+					++ `;
+					var srcDir = Reflect.field(cfg.assets, destSub);
+					if (! sys.FileSystem.exists(srcDir) || ! sys.FileSystem.isDirectory(srcDir)) {
+						missing.push("assets[" + destSub + "] = " + srcDir + " (not a directory)");
+						continue;
+					};
+					var destDir = "android/app/src/main/assets/" + destSub;
+					var stats = aui.macros.ComposeGenerator.mirrorDir(srcDir, destDir);
+					copied += stats.copied;
+					skipped += stats.skipped;
+				};
+			};
+		};
+		if (missing.length > 0) {
+			haxe.macro.Context.warning("[AUI] nativeBundle: missing sources — " + missing.join("; "), haxe.macro.Context.currentPos(), null);
+		};
+		if (copied > 0) {
+			haxe.macro.Context.warning("[AUI] nativeBundle: " + copied + " file(s) copied, " + skipped + " up-to-date", haxe.macro.Context.currentPos(), null);
+		};
+	}
+
+	static function copyIfNewer(src:String, dst:String) {
+		if (! sys.FileSystem.exists(src)) {
+			return false;
+		};
+		var srcStat = sys.FileSystem.stat(src);
+		if (sys.FileSystem.exists(dst)) {
+			var dstStat = sys.FileSystem.stat(dst);
+			if (dstStat.size == srcStat.size && dstStat.mtime.getTime() >= srcStat.mtime.getTime()) {
+				return false;
+			};
+		};
+		sys.io.File.copy(src, dst);
+		return true;
+	}
+
+	static function mirrorDir(srcDir:String, destDir:String) {
+		aui.macros.ComposeGenerator.ensureDir(destDir);
+		var copied = 0;
+		var skipped = 0;
+		{
+			var ` = 0;
+			var ` = sys.FileSystem.readDirectory(srcDir);
+			while (` < `.length) {
+				var entry = `[`];
+				++ `;
+				var srcPath = srcDir + "/" + entry;
+				var dstPath = destDir + "/" + entry;
+				if (sys.FileSystem.isDirectory(srcPath)) {
+					var sub = aui.macros.ComposeGenerator.mirrorDir(srcPath, dstPath);
+					copied += sub.copied;
+					skipped += sub.skipped;
+				} else {
+					if (aui.macros.ComposeGenerator.copyIfNewer(srcPath, dstPath)) {
+						copied ++;
+					} else {
+						skipped ++;
+					};
+				};
+			};
+		};
+		return {copied : copied, skipped : skipped};
+	}
+
+	static function escapeString(s:String) {
+		var r = StringTools.replace(s, "\\", "\\\\");
+		r = StringTools.replace(r, "\"", "\\\"");
+		r = StringTools.replace(r, "$", "\\$");
+		r = StringTools.replace(r, "\n", "\\n");
+		r = StringTools.replace(r, "\r", "\\r");
+		r = StringTools.replace(r, "\t", "\\t");
+		return r;
+	}
+
+	static function haxeTypeToKotlin(type:haxe.macro.Type) {
+		@:ast(switch (type) {
+	case TAbstract(ref, _):
+		switch (ref.get().name) {
+			case "Int":
+				return "Int";			
+			case "Float":
+				return "Float";			
+			case "Bool":
+				return "Boolean";			
+			default:
+				return "Any";			
+		};	
+	case TInst(ref, params):
+		switch (ref.get().name) {
+			case "String":
+				return "String";			
+			case "Array" | "ImmutableList":
+				return "List<" + (params.length > 0 ? haxeTypeToKotlin(params[0]) : "Any") + ">";			
+			default:
+				return "Any";			
+		};	
+	default:
+		return "Any";	
+}) switch (enumIndex type) {
+			case 2: {
+				var ` = type[0];
+				var ` = type[1];
+				{
+					var ref = `;
+					var params = `;
+					{
+						@:ast(switch (ref.get().name) {
+	case "String":
+		return "String";	
+	case "Array" | "ImmutableList":
+		return "List<" + (params.length > 0 ? haxeTypeToKotlin(params[0]) : "Any") + ">";	
+	default:
+		return "Any";	
+}) {
+							var ` = ref.get().name;
+							switch (`) {
+								case "Array", "ImmutableList": {
+									{
+										return "List<" + (if (params.length > 0) {
+											aui.macros.ComposeGenerator.haxeTypeToKotlin(params[0]);
+										} else {
+											"Any";
+										}) + ">";
+									};
+								};
+								case "String": {
+									{
+										return "String";
+									};
+								};
+								default: {
+									return "Any";
+								}
+							};
+						};
+					};
+				};
+			};
+			case 8: {
+				var ` = type[0];
+				var ` = type[1];
+				{
+					var ref = `;
+					{
+						@:ast(switch (ref.get().name) {
+	case "Int":
+		return "Int";	
+	case "Float":
+		return "Float";	
+	case "Bool":
+		return "Boolean";	
+	default:
+		return "Any";	
+}) {
+							var ` = ref.get().name;
+							switch (`) {
+								case "Bool": {
+									{
+										return "Boolean";
+									};
+								};
+								case "Float": {
+									{
+										return "Float";
+									};
+								};
+								case "Int": {
+									{
+										return "Int";
+									};
+								};
+								default: {
+									return "Any";
+								}
+							};
+						};
+					};
+				};
+			};
+			default: {
+				return "Any";
+			}
+		};
+	}
+
+	static function getDefaultForKotlinType(type:String) {
+		@:ast(switch (type) {
+	case "Int":
+		return "0";	
+	case "Float":
+		return "0f";	
+	case "Boolean":
+		return "false";	
+	case "String":
+		return "\"\"";	
+	default:
+		return "null";	
+}) switch (type) {
+			case "Boolean": {
+				{
+					return "false";
+				};
+			};
+			case "Float": {
+				{
+					return "0f";
+				};
+			};
+			case "Int": {
+				{
+					return "0";
+				};
+			};
+			case "String": {
+				{
+					return "\"\"";
+				};
+			};
+			default: {
+				return "null";
+			}
+		};
+	}
+
+	static function getIndent() {
+		var buf = new StringBuf();
+		{
+			var ` = 0;
+			var ` = aui.macros.ComposeGenerator._indent;
+			while (` < `) {
+				var i = ` ++;
+				buf.add("    ");
+			};
+		};
+		return buf.toString();
+	}
+
+	static function ensureDir(path:String) {
+		if (! sys.FileSystem.exists(path)) {
+			var parts = path.split("/");
+			var current = "";
+			{
+				var ` = 0;
+				while (` < parts.length) {
+					var part = parts[`];
+					++ `;
+					current += part + "/";
+					if (! sys.FileSystem.exists(current)) {
+						sys.FileSystem.createDirectory(current);
+					};
+				};
+			};
+		};
+	}
+
+	static function checkDynamicCoverage(types:Array<haxe.macro.ModuleType>) {
+		var covered = aui.macros.ComposeGenerator.coveredViewTypes();
+		if (covered == null) {
+			return;
+		};
+		var offenders = [];
+		{
+			var ` = 0;
+			while (` < types.length) {
+				var mt = types[`];
+				++ `;
+				@:ast(switch (mt) {
+	case TClassDecl(ref):
+		var cls = ref.get();
+		if (!isAppSubclass(cls)) continue;
+		for (field  in  cls.fields.get()) collectViews(field, covered, offenders);
+		for (field  in  cls.statics.get()) collectViews(field, covered, offenders);	
+	default:
+}) if (enumIndex mt == 0) {
+					var ` = mt[0];
+					{
+						var ref = `;
+						{
+							var cls = ref.get();
+							if (! aui.macros.ComposeGenerator.isAppSubclass(cls)) {
+								continue;
+							};
+							{
+								var ` = 0;
+								var ` = cls.fields.get();
+								while (` < `.length) {
+									var field = `[`];
+									++ `;
+									aui.macros.ComposeGenerator.collectViews(field, covered, offenders);
+								};
+							};
+							{
+								var ` = 0;
+								var ` = cls.statics.get();
+								while (` < `.length) {
+									var field = `[`];
+									++ `;
+									aui.macros.ComposeGenerator.collectViews(field, covered, offenders);
+								};
+							};
+						};
+					};
+				} else {};
+			};
+		};
+		if (offenders.length == 0) {
+			return;
+		};
+		var known = {
+			var ` = [];
+			for (k in covered.keys()) {
+				`.push(k);
+			};
+			`;
+		};
+		known.sort(Reflect.compare);
+		{
+			var ` = 0;
+			var ` = offenders.length;
+			while (` < `) {
+				var i = ` ++;
+				var o = offenders[i];
+				var msg = "The dynamic renderer cannot draw \"" + o.name + "\".\n" + "  Covered types: " + known.join(", ") + ".\n" + "  Add it to the when() in aui/runtime/DynamicComposable.kt.";
+				if (i == offenders.length - 1) {
+					haxe.macro.Context.error(msg, o.pos, null);
+				} else {
+					haxe.macro.Context.reportError(msg, o.pos, null);
+				};
+			};
+		};
+	}
+
+	static function coveredViewTypes() {
+		var path = aui.macros.ComposeGenerator.locateAuiRuntimeFile("DynamicComposable.kt");
+		if (path == null) {
+			haxe.macro.Context.error("[AUI] DynamicComposable.kt not found: cannot check what the dynamic renderer covers.", haxe.macro.Context.currentPos(), null);
+			return null;
+		};
+		var source = sys.io.File.getContent(path);
+		var from = source.indexOf("fun DynamicView(", null);
+		var to = source.indexOf("fun applyModifiers(", null);
+		if (from < 0 || to < 0 || to < from) {
+			haxe.macro.Context.error("[AUI] DynamicComposable.kt is not in the expected shape (DynamicView then applyModifiers): the check cannot assert anything.", haxe.macro.Context.currentPos(), null);
+			return null;
+		};
+		var out = {
+			{};
+			new haxe.ds.StringMap();
+		};
+		var branch = new EReg("^\\s*\"([A-Za-z0-9_]+)\"\\s*->", "");
+		{
+			var ` = 0;
+			var ` = source.substring(from, to).split("\n");
+			while (` < `.length) {
+				var line = `[`];
+				++ `;
+				if (branch.match(line)) {
+					{
+						var key = branch.matched(1);
+						out.set(key, true);
+					};
+				};
+			};
+		};
+		if (! out.keys().hasNext()) {
+			haxe.macro.Context.error("[AUI] No type recognised in the when() of DynamicComposable.kt: the check cannot assert anything.", haxe.macro.Context.currentPos(), null);
+			return null;
+		};
+		return out;
+	}
+
+	static function isAppSubclass(cls:haxe.macro.ClassType) {
+		var current = if (cls.superClass == null) {
+			null;
+		} else {
+			cls.superClass.t.get();
+		};
+		while (current != null) {
+			if (current.name == "App" && current.pack.join(".") == "aui") {
+				return true;
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function collectViews(field:haxe.macro.ClassField, covered:Map<String, Bool>, offenders:Array<{ pos : haxe.macro.Position, name : String }>) {
+		if (field.name != "body" && ! aui.macros.ComposeGenerator.buildsViews(field)) {
+			return;
+		};
+		var e = field.expr();
+		if (e != null) {
+			aui.macros.ComposeGenerator.walkForViews(e, covered, offenders);
+		};
+	}
+
+	static function buildsViews(field:haxe.macro.ClassField) {
+		return @:ast(switch (haxe.macro.TypeTools.follow(field.type)) {
+	case TFun(_, ret):
+		isViewType(ret);	
+	case _:
+		false;	
+}) {
+			var ` = {
+				var t = field.type;
+				var once = null;
+				haxe.macro.Context.follow(t, once);
+			};
+			if (enumIndex ` == 4) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var ret = `;
+					{
+						aui.macros.ComposeGenerator.isViewType(ret);
+					};
+				};
+			} else {
+				false;
+			};
+		};
+	}
+
+	static function isViewType(t:haxe.macro.Type) {
+		return @:ast(switch (haxe.macro.TypeTools.follow(t)) {
+	case TInst(ref, _):
+		var cls = ref.get();
+		while (cls != null) {
+			if (cls.name == "View" && cls.pack.join(".") == "aui") return true;
+			cls = cls.superClass == null ? null : cls.superClass.t.get();
+		};
+		false;	
+	case _:
+		false;	
+}) {
+			var ` = {
+				var once = null;
+				haxe.macro.Context.follow(t, once);
+			};
+			if (enumIndex ` == 2) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var ref = `;
+					{
+						var cls = ref.get();
+						while (cls != null) {
+							if (cls.name == "View" && cls.pack.join(".") == "aui") {
+								return true;
+							};
+							cls = if (cls.superClass == null) {
+								null;
+							} else {
+								cls.superClass.t.get();
+							};
+						};
+						false;
+					};
+				};
+			} else {
+				false;
+			};
+		};
+	}
+
+	static function isComponentName(fullName:String) {
+		try {
+			@:ast(switch (Context.follow(Context.getType(fullName))) {
+	case TInst(ref, _):
+		return isComponent(ref.get());	
+	case _:
+		return false;	
+}) {
+				var ` = haxe.macro.Context.follow(haxe.macro.Context.getType(fullName), null);
+				if (enumIndex ` == 2) {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var ref = `;
+						{
+							return aui.macros.ComposeGenerator.isComponent(ref.get());
+						};
+					};
+				} else {
+					return false;
+				};
+			};
+		} catch (`:Dynamic) {
+			{};
+			{};
+			if (true) {
+				{};
+				{
+					return false;
+				};
+			} else throw `;
+		};
+	}
+
+	static function coveredByChain(cls:haxe.macro.ClassType, covered:Map<String, Bool>) {
+		var current = cls;
+		while (current != null) {
+			if ({
+				var key = current.name;
+				covered.exists(key);
+			}) {
+				return true;
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function isExpanded(cls:haxe.macro.ClassType) {
+		if (aui.macros.ComposeGenerator.isComponent(cls)) {
+			return true;
+		};
+		return cls.name == "ForEach" && cls.pack.join(".") == "aui.ui";
+	}
+
+	static function isComponent(cls:haxe.macro.ClassType) {
+		var current = cls;
+		while (current != null) {
+			if (current.name == "ViewComponent" && current.pack.join(".") == "aui") {
+				return true;
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function extendsView(cls:haxe.macro.ClassType) {
+		var current = cls;
+		while (current != null) {
+			if (current.name == "View" && current.pack.join(".") == "aui") {
+				return true;
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function walkForViews(e:haxe.macro.TypedExpr, covered:Map<String, Bool>, offenders:Array<{ pos : haxe.macro.Position, name : String }>) {
+		if (e == null) {
+			return;
+		};
+		@:ast(switch (e.expr) {
+	case TNew(ref, _, _):
+		var cls = ref.get();
+		if (extendsView(cls) && !isExpanded(cls) && !coveredByChain(cls, covered)) {
+			offenders.push({ name : cls.name, pos : e.pos });
+		};	
+	default:
+}) {
+			var ` = e.expr;
+			if (enumIndex ` == 10) {
+				var ` = `[0];
+				var ` = `[1];
+				var ` = `[2];
+				{
+					var ref = `;
+					{
+						var cls = ref.get();
+						if (aui.macros.ComposeGenerator.extendsView(cls) && ! aui.macros.ComposeGenerator.isExpanded(cls) && ! aui.macros.ComposeGenerator.coveredByChain(cls, covered)) {
+							offenders.push({name : cls.name, pos : e.pos});
+						};
+					};
+				};
+			} else {};
+		};
+		haxe.macro.TypedExprTools.iter(e, function(sub:haxe.macro.TypedExpr) aui.macros.ComposeGenerator.walkForViews(sub, covered, offenders));
+	}
+}

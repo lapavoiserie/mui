@@ -1,0 +1,3 @@
+@:realPath("java.time.Duration_1") @:native("java.time.Duration$1") @:libType
+extern class java.time.Duration$1 {
+}

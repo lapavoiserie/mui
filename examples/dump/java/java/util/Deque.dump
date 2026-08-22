@@ -1,0 +1,57 @@
+@:realPath("java.util.Deque") @:used @:native("java.util.Deque") @:libType
+extern interface java.util.Deque<E:Dynamic> implements java.util.Queue<java.util.Deque.E> {
+
+	function addFirst(param1:java.util.Deque.E):Void;
+
+	function addLast(param1:java.util.Deque.E):Void;
+
+	function offerFirst(param1:java.util.Deque.E):Bool;
+
+	function offerLast(param1:java.util.Deque.E):Bool;
+
+	function removeFirst():java.util.Deque.E;
+
+	function removeLast():java.util.Deque.E;
+
+	function pollFirst():java.util.Deque.E;
+
+	function pollLast():java.util.Deque.E;
+
+	function getFirst():java.util.Deque.E;
+
+	function getLast():java.util.Deque.E;
+
+	function peekFirst():java.util.Deque.E;
+
+	function peekLast():java.util.Deque.E;
+
+	function removeFirstOccurrence(param1:Dynamic):Bool;
+
+	function removeLastOccurrence(param1:Dynamic):Bool;
+
+	function add(param1:java.util.Deque.E):Bool;
+
+	function offer(param1:java.util.Deque.E):Bool;
+
+	function remove():java.util.Deque.E;
+
+	function remove(param1:Dynamic):Bool;
+
+	function poll():java.util.Deque.E;
+
+	function element():java.util.Deque.E;
+
+	function peek():java.util.Deque.E;
+
+	function push(param1:java.util.Deque.E):Void;
+
+	function pop():java.util.Deque.E;
+
+	function contains(param1:Dynamic):Bool;
+
+	function size():Int;
+
+	function iterator():java.util.Iterator<java.util.Deque.E>;
+
+	function descendingIterator():java.util.Iterator<java.util.Deque.E>;
+}

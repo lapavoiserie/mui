@@ -1,0 +1,10 @@
+@:realPath("java.io.Console_3") @:used @:native("java.io.Console$3") @:libType
+extern class java.io.Console$3 extends java.io.PrintWriter {
+
+	function new(param1:java.io.Console, param2:java.io.Writer, param3:Bool):Void;
+
+	function close():Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.io.Console;
+}

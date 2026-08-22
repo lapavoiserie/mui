@@ -1,0 +1,14 @@
+@:realPath("java.util.function.LongPredicate") @:used @:native("java.util.function.LongPredicate") @:libType
+extern interface java.util.function.LongPredicate {
+
+	function test(param1:haxe.Int64):Bool;
+
+	@:java.default
+	function and(param1:java.util.function.LongPredicate):java.util.function.LongPredicate;
+
+	@:java.default
+	function negate():java.util.function.LongPredicate;
+
+	@:java.default
+	function or(param1:java.util.function.LongPredicate):java.util.function.LongPredicate;
+}

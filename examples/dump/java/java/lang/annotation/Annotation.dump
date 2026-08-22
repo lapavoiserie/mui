@@ -1,0 +1,11 @@
+@:realPath("java.lang.annotation.Annotation") @:directlyUsed @:used @:native("java.lang.annotation.Annotation") @:libType
+extern interface java.lang.annotation.Annotation {
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	function annotationType():java.lang.Class<java.lang.annotation.Annotation>;
+}

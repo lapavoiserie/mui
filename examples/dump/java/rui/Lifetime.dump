@@ -1,0 +1,102 @@
+@:directlyUsed @:used
+class rui.Lifetime {
+
+	public function new() {}
+
+	@:value([])
+	var _owned:Array<() -> Void> = [];
+
+	@:value(new Map())
+	var _kept:Map<java.lang.String, { undo : () -> Void, seen : Bool }> = new haxe.ds.StringMap();
+
+	@:value(false)
+	var _released:Bool = false;
+
+	public var released(get,never):Bool;
+
+	function get_released() {
+		return this._released;
+	}
+
+	public function own(undo:() -> Void) {
+		if ((undo == null)) return;
+		if ((this._released)) {
+			undo();
+			return;
+		};
+		this._owned.push(undo);
+	}
+
+	public function keep(key:java.lang.String, start:() -> (() -> Void)) {
+		if ((this._released)) return;
+		var existing = cast cast this._kept.get(key);
+		if ((existing != null)) {
+			existing.seen = true;
+			return;
+		};
+		var undo = start();
+		cast cast this._kept.set(key, {undo : if ((undo == null)) function() {} else undo, seen : true});
+	}
+
+	public function beginPass() {
+		if ((this._released)) return;
+		{
+			var key = cast cast cast this._kept.hashMap.keySet().iterator();
+			while ((key.hasNext())) {
+				var key = key.next();
+				cast cast this._kept.get(key).seen = false;
+			};
+		};
+	}
+
+	public function endPass() {
+		if ((this._released)) return;
+		{
+			var key = cast cast cast this._kept.hashMap.keySet().iterator();
+			while ((key.hasNext())) {
+				var key = key.next();
+				var entry = cast cast this._kept.get(key);
+				if ((entry.seen)) continue;
+				cast cast this._kept.remove(key);
+				try {
+					entry.undo();
+				} catch (_g:java.lang.Throwable) {
+					var e = cast haxe.Exception.caught(_g).unwrap();
+					haxe.Log.trace("Error releasing \"" + key + "\": " + Std.string(e), {fileName : "rui/Lifetime.hx", lineNumber : 150, className : "rui.Lifetime", methodName : "endPass"});
+				};
+			};
+		};
+	}
+
+	public function keeping(key:java.lang.String) {
+		return cast cast this._kept.exists(key);
+	}
+
+	public function release() {
+		if ((this._released)) return;
+		this._released = true;
+		{
+			var key = cast cast cast this._kept.hashMap.keySet().iterator();
+			while ((key.hasNext())) {
+				var key = key.next();
+				var entry = cast cast this._kept.get(key);
+				try {
+					entry.undo();
+				} catch (_g:java.lang.Throwable) {
+					var e = cast haxe.Exception.caught(_g).unwrap();
+					haxe.Log.trace("Error releasing \"" + key + "\": " + Std.string(e), {fileName : "rui/Lifetime.hx", lineNumber : 165, className : "rui.Lifetime", methodName : "release"});
+				};
+			};
+		};
+		this._kept = new haxe.ds.StringMap();
+		var pending = this._owned;
+		this._owned = [];
+		var i = pending.length;
+		while ((i -- > 0)) try {
+			pending[i]();
+		} catch (_g:java.lang.Throwable) {
+			var e = cast haxe.Exception.caught(_g).unwrap();
+			haxe.Log.trace("Error releasing a Lifetime: " + Std.string(e), {fileName : "rui/Lifetime.hx", lineNumber : 173, className : "rui.Lifetime", methodName : "release"});
+		};
+	}
+}

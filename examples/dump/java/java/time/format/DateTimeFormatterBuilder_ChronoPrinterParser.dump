@@ -1,0 +1,9 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_ChronoPrinterParser") @:used @:native("java.time.format.DateTimeFormatterBuilder$ChronoPrinterParser") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$ChronoPrinterParser implements java.time.format.DateTimeFormatterBuilder$DateTimePrinterParser {
+
+	function new(param1:java.time.format.TextStyle):Void;
+
+	function format(param1:java.time.format.DateTimePrintContext, param2:java.lang.StringBuilder):Bool;
+
+	function parse(param1:java.time.format.DateTimeParseContext, param2:java.lang.CharSequence, param3:Int):Int;
+}

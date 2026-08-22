@@ -1,0 +1,7 @@
+@:realPath("java.io.SerializablePermission") @:used @:native("java.io.SerializablePermission") @:libType
+extern class java.io.SerializablePermission extends java.security.BasicPermission {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+}

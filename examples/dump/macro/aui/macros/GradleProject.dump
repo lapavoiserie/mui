@@ -1,0 +1,229 @@
+class aui.macros.GradleProject {
+
+	public static function generate(config:{ targetSdk : Int, packageName : String, minSdk : Int, ?glanceWidget : Null<Bool>, compileSdk : Int, appName : String, ?android : Null<aui.macros.AndroidPackagingConfig> }) {
+		var androidDir = "android";
+		var appDir = androidDir + "/app";
+		var srcDir = appDir + "/src/main";
+		aui.macros.GradleProject.ensureDir(androidDir);
+		aui.macros.GradleProject.ensureDir(appDir);
+		aui.macros.GradleProject.ensureDir(srcDir);
+		aui.macros.GradleProject.ensureDir(srcDir + "/kotlin");
+		aui.macros.GradleProject.ensureDir(srcDir + "/res/values");
+		aui.macros.GradleProject.generateRootBuildGradle(androidDir);
+		aui.macros.GradleProject.generateSettings(androidDir, config.appName);
+		aui.macros.GradleProject.generateAppBuildGradle(appDir, config);
+		aui.macros.GradleProject.generateManifest(srcDir, config);
+		aui.macros.GradleProject.generateGradleWrapper(androidDir);
+		aui.macros.GradleProject.generateTheme(srcDir, config.appName);
+		aui.macros.GradleProject.generateProguard(appDir);
+		aui.macros.GradleProject.generateGradleProperties(androidDir);
+		aui.macros.GradleProject.generateLocalProperties(androidDir);
+	}
+
+	static function generateRootBuildGradle(dir:String) {
+		var lines = ["// Top-level build file for AUI Android project", "plugins {", "    id(\"com.android.application\") version \"8.7.3\" apply false", "    id(\"org.jetbrains.kotlin.android\") version \"2.1.0\" apply false", "    id(\"org.jetbrains.kotlin.plugin.compose\") version \"2.1.0\" apply false", "}", ""];
+		sys.io.File.saveContent(dir + "/build.gradle.kts", lines.join("\n"));
+	}
+
+	static function generateSettings(dir:String, appName:String) {
+		var lines = ["pluginManagement {", "    repositories {", "        google()", "        mavenCentral()", "        gradlePluginPortal()", "    }", "}", "dependencyResolutionManagement {", "    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)", "    repositories {", "        google()", "        mavenCentral()", "    }", "}", "", "rootProject.name = \"" + appName + "\"", "include(\":app\")", ""];
+		sys.io.File.saveContent(dir + "/settings.gradle.kts", lines.join("\n"));
+	}
+
+	static function generateAppBuildGradle(dir:String, config:{ targetSdk : Int, packageName : String, minSdk : Int, ?glanceWidget : Null<Bool>, compileSdk : Int, appName : String, ?android : Null<aui.macros.AndroidPackagingConfig> }) {
+		var defaultConfigExtras = [];
+		if (config.android != null && config.android.abiFilters != null && config.android.abiFilters.length > 0) {
+			var quoted = {
+				var _this = config.android.abiFilters;
+				{
+					var ` = [];
+					{
+						var ` = 0;
+						var ` = _this;
+						while (` < `.length) {
+							var v = `[`];
+							++ `;
+							`.push(function(s:String) {
+								return "\"" + s + "\"";
+							}(v));
+						};
+					};
+					`;
+				};
+			}.join(", ");
+			defaultConfigExtras.push("        ndk {");
+			defaultConfigExtras.push("            abiFilters += listOf(" + quoted + ")");
+			defaultConfigExtras.push("        }");
+		};
+		var packagingBlock = [];
+		if (config.android != null && config.android.useLegacyPackaging == true) {
+			packagingBlock.push("");
+			packagingBlock.push("    packaging {");
+			packagingBlock.push("        jniLibs {");
+			packagingBlock.push("            useLegacyPackaging = true");
+			packagingBlock.push("        }");
+			packagingBlock.push("    }");
+		};
+		var lines = ["plugins {", "    id(\"com.android.application\")", "    id(\"org.jetbrains.kotlin.android\")", "    id(\"org.jetbrains.kotlin.plugin.compose\")", "}", "", "android {", "    namespace = \"" + config.packageName + "\"", "    compileSdk = " + config.compileSdk, "", "    defaultConfig {", "        applicationId = \"" + config.packageName + "\"", "        minSdk = " + config.minSdk, "        targetSdk = " + config.targetSdk, "        versionCode = 1", "        versionName = \"1.0\""].concat(defaultConfigExtras).concat(["    }", "", "    buildTypes {", "        release {", "            isMinifyEnabled = true", "            proguardFiles(", "                getDefaultProguardFile(\"proguard-android-optimize.txt\"),", "                \"proguard-rules.pro\"", "            )", "        }", "    }"]).concat(packagingBlock).concat(["", "    compileOptions {", "        sourceCompatibility = JavaVersion.VERSION_17", "        targetCompatibility = JavaVersion.VERSION_17", "    }", "", "    kotlinOptions {", "        jvmTarget = \"17\"", "    }", "", "    buildFeatures {", "        compose = true", "    }"]).concat(aui.macros.GradleProject.kuiSourceSets()).concat(["}", "", "dependencies {", "    implementation(platform(\"androidx.compose:compose-bom:2024.12.01\"))", "    implementation(\"androidx.compose.ui:ui\")", "    implementation(\"androidx.compose.ui:ui-graphics\")", "    implementation(\"androidx.compose.ui:ui-tooling-preview\")", "    implementation(\"androidx.compose.material3:material3\")", "    implementation(\"androidx.activity:activity-compose:1.9.3\")", "    implementation(\"androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7\")", "    implementation(\"androidx.navigation:navigation-compose:2.8.5\")", "    implementation(\"androidx.compose.foundation:foundation\")"]).concat(if (config.glanceWidget == true) {
+			["", "    // The App Widget that draws @:surface(Glance). Only for an", "    // application that declares one: a widget nothing fills is a", "    // blank rectangle on someone's home screen.", "    implementation(\"androidx.glance:glance-appwidget:1.1.1\")"];
+		} else {
+			[];
+		}).concat(["", "    // Haxe JVM output", "    implementation(files(\"../../build/app-logic.jar\"))"]).concat(aui.macros.GradleProject.kuiDependencies()).concat(["", "    debugImplementation(\"androidx.compose.ui:ui-tooling\")", "}", ""]);
+		sys.io.File.saveContent(dir + "/build.gradle.kts", lines.join("\n"));
+	}
+
+	static function kuiSourceSets() {
+		var directories = [];
+		{
+			var ` = 0;
+			var ` = kui.macros.Emit.current().strings("gradle", "sources");
+			while (` < `.length) {
+				var file = `[`];
+				++ `;
+				var directory = haxe.io.Path.directory(StringTools.replace(file, "\\", "/"));
+				if (directory != "" && directories.indexOf(directory, null) < 0) {
+					directories.push(directory);
+				};
+			};
+		};
+		if (directories.length == 0) {
+			return [];
+		};
+		return ["", "    // Kotlin carried by kui capabilities, compiled where it lives", "    sourceSets {", "        getByName(\"main\") {", "            java.srcDirs(" + {
+			var ` = [];
+			{
+				var ` = 0;
+				while (` < directories.length) {
+					var d = directories[`];
+					++ `;
+					`.push("\"" + d + "\"");
+				};
+			};
+			`;
+		}.join(", ") + ")", "        }", "    }"];
+	}
+
+	static function kuiDependencies() {
+		var coordinates = kui.macros.Emit.current().strings("gradle", "dependencies");
+		if (coordinates.length == 0) {
+			return [];
+		};
+		var lines = ["", "    // Asked for by kui capabilities"];
+		{
+			var ` = 0;
+			while (` < coordinates.length) {
+				var coordinate = coordinates[`];
+				++ `;
+				lines.push("    implementation(\"" + coordinate + "\")");
+			};
+		};
+		return lines;
+	}
+
+	static function kuiPermissions() {
+		var names = kui.macros.Emit.current().strings("gradle", "permissions");
+		if (names.length == 0) {
+			return [];
+		};
+		var lines = ["    <!-- Needed by kui capabilities -->"];
+		{
+			var ` = 0;
+			while (` < names.length) {
+				var name = names[`];
+				++ `;
+				lines.push("    <uses-permission android:name=\"" + name + "\" />");
+			};
+		};
+		lines.push("");
+		return lines;
+	}
+
+	static function generateManifest(srcDir:String, config:{ targetSdk : Int, packageName : String, minSdk : Int, ?glanceWidget : Null<Bool>, compileSdk : Int, appName : String, ?android : Null<aui.macros.AndroidPackagingConfig> }) {
+		var safeName = aui.macros.GradleProject.sanitizeName(config.appName);
+		var applicationAttrs = ["        android:allowBackup=\"true\""];
+		if (config.android != null && config.android.extractNativeLibs == true) {
+			applicationAttrs.push("        android:extractNativeLibs=\"true\"");
+		};
+		applicationAttrs.push("        android:label=\"" + config.appName + "\"");
+		applicationAttrs.push("        android:supportsRtl=\"true\"");
+		applicationAttrs.push("        android:theme=\"@style/Theme." + safeName + "\">");
+		var lines = ["<?xml version=\"1.0\" encoding=\"utf-8\"?>", "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\">", ""].concat(aui.macros.GradleProject.kuiPermissions()).concat(["    <application"]).concat(applicationAttrs).concat(["        <activity", "            android:name=\"" + config.packageName + ".MainActivity\"", "            android:exported=\"true\"", "            android:theme=\"@style/Theme." + safeName + "\">", "            <intent-filter>", "                <action android:name=\"android.intent.action.MAIN\" />", "                <category android:name=\"android.intent.category.LAUNCHER\" />", "            </intent-filter>", "        </activity>"]).concat(if (config.glanceWidget == true) {
+			["", "        <!-- The App Widget drawing @:surface(Glance). exported, because", "             the launcher is another application and must be able to", "             bind it; it carries no data of its own. -->", "        <receiver", "            android:name=\"" + config.packageName + ".AuiGlanceReceiver\"", "            android:exported=\"true\">", "            <intent-filter>", "                <action android:name=\"android.appwidget.action.APPWIDGET_UPDATE\" />", "            </intent-filter>", "            <meta-data", "                android:name=\"android.appwidget.provider\"", "                android:resource=\"@xml/aui_glance_widget_info\" />", "        </receiver>"];
+		} else {
+			[];
+		}).concat(["    </application>", "", "</manifest>", ""]);
+		sys.io.File.saveContent(srcDir + "/AndroidManifest.xml", lines.join("\n"));
+		if (config.glanceWidget == true) {
+			aui.macros.GradleProject.generateGlanceWidgetInfo(srcDir);
+		};
+	}
+
+	static function generateGlanceWidgetInfo(srcDir:String) {
+		aui.macros.GradleProject.ensureDir(srcDir + "/res/xml");
+		var lines = ["<?xml version=\"1.0\" encoding=\"utf-8\"?>", "<appwidget-provider xmlns:android=\"http://schemas.android.com/apk/res/android\"", "    android:minWidth=\"180dp\"", "    android:minHeight=\"110dp\"", "    android:updatePeriodMillis=\"0\"", "    android:resizeMode=\"horizontal|vertical\"", "    android:widgetCategory=\"home_screen\" />", ""];
+		sys.io.File.saveContent(srcDir + "/res/xml/aui_glance_widget_info.xml", lines.join("\n"));
+	}
+
+	static function generateGradleWrapper(dir:String) {
+		aui.macros.GradleProject.ensureDir(dir + "/gradle/wrapper");
+		var lines = ["distributionBase=GRADLE_USER_HOME", "distributionPath=wrapper/dists", "distributionUrl=https\\://services.gradle.org/distributions/gradle-8.11.1-bin.zip", "zipStoreBase=GRADLE_USER_HOME", "zipStorePath=wrapper/dists", ""];
+		sys.io.File.saveContent(dir + "/gradle/wrapper/gradle-wrapper.properties", lines.join("\n"));
+	}
+
+	static function generateTheme(srcDir:String, appName:String) {
+		var safeName = aui.macros.GradleProject.sanitizeName(appName);
+		var lines = ["<?xml version=\"1.0\" encoding=\"utf-8\"?>", "<resources>", "    <style name=\"Theme." + safeName + "\" parent=\"android:Theme.Material.Light.NoActionBar\" />", "</resources>", ""];
+		sys.io.File.saveContent(srcDir + "/res/values/themes.xml", lines.join("\n"));
+	}
+
+	static function generateProguard(dir:String) {
+		var lines = ["# AUI ProGuard Rules", "# Keep Haxe runtime classes", "-keep class haxe.** { *; }", "-keep class _** { *; }", ""];
+		sys.io.File.saveContent(dir + "/proguard-rules.pro", lines.join("\n"));
+	}
+
+	static function generateGradleProperties(dir:String) {
+		var lines = ["org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8", "android.useAndroidX=true", "kotlin.code.style=official", "android.nonTransitiveRClass=true", ""];
+		sys.io.File.saveContent(dir + "/gradle.properties", lines.join("\n"));
+	}
+
+	static function generateLocalProperties(dir:String) {
+		var sdkDir = Sys.getEnv("ANDROID_HOME");
+		if (sdkDir == null || sdkDir == "") {
+			sdkDir = Sys.getEnv("ANDROID_SDK_ROOT");
+		};
+		if (sdkDir == null || sdkDir == "") {
+			var home = Sys.getEnv("HOME");
+			if (home != null) {
+				var defaultPath = home + "/Library/Android/sdk";
+				if (sys.FileSystem.exists(defaultPath)) {
+					sdkDir = defaultPath;
+				};
+			};
+		};
+		if (sdkDir != null && sdkDir != "") {
+			sys.io.File.saveContent(dir + "/local.properties", "sdk.dir=" + sdkDir + "\n");
+		};
+	}
+
+	static function sanitizeName(name:String) {
+		return new EReg("[^a-zA-Z0-9]", "g").replace(name, "");
+	}
+
+	static function ensureDir(path:String) {
+		if (! sys.FileSystem.exists(path)) {
+			var parts = path.split("/");
+			var current = "";
+			{
+				var ` = 0;
+				while (` < parts.length) {
+					var part = parts[`];
+					++ `;
+					current += part + "/";
+					if (! sys.FileSystem.exists(current)) {
+						sys.FileSystem.createDirectory(current);
+					};
+				};
+			};
+		};
+	}
+}

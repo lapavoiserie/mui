@@ -1,0 +1,65 @@
+@:realPath("java.nio.DoubleBuffer") @:used @:native("java.nio.DoubleBuffer") @:libType
+extern class java.nio.DoubleBuffer extends java.nio.Buffer implements java.lang.Comparable<java.nio.DoubleBuffer> {
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int, param5:java.NativeArray<Float>, param6:Int):Void;
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int):Void;
+
+	function slice():java.nio.DoubleBuffer;
+
+	function duplicate():java.nio.DoubleBuffer;
+
+	function asReadOnlyBuffer():java.nio.DoubleBuffer;
+
+	function get():Float;
+
+	function get(param1:java.NativeArray<Float>):java.nio.DoubleBuffer;
+
+	function get(param1:java.NativeArray<Float>, param2:Int, param3:Int):java.nio.DoubleBuffer;
+
+	function get(param1:Int):Float;
+
+	function put(param1:Float):java.nio.DoubleBuffer;
+
+	function put(param1:java.NativeArray<Float>):java.nio.DoubleBuffer;
+
+	function put(param1:java.NativeArray<Float>, param2:Int, param3:Int):java.nio.DoubleBuffer;
+
+	function put(param1:java.nio.DoubleBuffer):java.nio.DoubleBuffer;
+
+	function put(param1:Int, param2:Float):java.nio.DoubleBuffer;
+
+	function hasArray():Bool;
+
+	function array():java.NativeArray<Float>;
+
+	function arrayOffset():Int;
+
+	function compact():java.nio.DoubleBuffer;
+
+	function isDirect():Bool;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function compareTo(param1:java.nio.DoubleBuffer):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function order():java.nio.ByteOrder;
+
+	var hb(default,ctor):java.NativeArray<Float>;
+
+	var offset(default,ctor):Int;
+
+	var isReadOnly:Bool;
+
+	static function allocate(param1:Int):java.nio.DoubleBuffer;
+
+	static function wrap(param1:java.NativeArray<Float>, param2:Int, param3:Int):java.nio.DoubleBuffer;
+
+	static function wrap(param1:java.NativeArray<Float>):java.nio.DoubleBuffer;
+}

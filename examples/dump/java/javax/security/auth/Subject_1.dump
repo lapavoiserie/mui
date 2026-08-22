@@ -1,0 +1,10 @@
+@:realPath("java.javax.security.auth.Subject_1") @:used @:native("javax.security.auth.Subject$1") @:libType
+extern class javax.security.auth.Subject$1 implements java.security.PrivilegedAction<javax.security.auth.Subject> {
+
+	function new(param1:java.security.AccessControlContext):Void;
+
+	function run():javax.security.auth.Subject;
+
+	@:realPath("val_acc") @:native("val$acc")
+	var val$acc(default,ctor):java.security.AccessControlContext;
+}

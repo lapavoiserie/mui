@@ -1,0 +1,27 @@
+@:realPath("java.util.Collections_UnmodifiableNavigableSet") @:used @:native("java.util.Collections$UnmodifiableNavigableSet") @:libType
+extern class java.util.Collections$UnmodifiableNavigableSet<E:Dynamic> extends java.util.Collections$UnmodifiableSortedSet<java.util.Collections_UnmodifiableNavigableSet.E> implements java.io.Serializable implements java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableSet.E> {
+
+	function new(param1:java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableSet.E>):Void;
+
+	function lower(param1:java.util.Collections_UnmodifiableNavigableSet.E):java.util.Collections_UnmodifiableNavigableSet.E;
+
+	function floor(param1:java.util.Collections_UnmodifiableNavigableSet.E):java.util.Collections_UnmodifiableNavigableSet.E;
+
+	function ceiling(param1:java.util.Collections_UnmodifiableNavigableSet.E):java.util.Collections_UnmodifiableNavigableSet.E;
+
+	function higher(param1:java.util.Collections_UnmodifiableNavigableSet.E):java.util.Collections_UnmodifiableNavigableSet.E;
+
+	function pollFirst():java.util.Collections_UnmodifiableNavigableSet.E;
+
+	function pollLast():java.util.Collections_UnmodifiableNavigableSet.E;
+
+	function descendingSet():java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableSet.E>;
+
+	function descendingIterator():java.util.Iterator<java.util.Collections_UnmodifiableNavigableSet.E>;
+
+	function subSet(param1:java.util.Collections_UnmodifiableNavigableSet.E, param2:Bool, param3:java.util.Collections_UnmodifiableNavigableSet.E, param4:Bool):java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableSet.E>;
+
+	function headSet(param1:java.util.Collections_UnmodifiableNavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableSet.E>;
+
+	function tailSet(param1:java.util.Collections_UnmodifiableNavigableSet.E, param2:Bool):java.util.NavigableSet<java.util.Collections_UnmodifiableNavigableSet.E>;
+}

@@ -1,0 +1,19 @@
+@:realPath("java.security.BasicPermission") @:used @:native("java.security.BasicPermission") @:libType
+extern class java.security.BasicPermission extends java.security.Permission implements java.io.Serializable {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function implies(param1:java.security.Permission):Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function getActions():java.lang.String;
+
+	function newPermissionCollection():java.security.PermissionCollection;
+
+	function getCanonicalName():java.lang.String;
+}

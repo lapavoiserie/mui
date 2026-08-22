@@ -1,0 +1,7 @@
+@:realPath("jvm.VarArgs") @:used @:native("haxe.jvm.VarArgs")
+extern class haxe.jvm.VarArgs extends haxe.jvm.Function {
+
+	function new(func:haxe.jvm.Function):Void;
+
+	var func:haxe.jvm.Function;
+}

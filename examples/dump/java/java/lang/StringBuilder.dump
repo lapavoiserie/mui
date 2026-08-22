@@ -1,0 +1,113 @@
+@:realPath("java.lang.StringBuilder") @:directlyUsed @:used @:native("java.lang.StringBuilder") @:libType
+extern class java.lang.StringBuilder extends java.lang.AbstractStringBuilder implements java.io.Serializable implements java.lang.CharSequence {
+
+	function new():Void;
+
+	function new(param1:java.lang.CharSequence):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:Int):Void;
+
+	function append(param1:Dynamic):java.lang.StringBuilder;
+
+	function append(param1:Float):java.lang.StringBuilder;
+
+	function append(param1:Single):java.lang.StringBuilder;
+
+	function append(param1:haxe.Int64):java.lang.StringBuilder;
+
+	function append(param1:Int):java.lang.StringBuilder;
+
+	function append(param1:java.types.Char16):java.lang.StringBuilder;
+
+	function append(param1:Bool):java.lang.StringBuilder;
+
+	function append(param1:java.NativeArray<java.types.Char16>, param2:Int, param3:Int):java.lang.StringBuilder;
+
+	function append(param1:java.NativeArray<java.types.Char16>):java.lang.StringBuilder;
+
+	function append(param1:java.lang.CharSequence, param2:Int, param3:Int):java.lang.StringBuilder;
+
+	function append(param1:java.lang.CharSequence):java.lang.StringBuilder;
+
+	function append(param1:java.lang.StringBuffer):java.lang.StringBuilder;
+
+	function append(param1:java.lang.String):java.lang.StringBuilder;
+
+	function appendCodePoint(param1:Int):java.lang.StringBuilder;
+
+	function delete(param1:Int, param2:Int):java.lang.StringBuilder;
+
+	function deleteCharAt(param1:Int):java.lang.StringBuilder;
+
+	function replace(param1:Int, param2:Int, param3:java.lang.String):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:java.NativeArray<java.types.Char16>, param3:Int, param4:Int):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:Float):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:Single):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:haxe.Int64):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:Int):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:java.types.Char16):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:Bool):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:java.lang.CharSequence, param3:Int, param4:Int):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:java.lang.CharSequence):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:java.NativeArray<java.types.Char16>):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:java.lang.String):java.lang.StringBuilder;
+
+	function insert(param1:Int, param2:Dynamic):java.lang.StringBuilder;
+
+	function indexOf(param1:java.lang.String):Int;
+
+	function indexOf(param1:java.lang.String, param2:Int):Int;
+
+	function lastIndexOf(param1:java.lang.String):Int;
+
+	function lastIndexOf(param1:java.lang.String, param2:Int):Int;
+
+	function reverse():java.lang.StringBuilder;
+
+	function toString():java.lang.String;
+
+	function substring(param1:Int, param2:Int):java.lang.String;
+
+	function substring(param1:Int):java.lang.String;
+
+	function subSequence(param1:Int, param2:Int):java.lang.CharSequence;
+
+	function setCharAt(param1:Int, param2:java.types.Char16):Void;
+
+	function getChars(param1:Int, param2:Int, param3:java.NativeArray<java.types.Char16>, param4:Int):Void;
+
+	function offsetByCodePoints(param1:Int, param2:Int):Int;
+
+	function codePointCount(param1:Int, param2:Int):Int;
+
+	function codePointBefore(param1:Int):Int;
+
+	function codePointAt(param1:Int):Int;
+
+	function charAt(param1:Int):java.types.Char16;
+
+	function setLength(param1:Int):Void;
+
+	function trimToSize():Void;
+
+	function ensureCapacity(param1:Int):Void;
+
+	function capacity():Int;
+
+	function length():Int;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

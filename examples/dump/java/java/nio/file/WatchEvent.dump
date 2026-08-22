@@ -1,0 +1,9 @@
+@:realPath("java.nio.file.WatchEvent") @:used @:native("java.nio.file.WatchEvent") @:libType
+extern interface java.nio.file.WatchEvent<T:Dynamic> {
+
+	function kind():java.nio.file.WatchEvent$Kind<java.nio.file.WatchEvent.T>;
+
+	function count():Int;
+
+	function context():java.nio.file.WatchEvent.T;
+}

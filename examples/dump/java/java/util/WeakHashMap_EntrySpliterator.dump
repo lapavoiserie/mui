@@ -1,0 +1,13 @@
+@:realPath("java.util.WeakHashMap_EntrySpliterator") @:used @:native("java.util.WeakHashMap$EntrySpliterator") @:libType
+extern class java.util.WeakHashMap$EntrySpliterator<K:Dynamic, V:Dynamic> extends java.util.WeakHashMap$WeakHashMapSpliterator<java.util.WeakHashMap_EntrySpliterator.K, java.util.WeakHashMap_EntrySpliterator.V> implements java.util.Spliterator<java.util.Map$Entry<java.util.WeakHashMap_EntrySpliterator.K, java.util.WeakHashMap_EntrySpliterator.V>> {
+
+	function new(param1:java.util.WeakHashMap<java.util.WeakHashMap_EntrySpliterator.K, java.util.WeakHashMap_EntrySpliterator.V>, param2:Int, param3:Int, param4:Int, param5:Int):Void;
+
+	function trySplit():java.util.WeakHashMap$EntrySpliterator<java.util.WeakHashMap_EntrySpliterator.K, java.util.WeakHashMap_EntrySpliterator.V>;
+
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	function characteristics():Int;
+}

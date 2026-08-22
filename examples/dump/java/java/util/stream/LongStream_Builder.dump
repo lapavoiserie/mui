@@ -1,0 +1,10 @@
+@:realPath("java.util.stream.LongStream_Builder") @:used @:native("java.util.stream.LongStream$Builder") @:libType
+extern interface java.util.stream.LongStream$Builder implements java.util.function.LongConsumer {
+
+	function accept(param1:haxe.Int64):Void;
+
+	@:java.default
+	function add(param1:haxe.Int64):java.util.stream.LongStream$Builder;
+
+	function build():java.util.stream.LongStream;
+}

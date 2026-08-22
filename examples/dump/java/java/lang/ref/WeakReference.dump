@@ -1,0 +1,7 @@
+@:realPath("java.lang.ref.WeakReference") @:used @:native("java.lang.ref.WeakReference") @:libType
+extern class java.lang.ref.WeakReference<T:Dynamic> extends java.lang.ref.Reference<java.lang.ref.WeakReference.T> {
+
+	function new(param1:java.lang.ref.WeakReference.T):Void;
+
+	function new(param1:java.lang.ref.WeakReference.T, param2:java.lang.ref.ReferenceQueue<Dynamic>):Void;
+}

@@ -1,0 +1,1 @@
+typedef haxe.macro.TypePath = { ?sub : Null<java.lang.String>, ?params : Null<Array<haxe.macro.TypeParam>>, pack : Array<java.lang.String>, name : java.lang.String }

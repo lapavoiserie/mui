@@ -13,7 +13,7 @@ actually has, and a role the backend being built has no host for is a
 > | Role | Where it lives today |
 > |---|---|
 > | `Primary` | everywhere — it is `body()` |
-> | `Glance` | Sailfish: the cover, live-mounted by `qui.mui.CoverHost` |
+> | `Glance` | Sailfish: the cover, live-mounted by `qui.mui.CoverHost`. Android: an App Widget, sampled — buttons in it run their closures |
 > | `Preferences` | macOS: the Settings scene (⌘,), a second live root |
 > | `Commands` | macOS: the menu bar (with derived shortcuts); terminal: key bindings; Windows: the MenuBar, injected as ordinary nodes |
 > | `Auxiliary` | Windows and macOS: real extra windows, one per declaration, each with its own lifetime |
@@ -184,7 +184,7 @@ the floor.
 | | today |
 |---|---|
 | `Primary` | every backend |
-| `Glance` | qui |
+| `Glance` | qui, aui |
 | `Preferences` | sui |
 | `Commands` | sui, wui, cui |
 | `Auxiliary` | sui, wui |

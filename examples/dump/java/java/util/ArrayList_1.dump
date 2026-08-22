@@ -1,0 +1,3 @@
+@:realPath("java.util.ArrayList_1") @:used @:native("java.util.ArrayList$1") @:libType
+extern class java.util.ArrayList$1 {
+}

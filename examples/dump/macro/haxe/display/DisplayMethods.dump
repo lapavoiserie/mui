@@ -1,0 +1,39 @@
+@:publicFields
+class haxe.display.DisplayMethods {
+
+	@:value(new HaxeRequestMethod<DiagnosticsParams,DiagnosticsResult>("display/diagnostics"))
+	public static inline var Diagnostics:haxe.display.HaxeRequestMethod<haxe.display.DiagnosticsParams, haxe.display.DiagnosticsResult> = cast "display/diagnostics";
+
+	@:value(new HaxeRequestMethod<CompletionParams,CompletionResult>("display/completion"))
+	public static inline var Completion:haxe.display.HaxeRequestMethod<haxe.display.CompletionParams, haxe.display.CompletionResult> = cast "display/completion";
+
+	@:value(new HaxeRequestMethod<CompletionItemResolveParams,CompletionItemResolveResult>("display/completionItem/resolve"))
+	public static inline var CompletionItemResolve:haxe.display.HaxeRequestMethod<haxe.display.CompletionItemResolveParams, haxe.display.CompletionItemResolveResult> = cast "display/completionItem/resolve";
+
+	@:value(new HaxeRequestMethod<FindReferencesParams,GotoDefinitionResult>("display/references"))
+	public static inline var FindReferences:haxe.display.HaxeRequestMethod<haxe.display.FindReferencesParams, haxe.display.GotoDefinitionResult> = cast "display/references";
+
+	@:value(new HaxeRequestMethod<PositionParams,GotoDefinitionResult>("display/definition"))
+	public static inline var GotoDefinition:haxe.display.HaxeRequestMethod<haxe.display.PositionParams, haxe.display.GotoDefinitionResult> = cast "display/definition";
+
+	@:value(new HaxeRequestMethod<PositionParams,GotoDefinitionResult>("display/implementation"))
+	public static inline var GotoImplementation:haxe.display.HaxeRequestMethod<haxe.display.PositionParams, haxe.display.GotoDefinitionResult> = cast "display/implementation";
+
+	@:value(new HaxeRequestMethod<PositionParams,GotoTypeDefinitionResult>("display/typeDefinition"))
+	public static inline var GotoTypeDefinition:haxe.display.HaxeRequestMethod<haxe.display.PositionParams, haxe.display.GotoTypeDefinitionResult> = cast "display/typeDefinition";
+
+	@:value(new HaxeRequestMethod<PositionParams,HoverResult>("display/hover"))
+	public static inline var Hover:haxe.display.HaxeRequestMethod<haxe.display.PositionParams, haxe.display.HoverResult> = cast "display/hover";
+
+	@:value(new HaxeRequestMethod<FileParams,DeterminePackageResult>("display/package"))
+	public static inline var DeterminePackage:haxe.display.HaxeRequestMethod<haxe.display.FileParams, haxe.display.DeterminePackageResult> = cast "display/package";
+
+	@:value(new HaxeRequestMethod<SignatureHelpParams,SignatureHelpResult>("display/signatureHelp"))
+	public static inline var SignatureHelp:haxe.display.HaxeRequestMethod<haxe.display.SignatureHelpParams, haxe.display.SignatureHelpResult> = cast "display/signatureHelp";
+
+	@:value(new HaxeRequestMethod<MetadataParams,MetadataResult>("display/metadata"))
+	public static inline var Metadata:haxe.display.HaxeRequestMethod<haxe.display.MetadataParams, haxe.display.MetadataResult> = cast "display/metadata";
+
+	@:value(new HaxeRequestMethod<DefinesParams,DefinesResult>("display/defines"))
+	public static inline var Defines:haxe.display.HaxeRequestMethod<haxe.display.DefinesParams, haxe.display.DefinesResult> = cast "display/defines";
+}

@@ -1,0 +1,90 @@
+@:realPath("java.util.stream.DoubleStream") @:used @:native("java.util.stream.DoubleStream") @:libType
+extern interface java.util.stream.DoubleStream implements java.util.stream.BaseStream<java.lang.Double, java.util.stream.DoubleStream> {
+
+	function filter(param1:java.util.function.DoublePredicate):java.util.stream.DoubleStream;
+
+	function map(param1:java.util.function.DoubleUnaryOperator):java.util.stream.DoubleStream;
+
+	function mapToObj<U:Dynamic>(param1:java.util.function.DoubleFunction<mapToObj.U>):java.util.stream.Stream<mapToObj.U>;
+
+	function mapToInt(param1:java.util.function.DoubleToIntFunction):java.util.stream.IntStream;
+
+	function mapToLong(param1:java.util.function.DoubleToLongFunction):java.util.stream.LongStream;
+
+	function flatMap(param1:java.util.function.DoubleFunction<java.util.stream.DoubleStream>):java.util.stream.DoubleStream;
+
+	function distinct():java.util.stream.DoubleStream;
+
+	function sorted():java.util.stream.DoubleStream;
+
+	function peek(param1:java.util.function.DoubleConsumer):java.util.stream.DoubleStream;
+
+	function limit(param1:haxe.Int64):java.util.stream.DoubleStream;
+
+	function skip(param1:haxe.Int64):java.util.stream.DoubleStream;
+
+	function forEach(param1:java.util.function.DoubleConsumer):Void;
+
+	function forEachOrdered(param1:java.util.function.DoubleConsumer):Void;
+
+	function toArray():java.NativeArray<Float>;
+
+	function reduce(param1:Float, param2:java.util.function.DoubleBinaryOperator):Float;
+
+	function reduce(param1:java.util.function.DoubleBinaryOperator):java.util.OptionalDouble;
+
+	function collect<R:Dynamic>(param1:java.util.function.Supplier<collect.R>, param2:java.util.function.ObjDoubleConsumer<collect.R>, param3:java.util.function.BiConsumer<collect.R, collect.R>):collect.R;
+
+	function sum():Float;
+
+	function min():java.util.OptionalDouble;
+
+	function max():java.util.OptionalDouble;
+
+	function count():haxe.Int64;
+
+	function average():java.util.OptionalDouble;
+
+	function summaryStatistics():java.util.DoubleSummaryStatistics;
+
+	function anyMatch(param1:java.util.function.DoublePredicate):Bool;
+
+	function allMatch(param1:java.util.function.DoublePredicate):Bool;
+
+	function noneMatch(param1:java.util.function.DoublePredicate):Bool;
+
+	function findFirst():java.util.OptionalDouble;
+
+	function findAny():java.util.OptionalDouble;
+
+	function boxed():java.util.stream.Stream<java.lang.Double>;
+
+	function sequential():java.util.stream.DoubleStream;
+
+	function parallel():java.util.stream.DoubleStream;
+
+	function iterator():java.util.PrimitiveIterator$OfDouble;
+
+	function spliterator():java.util.Spliterator$OfDouble;
+
+	@:java.default
+	static function builder():java.util.stream.DoubleStream$Builder;
+
+	@:java.default
+	static function empty():java.util.stream.DoubleStream;
+
+	@:java.default
+	static function of(param1:Float):java.util.stream.DoubleStream;
+
+	@:java.default
+	static function of(param1:java.NativeArray<Float>):java.util.stream.DoubleStream;
+
+	@:java.default
+	static function iterate(param1:Float, param2:java.util.function.DoubleUnaryOperator):java.util.stream.DoubleStream;
+
+	@:java.default
+	static function generate(param1:java.util.function.DoubleSupplier):java.util.stream.DoubleStream;
+
+	@:java.default
+	static function concat(param1:java.util.stream.DoubleStream, param2:java.util.stream.DoubleStream):java.util.stream.DoubleStream;
+}

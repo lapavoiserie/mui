@@ -1,0 +1,3 @@
+@:realPath("java.sun.reflect.generics.tree.Tree") @:used @:native("sun.reflect.generics.tree.Tree") @:libType
+extern interface sun.reflect.generics.tree.Tree {
+}

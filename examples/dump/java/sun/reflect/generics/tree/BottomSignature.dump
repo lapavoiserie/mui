@@ -1,0 +1,7 @@
+@:realPath("java.sun.reflect.generics.tree.BottomSignature") @:used @:native("sun.reflect.generics.tree.BottomSignature") @:libType
+extern class sun.reflect.generics.tree.BottomSignature implements sun.reflect.generics.tree.FieldTypeSignature {
+
+	function accept(param1:sun.reflect.generics.visitor.TypeTreeVisitor<Dynamic>):Void;
+
+	static function make():sun.reflect.generics.tree.BottomSignature;
+}

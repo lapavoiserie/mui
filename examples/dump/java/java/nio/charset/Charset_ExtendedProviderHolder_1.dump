@@ -1,0 +1,7 @@
+@:realPath("java.nio.charset.Charset_ExtendedProviderHolder_1") @:used @:native("java.nio.charset.Charset$ExtendedProviderHolder$1") @:libType
+extern class java.nio.charset.Charset$ExtendedProviderHolder$1 implements java.security.PrivilegedAction<java.nio.charset.spi.CharsetProvider> {
+
+	function new():Void;
+
+	function run():java.nio.charset.spi.CharsetProvider;
+}

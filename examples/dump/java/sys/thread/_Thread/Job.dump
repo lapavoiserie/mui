@@ -1,0 +1,2 @@
+@:used
+private abstract sys.thread._Thread.Job from java.lang.Runnable to java.lang.Runnable {}

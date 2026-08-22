@@ -1,0 +1,18 @@
+@:realPath("java.util.AbstractMap_1") @:used @:native("java.util.AbstractMap$1") @:libType
+extern class java.util.AbstractMap$1 extends java.util.AbstractSet<Dynamic> {
+
+	function new(param1:java.util.AbstractMap<Dynamic, Dynamic>):Void;
+
+	function iterator():java.util.Iterator<Dynamic>;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function clear():Void;
+
+	function contains(param1:Dynamic):Bool;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.AbstractMap<Dynamic, Dynamic>;
+}

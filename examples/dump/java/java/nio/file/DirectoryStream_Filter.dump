@@ -1,0 +1,5 @@
+@:realPath("java.nio.file.DirectoryStream_Filter") @:used @:native("java.nio.file.DirectoryStream$Filter") @:libType
+extern interface java.nio.file.DirectoryStream$Filter<T:Dynamic> {
+
+	function accept(param1:java.nio.file.DirectoryStream_Filter.T):Bool;
+}

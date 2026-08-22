@@ -1,0 +1,22 @@
+@:realPath("java.util.Hashtable_EntrySet") @:used @:native("java.util.Hashtable$EntrySet") @:libType
+extern class java.util.Hashtable$EntrySet extends java.util.AbstractSet<java.util.Map$Entry<Dynamic, Dynamic>> {
+
+	function new(param1:java.util.Hashtable<Dynamic, Dynamic>, param2:java.util.Hashtable$1):Void;
+
+	function iterator():java.util.Iterator<java.util.Map$Entry<Dynamic, Dynamic>>;
+
+	function add(param1:java.util.Map$Entry<Dynamic, Dynamic>):Bool;
+
+	function add(param1:Dynamic):Bool;
+
+	function contains(param1:Dynamic):Bool;
+
+	function remove(param1:Dynamic):Bool;
+
+	function size():Int;
+
+	function clear():Void;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.Hashtable<Dynamic, Dynamic>;
+}

@@ -1,0 +1,10 @@
+@:used
+class aui.mui.Slider extends aui.ui.Slider {
+
+	@:value({ max : 1.0, min : 0.0 })
+	public function new(state:aui.mui.SliderBinding, min:Null<Float> = 0.0, max:Null<Float> = 1.0) {
+		super(cast state, if ((min == null)) 0.0 else cast min, if ((max == null)) 1.0 else cast max);
+		var max = if ((max == null)) 1.0 else cast max;
+		var min = if ((min == null)) 0.0 else cast min;
+	}
+}

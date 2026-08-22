@@ -1,0 +1,53 @@
+@:realPath("java.util.Spliterators") @:native("java.util.Spliterators") @:libType
+extern class java.util.Spliterators {
+
+	static function emptySpliterator<T:Dynamic>():java.util.Spliterator<emptySpliterator.T>;
+
+	static function emptyIntSpliterator():java.util.Spliterator$OfInt;
+
+	static function emptyLongSpliterator():java.util.Spliterator$OfLong;
+
+	static function emptyDoubleSpliterator():java.util.Spliterator$OfDouble;
+
+	static function spliterator<T:Dynamic>(param1:java.NativeArray<Dynamic>, param2:Int):java.util.Spliterator<spliterator.T>;
+
+	static function spliterator(param1:java.util.PrimitiveIterator$OfDouble, param2:haxe.Int64, param3:Int):java.util.Spliterator$OfDouble;
+
+	static function spliterator(param1:java.util.PrimitiveIterator$OfLong, param2:haxe.Int64, param3:Int):java.util.Spliterator$OfLong;
+
+	static function spliterator(param1:java.util.PrimitiveIterator$OfInt, param2:haxe.Int64, param3:Int):java.util.Spliterator$OfInt;
+
+	static function spliterator<T:Dynamic>(param1:java.util.Iterator<spliterator.T>, param2:haxe.Int64, param3:Int):java.util.Spliterator<spliterator.T>;
+
+	static function spliterator<T:Dynamic>(param1:java.util.Collection<spliterator.T>, param2:Int):java.util.Spliterator<spliterator.T>;
+
+	static function spliterator(param1:java.NativeArray<Float>, param2:Int, param3:Int, param4:Int):java.util.Spliterator$OfDouble;
+
+	static function spliterator(param1:java.NativeArray<Float>, param2:Int):java.util.Spliterator$OfDouble;
+
+	static function spliterator(param1:java.NativeArray<haxe.Int64>, param2:Int, param3:Int, param4:Int):java.util.Spliterator$OfLong;
+
+	static function spliterator(param1:java.NativeArray<haxe.Int64>, param2:Int):java.util.Spliterator$OfLong;
+
+	static function spliterator(param1:java.NativeArray<Int>, param2:Int, param3:Int, param4:Int):java.util.Spliterator$OfInt;
+
+	static function spliterator(param1:java.NativeArray<Int>, param2:Int):java.util.Spliterator$OfInt;
+
+	static function spliterator<T:Dynamic>(param1:java.NativeArray<Dynamic>, param2:Int, param3:Int, param4:Int):java.util.Spliterator<spliterator.T>;
+
+	static function spliteratorUnknownSize<T:Dynamic>(param1:java.util.Iterator<spliteratorUnknownSize.T>, param2:Int):java.util.Spliterator<spliteratorUnknownSize.T>;
+
+	static function spliteratorUnknownSize(param1:java.util.PrimitiveIterator$OfDouble, param2:Int):java.util.Spliterator$OfDouble;
+
+	static function spliteratorUnknownSize(param1:java.util.PrimitiveIterator$OfLong, param2:Int):java.util.Spliterator$OfLong;
+
+	static function spliteratorUnknownSize(param1:java.util.PrimitiveIterator$OfInt, param2:Int):java.util.Spliterator$OfInt;
+
+	static function iterator<T:Dynamic>(param1:java.util.Spliterator<iterator.T>):java.util.Iterator<iterator.T>;
+
+	static function iterator(param1:java.util.Spliterator$OfDouble):java.util.PrimitiveIterator$OfDouble;
+
+	static function iterator(param1:java.util.Spliterator$OfLong):java.util.PrimitiveIterator$OfLong;
+
+	static function iterator(param1:java.util.Spliterator$OfInt):java.util.PrimitiveIterator$OfInt;
+}

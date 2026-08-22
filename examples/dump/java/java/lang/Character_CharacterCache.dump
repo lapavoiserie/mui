@@ -1,0 +1,3 @@
+@:realPath("java.lang.Character_CharacterCache") @:realPath("java.lang.Character_CharacterCache") @:javaNative @:native("java.lang.Character$CharacterCache") @:javaCanonical("java.lang", "Character.CharacterCache")
+extern class java.lang.Character$CharacterCache {
+}

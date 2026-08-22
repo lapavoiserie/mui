@@ -1,0 +1,3 @@
+@:realPath("java.util.Hashtable_1") @:used @:native("java.util.Hashtable$1") @:libType
+extern class java.util.Hashtable$1 {
+}

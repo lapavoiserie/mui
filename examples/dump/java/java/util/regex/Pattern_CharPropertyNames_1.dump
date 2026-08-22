@@ -1,0 +1,10 @@
+@:realPath("java.util.regex.Pattern_CharPropertyNames_1") @:used @:native("java.util.regex.Pattern$CharPropertyNames$1") @:libType
+extern class java.util.regex.Pattern$CharPropertyNames$1 extends java.util.regex.Pattern$CharPropertyNames$CharPropertyFactory {
+
+	function new(param1:Int):Void;
+
+	function make():java.util.regex.Pattern$CharProperty;
+
+	@:realPath("val_typeMask") @:native("val$typeMask")
+	var val$typeMask(default,ctor):Int;
+}

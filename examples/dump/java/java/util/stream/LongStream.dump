@@ -1,0 +1,98 @@
+@:realPath("java.util.stream.LongStream") @:used @:native("java.util.stream.LongStream") @:libType
+extern interface java.util.stream.LongStream implements java.util.stream.BaseStream<java.lang.Long, java.util.stream.LongStream> {
+
+	function filter(param1:java.util.function.LongPredicate):java.util.stream.LongStream;
+
+	function map(param1:java.util.function.LongUnaryOperator):java.util.stream.LongStream;
+
+	function mapToObj<U:Dynamic>(param1:java.util.function.LongFunction<mapToObj.U>):java.util.stream.Stream<mapToObj.U>;
+
+	function mapToInt(param1:java.util.function.LongToIntFunction):java.util.stream.IntStream;
+
+	function mapToDouble(param1:java.util.function.LongToDoubleFunction):java.util.stream.DoubleStream;
+
+	function flatMap(param1:java.util.function.LongFunction<java.util.stream.LongStream>):java.util.stream.LongStream;
+
+	function distinct():java.util.stream.LongStream;
+
+	function sorted():java.util.stream.LongStream;
+
+	function peek(param1:java.util.function.LongConsumer):java.util.stream.LongStream;
+
+	function limit(param1:haxe.Int64):java.util.stream.LongStream;
+
+	function skip(param1:haxe.Int64):java.util.stream.LongStream;
+
+	function forEach(param1:java.util.function.LongConsumer):Void;
+
+	function forEachOrdered(param1:java.util.function.LongConsumer):Void;
+
+	function toArray():java.NativeArray<haxe.Int64>;
+
+	function reduce(param1:haxe.Int64, param2:java.util.function.LongBinaryOperator):haxe.Int64;
+
+	function reduce(param1:java.util.function.LongBinaryOperator):java.util.OptionalLong;
+
+	function collect<R:Dynamic>(param1:java.util.function.Supplier<collect.R>, param2:java.util.function.ObjLongConsumer<collect.R>, param3:java.util.function.BiConsumer<collect.R, collect.R>):collect.R;
+
+	function sum():haxe.Int64;
+
+	function min():java.util.OptionalLong;
+
+	function max():java.util.OptionalLong;
+
+	function count():haxe.Int64;
+
+	function average():java.util.OptionalDouble;
+
+	function summaryStatistics():java.util.LongSummaryStatistics;
+
+	function anyMatch(param1:java.util.function.LongPredicate):Bool;
+
+	function allMatch(param1:java.util.function.LongPredicate):Bool;
+
+	function noneMatch(param1:java.util.function.LongPredicate):Bool;
+
+	function findFirst():java.util.OptionalLong;
+
+	function findAny():java.util.OptionalLong;
+
+	function asDoubleStream():java.util.stream.DoubleStream;
+
+	function boxed():java.util.stream.Stream<java.lang.Long>;
+
+	function sequential():java.util.stream.LongStream;
+
+	function parallel():java.util.stream.LongStream;
+
+	function iterator():java.util.PrimitiveIterator$OfLong;
+
+	function spliterator():java.util.Spliterator$OfLong;
+
+	@:java.default
+	static function builder():java.util.stream.LongStream$Builder;
+
+	@:java.default
+	static function empty():java.util.stream.LongStream;
+
+	@:java.default
+	static function of(param1:haxe.Int64):java.util.stream.LongStream;
+
+	@:java.default
+	static function of(param1:java.NativeArray<haxe.Int64>):java.util.stream.LongStream;
+
+	@:java.default
+	static function iterate(param1:haxe.Int64, param2:java.util.function.LongUnaryOperator):java.util.stream.LongStream;
+
+	@:java.default
+	static function generate(param1:java.util.function.LongSupplier):java.util.stream.LongStream;
+
+	@:java.default
+	static function range(param1:haxe.Int64, param2:haxe.Int64):java.util.stream.LongStream;
+
+	@:java.default
+	static function rangeClosed(param1:haxe.Int64, param2:haxe.Int64):java.util.stream.LongStream;
+
+	@:java.default
+	static function concat(param1:java.util.stream.LongStream, param2:java.util.stream.LongStream):java.util.stream.LongStream;
+}

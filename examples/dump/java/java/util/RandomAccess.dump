@@ -1,0 +1,3 @@
+@:realPath("java.util.RandomAccess") @:used @:native("java.util.RandomAccess") @:libType
+extern interface java.util.RandomAccess {
+}

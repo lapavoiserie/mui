@@ -1,0 +1,35 @@
+@:realPath("java.text.FieldPosition") @:used @:native("java.text.FieldPosition") @:libType
+extern class java.text.FieldPosition {
+
+	function new(param1:Int):Void;
+
+	function new(param1:java.text.Format$Field, param2:Int):Void;
+
+	function new(param1:java.text.Format$Field):Void;
+
+	function getFieldAttribute():java.text.Format$Field;
+
+	function getField():Int;
+
+	function getBeginIndex():Int;
+
+	function getEndIndex():Int;
+
+	function setBeginIndex(param1:Int):Void;
+
+	function setEndIndex(param1:Int):Void;
+
+	function getFieldDelegate():java.text.Format$FieldDelegate;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	var field:Int;
+
+	var endIndex:Int;
+
+	var beginIndex:Int;
+}

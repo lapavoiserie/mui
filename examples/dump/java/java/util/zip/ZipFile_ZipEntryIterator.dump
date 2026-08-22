@@ -1,0 +1,16 @@
+@:realPath("java.util.zip.ZipFile_ZipEntryIterator") @:used @:native("java.util.zip.ZipFile$ZipEntryIterator") @:libType
+extern class java.util.zip.ZipFile$ZipEntryIterator implements java.util.Iterator<java.util.zip.ZipEntry> implements java.util.Enumeration<java.util.zip.ZipEntry> {
+
+	function new(param1:java.util.zip.ZipFile):Void;
+
+	function hasMoreElements():Bool;
+
+	function hasNext():Bool;
+
+	function nextElement():java.util.zip.ZipEntry;
+
+	function next():java.util.zip.ZipEntry;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.zip.ZipFile;
+}

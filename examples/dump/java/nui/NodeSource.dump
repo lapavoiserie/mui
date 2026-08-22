@@ -1,0 +1,37 @@
+@:used
+interface nui.NodeSource<Node> {
+
+	function root():nui.NodeSource.Node;
+
+	function rebuild():Void;
+
+	function typeOf(n:nui.NodeSource.Node):java.lang.String;
+
+	function keyOf(n:nui.NodeSource.Node):Null<java.lang.String>;
+
+	function childCount(n:nui.NodeSource.Node):Int;
+
+	function childAt(n:nui.NodeSource.Node, index:Int):nui.NodeSource.Node;
+
+	function hasProp(n:nui.NodeSource.Node, key:java.lang.String):Bool;
+
+	function stringProp(n:nui.NodeSource.Node, key:java.lang.String):java.lang.String;
+
+	function intProp(n:nui.NodeSource.Node, key:java.lang.String):Int;
+
+	function floatProp(n:nui.NodeSource.Node, key:java.lang.String):Float;
+
+	function boolProp(n:nui.NodeSource.Node, key:java.lang.String):Bool;
+
+	function modifierCount(n:nui.NodeSource.Node):Int;
+
+	function modifierType(n:nui.NodeSource.Node, index:Int):java.lang.String;
+
+	function modifierFloat(n:nui.NodeSource.Node, index:Int, param:Int):Float;
+
+	function modifierString(n:nui.NodeSource.Node, index:Int, param:Int):java.lang.String;
+
+	function actionId(n:nui.NodeSource.Node):Int;
+
+	function invokeAction(n:nui.NodeSource.Node):Void;
+}

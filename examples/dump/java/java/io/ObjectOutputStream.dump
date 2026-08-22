@@ -1,0 +1,73 @@
+@:realPath("java.io.ObjectOutputStream") @:used @:native("java.io.ObjectOutputStream") @:libType
+extern class java.io.ObjectOutputStream extends java.io.OutputStream implements java.io.ObjectOutput implements java.io.ObjectStreamConstants {
+
+	function new(param1:java.io.OutputStream):Void;
+
+	function new():Void;
+
+	function useProtocolVersion(param1:Int):Void;
+
+	function writeObject(param1:Dynamic):Void;
+
+	function writeObjectOverride(param1:Dynamic):Void;
+
+	function writeUnshared(param1:Dynamic):Void;
+
+	function defaultWriteObject():Void;
+
+	function putFields():java.io.ObjectOutputStream$PutField;
+
+	function writeFields():Void;
+
+	function reset():Void;
+
+	function annotateClass(param1:java.lang.Class<Dynamic>):Void;
+
+	function annotateProxyClass(param1:java.lang.Class<Dynamic>):Void;
+
+	function replaceObject(param1:Dynamic):Dynamic;
+
+	function enableReplaceObject(param1:Bool):Bool;
+
+	function writeStreamHeader():Void;
+
+	function writeClassDescriptor(param1:java.io.ObjectStreamClass):Void;
+
+	function write(param1:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function flush():Void;
+
+	function drain():Void;
+
+	function close():Void;
+
+	function writeBoolean(param1:Bool):Void;
+
+	function writeByte(param1:Int):Void;
+
+	function writeShort(param1:Int):Void;
+
+	function writeChar(param1:Int):Void;
+
+	function writeInt(param1:Int):Void;
+
+	function writeLong(param1:haxe.Int64):Void;
+
+	function writeFloat(param1:Single):Void;
+
+	function writeDouble(param1:Float):Void;
+
+	function writeBytes(param1:java.lang.String):Void;
+
+	function writeChars(param1:java.lang.String):Void;
+
+	function writeUTF(param1:java.lang.String):Void;
+
+	function getProtocolVersion():Int;
+
+	function writeTypeString(param1:java.lang.String):Void;
+}

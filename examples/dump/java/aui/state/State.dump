@@ -1,0 +1,52 @@
+@:directlyUsed @:used
+class aui.state.State<T> extends rui.state.State<aui.state.State.T> {
+
+	public function new(initialValue:aui.state.State.T, name:java.lang.String) {
+		super(initialValue, name);
+		this.bridge = aui.state.StateBridge.create(initialValue);
+		cast cast aui.state.State._registry.set(name, cast this);
+	}
+
+	var bridge:Dynamic;
+
+	function get_value() {
+		return this.get();
+	}
+
+	public function get() {
+		super.get();
+		return cast aui.state.StateBridge.read(this.bridge);
+	}
+
+	public function set(newValue:aui.state.State.T) {
+		super.set(newValue);
+		aui.state.StateBridge.write(this.bridge, newValue);
+	}
+
+	public function inc(amount:Null<Dynamic> = null) {
+		return aui.state.StateAction.Increment(this, amount);
+	}
+
+	public function dec(amount:Null<Dynamic> = null) {
+		return aui.state.StateAction.Decrement(this, amount);
+	}
+
+	public function setTo(val:Dynamic) {
+		return aui.state.StateAction.SetValue(this, val);
+	}
+
+	public function tog() {
+		return aui.state.StateAction.Toggle(this);
+	}
+
+	public function appendAction(val:Dynamic) {
+		return aui.state.StateAction.Append(this, val);
+	}
+
+	@:value(new Map())
+	static var _registry:Map<java.lang.String, Dynamic> = new haxe.ds.StringMap();
+
+	public static function getByName(name:java.lang.String) {
+		return cast cast aui.state.State._registry.get(name);
+	}
+}

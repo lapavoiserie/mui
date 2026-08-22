@@ -1,0 +1,25 @@
+@:realPath("java.text.CharacterIterator") @:used @:native("java.text.CharacterIterator") @:libType
+extern interface java.text.CharacterIterator implements java.lang.Cloneable {
+
+	function first():java.types.Char16;
+
+	function last():java.types.Char16;
+
+	function current():java.types.Char16;
+
+	function next():java.types.Char16;
+
+	function previous():java.types.Char16;
+
+	function setIndex(param1:Int):java.types.Char16;
+
+	function getBeginIndex():Int;
+
+	function getEndIndex():Int;
+
+	function getIndex():Int;
+
+	function clone():Dynamic;
+
+	static var DONE(default,never):java.types.Char16;
+}

@@ -1,0 +1,43 @@
+@:realPath("java.util.jar.JarFile") @:used @:native("java.util.jar.JarFile") @:libType
+extern class java.util.jar.JarFile extends java.util.zip.ZipFile {
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.io.File, param2:Bool, param3:Int):Void;
+
+	function new(param1:java.io.File, param2:Bool):Void;
+
+	function new(param1:java.io.File):Void;
+
+	function new(param1:java.lang.String, param2:Bool):Void;
+
+	function getManifest():java.util.jar.Manifest;
+
+	function getJarEntry(param1:java.lang.String):java.util.jar.JarEntry;
+
+	function getEntry(param1:java.lang.String):java.util.zip.ZipEntry;
+
+	function entries():java.util.Enumeration<java.util.jar.JarEntry>;
+
+	function stream():java.util.stream.Stream<java.util.jar.JarEntry>;
+
+	function getInputStream(param1:java.util.zip.ZipEntry):java.io.InputStream;
+
+	function hasClassPathAttribute():Bool;
+
+	function newEntry(param1:java.util.zip.ZipEntry):java.util.jar.JarEntry;
+
+	function entryNames(param1:java.NativeArray<java.security.CodeSource>):java.util.Enumeration<java.lang.String>;
+
+	function entries2():java.util.Enumeration<java.util.jar.JarEntry>;
+
+	function getCodeSources(param1:java.net.URL):java.NativeArray<java.security.CodeSource>;
+
+	function getCodeSource(param1:java.net.URL, param2:java.lang.String):java.security.CodeSource;
+
+	function setEagerValidation(param1:Bool):Void;
+
+	function getManifestDigests():java.util.List<Dynamic>;
+
+	static var MANIFEST_NAME(default,never):java.lang.String;
+}

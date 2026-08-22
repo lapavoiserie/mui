@@ -1,0 +1,25 @@
+@:realPath("java.sun.misc.URLClassPath_JarLoader") @:used @:native("sun.misc.URLClassPath$JarLoader") @:libType
+extern class sun.misc.URLClassPath$JarLoader extends sun.misc.URLClassPath$Loader {
+
+	function new(param1:java.net.URL, param2:java.net.URLStreamHandler, param3:java.util.HashMap<java.lang.String, sun.misc.URLClassPath$Loader>):Void;
+
+	function close():Void;
+
+	function getJarFile():java.util.jar.JarFile;
+
+	function getIndex():sun.misc.JarIndex;
+
+	function checkResource(param1:java.lang.String, param2:Bool, param3:java.util.jar.JarEntry):sun.misc.Resource;
+
+	function validIndex(param1:java.lang.String):Bool;
+
+	function findResource(param1:java.lang.String, param2:Bool):java.net.URL;
+
+	function getResource(param1:java.lang.String, param2:Bool):sun.misc.Resource;
+
+	function getResource(param1:java.lang.String, param2:Bool, param3:java.util.Set<java.lang.String>):sun.misc.Resource;
+
+	function getClassPath():java.NativeArray<java.net.URL>;
+
+	static function checkJar(param1:java.util.jar.JarFile):java.util.jar.JarFile;
+}

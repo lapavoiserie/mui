@@ -1,0 +1,98 @@
+@:keep @:directlyUsed @:used @:coreApi
+class Std {
+
+	public static function isOfType(v:Dynamic, t:Dynamic) {
+		if ((v == null || t == null)) return false;
+		var clt = cast t;
+		if ((clt == null)) return false;
+		if ((clt == cast java.lang.Object)) return true;
+		clt = haxe.jvm.Jvm.getWrapperClass(clt);
+		if ((clt == cast java.lang.Double)) clt = cast java.lang.Number else if ((clt == cast java.lang.Integer)) {
+			if ((! haxe.jvm.Jvm.instanceof(v, java.lang.Number))) return false;
+			var n = cast v;
+			return n.doubleValue() == n.intValue();
+		};
+		return clt.isAssignableFrom(cast v.getClass());
+	}
+
+	public static function string(s:Dynamic) {
+		return haxe.jvm.Jvm.toString(s);
+	}
+
+	public static function int(x:Float) {
+		return cast x;
+	}
+
+	public static function parseInt(x:java.lang.String) {
+		if ((x == null)) return null;
+		var len = x.length;
+		var index = 0;
+		while ((index < len)) {
+			var code = cast (cast x.charAt(index),Int);
+			if ((! (code > 8 && code < 14 || code == 32))) break;
+			++ index;
+		};
+		var isNegative;
+		if ((index < len)) {
+			var sign = cast (cast x.charAt(index),Int);
+			if ((sign == 45 || sign == 43)) ++ index;
+			isNegative = sign == 45;
+		} else isNegative = false;
+		var isHexadecimal;
+		if ((index + 1 < len)) {
+			var cur = cast (cast x.charAt(index),Int);
+			var next = cast (cast x.charAt(index + 1),Int);
+			isHexadecimal = cur == 48 && (next == 120 || next == 88);
+		} else isHexadecimal = false;
+		if ((isHexadecimal)) index += 2;
+		var cur = index;
+		if ((isHexadecimal)) while ((cur < len)) {
+			var code = cast (cast x.charAt(cur),Int);
+			if ((! (48 <= code && code <= 57 || 97 <= code && code <= 102 || 65 <= code && code <= 70))) break;
+			++ cur;
+		} else while ((cur < len)) {
+			var code = cast (cast x.charAt(cur),Int);
+			if ((! (48 <= code && code <= 57))) break;
+			++ cur;
+		};
+		var firstInvalidIndex = cur;
+		if ((index == firstInvalidIndex)) return null;
+		var result = java.lang.Integer.parseInt(haxe.jvm.StringExt.substring(x, index, firstInvalidIndex), if ((isHexadecimal)) 16 else 10);
+		if ((isNegative)) return - result else return result;
+	}
+
+	public static function parseFloat(x:java.lang.String) {
+		if ((x == null)) return java.lang.Math.NaN;
+		x = StringTools.ltrim(x);
+		var xn = cast x;
+		var found = false;
+		var hasDot = false;
+		var hasSign = false;
+		var hasE = false;
+		var hasESign = false;
+		var hasEData = false;
+		var i = -1;
+		@:loopLabel(1) while ((++ i < x.length)) {
+			var chr = cast xn.charAt(i);
+			if ((chr >= 48 && chr <= 57)) {
+				if ((hasE)) hasEData = true;
+				found = true;
+			} else switch ((chr)) {
+				case 43, 45: if ((! found && ! hasSign)) hasSign = true else if ((found && ! hasESign && hasE && ! hasEData)) hasESign = true else @:loopLabel(1) break;
+				case 46: if ((! hasDot)) hasDot = true else @:loopLabel(1) break;
+				case 69, 101: if ((! hasE)) hasE = true else @:loopLabel(1) break;
+				default: @:loopLabel(1) break
+			};
+		};
+		if ((hasE && ! hasEData)) {
+			-- i;
+			if ((hasESign)) -- i;
+		};
+		if ((i != x.length)) x = haxe.jvm.StringExt.substr(x, 0, i);
+		try {
+			return java.lang.Double.parseDouble(x);
+		} catch (_g:java.lang.Throwable) {
+			return java.lang.Math.NaN;
+		};
+	}
+}

@@ -1,0 +1,25 @@
+@:realPath("java.util.concurrent.BlockingQueue") @:used @:native("java.util.concurrent.BlockingQueue") @:libType
+extern interface java.util.concurrent.BlockingQueue<E:Dynamic> implements java.util.Queue<java.util.concurrent.BlockingQueue.E> {
+
+	function add(param1:java.util.concurrent.BlockingQueue.E):Bool;
+
+	function offer(param1:java.util.concurrent.BlockingQueue.E):Bool;
+
+	function offer(param1:java.util.concurrent.BlockingQueue.E, param2:haxe.Int64, param3:java.util.concurrent.TimeUnit):Bool;
+
+	function put(param1:java.util.concurrent.BlockingQueue.E):Void;
+
+	function take():java.util.concurrent.BlockingQueue.E;
+
+	function poll(param1:haxe.Int64, param2:java.util.concurrent.TimeUnit):java.util.concurrent.BlockingQueue.E;
+
+	function remainingCapacity():Int;
+
+	function remove(param1:Dynamic):Bool;
+
+	function contains(param1:Dynamic):Bool;
+
+	function drainTo(param1:java.util.Collection<Dynamic>):Int;
+
+	function drainTo(param1:java.util.Collection<Dynamic>, param2:Int):Int;
+}

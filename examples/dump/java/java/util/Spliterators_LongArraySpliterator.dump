@@ -1,0 +1,23 @@
+@:realPath("java.util.Spliterators_LongArraySpliterator") @:used @:native("java.util.Spliterators$LongArraySpliterator") @:libType
+extern class java.util.Spliterators$LongArraySpliterator implements java.util.Spliterator$OfLong {
+
+	function new(param1:java.NativeArray<haxe.Int64>, param2:Int):Void;
+
+	function new(param1:java.NativeArray<haxe.Int64>, param2:Int, param3:Int, param4:Int):Void;
+
+	function trySplit():java.util.Spliterator$OfLong;
+
+	function forEachRemaining(param1:java.util.function.LongConsumer):Void;
+
+	function forEachRemaining(param1:Dynamic):Void;
+
+	function tryAdvance(param1:java.util.function.LongConsumer):Bool;
+
+	function tryAdvance(param1:Dynamic):Bool;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	function getComparator():java.util.Comparator<Dynamic>;
+}

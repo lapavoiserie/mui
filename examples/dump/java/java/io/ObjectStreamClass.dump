@@ -1,0 +1,101 @@
+@:realPath("java.io.ObjectStreamClass") @:used @:native("java.io.ObjectStreamClass") @:libType
+extern class java.io.ObjectStreamClass implements java.io.Serializable {
+
+	function new():Void;
+
+	function getName():java.lang.String;
+
+	function getSerialVersionUID():haxe.Int64;
+
+	function forClass():java.lang.Class<Dynamic>;
+
+	function getFields():java.NativeArray<java.io.ObjectStreamField>;
+
+	function getFields(param1:Bool):java.NativeArray<java.io.ObjectStreamField>;
+
+	function getField(param1:java.lang.String):java.io.ObjectStreamField;
+
+	function getField(param1:java.lang.String, param2:java.lang.Class<Dynamic>):java.io.ObjectStreamField;
+
+	function toString():java.lang.String;
+
+	function initProxy(param1:java.lang.Class<Dynamic>, param2:java.lang.ClassNotFoundException, param3:java.io.ObjectStreamClass):Void;
+
+	function initNonProxy(param1:java.io.ObjectStreamClass, param2:java.lang.Class<Dynamic>, param3:java.lang.ClassNotFoundException, param4:java.io.ObjectStreamClass):Void;
+
+	function readNonProxy(param1:java.io.ObjectInputStream):Void;
+
+	function writeNonProxy(param1:java.io.ObjectOutputStream):Void;
+
+	function getResolveException():java.lang.ClassNotFoundException;
+
+	function checkDeserialize():Void;
+
+	function checkSerialize():Void;
+
+	function checkDefaultSerialize():Void;
+
+	function getSuperDesc():java.io.ObjectStreamClass;
+
+	function getLocalDesc():java.io.ObjectStreamClass;
+
+	function isProxy():Bool;
+
+	function isEnum():Bool;
+
+	function isExternalizable():Bool;
+
+	function isSerializable():Bool;
+
+	function hasBlockExternalData():Bool;
+
+	function hasWriteObjectData():Bool;
+
+	function isInstantiable():Bool;
+
+	function hasWriteObjectMethod():Bool;
+
+	function hasReadObjectMethod():Bool;
+
+	function hasReadObjectNoDataMethod():Bool;
+
+	function hasWriteReplaceMethod():Bool;
+
+	function hasReadResolveMethod():Bool;
+
+	function newInstance():Dynamic;
+
+	function invokeWriteObject(param1:Dynamic, param2:java.io.ObjectOutputStream):Void;
+
+	function invokeReadObject(param1:Dynamic, param2:java.io.ObjectInputStream):Void;
+
+	function invokeReadObjectNoData(param1:Dynamic):Void;
+
+	function invokeWriteReplace(param1:Dynamic):Dynamic;
+
+	function invokeReadResolve(param1:Dynamic):Dynamic;
+
+	function getClassDataLayout():java.NativeArray<java.io.ObjectStreamClass$ClassDataSlot>;
+
+	function getPrimDataSize():Int;
+
+	function getNumObjFields():Int;
+
+	function getPrimFieldValues(param1:Dynamic, param2:java.NativeArray<java.types.Int8>):Void;
+
+	function setPrimFieldValues(param1:Dynamic, param2:java.NativeArray<java.types.Int8>):Void;
+
+	function getObjFieldValues(param1:Dynamic, param2:java.NativeArray<Dynamic>):Void;
+
+	function setObjFieldValues(param1:Dynamic, param2:java.NativeArray<Dynamic>):Void;
+
+	static function lookup(param1:java.lang.Class<Dynamic>):java.io.ObjectStreamClass;
+
+	static function lookup(param1:java.lang.Class<Dynamic>, param2:Bool):java.io.ObjectStreamClass;
+
+	static function lookupAny(param1:java.lang.Class<Dynamic>):java.io.ObjectStreamClass;
+
+	static function processQueue(param1:java.lang.ref.ReferenceQueue<java.lang.Class<Dynamic>>, param2:java.util.concurrent.ConcurrentMap<java.lang.ref.WeakReference<java.lang.Class<Dynamic>>, Dynamic>):Void;
+
+	static var NO_FIELDS(default,never):java.NativeArray<java.io.ObjectStreamField>;
+}

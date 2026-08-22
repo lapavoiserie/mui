@@ -1,0 +1,13 @@
+@:realPath("java.security.Provider_EngineDescription") @:native("java.security.Provider$EngineDescription") @:libType
+extern class java.security.Provider$EngineDescription {
+
+	function new(param1:java.lang.String, param2:Bool, param3:java.lang.String):Void;
+
+	function getConstructorParameterClass():java.lang.Class<Dynamic>;
+
+	var name(default,ctor):java.lang.String;
+
+	var supportsParameter(default,ctor):Bool;
+
+	var constructorParameterClassName(default,ctor):java.lang.String;
+}

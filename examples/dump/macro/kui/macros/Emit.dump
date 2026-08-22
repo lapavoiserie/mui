@@ -1,0 +1,81 @@
+class kui.macros.Emit {
+
+	@:value([])
+	static var payloads:Array<{ type : String, platform : String, payload : Dynamic }> = [];
+
+	@:value([])
+	static var undefs:Array<String> = [];
+
+	@:value(false)
+	static var armed:Bool = false;
+
+	public static function undefine(names:Array<String>) {
+		{
+			var ` = 0;
+			while (` < names.length) {
+				var name = names[`];
+				++ `;
+				if (kui.macros.Emit.undefs.indexOf(name, null) < 0) {
+					kui.macros.Emit.undefs.push(name);
+				};
+			};
+		};
+		kui.macros.Emit.arm();
+	}
+
+	public static function undefined() return kui.macros.Emit.undefs.copy()
+
+	public static function record(type:String, payload:Dynamic) {
+		kui.macros.Emit.payloads.push({type : type, platform : if (kui.macros.Host.platform() == null) {
+			"";
+		} else {
+			kui.macros.Host.platform();
+		}, payload : payload});
+		kui.macros.Emit.arm();
+	}
+
+	static function arm() {
+		if (kui.macros.Emit.armed) {
+			return;
+		};
+		kui.macros.Emit.armed = true;
+		haxe.macro.Context.onAfterGenerate(kui.macros.Emit.write);
+	}
+
+	public static function current() return kui.build.Sidecar.of(cast kui.macros.Emit.payloads)
+
+	static function write() {
+		if (kui.macros.Emit.payloads.length == 0 && kui.macros.Emit.undefs.length == 0) {
+			return;
+		};
+		var out = haxe.macro.Compiler.getOutput();
+		var directory = if (sys.FileSystem.exists(out) && sys.FileSystem.isDirectory(out)) {
+			out;
+		} else {
+			haxe.io.Path.directory(out);
+		};
+		if (directory == "") {
+			directory = ".";
+		};
+		var document = {platform : kui.macros.Host.platform(), backend : kui.macros.Host.backend(), toolchains : kui.macros.Host.toolchains(), capabilities : kui.macros.Emit.payloads};
+		try {
+			if (! sys.FileSystem.exists(directory)) {
+				sys.FileSystem.createDirectory(directory);
+			};
+			sys.io.File.saveContent(directory + "/kui-payload.json", {
+				var replacer = null;
+				haxe.format.JsonPrinter.print(cast document, replacer, "  ");
+			});
+			kui.build.Qmake.write(kui.macros.Emit.current(), directory, kui.macros.Emit.undefs);
+		} catch (`:Dynamic) {
+			{};
+			{};
+			if (true) {
+				var e = `;
+				{
+					haxe.macro.Context.warning("kui could not write kui-payload.json to " + directory + ": " + Std.string(e), haxe.macro.Context.currentPos(), null);
+				};
+			} else throw `;
+		};
+	}
+}

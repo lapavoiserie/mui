@@ -1,0 +1,9 @@
+@:realPath("java.util.function.BinaryOperator") @:used @:native("java.util.function.BinaryOperator") @:libType
+extern interface java.util.function.BinaryOperator<T:Dynamic> implements java.util.function.BiFunction<java.util.function.BinaryOperator.T, java.util.function.BinaryOperator.T, java.util.function.BinaryOperator.T> {
+
+	@:java.default
+	static function minBy<T:Dynamic>(param1:java.util.Comparator<Dynamic>):java.util.function.BinaryOperator<minBy.T>;
+
+	@:java.default
+	static function maxBy<T:Dynamic>(param1:java.util.Comparator<Dynamic>):java.util.function.BinaryOperator<maxBy.T>;
+}

@@ -1,0 +1,37 @@
+@:realPath("java.time.format.DecimalStyle") @:native("java.time.format.DecimalStyle") @:libType
+extern class java.time.format.DecimalStyle {
+
+	function getZeroDigit():java.types.Char16;
+
+	function withZeroDigit(param1:java.types.Char16):java.time.format.DecimalStyle;
+
+	function getPositiveSign():java.types.Char16;
+
+	function withPositiveSign(param1:java.types.Char16):java.time.format.DecimalStyle;
+
+	function getNegativeSign():java.types.Char16;
+
+	function withNegativeSign(param1:java.types.Char16):java.time.format.DecimalStyle;
+
+	function getDecimalSeparator():java.types.Char16;
+
+	function withDecimalSeparator(param1:java.types.Char16):java.time.format.DecimalStyle;
+
+	function convertToDigit(param1:java.types.Char16):Int;
+
+	function convertNumberToI18N(param1:java.lang.String):java.lang.String;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function getAvailableLocales():java.util.Set<java.util.Locale>;
+
+	static function ofDefaultLocale():java.time.format.DecimalStyle;
+
+	static function of(param1:java.util.Locale):java.time.format.DecimalStyle;
+
+	static var STANDARD(default,never):java.time.format.DecimalStyle;
+}

@@ -1,0 +1,18 @@
+@:realPath("java.util.jar.JarFile_JarEntryIterator") @:used @:native("java.util.jar.JarFile$JarEntryIterator") @:libType
+extern class java.util.jar.JarFile$JarEntryIterator implements java.util.Iterator<java.util.jar.JarEntry> implements java.util.Enumeration<java.util.jar.JarEntry> {
+
+	function new(param1:java.util.jar.JarFile, param2:java.util.jar.JarFile$1):Void;
+
+	function hasNext():Bool;
+
+	function next():java.util.jar.JarEntry;
+
+	function hasMoreElements():Bool;
+
+	function nextElement():java.util.jar.JarEntry;
+
+	var e(default,ctor):java.util.Enumeration<java.util.zip.ZipEntry>;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.util.jar.JarFile;
+}

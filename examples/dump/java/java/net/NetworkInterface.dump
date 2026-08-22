@@ -1,0 +1,51 @@
+@:realPath("java.net.NetworkInterface") @:used @:native("java.net.NetworkInterface") @:libType
+extern class java.net.NetworkInterface {
+
+	function new():Void;
+
+	function new(param1:java.lang.String, param2:Int, param3:java.NativeArray<java.net.InetAddress>):Void;
+
+	function getName():java.lang.String;
+
+	function getInetAddresses():java.util.Enumeration<java.net.InetAddress>;
+
+	function getInterfaceAddresses():java.util.List<java.net.InterfaceAddress>;
+
+	function getSubInterfaces():java.util.Enumeration<java.net.NetworkInterface>;
+
+	function getParent():java.net.NetworkInterface;
+
+	function getIndex():Int;
+
+	function getDisplayName():java.lang.String;
+
+	function isUp():Bool;
+
+	function isLoopback():Bool;
+
+	function isPointToPoint():Bool;
+
+	function supportsMulticast():Bool;
+
+	function getHardwareAddress():java.NativeArray<java.types.Int8>;
+
+	function getMTU():Int;
+
+	function isVirtual():Bool;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	static function getByName(param1:java.lang.String):java.net.NetworkInterface;
+
+	static function getByIndex(param1:Int):java.net.NetworkInterface;
+
+	static function getByInetAddress(param1:java.net.InetAddress):java.net.NetworkInterface;
+
+	static function getNetworkInterfaces():java.util.Enumeration<java.net.NetworkInterface>;
+
+	static function getDefault():java.net.NetworkInterface;
+}

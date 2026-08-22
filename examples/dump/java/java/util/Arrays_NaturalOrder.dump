@@ -1,0 +1,9 @@
+@:realPath("java.util.Arrays_NaturalOrder") @:used @:native("java.util.Arrays$NaturalOrder") @:libType
+extern class java.util.Arrays$NaturalOrder implements java.util.Comparator<Dynamic> {
+
+	function new():Void;
+
+	function compare(param1:Dynamic, param2:Dynamic):Int;
+
+	static var INSTANCE(default,never):java.util.Arrays$NaturalOrder;
+}

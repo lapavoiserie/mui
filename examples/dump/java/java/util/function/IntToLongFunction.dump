@@ -1,0 +1,5 @@
+@:realPath("java.util.function.IntToLongFunction") @:used @:native("java.util.function.IntToLongFunction") @:libType
+extern interface java.util.function.IntToLongFunction {
+
+	function applyAsLong(param1:Int):haxe.Int64;
+}

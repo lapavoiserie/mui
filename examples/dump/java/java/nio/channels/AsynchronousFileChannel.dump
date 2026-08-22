@@ -1,0 +1,35 @@
+@:realPath("java.nio.channels.AsynchronousFileChannel") @:native("java.nio.channels.AsynchronousFileChannel") @:libType
+extern class java.nio.channels.AsynchronousFileChannel implements java.nio.channels.AsynchronousChannel {
+
+	function new():Void;
+
+	function size():haxe.Int64;
+
+	function truncate(param1:haxe.Int64):java.nio.channels.AsynchronousFileChannel;
+
+	function force(param1:Bool):Void;
+
+	function lock<A:Dynamic>(param1:haxe.Int64, param2:haxe.Int64, param3:Bool, param4:lock.A, param5:java.nio.channels.CompletionHandler<java.nio.channels.FileLock, Dynamic>):Void;
+
+	function lock():java.util.concurrent.Future<java.nio.channels.FileLock>;
+
+	function lock(param1:haxe.Int64, param2:haxe.Int64, param3:Bool):java.util.concurrent.Future<java.nio.channels.FileLock>;
+
+	function lock<A:Dynamic>(param1:lock.A, param2:java.nio.channels.CompletionHandler<java.nio.channels.FileLock, Dynamic>):Void;
+
+	function tryLock(param1:haxe.Int64, param2:haxe.Int64, param3:Bool):java.nio.channels.FileLock;
+
+	function tryLock():java.nio.channels.FileLock;
+
+	function read<A:Dynamic>(param1:java.nio.ByteBuffer, param2:haxe.Int64, param3:read.A, param4:java.nio.channels.CompletionHandler<java.lang.Integer, Dynamic>):Void;
+
+	function read(param1:java.nio.ByteBuffer, param2:haxe.Int64):java.util.concurrent.Future<java.lang.Integer>;
+
+	function write<A:Dynamic>(param1:java.nio.ByteBuffer, param2:haxe.Int64, param3:write.A, param4:java.nio.channels.CompletionHandler<java.lang.Integer, Dynamic>):Void;
+
+	function write(param1:java.nio.ByteBuffer, param2:haxe.Int64):java.util.concurrent.Future<java.lang.Integer>;
+
+	static function open(param1:java.nio.file.Path, param2:java.util.Set<java.nio.file.OpenOption>, param3:java.util.concurrent.ExecutorService, param4:haxe.Rest<java.nio.file.attribute.FileAttribute<Dynamic>>):java.nio.channels.AsynchronousFileChannel;
+
+	static function open(param1:java.nio.file.Path, param2:haxe.Rest<java.nio.file.OpenOption>):java.nio.channels.AsynchronousFileChannel;
+}

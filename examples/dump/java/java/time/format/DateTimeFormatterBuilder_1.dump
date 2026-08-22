@@ -1,0 +1,15 @@
+@:realPath("java.time.format.DateTimeFormatterBuilder_1") @:used @:native("java.time.format.DateTimeFormatterBuilder$1") @:libType
+extern class java.time.format.DateTimeFormatterBuilder$1 extends java.time.format.DateTimeTextProvider {
+
+	function new(param1:java.time.format.DateTimeFormatterBuilder, param2:java.time.format.DateTimeTextProvider$LocaleStore):Void;
+
+	function getText(param1:java.time.temporal.TemporalField, param2:haxe.Int64, param3:java.time.format.TextStyle, param4:java.util.Locale):java.lang.String;
+
+	function getTextIterator(param1:java.time.temporal.TemporalField, param2:java.time.format.TextStyle, param3:java.util.Locale):java.util.Iterator<java.util.Map$Entry<java.lang.String, java.lang.Long>>;
+
+	@:realPath("val_store") @:native("val$store")
+	var val$store(default,ctor):java.time.format.DateTimeTextProvider$LocaleStore;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.time.format.DateTimeFormatterBuilder;
+}

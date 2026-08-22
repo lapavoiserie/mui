@@ -1,0 +1,12 @@
+@:keep @:directlyUsed @:used @:coreApi
+class sys.thread.Lock {
+
+	public function new() {}
+
+	@:value(new LinkedBlockingDeque<String>())
+	var deque(default,ctor):java.util.concurrent.LinkedBlockingDeque<java.lang.String> = new java.util.concurrent.LinkedBlockingDeque();
+
+	public function wait(timeout:Null<Float> = null) {
+		if (((if ((timeout == null)) this.deque.take() else this.deque.poll(@:implicitCast cast Std.int(timeout * 1000.0), java.util.concurrent.TimeUnit.MILLISECONDS)) == null)) return false else return true;
+	}
+}

@@ -1,0 +1,158 @@
+@:realPath("java.lang.Class") @:directlyUsed @:used @:native("java.lang.Class") @:libType
+extern class java.lang.Class<T:Dynamic> implements java.lang.reflect.AnnotatedElement implements java.lang.reflect.Type implements java.lang.reflect.GenericDeclaration implements java.io.Serializable {
+
+	function toString():java.lang.String;
+
+	function toGenericString():java.lang.String;
+
+	function newInstance():java.lang.Class.T;
+
+	function isInstance(param1:Dynamic):Bool;
+
+	function isAssignableFrom(param1:java.lang.Class<Dynamic>):Bool;
+
+	function isInterface():Bool;
+
+	function isArray():Bool;
+
+	function isPrimitive():Bool;
+
+	function isAnnotation():Bool;
+
+	function isSynthetic():Bool;
+
+	function getName():java.lang.String;
+
+	function getClassLoader():java.lang.ClassLoader;
+
+	function getClassLoader0():java.lang.ClassLoader;
+
+	function getTypeParameters():java.NativeArray<java.lang.reflect.TypeVariable<java.lang.Class<java.lang.Class.T>>>;
+
+	function getSuperclass():java.lang.Class<Dynamic>;
+
+	function getGenericSuperclass():java.lang.reflect.Type;
+
+	function getPackage():java.lang.Package;
+
+	function getInterfaces():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getGenericInterfaces():java.NativeArray<java.lang.reflect.Type>;
+
+	function getComponentType():java.lang.Class<Dynamic>;
+
+	function getModifiers():Int;
+
+	function getSigners():java.NativeArray<Dynamic>;
+
+	function setSigners(param1:java.NativeArray<Dynamic>):Void;
+
+	function getEnclosingMethod():java.lang.reflect.Method;
+
+	function getEnclosingConstructor():java.lang.reflect.Constructor<Dynamic>;
+
+	function getDeclaringClass():java.lang.Class<Dynamic>;
+
+	function getEnclosingClass():java.lang.Class<Dynamic>;
+
+	function getSimpleName():java.lang.String;
+
+	function getTypeName():java.lang.String;
+
+	function getCanonicalName():java.lang.String;
+
+	function isAnonymousClass():Bool;
+
+	function isLocalClass():Bool;
+
+	function isMemberClass():Bool;
+
+	function getClasses():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getFields():java.NativeArray<java.lang.reflect.Field>;
+
+	function getMethods():java.NativeArray<java.lang.reflect.Method>;
+
+	function getConstructors():java.NativeArray<java.lang.reflect.Constructor<Dynamic>>;
+
+	function getField(param1:java.lang.String):java.lang.reflect.Field;
+
+	function getMethod(param1:java.lang.String, param2:haxe.Rest<java.lang.Class<Dynamic>>):java.lang.reflect.Method;
+
+	function getConstructor(param1:haxe.Rest<java.lang.Class<Dynamic>>):java.lang.reflect.Constructor<java.lang.Class.T>;
+
+	function getDeclaredClasses():java.NativeArray<java.lang.Class<Dynamic>>;
+
+	function getDeclaredFields():java.NativeArray<java.lang.reflect.Field>;
+
+	function getDeclaredMethods():java.NativeArray<java.lang.reflect.Method>;
+
+	function getDeclaredConstructors():java.NativeArray<java.lang.reflect.Constructor<Dynamic>>;
+
+	function getDeclaredField(param1:java.lang.String):java.lang.reflect.Field;
+
+	function getDeclaredMethod(param1:java.lang.String, param2:haxe.Rest<java.lang.Class<Dynamic>>):java.lang.reflect.Method;
+
+	function getDeclaredConstructor(param1:haxe.Rest<java.lang.Class<Dynamic>>):java.lang.reflect.Constructor<java.lang.Class.T>;
+
+	function getResourceAsStream(param1:java.lang.String):java.io.InputStream;
+
+	function getResource(param1:java.lang.String):java.net.URL;
+
+	function getProtectionDomain():java.security.ProtectionDomain;
+
+	function getRawAnnotations():java.NativeArray<java.types.Int8>;
+
+	function getRawTypeAnnotations():java.NativeArray<java.types.Int8>;
+
+	function getConstantPool():sun.reflect.ConstantPool;
+
+	function desiredAssertionStatus():Bool;
+
+	function isEnum():Bool;
+
+	function getEnumConstants():java.NativeArray<java.lang.Class.T>;
+
+	function getEnumConstantsShared():java.NativeArray<java.lang.Class.T>;
+
+	function enumConstantDirectory():java.util.Map<java.lang.String, java.lang.Class.T>;
+
+	@:realPath("_cast") @:native("cast")
+	function cast(param1:Dynamic):java.lang.Class.T;
+
+	function asSubclass<U:Dynamic>(param1:java.lang.Class<asSubclass.U>):java.lang.Class<asSubclass.U>;
+
+	function getAnnotation<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.A>):getAnnotation.A;
+
+	function isAnnotationPresent(param1:java.lang.Class<java.lang.annotation.Annotation>):Bool;
+
+	function getAnnotationsByType<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotationsByType.A>):java.NativeArray<getAnnotationsByType.A>;
+
+	function getAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getDeclaredAnnotation<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotation.A>):getDeclaredAnnotation.A;
+
+	function getDeclaredAnnotationsByType<A:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotationsByType.A>):java.NativeArray<getDeclaredAnnotationsByType.A>;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function casAnnotationType(param1:sun.reflect.annotation.AnnotationType, param2:sun.reflect.annotation.AnnotationType):Bool;
+
+	function getAnnotationType():sun.reflect.annotation.AnnotationType;
+
+	function getDeclaredAnnotationMap():java.util.Map<java.lang.Class<java.lang.annotation.Annotation>, java.lang.annotation.Annotation>;
+
+	function getAnnotatedSuperclass():java.lang.reflect.AnnotatedType;
+
+	function getAnnotatedInterfaces():java.NativeArray<java.lang.reflect.AnnotatedType>;
+
+	var classValueMap:java.lang.ClassValue$ClassValueMap;
+
+	static function forName(param1:java.lang.String):java.lang.Class<Dynamic>;
+
+	static function forName(param1:java.lang.String, param2:Bool, param3:java.lang.ClassLoader):java.lang.Class<Dynamic>;
+
+	static function getPrimitiveClass(param1:java.lang.String):java.lang.Class<Dynamic>;
+
+	static function getExecutableTypeAnnotationBytes(param1:java.lang.reflect.Executable):java.NativeArray<java.types.Int8>;
+}

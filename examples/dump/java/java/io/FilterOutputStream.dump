@@ -1,0 +1,17 @@
+@:realPath("java.io.FilterOutputStream") @:used @:native("java.io.FilterOutputStream") @:libType
+extern class java.io.FilterOutputStream extends java.io.OutputStream {
+
+	function new(param1:java.io.OutputStream):Void;
+
+	function write(param1:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):Void;
+
+	function write(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function flush():Void;
+
+	function close():Void;
+
+	var out:java.io.OutputStream;
+}

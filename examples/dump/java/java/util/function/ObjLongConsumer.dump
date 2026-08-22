@@ -1,0 +1,5 @@
+@:realPath("java.util.function.ObjLongConsumer") @:used @:native("java.util.function.ObjLongConsumer") @:libType
+extern interface java.util.function.ObjLongConsumer<T:Dynamic> {
+
+	function accept(param1:java.util.function.ObjLongConsumer.T, param2:haxe.Int64):Void;
+}

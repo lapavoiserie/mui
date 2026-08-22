@@ -1,0 +1,89 @@
+@:realPath("java.util.zip.ZipEntry") @:used @:native("java.util.zip.ZipEntry") @:libType
+extern class java.util.zip.ZipEntry implements java.util.zip.ZipConstants implements java.lang.Cloneable {
+
+	function new(param1:java.lang.String):Void;
+
+	function new():Void;
+
+	function new(param1:java.util.zip.ZipEntry):Void;
+
+	function getName():java.lang.String;
+
+	function setTime(param1:haxe.Int64):Void;
+
+	function getTime():haxe.Int64;
+
+	function setLastModifiedTime(param1:java.nio.file.attribute.FileTime):java.util.zip.ZipEntry;
+
+	function getLastModifiedTime():java.nio.file.attribute.FileTime;
+
+	function setLastAccessTime(param1:java.nio.file.attribute.FileTime):java.util.zip.ZipEntry;
+
+	function getLastAccessTime():java.nio.file.attribute.FileTime;
+
+	function setCreationTime(param1:java.nio.file.attribute.FileTime):java.util.zip.ZipEntry;
+
+	function getCreationTime():java.nio.file.attribute.FileTime;
+
+	function setSize(param1:haxe.Int64):Void;
+
+	function getSize():haxe.Int64;
+
+	function getCompressedSize():haxe.Int64;
+
+	function setCompressedSize(param1:haxe.Int64):Void;
+
+	function setCrc(param1:haxe.Int64):Void;
+
+	function getCrc():haxe.Int64;
+
+	function setMethod(param1:Int):Void;
+
+	function getMethod():Int;
+
+	function setExtra(param1:java.NativeArray<java.types.Int8>):Void;
+
+	function setExtra0(param1:java.NativeArray<java.types.Int8>, param2:Bool):Void;
+
+	function getExtra():java.NativeArray<java.types.Int8>;
+
+	function setComment(param1:java.lang.String):Void;
+
+	function getComment():java.lang.String;
+
+	function isDirectory():Bool;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function clone():Dynamic;
+
+	var name:java.lang.String;
+
+	var time:haxe.Int64;
+
+	var mtime:java.nio.file.attribute.FileTime;
+
+	var atime:java.nio.file.attribute.FileTime;
+
+	var ctime:java.nio.file.attribute.FileTime;
+
+	var crc:haxe.Int64;
+
+	var size:haxe.Int64;
+
+	var csize:haxe.Int64;
+
+	var method:Int;
+
+	var flag:Int;
+
+	var extra:java.NativeArray<java.types.Int8>;
+
+	var comment:java.lang.String;
+
+	static var STORED(default,never):Int;
+
+	static var DEFLATED(default,never):Int;
+}

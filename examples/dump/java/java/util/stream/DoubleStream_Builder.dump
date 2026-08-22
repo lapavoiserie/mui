@@ -1,0 +1,10 @@
+@:realPath("java.util.stream.DoubleStream_Builder") @:used @:native("java.util.stream.DoubleStream$Builder") @:libType
+extern interface java.util.stream.DoubleStream$Builder implements java.util.function.DoubleConsumer {
+
+	function accept(param1:Float):Void;
+
+	@:java.default
+	function add(param1:Float):java.util.stream.DoubleStream$Builder;
+
+	function build():java.util.stream.DoubleStream;
+}

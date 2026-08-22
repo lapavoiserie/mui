@@ -1,0 +1,5 @@
+@:realPath("java.security.PublicKey") @:used @:native("java.security.PublicKey") @:libType
+extern interface java.security.PublicKey implements java.security.Key {
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

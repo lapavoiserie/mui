@@ -1,0 +1,2 @@
+@:used @:native("") @:transitive @:forwardStatics @:forward
+abstract java.lang.Boolean from java.lang.Boolean to java.lang.Boolean {}

@@ -1,0 +1,23 @@
+@:realPath("java.util.WeakHashMap_Entry") @:used @:native("java.util.WeakHashMap$Entry") @:libType
+extern class java.util.WeakHashMap$Entry<K:Dynamic, V:Dynamic> extends java.lang.ref.WeakReference<Dynamic> implements java.util.Map$Entry<java.util.WeakHashMap_Entry.K, java.util.WeakHashMap_Entry.V> {
+
+	function new(param1:Dynamic, param2:java.util.WeakHashMap_Entry.V, param3:java.lang.ref.ReferenceQueue<Dynamic>, param4:Int, param5:java.util.WeakHashMap$Entry<java.util.WeakHashMap_Entry.K, java.util.WeakHashMap_Entry.V>):Void;
+
+	function getKey():java.util.WeakHashMap_Entry.K;
+
+	function getValue():java.util.WeakHashMap_Entry.V;
+
+	function setValue(param1:java.util.WeakHashMap_Entry.V):java.util.WeakHashMap_Entry.V;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function toString():java.lang.String;
+
+	var value:java.util.WeakHashMap_Entry.V;
+
+	var hash(default,ctor):Int;
+
+	var next:java.util.WeakHashMap$Entry<java.util.WeakHashMap_Entry.K, java.util.WeakHashMap_Entry.V>;
+}

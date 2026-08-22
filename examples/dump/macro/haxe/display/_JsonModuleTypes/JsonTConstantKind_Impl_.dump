@@ -1,0 +1,24 @@
+@:enum
+private class haxe.display._JsonModuleTypes.JsonTConstantKind_Impl_ {
+
+	@:value(cast "TInt") @:impl @:enum
+	public static inline var TInt:haxe.display.JsonTConstantKind<String> = cast "TInt";
+
+	@:value(cast "TFloat") @:impl @:enum
+	public static inline var TFloat:haxe.display.JsonTConstantKind<String> = cast "TFloat";
+
+	@:value(cast "TString") @:impl @:enum
+	public static inline var TString:haxe.display.JsonTConstantKind<String> = cast "TString";
+
+	@:value(cast "TBool") @:impl @:enum
+	public static inline var TBool:haxe.display.JsonTConstantKind<Bool> = cast "TBool";
+
+	@:value(cast "TNull") @:impl @:enum
+	public static inline var TNull:haxe.display.JsonTConstantKind<haxe.display.JsonTConstantKind.T> = cast "TNull";
+
+	@:value(cast "TThis") @:impl @:enum
+	public static inline var TThis:haxe.display.JsonTConstantKind<haxe.display.JsonTConstantKind.T> = cast "TThis";
+
+	@:value(cast "TSuper") @:impl @:enum
+	public static inline var TSuper:haxe.display.JsonTConstantKind<haxe.display.JsonTConstantKind.T> = cast "TSuper";
+}

@@ -1,0 +1,5 @@
+@:realPath("java.io.ObjectInputValidation") @:used @:native("java.io.ObjectInputValidation") @:libType
+extern interface java.io.ObjectInputValidation {
+
+	function validateObject():Void;
+}

@@ -1,0 +1,20 @@
+@:used
+class aui.ui.Slider extends aui.View {
+
+	@:value({ max : 1.0, min : 0.0 })
+	public function new(valueState:Null<aui.state.State<Float>> = null, min:Null<Float> = 0.0, max:Null<Float> = 1.0) {
+		super();
+		var max = if ((max == null)) 1.0 else cast max;
+		var min = if ((min == null)) 0.0 else cast min;
+		this.viewType = "Slider";
+		this.valueState = valueState;
+		this.min = min;
+		this.max = max;
+	}
+
+	public var valueState:Null<aui.state.State<Float>>;
+
+	public var min:Float;
+
+	public var max:Float;
+}

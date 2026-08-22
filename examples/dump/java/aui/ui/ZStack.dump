@@ -1,0 +1,12 @@
+@:used
+class aui.ui.ZStack extends aui.View {
+
+	public function new(alignment:Null<aui.modifiers.Alignment> = null, content:Array<aui.View>) {
+		super();
+		this.viewType = "ZStack";
+		this.alignment = if ((alignment != null)) alignment else aui.modifiers.Alignment.Center;
+		this.children = content;
+	}
+
+	public var alignment:aui.modifiers.Alignment;
+}

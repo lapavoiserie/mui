@@ -1,0 +1,65 @@
+@:realPath("java.nio.IntBuffer") @:used @:native("java.nio.IntBuffer") @:libType
+extern class java.nio.IntBuffer extends java.nio.Buffer implements java.lang.Comparable<java.nio.IntBuffer> {
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int, param5:java.NativeArray<Int>, param6:Int):Void;
+
+	function new(param1:Int, param2:Int, param3:Int, param4:Int):Void;
+
+	function slice():java.nio.IntBuffer;
+
+	function duplicate():java.nio.IntBuffer;
+
+	function asReadOnlyBuffer():java.nio.IntBuffer;
+
+	function get():Int;
+
+	function get(param1:java.NativeArray<Int>):java.nio.IntBuffer;
+
+	function get(param1:java.NativeArray<Int>, param2:Int, param3:Int):java.nio.IntBuffer;
+
+	function get(param1:Int):Int;
+
+	function put(param1:Int):java.nio.IntBuffer;
+
+	function put(param1:java.NativeArray<Int>):java.nio.IntBuffer;
+
+	function put(param1:java.NativeArray<Int>, param2:Int, param3:Int):java.nio.IntBuffer;
+
+	function put(param1:java.nio.IntBuffer):java.nio.IntBuffer;
+
+	function put(param1:Int, param2:Int):java.nio.IntBuffer;
+
+	function hasArray():Bool;
+
+	function array():java.NativeArray<Int>;
+
+	function arrayOffset():Int;
+
+	function compact():java.nio.IntBuffer;
+
+	function isDirect():Bool;
+
+	function toString():java.lang.String;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function compareTo(param1:java.nio.IntBuffer):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function order():java.nio.ByteOrder;
+
+	var hb(default,ctor):java.NativeArray<Int>;
+
+	var offset(default,ctor):Int;
+
+	var isReadOnly:Bool;
+
+	static function allocate(param1:Int):java.nio.IntBuffer;
+
+	static function wrap(param1:java.NativeArray<Int>, param2:Int, param3:Int):java.nio.IntBuffer;
+
+	static function wrap(param1:java.NativeArray<Int>):java.nio.IntBuffer;
+}

@@ -1,0 +1,13 @@
+@:realPath("java.util.regex.Pattern_CIBackRef") @:used @:native("java.util.regex.Pattern$CIBackRef") @:libType
+extern class java.util.regex.Pattern$CIBackRef extends java.util.regex.Pattern$Node {
+
+	function new(param1:Int, param2:Bool):Void;
+
+	function match(param1:java.util.regex.Matcher, param2:Int, param3:java.lang.CharSequence):Bool;
+
+	function study(param1:java.util.regex.Pattern$TreeInfo):Bool;
+
+	var groupIndex:Int;
+
+	var doUnicodeCase:Bool;
+}

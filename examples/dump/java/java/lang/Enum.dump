@@ -1,0 +1,27 @@
+@:realPath("java.lang.Enum") @:directlyUsed @:used @:native("java.lang.Enum") @:libType
+extern class java.lang.Enum<E:EnumValue> implements java.io.Serializable implements java.lang.Comparable<java.lang.Enum.E> {
+
+	function new(param1:java.lang.String, param2:Int):Void;
+
+	function name():java.lang.String;
+
+	function ordinal():Int;
+
+	function toString():java.lang.String;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function clone():Dynamic;
+
+	function compareTo(param1:java.lang.Enum.E):Int;
+
+	function compareTo(param1:Dynamic):Int;
+
+	function getDeclaringClass():java.lang.Class<java.lang.Enum.E>;
+
+	function finalize():Void;
+
+	static function valueOf<T:EnumValue>(param1:java.lang.Class<valueOf.T>, param2:java.lang.String):valueOf.T;
+}

@@ -1,0 +1,5 @@
+@:realPath("java.lang.ref.ReferenceQueue_Lock") @:native("java.lang.ref.ReferenceQueue$Lock") @:libType
+extern class java.lang.ref.ReferenceQueue$Lock {
+
+	function new(param1:java.lang.ref.ReferenceQueue$1):Void;
+}

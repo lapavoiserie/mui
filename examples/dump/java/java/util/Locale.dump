@@ -1,0 +1,155 @@
+@:realPath("java.util.Locale") @:used @:native("java.util.Locale") @:libType
+extern class java.util.Locale implements java.lang.Cloneable implements java.io.Serializable {
+
+	function new(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String):Void;
+
+	function new(param1:sun.util.locale.BaseLocale, param2:sun.util.locale.LocaleExtensions, param3:java.util.Locale$1):Void;
+
+	function new(param1:java.lang.String):Void;
+
+	function new(param1:java.lang.String, param2:java.lang.String):Void;
+
+	function getLanguage():java.lang.String;
+
+	function getScript():java.lang.String;
+
+	function getCountry():java.lang.String;
+
+	function getVariant():java.lang.String;
+
+	function hasExtensions():Bool;
+
+	function stripExtensions():java.util.Locale;
+
+	function getExtension(param1:java.types.Char16):java.lang.String;
+
+	function getExtensionKeys():java.util.Set<java.lang.Character>;
+
+	function getUnicodeLocaleAttributes():java.util.Set<java.lang.String>;
+
+	function getUnicodeLocaleType(param1:java.lang.String):java.lang.String;
+
+	function getUnicodeLocaleKeys():java.util.Set<java.lang.String>;
+
+	function getBaseLocale():sun.util.locale.BaseLocale;
+
+	function getLocaleExtensions():sun.util.locale.LocaleExtensions;
+
+	function toString():java.lang.String;
+
+	function toLanguageTag():java.lang.String;
+
+	function getISO3Language():java.lang.String;
+
+	function getISO3Country():java.lang.String;
+
+	function getDisplayLanguage():java.lang.String;
+
+	function getDisplayLanguage(param1:java.util.Locale):java.lang.String;
+
+	function getDisplayScript():java.lang.String;
+
+	function getDisplayScript(param1:java.util.Locale):java.lang.String;
+
+	function getDisplayCountry():java.lang.String;
+
+	function getDisplayCountry(param1:java.util.Locale):java.lang.String;
+
+	function getDisplayVariant():java.lang.String;
+
+	function getDisplayVariant(param1:java.util.Locale):java.lang.String;
+
+	function getDisplayName():java.lang.String;
+
+	function getDisplayName(param1:java.util.Locale):java.lang.String;
+
+	function clone():Dynamic;
+
+	function hashCode():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	static function getInstance(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String):java.util.Locale;
+
+	static function getInstance(param1:sun.util.locale.BaseLocale, param2:sun.util.locale.LocaleExtensions):java.util.Locale;
+
+	static function getInstance(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String, param4:java.lang.String, param5:sun.util.locale.LocaleExtensions):java.util.Locale;
+
+	static function getDefault():java.util.Locale;
+
+	static function getDefault(param1:java.util.Locale$Category):java.util.Locale;
+
+	static function setDefault(param1:java.util.Locale):Void;
+
+	static function setDefault(param1:java.util.Locale$Category, param2:java.util.Locale):Void;
+
+	static function getAvailableLocales():java.NativeArray<java.util.Locale>;
+
+	static function getISOCountries():java.NativeArray<java.lang.String>;
+
+	static function getISOLanguages():java.NativeArray<java.lang.String>;
+
+	static function forLanguageTag(param1:java.lang.String):java.util.Locale;
+
+	static function filter(param1:java.util.List<java.util.Locale$LanguageRange>, param2:java.util.Collection<java.util.Locale>, param3:java.util.Locale$FilteringMode):java.util.List<java.util.Locale>;
+
+	static function filter(param1:java.util.List<java.util.Locale$LanguageRange>, param2:java.util.Collection<java.util.Locale>):java.util.List<java.util.Locale>;
+
+	static function filterTags(param1:java.util.List<java.util.Locale$LanguageRange>, param2:java.util.Collection<java.lang.String>, param3:java.util.Locale$FilteringMode):java.util.List<java.lang.String>;
+
+	static function filterTags(param1:java.util.List<java.util.Locale$LanguageRange>, param2:java.util.Collection<java.lang.String>):java.util.List<java.lang.String>;
+
+	static function lookup(param1:java.util.List<java.util.Locale$LanguageRange>, param2:java.util.Collection<java.util.Locale>):java.util.Locale;
+
+	static function lookupTag(param1:java.util.List<java.util.Locale$LanguageRange>, param2:java.util.Collection<java.lang.String>):java.lang.String;
+
+	static var ENGLISH(default,never):java.util.Locale;
+
+	static var FRENCH(default,never):java.util.Locale;
+
+	static var GERMAN(default,never):java.util.Locale;
+
+	static var ITALIAN(default,never):java.util.Locale;
+
+	static var JAPANESE(default,never):java.util.Locale;
+
+	static var KOREAN(default,never):java.util.Locale;
+
+	static var CHINESE(default,never):java.util.Locale;
+
+	static var SIMPLIFIED_CHINESE(default,never):java.util.Locale;
+
+	static var TRADITIONAL_CHINESE(default,never):java.util.Locale;
+
+	static var FRANCE(default,never):java.util.Locale;
+
+	static var GERMANY(default,never):java.util.Locale;
+
+	static var ITALY(default,never):java.util.Locale;
+
+	static var JAPAN(default,never):java.util.Locale;
+
+	static var KOREA(default,never):java.util.Locale;
+
+	static var CHINA(default,never):java.util.Locale;
+
+	static var PRC(default,never):java.util.Locale;
+
+	static var TAIWAN(default,never):java.util.Locale;
+
+	static var UK(default,never):java.util.Locale;
+
+	static var US(default,never):java.util.Locale;
+
+	static var CANADA(default,never):java.util.Locale;
+
+	static var CANADA_FRENCH(default,never):java.util.Locale;
+
+	static var ROOT(default,never):java.util.Locale;
+
+	static var PRIVATE_USE_EXTENSION(default,never):java.types.Char16;
+
+	static var UNICODE_LOCALE_EXTENSION(default,never):java.types.Char16;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

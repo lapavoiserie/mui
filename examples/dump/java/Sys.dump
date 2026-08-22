@@ -1,0 +1,7 @@
+@:keep @:directlyUsed @:used @:coreApi
+class Sys {
+
+	public static function time() {
+		return cast (java.lang.System.currentTimeMillis(),Float) / 1000;
+	}
+}

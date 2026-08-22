@@ -1,0 +1,3 @@
+@:realPath("java.lang.Short_ShortCache") @:realPath("java.lang.Short_ShortCache") @:javaNative @:native("java.lang.Short$ShortCache") @:javaCanonical("java.lang", "Short.ShortCache")
+extern class java.lang.Short$ShortCache {
+}

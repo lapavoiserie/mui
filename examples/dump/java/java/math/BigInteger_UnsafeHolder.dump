@@ -1,0 +1,7 @@
+@:realPath("java.math.BigInteger_UnsafeHolder") @:native("java.math.BigInteger$UnsafeHolder") @:libType
+extern class java.math.BigInteger$UnsafeHolder {
+
+	static function putSign(param1:java.math.BigInteger, param2:Int):Void;
+
+	static function putMag(param1:java.math.BigInteger, param2:java.NativeArray<Int>):Void;
+}

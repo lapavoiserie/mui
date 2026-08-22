@@ -1,0 +1,17 @@
+@:realPath("java.security.PermissionCollection") @:used @:native("java.security.PermissionCollection") @:libType
+extern class java.security.PermissionCollection implements java.io.Serializable {
+
+	function new():Void;
+
+	function add(param1:java.security.Permission):Void;
+
+	function implies(param1:java.security.Permission):Bool;
+
+	function elements():java.util.Enumeration<java.security.Permission>;
+
+	function setReadOnly():Void;
+
+	function isReadOnly():Bool;
+
+	function toString():java.lang.String;
+}

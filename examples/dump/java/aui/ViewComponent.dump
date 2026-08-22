@@ -1,0 +1,21 @@
+@:directlyUsed @:used @:autoBuild(aui.macros.StateMacro.build())
+class aui.ViewComponent extends aui.View {
+
+	public function new() {
+		super();
+		this.viewType = "ViewComponent";
+	}
+
+	@:value(null) @:noCompletion
+	var _expanded:Null<aui.View> = null;
+
+	public function body() {
+		return new aui.View();
+	}
+
+	@:noCompletion
+	public function expand() {
+		if ((this._expanded == null)) this._expanded = this.body();
+		return this._expanded;
+	}
+}

@@ -1,0 +1,9 @@
+@:realPath("java.sun.util.spi.XmlPropertiesProvider") @:used @:native("sun.util.spi.XmlPropertiesProvider") @:libType
+extern class sun.util.spi.XmlPropertiesProvider {
+
+	function new():Void;
+
+	function load(param1:java.util.Properties, param2:java.io.InputStream):Void;
+
+	function store(param1:java.util.Properties, param2:java.io.OutputStream, param3:java.lang.String, param4:java.lang.String):Void;
+}

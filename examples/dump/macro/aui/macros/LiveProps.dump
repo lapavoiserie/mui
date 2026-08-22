@@ -1,0 +1,526 @@
+class aui.macros.LiveProps {
+
+	static function isDeferrableValue(t:haxe.macro.Type) {
+		return @:ast(switch (Context.follow(t)) {
+	case TInst(ref, _):
+		ref.get().name == "String";	
+	case TAbstract(ref, _):
+		switch (ref.get().name) {
+			case "Int" | "Float" | "Bool":
+				true;			
+			case _:
+				false;			
+		};	
+	case _:
+		false;	
+}) {
+			var ` = haxe.macro.Context.follow(t, null);
+			switch (enumIndex `) {
+				case 2: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var ref = `;
+						{
+							ref.get().name == "String";
+						};
+					};
+				};
+				case 8: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var ref = `;
+						{
+							@:ast(switch (ref.get().name) {
+	case "Int" | "Float" | "Bool":
+		true;	
+	case _:
+		false;	
+}) {
+								var ` = ref.get().name;
+								switch (`) {
+									case "Bool", "Float", "Int": {
+										{
+											true;
+										};
+									};
+									default: {
+										false;
+									}
+								};
+							};
+						};
+					};
+				};
+				default: {
+					false;
+				}
+			};
+		};
+	}
+
+	static function isViewish(t:haxe.macro.Type) {
+		return @:ast(switch (Context.follow(t)) {
+	case TInst(ref, params):
+		var cls = ref.get();
+		if (cls.name == "Array" && params.length > 0) return isViewish(params[0]);
+		var c = cls;
+		while (c != null) {
+			if (c.name == "View" && c.pack.join(".") == "aui") return true;
+			c = c.superClass == null ? null : c.superClass.t.get();
+		};
+		false;	
+	case _:
+		false;	
+}) {
+			var ` = haxe.macro.Context.follow(t, null);
+			if (enumIndex ` == 2) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var ref = `;
+					var params = `;
+					{
+						var cls = ref.get();
+						if (cls.name == "Array" && params.length > 0) {
+							return aui.macros.LiveProps.isViewish(params[0]);
+						};
+						var c = cls;
+						while (c != null) {
+							if (c.name == "View" && c.pack.join(".") == "aui") {
+								return true;
+							};
+							c = if (c.superClass == null) {
+								null;
+							} else {
+								c.superClass.t.get();
+							};
+						};
+						false;
+					};
+				};
+			} else {
+				false;
+			};
+		};
+	}
+
+	@:has_untyped
+	static function neutralFor(t:haxe.macro.Type) {
+		return @:ast(switch (Context.follow(t)) {
+	case TInst(ref, _) if (ref.get().name == "String"):
+		({ expr : EConst(CString("", DoubleQuotes)), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2792, 2794) } : haxe.macro.Expr);	
+	case TAbstract(ref, _):
+		switch (ref.get().name) {
+			case "Int":
+				({ expr : EConst(CInt("0", null)), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2876, 2877) } : haxe.macro.Expr);			
+			case "Float":
+				({ expr : EConst(CFloat("0.0", null)), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2904, 2907) } : haxe.macro.Expr);			
+			case "Bool":
+				({ expr : EConst(CIdent("false")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2933, 2938) } : haxe.macro.Expr);			
+			case _:
+				({ expr : EConst(CIdent("null")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2959, 2963) } : haxe.macro.Expr);			
+		};	
+	case _:
+		({ expr : EConst(CIdent("null")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2988, 2992) } : haxe.macro.Expr);	
+}) {
+			var ` = haxe.macro.Context.follow(t, null);
+			switch (enumIndex `) {
+				case 2: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var ref = `;
+						if (ref.get().name == "String") {
+							cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CString("", haxe.macro.StringLiteralKind.DoubleQuotes)), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2792, 2794)};
+						} else {
+							cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("null")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2988, 2992)};
+						};
+					};
+				};
+				case 8: {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var ref = `;
+						{
+							@:ast(switch (ref.get().name) {
+	case "Int":
+		({ expr : EConst(CInt("0", null)), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2876, 2877) } : haxe.macro.Expr);	
+	case "Float":
+		({ expr : EConst(CFloat("0.0", null)), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2904, 2907) } : haxe.macro.Expr);	
+	case "Bool":
+		({ expr : EConst(CIdent("false")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2933, 2938) } : haxe.macro.Expr);	
+	case _:
+		({ expr : EConst(CIdent("null")), pos : untyped $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2959, 2963) } : haxe.macro.Expr);	
+}) {
+								var ` = ref.get().name;
+								switch (`) {
+									case "Bool": {
+										{
+											cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("false")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2933, 2938)};
+										};
+									};
+									case "Float": {
+										{
+											cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CFloat("0.0", null)), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2904, 2907)};
+										};
+									};
+									case "Int": {
+										{
+											cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CInt("0", null)), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2876, 2877)};
+										};
+									};
+									default: {
+										cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("null")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2959, 2963)};
+									}
+								};
+							};
+						};
+					};
+				};
+				default: {
+					cast {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("null")), pos : $__mk_pos__("/Users/benjamindasnois/new-projects/aui/src/aui/macros/LiveProps.hx", 2988, 2992)};
+				}
+			};
+		};
+	}
+
+	static function isConstant(e:haxe.macro.Expr) {
+		return @:ast(switch (e.expr) {
+	case EConst(CString(value, kind)):
+		kind != SingleQuotes || value.indexOf("$") < 0;	
+	case EConst(CInt(_) | CFloat(_)):
+		true;	
+	case EConst(CIdent("true" | "false" | "null")):
+		true;	
+	case _:
+		false;	
+}) {
+			var ` = e.expr;
+			if (enumIndex ` == 0) {
+				var ` = `[0];
+				switch (enumIndex `) {
+					case 0: {
+						var ` = `[0];
+						var ` = `[1];
+						{
+							true;
+						};
+					};
+					case 1: {
+						var ` = `[0];
+						var ` = `[1];
+						{
+							true;
+						};
+					};
+					case 2: {
+						var ` = `[0];
+						var ` = `[1];
+						{
+							var value = `;
+							var kind = `;
+							{
+								kind != haxe.macro.StringLiteralKind.SingleQuotes || value.indexOf("$", null) < 0;
+							};
+						};
+					};
+					case 3: {
+						var ` = `[0];
+						switch (`) {
+							case "false", "null", "true": {
+								{
+									true;
+								};
+							};
+							default: {
+								false;
+							}
+						};
+					};
+					default: {
+						false;
+					}
+				};
+			} else {
+				false;
+			};
+		};
+	}
+
+	static function ctorArgTypes(tp:haxe.macro.TypePath, pos:haxe.macro.Position) {
+		try {
+			var t = haxe.macro.Context.resolveType(haxe.macro.ComplexType.TPath(tp), pos);
+			@:ast(switch (Context.follow(t)) {
+	case TInst(ref, _):
+		var cls = ref.get();
+		if (!isAuiView(cls)) return null;
+		var ctor = cls.constructor;
+		if (ctor == null) return null;
+		switch (Context.follow(ctor.get().type)) {
+			case TFun(args, _):
+				return [for (a  in  args) a.t];			
+			case _:
+				return null;			
+		};	
+	case _:
+		return null;	
+}) {
+				var ` = haxe.macro.Context.follow(t, null);
+				if (enumIndex ` == 2) {
+					var ` = `[0];
+					var ` = `[1];
+					{
+						var ref = `;
+						{
+							var cls = ref.get();
+							if (! aui.macros.LiveProps.isAuiView(cls)) {
+								return null;
+							};
+							var ctor = cls.constructor;
+							if (ctor == null) {
+								return null;
+							};
+							@:ast(switch (Context.follow(ctor.get().type)) {
+	case TFun(args, _):
+		return [for (a  in  args) a.t];	
+	case _:
+		return null;	
+}) {
+								var ` = haxe.macro.Context.follow(ctor.get().type, null);
+								if (enumIndex ` == 4) {
+									var ` = `[0];
+									var ` = `[1];
+									{
+										var args = `;
+										{
+											return {
+												var ` = [];
+												{
+													var ` = 0;
+													while (` < args.length) {
+														var a = args[`];
+														++ `;
+														`.push(a.t);
+													};
+												};
+												`;
+											};
+										};
+									};
+								} else {
+									return null;
+								};
+							};
+						};
+					};
+				} else {
+					return null;
+				};
+			};
+		} catch (`:Dynamic) {
+			{};
+			{};
+			if (true) {
+				{};
+				{
+					return null;
+				};
+			} else throw `;
+		};
+	}
+
+	static function isAuiView(cls:haxe.macro.ClassType) {
+		var current = cls;
+		while (current != null) {
+			if (current.pack.join(".") == "aui.ui") {
+				return true;
+			};
+			current = if (current.superClass == null) {
+				null;
+			} else {
+				current.superClass.t.get();
+			};
+		};
+		return false;
+	}
+
+	static function wrap(e:haxe.macro.Expr) {
+		var mapped = haxe.macro.ExprTools.map(e, aui.macros.LiveProps.wrap);
+		return @:ast(switch (mapped.expr) {
+	case ENew(_, args) if (args.length > 0):
+		({ expr : ECall({ expr : EField({ expr : EField({ expr : EField({ expr : EConst(CIdent("aui")), pos : e.pos }, "macros", Normal), pos : e.pos }, "LiveProps", Normal), pos : e.pos }, "live", Normal), pos : e.pos }, [mapped]), pos : e.pos } : haxe.macro.Expr);	
+	case _:
+		mapped;	
+}) {
+			var ` = mapped.expr;
+			if (enumIndex ` == 8) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var args = `;
+					if (args.length > 0) {
+						cast {expr : haxe.macro.ExprDef.ECall({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("aui")), pos : e.pos}, "macros", haxe.macro.EFieldKind.Normal), pos : e.pos}, "LiveProps", haxe.macro.EFieldKind.Normal), pos : e.pos}, "live", haxe.macro.EFieldKind.Normal), pos : e.pos}, [mapped]), pos : e.pos};
+					} else {
+						mapped;
+					};
+				};
+			} else {
+				mapped;
+			};
+		};
+	}
+
+	static function deferOne(e:haxe.macro.Expr) {
+		return @:ast(switch (e.expr) {
+	case ENew(tp, args) if (args.length > 0):
+		var types = ctorArgTypes(tp, e.pos);
+		if (types == null || types.length < args.length) {
+			e;
+		} else {
+			var container = false;
+			for (t  in  types) if (isViewish(t)) container = true;
+			if (container) {
+				e;
+			} else {
+				var neutral = [];
+				var deferred = false;
+				for (i  in  0 ... args.length) {
+					if (isDeferrableValue(types[i]) && !isConstant(args[i])) {
+						neutral.push(neutralFor(types[i]));
+						deferred = true;
+					} else {
+						neutral.push(args[i]);
+					};
+				};
+				if (!deferred) {
+					e;
+				} else {
+					var placeholder = { expr : ENew(tp, neutral), pos : e.pos };
+					({ expr : EBlock([{ expr : EVars([{ name : "__live", namePos : e.pos, type : null, expr : placeholder, isFinal : false, isStatic : false, meta : [] }]), pos : e.pos }, { expr : EBinop(OpAssign, { expr : EField({ expr : EConst(CIdent("__live")), pos : e.pos }, "liveBuild", Normal), pos : e.pos }, { expr : EFunction(FAnonymous, { args : [], ret : null, expr : { expr : EReturn(e), pos : e.pos }, params : [] }), pos : e.pos }), pos : e.pos }, { expr : EConst(CIdent("__live")), pos : e.pos }]), pos : e.pos } : haxe.macro.Expr);
+				};
+			};
+		};	
+	case _:
+		e;	
+}) {
+			var ` = e.expr;
+			if (enumIndex ` == 8) {
+				var ` = `[0];
+				var ` = `[1];
+				{
+					var tp = `;
+					var args = `;
+					if (args.length > 0) {
+						var types = aui.macros.LiveProps.ctorArgTypes(tp, e.pos);
+						if (types == null || types.length < args.length) {
+							e;
+						} else {
+							var container = false;
+							{
+								var ` = 0;
+								while (` < types.length) {
+									var t = types[`];
+									++ `;
+									if (aui.macros.LiveProps.isViewish(t)) {
+										container = true;
+									};
+								};
+							};
+							if (container) {
+								e;
+							} else {
+								var neutral = [];
+								var deferred = false;
+								{
+									var ` = 0;
+									var ` = args.length;
+									while (` < `) {
+										var i = ` ++;
+										if (aui.macros.LiveProps.isDeferrableValue(types[i]) && ! aui.macros.LiveProps.isConstant(args[i])) {
+											neutral.push(aui.macros.LiveProps.neutralFor(types[i]));
+											deferred = true;
+										} else {
+											neutral.push(args[i]);
+										};
+									};
+								};
+								if (! deferred) {
+									e;
+								} else {
+									var placeholder = {expr : haxe.macro.ExprDef.ENew(tp, neutral), pos : e.pos};
+									cast {expr : haxe.macro.ExprDef.EBlock([{expr : haxe.macro.ExprDef.EVars([{name : "__live", namePos : e.pos, type : null, expr : placeholder, isFinal : cast false, isStatic : cast false, meta : []}]), pos : e.pos}, {expr : haxe.macro.ExprDef.EBinop(haxe.macro.Binop.OpAssign, {expr : haxe.macro.ExprDef.EField({expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("__live")), pos : e.pos}, "liveBuild", haxe.macro.EFieldKind.Normal), pos : e.pos}, {expr : haxe.macro.ExprDef.EFunction(haxe.macro.FunctionKind.FAnonymous, {args : [], ret : null, expr : {expr : haxe.macro.ExprDef.EReturn(e), pos : e.pos}, params : []}), pos : e.pos}), pos : e.pos}, {expr : haxe.macro.ExprDef.EConst(haxe.macro.Constant.CIdent("__live")), pos : e.pos}]), pos : e.pos};
+								};
+							};
+						};
+					} else {
+						e;
+					};
+				};
+			} else {
+				e;
+			};
+		};
+	}
+
+	public static function apply(fields:Array<haxe.macro.Field>) {
+		if (aui.macros.RenderPath.isStatic()) {
+			return fields;
+		};
+		{
+			var ` = 0;
+			while (` < fields.length) {
+				var field = fields[`];
+				++ `;
+				@:ast(switch (field.kind) {
+	case FFun(fn) if (fn.expr != null):
+		if (field.name != "body" && !returnsView(fn.ret)) continue;
+		fn.expr = wrap(fn.expr);	
+	case _:
+}) {
+					var ` = field.kind;
+					if (enumIndex ` == 1) {
+						var ` = `[0];
+						{
+							var fn = `;
+							if (fn.expr != null) {
+								if (field.name != "body" && ! aui.macros.LiveProps.returnsView(fn.ret)) {
+									continue;
+								};
+								fn.expr = aui.macros.LiveProps.wrap(fn.expr);
+							} else {};
+						};
+					} else {};
+				};
+			};
+		};
+		return fields;
+	}
+
+	static function returnsView(ret:Null<haxe.macro.ComplexType>) {
+		return @:ast(switch (ret) {
+	case TPath(p):
+		p.name == "View";	
+	case _:
+		false;	
+}) if (ret == null) {
+			false;
+		} else if (enumIndex ret == 0) {
+			var ` = ret[0];
+			{
+				var p = `;
+				{
+					p.name == "View";
+				};
+			};
+		} else {
+			false;
+		};
+	}
+
+	public static macro function live(e:haxe.macro.Expr) {
+		return aui.macros.LiveProps.deferOne(e);
+	}
+}

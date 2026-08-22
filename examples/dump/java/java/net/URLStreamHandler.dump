@@ -1,0 +1,30 @@
+@:realPath("java.net.URLStreamHandler") @:used @:native("java.net.URLStreamHandler") @:libType
+extern class java.net.URLStreamHandler {
+
+	function new():Void;
+
+	function openConnection(param1:java.net.URL):java.net.URLConnection;
+
+	function openConnection(param1:java.net.URL, param2:java.net.Proxy):java.net.URLConnection;
+
+	function parseURL(param1:java.net.URL, param2:java.lang.String, param3:Int, param4:Int):Void;
+
+	function getDefaultPort():Int;
+
+	function equals(param1:java.net.URL, param2:java.net.URL):Bool;
+
+	function hashCode(param1:java.net.URL):Int;
+
+	function sameFile(param1:java.net.URL, param2:java.net.URL):Bool;
+
+	function getHostAddress(param1:java.net.URL):java.net.InetAddress;
+
+	function hostsEqual(param1:java.net.URL, param2:java.net.URL):Bool;
+
+	function toExternalForm(param1:java.net.URL):java.lang.String;
+
+	function setURL(param1:java.net.URL, param2:java.lang.String, param3:java.lang.String, param4:Int, param5:java.lang.String, param6:java.lang.String, param7:java.lang.String, param8:java.lang.String, param9:java.lang.String):Void;
+
+	@:deprecated
+	function setURL(param1:java.net.URL, param2:java.lang.String, param3:java.lang.String, param4:Int, param5:java.lang.String, param6:java.lang.String):Void;
+}

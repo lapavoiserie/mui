@@ -1,0 +1,45 @@
+@:realPath("java.lang.reflect.Parameter") @:used @:native("java.lang.reflect.Parameter") @:libType
+extern class java.lang.reflect.Parameter implements java.lang.reflect.AnnotatedElement {
+
+	function new(param1:java.lang.String, param2:Int, param3:java.lang.reflect.Executable, param4:Int):Void;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function isNamePresent():Bool;
+
+	function toString():java.lang.String;
+
+	function getDeclaringExecutable():java.lang.reflect.Executable;
+
+	function getModifiers():Int;
+
+	function getName():java.lang.String;
+
+	function getRealName():java.lang.String;
+
+	function getParameterizedType():java.lang.reflect.Type;
+
+	function getType():java.lang.Class<Dynamic>;
+
+	function getAnnotatedType():java.lang.reflect.AnnotatedType;
+
+	function isImplicit():Bool;
+
+	function isSynthetic():Bool;
+
+	function isVarArgs():Bool;
+
+	function getAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotation.T>):getAnnotation.T;
+
+	function getAnnotationsByType<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getAnnotationsByType.T>):java.NativeArray<getAnnotationsByType.T>;
+
+	function getDeclaredAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+
+	function getDeclaredAnnotation<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotation.T>):getDeclaredAnnotation.T;
+
+	function getDeclaredAnnotationsByType<T:java.lang.annotation.Annotation>(param1:java.lang.Class<getDeclaredAnnotationsByType.T>):java.NativeArray<getDeclaredAnnotationsByType.T>;
+
+	function getAnnotations():java.NativeArray<java.lang.annotation.Annotation>;
+}

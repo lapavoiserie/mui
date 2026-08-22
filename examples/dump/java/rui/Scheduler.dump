@@ -1,0 +1,31 @@
+@:directlyUsed @:used
+class rui.Scheduler {
+
+	@:value([])
+	static var tasks:Array<() -> Void> = [];
+
+	@:value(false)
+	static var pending:Bool = false;
+
+	public static function schedule(task:() -> Void) {
+		rui.Scheduler.tasks.push(task);
+		if ((! rui.Scheduler.pending)) {
+			rui.Scheduler.pending = true;
+			rui.Scheduler.flush(0);
+		};
+	}
+
+	static function flush(_:Int) {
+		rui.Scheduler.pending = false;
+		var currentTasks = rui.Scheduler.tasks.copy();
+		rui.Scheduler.tasks = [];
+		{
+			var _g = 0;
+			while ((_g < currentTasks.length)) {
+				var task = currentTasks[_g];
+				++ _g;
+				task();
+			};
+		};
+	}
+}

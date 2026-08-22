@@ -1,0 +1,7 @@
+@:realPath("java.sun.misc.JavaSecurityProtectionDomainAccess_ProtectionDomainCache") @:used @:native("sun.misc.JavaSecurityProtectionDomainAccess$ProtectionDomainCache") @:libType
+extern interface sun.misc.JavaSecurityProtectionDomainAccess$ProtectionDomainCache {
+
+	function put(param1:java.security.ProtectionDomain, param2:java.security.PermissionCollection):Void;
+
+	function get(param1:java.security.ProtectionDomain):java.security.PermissionCollection;
+}

@@ -1,0 +1,15 @@
+@:directlyUsed @:used
+class aui.ui.VStack extends aui.View {
+
+	public function new(alignment:Null<aui.ui.HorizontalAlignment> = null, spacing:Null<Float> = null, content:Array<aui.View>) {
+		super();
+		this.viewType = "VStack";
+		this.alignment = if ((alignment != null)) alignment else aui.ui.HorizontalAlignment.Center;
+		this.spacing = spacing;
+		this.children = content;
+	}
+
+	public var spacing:Null<Float>;
+
+	public var alignment:aui.ui.HorizontalAlignment;
+}

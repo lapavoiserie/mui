@@ -1,0 +1,7 @@
+@:realPath("java.io.ObjectOutputStream_Caches") @:native("java.io.ObjectOutputStream$Caches") @:libType
+extern class java.io.ObjectOutputStream$Caches {
+
+	static var subclassAudits(default,never):java.util.concurrent.ConcurrentMap<java.io.ObjectStreamClass$WeakClassKey, java.lang.Boolean>;
+
+	static var subclassAuditsQueue(default,never):java.lang.ref.ReferenceQueue<java.lang.Class<Dynamic>>;
+}

@@ -1,0 +1,15 @@
+@:realPath("java.util.Spliterators_AbstractSpliterator") @:used @:native("java.util.Spliterators$AbstractSpliterator") @:libType
+extern class java.util.Spliterators$AbstractSpliterator<T:Dynamic> implements java.util.Spliterator<java.util.Spliterators_AbstractSpliterator.T> {
+
+	function new(param1:haxe.Int64, param2:Int):Void;
+
+	function trySplit():java.util.Spliterator<java.util.Spliterators_AbstractSpliterator.T>;
+
+	function estimateSize():haxe.Int64;
+
+	function characteristics():Int;
+
+	static var BATCH_UNIT(default,never):Int;
+
+	static var MAX_BATCH(default,never):Int;
+}

@@ -1,0 +1,7 @@
+@:realPath("java.net.SocketAddress") @:native("java.net.SocketAddress") @:libType
+extern class java.net.SocketAddress implements java.io.Serializable {
+
+	function new():Void;
+
+	static var serialVersionUID(default,never):haxe.Int64;
+}

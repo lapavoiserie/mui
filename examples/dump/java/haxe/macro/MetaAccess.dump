@@ -1,0 +1,1 @@
+typedef haxe.macro.MetaAccess = { remove : (name : java.lang.String) -> Void, has : (name : java.lang.String) -> Bool, get : () -> haxe.macro.Metadata, extract : (name : java.lang.String) -> Array<haxe.macro.MetadataEntry>, add : (name : java.lang.String, params : Array<haxe.macro.Expr>, pos : haxe.macro.Position) -> Void }

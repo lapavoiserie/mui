@@ -1,0 +1,39 @@
+@:realPath("java.util.Spliterator") @:used @:native("java.util.Spliterator") @:libType
+extern interface java.util.Spliterator<T:Dynamic> {
+
+	function tryAdvance(param1:java.util.function.Consumer<Dynamic>):Bool;
+
+	@:java.default
+	function forEachRemaining(param1:java.util.function.Consumer<Dynamic>):Void;
+
+	function trySplit():java.util.Spliterator<java.util.Spliterator.T>;
+
+	function estimateSize():haxe.Int64;
+
+	@:java.default
+	function getExactSizeIfKnown():haxe.Int64;
+
+	function characteristics():Int;
+
+	@:java.default
+	function hasCharacteristics(param1:Int):Bool;
+
+	@:java.default
+	function getComparator():java.util.Comparator<Dynamic>;
+
+	static var ORDERED(default,never):Int;
+
+	static var DISTINCT(default,never):Int;
+
+	static var SORTED(default,never):Int;
+
+	static var SIZED(default,never):Int;
+
+	static var NONNULL(default,never):Int;
+
+	static var IMMUTABLE(default,never):Int;
+
+	static var CONCURRENT(default,never):Int;
+
+	static var SUBSIZED(default,never):Int;
+}

@@ -1,0 +1,21 @@
+@:realPath("java.util.IntSummaryStatistics") @:used @:native("java.util.IntSummaryStatistics") @:libType
+extern class java.util.IntSummaryStatistics implements java.util.function.IntConsumer {
+
+	function new():Void;
+
+	function accept(param1:Int):Void;
+
+	function combine(param1:java.util.IntSummaryStatistics):Void;
+
+	function getCount():haxe.Int64;
+
+	function getSum():haxe.Int64;
+
+	function getMin():Int;
+
+	function getMax():Int;
+
+	function getAverage():Float;
+
+	function toString():java.lang.String;
+}

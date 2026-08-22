@@ -1,0 +1,5 @@
+@:realPath("java.util.concurrent.Callable") @:used @:native("java.util.concurrent.Callable") @:libType
+extern interface java.util.concurrent.Callable<V:Dynamic> {
+
+	function call():java.util.concurrent.Callable.V;
+}

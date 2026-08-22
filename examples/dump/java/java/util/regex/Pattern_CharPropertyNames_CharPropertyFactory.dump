@@ -1,0 +1,7 @@
+@:realPath("java.util.regex.Pattern_CharPropertyNames_CharPropertyFactory") @:used @:native("java.util.regex.Pattern$CharPropertyNames$CharPropertyFactory") @:libType
+extern class java.util.regex.Pattern$CharPropertyNames$CharPropertyFactory {
+
+	function new(param1:java.util.regex.Pattern$1):Void;
+
+	function make():java.util.regex.Pattern$CharProperty;
+}

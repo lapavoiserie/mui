@@ -1,0 +1,6 @@
+@:used @:flatEnum
+enum aui.modifiers.TextAlignment {
+	Start;
+	Center;
+	End;
+}

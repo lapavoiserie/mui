@@ -1,0 +1,90 @@
+@:realPath("java.lang.ClassLoader") @:used @:native("java.lang.ClassLoader") @:libType
+extern class java.lang.ClassLoader {
+
+	function new(param1:java.lang.ClassLoader):Void;
+
+	function new():Void;
+
+	function addClass(param1:java.lang.Class<Dynamic>):Void;
+
+	function loadClass(param1:java.lang.String):java.lang.Class<Dynamic>;
+
+	function loadClass(param1:java.lang.String, param2:Bool):java.lang.Class<Dynamic>;
+
+	function getClassLoadingLock(param1:java.lang.String):Dynamic;
+
+	function findClass(param1:java.lang.String):java.lang.Class<Dynamic>;
+
+	@:deprecated
+	function defineClass(param1:java.NativeArray<java.types.Int8>, param2:Int, param3:Int):java.lang.Class<Dynamic>;
+
+	function defineClass(param1:java.lang.String, param2:java.nio.ByteBuffer, param3:java.security.ProtectionDomain):java.lang.Class<Dynamic>;
+
+	function defineClass(param1:java.lang.String, param2:java.NativeArray<java.types.Int8>, param3:Int, param4:Int, param5:java.security.ProtectionDomain):java.lang.Class<Dynamic>;
+
+	function defineClass(param1:java.lang.String, param2:java.NativeArray<java.types.Int8>, param3:Int, param4:Int):java.lang.Class<Dynamic>;
+
+	function resolveClass(param1:java.lang.Class<Dynamic>):Void;
+
+	function findSystemClass(param1:java.lang.String):java.lang.Class<Dynamic>;
+
+	function findLoadedClass(param1:java.lang.String):java.lang.Class<Dynamic>;
+
+	function setSigners(param1:java.lang.Class<Dynamic>, param2:java.NativeArray<Dynamic>):Void;
+
+	function getResource(param1:java.lang.String):java.net.URL;
+
+	function getResources(param1:java.lang.String):java.util.Enumeration<java.net.URL>;
+
+	function findResource(param1:java.lang.String):java.net.URL;
+
+	function findResources(param1:java.lang.String):java.util.Enumeration<java.net.URL>;
+
+	function getResourceAsStream(param1:java.lang.String):java.io.InputStream;
+
+	function getParent():java.lang.ClassLoader;
+
+	function isAncestor(param1:java.lang.ClassLoader):Bool;
+
+	function definePackage(param1:java.lang.String, param2:java.lang.String, param3:java.lang.String, param4:java.lang.String, param5:java.lang.String, param6:java.lang.String, param7:java.lang.String, param8:java.net.URL):java.lang.Package;
+
+	function getPackage(param1:java.lang.String):java.lang.Package;
+
+	function getPackages():java.NativeArray<java.lang.Package>;
+
+	function findLibrary(param1:java.lang.String):java.lang.String;
+
+	function setDefaultAssertionStatus(param1:Bool):Void;
+
+	function setPackageAssertionStatus(param1:java.lang.String, param2:Bool):Void;
+
+	function setClassAssertionStatus(param1:java.lang.String, param2:Bool):Void;
+
+	function clearAssertionStatus():Void;
+
+	function desiredAssertionStatus(param1:java.lang.String):Bool;
+
+	var assertionLock(default,ctor):Dynamic;
+
+	var classAssertionStatus:java.util.Map<java.lang.String, java.lang.Boolean>;
+
+	static function registerAsParallelCapable():Bool;
+
+	static function getSystemResource(param1:java.lang.String):java.net.URL;
+
+	static function getSystemResources(param1:java.lang.String):java.util.Enumeration<java.net.URL>;
+
+	static function getBootstrapClassPath():sun.misc.URLClassPath;
+
+	static function getSystemResourceAsStream(param1:java.lang.String):java.io.InputStream;
+
+	static function getSystemClassLoader():java.lang.ClassLoader;
+
+	static function getClassLoader(param1:java.lang.Class<Dynamic>):java.lang.ClassLoader;
+
+	static function checkClassLoaderPermission(param1:java.lang.ClassLoader, param2:java.lang.Class<Dynamic>):Void;
+
+	static function loadLibrary(param1:java.lang.Class<Dynamic>, param2:java.lang.String, param3:Bool):Void;
+
+	static function findNative(param1:java.lang.ClassLoader, param2:java.lang.String):haxe.Int64;
+}

@@ -1,0 +1,7 @@
+@:realPath("java.lang.ref.ReferenceQueue_Null") @:used @:native("java.lang.ref.ReferenceQueue$Null") @:libType
+extern class java.lang.ref.ReferenceQueue$Null<S:Dynamic> extends java.lang.ref.ReferenceQueue<java.lang.ref.ReferenceQueue_Null.S> {
+
+	function new(param1:java.lang.ref.ReferenceQueue$1):Void;
+
+	function enqueue(param1:java.lang.ref.Reference<java.lang.ref.ReferenceQueue_Null.S>):Bool;
+}

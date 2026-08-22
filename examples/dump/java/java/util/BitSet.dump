@@ -1,0 +1,77 @@
+@:realPath("java.util.BitSet") @:used @:native("java.util.BitSet") @:libType
+extern class java.util.BitSet implements java.lang.Cloneable implements java.io.Serializable {
+
+	function new():Void;
+
+	function new(param1:Int):Void;
+
+	function toByteArray():java.NativeArray<java.types.Int8>;
+
+	function toLongArray():java.NativeArray<haxe.Int64>;
+
+	function flip(param1:Int):Void;
+
+	function flip(param1:Int, param2:Int):Void;
+
+	function set(param1:Int):Void;
+
+	function set(param1:Int, param2:Int, param3:Bool):Void;
+
+	function set(param1:Int, param2:Int):Void;
+
+	function set(param1:Int, param2:Bool):Void;
+
+	function clear(param1:Int):Void;
+
+	function clear():Void;
+
+	function clear(param1:Int, param2:Int):Void;
+
+	function get(param1:Int):Bool;
+
+	function get(param1:Int, param2:Int):java.util.BitSet;
+
+	function nextSetBit(param1:Int):Int;
+
+	function nextClearBit(param1:Int):Int;
+
+	function previousSetBit(param1:Int):Int;
+
+	function previousClearBit(param1:Int):Int;
+
+	function length():Int;
+
+	function isEmpty():Bool;
+
+	function intersects(param1:java.util.BitSet):Bool;
+
+	function cardinality():Int;
+
+	function and(param1:java.util.BitSet):Void;
+
+	function or(param1:java.util.BitSet):Void;
+
+	function xor(param1:java.util.BitSet):Void;
+
+	function andNot(param1:java.util.BitSet):Void;
+
+	function hashCode():Int;
+
+	function size():Int;
+
+	function equals(param1:Dynamic):Bool;
+
+	function clone():Dynamic;
+
+	function toString():java.lang.String;
+
+	function stream():java.util.stream.IntStream;
+
+	static function valueOf(param1:java.NativeArray<haxe.Int64>):java.util.BitSet;
+
+	static function valueOf(param1:java.nio.ByteBuffer):java.util.BitSet;
+
+	static function valueOf(param1:java.NativeArray<java.types.Int8>):java.util.BitSet;
+
+	static function valueOf(param1:java.nio.LongBuffer):java.util.BitSet;
+}

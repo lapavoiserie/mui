@@ -1,0 +1,15 @@
+@:realPath("java.io.ObjectStreamClass_FieldReflector") @:native("java.io.ObjectStreamClass$FieldReflector") @:libType
+extern class java.io.ObjectStreamClass$FieldReflector {
+
+	function new(param1:java.NativeArray<java.io.ObjectStreamField>):Void;
+
+	function getFields():java.NativeArray<java.io.ObjectStreamField>;
+
+	function getPrimFieldValues(param1:Dynamic, param2:java.NativeArray<java.types.Int8>):Void;
+
+	function setPrimFieldValues(param1:Dynamic, param2:java.NativeArray<java.types.Int8>):Void;
+
+	function getObjFieldValues(param1:Dynamic, param2:java.NativeArray<Dynamic>):Void;
+
+	function setObjFieldValues(param1:Dynamic, param2:java.NativeArray<Dynamic>):Void;
+}

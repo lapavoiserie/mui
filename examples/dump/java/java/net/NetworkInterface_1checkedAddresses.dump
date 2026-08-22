@@ -1,0 +1,12 @@
+@:realPath("java.net.NetworkInterface_1checkedAddresses") @:used @:native("java.net.NetworkInterface$1checkedAddresses") @:libType
+extern class java.net.NetworkInterface$1checkedAddresses implements java.util.Enumeration<java.net.InetAddress> {
+
+	function new(param1:java.net.NetworkInterface):Void;
+
+	function nextElement():java.net.InetAddress;
+
+	function hasMoreElements():Bool;
+
+	@:realPath("this_0") @:native("this$0")
+	var this$0(default,ctor):java.net.NetworkInterface;
+}

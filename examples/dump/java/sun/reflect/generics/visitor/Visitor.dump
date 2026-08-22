@@ -1,0 +1,7 @@
+@:realPath("java.sun.reflect.generics.visitor.Visitor") @:used @:native("sun.reflect.generics.visitor.Visitor") @:libType
+extern interface sun.reflect.generics.visitor.Visitor<T:Dynamic> implements sun.reflect.generics.visitor.TypeTreeVisitor<java.sun.reflect.generics.visitor.Visitor.T> {
+
+	function visitClassSignature(param1:sun.reflect.generics.tree.ClassSignature):Void;
+
+	function visitMethodTypeSignature(param1:sun.reflect.generics.tree.MethodTypeSignature):Void;
+}

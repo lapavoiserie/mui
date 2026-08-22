@@ -1,0 +1,10 @@
+@:realPath("java.time.DayOfWeek") @:used @:flatEnum @:native("java.time.DayOfWeek")
+extern enum java.time.DayOfWeek {
+	MONDAY;
+	TUESDAY;
+	WEDNESDAY;
+	THURSDAY;
+	FRIDAY;
+	SATURDAY;
+	SUNDAY;
+}

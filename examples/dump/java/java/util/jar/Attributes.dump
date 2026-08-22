@@ -1,0 +1,53 @@
+@:realPath("java.util.jar.Attributes") @:used @:native("java.util.jar.Attributes") @:libType
+extern class java.util.jar.Attributes implements java.lang.Cloneable implements java.util.Map<Dynamic, Dynamic> {
+
+	function new():Void;
+
+	function new(param1:java.util.jar.Attributes):Void;
+
+	function new(param1:Int):Void;
+
+	function get(param1:Dynamic):Dynamic;
+
+	function getValue(param1:java.lang.String):java.lang.String;
+
+	function getValue(param1:java.util.jar.Attributes$Name):java.lang.String;
+
+	function put(param1:Dynamic, param2:Dynamic):Dynamic;
+
+	function putValue(param1:java.lang.String, param2:java.lang.String):java.lang.String;
+
+	function remove(param1:Dynamic):Dynamic;
+
+	function containsValue(param1:Dynamic):Bool;
+
+	function containsKey(param1:Dynamic):Bool;
+
+	function putAll(param1:java.util.Map<Dynamic, Dynamic>):Void;
+
+	function clear():Void;
+
+	function size():Int;
+
+	function isEmpty():Bool;
+
+	function keySet():java.util.Set<Dynamic>;
+
+	function values():java.util.Collection<Dynamic>;
+
+	function entrySet():java.util.Set<java.util.Map$Entry<Dynamic, Dynamic>>;
+
+	function equals(param1:Dynamic):Bool;
+
+	function hashCode():Int;
+
+	function clone():Dynamic;
+
+	function write(param1:java.io.DataOutputStream):Void;
+
+	function writeMain(param1:java.io.DataOutputStream):Void;
+
+	function read(param1:java.util.jar.Manifest$FastInputStream, param2:java.NativeArray<java.types.Int8>):Void;
+
+	var map:java.util.Map<Dynamic, Dynamic>;
+}

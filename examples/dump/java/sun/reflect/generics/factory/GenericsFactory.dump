@@ -1,0 +1,33 @@
+@:realPath("java.sun.reflect.generics.factory.GenericsFactory") @:used @:native("sun.reflect.generics.factory.GenericsFactory") @:libType
+extern interface sun.reflect.generics.factory.GenericsFactory {
+
+	function makeTypeVariable(param1:java.lang.String, param2:java.NativeArray<sun.reflect.generics.tree.FieldTypeSignature>):java.lang.reflect.TypeVariable<Dynamic>;
+
+	function makeParameterizedType(param1:java.lang.reflect.Type, param2:java.NativeArray<java.lang.reflect.Type>, param3:java.lang.reflect.Type):java.lang.reflect.ParameterizedType;
+
+	function findTypeVariable(param1:java.lang.String):java.lang.reflect.TypeVariable<Dynamic>;
+
+	function makeWildcard(param1:java.NativeArray<sun.reflect.generics.tree.FieldTypeSignature>, param2:java.NativeArray<sun.reflect.generics.tree.FieldTypeSignature>):java.lang.reflect.WildcardType;
+
+	function makeNamedType(param1:java.lang.String):java.lang.reflect.Type;
+
+	function makeArrayType(param1:java.lang.reflect.Type):java.lang.reflect.Type;
+
+	function makeByte():java.lang.reflect.Type;
+
+	function makeBool():java.lang.reflect.Type;
+
+	function makeShort():java.lang.reflect.Type;
+
+	function makeChar():java.lang.reflect.Type;
+
+	function makeInt():java.lang.reflect.Type;
+
+	function makeLong():java.lang.reflect.Type;
+
+	function makeFloat():java.lang.reflect.Type;
+
+	function makeDouble():java.lang.reflect.Type;
+
+	function makeVoid():java.lang.reflect.Type;
+}

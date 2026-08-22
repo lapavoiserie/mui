@@ -1,0 +1,17 @@
+@:used
+private class aui.mui._TextInputBinding.TextInputBinding_Impl_ {
+
+	@:noCompletion
+	public static inline function _new(v:aui.state.State<java.lang.String>) {
+		return cast v;
+	}
+
+	@:from
+	static inline function fromState(s:aui.state.State<java.lang.String>) {
+		return cast s;
+	}
+
+	public static inline function unwrap(this1:aui.state.State<java.lang.String>) {
+		return this1;
+	}
+}

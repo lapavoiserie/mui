@@ -1,0 +1,17 @@
+@:realPath("java.util.stream.LongStream_1") @:used @:native("java.util.stream.LongStream$1") @:libType
+extern class java.util.stream.LongStream$1 implements java.util.PrimitiveIterator$OfLong {
+
+	function new(param1:haxe.Int64, param2:java.util.function.LongUnaryOperator):Void;
+
+	function hasNext():Bool;
+
+	function nextLong():haxe.Int64;
+
+	var t:haxe.Int64;
+
+	@:realPath("val_seed") @:native("val$seed")
+	var val$seed(default,ctor):haxe.Int64;
+
+	@:realPath("val_f") @:native("val$f")
+	var val$f(default,ctor):java.util.function.LongUnaryOperator;
+}

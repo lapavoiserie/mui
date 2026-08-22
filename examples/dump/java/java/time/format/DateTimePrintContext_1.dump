@@ -1,0 +1,25 @@
+@:realPath("java.time.format.DateTimePrintContext_1") @:used @:native("java.time.format.DateTimePrintContext$1") @:libType
+extern class java.time.format.DateTimePrintContext$1 implements java.time.temporal.TemporalAccessor {
+
+	function new(param1:java.time.chrono.ChronoLocalDate, param2:java.time.temporal.TemporalAccessor, param3:java.time.chrono.Chronology, param4:java.time.ZoneId):Void;
+
+	function isSupported(param1:java.time.temporal.TemporalField):Bool;
+
+	function range(param1:java.time.temporal.TemporalField):java.time.temporal.ValueRange;
+
+	function getLong(param1:java.time.temporal.TemporalField):haxe.Int64;
+
+	function query<R:Dynamic>(param1:java.time.temporal.TemporalQuery<query.R>):query.R;
+
+	@:realPath("val_effectiveDate") @:native("val$effectiveDate")
+	var val$effectiveDate(default,ctor):java.time.chrono.ChronoLocalDate;
+
+	@:realPath("val_temporal") @:native("val$temporal")
+	var val$temporal(default,ctor):java.time.temporal.TemporalAccessor;
+
+	@:realPath("val_effectiveChrono") @:native("val$effectiveChrono")
+	var val$effectiveChrono(default,ctor):java.time.chrono.Chronology;
+
+	@:realPath("val_effectiveZone") @:native("val$effectiveZone")
+	var val$effectiveZone(default,ctor):java.time.ZoneId;
+}
