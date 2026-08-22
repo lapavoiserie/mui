@@ -233,7 +233,7 @@ class Surfaces {
 		intermediate base class widen the set if it ever hosts something
 		itself.
 	**/
-	static function hostedRoles():Null<Array<String>> {
+	public static function hostedRoles():Null<Array<String>> {
 		var cls = Context.getLocalClass();
 		if (cls == null) return null;
 

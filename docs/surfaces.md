@@ -101,6 +101,39 @@ override function surfaces():Array<SurfaceDecl> {
 
 `mui.Contract` requires `surfaces` of every backend, next to `lifetime`.
 
+## Asking for a new sample
+
+A live surface needs nothing: it is an effect, and it reconciles when the
+state it read changes. A **snapshot** surface is the other half of the model
+— the system samples it when it decides, which on a home screen means "when
+it bound the widget, and then never again on its own". Something has to say
+*now*, and only the application knows when its content became worth showing:
+
+```haxe
+count.set(count.get() + 1);
+mui.surface.Resample.request(Glance);   // the widget is worth redrawing
+```
+
+Every host answers that under a different name — Android pushes a fresh
+picture into the widget's state, WidgetKit calls `reloadTimelines`, a
+self-drawn painter repaints — and the application says the same sentence to
+all of them.
+
+**It compiles to nothing where the backend hosts no such surface.** `request`
+is a macro, and the roles a backend hosts are knowable (`@:hostedRoles`), so
+a terminal build drops the call entirely. That is a no-op, not a silence: the
+declaration itself could not have compiled here without `optional`, which is
+where the application accepted, in its own source, that the surface flies
+nowhere on this target. Refreshing what flies nowhere is nothing by
+construction.
+
+Where the role *is* hosted, the call is real, and a backend that hosts the
+role but installed no resampler says so with a word — that hole belongs to
+the backend. A backend hosting the role *live* installs a no-op on purpose:
+the request is already satisfied, and that is a difference of kind, not a
+gap. (`qui` does exactly this: its cover is a live effect, so there is never
+a stale picture to retake.)
+
 ## Companion: a surface on another machine
 
 **Off unless the build asks.** A Companion is served to machines this one has

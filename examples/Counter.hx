@@ -50,7 +50,14 @@ class Counter extends App {
             new HStack([
                 new Button("-", function() count.set(count.get() - 1)),
                 new Button("Reset", function() count.set(0)),
-                new Button("+", function() count.set(count.get() + 1)),
+                // The one snapshot surfaces need: a live surface reconciles
+                // on its own, a sampled one has to be told the picture is
+                // worth retaking. On a backend hosting no Glance this call
+                // compiles to nothing at all — see mui.surface.Resample.
+                new Button("+", function() {
+                    count.set(count.get() + 1);
+                    mui.surface.Resample.request(Glance);
+                }),
             ], 8),
             new Spacer(),
         ], 10);

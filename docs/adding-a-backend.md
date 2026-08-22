@@ -35,6 +35,13 @@ in your `App` constructor — that is what a projection needs. It states a
 capability, not an appetite: the networked corner stays off in any build that
 has not set `-D mui_cafos`.
 
+If any role you host is a **snapshot** one — sampled by the system rather
+than reconciled by an effect — also install `mui.surface.Resample.impl` in
+your `mui.App` constructor: it is how an application says "the picture is
+worth retaking", and without it the call reaches nothing and says so. A
+backend hosting the role *live* installs a no-op deliberately, since the
+request is already satisfied.
+
 A backend that states nothing at all is not refused — the application whose
 build would stop did nothing wrong — but every application built against it
 gets a warning saying its surfaces cannot be checked. That warning is aimed
