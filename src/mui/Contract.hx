@@ -110,6 +110,12 @@ class Contract {
 		{pack: ["mui", "ui"], name: "SliderBinding"},
 		{pack: ["mui", "ui"], name: "TextInput", args: ["String", "*"]},
 		{pack: ["mui", "ui"], name: "TextInputBinding"},
+		// A drop-down list, its options as text, its selection an index (-1 for
+		// none). Optional while it is being brought to every backend, so an
+		// application reaching for it where it is missing stops at that line:
+		// wui and sui first, because the Farceur switcher needs it.
+		{pack: ["mui", "ui"], name: "Picker", args: ["String", "Array<String>", "*"], optional: true},
+		{pack: ["mui", "ui"], name: "PickerBinding", optional: true},
 
 		// ---- flow ----
 		{pack: ["mui", "ui"], name: "ConditionalView", args: ["*", "View", "?View"]},

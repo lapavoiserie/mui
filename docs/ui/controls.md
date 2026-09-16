@@ -78,6 +78,28 @@ new ProgressView()                     // indeterminate
 
 Maps to `ProgressView` (sui), `ProgressRing` (wui), `ProgressBar` (cui).
 
+## Picker
+
+A drop-down list: one choice among several. The selection is the chosen option's
+**index**, `-1` for none.
+
+```haxe
+@:state var transition:Int = 1;
+
+new Picker("Transition", ["Cut", "Fade", "Wipe"], transition_)
+```
+
+**Constructor**: `Picker(label:String, options:Array<String>, selection:PickerBinding)` —
+the binding is an `@:state` of type `Int`. An empty label shows none.
+
+Maps to `Picker` (sui) and `ComboBox` (wui). **Not yet on aui, cui, qui or pui**:
+`mui.Contract` marks it optional while it reaches every backend, so using it there
+is a compile error at that line.
+
+On the wire it is a canonical `Picker` node: `label`, `selectedIndex`, `onSelect`
+(an index), and one `Text` child per option. A received selection is not applied
+while the list is open.
+
 ## Image
 
 Displays an image (not available on cui).

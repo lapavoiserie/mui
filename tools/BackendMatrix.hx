@@ -47,6 +47,10 @@ class BackendMatrix {
 		// wui's own helper, which lives in its mui package because that is who
 		// needs it -- not a type mui asks any backend for.
 		"FromViews",
+		// The same, for helpers other backends keep beside their conformance:
+		// wui's shortcut grammar, qui's cover host, the Glance bridges of sui and
+		// aui. Nothing in `mui.Contract` names them.
+		"Chords", "CoverHost", "GlanceBridge", "GlancePublish",
 	];
 
 	static function main() {

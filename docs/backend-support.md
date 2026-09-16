@@ -13,6 +13,7 @@
 | **HStack** | HStack | HStack | HStack | HStack | HStack | HStack |
 | **Image** | Image | Image | Image | — | Image | Image |
 | **ListView** | List | LazyColumn | ListView | ListView | ListView | ListView |
+| **Picker** | Picker | — | ComboBox | — | — | — |
 | **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar | ProgressView | ProgressView |
 | **SafeArea** | VStack ○ | SafeArea | VStack ○ | VStack ○ | SafeArea ○ | SafeArea |
 | **ScrollView** | ScrollView | ScrollView | ScrollViewer | ScrollView | ScrollView | ScrollView |
