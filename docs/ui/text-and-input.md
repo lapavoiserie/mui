@@ -11,7 +11,48 @@ new Text("Account", Title)         // set at a shared step
 new Text("A note beside it", Caption)
 ```
 
-**Constructor**: `Text(content:String, ?scale:TextScale)`
+**Constructor**: `Text(content:String, ?scale:TextScale, ?style:TextStyle)`
+
+```haxe
+new Text("Farceur", Title, {family: Fonts.family("Inter")})
+new Text("00:12:34", Body, {weight: 600, numbers: Tabular})
+```
+
+### How it is set
+
+`TextStyle` is `{?family, ?weight, ?italic, ?numbers}`, and every field is
+optional: what is left out is the platform's own answer. `weight` is 100 to 900
+in hundreds — the vocabulary every font file uses, 400 regular and 700 bold — and
+a weight a family does not have is the nearest one it does, which is the
+platform's rule and not one `mui` invents. `numbers: Tabular` asks for digits of
+one width, so a timecode does not jitter as it counts.
+
+A backend honours what it can. A terminal takes the weight as bold and the
+italic, and leaves family and scale alone: a cell is one size and one font, and
+saying so is not a lack. `pui` and `qui`, which cannot ask a platform for a font
+feature, answer `Tabular` with a monospaced family, which does the same job.
+
+### Fonts an application ships
+
+Font files go in `assets/fonts`, beside the build file — the same `assets`
+directory pictures use, so a font needs no second mechanism — and `Fonts.family`
+names one:
+
+```haxe
+new Text(timecode, Body, {family: Fonts.family("Inter")})
+```
+
+It is a macro: the files are read while the application compiles, and a family
+nothing ships is an error at that line, naming the families that *are* shipped.
+The file describes itself — a family name, a weight and an italic bit live in a
+font's own tables, which is where every platform reads them — so an application
+does not declare that `Inter-Bold.ttf` is Inter, bold and upright.
+
+Each backend registers what is shipped the way its platform expects: an
+`Info.plist` entry on Apple's, a table from a family to a file on Windows and
+Android, `QFontDatabase` on Sailfish. A family the platform does not have — a
+tree from elsewhere naming one it never shipped — falls back to the system font,
+silently: a wrong picture is a lie, a wrong typeface is a disappointment.
 
 ### The scale
 

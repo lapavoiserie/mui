@@ -95,7 +95,11 @@ class Contract {
 		{pack: ["mui", "ui"], name: "TabView", args: ["*"]},
 
 		// ---- leaves ----
-		{pack: ["mui", "ui"], name: "Text", args: ["String", "?mui.ui.TextScale"]},
+		// How it is set, beyond its scale: a family the application ships, a
+		// weight, italic, digits of one width. Every backend takes it, and
+		// honours what it can -- a terminal has one font, so it takes the
+		// weight as bold and the italic and leaves the rest.
+		{pack: ["mui", "ui"], name: "Text", args: ["String", "?mui.ui.TextScale", "?mui.ui.TextStyle"]},
 		{pack: ["mui", "ui"], name: "Button", args: ["String", "?() -> Void"]},
 		{pack: ["mui", "ui"], name: "Divider", args: []},
 		{pack: ["mui", "ui"], name: "Spacer"},
