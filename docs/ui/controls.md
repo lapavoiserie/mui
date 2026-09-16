@@ -102,17 +102,46 @@ while the list is open.
 
 ## Image
 
-Displays an image (not available on cui).
+A picture. `src` says where it lives, by scheme; `alt` says what it shows.
 
 ```haxe
-new Image("photo.png")
+new Image("asset:farceur/logo.png", "Farceur")
+new Image("https://example.org/cover.jpg", "Album cover", {width: 120, fit: Cover})
+new Image(thumbnailDataUri, "")            // "" declares it decorative
 ```
 
-**Constructor**: `Image(source:String)`
+**Constructor**: `Image(src:String, alt:String, ?options:ImageOptions)` — `options` is
+`{?width, ?height, ?fit}` in points; `fit` is `Contain` (default), `Cover` or `Fill`.
 
-`cui` provides no `Image`: a terminal cannot draw one, and `mui.Contract` marks
-the entry optional, so `mui.ui.Image` does not exist there. Using it on that
-backend is a compile error at the line that used it — which is the rule this
-ecosystem follows, that what can be known at compile time is never a marker on
-screen. Guard with `#if (mui_backend != "cui")` in code meant for every
-backend.
+| `src` | names |
+|---|---|
+| `asset:path` | a file shipped in the application |
+| `https://…` | a picture on the web |
+| `data:image/png;base64,…` | a small picture carried in the tree |
+| `file:///…` | a local path |
+
+While a picture is loading, and whenever it cannot be drawn — refused, not found,
+not a PNG or a JPEG — its `alt` is drawn in its place, never a broken-image glyph. A
+tree received from elsewhere may not name a local file, loads `https:` only from
+hosts the panel trusts, and carries `data:` up to 256 KiB (see nui's *node model*).
+
+**Where it is**: sui draws the canonical `Image`. aui, wui, qui and pui still have
+their older one-argument `Image`, and cui has none; the contract checks the new
+signature once every backend takes it.
+
+## Icon
+
+A glyph from the shared vocabulary, drawn with the platform's own icons and
+coloured like the text around it.
+
+```haxe
+new Icon(Mic)
+new Icon(SpeakerOff, "Monitor muted")
+```
+
+**Constructor**: `Icon(name:IconName, ?label:String)`. `IconName` has one constant per
+name of `nui.Icons` — `mic-off` is `MicOff` — and no conversion from `String`, so a
+name outside the vocabulary does not compile. `IconName.fromString` reads one that
+arrives as data. The label is what a screen reader says; without one, the name.
+
+**Where it is**: sui (SF Symbols). The other backends follow.
