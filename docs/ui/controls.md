@@ -92,7 +92,8 @@ new Picker("Transition", ["Cut", "Fade", "Wipe"], transition_)
 **Constructor**: `Picker(label:String, options:Array<String>, selection:PickerBinding)` —
 the binding is an `@:state` of type `Int`. An empty label shows none.
 
-Maps to `Picker` (sui) and `ComboBox` (wui). **Not yet on aui, cui, qui or pui**:
+Maps to `Picker` (sui), `ComboBox` (wui) and a drawn one on `pui`, whose list is
+an overlay over the tree. **Not yet on aui, cui or qui**:
 `mui.Contract` marks it optional while it reaches every backend, so using it there
 is a compile error at that line.
 

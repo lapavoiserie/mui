@@ -124,6 +124,7 @@ class Contract {
 		// wui and sui first, because the Farceur switcher needs it.
 		{pack: ["mui", "ui"], name: "Picker", args: ["String", "Array<String>", "*"], optional: true},
 		{pack: ["mui", "ui"], name: "PickerBinding", optional: true},
+		// Still optional: sui, wui and pui have one; aui, cui and qui do not.
 
 		// ---- flow ----
 		{pack: ["mui", "ui"], name: "ConditionalView", args: ["*", "View", "?View"]},
