@@ -99,7 +99,11 @@ class Contract {
 		{pack: ["mui", "ui"], name: "Button", args: ["String", "?() -> Void"]},
 		{pack: ["mui", "ui"], name: "Divider", args: []},
 		{pack: ["mui", "ui"], name: "Spacer"},
+		// Its signature becomes `String, String, ?mui.ui.ImageOptions` -- the
+		// canonical src and alt -- backend by backend; it is checked once all
+		// six take it, when Image and Icon both stop being optional.
 		{pack: ["mui", "ui"], name: "Image", optional: true},
+		{pack: ["mui", "ui"], name: "Icon", args: ["mui.ui.IconName", "?String"], optional: true},
 		{pack: ["mui", "ui"], name: "ListView"},
 		{pack: ["mui", "ui"], name: "ProgressView", args: ["?String", "?Float"]},
 
