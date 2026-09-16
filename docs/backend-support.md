@@ -11,6 +11,7 @@
 | **Divider** | Divider | Divider | Border ⚙️ | Divider | Divider | Divider |
 | **ForEach** | macro | macro | macro | macro | macro | macro |
 | **HStack** | HStack | HStack | HStack | HStack | HStack | HStack |
+| **Icon** | Icon | Icon | Icon | — | — | — |
 | **Image** | Image | Image | Image | — | Image | Image |
 | **ListView** | List | LazyColumn | ListView | ListView | ListView | ListView |
 | **Picker** | Picker | — | ComboBox | — | — | — |

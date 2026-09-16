@@ -26,7 +26,7 @@ import sys.io.File;
 	as a library — `qui` lives inside the `haxe-sailfish` repository — can be
 	named by passing the directory that holds its package:
 
-	    haxe -cp tools --run BackendMatrix ~/new-projects/haxe-sailfish/src
+	    haxe -cp tools --run BackendMatrix ~/new-projects/haxe-sailfish-workspace/haxe-sailfish/src
 
 	`docs/backend-support.md` is output, not source.
 **/
