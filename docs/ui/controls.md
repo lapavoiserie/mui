@@ -115,10 +115,24 @@ new Image(thumbnailDataUri, "")            // "" declares it decorative
 
 | `src` | names |
 |---|---|
-| `asset:path` | a file shipped in the application |
+| `asset:path` | a file shipped in the application, in its `assets` directory |
 | `https://…` | a picture on the web |
 | `data:image/png;base64,…` | a small picture carried in the tree |
 | `file:///…` | a local path |
+
+**What an application ships** goes in an `assets` directory beside the build file,
+and `Assets.src` names one:
+
+```haxe
+new Image(Assets.src("logo.png"), "Farceur")
+```
+
+It is a macro: the file is looked for while this compiles, and a name that is not
+there is an error at that line rather than an `alt` noticed on a device. Every
+backend's build copies the directory to wherever its runtime reads one — a
+bundle's `Resources/assets`, `app/src/main/assets`, an `assets` folder beside the
+executable, `/usr/share/<name>/assets` — so the same tree draws the same picture
+on all six. `-D mui_assets=<directory>` moves it.
 
 While a picture is loading, and whenever it cannot be drawn — refused, not found,
 not a PNG or a JPEG — its `alt` is drawn in its place, never a broken-image glyph. A
