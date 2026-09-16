@@ -125,7 +125,7 @@ not a PNG or a JPEG — its `alt` is drawn in its place, never a broken-image gl
 tree received from elsewhere may not name a local file, loads `https:` only from
 hosts the panel trusts, and carries `data:` up to 256 KiB (see nui's *node model*).
 
-**Where it is**: sui draws the canonical `Image`. aui, wui, qui and pui still have
+**Where it is**: sui and wui draw the canonical `Image`. aui, qui and pui still have
 their older one-argument `Image`, and cui has none; the contract checks the new
 signature once every backend takes it.
 
@@ -144,4 +144,4 @@ name of `nui.Icons` — `mic-off` is `MicOff` — and no conversion from `String
 name outside the vocabulary does not compile. `IconName.fromString` reads one that
 arrives as data. The label is what a screen reader says; without one, the name.
 
-**Where it is**: sui (SF Symbols). The other backends follow.
+**Where it is**: sui (SF Symbols) and wui (Segoe Fluent Icons). The other backends follow.
