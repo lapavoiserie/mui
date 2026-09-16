@@ -25,11 +25,11 @@ package mui;
 	class whose constructor is the backend's own business.
 
 	`optional: true` means a backend may leave it out, and `mui` then publishes
-	nothing under that name. Exactly one entry uses it: a terminal cannot draw an
-	image, and `cui` says so by providing no `cui.mui.Image`. An application that
-	reaches for `mui.ui.Image` there gets `Type not found`, at the line that
-	reached — a compile error, which is the rule, though a blunter one than the
-	sentence the old `#error` could write.
+	nothing under that name. An application that reaches for a name its backend
+	does not have gets `Type not found`, at the line that reached — a compile
+	error, which is the rule, though a blunter one than the sentence the old
+	`#error` could write. `Picker` is the entry that uses it today, while it is
+	brought to the backends that have no drop-down yet.
 
 	## What this checks, and what it cannot
 
@@ -99,11 +99,11 @@ class Contract {
 		{pack: ["mui", "ui"], name: "Button", args: ["String", "?() -> Void"]},
 		{pack: ["mui", "ui"], name: "Divider", args: []},
 		{pack: ["mui", "ui"], name: "Spacer"},
-		// Its signature becomes `String, String, ?mui.ui.ImageOptions` -- the
-		// canonical src and alt -- backend by backend; it is checked once all
-		// six take it, when Image and Icon both stop being optional.
-		{pack: ["mui", "ui"], name: "Image", optional: true},
-		{pack: ["mui", "ui"], name: "Icon", args: ["mui.ui.IconName", "?String"], optional: true},
+		// Where the picture comes from, what stands in its place, and how it is
+		// sized: required of all six since 2026-09-16, cui included -- a
+		// terminal draws the alt rather than nothing.
+		{pack: ["mui", "ui"], name: "Image", args: ["String", "String", "?mui.ui.ImageOptions"]},
+		{pack: ["mui", "ui"], name: "Icon", args: ["mui.ui.IconName", "?String"]},
 		{pack: ["mui", "ui"], name: "ListView"},
 		{pack: ["mui", "ui"], name: "ProgressView", args: ["?String", "?Float"]},
 

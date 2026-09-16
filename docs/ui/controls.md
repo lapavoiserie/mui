@@ -125,9 +125,11 @@ not a PNG or a JPEG — its `alt` is drawn in its place, never a broken-image gl
 tree received from elsewhere may not name a local file, loads `https:` only from
 hosts the panel trusts, and carries `data:` up to 256 KiB (see nui's *node model*).
 
-**Where it is**: sui, wui and aui draw the canonical `Image`. qui and pui still have
-their older one-argument `Image`, and cui has none; the contract checks the new
-signature once every backend takes it.
+**Where it is**: all six backends, and the contract checks the signature — sui
+(`AsyncImage` and `NSImage`), wui (a WinUI `Image`), aui (decoded off the main
+thread), pui (drawn by `pui.Pictures` through the platform), qui (a QML `Image`
+whose `alt` is a `Label` inside it), cui (no pixels yet: it draws the `alt` in
+brackets, and Sixel is what will change that).
 
 ## Icon
 
@@ -144,5 +146,12 @@ name of `nui.Icons` — `mic-off` is `MicOff` — and no conversion from `String
 name outside the vocabulary does not compile. `IconName.fromString` reads one that
 arrives as data. The label is what a screen reader says; without one, the name.
 
-**Where it is**: sui (SF Symbols), wui (Segoe Fluent Icons) and aui (Material icons,
-the ones `material-icons-core` lacks carried as path data). The other backends follow.
+**Where it is**: all six, each with what its platform draws — sui (SF Symbols),
+wui (Segoe Fluent Icons), aui (Material icons, the ones `material-icons-core`
+lacks carried as path data), pui and qui (the shapes of `nui.IconShapes`, filled
+with the non-zero rule so their holes stay holes), cui (one character per name,
+an `-off` name stroked in the same cell).
+
+A backend may also take an icon on its own `Button` — wui, sui, aui, pui and cui
+do — but `mui.ui.Button` has no icon argument yet: Silica's button has nowhere to
+put one that has been checked on a device.
