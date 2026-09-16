@@ -92,10 +92,16 @@ new Picker("Transition", ["Cut", "Fade", "Wipe"], transition_)
 **Constructor**: `Picker(label:String, options:Array<String>, selection:PickerBinding)` —
 the binding is an `@:state` of type `Int`. An empty label shows none.
 
-Maps to `Picker` (sui), `ComboBox` (wui) and a drawn one on `pui`, whose list is
-an overlay over the tree. **Not yet on aui, cui or qui**:
-`mui.Contract` marks it optional while it reaches every backend, so using it there
-is a compile error at that line.
+On all six. How the list opens is each backend's own: `Picker` (sui),
+`ComboBox` (wui and qui), a `DropdownMenu` (aui), and a drawn one on `pui`,
+whose list is an overlay over the tree because nothing in a tree can paint past
+its parent's siblings.
+
+**`cui` is the one that cannot open a list at all.** A terminal buffer is a grid
+of cells with no z-order, so its picker shows one option on one row and cycles
+through them — `Transition ‹ Mix › 2/4`, Left and Right to move — and the
+matrix marks it ⚠️ for that. The contract is the options and the index; the
+drawing never was.
 
 On the wire it is a canonical `Picker` node: `label`, `selectedIndex`, `onSelect`
 (an index), and one `Text` child per option. A received selection is not applied

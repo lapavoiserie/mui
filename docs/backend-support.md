@@ -14,7 +14,7 @@
 | **Icon** | Icon | Icon | Icon | Icon | Icon | Icon |
 | **Image** | Image | Image | Image | Image | Image | Image |
 | **ListView** | List | LazyColumn | ListView | ListView | ListView | ListView |
-| **Picker** | Picker | — | ComboBox | — | — | Picker |
+| **Picker** | Picker | Picker | ComboBox | Picker ⚠️ | Picker | Picker |
 | **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar | ProgressView | ProgressView |
 | **SafeArea** | VStack ○ | SafeArea | VStack ○ | VStack ○ | SafeArea ○ | SafeArea |
 | **ScrollView** | ScrollView | ScrollView | ScrollViewer | ScrollView | ScrollView | ScrollView |
@@ -45,6 +45,7 @@ Unmarked, the backend has the concept natively and `mui` binds straight to it.
 |---|---|---|---|
 | ConditionalView | cui | ⚙️ | cui has no conditional view: the branch is chosen at construction |
 | Divider | wui | ⚙️ | WinUI has no Divider: a 1px grey Border stands in |
+| Picker | cui | ⚠️ | a terminal cannot overlay: the options cycle on one row |
 | SafeArea | sui | ○ | SwiftUI handles safe areas by default: nothing to apply |
 | SafeArea | wui | ○ | a desktop window has no safe area |
 | SafeArea | cui | ○ | a terminal has no safe area |

@@ -119,12 +119,13 @@ class Contract {
 		{pack: ["mui", "ui"], name: "TextInput", args: ["String", "*"]},
 		{pack: ["mui", "ui"], name: "TextInputBinding"},
 		// A drop-down list, its options as text, its selection an index (-1 for
-		// none). Optional while it is being brought to every backend, so an
-		// application reaching for it where it is missing stops at that line:
-		// wui and sui first, because the Farceur switcher needs it.
-		{pack: ["mui", "ui"], name: "Picker", args: ["String", "Array<String>", "*"], optional: true},
-		{pack: ["mui", "ui"], name: "PickerBinding", optional: true},
-		// Still optional: sui, wui and pui have one; aui, cui and qui do not.
+		// none). Required since 2026-09-16: all six have one. How it opens is
+		// each backend's own -- a popup on Android, a menu on Silica and WinUI,
+		// an overlay pui had to build, and a row that cycles in a terminal,
+		// whose buffer has no z-order. The contract is the options and the
+		// index; the drawing never was.
+		{pack: ["mui", "ui"], name: "Picker", args: ["String", "Array<String>", "*"]},
+		{pack: ["mui", "ui"], name: "PickerBinding"},
 
 		// ---- flow ----
 		{pack: ["mui", "ui"], name: "ConditionalView", args: ["*", "View", "?View"]},
