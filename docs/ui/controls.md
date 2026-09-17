@@ -187,6 +187,6 @@ lacks carried as path data), pui and qui (the shapes of `nui.IconShapes`, filled
 with the non-zero rule so their holes stay holes), cui (one character per name,
 an `-off` name stroked in the same cell).
 
-A backend may also take an icon on its own `Button` — wui, sui, aui, pui and cui
-do — but `mui.ui.Button` has no icon argument yet: Silica's button has nowhere to
-put one that has been checked on a device.
+`mui.ui.Button` takes one too, as a third optional argument — see **Button**
+above. aui, wui, cui and pui draw it; sui and qui draw the label, neither having
+a verified place for an icon inside a button.
