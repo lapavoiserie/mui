@@ -122,6 +122,16 @@ class Contract {
 		{pack: ["mui", "ui"], name: "SliderBinding"},
 		{pack: ["mui", "ui"], name: "TextInput", args: ["String", "*"]},
 		{pack: ["mui", "ui"], name: "TextInputBinding"},
+		// A value typed in that never enters the tree: a stream key, a token.
+		// `placeholder`, whether one is already stored, and where the value goes
+		// once -- no binding, because there is nothing to bind to. nui's canon
+		// states the type and what a renderer owes it.
+		//
+		// **Optional, and meant to stay optional.** A backend that has not built
+		// one does not get a silent approximation: an application naming it
+		// there fails to compile at that line, which for a secret is the only
+		// honest answer. Only `pui` has one today.
+		{pack: ["mui", "ui"], name: "SecretInput", args: ["String", "*", "?Bool"], optional: true},
 		// A drop-down list, its options as text, its selection an index (-1 for
 		// none). Required since 2026-09-16: all six have one. How it opens is
 		// each backend's own -- a popup on Android, a menu on Silica and WinUI,

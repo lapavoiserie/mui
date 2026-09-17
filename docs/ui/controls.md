@@ -121,6 +121,38 @@ On the wire it is a canonical `Picker` node: `label`, `selectedIndex`, `onSelect
 (an index), and one `Text` child per option. A received selection is not applied
 while the list is open.
 
+## SecretInput
+
+A value that is typed in and **never enters the tree**: a stream key, a token, a
+password.
+
+```haxe
+new SecretInput("Stream key — type to replace", key -> engine.setStreamKey(key), true)
+```
+
+**Constructor**: `SecretInput(placeholder:String, ?onSecret:String->Void, isSet:Bool = false)` —
+`isSet` says a value is already stored somewhere this control cannot see, so a
+panel can say "saved" without the value crossing.
+
+There is no binding and no `text`, and that is the definition of the type rather
+than a rule a renderer has to remember. The value leaves through `onSecret`
+once, on submission, and the field is cleared. So it is not republished on every
+frame, a diagnostic has nothing to print from the node, and a received value
+cannot be applied because there is none.
+
+**Why a type rather than a flag on `TextInput`.** A forgotten flag fails *open* —
+a renderer that does not know it draws an ordinary field with the secret in
+clear, and nothing says so. An unknown type fails *closed*. For an ordinary
+defect that is a preference; for a secret it is the difference between a bug and
+a leak.
+
+**Where it is: `pui` only, and the entry is optional on purpose.** A backend that
+has not built a control which masks, refuses the clipboard, tells the input
+method nothing and reports once does not get an approximation — an application
+naming it there fails to compile at that line. That is the only honest answer
+for a secret. nui's canon (*node model*) states the type and what a renderer
+owes it.
+
 ## Image
 
 A picture. `src` says where it lives, by scheme; `alt` says what it shows.
