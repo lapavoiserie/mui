@@ -18,7 +18,7 @@
 | **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar | ProgressView | ProgressView |
 | **SafeArea** | VStack ○ | SafeArea | VStack ○ | VStack ○ | SafeArea ○ | SafeArea |
 | **ScrollView** | ScrollView | ScrollView | ScrollViewer | ScrollView | ScrollView | ScrollView |
-| **SecretInput** | — | — | — | — | — | SecretInput |
+| **SecretInput** | — | — | PasswordBox | — | — | SecretInput |
 | **Slider** | Slider | Slider | Slider | Slider | Slider | Slider |
 | **Spacer** | Spacer | Spacer | Spacer | Spacer | Spacer | Spacer |
 | **TabView** | TabView | TabView | NavigationView | Tabs | TabView | TabView |

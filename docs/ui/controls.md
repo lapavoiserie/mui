@@ -146,10 +146,13 @@ clear, and nothing says so. An unknown type fails *closed*. For an ordinary
 defect that is a preference; for a secret it is the difference between a bug and
 a leak.
 
-**Where it is: `pui` only, and the entry is optional on purpose.** A backend that
+**Where it is: `pui` and `wui`, and the entry is optional on purpose.** A backend that
 has not built a control which masks, refuses the clipboard, tells the input
 method nothing and reports once does not get an approximation — an application
-naming it there fails to compile at that line. That is the only honest answer
+naming it there fails to compile at that line. `wui` is a WinUI `PasswordBox`
+with its reveal button turned off: the platform's own default shows the value
+in clear while the box has focus, which is the one thing a secret typed in
+front of a screen capture must not offer. That is the only honest answer
 for a secret. nui's canon (*node model*) states the type and what a renderer
 owes it.
 
