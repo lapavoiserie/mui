@@ -131,7 +131,7 @@ class Contract {
 		// one does not get a silent approximation: an application naming it
 		// there fails to compile at that line, which for a secret is the only
 		// honest answer. Only `pui` has one today.
-		{pack: ["mui", "ui"], name: "SecretInput", args: ["String", "*", "?Bool"], optional: true},
+		{pack: ["mui", "ui"], name: "SecretInput", args: ["String", "*", "?Bool", "?String"], optional: true},
 		// A drop-down list, its options as text, its selection an index (-1 for
 		// none). Required since 2026-09-16: all six have one. How it opens is
 		// each backend's own -- a popup on Android, a menu on Silica and WinUI,
