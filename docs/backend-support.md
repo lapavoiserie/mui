@@ -6,7 +6,7 @@
 
 | `mui` type | sui | aui | wui | cui | qui | pui |
 |---|---|---|---|---|---|---|
-| **Button** | Button | Button | Button | Button | Button | Button |
+| **Button** | Button ⚠️ | Button | Button | Button | Button ⚠️ | Button |
 | **ConditionalView** | ConditionalView | ConditionalView | ConditionalView | View ⚙️ | ConditionalView | ConditionalView |
 | **Divider** | Divider | Divider | Border ⚙️ | Divider | Divider | Divider |
 | **ForEach** | macro | macro | macro | macro | macro | macro |
@@ -43,6 +43,8 @@ Unmarked, the backend has the concept natively and `mui` binds straight to it.
 
 | Type | Backend | | What happens |
 |---|---|---|---|
+| Button | sui | ⚠️ | a SwiftUI Button here draws its label: no icon slot yet |
+| Button | qui | ⚠️ | Silica has no verified place for an icon in a Button yet |
 | ConditionalView | cui | ⚙️ | cui has no conditional view: the branch is chosen at construction |
 | Divider | wui | ⚙️ | WinUI has no Divider: a 1px grey Border stands in |
 | Picker | cui | ⚠️ | a terminal cannot overlay: the options cycle on one row |

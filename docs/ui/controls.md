@@ -10,9 +10,23 @@ new Button("Click me", function() {
 })
 ```
 
-**Constructor**: `Button(label:String, ?action:()->Void)`
+A button may carry an icon from the shared vocabulary, beside the label or
+alone — then the icon's name is what a screen reader says:
+
+```haxe
+new Button("TAKE", take, Swap)
+new Button("", mute, MicOff)
+```
+
+**Constructor**: `Button(label:String, ?action:()->Void, ?icon:mui.ui.IconName)`
 
 All backends are normalized to accept closures. On backends that natively use `StateAction` (sui, wui), the closure is wrapped appropriately.
+
+The icon is the canon's: nui's `Button` node has carried one since pictures
+landed. **aui, wui, cui and pui draw it**; on sui and qui the label is drawn and
+the icon is not, which the matrix marks ⚠️ with the reason beside the row. The
+argument is accepted everywhere rather than refused on two backends, because an
+application writes one view for six.
 
 ## Toggle
 

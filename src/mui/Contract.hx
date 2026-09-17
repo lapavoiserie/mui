@@ -100,7 +100,11 @@ class Contract {
 		// honours what it can -- a terminal has one font, so it takes the
 		// weight as bold and the italic and leaves the rest.
 		{pack: ["mui", "ui"], name: "Text", args: ["String", "?mui.ui.TextScale", "?mui.ui.TextStyle"]},
-		{pack: ["mui", "ui"], name: "Button", args: ["String", "?() -> Void"]},
+		// The icon is the canon's: `nui`'s `Button` node has carried one since
+		// pictures landed, and four backends draw it. Optional, so an
+		// application that wants none writes none -- and named `mui.ui.IconName`
+		// so a name outside the vocabulary does not compile.
+		{pack: ["mui", "ui"], name: "Button", args: ["String", "?() -> Void", "?mui.ui.IconName"]},
 		{pack: ["mui", "ui"], name: "Divider", args: []},
 		{pack: ["mui", "ui"], name: "Spacer"},
 		// Where the picture comes from, what stands in its place, and how it is
