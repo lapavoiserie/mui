@@ -228,10 +228,17 @@ class Markup {
 
 		// Text content is the `text` property -- `nui` settled in B2 that text is
 		// an ordinary property, not a special accessor.
+		//
+		// Unless what is inside is a LIST OF NODES, in which case it is the
+		// children. Nothing in the syntax says which: the TYPE does, and there
+		// is no expression that could sensibly be both. See `spliced`.
 		var text = directText(xml);
-		if (text != null && !seen.exists("text")) {
+		var computed:Null<Expr> = text == null ? null : spliced(text, pos);
+		if (computed == null && text != null && !seen.exists("text")) {
 			if (Backend.kindOf(tag, "text") == null) {
-				Context.error('"$tag" ne porte pas de texte.', pos);
+				Context.error('"$tag" ne porte pas de texte.\n'
+					+ "  Une interpolation d'enfants ({[for (x in xs) ui(<Text …/>)]}) "
+					+ "serait acceptée ici ; celle-ci n'est pas une liste de nœuds.", pos);
 			} else {
 				seen.set("text", true);
 				setters.push({key: "text", value: macro nui.PropValue.PString(${valueExpr(text, pos)})});
@@ -262,7 +269,68 @@ class Markup {
 		for (setter in setters) chain = applyTo(chain, setter);
 		for (child in childExprs) chain = macro $chain.child($child);
 
+		// A computed list comes after the written children, in the order the
+		// expression produced it. Evaluated ONCE, into a local, so a `for`
+		// comprehension in the markup is not run per child.
+		if (computed != null) {
+			chain = macro {
+				final __parent = $chain;
+				for (__child in $computed) __parent.child(__child);
+				__parent;
+			};
+		}
+
 		return chain;
+	}
+
+	/**
+		A list of nodes written inside an element, which becomes its children.
+
+		```haxe
+		<Picker label="Type" selectedIndex={i} onSelect={choisir}>
+		    {[for (t in types) ui(<Text text={t}/>)]}
+		</Picker>
+		```
+
+		Children written as elements are enough for a panel whose shape is
+		known, and not for one drawn from data -- a list of sources, of
+		transitions, of placements. Without this the caller writes the tag, then
+		a loop outside it, then uses the node again; the Farceur session measured
+		its markup at 86 lines against 69 for the same panel in views, and every
+		line of the difference was that loop.
+
+		## The type says which, because nothing else honestly could
+
+		The same position already means text: `<Text>{nom}</Text>`. Adding a
+		second meaning to the same syntax needs something to tell them apart,
+		and a marker (`<For>`, a second brace) would be a word invented to say
+		what the expression already says. A `String` is text; an
+		`Array<nui.Node>` is children; there is no expression for which both
+		readings make sense.
+
+		So this types the interpolation and answers only for a list of nodes.
+		Anything else falls through to the text rule, which refuses it by name
+		if the tag carries no text -- and now mentions this form, because
+		"ne porte pas de texte" is a confusing thing to be told about a `for`
+		comprehension.
+
+		Null when the content is not a single interpolation at all: plain text,
+		or text around one.
+	**/
+	static function spliced(raw:String, pos:Position):Null<Expr> {
+		var re = ~/^__EXPR_(\d+)__$/;
+		if (!re.match(raw)) return null;
+
+		var e = parseExpr(Std.parseInt(re.matched(1)));
+		var nodes = Context.getType("nui.Node");
+		var list = Context.resolveType(macro :Array<nui.Node>, pos);
+
+		var t = try Context.typeof(e) catch (_:Dynamic) return null;
+		if (Context.unify(t, list)) return e;
+		// One node on its own is a list of one: writing a conditional child as
+		// `{siOuvert ? ui(<Text …/>) : null}` is the same need.
+		if (Context.unify(t, nodes)) return macro [$e];
+		return null;
 	}
 
 	/** Text directly inside this element, ignoring what belongs to children. **/
