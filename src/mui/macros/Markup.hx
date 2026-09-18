@@ -293,15 +293,43 @@ class Markup {
 			setters.push({key: attr, value: value});
 		}
 
-		// Text content is the `text` property -- `nui` settled in B2 that text is
-		// an ordinary property, not a special accessor.
+		// The children, IN THE ORDER THEY WERE WRITTEN.
 		//
-		// Unless what is inside is a LIST OF NODES, in which case it is the
-		// children. Nothing in the syntax says which: the TYPE does, and there
-		// is no expression that could sensibly be both. See `spliced`.
-		var text = directText(xml);
-		var computed:Null<Expr> = text == null ? null : spliced(text, pos);
-		if (computed == null && text != null && !seen.exists("text")) {
+		// Elements and interpolations are walked together: an element becomes a
+		// child node, an interpolation that resolves to nodes is spliced where
+		// it stands, and anything else is text. An earlier version appended
+		// every computed list after every written child, so
+
+		//     <VStack><Text/>{rows}<Button/></VStack>
+
+		// put `rows` after the button. The Farceur session hit it on the first
+		// real panel; source order is the only order anybody can read off the
+		// page, and it was not a decision, only what appending happened to do.
+		var pieces:Array<{node:Null<Expr>, splice:Null<Expr>}> = [];
+		var text:Null<String> = null;
+
+		for (child in xml) {
+			switch (child.nodeType) {
+				case Xml.Element:
+					pieces.push({node: buildNode(child, pos), splice: null});
+
+				case Xml.PCData | Xml.CData:
+					var raw = StringTools.trim(child.nodeValue);
+					if (raw == "") continue;
+					var nodes = spliced(raw, pos);
+					if (nodes != null) pieces.push({node: null, splice: nodes});
+					else text = text == null ? raw : text + raw;
+
+				case _:
+			}
+		}
+
+		// Text content is the `text` property -- `nui` settled in B2 that text is
+		// an ordinary property, not a special accessor. What tells it apart from
+		// children is the TYPE of the interpolation, above: a `String` is text,
+		// an `Array<nui.Node>` is children, and there is no expression for which
+		// both readings make sense.
+		if (text != null && !seen.exists("text")) {
 			if (Backend.kindOf(tag, "text") == null) {
 				Context.error('"$tag" ne porte pas de texte.\n'
 					+ "  Une interpolation d'enfants ({[for (x in xs) ui(<Text …/>)]}) "
@@ -318,20 +346,6 @@ class Markup {
 			}
 		}
 
-		var childExprs:Array<Expr> = [];
-		for (child in xml) {
-			if (child.nodeType == Xml.Element) {
-				childExprs.push(buildNode(child, pos));
-			}
-		}
-
-		// A chain, not a block of statements.
-		//
-		// `prop` and `child` return the node, so both shapes build the same tree
-		// -- but the backend's validator reads a chain as one node with its
-		// properties, where statements on a local look like a bare `new` carrying
-		// none, and a required property is then reported missing. Emitting the
-		// idiomatic form keeps the two in agreement.
 		// A component contract builds its own node: `vui.meter.LevelMeter.node()`
 		// fills in seven defaults and normalises the channel count, and a bare
 		// `new Node("LevelMeter")` here would mean the same tag produced
@@ -342,20 +356,29 @@ class Markup {
 			? macro $p{builder.split(".")}.node(${object(setters, pos)})
 			: macro new nui.Node($v{tag}, $keyExpr);
 		if (builder == null) for (setter in setters) chain = applyTo(chain, setter);
-		for (child in childExprs) chain = macro $chain.child($child);
 
-		// A computed list comes after the written children, in the order the
-		// expression produced it. Evaluated ONCE, into a local, so a `for`
-		// comprehension in the markup is not run per child.
-		if (computed != null) {
-			chain = macro {
-				final __parent = $chain;
-				for (__child in $computed) __parent.child(__child);
-				__parent;
-			};
+		// A chain while every child is written, a block as soon as one is
+		// computed: `prop` and `child` return the node, so both shapes build the
+		// same tree, and the backend's validator reads a chain as one node with
+		// its properties where statements on a local look like a bare `new`
+		// carrying none.
+		var anySplice = false;
+		for (piece in pieces) if (piece.splice != null) anySplice = true;
+
+		if (!anySplice) {
+			for (piece in pieces) chain = macro $chain.child(${piece.node});
+			return chain;
 		}
 
-		return chain;
+		var body:Array<Expr> = [];
+		body.push(macro final __parent = $chain);
+		for (piece in pieces) {
+			body.push(piece.splice != null
+				? macro for (__child in ${piece.splice}) __parent.child(__child)
+				: macro __parent.child(${piece.node}));
+		}
+		body.push(macro __parent);
+		return {expr: EBlock(body), pos: pos};
 	}
 
 	/**
