@@ -122,6 +122,13 @@ class Contract {
 		{pack: ["mui", "ui"], name: "SliderBinding"},
 		{pack: ["mui", "ui"], name: "TextInput", args: ["String", "*"]},
 		{pack: ["mui", "ui"], name: "TextInputBinding"},
+		// A password field: masked, and the value is the application's -- bound,
+		// pre-filled, read back. A `TextInput` in every respect but how it is
+		// drawn, and a TYPE rather than a flag for the reason `SecretInput`
+		// below is one: a renderer that does not know a flag draws the password
+		// in clear, and an unknown type draws its marker instead.
+		{pack: ["mui", "ui"], name: "PasswordInput", args: ["String", "*"], optional: true},
+
 		// A value typed in that never enters the tree: a stream key, a token.
 		// `placeholder`, whether one is already stored, and where the value goes
 		// once -- no binding, because there is nothing to bind to. nui's canon

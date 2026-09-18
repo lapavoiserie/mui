@@ -121,6 +121,40 @@ On the wire it is a canonical `Picker` node: `label`, `selectedIndex`, `onSelect
 (an index), and one `Text` child per option. A received selection is not applied
 while the list is open.
 
+## PasswordInput
+
+A password field: masked, and **the value is the application's** — bound,
+pre-filled, read back.
+
+```haxe
+@:state var password:String = "";
+
+new PasswordInput("Password", password_)
+```
+
+**Constructor**: `PasswordInput(placeholder:String, state:TextInputBinding)` — a
+`TextInput` in every respect but one: it is drawn masked and never shows what
+it holds.
+
+The difference from `SecretInput` below is purpose, not degree:
+
+| | `PasswordInput` | `SecretInput` |
+|---|---|---|
+| the value | in the tree, bound, read back | never in the tree |
+| who owns it | the application | the person typing, until they submit |
+| what it is for | a password field an application manages | a key, a token, entered once |
+
+**Why a type and not `masked: true` on `TextInput`.** The same reason
+`SecretInput` is one: a renderer that does not know the flag draws the password
+in clear, and nothing says so. An unknown type draws its marker instead. A flag
+fails open; a type fails closed. It costs an implementation almost nothing — on
+a backend that draws its own text it is one method overridden.
+
+**Where it is: `sui`, `cui` and `pui`.** `aui` and `qui` have not got one;
+`wui` has not either, and that one is a story worth reading in
+`wui/test/SecretCheck.hx` — the obvious way to add it silently put a value
+setter on the *secret* field's node type.
+
 ## SecretInput
 
 A value that is typed in and **never enters the tree**: a stream key, a token, a

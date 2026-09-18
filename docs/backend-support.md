@@ -14,6 +14,7 @@
 | **Icon** | Icon | Icon | Icon | Icon | Icon | Icon |
 | **Image** | Image | Image | Image | Image | Image | Image |
 | **ListView** | List | LazyColumn | ListView | ListView | ListView | ListView |
+| **PasswordInput** | SecureField | — | — | Password | — | PasswordInput |
 | **Picker** | Picker | Picker | ComboBox | Picker ⚠️ | Picker | Picker |
 | **ProgressView** | ProgressView | ProgressView | ProgressRing | ProgressBar | ProgressView | ProgressView |
 | **SafeArea** | VStack ○ | SafeArea | VStack ○ | VStack ○ | SafeArea ○ | SafeArea |
