@@ -56,9 +56,58 @@ import haxe.macro.Expr;
 	compiler can complete inside it. Text content becomes the `text` property.
 **/
 class Markup {
-	/** Build a `nui.Node` tree from markup. **/
+	/**
+		Build a `nui.Node` tree from markup.
+
+		## Why this saves three statics before doing anything
+
+		`base`, `file` and `exprs` are where the extracted `{expr}` blocks live
+		while one piece of markup is being read, and they were plain statics --
+		fine for one call, and one call was all there ever was.
+
+		Computed children ended that the day they arrived, because the natural
+		way to write them nests:
+
+		```haxe
+		ui(<VStack>
+			<Picker …>{[for (t in types) ui(<Text text={t}/>)]}</Picker>
+		</VStack>);
+		```
+
+		The inner `ui()` runs while the outer is halfway through its
+		attributes, overwrites all three, and the outer then reads `exprs` that
+		belong to the inner:
+
+		    Markup.hx:175: Uncaught exception field access on null
+
+		Found by the Farceur session, on the exact example this library's own
+		documentation gives. The suite missed it because its computed list was
+		the last thing in its tag, so nothing was read afterwards -- a test that
+		passed for a reason unrelated to what it was checking.
+
+		Saved and put back rather than made a parameter: the three are read from
+		five places on the way down, and threading them through would be a
+		parameter nobody reads, for a depth that is almost always one.
+	**/
 	public static macro function ui(markup:Expr):Expr {
 		#if macro
+		var outerBase = base;
+		var outerFile = file;
+		var outerExprs = exprs;
+
+		var built = expand(markup);
+
+		base = outerBase;
+		file = outerFile;
+		exprs = outerExprs;
+		return built;
+		#else
+		return macro null;
+		#end
+	}
+
+	#if macro
+	static function expand(markup:Expr):Expr {
 		var source:String;
 		var contentPos:Position;
 		var skipQuote:Bool;
@@ -120,12 +169,8 @@ class Markup {
 		}
 
 		return buildNode(root, markup.pos);
-		#else
-		return macro null;
-		#end
 	}
 
-	#if macro
 	static var base:Int;
 	static var file:String;
 	static var exprs:Array<{code:String, offset:Int}>;
@@ -184,6 +229,28 @@ class Markup {
 		var re = ~/^__EXPR_(\d+)__$/;
 		if (re.match(raw)) return parseExpr(Std.parseInt(re.matched(1)));
 		return macro $v{raw};
+	}
+
+	/**
+		The attributes as the object a contract's `node()` takes.
+
+		Unwrapped: the props of a contract are ordinary Haxe fields of a
+		typedef, not `nui.PropValue`, so what `wrap` put on comes straight back
+		off. The kind was not wasted -- it is what refused `<LevelMeter
+		channels="deux"/>` before Haxe ever saw the object.
+	**/
+	static function object(setters:Array<{key:String, value:Expr}>, pos:Position):Expr {
+		var fields:Array<ObjectField> = [];
+		for (setter in setters) fields.push({field: setter.key, expr: unwrap(setter.value)});
+		return {expr: EObjectDecl(fields), pos: pos};
+	}
+
+	/** The value inside a `PropValue` constructor this markup put it in. **/
+	static function unwrap(e:Expr):Expr {
+		return switch (e.expr) {
+			case ECall({expr: EField(_, _)}, [inner]): inner;
+			case _: e;
+		};
 	}
 
 	/** Append one `.prop(key, value)` to a node expression. **/
@@ -265,8 +332,16 @@ class Markup {
 		// properties, where statements on a local look like a bare `new` carrying
 		// none, and a required property is then reported missing. Emitting the
 		// idiomatic form keeps the two in agreement.
-		var chain = macro new nui.Node($v{tag}, $keyExpr);
-		for (setter in setters) chain = applyTo(chain, setter);
+		// A component contract builds its own node: `vui.meter.LevelMeter.node()`
+		// fills in seven defaults and normalises the channel count, and a bare
+		// `new Node("LevelMeter")` here would mean the same tag produced
+		// something different depending on whether it was written in markup or
+		// in Haxe. See `Backend.Vocabulary.builderOf`.
+		var builder = Backend.builderOf(tag);
+		var chain = builder != null
+			? macro $p{builder.split(".")}.node(${object(setters, pos)})
+			: macro new nui.Node($v{tag}, $keyExpr);
+		if (builder == null) for (setter in setters) chain = applyTo(chain, setter);
 		for (child in childExprs) chain = macro $chain.child($child);
 
 		// A computed list comes after the written children, in the order the

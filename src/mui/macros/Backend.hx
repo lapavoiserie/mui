@@ -89,15 +89,87 @@ typedef Vocabulary = {
 	var requiredOf:String->Array<String>;
 	var kindOf:String->String->Null<String>;
 	var types:Void->Array<String>;
+
+	/**
+		For an EXTENSION only: the type path whose `node(props)` builds this
+		tag, or null to have the markup build a `nui.Node` itself.
+
+		A backend leaves this out. A component library does not, and the
+		difference is where the defaults live: `vui.meter.LevelMeter.node()`
+		fills in `channels`, `floorDb`, `warnDb` and four more, and normalises
+		the channel count. Markup that emitted a bare `nui.Node` would produce
+		a meter missing all of them — the same tag meaning two things depending
+		on whether it was written in Haxe or in markup.
+	**/
+	@:optional var builderOf:String->Null<String>;
 };
 
 class Backend {
 	#if macro
 	static var registered:Null<Vocabulary> = null;
+	static var extensions:Array<Vocabulary> = [];
 
 	/** Called by a backend's own init macro. See the class documentation. **/
 	public static function register(vocabulary:Vocabulary):Void
 		registered = vocabulary;
+
+	/**
+		A library adding types of its own to whatever backend is being built.
+
+		`vui` is why. Its components are contracts rather than controls: the
+		node is data, carried in a tree that a panel WITHOUT the component
+		still receives and draws a fallback for, so `LevelMeter` is not `pui`'s
+		vocabulary nor `wui`'s — it is the same on all of them. Registering it
+		through the backend would have meant six copies, and teaching `pui`
+		about `vui` would have meant a backend depending on a library that
+		depends on backends.
+
+		So an extension registers beside the backend rather than inside it, and
+		nobody learns anybody's name:
+
+		```
+		--macro pui.nui.Vocabulary.registerWithMui()
+		--macro vui.macros.Vocabulary.declare("vui.meter.LevelMeter")
+		```
+
+		The backend is asked first, and a type BOTH claim is a compile error
+		rather than a silent shadow: two answers for one tag is the drift this
+		whole schema exists to prevent, and the one place it could still get in.
+	**/
+	public static function extend(vocabulary:Vocabulary):Void {
+		if (extensions.indexOf(vocabulary) < 0) extensions.push(vocabulary);
+	}
+
+	/**
+		The vocabulary that answers for this type: the backend, or an extension.
+
+		The clash is caught HERE rather than when an extension registers,
+		because `--macro` lines run in the order they are written and an
+		extension declared before the backend would have found nothing to clash
+		with. Checked where it is asked, it cannot depend on that order.
+	**/
+	static function owner(type:String):Null<Vocabulary> {
+		var mine = registered != null && registered.knows(type);
+		var theirs = null;
+		for (extension in extensions) if (extension.knows(type)) { theirs = extension; break; }
+
+		if (mine && theirs != null) {
+			haxe.macro.Context.error('"$type" est à la fois un type du backend '
+				+ name() + " et d'une extension. Une balise ne peut pas avoir deux "
+				+ "réponses.", haxe.macro.Context.currentPos());
+		}
+		return mine ? registered : theirs;
+	}
+
+	/**
+		The type path whose `node(props)` builds this tag, if it is not a plain
+		node. See `Vocabulary.builderOf`.
+	**/
+	public static function builderOf(type:String):Null<String> {
+		var found = owner(type);
+		if (found == null || found.builderOf == null) return null;
+		return found.builderOf(type);
+	}
 
 	/**
 		Does the target declare a vocabulary at all?
@@ -122,16 +194,20 @@ class Backend {
 
 	/** Does the target know how to build this node type? **/
 	public static function knows(type:String):Bool
-		// Unreachable when null: ui() stops at hasVocabulary() before asking.
-		return registered == null ? false : registered.knows(type);
+		// Unreachable when registered is null: ui() stops at hasVocabulary().
+		return owner(type) != null;
 
 	/** Every attribute the target accepts on this type. **/
-	public static function keysOf(type:String):Array<String>
-		return registered == null ? [] : registered.keysOf(type);
+	public static function keysOf(type:String):Array<String> {
+		var found = owner(type);
+		return found == null ? [] : found.keysOf(type);
+	}
 
 	/** Attributes the target requires on this type. **/
-	public static function requiredOf(type:String):Array<String>
-		return registered == null ? [] : registered.requiredOf(type);
+	public static function requiredOf(type:String):Array<String> {
+		var found = owner(type);
+		return found == null ? [] : found.requiredOf(type);
+	}
 
 	/**
 		Which `PropValue` constructor an attribute takes, by name.
@@ -139,11 +215,16 @@ class Backend {
 		`null` means the target has no such attribute — which the markup reports
 		as an error.
 	**/
-	public static function kindOf(type:String, key:String):Null<String>
-		return registered == null ? null : registered.kindOf(type, key);
+	public static function kindOf(type:String, key:String):Null<String> {
+		var found = owner(type);
+		return found == null ? null : found.kindOf(type, key);
+	}
 
 	/** Types the target knows, for an error message that helps. **/
-	public static function types():Array<String>
-		return registered == null ? [] : registered.types();
+	public static function types():Array<String> {
+		var out = registered == null ? [] : registered.types();
+		for (extension in extensions) for (type in extension.types()) out.push(type);
+		return out;
+	}
 	#end
 }
