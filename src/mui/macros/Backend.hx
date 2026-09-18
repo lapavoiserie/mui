@@ -54,6 +54,34 @@ package mui.macros;
 	The kind crosses as a **string**, not as an enum. Each backend owns its own
 	`PropKind`, and `mui` only needs the name of the constructor to emit; sharing
 	the enum would mean hoisting it somewhere common for no benefit.
+
+	## The kinds a backend may name
+
+	`KString`, `KInt`, `KFloat`, `KBool` for values, and for acts `KCallback`
+	when it carries nothing plus `KCallbackString`, `KCallbackFloat`,
+	`KCallbackInt` and `KCallbackBool` when it carries something — one per
+	constructor of `nui.PropValue`. Anything else is a compile error naming the
+	tag, the attribute and the kind: a schema exists to say what a value is, and
+	a default that guesses undoes it.
+
+	The four carrying kinds were added for `pui`. Until then the only declared
+	callback in any backend was `wui.ui.Button.onClick`, a `Void->Void`, so
+	`KCallback` had never been asked to carry anything — and a two-way control
+	in markup asks immediately:
+
+	```haxe
+	<Toggle isOn={muet} onToggle={v -> moteur.muet(v)}/>
+	```
+
+	## Acts are keys; children are not
+
+	`keysOf` lists what may be written as an ATTRIBUTE, so it includes acts —
+	`wui` has done this from the start, its `onClick` being an ordinary
+	`@:winrt` field of function type. Children are a different axis: the markup
+	builds them from child ELEMENTS, so a control whose children are not views
+	(`pui.ui.Picker`, whose options cross as one `Text` child each) declares
+	that where it declares its children, and nothing about it belongs in
+	`keysOf`.
 **/
 typedef Vocabulary = {
 	var knows:String->Bool;

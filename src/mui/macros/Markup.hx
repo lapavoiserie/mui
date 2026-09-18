@@ -222,7 +222,7 @@ class Markup {
 			}
 
 			seen.set(attr, true);
-			var value = wrap(kind, valueExpr(raw, pos));
+			var value = wrap(kind, valueExpr(raw, pos), tag, attr, pos);
 			setters.push({key: attr, value: value});
 		}
 
@@ -282,15 +282,48 @@ class Markup {
 		return found ? buf.toString() : null;
 	}
 
-	/** Wrap a value in the `PropValue` constructor the schema declares for it. **/
-	static function wrap(kind:String, value:Expr):Expr {
+	/**
+		Wrap a value in the `PropValue` constructor the schema declares for it.
+
+		## An act that carries something
+
+		`KCallback` alone was enough while the only declared callback in any
+		backend was `wui.ui.Button.onClick`, a `Void->Void`. It stops being
+		enough the moment a two-way control is written in markup:
+
+		```haxe
+		<Toggle isOn={muet} onToggle={v -> moteur.muet(v)}/>
+		```
+
+		`onToggle` carries a `Bool`, and wrapping it as `PCallback` builds a node
+		whose action takes nothing. So a backend now says what an act carries,
+		and the four `PCallbackX` of `nui.PropValue` each have a kind.
+
+		## And an unknown kind is refused
+
+		This ended in `case _: PString($value)`, which made an unrecognised kind
+		into a string — silently, and with a cast error somewhere downstream if
+		it was lucky. A schema's job is to say what a value is; a default that
+		guesses undoes it. The same shape cost `wui` its numeral setters this
+		morning, and `pui` its property kinds.
+	**/
+	static function wrap(kind:String, value:Expr, tag:String, attr:String, pos:Position):Expr {
 		return switch (kind) {
 			case "KString": macro nui.PropValue.PString($value);
 			case "KInt": macro nui.PropValue.PInt($value);
 			case "KFloat": macro nui.PropValue.PFloat($value);
 			case "KBool": macro nui.PropValue.PBool($value);
 			case "KCallback": macro nui.PropValue.PCallback($value);
-			case _: macro nui.PropValue.PString($value);
+			case "KCallbackString": macro nui.PropValue.PCallbackString($value);
+			case "KCallbackFloat": macro nui.PropValue.PCallbackFloat($value);
+			case "KCallbackInt": macro nui.PropValue.PCallbackInt($value);
+			case "KCallbackBool": macro nui.PropValue.PCallbackBool($value);
+			case _:
+				Context.error('"$tag" déclare "$attr" de sorte "$kind", que ce markup '
+					+ "ne sait pas écrire.\n"
+					+ "  Sortes connues : KString, KInt, KFloat, KBool, KCallback, "
+					+ "KCallbackString, KCallbackFloat, KCallbackInt, KCallbackBool.", pos);
+				macro null;
 		};
 	}
 	#end
