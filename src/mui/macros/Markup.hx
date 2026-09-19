@@ -338,11 +338,94 @@ class Markup {
 	static function decorate(node:Expr, of:{key:String, kind:String, value:Expr}):Expr {
 		var key = of.key;
 		var value = of.value;
+
+		// Written whole, as a structure: `border={{colour: …, width: 3}}`.
+		var whole = whole(key, value);
+		if (whole != null) {
+			var strings = {expr: EArrayDecl(whole.strings), pos: value.pos};
+			var floats = {expr: EArrayDecl(whole.floats), pos: value.pos};
+			return macro $node.modifier({type: $v{key}, strings: $strings, floats: $floats});
+		}
+
 		return switch (of.kind) {
 			case "KString": macro $node.modifier({type: $v{key}, strings: [$value]});
 			case "KBool": macro $value ? $node.modifier({type: $v{key}}) : $node;
 			case _: macro $node.modifier({type: $v{key}, floats: [$value]});
 		}
+	}
+
+	/**
+		A modifier written as a structure rather than a single value.
+
+		`border` carries a colour, a width and a radius -- the wire has said so
+		since there was a wire -- and the markup could write only the first, so
+		an application wanting a three-pixel border built the modifier by hand
+		beside markup that was checked. `nui.Modifiers.partsOf` names the parts,
+		and this matches the fields against them.
+
+		Null when the attribute was not written as one, which is every other
+		attribute in every existing tree: a colour on its own still means the
+		colour, and this reads nothing it was not given.
+
+		Two refusals rather than a guess, both from the canon:
+		- **a field the modifier does not carry** -- `borderColour` for
+		  `colour` is the same typo `backgroundColour` already is, and it is
+		  caught in the same place;
+		- **a part named without the part before it**, where a missing one is
+		  not a zero: `{colour: …, radius: 6}` asks for a rounded border of no
+		  width, which draws nothing at all. Under `fill` (that is, `padding`)
+		  there is no such thing -- an unnamed edge has no padding, and that is
+		  a real thing to want.
+	**/
+	static function whole(key:String, value:Expr):Null<{strings:Array<Expr>, floats:Array<Expr>}> {
+		var fields = switch (value.expr) {
+			case EObjectDecl(f): f;
+			case _: return null;
+		};
+		var canon = nui.Modifiers.partsOf(key);
+		// `clip` carries nothing, so `clip={{…}}` is not a whole modifier; it
+		// falls through and Haxe refuses the structure as a condition.
+		if (canon == null) return null;
+
+		var said = new Map<String, Expr>();
+		for (field in fields) {
+			if (canon.strings.indexOf(field.field) < 0 && canon.floats.indexOf(field.field) < 0) {
+				Context.error('"$key" ne porte pas de "${field.field}".\n'
+					+ '  Parties acceptées : '
+					+ canon.strings.concat(canon.floats).join(", ") + ".", value.pos);
+				continue;
+			}
+			said.set(field.field, field.expr);
+		}
+
+		var strings = [for (name in canon.strings)
+			said.exists(name) ? said.get(name) : macro ""];
+		// Trailing strings are never dropped: there is one, and it is the
+		// colour. An absent one is the empty string, which `nui.Color.said`
+		// refuses, so the modifier carries no colour rather than black.
+
+		var floats:Array<Expr> = [];
+		var missing:Null<String> = null;
+		for (name in canon.floats) {
+			if (said.exists(name)) {
+				if (missing != null) {
+					Context.error('"$key" ne peut pas porter "$name" sans "$missing".\n'
+						+ '  Une partie absente y vaut « celle du contrôle », pas zéro.', value.pos);
+					return null;
+				}
+				floats.push(said.get(name));
+			} else if (canon.fill) {
+				// A real zero, leading or trailing: `{top: 8}` is a padding at
+				// the top and nowhere else, not a padding of 8 everywhere --
+				// which is what the positional `padding={8}` means, and the
+				// reason an object must not be read as a short form.
+				floats.push(macro 0.0);
+			} else {
+				missing = name;
+			}
+		}
+
+		return {strings: strings, floats: floats};
 	}
 
 	/** Append one `.prop(key, value)` to a node expression. **/
