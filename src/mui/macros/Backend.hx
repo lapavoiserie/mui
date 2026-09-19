@@ -73,6 +73,17 @@ package mui.macros;
 	<Toggle isOn={muet} onToggle={v -> moteur.muet(v)}/>
 	```
 
+	## Decorations are not a vocabulary's business
+
+	`backgroundColor` belongs to no control. It is one of `nui`'s **modifiers**
+	— an ordered list with its own shape on the wire — so a backend is never
+	asked about it and `nui.Modifiers` answers instead. The names are a closed
+	set, which is what lets `backgroundColour` be refused by the same rule that
+	refuses a misspelt property.
+
+	There is no such thing as an attribute every control accepts. A property is
+	a control's own, declared by it; a decoration is not a property at all.
+
 	## Acts are keys; children are not
 
 	`keysOf` lists what may be written as an ATTRIBUTE, so it includes acts —

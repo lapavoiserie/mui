@@ -94,12 +94,16 @@ class Markup {
 		var outerBase = base;
 		var outerFile = file;
 		var outerExprs = exprs;
+		var outerWritten = written;
+		var outerAt = at;
 
 		var built = expand(markup);
 
 		base = outerBase;
 		file = outerFile;
 		exprs = outerExprs;
+		written = outerWritten;
+		at = outerAt;
 		return built;
 		#else
 		return macro null;
@@ -135,6 +139,8 @@ class Markup {
 		exprs = [];
 
 		var cleaned = extractExpressions(source, exprs);
+		written = attributeOrder(cleaned);
+		at = 0;
 
 		var xml:Xml;
 		try {
@@ -175,6 +181,12 @@ class Markup {
 	static var file:String;
 	static var exprs:Array<{code:String, offset:Int}>;
 
+	/** Attribute names per element, in source order. See `attributeOrder`. **/
+	static var written:Array<Array<String>>;
+
+	/** Which element `buildNode` is on, walking `written` in step with it. **/
+	static var at:Int;
+
 	/**
 		Pull `{expr}` blocks out, leaving placeholders that parse as XML.
 
@@ -212,6 +224,67 @@ class Markup {
 		}
 		return buf.toString();
 	}
+
+	/**
+		The attribute names of every element, in the order they were written.
+
+		`Xml.attributes()` does **not** preserve document order — asked for
+		`label onClick backgroundColor foregroundColor opacity` it answers
+		`opacity onClick label foregroundColor backgroundColor`. That is fine
+		for properties, which are a map, and wrong for decorations, which are a
+		LIST because the order is the semantics: a border applied after a
+		padding is not the same as one applied before it.
+
+		So the order is read from the source, which is the only place it
+		survives. One entry per element, in document order — and `buildNode`
+		walks depth-first, attributes before children, which is document order
+		too, so a cursor over this list stays in step with it.
+	**/
+	static function attributeOrder(cleaned:String):Array<Array<String>> {
+		var out:Array<Array<String>> = [];
+		var i = 0;
+		while (i < cleaned.length) {
+			if (StringTools.fastCodeAt(cleaned, i) != "<".code) { i++; continue; }
+			// A closing tag, a comment or a declaration carries no attributes.
+			var after = i + 1 < cleaned.length ? cleaned.charAt(i + 1) : "";
+			if (after == "/" || after == "!" || after == "?") { i++; continue; }
+
+			var names:Array<String> = [];
+			var j = i + 1;
+			// Past the tag name.
+			while (j < cleaned.length && !isSpace(cleaned.charAt(j))
+				&& cleaned.charAt(j) != ">" && cleaned.charAt(j) != "/") j++;
+
+			while (j < cleaned.length && cleaned.charAt(j) != ">") {
+				while (j < cleaned.length && isSpace(cleaned.charAt(j))) j++;
+				var start = j;
+				while (j < cleaned.length && cleaned.charAt(j) != "=" && cleaned.charAt(j) != ">"
+					&& !isSpace(cleaned.charAt(j))) j++;
+				var name = cleaned.substr(start, j - start);
+				while (j < cleaned.length && isSpace(cleaned.charAt(j))) j++;
+				if (j < cleaned.length && cleaned.charAt(j) == "=") {
+					if (name != "" && name != "/") names.push(name);
+					j++;
+					while (j < cleaned.length && isSpace(cleaned.charAt(j))) j++;
+					// Past the quoted value, whichever quote it used.
+					if (j < cleaned.length && (cleaned.charAt(j) == '"' || cleaned.charAt(j) == "'")) {
+						var quote = cleaned.charAt(j);
+						j++;
+						while (j < cleaned.length && cleaned.charAt(j) != quote) j++;
+						j++;
+					}
+				} else if (name == "") {
+					j++;
+				}
+			}
+			out.push(names);
+			i = j;
+		}
+		return out;
+	}
+
+	static inline function isSpace(c:String):Bool
+		return c == " " || c == "\t" || c == "\n" || c == "\r";
 
 	/** Re-parse an extracted block at the position it actually occupies. **/
 	static function parseExpr(index:Int):Expr {
@@ -253,6 +326,25 @@ class Markup {
 		};
 	}
 
+	/**
+		Append one `.modifier(...)` to a node expression.
+
+		A modifier's shape on the wire is `{type, floats, strings}` rather than
+		a `PropValue`, so what an attribute carries goes into whichever of the
+		two lists its kind belongs in. `clip` carries nothing and is written as
+		a flag, so `clip={true}` adds it and `clip={false}` does not -- which is
+		the only way to write "not clipped" without a second name for it.
+	**/
+	static function decorate(node:Expr, of:{key:String, kind:String, value:Expr}):Expr {
+		var key = of.key;
+		var value = of.value;
+		return switch (of.kind) {
+			case "KString": macro $node.modifier({type: $v{key}, strings: [$value]});
+			case "KBool": macro $value ? $node.modifier({type: $v{key}}) : $node;
+			case _: macro $node.modifier({type: $v{key}, floats: [$value]});
+		}
+	}
+
 	/** Append one `.prop(key, value)` to a node expression. **/
 	static function applyTo(node:Expr, setter:{key:String, value:Expr}):Expr {
 		var key = setter.key;
@@ -271,20 +363,46 @@ class Markup {
 
 		var keyExpr:Expr = macro null;
 		var setters:Array<{key:String, value:Expr}> = [];
+		var decorations:Array<{key:String, kind:String, value:Expr}> = [];
 		var seen = new Map<String, Bool>();
 
-		for (attr in xml.attributes()) {
+		// In the order they were written, which `Xml` does not keep: see
+		// `attributeOrder`. A property would not care -- properties are a map
+		// -- but a decoration is a list entry, and the order is the semantics.
+		var order = at < written.length ? written[at] : [for (a in xml.attributes()) a];
+		at++;
+
+		for (attr in order) {
 			var raw = xml.get(attr);
+			if (raw == null) continue;
 
 			if (attr == "key") {
 				keyExpr = valueExpr(raw, pos);
 				continue;
 			}
 
+			// A decoration, not a property. `backgroundColor` belongs to no
+			// control -- it is one of `nui`'s modifiers, an ordered list with
+			// its own shape on the wire -- so the backend's vocabulary is not
+			// asked about it and `nui` answers instead. The names are a closed
+			// set, so `backgroundColour` is refused by the same rule that
+			// refuses a misspelt property.
+			if (nui.Modifiers.knows(attr)) {
+				seen.set(attr, true);
+				decorations.push({
+					key: attr,
+					kind: nui.Modifiers.kindOf(attr),
+					value: valueExpr(raw, pos),
+				});
+				continue;
+			}
+
 			var kind = Backend.kindOf(tag, attr);
 			if (kind == null) {
 				Context.error('"$tag" n\'a pas d\'attribut "$attr".\n'
-					+ '  Attributs acceptés : ${Backend.keysOf(tag).join(", ")}.', pos);
+					+ '  Attributs acceptés : ${Backend.keysOf(tag).join(", ")}.\n'
+					+ '  Décorations acceptées sur n\'importe quelle balise : '
+					+ nui.Modifiers.NAMES.join(", ") + ".", pos);
 				continue;
 			}
 
@@ -356,6 +474,12 @@ class Markup {
 			? macro $p{builder.split(".")}.node(${object(setters, pos)})
 			: macro new nui.Node($v{tag}, $keyExpr);
 		if (builder == null) for (setter in setters) chain = applyTo(chain, setter);
+
+		// Decorations after the properties, and among themselves in the order
+		// they were written: `nui.Modifier` is a list because the order IS the
+		// semantics -- a border applied after a padding is not the same as one
+		// applied before it.
+		for (decoration in decorations) chain = decorate(chain, decoration);
 
 		// A chain while every child is written, a block as soon as one is
 		// computed: `prop` and `child` return the node, so both shapes build the
