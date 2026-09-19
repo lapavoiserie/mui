@@ -432,11 +432,19 @@ class Markup {
 					pieces.push({node: buildNode(child, pos), splice: null});
 
 				case Xml.PCData | Xml.CData:
-					var raw = StringTools.trim(child.nodeValue);
-					if (raw == "") continue;
-					var nodes = spliced(raw, pos);
-					if (nodes != null) pieces.push({node: null, splice: nodes});
-					else text = text == null ? raw : text + raw;
+					// One text node may hold SEVERAL interpolations: `{a}{b}`,
+					// or two on separate lines, are one PCData with two
+					// placeholders and whitespace between them. Read as a
+					// whole it matched neither "one interpolation" nor "text",
+					// so `<HStack>{a}{b}</HStack>` was refused with "does not
+					// carry text" -- each half compiling on its own, which is
+					// the most confusing shape a refusal can take. Found by the
+					// Farceur session on the first panel that needed two.
+					for (part in runs(child.nodeValue)) {
+						var nodes = spliced(part, pos);
+						if (nodes != null) pieces.push({node: null, splice: nodes});
+						else if (part != "") text = text == null ? part : text + part;
+					}
 
 				case _:
 			}
@@ -503,6 +511,32 @@ class Markup {
 		}
 		body.push(macro __parent);
 		return {expr: EBlock(body), pos: pos};
+	}
+
+	/**
+		One text node, split into its interpolations and the text between them.
+
+		`extractExpressions` leaves `__EXPR_n__` placeholders in the source, and
+		XML gives back everything between two elements as ONE text node — so two
+		interpolations side by side arrive together, with whatever whitespace
+		the author wrote between them. Each placeholder is its own run; what is
+		left is text, trimmed, and dropped when it is only the whitespace that
+		separated them.
+	**/
+	static function runs(said:Null<String>):Array<String> {
+		if (said == null) return [];
+		var out:Array<String> = [];
+		var pattern = ~/__EXPR_\d+__/;
+		var rest = said;
+		while (pattern.match(rest)) {
+			var before = StringTools.trim(pattern.matchedLeft());
+			if (before != "") out.push(before);
+			out.push(pattern.matched(0));
+			rest = pattern.matchedRight();
+		}
+		var tail = StringTools.trim(rest);
+		if (tail != "") out.push(tail);
+		return out;
 	}
 
 	/**
