@@ -64,17 +64,13 @@ class KitchenSink extends mui.App {
 	/**
 		The screen. One source, three backends.
 
-		`pui`, `sui` and `aui` all build their own controls from markup now, so
-		there is nothing to hand over: `screen()` already answers this
-		backend's `View`. It used to go through `readThrough` on two of them --
-		the door a Companion frame uses -- which worked and was wrong: a screen
-		written here is a WRITTEN tree and belongs in the built door.
+		Written straight into `body()`, not through a helper: `sui`'s generator
+		reads this method at compile time and turns it into Swift, and a call
+		to a method of our own is not something it can follow -- *"[SwiftGen]
+		Cannot generate Swift for this factory call"*. `pui` and `aui` did not
+		care, which is exactly why it was worth finding out.
 	**/
 	override function body():mui.View {
-		return screen();
-	}
-
-	public function screen():mui.View {
 		return ui(<VStack spacing={12} padding={{top: 16.0, right: 16.0, bottom: 16.0, left: 16.0}}>
 			<Text text="mui markup, three backends" scale="title"/>
 			<Text text="every type all three declare" scale="caption"/>

@@ -4,10 +4,12 @@
 -lib kui
 -lib rui
 -lib nui
+-lib hxcpp
 -D mui_backend=sui
 -D mui_views
+--macro sui.macros.SwiftGenerator.register()
 --macro mui.macros.Bind.all()
 --macro sui.nui.Vocabulary.registerWithMui()
 --macro sui.kui.Platform.registerWithKui()
 --main KitchenSink
---interp
+-cpp build/cpp
