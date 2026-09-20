@@ -1,0 +1,11 @@
+-cp .
+-cp ../../../src
+-lib wui
+-lib rui
+-lib nui
+-lib kui
+-D mui_backend=wui
+--macro wui.nui.Vocabulary.registerWithMui()
+--macro mui.macros.Bind.all()
+-main CanonTags
+--interp

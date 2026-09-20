@@ -10,24 +10,32 @@ written, not about what `ui()` would accept.
 
 ## What the table says today
 
-Two different problems, and only one of them is a gap.
+**`wui` now speaks the canon too** — fixed 2026-09-21. Its classes are still
+named after WinUI's controls (`ToggleSwitch`, `TextBox`, `ScrollViewer`), which
+is what a WinUI reader should read; what changed is that `nodeNameOf` reports
+the canonical name when `wui.nui.Canonical` has one, and the vocabulary answers
+to both. `WinUISink` had been translating those names at the door all along —
+only the schema markup consults had not been told.
 
-**`wui` speaks WinUI, not the shared vocabulary.** It declares `ToggleSwitch`,
-`TextBox`, `ScrollViewer`, `TabView`, `ComboBox`, `PasswordBox`, `ProgressBar`,
-`StackPanel`, `TextBlock` — the names of the controls it maps to. That is
-deliberate and documented in `wui.nui.Vocabulary.nodeNameOf`: a control *is* a
-node type, and `@:winuiType` already says which one, so nothing was restated.
+`canon/` is the fixture that keeps it: canonical tags compiled against `wui`.
+Without the change it fails with *Le backend cible ne sait pas construire
+"ProgressView"*.
 
-The reasoning held while the name was wui's own business. It stopped holding
-when markup began checking a tag against the target's vocabulary: the name is
-now **shared**, and one concept has two of them. `<Toggle/>` does not compile
-for `wui`, and `<ToggleSwitch/>` compiles for nothing else.
+**What is left is missing types**, an ordinary debt: the concept has one name
+everywhere, some backends have not declared it yet.
 
-**The others are missing types**, which is an ordinary debt: the concept has
-one name everywhere, some backends have not declared it yet. `sui` is the
-thinnest at ten; `cui` has no `ScrollView`, `Spacer` or `ZStack`, which is why
+| backend | manque |
+|---|---|
+| `sui` (10) | Disclosure, Divider, Icon, Image, PasswordInput, Picker, ProgressView, SafeArea, SecretInput, Tab, Tabs, Tappable |
+| `aui` (14) | **Button**, Disclosure, PasswordInput, SafeArea, SecretInput, Tab, Tabs, Tappable |
+| `qui` (15) | Button is there; Disclosure, PasswordInput, SafeArea, SecretInput, Tab, Tabs, Tappable |
+| `cui` (16) | Disclosure, SafeArea, ScrollView, SecretInput, Spacer, Tappable, ZStack |
+| `wui` (39) | Disclosure, PasswordInput, SafeArea, Tappable |
+| `pui` (22) | — the reference |
+
+`cui`'s missing `ScrollView`, `Spacer` and `ZStack` are why
 `mui/examples/kitchen-sink` cannot be built for it.
 
 `Box` (cui) and `Grid`, `FontIcon`, `SelectorBar`, `MenuBar`, `NavigationView`
 (wui) belong to nobody else. Some are a backend's own idea; some are the same
-concept again under a third name.
+concept again under a third name, and this table is where that will show.

@@ -25,11 +25,25 @@ if [ "${1:-}" = "--record" ]; then
     exit 0
 fi
 
-if diff -u matrix.txt matrix.out; then
-    rm -f matrix.out
+ok=1
+if ! diff -u matrix.txt matrix.out; then
+    echo "the declared vocabulary moved -- ./check.sh --record once that is intended" >&2
+    ok=0
+fi
+rm -f matrix.out
+
+# And one fixture, because a table is a table: canonical tags have to
+# COMPILE for a backend whose own controls are named after somebody else's.
+if out=$(cd canon && haxe canon.hxml 2>&1); then
+    echo "$out"
+else
+    echo "FAIL canonical tags were refused by wui:" >&2
+    echo "$out" >&2
+    ok=0
+fi
+
+if [ "$ok" = 1 ]; then
     echo "all good"
 else
-    echo "the declared vocabulary moved -- ./check.sh --record once that is intended" >&2
-    rm -f matrix.out
     exit 1
 fi
