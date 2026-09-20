@@ -5,6 +5,7 @@
 -lib rui
 -lib nui
 -D mui_backend=pui
+-D mui_views
 --macro mui.macros.Bind.all()
 --macro pui.nui.Vocabulary.registerWithMui()
 --macro pui.kui.Platform.registerWithKui()

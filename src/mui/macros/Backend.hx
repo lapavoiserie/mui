@@ -1,5 +1,9 @@
 package mui.macros;
 
+#if macro
+import haxe.macro.Expr;
+#end
+
 /**
 	The target backend's vocabulary, seen from `mui` — and registered by it.
 
@@ -113,6 +117,44 @@ typedef Vocabulary = {
 		on whether it was written in Haxe or in markup.
 	**/
 	@:optional var builderOf:String->Null<String>;
+
+	/**
+		Build this backend's OWN control for a tag, instead of a `nui.Node`.
+
+		`given` is keyed by the canonical attribute name, with the value as the
+		author wrote it and nothing wrapped around it. `children` is an
+		`Array<View>` expression, or null. Answering null for a tag leaves the
+		markup building a node for it, which is what every backend did before
+		this hook existed.
+
+		**Why a backend would want this.** Markup produced a node and nothing
+		else, so it had one first-class consumer: `wui`, which is in push mode
+		and wants nodes. `pui` could turn a node into views; `sui` and `aui`
+		cannot, by design -- they read a received tree natively and never copy
+		it into views. An application written in markup could only reach those
+		by pretending to be a remote machine talking to itself: actions through
+		a string-id registry, the transpiler bypassed, and the fine-grained
+		read tracking those backends exist for thrown away.
+
+		With this, markup is a **syntax over the backend's own API**, checked
+		against the same declarations as before. `nui.macros.Construct` does
+		the work from what a control declared, so a backend's answer is one
+		line.
+	**/
+	@:optional var viewOf:(tag:String, given:Map<String, Expr>, children:Null<Expr>,
+		pos:Position) -> Null<Expr>;
+
+	/**
+		Put the decorations on a control this backend built.
+
+		`modifiers` is an `Array<nui.Modifier>` expression -- the same shape,
+		and the same order, the node path would have carried. A backend answers
+		by handing it to whatever already reads one, so the canon's nine names
+		are mapped in ONE place per backend rather than twice.
+
+		Only asked of a backend that answered `viewOf`.
+	**/
+	@:optional var decorate:(view:Expr, modifiers:Expr, pos:Position) -> Expr;
 };
 
 class Backend {
@@ -176,6 +218,23 @@ class Backend {
 		The type path whose `node(props)` builds this tag, if it is not a plain
 		node. See `Vocabulary.builderOf`.
 	**/
+	/** The backend's own control for a tag, or null to build a node. **/
+	public static function viewOf(tag:String, given:Map<String, Expr>,
+			children:Null<Expr>, pos:Position):Null<Expr> {
+		if (registered == null || registered.viewOf == null) return null;
+		return registered.viewOf(tag, given, children, pos);
+	}
+
+	/** Whether the target backend builds its own controls rather than nodes. **/
+	public static function buildsViews():Bool
+		return registered != null && registered.viewOf != null;
+
+	/** Put the decorations on a control the backend built. **/
+	public static function decorate(view:Expr, modifiers:Expr, pos:Position):Null<Expr> {
+		if (registered == null || registered.decorate == null) return null;
+		return registered.decorate(view, modifiers, pos);
+	}
+
 	public static function builderOf(type:String):Null<String> {
 		var found = owner(type);
 		if (found == null || found.builderOf == null) return null;

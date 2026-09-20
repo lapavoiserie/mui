@@ -63,7 +63,7 @@ class KitchenSink extends mui.App {
 	**/
 	override function body():mui.View {
 		#if (mui_backend == "pui")
-		return pui.nui.NodeRenderer.build(screen());
+		return screen();
 		#elseif (mui_backend == "sui")
 		sui.runtime.ViewNodeBridge.readThrough(new nui.SelfSource(screen));
 		return new mui.ui.VStack([]);
@@ -75,7 +75,7 @@ class KitchenSink extends mui.App {
 		#end
 	}
 
-	public function screen():nui.Node {
+	public function screen():mui.View {
 		return ui(<VStack spacing={12} padding={{top: 16.0, right: 16.0, bottom: 16.0, left: 16.0}}>
 			<Text text="mui markup, three backends" scale="title"/>
 			<Text text="every type all three declare" scale="caption"/>

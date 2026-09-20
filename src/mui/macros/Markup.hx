@@ -335,6 +335,25 @@ class Markup {
 		a flag, so `clip={true}` adds it and `clip={false}` does not -- which is
 		the only way to write "not clipped" without a second name for it.
 	**/
+	/** One `nui.Modifier` literal, as the node path would have carried it. **/
+	static function modifierOf(of:{key:String, kind:String, value:Expr}):Expr {
+		var key = of.key;
+		var value = of.value;
+		var whole = whole(key, value);
+		if (whole != null) {
+			var strings = {expr: EArrayDecl(whole.strings), pos: value.pos};
+			var floats = {expr: EArrayDecl(whole.floats), pos: value.pos};
+			return macro {type: $v{key}, strings: $strings, floats: $floats};
+		}
+		return switch (of.kind) {
+			case "KString": macro {type: $v{key}, strings: [$value]};
+			// `clip` carries nothing, so the flag decides whether it is there
+			// at all -- and in a list that means an entry or an empty one.
+			case "KBool": macro($value ? {type: $v{key}} : null);
+			case _: macro {type: $v{key}, floats: [$value]};
+		}
+	}
+
 	static function decorate(node:Expr, of:{key:String, kind:String, value:Expr}):Expr {
 		var key = of.key;
 		var value = of.value;
@@ -560,6 +579,28 @@ class Markup {
 		// `new Node("LevelMeter")` here would mean the same tag produced
 		// something different depending on whether it was written in markup or
 		// in Haxe. See `Backend.Vocabulary.builderOf`.
+		// The backend's own control, when it offers one: markup as a syntax
+		// over its API rather than a tree it has to read back. See
+		// `Backend.Vocabulary.viewOf`.
+		var given = new Map<String, Expr>();
+		for (setter in setters) given.set(setter.key, unwrap(setter.value));
+		var own = Backend.viewOf(tag, given, childrenExpr(pieces, pos), pos);
+		if (own != null) {
+			if (decorations.length == 0) return own;
+			// The same list, in the same order, the node path would have
+			// carried -- the order IS the semantics. The backend hands it to
+			// whatever already reads one, so the nine canon names are mapped
+			// once per backend and not twice.
+			var chain:Array<Expr> = [];
+			for (decoration in decorations) chain.push(modifierOf(decoration));
+			var list = {expr: EArrayDecl(chain), pos: pos};
+			var dressed = Backend.decorate(own, list, pos);
+			if (dressed != null) return dressed;
+			Context.error('"$tag" est construit par le backend lui-même, qui ne sait pas '
+				+ 'encore poser de décoration : ' + [for (d in decorations) d.key].join(", "), pos);
+			return own;
+		}
+
 		var builder = Backend.builderOf(tag);
 		var chain = builder != null
 			? macro $p{builder.split(".")}.node(${object(setters, pos)})
@@ -593,6 +634,35 @@ class Markup {
 				: macro __parent.child(${piece.node}));
 		}
 		body.push(macro __parent);
+		return {expr: EBlock(body), pos: pos};
+	}
+
+	/**
+		The children as one `Array<View>`, for a backend building its own.
+
+		Null when any of them is a computed list: splicing `{[for …]}` into a
+		literal array needs a block, and a block is not an array literal. That
+		is a real limit and not a hidden one -- the tag falls back to a node,
+		which every backend still accepts.
+	**/
+	static function childrenExpr(pieces:Array<{node:Expr, splice:Null<Expr>}>, pos:Position):Null<Expr> {
+		if (pieces.length == 0) return null;
+
+		var anySplice = false;
+		for (piece in pieces) if (piece.splice != null) anySplice = true;
+		if (!anySplice) return {expr: EArrayDecl([for (piece in pieces) piece.node]), pos: pos};
+
+		// A computed list cannot be spliced into an array literal, so the
+		// children are pushed in written order instead. Typed, because an
+		// empty `[]` followed by a push of one control makes an array of THAT
+		// control, and the next child of another type would be refused.
+		var body:Array<Expr> = [macro var __kids:Array<mui.View> = []];
+		for (piece in pieces) {
+			body.push(piece.splice != null
+				? macro for (__child in ${piece.splice}) __kids.push(__child)
+				: macro __kids.push(${piece.node}));
+		}
+		body.push(macro __kids);
 		return {expr: EBlock(body), pos: pos};
 	}
 
@@ -661,14 +731,32 @@ class Markup {
 		if (!re.match(raw)) return null;
 
 		var e = parseExpr(Std.parseInt(re.matched(1)));
-		var nodes = Context.getType("nui.Node");
-		var list = Context.resolveType(macro :Array<nui.Node>, pos);
-
 		var t = try Context.typeof(e) catch (_:Dynamic) return null;
-		if (Context.unify(t, list)) return e;
-		// One node on its own is a list of one: writing a conditional child as
-		// `{siOuvert ? ui(<Text …/>) : null}` is the same need.
-		if (Context.unify(t, nodes)) return macro [$e];
+
+		// Nodes, and -- where the backend builds its own controls -- its
+		// views. Markup used to produce only nodes, so only nodes were ever
+		// spliced; a computed list of `pui.ui.HStack` is the same need and
+		// was being read as text, which is a confusing thing to be told.
+		var wanted = [Context.getType("nui.Node")];
+		// And, where the backend builds its own controls, its views.
+		if (Backend.buildsViews()) wanted.push(Context.getType("mui.View"));
+
+		for (one in wanted) {
+			// One on its own is a list of one: a conditional child written as
+			// `{siOuvert ? ui(<Text …/>) : null}` is the same need.
+			if (Context.unify(t, one)) return macro [$e];
+		}
+
+		// A LIST of them. Not `unify(t, Array<mui.View>)`: a Haxe array is
+		// invariant, so a comprehension of `pui.ui.HStack` does not unify with
+		// `Array<pui.View>` however clearly it is a list of views. The element
+		// type is what has to be asked.
+		var element = switch (Context.follow(t)) {
+			case TInst(_.get() => {name: "Array", pack: []}, [item]): item;
+			case _: null;
+		}
+		if (element == null) return null;
+		for (one in wanted) if (Context.unify(element, one)) return e;
 		return null;
 	}
 
