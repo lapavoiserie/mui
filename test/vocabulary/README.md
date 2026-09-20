@@ -29,12 +29,13 @@ everywhere, some backends have not declared it yet.
 | `sui` (10) | Disclosure, Divider, Icon, Image, PasswordInput, Picker, ProgressView, SafeArea, SecretInput, Tab, Tabs, Tappable |
 | `aui` (14) | **Button**, Disclosure, PasswordInput, SafeArea, SecretInput, Tab, Tabs, Tappable |
 | `qui` (15) | Button is there; Disclosure, PasswordInput, SafeArea, SecretInput, Tab, Tabs, Tappable |
-| `cui` (16) | Disclosure, SafeArea, ScrollView, SecretInput, Spacer, Tappable, ZStack |
+| `cui` (19) | Disclosure, SafeArea, SecretInput, Tappable |
 | `wui` (39) | Disclosure, PasswordInput, SafeArea, Tappable |
 | `pui` (22) | — the reference |
 
-`cui`'s missing `ScrollView`, `Spacer` and `ZStack` are why
-`mui/examples/kitchen-sink` cannot be built for it.
+`cui` gained `ScrollView`, `Spacer` and `ZStack` on 2026-09-21, and the kitchen
+sink builds and draws for it — see `examples/kitchen-sink/build-cui-frame.hxml`,
+which renders into a `Buffer` rather than taking over a terminal.
 
 `Box` (cui) and `Grid`, `FontIcon`, `SelectorBar`, `MenuBar`, `NavigationView`
 (wui) belong to nobody else. Some are a backend's own idea; some are the same

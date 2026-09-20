@@ -23,13 +23,13 @@ ProgressBar         .   .   .   .   .   x
 ProgressRing        .   .   .   .   .   x  
 ProgressView        x   x   .   x   x   x  
 SafeArea            x   .   .   .   .   .  
-ScrollView          x   .   x   x   x   x  
+ScrollView          x   x   x   x   x   x  
 ScrollViewer        .   .   .   .   .   x  
 SecretInput         x   .   .   .   .   x  
 SelectorBar         .   .   .   .   .   x  
 SelectorBarItem     .   .   .   .   .   x  
 Slider              x   x   x   x   x   x  
-Spacer              x   .   x   x   x   x  
+Spacer              x   x   x   x   x   x  
 StackPanel          .   .   .   .   .   x  
 Tab                 x   x   .   .   .   x  
 TabView             .   .   .   .   .   x  
@@ -43,6 +43,6 @@ TextInput           x   x   x   x   x   x
 Toggle              x   x   x   x   x   x  
 ToggleSwitch        .   .   .   .   .   x  
 VStack              x   x   x   x   x   x  
-ZStack              x   .   x   x   x   x  
+ZStack              x   x   x   x   x   x  
 
-total               22  16  10  14  15  39 
+total               22  19  10  14  15  39 

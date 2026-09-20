@@ -87,3 +87,27 @@ Haxe: a constructor argument matched by field name where the declaration names
 it otherwise (every string came out empty), a binding read only in the shape a
 hand-written app uses (`$null`), and a cell bound as `$count_` where the state
 is `count`.
+
+## `cui`, and what it costs a terminal
+
+    haxe build-cui.hxml                  # a real TUI, needs a terminal
+    haxe build-cui-frame.hxml            # the same screen into a Buffer, printed
+
+The second is how the picture is taken here: `cui` writes to a TTY and waits
+for keys, which a test harness has neither of, so the tree is rendered into a
+`cui.render.Buffer` and the cells are printed. Off-screen, like the other three.
+
+**The spacings are written in GUI units and applied as character cells.**
+`spacing={12}` is a sensible gap in points and twelve *rows* on a terminal, so
+this screen needs about 140 rows to hold what `pui` puts in 675 pixels. Nothing
+is wrong with either backend; the canon's `spacing` and `padding` carry no unit,
+and this is where that shows.
+
+Two defects are open and named rather than hidden:
+
+- **the `Bound to state` group lays out and draws nothing.** It measures 54x61
+  and occupies its rows; not one cell is written, including its plain `Text`.
+  Not padding — a padded `VStack` draws its child in isolation.
+- **`opacity` is accepted by markup for `cui` and nothing reads it.** The word
+  does not appear anywhere in that backend's source. A decoration a backend
+  cannot draw is supposed to be refused by name.
