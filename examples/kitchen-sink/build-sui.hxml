@@ -1,8 +1,13 @@
 -cp src
 -cp ../../src
 -lib sui
+-lib kui
+-lib rui
+-lib nui
 -D mui_backend=sui
---macro sui.macros.SwiftGenerator.register()
+-D mui_views
 --macro mui.macros.Bind.all()
+--macro sui.nui.Vocabulary.registerWithMui()
+--macro sui.kui.Platform.registerWithKui()
 --main KitchenSink
--cpp build/cpp
+--interp

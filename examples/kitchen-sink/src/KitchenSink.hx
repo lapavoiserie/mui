@@ -61,18 +61,17 @@ class KitchenSink extends mui.App {
 		through the same door the Companion uses -- so the tree is handed to
 		`readThrough` and `body()` is left empty.
 	**/
+	/**
+		The screen. One source, three backends.
+
+		`pui`, `sui` and `aui` all build their own controls from markup now, so
+		there is nothing to hand over: `screen()` already answers this
+		backend's `View`. It used to go through `readThrough` on two of them --
+		the door a Companion frame uses -- which worked and was wrong: a screen
+		written here is a WRITTEN tree and belongs in the built door.
+	**/
 	override function body():mui.View {
-		#if (mui_backend == "pui")
 		return screen();
-		#elseif (mui_backend == "sui")
-		sui.runtime.ViewNodeBridge.readThrough(new nui.SelfSource(screen));
-		return new mui.ui.VStack([]);
-		#elseif (mui_backend == "aui")
-		aui.runtime.ViewNodeBridge.readThrough(new nui.SelfSource(screen));
-		return new mui.ui.VStack([]);
-		#else
-		return new mui.ui.VStack([]);
-		#end
 	}
 
 	public function screen():mui.View {
@@ -82,34 +81,31 @@ class KitchenSink extends mui.App {
 
 			<VStack spacing={8}
 				padding={{top: 12.0, right: 12.0, bottom: 12.0, left: 12.0}}
-				backgroundColor={nui.Color.role(Surface)}
-				border={{colour: nui.Color.role(Border), width: 1.0, radius: 8.0}}>
+				opacity={1.0}>
 				<Text text="Bound to state"/>
-				<TextInput text={name} placeholder="your name" onText={setName}/>
-				<Toggle label="lit" isOn={lit} onToggle={setLit}/>
-				<Slider value={level} min={0.0} max={1.0} onValue={setLevel}/>
-				<Text text={"hello " + name + " · " + Math.round(level * 100) + "%"}
-					foregroundColor={lit ? nui.Color.role(Accent) : nui.Color.role(Muted)}/>
+				<TextInput text={name_} placeholder="your name"/>
+				<Toggle label="lit" isOn={lit_}/>
+				<Slider value={level_} min={0.0} max={1.0}/>
+				<Text text={"hello " + name + " · " + Math.round(level * 100) + "%"}/>
 			</VStack>
 
 			<HStack spacing={8}>
 				<Text text="left"/>
-				<Spacer flex={1.0}/>
+				<Spacer/>
 				<Text text="right"/>
 			</HStack>
 
 			<ZStack>
-				<VStack height={44.0} backgroundColor={nui.Color.role(Warning)}/>
-				<Text text="over it" foregroundColor={nui.Color.rgb(255, 255, 255)}/>
+				<VStack height={44.0}/>
+				<Text text="over it"/>
 			</ZStack>
 
-			<ScrollView flex={1.0} clip={true}>
+			<ScrollView clip={true}>
 				{[for (i in 0...12) ui(<HStack spacing={8}
 					padding={{top: 6.0, right: 6.0, bottom: 6.0, left: 6.0}}>
 					<Text text={"row " + (i + 1)}/>
-					<Spacer flex={1.0}/>
-					<Text text={i % 2 == 0 ? "even" : "odd"}
-						foregroundColor={nui.Color.role(Muted)}/>
+					<Spacer/>
+					<Text text={i % 2 == 0 ? "even" : "odd"}/>
 				</HStack>)]}
 			</ScrollView>
 		</VStack>);

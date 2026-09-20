@@ -64,8 +64,25 @@ and it is wrong.
 | `cui` | yes | |
 | `qui` | yes | its sink has no builder at all, so this is the only way markup reaches it |
 | `aui` | yes | |
-| `sui` | yes | its two-way controls take a **cell**, not a value and a callback — `<Toggle isOn={lit_}/>` |
+| `sui` | yes | |
 | `wui` | no, and by design | push mode: it wants nodes |
+
+## A two-way control binds a cell
+
+```haxe
+<Toggle label="Lit" isOn={lit_}/>
+<TextInput text={name_} placeholder="your name"/>
+<Slider value={level_} min={0} max={1}/>
+```
+
+The **cell**, not a value and a callback. `lit_` is the cell behind
+`@:state var lit`, and it is what a view written by hand binds too.
+
+It was a value and a callback for a while, with each backend turning the two
+back into a cell. `sui` is where that showed itself wrong — its controls hold a
+name, so there was nothing to make — and one source could not serve three
+backends while two of them wanted one shape and the third the other. A binding
+is a cell; saying so removed four modules.
 
 ## Decorations
 
