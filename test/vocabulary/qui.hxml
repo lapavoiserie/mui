@@ -1,0 +1,9 @@
+-cp .
+-cp ../../src
+-lib haxe-sailfishos
+-lib rui
+-lib nui
+-D mui_backend=qui
+--macro qui.nui.Vocabulary.registerWithMui()
+--macro Report.run()
+--interp

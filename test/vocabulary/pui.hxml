@@ -1,0 +1,9 @@
+-cp .
+-cp ../../src
+-lib pui
+-lib rui
+-lib nui
+-D mui_backend=pui
+--macro pui.nui.Vocabulary.registerWithMui()
+--macro Report.run()
+--interp
