@@ -586,6 +586,17 @@ class Markup {
 		for (setter in setters) given.set(setter.key, unwrap(setter.value));
 		var own = Backend.viewOf(tag, given, childrenExpr(pieces, pos), pos);
 		if (own != null) {
+			// A decoration this backend cannot draw is knowable HERE, so it is
+			// refused here. Skipping quietly is the canon's rule for a tree
+			// that ARRIVED, where failing a build is not on offer; markup is
+			// written against a backend somebody chose.
+			var can = Backend.honoured();
+			if (can != null) for (decoration in decorations) {
+				if (can.indexOf(decoration.key) >= 0) continue;
+				Context.error('Le backend cible ne sait pas dessiner "${decoration.key}" '
+					+ 'sur une de ses vues.\n'
+					+ '  Décorations qu\'il honore : ' + can.join(", ") + ".", pos);
+			}
 			if (decorations.length == 0) return own;
 			// The same list, in the same order, the node path would have
 			// carried -- the order IS the semantics. The backend hands it to

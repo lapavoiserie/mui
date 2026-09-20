@@ -155,6 +155,25 @@ typedef Vocabulary = {
 		Only asked of a backend that answered `viewOf`.
 	**/
 	@:optional var decorate:(view:Expr, modifiers:Expr, pos:Position) -> Expr;
+
+	/**
+		The modifier names this backend can actually put on one of its views.
+
+		Markup is written against a KNOWN backend, so a decoration it cannot
+		honour is knowable while compiling — and this project's rule is that
+		something knowable is a compile error, never a marker on screen or a
+		line in a log. A tag nothing declares is refused by name; an attribute
+		a control does not carry is refused by name; a decoration the backend
+		cannot draw is the same kind of thing.
+
+		"A backend honours what it can and skips the rest" is the canon's rule
+		for a **received** tree — data that arrived from elsewhere, where
+		failing the build is not on offer. It was never a licence to drop what
+		an author wrote in front of it.
+
+		Only asked of a backend that answered `viewOf`.
+	**/
+	@:optional var honoured:Void -> Array<String>;
 };
 
 class Backend {
@@ -223,6 +242,12 @@ class Backend {
 			children:Null<Expr>, pos:Position):Null<Expr> {
 		if (registered == null || registered.viewOf == null) return null;
 		return registered.viewOf(tag, given, children, pos);
+	}
+
+	/** The modifiers the target backend can put on a view, or null if it says. **/
+	public static function honoured():Null<Array<String>> {
+		if (registered == null || registered.honoured == null) return null;
+		return registered.honoured();
 	}
 
 	/** Whether the target backend builds its own controls rather than nodes. **/
