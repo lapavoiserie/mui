@@ -42,20 +42,30 @@ ZStack and the computed rows.
     haxe build-pui-mac.hxml && PUI_FRAME_DUMP=/tmp/ks.png ./build/mac/KitchenSink
     haxe build-aui.hxml && (cd android && ./gradlew :app:assembleDebug)
 
-**`sui` compiles and does not yet draw**, and the reason is worth knowing
-before anyone tries. Its generator reads `body()` at compile time and writes
-SwiftUI; it was written to read a sui application's own calls, and markup now
-emits different ones through `nui.macros.Construct`. The Swift that comes out
-loses every string and binds to names that do not exist:
+`sui` draws it too:
 
-    Text("")
-    TextField("your name", text: $name_)
-    Slider(value: $null, in: 0.0...1.0)
+    KS_DUMP=/tmp/ks-sui.png ./run-sui.sh
 
-`swiftc` refuses it — *cannot find `$name_` in scope* — which is the right
-place for that to be found. Teaching `SwiftGenerator` to read what `Construct`
-emits is its own piece of work; `run-sui.sh` is here so it can be checked in
-one command when it is done.
+`ImageRenderer`, not a screenshot: the picture is made off-screen and nobody's
+display is taken over for a test, which is the rule the emulator check follows
+too. `sui`'s own `SUI_FRAME_DUMP` photographs the DYNAMIC tree, so it says
+nothing about the `ContentView` a transpiled app shows.
 
-This is the gap this repository keeps naming: it compiled in Haxe, and that
-said nothing about what reached a screen.
+## What each picture still gets wrong
+
+Worth reading before trusting any of them.
+
+**`sui` leaves a computed `Text` empty.** Its generator folds a string literal
+into Swift and cannot fold `"hello " + name + " · " + …`, so that line renders
+blank. The scroll view's computed rows are missing for the same reason.
+
+**`sui`'s capture cannot draw a `TextField`.** `ImageRenderer` renders a view
+tree without a window, and an interactive control has nothing to draw there --
+the yellow bar with a slash is the renderer saying so, not the app. The field
+is in the tree and works in the real window.
+
+Three defects had to be fixed to get this far, and all three type-checked in
+Haxe: a constructor argument matched by field name where the declaration names
+it otherwise (every string came out empty), a binding read only in the shape a
+hand-written app uses (`$null`), and a cell bound as `$count_` where the state
+is `count`.

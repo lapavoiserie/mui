@@ -17,6 +17,42 @@ cp build/swift/*.swift build/$PLATFORM/Sources/
 # transpiled `ContentView`, which is the whole point of the transpiled path.
 rm -f build/$PLATFORM/Sources/DynamicView.swift build/$PLATFORM/Sources/ViewBridge.swift
 
+# A picture of the TRANSPILED screen, for a check that has no eyes.
+#
+# `sui`'s own `SUI_FRAME_DUMP` renders the DYNAMIC tree -- it photographs
+# `DynamicView(node: viewnode_get_root())` -- so it says nothing about the
+# `ContentView` a transpiled app actually shows. This draws that one, with
+# SwiftUI's own `ImageRenderer`, and writes it without opening a window:
+# nobody's screen is taken over for a test, which is the same rule the
+# emulator check follows.
+if [ -n "${KS_DUMP:-}" ]; then
+cat > build/$PLATFORM/Sources/App.swift << 'SWIFT'
+import SwiftUI
+import AppKit
+
+@main
+struct KitchenSinkApp: App {
+    init() {
+        HaxeRuntime.initialize()
+        let path = ProcessInfo.processInfo.environment["KS_DUMP"]!
+        let renderer = ImageRenderer(content: ContentView().frame(width: 900, height: 1100))
+        renderer.scale = 2
+        guard let image = renderer.nsImage,
+              let tiff = image.tiffRepresentation,
+              let rep = NSBitmapImageRep(data: tiff),
+              let png = rep.representation(using: .png, properties: [:]) else {
+            FileHandle.standardError.write(Data("no image".utf8))
+            exit(1)
+        }
+        try? png.write(to: URL(fileURLWithPath: path))
+        exit(0)
+    }
+
+    var body: some Scene { WindowGroup("KitchenSink") { ContentView() } }
+}
+SWIFT
+fi
+
 # Runtime stubs (standalone mode, no C++ bridge yet)
 if [ ! -f build/$PLATFORM/Sources/HaxeRuntime.swift ]; then
 cat > build/$PLATFORM/Sources/HaxeRuntime.swift << 'SWIFT'
