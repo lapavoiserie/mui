@@ -13,6 +13,10 @@ named by `-D mui_backend`, so anything else fails to build rather than to draw.
 `pui` declares 22, `aui` 14 — **and no `Button`** — and `sui` 10. There is no
 button in this file for that reason.
 
+**It is built through `-D mui_views`**, so `ui()` answers a `pui.View` rather
+than a `nui.Node` and the markup is a syntax over pui's own API: closures bound
+directly, nothing described, nothing read back.
+
 **Only `wui` has a `view():nui.Node` hook.** The other three expect `body()`
 returning their own `View` type, so the markup is written once and `body()`
 hands it over three different ways: `pui` builds views from a node in Haxe,
