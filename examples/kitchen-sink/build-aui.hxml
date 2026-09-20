@@ -8,6 +8,7 @@
 -D mui_views
 -D jvm
 --jvm build/app-logic.jar
+--macro aui.macros.ComposeGenerator.register()
 --macro mui.macros.Bind.all()
 --macro aui.nui.Vocabulary.registerWithMui()
 --macro aui.kui.Platform.registerWithKui()
