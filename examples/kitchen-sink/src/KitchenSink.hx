@@ -1,203 +1,123 @@
-import mui.App;
-import mui.View;
-import mui.ui.Button;
-import mui.ui.ConditionalView;
-import mui.ui.Divider;
-import mui.ui.ForEach;
-import mui.ui.HStack;
-import mui.ui.ProgressView;
-import mui.ui.SafeArea;
-import mui.ui.ScrollView;
-import mui.ui.Slider;
-import mui.ui.Spacer;
-import mui.ui.TabView;
-import mui.ui.Text;
-import mui.ui.TextScale;
-import mui.ui.TextInput;
-import mui.ui.Toggle;
-import mui.ui.VStack;
-import mui.ui.ZStack;
+import mui.macros.Markup.ui;
 
 /**
-    One app, every `mui` type the targeted backends share, on all of them.
+	One source, three backends, written in `mui`'s markup.
 
-    This is the example that answers "does write-once actually hold?" — not by
-    asserting it, but by being the same source built for iOS, macOS and Android
-    (and Windows, which the `wui` column of
-    [Backend support](../../docs/backend-support.md) says is covered too).
+	## Why it holds so little
 
-    ## What it deliberately does not use, and why
+	A kitchen sink is supposed to show everything, and this one shows nine node
+	types. That is not modesty: it is **every type `pui`, `sui` and `aui` all
+	three declare**, and the markup is checked against the backend named by
+	`-D mui_backend`, so anything else fails to compile rather than to draw.
 
-    One absence, for a stated reason rather than for convenience — a kitchen
-    sink that quietly skipped a type would be the wrong kind of example.
+	| | declares |
+	|---|---|
+	| `pui` | 22 types |
+	| `aui` | 14, and **no `Button`** |
+	| `sui` | 10 — no `Picker`, `Image`, `Icon`, `Divider`, `ProgressView` |
 
-    - **`Image` and `ListView`** are in `mui`'s vocabulary and in all three
-      backends, but not in **aui's dynamic renderer**, which is a narrower thing
-      than the backend. Being outside it is a compile error naming the type, not
-      a blank area on screen.
+	So there is no button here, on purpose. `aui.ui.Button` exists and
+	`aui.mui.Button` takes a closure, but nothing declares it as a node, so the
+	markup cannot write one for that target. Naming that here is worth more
+	than a `#if` that hides it.
 
-    ## Reading it
+	## What it does show
 
-    Three tabs, each a different question:
-
-    - **Layout** — do stacks, spacing, dividers and scrolling agree across
-      platforms?
-    - **Controls** — does a value edited by a native control reach Haxe, and
-      does a Haxe write reach the screen?
-    - **Data** — do a loop and a condition produce the same shape everywhere?
+	Every shared control, bound to state, plus the modifier canon: padding and
+	a border written **whole**, a colour by role so each platform resolves it
+	with its own palette, `flex`, `clip`, `opacity`, and children computed from
+	data. Type in the field, drag the slider, flip the switch: the text follows,
+	because the view reads the cells and the effect around it subscribed.
 **/
-class KitchenSink extends App {
-    @:state var count:Int = 0;
-    @:state var darkMode:Bool = false;
-    @:state var notify:Bool = true;
-    @:state var name:String = "";
-    @:state var level:Float = 0.4;
-    @:state var items:Array<String> = ["alpha", "beta", "gamma"];
+@:keep
+class KitchenSink extends mui.App {
+	@:state var name:String = "Pavois";
+	@:state var level:Float = 0.4;
+	@:state var lit:Bool = true;
 
-    // A condition has to be something the renderers can follow, so it is a
-    // cell kept up to date where the list changes -- not a value computed
-    // while the tree is built, which the view rule refuses and no renderer
-    // could observe.
-    @:state var hasAny:Bool = true;
+	static function main() {
+		#if mui_owns_main
+		new KitchenSink().run();
+		#end
+	}
 
-    public function new() {
-        super();
-        appTitle = "Kitchen Sink";
-    }
+	public function new() {
+		super();
+		appTitle = "Kitchen Sink";
+	}
 
-    override function body():View {
-        return new SafeArea([new TabView([
-            {label: "Layout", content: layoutTab()},
-            {label: "Controls", content: controlsTab()},
-            {label: "Data", content: dataTab()},
-        ])]);
-    }
+	/**
+		The screen, handed to whichever door this backend has.
 
-    // --- Layout ------------------------------------------------------------
+		**Only `wui` has a `view():nui.Node` hook.** `pui`, `sui` and `aui` all
+		expect `body()` returning their own `View` type, so the markup is
+		written once -- above, in `screen()` -- and these few lines hand it
+		over three different ways. That asymmetry is the honest result of
+		writing this example: the markup is shared, the plumbing to accept it
+		is not.
 
-    function layoutTab():View {
-        return new ScrollView([new VStack([
-            heading("Stacks"),
-            note("A row of three, spaced evenly."),
-            new HStack([
-                new Text("left"),
-                new Spacer(),
-                new Text("middle"),
-                new Spacer(),
-                new Text("right"),
-            ], 8),
+		`pui` builds views from a node in Haxe (`NodeRenderer`). `sui` and
+		`aui` have no such builder -- they render a received tree natively,
+		through the same door the Companion uses -- so the tree is handed to
+		`readThrough` and `body()` is left empty.
+	**/
+	override function body():mui.View {
+		#if (mui_backend == "pui")
+		return pui.nui.NodeRenderer.build(screen());
+		#elseif (mui_backend == "sui")
+		sui.runtime.ViewNodeBridge.readThrough(new nui.SelfSource(screen));
+		return new mui.ui.VStack([]);
+		#elseif (mui_backend == "aui")
+		aui.runtime.ViewNodeBridge.readThrough(new nui.SelfSource(screen));
+		return new mui.ui.VStack([]);
+		#else
+		return new mui.ui.VStack([]);
+		#end
+	}
 
-            new Divider(),
+	public function screen():nui.Node {
+		return ui(<VStack spacing={12} padding={{top: 16.0, right: 16.0, bottom: 16.0, left: 16.0}}>
+			<Text text="mui markup, three backends" scale="title"/>
+			<Text text="every type all three declare" scale="caption"/>
 
-            heading("Depth"),
-            note("A ZStack lays its children on top of each other."),
-            new ZStack([
-                new Text("behind"),
-                new Text("in front"),
-            ]),
+			<VStack spacing={8}
+				padding={{top: 12.0, right: 12.0, bottom: 12.0, left: 12.0}}
+				backgroundColor={nui.Color.role(Surface)}
+				border={{colour: nui.Color.role(Border), width: 1.0, radius: 8.0}}>
+				<Text text="Bound to state"/>
+				<TextInput text={name} placeholder="your name" onText={setName}/>
+				<Toggle label="lit" isOn={lit} onToggle={setLit}/>
+				<Slider value={level} min={0.0} max={1.0} onValue={setLevel}/>
+				<Text text={"hello " + name + " · " + Math.round(level * 100) + "%"}
+					foregroundColor={lit ? nui.Color.role(Accent) : nui.Color.role(Muted)}/>
+			</VStack>
 
-            new Divider(),
+			<HStack spacing={8}>
+				<Text text="left"/>
+				<Spacer flex={1.0}/>
+				<Text text="right"/>
+			</HStack>
 
-            heading("Spacing"),
-            note("This column is built with an explicit gap, so the same\n"
-                + "number produces the same rhythm on every backend."),
-            new VStack([
-                new Text("one"),
-                new Text("two"),
-                new Text("three"),
-            ], 4),
-        ], 12)]);
-    }
+			<ZStack>
+				<VStack height={44.0} backgroundColor={nui.Color.role(Warning)}/>
+				<Text text="over it" foregroundColor={nui.Color.rgb(255, 255, 255)}/>
+			</ZStack>
 
-    // --- Controls ----------------------------------------------------------
+			<ScrollView flex={1.0} clip={true}>
+				{[for (i in 0...12) ui(<HStack spacing={8}
+					padding={{top: 6.0, right: 6.0, bottom: 6.0, left: 6.0}}>
+					<Text text={"row " + (i + 1)}/>
+					<Spacer flex={1.0}/>
+					<Text text={i % 2 == 0 ? "even" : "odd"}
+						foregroundColor={nui.Color.role(Muted)}/>
+				</HStack>)]}
+			</ScrollView>
+		</VStack>);
+	}
 
-    function controlsTab():View {
-        return new ScrollView([new VStack([
-            heading("Buttons and state"),
-            new Text('Count: $count'),
-            new HStack([
-                new Button("-", () -> count -= 1),
-                new Button("Reset", () -> count = 0),
-                new Button("+", () -> count += 1),
-            ], 8),
+	function setName(v:String):Void name = v;
 
-            new Divider(),
+	function setLit(v:Bool):Void lit = v;
 
-            heading("Toggles"),
-            new Toggle("Notifications", notify_),
-            new Toggle("Dark mode", darkMode_),
-            new Text('Notifications are ${notify ? "on" : "off"}.'),
-
-            new Divider(),
-
-            heading("Text input"),
-            new TextInput("Your name", name_),
-            new Text(greeting()),
-
-            new Divider(),
-
-            heading("A value, two ways"),
-            new Slider(level_),
-            new ProgressView("Level", level),
-        ], 12)]);
-    }
-
-    function greeting():String {
-        var typed = name;
-        return typed == "" ? "Type above, and this line follows." : 'Hello, $typed.';
-    }
-
-    // --- Data --------------------------------------------------------------
-
-    function dataTab():View {
-        return new ScrollView([new VStack([
-            heading("A loop"),
-            note("Each row below is built by the same closure."),
-            new VStack([ForEach.build(items_, item -> new HStack([
-                new Text("•"),
-                new Text(item),
-                new Spacer(),
-            ], 6))], 4),
-
-            new HStack([
-                new Button("Add", () -> {
-                    items = items.concat(["item " + (items.length + 1)]);
-                    hasAny = true;
-                }),
-                new Button("Drop", () -> {
-                    var current = items;
-                    if (current.length > 0) items = current.slice(0, current.length - 1);
-                    hasAny = items.length > 0;
-                }),
-            ], 8),
-
-            new Divider(),
-
-            heading("A condition"),
-            note("The line below swaps when the list empties."),
-            new ConditionalView(hasAny_,
-                new Text("The list has something in it."),
-                new Text("The list is empty.")),
-        ], 12)]);
-    }
-
-    // --- Shared ------------------------------------------------------------
-
-    function heading(label:String):View {
-        return new Text(label, Subtitle);
-    }
-
-    /** An explanatory aside, which is what `Caption` is for. **/
-    function note(line:String):View {
-        return new Text(line, Caption);
-    }
-
-    static function main() {
-        // cui and pui are the two backends whose engine owns the process:
-        // everywhere else the generated app has its own entry point and this
-        // main() must stay empty.
-        #if mui_owns_main
-        new KitchenSink().run();
-        #end
-    }
+	function setLevel(v:Float):Void level = v;
 }

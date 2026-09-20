@@ -1,11 +1,13 @@
-# The same source as the five other backends, on a native macOS window.
 -cp src
 -cp ../../src
--cp ../../../pui/src
+-lib pui
+-lib kui
 -lib rui
 -lib nui
--lib hxcpp
 -D mui_backend=pui
 --macro mui.macros.Bind.all()
+--macro pui.nui.Vocabulary.registerWithMui()
+--macro pui.kui.Platform.registerWithKui()
 --main KitchenSink
--cpp build/pui-mac
+-cpp build/mac
+

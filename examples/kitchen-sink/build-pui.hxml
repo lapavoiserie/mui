@@ -1,13 +1,13 @@
 -cp src
 -cp ../../src
--cp ../../../pui/src
+-lib pui
+-lib kui
 -lib rui
 -lib nui
 -D mui_backend=pui
-# The rule the plan asked for and only wui had: a view may read immutable or
-# observable state and nothing else. Free correctness for a backend whose whole
-# model is "a view is a function of observable state".
 --macro mui.macros.Bind.all()
+--macro pui.nui.Vocabulary.registerWithMui()
+--macro pui.kui.Platform.registerWithKui()
 --main KitchenSink
---js build/pui/kitchen-sink.js
+--js build/pui/KitchenSink.js
 -D js-es=6
