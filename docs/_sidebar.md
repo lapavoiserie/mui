@@ -7,6 +7,7 @@
   - [Text & Input](ui/text-and-input.md)
   - [Controls](ui/controls.md)
   - [Lists & Iteration](ui/lists-and-iteration.md)
+- [Markup](markup.md)
 - [Components](components.md)
 - [Modifiers](modifiers.md)
 - **State**

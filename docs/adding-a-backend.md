@@ -15,6 +15,41 @@ A backend library must provide:
 5. **`state/Binding<T>`** with `.get()` and `.set()`
 6. **UI components** in a `ui/` package: Text, VStack, HStack, Button, Spacer, etc.
 
+### Accepting markup
+
+`mui`'s markup is checked against your declarations already — that comes free
+with `@:node`/`@:prop`. What does not come free is **what it produces**. By
+default `ui()` answers a `nui.Node`, which suits a backend in push mode and
+nothing else: a backend that renders its own controls would have to read that
+node back, and one that reads a received tree natively (like `sui` and `aui`)
+cannot turn it into views at all.
+
+So say so, in your `registerWithMui`:
+
+```haxe
+#if mui_views
+viewOf: (tag, given, children, pos) ->
+    nui.macros.Construct.expr(DIALECT, tag, given, children, pos),
+decorate: (view, modifiers, pos) -> macro yourbackend.nui.Decorate.apply($view,
+    [for (__m in ($modifiers : Array<Null<nui.Modifier>>)) if (__m != null) __m]),
+honoured: () -> [nui.Modifiers.PADDING, /* …what you can actually draw… */],
+#end
+```
+
+`nui.macros.Construct` builds the control from the same declarations
+`nui.macros.Derive` reads, one stage earlier — while compiling, where the tree
+is known. Your dialect needs `cells` for it: the one step a declaration cannot
+describe is what a two-way control takes, and that is yours to say. It is handed
+the **place** a markup element was written at, which `aui` needs (its cells live
+in a registry and must be the same one on every rebuild) and the others ignore.
+
+`honoured` is not optional politeness: markup refuses a decoration you do not
+list, **by name, while compiling**. A tree somebody wrote is checkable, so
+anything wrong with it is a compile error — "honour what you can and skip the
+rest" is the rule for a tree that ARRIVED. See
+[Markup](markup.md) and the
+[node model](https://lapavoiserie.github.io/nui/#/node-model).
+
 ### Stating what you host
 
 `@:hostedRoles` on your `mui.App` is not documentation, it is the check:
