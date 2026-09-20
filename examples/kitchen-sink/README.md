@@ -55,9 +55,17 @@ nothing about the `ContentView` a transpiled app shows.
 
 Worth reading before trusting any of them.
 
-**`sui` leaves a computed `Text` empty.** Its generator folds a string literal
-into Swift and cannot fold `"hello " + name + " · " + …`, so that line renders
-blank. The scroll view's computed rows are missing for the same reason.
+**`sui` draws no rows.** Not the same reason as the text, and not a bug in the
+generator: `{[for (i in 0…12) ui(<HStack…/>)]}` is a **Haxe comprehension**,
+which a backend that builds its views at runtime can simply run — `pui` and
+`aui` do — and a backend that transpiles cannot, because there is no Swift for
+a loop that has already produced views.
+
+SwiftUI's own answer is `ForEach` over a collection, and `sui` supports exactly
+that: `ForEach(cellName, item -> view)`. But **nothing declares `ForEach` as a
+node**, on any backend, so markup has no way to say it. Until it does, a
+computed list is portable to the backends that build at runtime and to no
+others.
 
 **`sui`'s capture cannot draw a `TextField`.** `ImageRenderer` renders a view
 tree without a window, and an interactive control has nothing to draw there --
