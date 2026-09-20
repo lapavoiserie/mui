@@ -67,6 +67,29 @@ and it is wrong.
 | `sui` | yes | |
 | `wui` | no, and by design | push mode: it wants nodes |
 
+### What "its own view" means on `sui`
+
+Worth spelling out, because it is the backend where the answer is least
+obvious. `sui` has two render paths, and
+[its docs](https://lapavoiserie.github.io/sui/#/render-paths) say which is
+which: the **dynamic renderer** is the path — the app runs, `body()` builds a
+Haxe view tree, `DynamicView.swift` walks it into SwiftUI — and the SwiftUI
+transpiler is decommissioned, kept behind `--static` so a build that depended
+on it still has somewhere to go.
+
+So markup on `sui` emits `new sui.ui.Text(...)` exactly as it emits
+`new pui.ui.Text(...)`, and that tree is what the renderer walks. The
+consequence is the one people ask about first: **a Haxe comprehension inside
+markup simply runs**, on `sui` as on the others, because nothing translates it.
+Measured — twelve rows on macOS from `[for (i in 0...12) ui(<HStack…/>)]`,
+with the arithmetic and the conditional both right.
+
+Markup briefly grew a hook (`forEachOf`) so a backend could say a comprehension
+its own way — a SwiftUI `ForEach` rather than an array of views. It was written
+for the transpiler, and on the path that actually runs it made the rows vanish.
+It is gone. A backend that renders a tree does not need it, and the one that
+translates is not the one being built for.
+
 ## A two-way control binds a cell
 
 ```haxe
