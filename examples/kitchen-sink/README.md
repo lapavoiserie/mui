@@ -105,8 +105,11 @@ and this is where that shows.
 
 Two defects are open and named rather than hidden:
 
-- **the `Bound to state` group lays out and draws nothing.** It measures 54x61
-  and occupies its rows; not one cell is written, including its plain `Text`.
-  Not padding — a padded `VStack` draws its child in isolation.
+- ~~the `Bound to state` group lays out and draws nothing~~ — **not a defect;
+  it is the unit problem above, measured.** In 140 rows the root stack's own
+  spacing (12 × 5) and padding (16 + 16) leave 48 rows for six children; the
+  group is squeezed to 22 and its padding asks for 24 (12 above, 12 below), so
+  its inside is negative and there is nothing to draw — which is correct. In a
+  400-row buffer every line of it appears. The fix is a unit, not a renderer.
 - ~~`opacity` was accepted by markup for `cui` and nothing read it.~~ Fixed:
   `cui` draws `opacity`, `width` and `height` now, and refuses `flex` by name.
