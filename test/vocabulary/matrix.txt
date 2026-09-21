@@ -1,7 +1,7 @@
 type                pui cui sui aui qui wui
 Border              .   .   .   .   .   x  
 Box                 .   x   .   .   .   .  
-Button              x   x   x   .   x   x  
+Button              x   x   x   x   x   x  
 ComboBox            .   .   .   .   .   x  
 ComboBoxItem        .   .   .   .   .   x  
 Disclosure          x   .   x   .   .   .  
@@ -45,4 +45,4 @@ ToggleSwitch        .   .   .   .   .   x
 VStack              x   x   x   x   x   x  
 ZStack              x   x   x   x   x   x  
 
-total               22  19  14  15  16  39 
+total               22  19  14  16  16  39 

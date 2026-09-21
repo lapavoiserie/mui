@@ -5,21 +5,17 @@ import mui.macros.Markup.ui;
 
 	## Why it holds so little
 
-	A kitchen sink is supposed to show everything, and this one shows nine node
-	types. That is not modesty: it is **every type `pui`, `sui` and `aui` all
-	three declare**, and the markup is checked against the backend named by
+	A kitchen sink is supposed to show everything, and this one shows ten node
+	types. That is not modesty: it is **every type `pui`, `sui`, `aui` and
+	`cui` all declare**, and the markup is checked against the backend named by
 	`-D mui_backend`, so anything else fails to compile rather than to draw.
+	`mui/test/vocabulary` keeps the table of who declares what.
 
-	| | declares |
-	|---|---|
-	| `pui` | 22 types |
-	| `aui` | 14, and **no `Button`** |
-	| `sui` | 10 — no `Picker`, `Image`, `Icon`, `Divider`, `ProgressView` |
-
-	So there is no button here, on purpose. `aui.ui.Button` exists and
-	`aui.mui.Button` takes a closure, but nothing declares it as a node, so the
-	markup cannot write one for that target. Naming that here is worth more
-	than a `#if` that hides it.
+	The tenth is `Button`. It was absent on purpose until 2026-09-21: `aui`
+	had no control that could carry a closure, so nothing declared it there,
+	and the markup could not write one for that target. It was a field
+	missing, not a capability -- `aui` renders by running Haxe on the JVM --
+	and once the field existed the button came back here.
 
 	## What it does show
 
@@ -72,8 +68,8 @@ class KitchenSink extends mui.App {
 	**/
 	override function body():mui.View {
 		return ui(<VStack spacing={12} padding={{top: 16.0, right: 16.0, bottom: 16.0, left: 16.0}}>
-			<Text text="mui markup, three backends" scale="title"/>
-			<Text text="every type all three declare" scale="caption"/>
+			<Text text="mui markup, four backends" scale="title"/>
+			<Text text="every type all four declare" scale="caption"/>
 
 			<VStack spacing={8}
 				padding={{top: 12.0, right: 12.0, bottom: 12.0, left: 12.0}}
@@ -83,6 +79,7 @@ class KitchenSink extends mui.App {
 				<Toggle label="lit" isOn={lit_}/>
 				<Slider value={level_} min={0.0} max={1.0}/>
 				<Text text={"hello " + name + " · " + Math.round(level * 100) + "%"}/>
+				<Button label="Full" onClick={() -> level = 1.0}/>
 			</VStack>
 
 			<HStack spacing={8}>

@@ -9,11 +9,11 @@ One source, written in `mui`'s markup, run on more than one backend.
 
 Two things this example exists to show, and neither is the controls.
 
-**It holds nine node types, because that is every type `pui`, `sui` and `aui`
-all three declare.** The markup is checked at compile time against the backend
-named by `-D mui_backend`, so anything else fails to build rather than to draw.
-`pui` declares 22, `aui` 14 — **and no `Button`** — and `sui` 10. There is no
-button in this file for that reason.
+**It holds ten node types, because that is every type `pui`, `sui`, `aui` and
+`cui` all declare.** The markup is checked at compile time against the backend
+named by `-D mui_backend`, so anything else fails to build rather than to draw;
+`mui/test/vocabulary` keeps the table. The tenth is `Button`, which `aui` could
+not declare until 2026-09-21 — it had no control able to carry a closure.
 
 **It is built through `-D mui_views`**, so `ui()` answers the backend's own
 view rather than a `nui.Node`, and the markup is a syntax over that backend's
