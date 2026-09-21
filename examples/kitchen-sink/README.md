@@ -97,19 +97,19 @@ The second is how the picture is taken here: `cui` writes to a TTY and waits
 for keys, which a test harness has neither of, so the tree is rendered into a
 `cui.render.Buffer` and the cells are printed. Off-screen, like the other three.
 
-**The spacings are written in GUI units and applied as character cells.**
-`spacing={12}` is a sensible gap in points and twelve *rows* on a terminal, so
-this screen needs about 140 rows to hold what `pui` puts in 675 pixels. Nothing
-is wrong with either backend; the canon's `spacing` and `padding` carry no unit,
-and this is where that shows.
+**It used to need 140 rows.** The canon's lengths carry no unit, so `cui` read
+them as cells: `spacing={12}` was twelve blank lines. Since nui 0a272d6 they
+are **points**, and `cui` converts at its door (a cell is 8 by 16) -- the whole
+screen, twelve computed rows included, fits an 80x44 terminal.
 
 Two defects are open and named rather than hidden:
 
-- ~~the `Bound to state` group lays out and draws nothing~~ — **not a defect;
-  it is the unit problem above, measured.** In 140 rows the root stack's own
-  spacing (12 × 5) and padding (16 + 16) leave 48 rows for six children; the
-  group is squeezed to 22 and its padding asks for 24 (12 above, 12 below), so
-  its inside is negative and there is nothing to draw — which is correct. In a
-  400-row buffer every line of it appears. The fix is a unit, not a renderer.
+- ~~the `Bound to state` group lays out and draws nothing~~ — it was the unit,
+  and it is fixed. It had been squeezed to 22 rows while its padding asked for
+  24, so its inside was negative and there was nothing to draw, which was
+  correct all along.
+- ~~`cui` showed `row 1` and nothing after it~~ — `cui.ui.ScrollView` took one
+  child and markup handed it twelve: it kept the first and dropped eleven in
+  silence. It holds a list now (cui 9a9eefb).
 - ~~`opacity` was accepted by markup for `cui` and nothing read it.~~ Fixed:
   `cui` draws `opacity`, `width` and `height` now, and refuses `flex` by name.

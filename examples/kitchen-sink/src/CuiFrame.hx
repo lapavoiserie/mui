@@ -16,7 +16,7 @@ class CuiFrame {
 		var view:cui.View = cast app.body();
 
 		var width = 80;
-		var height = 140;
+		var height = 44;
 		view.measure(Constraint.AtMost(width, height));
 
 		Sys.stderr().writeString("root " + Type.getClassName(Type.getClass(view))
