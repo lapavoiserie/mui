@@ -108,6 +108,5 @@ Two defects are open and named rather than hidden:
 - **the `Bound to state` group lays out and draws nothing.** It measures 54x61
   and occupies its rows; not one cell is written, including its plain `Text`.
   Not padding — a padded `VStack` draws its child in isolation.
-- **`opacity` is accepted by markup for `cui` and nothing reads it.** The word
-  does not appear anywhere in that backend's source. A decoration a backend
-  cannot draw is supposed to be refused by name.
+- ~~`opacity` was accepted by markup for `cui` and nothing read it.~~ Fixed:
+  `cui` draws `opacity`, `width` and `height` now, and refuses `flex` by name.

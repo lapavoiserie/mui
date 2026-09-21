@@ -138,7 +138,8 @@ can. Not every backend draws all nine on one of its own views:
 
 | backend | draws |
 |---|---|
-| `pui`, `cui` | all nine |
+| `pui` | all nine |
+| `cui` | eight — not `flex` (no stack reads a weight; they share space by finding `Spacer`). `opacity` is drawn as a terminal can: hidden at zero, dim below one |
 | `aui` | seven — not `border` (its own takes a colour value a role cannot become) or `flex` |
 | `sui` | five — not the colours (same reason, the other way round) nor `border` or `flex` |
 | `qui` | four: `padding`, `foregroundColor`, `width`, `height` |
