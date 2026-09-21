@@ -176,6 +176,18 @@ typedef Vocabulary = {
 	@:optional var honoured:Void -> Array<String>;
 
 	/**
+		What a tag's children are, when they are **data** rather than views.
+
+		A `Picker`'s options are the case the canon states: written as `Text`
+		children and carried as an array of strings
+		(`@:children("Text", "text")`). Markup had no way to ask, so it built
+		them as views, `Construct` refused the whole control, and a picker
+		written in markup quietly fell back to a node -- which reaches only a
+		backend that reads nodes.
+	**/
+	@:optional var dataChildren:(tag:String) -> Null<{type:String, prop:String, field:String}>;
+
+	/**
 		Put a written `key` on a control the backend built.
 
 		Until 2026-09-21 the views route parsed `key="…"` and dropped it: only
@@ -254,6 +266,12 @@ class Backend {
 			children:Null<Expr>, pos:Position):Null<Expr> {
 		if (registered == null || registered.viewOf == null) return null;
 		return registered.viewOf(tag, given, children, pos);
+	}
+
+	/** What a tag's children are, when they are data. See `Vocabulary.dataChildren`. **/
+	public static function dataChildren(tag:String):Null<{type:String, prop:String, field:String}> {
+		if (registered == null || registered.dataChildren == null) return null;
+		return registered.dataChildren(tag);
 	}
 
 	/** Put a written key on a built control, or null when the backend has no keys. **/

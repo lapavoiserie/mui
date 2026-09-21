@@ -528,7 +528,16 @@ class Markup {
 		var pieces:Array<{node:Null<Expr>, splice:Null<Expr>}> = [];
 		var text:Null<String> = null;
 
+		// Children that are DATA -- a `Picker`'s options, written as `Text`
+		// children and carried as an array of strings. Read here rather than
+		// built: by the time children are views the strings are gone, which is
+		// why `Construct` refused every control that has them and a picker
+		// written in markup fell back to a node.
+		var asData = Backend.dataChildren(tag);
+		var data:Null<Expr> = asData == null ? null : dataChildrenOf(xml, asData, tag, pos);
+
 		for (child in xml) {
+			if (asData != null) break;
 			switch (child.nodeType) {
 				case Xml.Element:
 					pieces.push({node: buildNode(child, pos), splice: null});
@@ -584,6 +593,7 @@ class Markup {
 		// `Backend.Vocabulary.viewOf`.
 		var given = new Map<String, Expr>();
 		for (setter in setters) given.set(setter.key, unwrap(setter.value));
+		if (data != null) given.set(asData.field, data);
 		var own = Backend.viewOf(tag, given, childrenExpr(pieces, pos), pos);
 		if (own != null) {
 			// A written key reaches the control, or the build says it cannot.
@@ -670,6 +680,76 @@ class Markup {
 		is a real limit and not a hidden one -- the tag falls back to a node,
 		which every backend still accepts.
 	**/
+	/**
+		A tag's data children, as one array expression.
+
+		Two shapes, and both are what somebody would write:
+
+		    <Picker label="Sortie"><Text text="HDMI"/><Text text="SDI"/></Picker>
+		    <Picker label="Sortie">{outputs}</Picker>
+
+		The first is the canon's own -- one child per option, each carrying the
+		value under the property the declaration names. The second is a list the
+		application already has, spliced straight in.
+
+		Anything else is refused by name. A child of the wrong type, or one
+		missing the property, would otherwise be dropped from the options in
+		silence, and a picker is exactly the control where a missing row is
+		read as "the application does not offer that" rather than as a bug.
+	**/
+	static function dataChildrenOf(xml:Xml, spec:{type:String, prop:String, field:String},
+			tag:String, pos:Position):Null<Expr> {
+		var values:Array<Expr> = [];
+		var spliced:Null<Expr> = null;
+
+		for (child in xml) {
+			switch (child.nodeType) {
+				case Xml.Element:
+					if (child.nodeName != spec.type) {
+						Context.error('"$tag" porte ses enfants comme des donnees : '
+							+ 'chacun doit etre un "${spec.type}", pas un "${child.nodeName}".', pos);
+						return null;
+					}
+					var said = child.get(spec.prop);
+					if (said == null) {
+						Context.error('"$tag" porte ses enfants comme des donnees : '
+							+ 'chaque "${spec.type}" doit porter "${spec.prop}".', pos);
+						return null;
+					}
+					values.push(valueExpr(said, pos));
+
+				case Xml.PCData | Xml.CData:
+					for (part in runs(child.nodeValue)) {
+						var whole = wholeExpression(part);
+						if (whole != null) {
+							if (spliced != null || values.length > 0) {
+								Context.error('"$tag" prend une liste, ou des enfants ecrits '
+									+ "un par un -- pas les deux.", pos);
+								return null;
+							}
+							spliced = whole;
+						} else if (StringTools.trim(part) != "") {
+							Context.error('"$tag" porte ses enfants comme des donnees : '
+								+ '"${StringTools.trim(part)}" n\'est ni un "${spec.type}" '
+								+ "ni une liste.", pos);
+							return null;
+						}
+					}
+
+				case _:
+			}
+		}
+
+		if (spliced != null) return spliced;
+		return values.length == 0 ? null : {expr: EArrayDecl(values), pos: pos};
+	}
+
+	/** The expression behind `{…}` when a text run is exactly one. **/
+	static function wholeExpression(raw:String):Null<Expr> {
+		var re = ~/^__EXPR_(\d+)__$/;
+		return re.match(raw) ? parseExpr(Std.parseInt(re.matched(1))) : null;
+	}
+
 	static function childrenExpr(pieces:Array<{node:Expr, splice:Null<Expr>}>, pos:Position):Null<Expr> {
 		if (pieces.length == 0) return null;
 
