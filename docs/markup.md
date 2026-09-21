@@ -107,6 +107,27 @@ name, so there was nothing to make — and one source could not serve three
 backends while two of them wanted one shape and the third the other. A binding
 is a cell; saying so removed four modules.
 
+## A key keeps a row itself
+
+```haxe
+{[for (row in rows) ui(<HStack key={row.id}>…</HStack>)]}
+```
+
+Identity is positional everywhere in this family — a view is "the third child",
+and whatever is remembered about it (a field's caret and draft, the focus, the
+handle a native renderer kept) is remembered under that place. That holds while
+rows stay put. A list that sorts, filters or gains a row at the top moves every
+row below it, and a key is how a row says it is still itself.
+
+On the views route a written `key` reaches the backend's view where views carry
+one (`pui`, `sui`), and is a **compile error** where they do not (`cui`, `aui`,
+`qui` today). It used to be parsed and dropped on this route, on every backend,
+silently; a key that does nothing is worse than no key.
+
+A control that edits a cell needs none: `pui`, `cui` and `sui` follow the cell.
+Two unkeyed siblings of one type that say the same thing — a column of "Delete"
+buttons — are the case where a key is not optional.
+
 ## Decorations
 
 The canon's nine are written as attributes on any tag, in the order you write

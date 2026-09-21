@@ -174,6 +174,18 @@ typedef Vocabulary = {
 		Only asked of a backend that answered `viewOf`.
 	**/
 	@:optional var honoured:Void -> Array<String>;
+
+	/**
+		Put a written `key` on a control the backend built.
+
+		Until 2026-09-21 the views route parsed `key="…"` and dropped it: only
+		the node route used it (`new nui.Node(tag, key)`). So a key written in
+		markup -- the one thing that keeps a row itself when a list reorders --
+		did nothing, on every backend, and said nothing. A backend whose views
+		carry a key registers this; against one that does not, a written key is
+		a compile error, because it is knowable and would otherwise be a lie.
+	**/
+	@:optional var keyed:(view:Expr, key:Expr, pos:Position) -> Expr;
 };
 
 class Backend {
@@ -242,6 +254,12 @@ class Backend {
 			children:Null<Expr>, pos:Position):Null<Expr> {
 		if (registered == null || registered.viewOf == null) return null;
 		return registered.viewOf(tag, given, children, pos);
+	}
+
+	/** Put a written key on a built control, or null when the backend has no keys. **/
+	public static function keyed(view:Expr, key:Expr, pos:Position):Null<Expr> {
+		if (registered == null || registered.keyed == null) return null;
+		return registered.keyed(view, key, pos);
 	}
 
 	/** The modifiers the target backend can put on a view, or null if it says. **/

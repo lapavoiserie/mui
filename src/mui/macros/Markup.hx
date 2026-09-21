@@ -586,6 +586,20 @@ class Markup {
 		for (setter in setters) given.set(setter.key, unwrap(setter.value));
 		var own = Backend.viewOf(tag, given, childrenExpr(pieces, pos), pos);
 		if (own != null) {
+			// A written key reaches the control, or the build says it cannot.
+			// It used to be parsed and dropped on this route -- see
+			// `Backend.Vocabulary.keyed`.
+			var hasKey = switch (keyExpr.expr) {
+				case EConst(CIdent("null")): false;
+				case _: true;
+			};
+			if (hasKey) {
+				var withKey = Backend.keyed(own, keyExpr, pos);
+				if (withKey == null)
+					Context.error('Le backend cible ne donne pas de clé à ses vues : "key" sur "$tag" '
+						+ "serait ignorée en silence.", pos);
+				own = withKey;
+			}
 			// A decoration this backend cannot draw is knowable HERE, so it is
 			// refused here. Skipping quietly is the canon's rule for a tree
 			// that ARRIVED, where failing a build is not on offer; markup is
