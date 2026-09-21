@@ -119,12 +119,17 @@ handle a native renderer kept) is remembered under that place. That holds while
 rows stay put. A list that sorts, filters or gains a row at the top moves every
 row below it, and a key is how a row says it is still itself.
 
-On the views route a written `key` reaches the backend's view where views carry
-one (`pui`, `sui`), and is a **compile error** where they do not (`cui`, `aui`,
-`qui` today). It used to be parsed and dropped on this route, on every backend,
-silently; a key that does nothing is worse than no key.
+On the views route a written `key` reaches the backend's view. All five that
+build their own views carry one, and each already had a reader waiting for it:
+`pui` puts it in the path a view's remembered state hangs from, `sui` publishes
+it as the `nodeId` SwiftUI diffs by, `aui` as the `nodeId` Compose's `key()`
+reads, `cui`'s focus follows it, and `qui` hands it to the reconciler that has
+matched children by key all along. A backend whose views carried no key would
+refuse one at compile time rather than drop it; until 2026-09-21 the route
+dropped it silently on every backend, which is worse than no key at all.
 
-A control that edits a cell needs none: `pui`, `cui` and `sui` follow the cell.
+A control that edits a cell needs none: `pui`, `cui` and `sui` follow the cell,
+so a field keeps its caret and its draft through an insertion without one.
 Two unkeyed siblings of one type that say the same thing — a column of "Delete"
 buttons — are the case where a key is not optional.
 

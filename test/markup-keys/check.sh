@@ -12,8 +12,12 @@ cd "$(dirname "$0")"
 fails=0
 common="-cp . -cp ../../src -lib rui -lib nui -D mui_views"
 
-for b in pui sui; do
-	out=$(haxe $common -lib $b -D mui_backend=$b --macro "$b.nui.Vocabulary.registerWithMui()" -main Keyed --interp 2>&1)
+for b in pui sui cui aui; do
+	# aui's State reaches a Kotlin class, so it is compiled and run on the JVM.
+	run="--interp"
+	[ "$b" = aui ] && run="-D jvm --jvm /tmp/mui-keys-aui.jar"
+	out=$(haxe $common -lib $b -D mui_backend=$b --macro "$b.nui.Vocabulary.registerWithMui()" -main Keyed $run 2>&1)
+	[ "$b" = aui ] && out=$(java -jar /tmp/mui-keys-aui.jar 2>&1)
 	if echo "$out" | grep -q "keys: a,b"; then
 		echo "ok   $b: a written key reaches the view"
 	else
@@ -21,11 +25,20 @@ for b in pui sui; do
 	fi
 done
 
-out=$(haxe $common -lib cui -D mui_backend=cui --macro "cui.nui.Vocabulary.registerWithMui()" -main Keyed --interp 2>&1)
-if echo "$out" | grep -q "ne donne pas de clé"; then
-	echo "ok   cui: a backend whose views carry no key refuses one, by name"
+# qui lives in the haxe-sailfish workspace and cannot be interpreted -- its
+# components reach C++ through `untyped __cpp__`. So the proof is the generated
+# code: the key has to appear in the C++ the markup produced. A missing hook
+# would not have got that far anyway (markup refuses a key by name).
+rm -rf /tmp/mui-keys-qui
+if haxe $common -lib haxe-sailfishos -D mui_backend=qui \
+		--macro "qui.nui.Vocabulary.registerWithMui()" -main Keyed -cpp /tmp/mui-keys-qui -D no-compilation 2>/dev/null \
+		&& grep -rq "keyed" /tmp/mui-keys-qui/src/Keyed.cpp; then
+	echo "ok   qui: a written key reaches the view (read in the generated C++)"
 else
-	echo "FAIL cui accepted a key it would have ignored:"; echo "$out" | head -5; fails=$((fails + 1))
+	echo "FAIL qui: the key did not reach the view"
+	haxe $common -lib haxe-sailfishos -D mui_backend=qui \
+		--macro "qui.nui.Vocabulary.registerWithMui()" -main Keyed -cpp /tmp/mui-keys-qui -D no-compilation 2>&1 | head -4
+	fails=$((fails + 1))
 fi
 
 echo ""
