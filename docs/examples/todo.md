@@ -1,13 +1,11 @@
 # Todo App
 
-A dynamic todo list using `ForEach.build()` to iterate over items.
+A dynamic todo list: the rows are a Haxe comprehension, spliced into the view.
 
 ```haxe
-import mui.App;
-import mui.View;
-import mui.ui.*;
+import mui.macros.Markup.ui;
 
-class TodoApp extends App {
+class TodoApp extends mui.App {
     @:state var inputText:String = "";
     @:state var todos:Array<String> = [];
 
@@ -17,31 +15,29 @@ class TodoApp extends App {
         todos = ["Buy groceries", "Write documentation", "Review pull request"];
     }
 
-    override function body():View {
-        return new VStack([
-            new Text("Todo List"),
-            new Text('${todos.length} items'),
-            new HStack([
-                new TextInput("New item...", inputText_),
-                new Button("Add", function() {
-                    var text = inputText;
-                    if (text.length > 0) {
-                        var list = todos.copy();
-                        list.push(text);
-                        todos = list;
-                        inputText = "";
-                    }
-                }),
-            ], 8),
-            new Spacer(),
-            ForEach.build(todos_, function(item) {
-                return new HStack([
-                    new Text(item),
-                    new Spacer(),
-                ]);
-            }),
-            new Spacer(),
-        ], 8);
+    override function body():mui.View {
+        return ui(<VStack spacing={8}>
+            <Text text="Todo List" scale="title"/>
+            <Text text={todos.length + " items"}/>
+            <HStack spacing={8}>
+                <TextInput text={inputText_} placeholder="New item..."/>
+                <Button label="Add" onClick={add}/>
+            </HStack>
+            <Spacer/>
+            {[for (item in todos) ui(<HStack key={item} spacing={8}>
+                <Text text={item}/>
+                <Spacer/>
+            </HStack>)]}
+            <Spacer/>
+        </VStack>);
+    }
+
+    function add() {
+        if (inputText.length == 0) return;
+        var list = todos.copy();
+        list.push(inputText);
+        todos = list;
+        inputText = "";
     }
 
     static function main() {
@@ -54,6 +50,7 @@ class TodoApp extends App {
 
 ## What it demonstrates
 
-- `ForEach.build()` macro -- works across all backends without `#if`
+- a comprehension in markup: `{[for (item in todos) ui(<HStack key={item}>…)]}`
+- a `key` per row, so a row that moves keeps what is remembered about it
 - An `ImmutableList` in a `@:state` field: a new list is a new value, so the view is told
 - `TextInput` for adding new items

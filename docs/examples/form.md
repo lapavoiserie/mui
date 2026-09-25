@@ -3,11 +3,9 @@
 A registration form with text inputs, toggles, and action buttons.
 
 ```haxe
-import mui.App;
-import mui.View;
-import mui.ui.*;
+import mui.macros.Markup.ui;
 
-class FormApp extends App {
+class FormApp extends mui.App {
     @:state var name:String = "";
     @:state var email:String = "";
     @:state var newsletter:Bool = true;
@@ -18,27 +16,31 @@ class FormApp extends App {
         appTitle = "Form";
     }
 
-    override function body():View {
-        return new VStack([
-            new Text("Registration"),
-            new Divider(),
-            new TextInput("Enter your name", name_),
-            new TextInput("Enter your email", email_),
-            new Divider(),
-            new Toggle("Subscribe to newsletter", newsletter_),
-            new Toggle("I accept the terms", terms_),
-            new Divider(),
-            new HStack([
-                new Button("Submit", function() { /* handle */ }),
-                new Button("Clear", function() {
-                    name = "";
-                    email = "";
-                    newsletter = true;
-                    terms = false;
-                }),
-            ], 8),
-            new Spacer(),
-        ], 8);
+    override function body():mui.View {
+        return ui(<VStack spacing={8}>
+            <Text text="Registration" scale="title"/>
+            <Divider/>
+            <TextInput text={name_} placeholder="Enter your name"/>
+            <TextInput text={email_} placeholder="Enter your email"/>
+            <Divider/>
+            <Toggle label="Subscribe to newsletter" isOn={newsletter_}/>
+            <Toggle label="I accept the terms" isOn={terms_}/>
+            <Divider/>
+            <HStack spacing={8}>
+                <Button label="Submit" onClick={submit}/>
+                <Button label="Clear" onClick={clear}/>
+            </HStack>
+            <Spacer/>
+        </VStack>);
+    }
+
+    function submit() {}
+
+    function clear() {
+        name = "";
+        email = "";
+        newsletter = true;
+        terms = false;
     }
 
     static function main() {
@@ -51,7 +53,7 @@ class FormApp extends App {
 
 ## What it demonstrates
 
-- `TextInput` with type-safe `TextInputBinding` -- no `#if` blocks
-- `Toggle` with type-safe `ToggleBinding` -- no `#if` blocks
+- a two-way control binds the **cell**: `text={name_}`, `isOn={terms_}`
+- an action is a closure or a method: `onClick={submit}`
 - `Divider` as a visual separator
 - `appTitle` for setting the window title

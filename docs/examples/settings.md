@@ -3,11 +3,9 @@
 A settings screen with toggles, dividers, and an app title.
 
 ```haxe
-import mui.App;
-import mui.View;
-import mui.ui.*;
+import mui.macros.Markup.ui;
 
-class SettingsApp extends App {
+class SettingsApp extends mui.App {
     @:state var darkMode:Bool = false;
     @:state var notifications:Bool = true;
     @:state var analytics:Bool = false;
@@ -18,23 +16,23 @@ class SettingsApp extends App {
         appTitle = "Settings";
     }
 
-    override function body():View {
-        return new VStack([
-            new Text("Settings"),
-            new Divider(),
-            new Text("Appearance"),
-            new Toggle("Dark Mode", darkMode_),
-            new Divider(),
-            new Text("Notifications"),
-            new Toggle("Push Notifications", notifications_),
-            new Divider(),
-            new Text("Privacy"),
-            new Toggle("Send Analytics", analytics_),
-            new Toggle("Auto-Update", autoUpdate_),
-            new Divider(),
-            new Text("Version 0.1.0"),
-            new Spacer(),
-        ], 8);
+    override function body():mui.View {
+        return ui(<VStack spacing={8}>
+            <Text text="Settings" scale="title"/>
+            <Divider/>
+            <Text text="Appearance" scale="caption"/>
+            <Toggle label="Dark Mode" isOn={darkMode_}/>
+            <Divider/>
+            <Text text="Notifications" scale="caption"/>
+            <Toggle label="Push Notifications" isOn={notifications_}/>
+            <Divider/>
+            <Text text="Privacy" scale="caption"/>
+            <Toggle label="Send Analytics" isOn={analytics_}/>
+            <Toggle label="Auto-Update" isOn={autoUpdate_}/>
+            <Divider/>
+            <Text text="Version 0.1.0"/>
+            <Spacer/>
+        </VStack>);
     }
 
     static function main() {
@@ -47,6 +45,7 @@ class SettingsApp extends App {
 
 ## What it demonstrates
 
-- Multiple `Toggle` bindings with zero `#if` blocks
+- several toggles, each binding its own cell — `isOn={darkMode_}`
+- `scale="caption"` to set a heading apart without a font size
 - `Divider` for visual sections
 - `appTitle` property

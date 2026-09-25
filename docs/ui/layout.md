@@ -1,15 +1,22 @@
 # Layout
 
+Written in [markup](../markup.md); the constructor beside each one is the same
+control built by hand.
+
+`spacing`, `padding` and every other length are in **points**, on every backend
+— a terminal converts them to cells at its door. See
+[Modifiers](../modifiers.md).
+
 ## VStack
 
-Arranges children vertically with optional spacing.
+Children down the screen, with optional spacing between them.
 
 ```haxe
-new VStack([
-    new Text("First"),
-    new Text("Second"),
-    new Text("Third"),
-], 10)  // 10px spacing
+<VStack spacing={10}>
+    <Text text="First"/>
+    <Text text="Second"/>
+    <Text text="Third"/>
+</VStack>
 ```
 
 **Constructor**: `VStack(content:Array<View>, ?spacing:Float)`
@@ -17,18 +24,18 @@ new VStack([
 Internally, VStack normalizes the backend differences:
 - sui: `VStack(?alignment, ?spacing, content)` -- reordered
 - wui: `VStack(children, ?spacing)` -- matches
-- cui: `VStack(children, spacing:Int)` -- Float-to-Int conversion
+- cui: `VStack(children, spacing:Int)` -- points to cells
 
 ## HStack
 
-Arranges children horizontally with optional spacing.
+Children across the screen.
 
 ```haxe
-new HStack([
-    new Button("Cancel", onCancel),
-    new Spacer(),
-    new Button("OK", onOk),
-], 8)
+<HStack spacing={8}>
+    <Button label="Cancel" onClick={onCancel}/>
+    <Spacer/>
+    <Button label="OK" onClick={onOk}/>
+</HStack>
 ```
 
 **Constructor**: `HStack(content:Array<View>, ?spacing:Float)`
@@ -38,11 +45,11 @@ new HStack([
 Flexible space that fills available room.
 
 ```haxe
-new VStack([
-    new Text("Top"),
-    new Spacer(),
-    new Text("Bottom"),
-])
+<VStack>
+    <Text text="Top"/>
+    <Spacer/>
+    <Text text="Bottom"/>
+</VStack>
 ```
 
 **Constructor**: `Spacer()`
@@ -52,11 +59,11 @@ new VStack([
 A horizontal separator line.
 
 ```haxe
-new VStack([
-    new Text("Section 1"),
-    new Divider(),
-    new Text("Section 2"),
-])
+<VStack>
+    <Text text="Section 1"/>
+    <Divider/>
+    <Text text="Section 2"/>
+</VStack>
 ```
 
 **Constructor**: `Divider()`
@@ -68,10 +75,10 @@ Maps to SwiftUI `Divider`, a styled `Border` on WinUI, `HorizontalDivider` on Co
 Overlay stack — children are layered on top of each other.
 
 ```haxe
-new ZStack([
-    new Image("background"),
-    new Text("Overlay text"),
-])
+<ZStack>
+    <Image src="asset:background.png" alt=""/>
+    <Text text="Overlay text"/>
+</ZStack>
 ```
 
 **Constructor**: `ZStack(content:Array<View>)`
@@ -94,10 +101,10 @@ says `SafeArea` gets the right one without naming it — and content used to sta
 hard against the window corner because nothing said otherwise.
 
 ```haxe
-new SafeArea([
-    new Text("Title"),
-    new VStack([...]),
-])
+<SafeArea>
+    <Text text="Title" scale="title"/>
+    <VStack spacing={8}>…</VStack>
+</SafeArea>
 ```
 
 **Constructor**: `SafeArea(children:Array<View>)`

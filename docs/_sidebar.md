@@ -1,15 +1,15 @@
 - [Home](/)
 - [Getting Started](getting-started.md)
-- **UI Components**
-  - [Overview](ui/README.md)
-  - [Backend support](backend-support.md)
+- **Writing a UI**
+  - [Markup](markup.md)
+  - [Components overview](ui/README.md)
   - [Layout](ui/layout.md)
   - [Text & Input](ui/text-and-input.md)
   - [Controls](ui/controls.md)
   - [Lists & Iteration](ui/lists-and-iteration.md)
-- [Markup](markup.md)
-- [Components](components.md)
-- [Modifiers](modifiers.md)
+  - [Modifiers](modifiers.md)
+  - [Reusable components](components.md)
+  - [Backend support](backend-support.md)
 - **State**
   - [Overview](state/README.md)
   - [Bindings](state/bindings.md)

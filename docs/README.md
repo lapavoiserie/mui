@@ -11,26 +11,25 @@
 | `pui` | macOS, Windows, Linux, iOS, Android, SailfishOS (own renderer) | [pui](https://github.com/lapavoiserie/pui) |
 | `qui` | SailfishOS (Qt Silica) | [haxe-sailfish](https://github.com/lapavoiserie/haxe-sailfish) |
 
-You write your app once and compile to any backend by setting a `-D mui_backend` flag. All mui types compile down to backend types with zero runtime overhead.
+You write your app once and compile to any backend by setting a `-D mui_backend`
+flag. All mui types compile down to backend types with zero runtime overhead.
 
-## Minimal Example
+## A user interface is written in markup
 
 ```haxe
-import mui.App;
-import mui.View;
-import mui.ui.*;
+import mui.macros.Markup.ui;
 
-class Counter extends App {
+class Counter extends mui.App {
     @:state var count:Int = 0;
 
-    override function body():View {
-        return new VStack([
-            new Text('Count: $count'),
-            new HStack([
-                new Button("-", function() count -= 1),
-                new Button("+", function() count += 1),
-            ], 8),
-        ], 10);
+    override function body():mui.View {
+        return ui(<VStack spacing={10}>
+            <Text text={"Count: " + count}/>
+            <HStack spacing={8}>
+                <Button label="−" onClick={() -> count -= 1}/>
+                <Button label="+" onClick={() -> count += 1}/>
+            </HStack>
+        </VStack>);
     }
 
     static function main() {
@@ -41,11 +40,20 @@ class Counter extends App {
 }
 ```
 
+It is **checked against the backend you are building for**: a tag nothing
+declares, an attribute a control does not carry, a decoration it cannot draw
+are refused by name while you compile. [Markup](markup.md) is the reference.
+
 No `#if` blocks in the UI code itself. The only conditional is `main()`, and
 it does not name a backend: `mui_owns_main` is defined when the chosen
 backend's engine owns the process — `cui` and `pui` today — because there
 `run()` blocks and nothing may follow it. Everywhere else a generator drives,
 and anything in `main()` would run at the wrong time.
+
+Every control is also an ordinary class, so the same screen can be built by
+hand — `new VStack([new Text("Count: " + count)], 10)` — and the two forms mix
+freely in one project. Write the markup unless a view is built by code rather
+than written: markup is checked against the backend, and a constructor is not.
 
 ## Four concepts
 
@@ -58,7 +66,8 @@ surface. An application written on mui uses **four concepts**, and nothing else:
    `rui.Signal` or `rui.state.State` yourself: a raw cell has no way to reach
    some backends' redraw, and the compiler will refuse the read in a view and
    name the field.
-2. **`body()`** — the view, rebuilt from state. It may read `@:state` fields,
+2. **`body()`** — the view, written in [markup](markup.md) and rebuilt from
+   state. It may read `@:state` fields,
    `final` fields and immutable data; anything else is refused at compile time,
    because a value the view cannot observe is a screen that quietly goes stale.
 3. **`lifetime`** — `lifetime.own(undo)` for "undo this when the application is

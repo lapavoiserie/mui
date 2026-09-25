@@ -1,15 +1,16 @@
 # Examples
 
-Each example is one source, built for every backend. They demonstrate different
-parts of the unified API — and two of them ask different questions about it.
+Each example is one source, built for every backend, and each is written in
+[markup](../markup.md). They demonstrate different parts of the unified API —
+and two of them ask different questions about it.
 
 | Example | Features | `#if` blocks |
 |---------|----------|-------------|
-| [Counter](examples/counter.md) | State, buttons, layout | 1 (main) |
-| [Form](examples/form.md) | TextInput, Toggle, Divider | 1 (main) |
-| [Todo](examples/todo.md) | ForEach macro, dynamic lists | 1 (main) |
-| [Settings](examples/settings.md) | Toggle, Divider, appTitle | 1 (main) |
-| [Dashboard](examples/dashboard.md) | ProgressView, helper functions | 1 (main) |
+| [Counter](counter.md) | State, buttons, layout | 1 (main) |
+| [Form](form.md) | TextInput, Toggle, Divider | 1 (main) |
+| [Todo](todo.md) | a comprehension, keyed rows | 1 (main) |
+| [Settings](settings.md) | Toggle, Divider, appTitle | 1 (main) |
+| [Dashboard](dashboard.md) | ProgressView, helper functions | 1 (main) |
 | **Kitchen sink** | every shared type, once | 1 (main) |
 | **Showcase** | one screen, arranged with care | **0** |
 
@@ -17,11 +18,17 @@ parts of the unified API — and two of them ask different questions about it.
 
 They answer different questions, and one example cannot answer both.
 
-The **kitchen sink** asks *does write-once hold?* It uses every shared type once,
-in the plainest arrangement that shows each working, and it is deliberately
-unstyled: anything it looked like beyond the vocabulary would be a claim the
-vocabulary cannot back. When it looks bare, that is information. It runs on all
-five backends — Windows, iOS, macOS, Android, SailfishOS and the terminal.
+The **kitchen sink** asks *does write-once hold?* It is written in markup, uses
+every type its targets all declare — eleven — in the plainest arrangement that
+shows each working, and it is deliberately unstyled: anything it looked like
+beyond the vocabulary would be a claim the vocabulary cannot back. When it looks
+bare, that is information.
+
+One source, four pictures, taken the same afternoon: a window on macOS through
+`sui`, another through `pui`, an Android emulator through `aui`, and an 80×44
+terminal through `cui`. Each draws the same eleven types with its own controls —
+the picker is a native macOS menu, a Material dropdown, a drawn list, and
+`‹ SDI › 2/2`.
 
 The **showcase** asks *does an app built this way look like it belongs?* It uses
 a fraction of the vocabulary and arranges it with care — a title, headings, a

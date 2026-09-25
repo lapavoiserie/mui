@@ -32,22 +32,23 @@ backend's own, so there is no runtime overhead and no wrapper to step through.
 
 ## Example
 
-```haxe
-import mui.App;
-import mui.View;
-import mui.ui.*;
+A user interface is written in **markup**, checked at compile time against the
+backend you are building for:
 
-class Counter extends App {
+```haxe
+import mui.macros.Markup.ui;
+
+class Counter extends mui.App {
     @:state var count:Int = 0;
 
-    override function body():View {
-        return new VStack([
-            new Text('Count: $count'),
-            new HStack([
-                new Button("-", function() count -= 1),
-                new Button("+", function() count += 1),
-            ], 8),
-        ], 10);
+    override function body():mui.View {
+        return ui(<VStack spacing={10}>
+            <Text text={"Count: " + count}/>
+            <HStack spacing={8}>
+                <Button label="−" onClick={() -> count -= 1}/>
+                <Button label="+" onClick={() -> count += 1}/>
+            </HStack>
+        </VStack>);
     }
 
     static function main() {
@@ -58,61 +59,68 @@ class Counter extends App {
 }
 ```
 
-No `#if` blocks in the UI code. The only conditional is `main()`, and it does not
-name a backend: `mui_owns_main` is defined when the chosen backend's engine owns
-the process — `cui` and `pui` today, where `run()` blocks and nothing may follow
-it. Everywhere else a generator drives.
+A tag nothing declares, an attribute a control does not carry, a decoration a
+backend cannot draw: each is refused by name while you compile, with the
+accepted set in the message. Every control is also an ordinary class, so the
+same screen can be built by hand where a view comes from code rather than from
+a page — see [the markup reference](docs/markup.md).
 
 ## Unified Components
 
-| mui Component | Constructor | Notes |
-|--------------|-------------|-------|
-| `Text` | `Text(content)` | |
-| `VStack` | `VStack(children, ?spacing)` | |
-| `HStack` | `HStack(children, ?spacing)` | |
-| `Button` | `Button(label, ?action)` | Closure-based |
-| `Toggle` | `Toggle(label, state)` | Accepts `@:state` Bool field directly |
-| `TextInput` | `TextInput(placeholder, state)` | Accepts `@:state` String field directly |
-| `ForEach` | `ForEach.build(items, item -> view)` | Macro-based, see below |
-| `Spacer` | `Spacer()` | |
-| `Divider` | `Divider()` | |
-| `ProgressView` | `ProgressView(?label, ?value)` | |
-| `Image` | `Image(source)` | Not available on cui |
-| `ListView` | Backend-specific | |
-| `ScrollView` | Backend-specific | |
-| `TabView` | Backend-specific | |
+| Tag | Built by hand | Notes |
+|-----|---------------|-------|
+| `<Text text="…"/>` | `Text(content, ?scale, ?style)` | |
+| `<VStack spacing={8}>` | `VStack(children, ?spacing)` | |
+| `<HStack spacing={8}>` | `HStack(children, ?spacing)` | |
+| `<ZStack>` | `ZStack(children)` | |
+| `<Button label="…" onClick={…}/>` | `Button(label, ?action, ?icon)` | a closure, everywhere |
+| `<Toggle label="…" isOn={flag_}/>` | `Toggle(label, state)` | takes the **cell** |
+| `<Slider value={v_} min={0.0} max={1.0}/>` | `Slider(state, ?min, ?max)` | takes the cell |
+| `<TextInput text={s_} placeholder="…"/>` | `TextInput(placeholder, state)` | takes the cell |
+| `<Picker label="…" selectedIndex={i_}>` | `Picker(label, options, selection)` | options are `Text` children |
+| `<ProgressView value={0.5}/>` | `ProgressView(?label, ?value)` | |
+| `<Spacer/>` | `Spacer()` | |
+| `<Image src="asset:…" alt="…"/>` | `Image(src, alt, ?options)` | |
+| `<ScrollView>` | `ScrollView(content)` | |
+| `ListView`, `TabView` | backend-specific | behind `#if` |
 
-## Toggle and TextInput
+Several more — `Divider`, `Icon`, `SafeArea`, `Tabs`, `Disclosure`,
+`PasswordInput`, `SecretInput`, `Tappable` — exist where the backend declares
+them, and a tag it does not declare is refused by name while you compile.
+`mui/test/vocabulary` measures who has what;
+[Backend support](docs/backend-support.md) is the summary.
 
-Toggle and TextInput accept `@:state` fields directly via type-safe abstract bindings (`ToggleBinding` / `TextInputBinding`). The `@:from` conversion handles the backend differences automatically:
+## A two-way control binds the cell
+
+`isOn={darkMode_}`, not a value and a callback. The trailing underscore is the
+cell behind `@:state var darkMode`, and an abstract with `@:from` turns it into
+whatever that backend's control wants:
 
 ```haxe
 @:state var darkMode:Bool = false;
 @:state var username:String = "";
 
-// Works on all backends — no #if needed
-new Toggle("Dark Mode", darkMode_),
-new TextInput("Enter username", username_),
+<Toggle label="Dark Mode" isOn={darkMode_}/>
+<TextInput text={username_} placeholder="Enter username"/>
 ```
 
-## ForEach
+## Lists
 
-`ForEach.build()` is a compile-time macro that transforms a builder closure into the correct backend representation:
+A list of views is a Haxe comprehension, spliced into the children — it is
+ordinary Haxe and it runs, so nothing about it can be unsupported:
 
 ```haxe
-@:state var todos:Array<String> = [];
+@:state var todos:Array<Todo> = [];
 
-// Works on all backends
-ForEach.build(todos_, item -> new Text(item))
-
-// With object fields
-ForEach.build(todos_, item -> new HStack([
-    new Text(item.title),
-    new Spacer(),
-]))
+<VStack spacing={4}>
+    {[for (todo in todos) ui(<HStack key={todo.id} spacing={8}>
+        <Text text={todo.title}/>
+        <Spacer/>
+    </HStack>)]}
+</VStack>
 ```
 
-On SUI, the macro transforms `item.title` references into string templates for Swift code generation. On CUI/WUI, the builder closure runs at runtime.
+`ForEach.build(todos_, builder)` is the same thing for a view built by hand.
 
 ## State API
 

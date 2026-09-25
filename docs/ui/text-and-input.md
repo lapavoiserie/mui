@@ -5,17 +5,19 @@
 Displays read-only text.
 
 ```haxe
-new Text("Hello, world!")
-new Text('Count: $count')  // string interpolation
-new Text("Account", Title)         // set at a shared step
-new Text("A note beside it", Caption)
+<Text text="Hello, world!"/>
+<Text text={"Count: " + count}/>
+<Text text="Account" scale="title"/>
+<Text text="A note beside it" scale="caption"/>
 ```
 
 **Constructor**: `Text(content:String, ?scale:TextScale, ?style:TextStyle)`
 
+A family, a weight and the rest of the style are written as attributes too:
+
 ```haxe
-new Text("Farceur", Title, {family: Fonts.family("Inter")})
-new Text("00:12:34", Body, {weight: 600, numbers: Tabular})
+<Text text="Farceur" scale="title" family={Fonts.family("Inter")}/>
+<Text text="00:12:34" weight={600} numbers="tabular"/>
 ```
 
 ### How it is set
@@ -39,7 +41,7 @@ directory pictures use, so a font needs no second mechanism — and `Fonts.famil
 names one:
 
 ```haxe
-new Text(timecode, Body, {family: Fonts.family("Inter")})
+<Text text={timecode} family={Fonts.family("Inter")}/>
 ```
 
 It is a macro: the files are read while the application compiles, and a family
@@ -83,12 +85,14 @@ A text input field with a placeholder and state binding.
 ```haxe
 @:state var name:String = "";
 
-new TextInput("Enter your name", name_)
+<TextInput text={name_} placeholder="Enter your name"/>
 ```
 
 **Constructor**: `TextInput(placeholder:String, state:TextInputBinding)`
 
-The second argument accepts a `@:state String` field directly. The `TextInputBinding` abstract handles the backend conversion automatically via `@:from`:
+`text` takes the **cell** — `name_`, the one behind `@:state var name`. The
+`TextInputBinding` abstract handles the backend conversion automatically via
+`@:from`:
 
 - **sui**: extracts the state name for Swift code generation
 - **wui**: passes the State object as a binding

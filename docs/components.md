@@ -10,12 +10,20 @@ takes. Nothing to extend, nothing to register, and it works on every backend.
 
 ```haxe
 function row(title:String, value:String):View {
-    return new HStack([
-        new Text(title),
-        new Spacer(),
-        new Text(value)
-    ]);
+    return ui(<HStack spacing={8}>
+        <Text text={title}/>
+        <Spacer/>
+        <Text text={value}/>
+    </HStack>);
 }
+```
+
+and it goes into a view like any other list of children:
+
+```haxe
+<VStack spacing={4}>
+    {[row("Codec", "ProRes"), row("Rate", "50p")]}
+</VStack>
 ```
 
 ## `ViewComponent`, when it has state
@@ -36,23 +44,29 @@ class Counter extends ViewComponent {
     }
 
     override public function body():View {
-        return new HStack([
-            new Text(label + ": " + n),
-            new Button("+", n++)
-        ]);
+        return ui(<HStack spacing={8}>
+            <Text text={label + ": " + n}/>
+            <Button label="+" onClick={() -> n += 1}/>
+        </HStack>);
     }
 }
 ```
 
-Used like any other view:
+Used like any other view — in markup, spliced in with braces:
 
 ```haxe
 override public function body():View {
-    return new VStack([
-        new Text("Above"),
-        new Counter("clicks")
-    ]);
+    return ui(<VStack spacing={8}>
+        <Text text="Above"/>
+        {new Counter("clicks")}
+    </VStack>);
 }
+```
+
+or by hand:
+
+```haxe
+return new VStack([new Text("Above"), new Counter("clicks")]);
 ```
 
 `mui.ViewComponent` resolves to the backend's own, so the component you write is
@@ -69,6 +83,7 @@ returns. **How** that expansion happens differs, and so does what it costs you.
 | `wui` | a separate C++/WinRT construction function | |
 | `cui` | expanded at draw time — `measure`/`render` delegate to `body()` | |
 | `aui` | expanded by the tree reader, on the device | |
+| `pui` | it splices: the component is replaced by its `body()` | it cannot fill its children in its own constructor, because a subclass's fields are not set until `super()` has returned |
 
 There is no exception left to state: `aui` used to render through a compile-time
 Kotlin transpiler, which would have needed a composable carrying the component's

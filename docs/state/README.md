@@ -42,7 +42,7 @@ two ways, a durable store, an untracked read. That is what the underscore
 name is for:
 
 ```haxe
-new Toggle("Dark Mode", darkMode_);   // the cell, so the toggle can write back
+<Toggle label="Dark Mode" isOn={darkMode_}/>   // the cell, so the toggle can write back
 count_.peek();                         // an untracked read, said out loud
 ```
 
@@ -56,12 +56,17 @@ why a property, and why that spelling.
 
 ```haxe
 override function body():View {
-    return new VStack([
-        new Text('Count: $count'),
-        new Button("Increment", function() count += 1),
-    ]);
+    return ui(<VStack spacing={8}>
+        <Text text={"Count: " + count}/>
+        <Button label="Increment" onClick={() -> count += 1}/>
+    </VStack>);
 }
 ```
+
+Reading `count` inside `body()` subscribes the view: write to it and that view
+is told. A field that is neither `@:state`, `final` nor immutable is **refused
+at compile time** and named — a value the view cannot observe is a screen that
+quietly goes stale.
 
 ## State in Bindings
 
@@ -72,11 +77,11 @@ where to write back:
 @:state var darkMode:Bool = false;
 @:state var username:String = "";
 
-new Toggle("Dark Mode", darkMode_),      // auto-converted via ToggleBinding
-new TextInput("Username", username_),     // auto-converted via TextInputBinding
+<Toggle label="Dark Mode" isOn={darkMode_}/>
+<TextInput text={username_} placeholder="Username"/>
 ```
 
-See [Bindings](state/bindings.md) for details.
+See [Bindings](bindings.md) for details.
 
 ## Shared cells
 

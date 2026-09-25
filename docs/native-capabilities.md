@@ -13,7 +13,7 @@ import battery.Battery;
 
 override function body():View {
     var level = kui.Kui.get(Battery).level();
-    return new Text(level < 0 ? "no battery" : 'charge: $level %');
+    return ui(<Text text={level < 0 ? "no battery" : "charge: " + level + " %"}/>);
 }
 ```
 

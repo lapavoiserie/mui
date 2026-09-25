@@ -1,33 +1,193 @@
 # Markup
 
+**This is how a user interface is written in `mui`.** Everything else on this
+page is detail.
+
 ```haxe
 import mui.macros.Markup.ui;
 
-override function body():View {
-    return ui(<VStack spacing={8} padding={{top: 16, left: 16}}>
-        <Text text="Hello" scale="title"/>
-        <Toggle label="Lit" isOn={lit} onToggle={setLit}/>
-        {[for (row in rows) ui(<Text text={row}/>)]}
-    </VStack>);
+class Counter extends mui.App {
+    @:state var count:Int = 0;
+
+    override function body():mui.View {
+        return ui(<VStack spacing={8} padding={{top: 16.0, right: 16.0, bottom: 16.0, left: 16.0}}>
+            <Text text={"Count: " + count} scale="title"/>
+            <HStack spacing={8}>
+                <Button label="−" onClick={() -> count -= 1}/>
+                <Button label="+" onClick={() -> count += 1}/>
+            </HStack>
+        </VStack>);
+    }
 }
 ```
 
-It is **checked against the backend you are building for**. `-D mui_backend`
-names it, and `ui()` asks that backend's own declarations what exists: a tag
-nothing declares, an attribute a control does not carry, a decoration it cannot
-draw are refused by name, with the accepted set in the message, before the
-program runs.
+That source compiles for every backend, and each draws it with its own
+controls: a SwiftUI `Button` on macOS, a Material one on Android, `[ + ]` in a
+terminal.
+
+## It is checked while you compile
+
+`-D mui_backend` names the backend, and `ui()` asks **that backend's own
+declarations** what exists. A tag nothing declares, an attribute a control does
+not carry, a decoration it cannot draw: each is refused by name, with the
+accepted set in the message, before the program runs.
+
+```
+"Tappable" n'a pas d'attribut "onTap".
+  Attributs acceptés : label, onClick.
+```
+
+There is no `?Button` drawn on a screen for something you typed. See
+[written, assembled, received](#written-assembled-received) for where that rule
+stops applying, and why.
+
+## The build file
+
+`mui init` writes one per installed backend, and each already carries the two
+lines markup needs:
+
+```
+--macro pui.nui.Vocabulary.registerWithMui()
+-D mui_views
+```
+
+The first is what `ui()` checks against. The second makes it build that
+backend's **own controls**; without it `ui()` answers a `nui.Node`, which is
+what `wui` wants — it is in push mode and renders nodes — and what a tree
+crossing a wire is made of.
+
+## Writing a view
+
+### A tag is a control, an attribute is a property
+
+```haxe
+<Text text="Hello" scale="title"/>
+<Slider value={level_} min={0.0} max={1.0}/>
+```
+
+A value in braces is Haxe: a literal, an expression, a closure, a cell. A value
+in quotes is a string.
+
+### Children are children
+
+```haxe
+<VStack spacing={8}>
+    <Text text="Above"/>
+    <HStack spacing={8}>
+        <Text text="left"/>
+        <Spacer/>
+        <Text text="right"/>
+    </HStack>
+</VStack>
+```
+
+### A two-way control binds a cell
+
+```haxe
+<TextInput text={name_} placeholder="your name"/>
+<Toggle label="Dark mode" isOn={dark_}/>
+<Slider value={level_} min={0.0} max={1.0}/>
+```
+
+The **cell**, not a value and a callback. `name_` is the cell behind
+`@:state var name`, and it is what a view written by hand binds too. Reading is
+`name`, writing is `name = …`; see [Bindings](state/bindings.md).
+
+### A computed list
+
+A Haxe comprehension, spliced in:
+
+```haxe
+<VStack spacing={4}>
+    {[for (row in rows) ui(<Text key={row} text={row}/>)]}
+</VStack>
+```
+
+It is ordinary Haxe and it **runs** — `if`, `switch`, a method call, anything.
+Nothing translates it, so nothing about it can be unsupported.
+
+A single view goes in the same way: `{open ? ui(<Text text="…"/>) : null}`.
+
+### A key, for rows that move
+
+```haxe
+{[for (row in rows) ui(<HStack key={row.id}>…</HStack>)]}
+```
+
+Identity is positional by default — a view is "the third child" — and whatever
+is remembered about it (a field's caret and draft, the focus, the handle a
+native renderer kept) is remembered under that place. That holds while rows stay
+put. A list that sorts, filters or gains a row at the top moves every row below
+it, and a key is how a row says it is still itself.
+
+A control that edits a cell needs none: `pui`, `cui` and `sui` follow the cell,
+so a field keeps its caret through an insertion. Two unkeyed siblings of one
+type that say the same thing — a column of "Delete" buttons — are the case where
+a key is not optional.
+
+### Options that are data
+
+A `Picker` carries its options as text, which the canon writes as `Text`
+children:
+
+```haxe
+<Picker label="Output" selectedIndex={output_}>
+    <Text text="HDMI"/>
+    <Text text="SDI"/>
+</Picker>
+```
+
+A list the application already has goes in directly:
+
+```haxe
+<Picker label="Output" selectedIndex={output_}>{outputs}</Picker>
+```
+
+Like anything else a view reads, that list is `final`, `@:state` or immutable —
+a plain mutable field is refused at compile time, naming it.
+
+Not both at once, and not a child of another type: each is refused by name,
+because a dropped row in a picker reads as "the application does not offer that"
+rather than as a bug.
+
+### A component
+
+A reusable piece with state of its own is a view like any other — put it in with
+braces:
+
+```haxe
+{new Badge("clicks")}
+```
+
+See [Components](components.md).
+
+## Decorations
+
+The canon's nine are written as attributes on any tag, **in the order you write
+them**, because the order is the semantics:
+
+```haxe
+<Text text="Warning"
+    padding={8.0}
+    backgroundColor={nui.Color.role(Surface)}
+    border={{colour: nui.Color.role(Border), width: 1.0, radius: 6.0}}/>
+```
+
+`padding`, `backgroundColor`, `foregroundColor`, `border`, `opacity`, `clip`,
+`width`, `height`, `flex`. **A backend refuses the ones it cannot draw**, by
+name, with the list of what it can. See [Modifiers](modifiers.md) for the table
+of who draws what, and for why a length is in **points** on every backend,
+including the terminal.
 
 ## Written, assembled, received
 
-This is the distinction everything else follows from, and the one worth getting
-right before writing much. The
+This is the distinction everything else follows from. The
 [node model](https://lapavoiserie.github.io/nui/#/node-model) states it; here is
 what it means for you.
 
 A **written** tree is this — in your source, against a backend you chose. Every
 mistake in it is knowable while compiling, so every mistake in it is a compile
-error. There is no `?Button` on screen for something you typed.
+error.
 
 A **received** tree arrived as data: a Companion frame, a relayed surface. It
 cannot be checked — failing a build is not on offer for something that arrives
@@ -35,119 +195,46 @@ while the app is running — so a backend honours what it can, skips the rest an
 says which.
 
 An **assembled** tree is neither: built by your own code at runtime with type
-names as strings, `new Node("Spacer")`. Nothing checks it. Prefer markup or the
-backend's own constructors; where you genuinely cannot, treat it as received and
-expect it to degrade.
+names as strings, `new Node("Spacer")`. Nothing checks it. Prefer markup; where
+you genuinely cannot, treat it as received and expect it to degrade.
 
 ## What `ui()` gives back
 
 Two shapes, and which one depends on the backend and on `-D mui_views`.
 
+**The backend's own view** — `new pui.ui.VStack(...)`, with your closures bound
+directly and nothing described. This is what a build file from `mui init` turns
+on, and what markup means on a backend that renders its own controls.
+
 **A `nui.Node`** — the tree as data. This is what `wui` wants: it is in push
 mode, it renders nodes, and markup for it needs nothing else.
 
-**The backend's own view** — `new pui.ui.VStack(...)`, with your closures bound
-directly and nothing described. This is what `-D mui_views` turns on, and it is
-what markup means on a backend that renders its own controls.
-
-The second exists because the first could not reach most backends. `pui` could
-turn a node into views; `sui` and `aui` cannot, by design — they read a received
-tree natively and never copy it into views — so markup that produced a node
-could only reach them through the **read** door, the one a Companion frame uses.
-Sending your own screen through it puts your closures in a string-id registry
-and bypasses the fine-grained read tracking those backends exist for. It works,
-and it is wrong.
-
-| backend | builds its own views | notes |
-|---|---|---|
-| `pui` | yes | |
-| `cui` | yes | |
-| `qui` | yes | its sink has no builder at all, so this is the only way markup reaches it |
-| `aui` | yes | |
-| `sui` | yes | |
-| `wui` | no, and by design | push mode: it wants nodes |
-
-### What "its own view" means on `sui`
-
-Worth spelling out, because it is the backend where the answer is least
-obvious. `sui` has two render paths, and
-[its docs](https://lapavoiserie.github.io/sui/#/render-paths) say which is
-which: the **dynamic renderer** is the path — the app runs, `body()` builds a
-Haxe view tree, `DynamicView.swift` walks it into SwiftUI — and the SwiftUI
-transpiler is decommissioned, kept behind `--static` so a build that depended
-on it still has somewhere to go.
-
-So markup on `sui` emits `new sui.ui.Text(...)` exactly as it emits
-`new pui.ui.Text(...)`, and that tree is what the renderer walks. The
-consequence is the one people ask about first: **a Haxe comprehension inside
-markup simply runs**, on `sui` as on the others, because nothing translates it.
-Measured — twelve rows on macOS from `[for (i in 0...12) ui(<HStack…/>)]`,
-with the arithmetic and the conditional both right.
-
-Markup briefly grew a hook (`forEachOf`) so a backend could say a comprehension
-its own way — a SwiftUI `ForEach` rather than an array of views. It was written
-for the transpiler, and on the path that actually runs it made the rows vanish.
-It is gone. A backend that renders a tree does not need it, and the one that
-translates is not the one being built for.
-
-## A two-way control binds a cell
-
-```haxe
-<Toggle label="Lit" isOn={lit_}/>
-<TextInput text={name_} placeholder="your name"/>
-<Slider value={level_} min={0} max={1}/>
-```
-
-The **cell**, not a value and a callback. `lit_` is the cell behind
-`@:state var lit`, and it is what a view written by hand binds too.
-
-It was a value and a callback for a while, with each backend turning the two
-back into a cell. `sui` is where that showed itself wrong — its controls hold a
-name, so there was nothing to make — and one source could not serve three
-backends while two of them wanted one shape and the third the other. A binding
-is a cell; saying so removed four modules.
-
-## A key keeps a row itself
-
-```haxe
-{[for (row in rows) ui(<HStack key={row.id}>…</HStack>)]}
-```
-
-Identity is positional everywhere in this family — a view is "the third child",
-and whatever is remembered about it (a field's caret and draft, the focus, the
-handle a native renderer kept) is remembered under that place. That holds while
-rows stay put. A list that sorts, filters or gains a row at the top moves every
-row below it, and a key is how a row says it is still itself.
-
-On the views route a written `key` reaches the backend's view. All five that
-build their own views carry one, and each already had a reader waiting for it:
-`pui` puts it in the path a view's remembered state hangs from, `sui` publishes
-it as the `nodeId` SwiftUI diffs by, `aui` as the `nodeId` Compose's `key()`
-reads, `cui`'s focus follows it, and `qui` hands it to the reconciler that has
-matched children by key all along. A backend whose views carried no key would
-refuse one at compile time rather than drop it; until 2026-09-21 the route
-dropped it silently on every backend, which is worse than no key at all.
-
-A control that edits a cell needs none: `pui`, `cui` and `sui` follow the cell,
-so a field keeps its caret and its draft through an insertion without one.
-Two unkeyed siblings of one type that say the same thing — a column of "Delete"
-buttons — are the case where a key is not optional.
-
-## Decorations
-
-The canon's nine are written as attributes on any tag, in the order you write
-them, because the order is the semantics. See [Modifiers](modifiers.md).
-
-**A backend refuses the ones it cannot draw**, by name, with the list of what it
-can. Not every backend draws all nine on one of its own views:
-
-| backend | draws |
+| backend | builds its own views |
 |---|---|
-| `pui` | all nine |
-| `cui` | eight — not `flex` (no stack reads a weight; they share space by finding `Spacer`). `opacity` is drawn as a terminal can: hidden at zero, dim below one |
-| `aui` | seven — not `border` (its own takes a colour value a role cannot become) or `flex` |
-| `sui` | five — not the colours (same reason, the other way round) nor `border` or `flex` |
-| `qui` | four: `padding`, `foregroundColor`, `width`, `height` |
+| `pui`, `cui`, `qui`, `aui`, `sui` | yes |
+| `wui` | no, and by design — push mode: it wants nodes |
 
-That table is a statement of debt, not of design. Each gap is named where it
-lives, so it can be closed rather than discovered.
+The second shape used to be the only one, and it could not reach most backends.
+`pui` could turn a node into views; `sui` and `aui` cannot, by design — they
+read a received tree natively and never copy it into views — so markup that
+produced a node could only reach them through the **read** door, the one a
+Companion frame uses. Sending your own screen through it puts your closures in a
+string-id registry and bypasses the fine-grained read tracking those backends
+exist for. It works, and it is wrong.
+
+## Writing a view by hand
+
+Every control is an ordinary class, and markup is a syntax over those
+constructors — `<Text text="Hello"/>` is `new mui.ui.Text("Hello")`. Both
+compile, side by side, in the same project:
+
+```haxe
+return new VStack([
+    new Text("Count: " + count),
+    new Button("+", () -> count += 1),
+], 8);
+```
+
+Reach for it when a view is built by code rather than written — a tree that
+comes from a protocol, a test fixture. For everything else write the markup: it
+is checked against the backend, and a constructor is not.

@@ -54,9 +54,10 @@ second name for it.
 ## A modifier with several parts can be written whole
 
 ```haxe
-ui(<Tappable border={{colour: Color.role(Border), width: 3, radius: 6}}
-        padding={{top: 8, left: 12}}
-        onTap={select}>
+ui(<Tappable label="Pick this source"
+        border={{colour: Color.role(Border), width: 3.0, radius: 6.0}}
+        padding={{top: 8.0, left: 12.0}}
+        onClick={select}>
     …
 </Tappable>)
 ```
@@ -81,6 +82,35 @@ draws with naturally; a zero would square the corners of a button that had round
 ones. So an unnamed trailing part is not written at all, and naming a later part
 without an earlier one — a radius with no width, which draws no border — is
 refused rather than filled with a zero.
+
+## A length is in points
+
+`padding`, `width`, `height`, a border's width and radius: all of them are
+**points**, the device-independent unit every surface in this family draws in.
+The canon says so once and every backend converts at its own door — `cui` above
+all, whose unit is a character cell, taken as 8 points wide and 16 tall.
+
+That was unsaid until 2026-09-21, and it cost what an unsaid unit costs:
+`spacing={12}`, a fair gap between two rows of a form, was **twelve blank
+lines** on a terminal. The kitchen sink example needed a 140-row screen; it fits
+44 now.
+
+Rounding is to the nearest cell there, so 8 points is one row rather than none,
+and anything below half a cell rounds away — the honest answer, since a terminal
+has nothing smaller.
+
+## What each backend draws
+
+A decoration a backend cannot draw is **refused at compile time**, by name, with
+the list of what it can. The table is a statement of debt, not of design:
+
+| backend | draws |
+|---|---|
+| `pui` | all nine |
+| `cui` | eight — not `flex`; no stack there reads a weight. `opacity` is what a terminal can do of it: hidden at zero, dim below one |
+| `aui` | seven — not `border` (its own takes a colour value a role cannot become) or `flex` |
+| `sui` | five — not the colours (same reason, the other way round), nor `border` or `flex` |
+| `qui` | four: `padding`, `foregroundColor`, `width`, `height` |
 
 ## A colour is a role or its components
 

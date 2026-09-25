@@ -1,27 +1,38 @@
 # Lists & Iteration
 
-## ForEach
+## A comprehension, in markup
 
-`ForEach.build()` is a compile-time macro that lets you iterate over a state array with a builder function, producing the correct code for each backend.
-
-### Basic usage
+A list of views is a Haxe comprehension, spliced into the children:
 
 ```haxe
 @:state var items:Array<String> = [];
 
-ForEach.build(items_, function(item) {
-    return new Text(item);
-})
+<VStack spacing={4}>
+    {[for (item in items) ui(<Text key={item} text={item}/>)]}
+</VStack>
 ```
 
-### With object fields
+It is ordinary Haxe and it **runs**: `if`, `switch`, a method call, a nested
+comprehension. Nothing translates it, so nothing about it can be unsupported.
+
+Rows that move want a `key` — see [Markup](../markup.md#a-key-for-rows-that-move).
 
 ```haxe
-ForEach.build(todos, function(item) {
-    return new HStack([
-        new Text(item.title),
-        new Spacer(),
-    ]);
+{[for (todo in todos) ui(<HStack key={todo.id} spacing={8}>
+    <Text text={todo.title}/>
+    <Spacer/>
+</HStack>)]}
+```
+
+## `ForEach`, written by hand
+
+`ForEach.build()` is a compile-time macro that iterates a state array with a
+builder function, producing the right code for each backend. It is what a view
+written by hand uses where markup writes a comprehension.
+
+```haxe
+ForEach.build(items_, function(item) {
+    return new Text(item);
 })
 ```
 
@@ -62,11 +73,12 @@ Expressions that don't reference the item parameter pass through unchanged on al
 ## ScrollView takes a list of views, everywhere
 
 ```haxe
-new ScrollView([
-    new Text("one"),
-    new Text("two"),
-])
+<ScrollView clip={true}>
+    {[for (row in rows) ui(<Text key={row} text={row}/>)]}
+</ScrollView>
 ```
+
+**Constructor**: `ScrollView(content:Array<View>)`
 
 `mui.Contract` states that signature and `mui.macros.Bind` checks it, so the
 six agree by construction. A backend may add **trailing optional** arguments the

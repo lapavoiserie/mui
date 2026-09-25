@@ -39,10 +39,10 @@ class TodoApp extends mui.App {
 	// The Sailfish cover, an iOS widget… "today" is the id.
 	@:surface(Glance)
 	function today():View {
-		return new VStack([
-			new Text("Todos", Title),
-			new Text('${remaining()} left'),
-		]);
+		return ui(<VStack>
+			<Text text="Todos" scale="title"/>
+			<Text text={remaining() + " left"}/>
+		</VStack>);
 	}
 
 	@:surface(Commands)
@@ -113,7 +113,7 @@ something is the surface's own effect: the declaration is evaluated inside one,
 and republishes. You write no call:
 
 ```haxe
-new Button("-", function() count--),   // the widget follows
+<Button label="−" onClick={() -> count -= 1}/>   // the widget follows
 ```
 
 Every host answers that under a different name — Android pushes a fresh picture
@@ -277,10 +277,10 @@ button says.
 ```haxe
 @:surface(Companion)
 function panel():View {
-	return new VStack([
-		new Text('count: $count'),
-		new Button("Add", () -> count += 10),
-	]);
+	return ui(<VStack>
+		<Text text={"count: " + count}/>
+		<Button label="Add" onClick={() -> count += 10}/>
+	</VStack>);
 }
 
 // once, after construction (the app opts into the transport):

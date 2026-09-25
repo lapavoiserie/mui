@@ -1,21 +1,23 @@
 # Controls
 
+Written in [markup](../markup.md); the constructor beside each one is the same
+control built by hand. A two-way control takes the **cell** — `volume_`, the one
+behind `@:state var volume`.
+
 ## Button
 
 A clickable button with a label and action.
 
 ```haxe
-new Button("Click me", function() {
-    count += 1;
-})
+<Button label="Click me" onClick={() -> count += 1}/>
 ```
 
 A button may carry an icon from the shared vocabulary, beside the label or
 alone — then the icon's name is what a screen reader says:
 
 ```haxe
-new Button("TAKE", take, Swap)
-new Button("", mute, MicOff)
+<Button label="TAKE" onClick={take} icon="swap"/>
+<Button label="" onClick={mute} icon="mic-off"/>
 ```
 
 **Constructor**: `Button(label:String, ?action:()->Void, ?icon:mui.ui.IconName)`
@@ -35,7 +37,7 @@ A boolean switch (toggle on sui/wui, checkbox on cui).
 ```haxe
 @:state var darkMode:Bool = false;
 
-new Toggle("Dark Mode", darkMode_)
+<Toggle label="Dark Mode" isOn={darkMode_}/>
 ```
 
 **Constructor**: `Toggle(label:String, state:ToggleBinding)`
@@ -53,7 +55,7 @@ A range slider for Float values.
 ```haxe
 @:state var volume:Float = 0.5;
 
-new Slider(volume_, 0.0, 1.0)
+<Slider value={volume_} min={0.0} max={1.0}/>
 ```
 
 **Constructor**: `Slider(state:SliderBinding, min:Float = 0.0, max:Float = 1.0)`
@@ -66,9 +68,19 @@ On cui, renders as a horizontal bar (`████████░░░░░░
 
 Shows one view or another based on a Bool state.
 
+In markup a condition is ordinary Haxe, spliced in:
+
 ```haxe
 @:state var isLoggedIn:Bool = false;
 
+<VStack>
+    {isLoggedIn ? ui(<Text text="Welcome!"/>) : ui(<Text text="Please log in"/>)}
+</VStack>
+```
+
+Written by hand it is a control:
+
+```haxe
 new ConditionalView(isLoggedIn_,
     new Text("Welcome!"),
     new Text("Please log in")
@@ -84,8 +96,8 @@ Native on sui/wui/aui. On cui, implemented at runtime with measure/render delega
 A progress indicator.
 
 ```haxe
-new ProgressView("Loading...", 0.75)  // 75% progress
-new ProgressView()                     // indeterminate
+<ProgressView label="Loading..." value={0.75}/>
+<ProgressView/>
 ```
 
 **Constructor**: `ProgressView(?label:String, ?value:Float)`
@@ -100,8 +112,24 @@ A drop-down list: one choice among several. The selection is the chosen option's
 ```haxe
 @:state var transition:Int = 1;
 
-new Picker("Transition", ["Cut", "Fade", "Wipe"], transition_)
+<Picker label="Transition" selectedIndex={transition_}>
+    <Text text="Cut"/>
+    <Text text="Fade"/>
+    <Text text="Wipe"/>
+</Picker>
 ```
+
+A list the application already has goes in directly, and means the same thing:
+
+```haxe
+final transitions = ["Cut", "Fade", "Wipe"];
+
+<Picker label="Transition" selectedIndex={transition_}>{transitions}</Picker>
+```
+
+The list has to be `final` or `@:state`, like anything else a view reads: a
+plain mutable field is refused at compile time, because nothing could tell the
+view it changed.
 
 **Constructor**: `Picker(label:String, options:Array<String>, selection:PickerBinding)` —
 the binding is an `@:state` of type `Int`. An empty label shows none.
@@ -129,7 +157,7 @@ pre-filled, read back.
 ```haxe
 @:state var password:String = "";
 
-new PasswordInput("Password", password_)
+<PasswordInput placeholder="Password" text={password_}/>
 ```
 
 **Constructor**: `PasswordInput(placeholder:String, state:TextInputBinding)` — a
@@ -161,7 +189,8 @@ A value that is typed in and **never enters the tree**: a stream key, a token, a
 password.
 
 ```haxe
-new SecretInput("Stream key — type to replace", key -> engine.setStreamKey(key), true)
+<SecretInput placeholder="Stream key — type to replace"
+    onSecret={key -> engine.setStreamKey(key)} isSet={true}/>
 ```
 
 **Constructor**: `SecretInput(placeholder:String, ?onSecret:String->Void, isSet:Bool = false)` —

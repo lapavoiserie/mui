@@ -3,48 +3,46 @@
 A system monitoring dashboard with progress indicators and stats.
 
 ```haxe
-import mui.App;
-import mui.View;
-import mui.ui.*;
+import mui.macros.Markup.ui;
 
-class DashboardApp extends App {
+class DashboardApp extends mui.App {
     public function new() {
         super();
         appTitle = "Dashboard";
     }
 
-    override function body():View {
-        return new VStack([
-            new Text("System Dashboard"),
-            new Divider(),
-            new Text("Resources"),
-            statusRow("CPU", 0.73),
-            statusRow("Memory", 0.45),
-            statusRow("Disk", 0.89),
-            new Divider(),
-            new Text("Stats"),
-            infoRow("Uptime", "14d 3h 22m"),
-            infoRow("Requests/s", "1,247"),
-            infoRow("Latency p99", "142ms"),
-            infoRow("Error rate", "0.03%"),
-            new Spacer(),
-        ], 8);
+    override function body():mui.View {
+        return ui(<VStack spacing={8}>
+            <Text text="System Dashboard" scale="title"/>
+            <Divider/>
+            <Text text="Resources" scale="caption"/>
+            {[statusRow("CPU", 0.73), statusRow("Memory", 0.45), statusRow("Disk", 0.89)]}
+            <Divider/>
+            <Text text="Stats" scale="caption"/>
+            {[
+                infoRow("Uptime", "14d 3h 22m"),
+                infoRow("Requests/s", "1,247"),
+                infoRow("Latency p99", "142ms"),
+                infoRow("Error rate", "0.03%"),
+            ]}
+            <Spacer/>
+        </VStack>);
     }
 
-    function statusRow(label:String, value:Float):View {
-        return new HStack([
-            new Text(label),
-            new ProgressView(null, value),
-            new Text('${Std.int(value * 100)}%'),
-        ], 8);
+    function statusRow(label:String, value:Float):mui.View {
+        return ui(<HStack spacing={8}>
+            <Text text={label}/>
+            <ProgressView value={value}/>
+            <Text text={Std.int(value * 100) + "%"}/>
+        </HStack>);
     }
 
-    function infoRow(label:String, val:String):View {
-        return new HStack([
-            new Text(label),
-            new Spacer(),
-            new Text(val),
-        ], 4);
+    function infoRow(label:String, said:String):mui.View {
+        return ui(<HStack spacing={4}>
+            <Text text={label}/>
+            <Spacer/>
+            <Text text={said}/>
+        </HStack>);
     }
 
     static function main() {

@@ -74,14 +74,13 @@ myapp/
 
 ## Your First App
 
-```haxe
-import mui.App;
-import mui.View;
-import mui.ui.Text;
-import mui.ui.VStack;
-import mui.ui.Button;
+A user interface is written in **markup**, checked against the backend you are
+building for:
 
-class MyApp extends App {
+```haxe
+import mui.macros.Markup.ui;
+
+class MyApp extends mui.App {
     @:state var greeting:String = "Hello!";
 
     public function new() {
@@ -89,11 +88,11 @@ class MyApp extends App {
         appTitle = "My First App";
     }
 
-    override function body():View {
-        return new VStack([
-            new Text(greeting),
-            new Button("Change", function() greeting = "Hi there!"),
-        ], 10);
+    override function body():mui.View {
+        return ui(<VStack spacing={10}>
+            <Text text={greeting} scale="title"/>
+            <Button label="Change" onClick={() -> greeting = "Hi there!"}/>
+        </VStack>);
     }
 
     static function main() {
@@ -104,8 +103,22 @@ class MyApp extends App {
 }
 ```
 
+Three things are worth noticing.
+
+**`@:state var greeting`** is observable state: `greeting` reads it,
+`greeting = …` writes it, and the screen follows on every backend.
+
+**`ui(<VStack>…</VStack>)`** is the view. Misspell a tag or an attribute and
+the build stops and names it, with what that backend does accept.
+
+**Nothing in it names a backend.** The build file does, and `mui init` wrote
+one per backend you have installed — each already carrying the two lines markup
+needs (`--macro <backend>.nui.Vocabulary.registerWithMui()` and
+`-D mui_views`).
+
 ## Next Steps
 
-- [UI Components](ui/README.md) -- layout, text, controls
+- [Markup](markup.md) -- the reference for writing a view
+- [UI Components](ui/README.md) -- every control, and what to write for it
 - [State Management](state/README.md) -- reactive state with `@:state`
 - [Examples](examples/README.md) -- counter, form, todo, dashboard
