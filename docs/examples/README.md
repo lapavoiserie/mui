@@ -7,6 +7,7 @@ and two of them ask different questions about it.
 | Example | Features | `#if` blocks |
 |---------|----------|-------------|
 | [Counter](counter.md) | State, buttons, layout | 1 (main) |
+| [A component](component.md) | `ViewComponent`, arguments, its own state | 1 (main) |
 | [Form](form.md) | TextInput, Toggle, Divider | 1 (main) |
 | [Todo](todo.md) | a comprehension, keyed rows | 1 (main) |
 | [Settings](settings.md) | Toggle, Divider, appTitle | 1 (main) |

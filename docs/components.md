@@ -92,6 +92,12 @@ own state and did not produce one. That path is
 renders through its tree reader, where a component is expanded like everywhere
 else.
 
+## A worked example
+
+[A component of your own](examples/component.md) builds one end to end — a
+mixer row with a label, a level and a mute button of its own — and shows it
+drawn.
+
 ## What a component is not
 
 **It is not a new node type.** Composing views `mui` provides is unlimited;

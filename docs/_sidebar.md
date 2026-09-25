@@ -23,6 +23,7 @@
 - **Examples**
   - [Overview](examples/README.md)
   - [Counter](examples/counter.md)
+  - [A component of your own](examples/component.md)
   - [Form](examples/form.md)
   - [Todo App](examples/todo.md)
   - [Settings](examples/settings.md)
