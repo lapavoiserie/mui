@@ -9,6 +9,9 @@ class Options {
 		var chosen = new pui.state.State(1);
 		#elseif (mui_backend == "cui")
 		var chosen = new cui.state.State.IntState(1, "chosen");
+		#elseif (mui_backend == "sui")
+		// This backend's controls hold a NAME, so the cell is named.
+		var chosen = new sui.state.State(1, "chosen");
 		#end
 		var written = ui(<Picker label="Sortie" selectedIndex={chosen}>
 			<Text text="HDMI"/>

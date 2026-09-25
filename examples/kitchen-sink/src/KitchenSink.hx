@@ -5,7 +5,7 @@ import mui.macros.Markup.ui;
 
 	## Why it holds so little
 
-	A kitchen sink is supposed to show everything, and this one shows ten node
+	A kitchen sink is supposed to show everything, and this one shows eleven node
 	types. That is not modesty: it is **every type `pui`, `sui`, `aui` and
 	`cui` all declare**, and the markup is checked against the backend named by
 	`-D mui_backend`, so anything else fails to compile rather than to draw.
@@ -29,6 +29,9 @@ import mui.macros.Markup.ui;
 class KitchenSink extends mui.App {
 	@:state var name:String = "Pavois";
 	@:state var level:Float = 0.4;
+
+	/** Which output: options written as data children, the canon's shape. **/
+	@:state var output:Int = 1;
 	@:state var lit:Bool = true;
 
 	static function main() {
@@ -80,6 +83,10 @@ class KitchenSink extends mui.App {
 				<Slider value={level_} min={0.0} max={1.0}/>
 				<Text text={"hello " + name + " · " + Math.round(level * 100) + "%"}/>
 				<Button label="Full" onClick={() -> level = 1.0}/>
+				<Picker label="Sortie" selectedIndex={output_}>
+					<Text text="HDMI"/>
+					<Text text="SDI"/>
+				</Picker>
 			</VStack>
 
 			<HStack spacing={8}>

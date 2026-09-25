@@ -535,6 +535,14 @@ class Markup {
 		// written in markup fell back to a node.
 		var asData = Backend.dataChildren(tag);
 		var data:Null<Expr> = asData == null ? null : dataChildrenOf(xml, asData, tag, pos);
+		// `written` holds one entry per ELEMENT, in source order, and `at`
+		// walks it in step with `buildNode`. Data children never reach
+		// `buildNode`, so their entries have to be stepped over here -- or
+		// every element after this one reads another element's attribute
+		// order. It cost a day's worth of confusion once: the kitchen sink's
+		// picker compiled alone and, in place, made the NEXT `<Text/>` be
+		// refused for carrying no text.
+		if (asData != null) for (child in xml) if (child.nodeType == Xml.Element) at++;
 
 		for (child in xml) {
 			if (asData != null) break;

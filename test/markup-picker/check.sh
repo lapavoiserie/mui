@@ -12,8 +12,8 @@ cd "$(dirname "$0")"
 fails=0
 common="-cp . -cp ../../src -lib rui -lib nui -D mui_views"
 
-for b in pui cui; do
-	out=$(haxe $common -lib $b -D mui_backend=$b --macro "$b.nui.Vocabulary.registerWithMui()" \
+for b in pui cui sui; do
+	out=$(haxe $common -lib $b -D mui_backend=$b --macro "mui.macros.Bind.all()" --macro "$b.nui.Vocabulary.registerWithMui()" \
 		-main Options --interp 2>&1)
 	if echo "$out" | grep -q "written: HDMI,SDI | spliced: HDMI,SDI,NDI"; then
 		echo "ok   $b: options written one by one, and a list spliced in"
@@ -32,12 +32,24 @@ for b in pui cui; do
 	fi
 done
 
+# The tag AFTER a picker: data children never reach `buildNode`, so their
+# entry in the attribute-order list has to be stepped over or every element
+# that follows reads another one's attributes.
+out=$(haxe $common -lib pui -D mui_backend=pui --macro "mui.macros.Bind.all()" \
+	--macro "pui.nui.Vocabulary.registerWithMui()" -main Nested --interp 2>&1)
+if echo "$out" | grep -q "after: after | options: HDMI,SDI"; then
+	echo "ok   the tags after a picker still read their own attributes"
+else
+	echo "FAIL a tag after the picker read the wrong attributes:"; echo "$out" | head -4
+	fails=$((fails + 1))
+fi
+
 # One refusal per shape, each judged on the phrase it must carry: a message
 # that merely fails is no better than a silent drop.
 refused() {
 	local main="$1" want="$2"
 	local out
-	out=$(haxe $common -lib pui -D mui_backend=pui --macro "pui.nui.Vocabulary.registerWithMui()" \
+	out=$(haxe $common -lib pui -D mui_backend=pui --macro "mui.macros.Bind.all()" --macro "pui.nui.Vocabulary.registerWithMui()" \
 		-cp refused -main "$main" --interp 2>&1)
 	if echo "$out" | grep -qF "$want"; then
 		echo "ok   $main is refused, and the message says exactly why"

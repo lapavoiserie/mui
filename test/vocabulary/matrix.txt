@@ -18,7 +18,7 @@ NavigationView      .   .   .   .   .   x
 NavigationViewItem  .   .   .   .   .   x  
 PasswordBox         .   .   .   .   .   x  
 PasswordInput       x   x   .   .   .   .  
-Picker              x   x   .   x   x   x  
+Picker              x   x   x   x   x   x  
 ProgressBar         .   .   .   .   .   x  
 ProgressRing        .   .   .   .   .   x  
 ProgressView        x   x   x   x   x   x  
@@ -45,4 +45,4 @@ ToggleSwitch        .   .   .   .   .   x
 VStack              x   x   x   x   x   x  
 ZStack              x   x   x   x   x   x  
 
-total               22  19  14  16  16  39 
+total               22  19  15  16  16  39 
