@@ -15,9 +15,10 @@ named by `-D mui_backend`, so anything else fails to build rather than to draw;
 `mui/test/vocabulary` keeps the table. The tenth is `Button`, which `aui` could
 not declare until 2026-09-21 — it had no control able to carry a closure.
 
-**It is built through `-D mui_views`**, so `ui()` answers the backend's own
-view rather than a `nui.Node`, and the markup is a syntax over that backend's
-API: closures bound directly, nothing described, nothing read back.
+**`ui()` answers the backend's own view** rather than a `nui.Node` — the
+default since 2026-09-27 — so the markup is a syntax over that backend's API:
+closures bound directly, nothing described, nothing read back. `-D mui_nodes`
+is the way back, for a tree that is going to be sent.
 
 **Its decorations are what all three can draw**, which is four of the canon's
 nine: no colours and no border, because `sui` cannot put a role on one of its

@@ -6,7 +6,6 @@
 -lib nui
 -lib hxcpp
 -D mui_backend=sui
--D mui_views
 --macro sui.macros.SwiftGenerator.register()
 --macro mui.macros.Bind.all()
 --macro sui.nui.Vocabulary.registerWithMui()

@@ -112,9 +112,8 @@ Three things are worth noticing.
 the build stops and names it, with what that backend does accept.
 
 **Nothing in it names a backend.** The build file does, and `mui init` wrote
-one per backend you have installed — each already carrying the two lines markup
-needs (`--macro <backend>.nui.Vocabulary.registerWithMui()` and
-`-D mui_views`).
+one per backend you have installed — each already carrying the line markup
+needs, `--macro <backend>.nui.Vocabulary.registerWithMui()`.
 
 ## Next Steps
 

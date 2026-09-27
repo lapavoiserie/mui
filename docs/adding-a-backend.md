@@ -18,16 +18,19 @@ A backend library must provide:
 ### Accepting markup
 
 `mui`'s markup is checked against your declarations already — that comes free
-with `@:node`/`@:prop`. What does not come free is **what it produces**. By
-default `ui()` answers a `nui.Node`, which suits a backend in push mode and
-nothing else: a backend that renders its own controls would have to read that
-node back, and one that reads a received tree natively (like `sui` and `aui`)
-cannot turn it into views at all.
+with `@:node`/`@:prop`. What does not come free is **what it produces**.
+`ui()` builds your own controls, which is what a backend that renders them
+wants; `-D mui_nodes` makes it answer a `nui.Node` instead, which suits a
+backend in push mode and a tree that is going to be sent.
+
+A backend that renders its own controls would otherwise have to read that node
+back, and one that reads a received tree natively (like `sui` and `aui`) cannot
+turn it into views at all — which is why this stopped being opt-in.
 
 So say so, in your `registerWithMui`:
 
 ```haxe
-#if mui_views
+#if !mui_nodes
 viewOf: (tag, given, children, pos) ->
     nui.macros.Construct.expr(DIALECT, tag, given, children, pos),
 decorate: (view, modifiers, pos) -> macro yourbackend.nui.Decorate.apply($view,

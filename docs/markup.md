@@ -43,18 +43,17 @@ stops applying, and why.
 
 ## The build file
 
-`mui init` writes one per installed backend, and each already carries the two
-lines markup needs:
+`mui init` writes one per installed backend, and each already carries the line
+markup needs:
 
 ```
 --macro pui.nui.Vocabulary.registerWithMui()
--D mui_views
 ```
 
-The first is what `ui()` checks against. The second makes it build that
-backend's **own controls**; without it `ui()` answers a `nui.Node`, which is
-what `wui` wants — it is in push mode and renders nodes — and what a tree
-crossing a wire is made of.
+That is what `ui()` checks a tag against. Building the backend's **own
+controls** is the default; `-D mui_nodes` is the way back, and answers a
+`nui.Node` instead — which is what `wui` wants, being in push mode, and what a
+tree crossing a wire is made of.
 
 ## Writing a view
 
@@ -200,11 +199,11 @@ you genuinely cannot, treat it as received and expect it to degrade.
 
 ## What `ui()` gives back
 
-Two shapes, and which one depends on the backend and on `-D mui_views`.
+Two shapes, and which one depends on the backend and on `-D mui_nodes`.
 
 **The backend's own view** — `new pui.ui.VStack(...)`, with your closures bound
-directly and nothing described. This is what a build file from `mui init` turns
-on, and what markup means on a backend that renders its own controls.
+directly and nothing described. This is the default, and what markup means on a
+backend that renders its own controls.
 
 **A `nui.Node`** — the tree as data. This is what `wui` wants: it is in push
 mode, it renders nodes, and markup for it needs nothing else.

@@ -5,7 +5,6 @@
 -lib rui
 -lib nui
 -D mui_backend=aui
--D mui_views
 -D jvm
 --jvm build/app-logic.jar
 --macro aui.macros.ComposeGenerator.register()

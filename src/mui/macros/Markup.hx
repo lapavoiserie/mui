@@ -852,7 +852,25 @@ class Markup {
 		// was being read as text, which is a confusing thing to be told.
 		var wanted = [Context.getType("nui.Node")];
 		// And, where the backend builds its own controls, its views.
-		if (Backend.buildsViews()) wanted.push(Context.getType("mui.View"));
+		//
+		// `mui.View` is an alias `mui.macros.Bind.all()` defines, and every
+		// build file from `mui init` calls it -- but a fixture that compiles
+		// markup without it used to be fine, because markup only ever made
+		// nodes. Since the views route became the default, asking for a type
+		// that is not there threw "Type not found 'mui.View'" from inside a
+		// macro, naming neither the missing line nor the file. Asked for
+		// gently, and said plainly when it is missing.
+		if (Backend.buildsViews()) {
+			try {
+				wanted.push(Context.getType("mui.View"));
+			} catch (_:Dynamic) {
+				Context.error("Le backend cible construit ses propres vues, mais `mui.View` "
+					+ "n'existe pas dans ce build.\n"
+					+ "  Ajoutez `--macro mui.macros.Bind.all()` -- c'est la ligne qui definit "
+					+ "les alias de `mui`.", pos);
+				return null;
+			}
+		}
 
 		for (one in wanted) {
 			// One on its own is a list of one: a conditional child written as

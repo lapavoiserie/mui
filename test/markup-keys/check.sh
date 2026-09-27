@@ -10,7 +10,7 @@
 set -u
 cd "$(dirname "$0")"
 fails=0
-common="-cp . -cp ../../src -lib rui -lib nui -D mui_views"
+common="-cp . -cp ../../src -lib rui -lib nui"
 
 for b in pui sui cui aui; do
 	# aui's State reaches a Kotlin class, so it is compiled and run on the JVM.

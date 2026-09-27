@@ -10,7 +10,7 @@
 set -u
 cd "$(dirname "$0")"
 fails=0
-common="-cp . -cp ../../src -lib rui -lib nui -D mui_views"
+common="-cp . -cp ../../src -lib rui -lib nui"
 
 for b in pui cui sui; do
 	out=$(haxe $common -lib $b -D mui_backend=$b --macro "mui.macros.Bind.all()" --macro "$b.nui.Vocabulary.registerWithMui()" \
