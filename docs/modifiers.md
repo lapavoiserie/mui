@@ -20,6 +20,12 @@ The set is closed, and `nui.Modifiers` holds it:
 | `width` / `height` | one float each: a size asked for rather than measured |
 | `flex` | one float: this view's share of what is left over |
 
+`flex` is the growing direction only. Who gives way when there is **not enough**
+room is not a modifier at all: the view says whether it can be made smaller —
+a label wraps, a picture scales, a button is as wide as its label — and the
+container shrinks what can and cuts what cannot. See
+[Layout](ui/layout.md#when-the-children-do-not-fit).
+
 Three things are deliberately absent, and the [node
 model](https://lapavoiserie.github.io/nui/#/node-model) gives the reasons at
 length: a free-standing `cornerRadius` (a radius belongs to the thing it

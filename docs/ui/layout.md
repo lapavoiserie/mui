@@ -54,6 +54,32 @@ Flexible space that fills available room.
 
 **Constructor**: `Spacer()`
 
+## When the children do not fit
+
+A row of three labels wanting 224 points in 180 has to do something. What it
+does is **shrink what can give way, then cut what cannot**:
+
+```haxe
+<HStack spacing={8}>
+    <Text text="Source"/>
+    <Text text="Transitions"/>
+    <Text text="Diffusion"/>
+</HStack>
+```
+
+In 600 points those measure 48, 88 and 72 and keep it. In 180 they become 38,
+69 and 57 — they wrap — and nothing is cut. Replace them with three buttons and
+nothing gives way: a button is as wide as its label, so the row overflows for
+real and is cut at its edge.
+
+A view **told** a size keeps it: `width={90}` is a size asked for, not a
+suggestion, so the squeeze falls on its neighbours instead.
+
+None of this crosses the wire. A container that shrinks or cuts is deciding
+*this* layout, and a panel on a wider screen has nothing to shrink — which is
+why it is not [`clip`](../modifiers.md), the one that means "cut here whether
+or not it fits".
+
 ## Divider
 
 A horizontal separator line.
