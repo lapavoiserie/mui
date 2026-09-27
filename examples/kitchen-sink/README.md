@@ -25,6 +25,12 @@ views and `aui`'s border takes a colour value a role cannot become. Writing one
 here does not produce a plain screen — it does not compile. That table is a
 statement of debt, not of design.
 
+**Every control it holds does something visible.** The toggle used to bind
+`lit` and nothing read it, so flipping it changed only the toggle — which is a
+poor thing for an example about state reaching the screen to demonstrate. The
+summary line reads it now, beside the name and the level:
+`hello Pavois · 40% · lit`.
+
 **A two-way control binds the cell** — `isOn={lit_}` — which is what a view
 written by hand does.
 

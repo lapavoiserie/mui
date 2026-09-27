@@ -81,7 +81,8 @@ class KitchenSink extends mui.App {
 				<TextInput text={name_} placeholder="your name"/>
 				<Toggle label="lit" isOn={lit_}/>
 				<Slider value={level_} min={0.0} max={1.0}/>
-				<Text text={"hello " + name + " · " + Math.round(level * 100) + "%"}/>
+				<Text text={"hello " + name + " · " + Math.round(level * 100) + "%"
+					+ " · " + (lit ? "lit" : "unlit")}/>
 				<Button label="Full" onClick={() -> level = 1.0}/>
 				<Picker label="Sortie" selectedIndex={output_}>
 					<Text text="HDMI"/>
@@ -110,10 +111,4 @@ class KitchenSink extends mui.App {
 			</ScrollView>
 		</VStack>);
 	}
-
-	function setName(v:String):Void name = v;
-
-	function setLit(v:Bool):Void lit = v;
-
-	function setLevel(v:Float):Void level = v;
 }
