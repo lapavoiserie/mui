@@ -53,4 +53,47 @@ class SurfaceDeclTools {
 			case CommandSet(id, _): id;
 		};
 	}
+
+	/**
+		Every tree declared for one role, in declaration order.
+
+		The walk each host was writing for itself. `sui` picks its `Auxiliary`
+		windows this way, `wui` picks the same ones, and `pui` now picks them
+		too -- three copies of a `for` over `surfaces()` with a `switch` whose
+		`case _:` is the interesting part, because a host that forgets a
+		constructor drops a declaration on the floor in silence.
+
+		Written here once, a host says which role it is mounting and gets the
+		declarations for it. What stays each host's own is the *cardinality*
+		answer: a platform that mounts one surface of a role takes the role's
+		default id if it is declared and the first otherwise, and that rule
+		differs per role -- see `pickOne`.
+	**/
+	public static function treesOf(decls:Array<SurfaceDecl>, role:SurfaceRole):Array<{id:String, content:() -> mui.View}> {
+		var out:Array<{id:String, content:() -> mui.View}> = [];
+		for (d in decls) switch (d) {
+			case Tree(r, id, content) if (Type.enumEq(r, role)): out.push({id: id, content: content});
+			case _:
+		}
+		return out;
+	}
+
+	/**
+		The one declaration a host that mounts one of this role should take.
+
+		The rule the surfaces page states and three hosts implemented
+		separately: the role's default id wins if it was declared, else the
+		first declaration. `null` when nothing was declared.
+
+		`defaultId` is the host's, because the default is the role's name as
+		the platform spells it -- "glance" for a cover, "preferences" for a
+		settings scene.
+	**/
+	public static function pickOne(decls:Array<SurfaceDecl>, role:SurfaceRole,
+			defaultId:String):Null<{id:String, content:() -> mui.View}> {
+		var all = treesOf(decls, role);
+		if (all.length == 0) return null;
+		for (one in all) if (one.id == defaultId) return one;
+		return all[0];
+	}
 }

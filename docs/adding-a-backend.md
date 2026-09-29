@@ -73,6 +73,20 @@ in your `App` constructor — that is what a projection needs. It states a
 capability, not an appetite: the networked corner stays off in any build that
 has not set `-D mui_cafos`.
 
+The list may be **per build** rather than per backend, where the answer
+genuinely differs between the surfaces one backend covers. `pui` states
+`Auxiliary` on a macOS build and not on an iOS one, behind `#if`, because
+AppKit puts N windows on one process and a phone has one pane of glass. That
+is the same rule one level down, not a way round it: which surface is being
+built is as knowable at compile time as which backend is.
+
+Take the declarations from `mui` rather than walking `surfaces()` yourself —
+`SurfaceDeclTools.treesOf(surfaces(), Auxiliary)` for a role with cardinality
+Many, `pickOne(surfaces(), Preferences, "preferences")` for one with
+cardinality One. Three backends were each writing that walk by hand, with a
+`switch` whose `case _:` is exactly where a declaration gets dropped in
+silence.
+
 ### Following a snapshot surface
 
 If any role you host is a **snapshot** one — sampled by the system rather than

@@ -16,7 +16,7 @@ actually has, and a role the backend being built has no host for is a
 > | `Glance` | Sailfish: the cover, live-mounted by `qui.mui.CoverHost`. Android: an App Widget, sampled — buttons in it run their closures. iOS: a WidgetKit widget, sampled through an App Group — its buttons run too, in the extension's own process |
 > | `Preferences` | macOS: the Settings scene (⌘,), a second live root |
 > | `Commands` | macOS: the menu bar (with derived shortcuts); terminal: key bindings; Windows: the MenuBar, injected as ordinary nodes |
-> | `Auxiliary` | Windows and macOS: real extra windows, one per declaration, each with its own lifetime |
+> | `Auxiliary` | Windows (`wui`), macOS (`sui`, and `pui` since it learned to open a second `NSWindow`): real extra windows, one per declaration, on the one process and the one event loop |
 > | `Companion` | another machine, or a paired watch, when the build asks for it (`-D mui_carry`) — see below |
 > | `Notification` | not yet — waits for the detached subsystem |
 >
@@ -100,6 +100,182 @@ override function surfaces():Array<SurfaceDecl> {
 ```
 
 `mui.Contract` requires `surfaces` of every backend, next to `lifetime`.
+
+## Several windows, one process
+
+A control room is two windows: the desk you press things on, and the wall of
+monitors beside it. Both are this application, on this machine, showing this
+state — and before anything was written down, the only way to get the second
+one was `dui`: a second process, a serialiser, a socket and a receiving end,
+for two windows six inches apart.
+
+**The vocabulary already had the answer, and it is `Auxiliary`.** A second
+window on the same machine is not a new concept next to `Glance`, `Companion`
+and the rest; it is the role that says "another top-level window, where the
+platform has windows", and `sui` and `wui` have hosted it since the surfaces
+chantier. What was missing was a third host and this page.
+
+So nothing new is declared:
+
+```haxe
+class Regie extends mui.App {
+	@:state var takes:Int = 0;
+
+	override function body():View {              // the desk
+		return ui(<VStack>
+			<Text text={"takes: " + takes}/>
+			<Button label="New take" onClick={() -> takes += 1}/>
+		</VStack>);
+	}
+
+	@:surface(Auxiliary)                          // the monitor wall
+	function monitors():View {
+		return ui(<VStack>
+			<Text text={"takes: " + takes}/>
+		</VStack>);
+	}
+}
+```
+
+Cardinality is `Many`: every declaration gets a window, in declaration order.
+The id is the window's identity and, for want of anywhere else to put it, its
+title — `monitors` opens a window called "Monitors". That is a degradation and
+is named as one: the vocabulary has no place for a window title yet, and
+inventing one that only two backends could honour is how a `case _:` gets
+written.
+
+### The same tree twice
+
+A declaration is a method, so the second window may simply be the first:
+
+```haxe
+@:surface(Auxiliary)
+function mirror():View return body();
+```
+
+Nothing special happens. Each window builds its own tree from the same thunk,
+and gets its own everything below — which is the next section, and the only
+part of this that is subtle.
+
+### What is shared, and what is not
+
+| | shared | why |
+|---|---|---|
+| `@:state` cells | **yes** | state is the application's. One application seen twice is the whole point, and it is what makes the second window worth having instead of a screenshot. |
+| the view tree | no | each window builds its own from its own thunk. Two windows of the same thunk are two trees. |
+| focus, and the caret | no | there is one focus ring per window. A field focused on the desk must not draw a ring on the wall. |
+| hover, and the cursor | no | the pointer is over one window at a time. |
+| an open drop-down | no | `pui.Overlay` is per host — and it was per *process* until a press in one window was answered by the other one's open list. |
+| scroll offsets, press highlights, animation phases | no | all of it is the interaction store, and the store belongs to a pane of glass. |
+| the clock | no | a window that is animating asks for frames; an idle one costs nothing. |
+| `lifetime.keep` keys | **see below** | the one question with three answers in this family. |
+
+### Where a `keep` lands, and the one hole
+
+`rui.Lifetime.keep` is declared from inside a body and swept at the end of the
+pass that stopped asking for it. With one window that is unambiguous. With two
+it is a design decision, and the family has made it twice, differently:
+
+- **`sui` brackets every root in one pass of the application's one lifetime**
+  (`ViewNodeBridge.rebuild`: "the roots share the app's one Lifetime, so the
+  pass opens once before the first root and closes once after the last"). A
+  `keep` declared anywhere works. The cost is that every root rebuilds
+  together.
+- **`pui` does the same**, and it costs nothing there: a state write already
+  marks a rebuild on *every* live host, because the sink has no host in hand
+  and broadcasts — so the windows were going to rebuild together regardless.
+- **`wui` gives each Auxiliary surface its own fresh `rui.Lifetime`**, which
+  buys genuinely finer rebuilds: each surface reconciles on its own state and
+  nobody else's, which is something the other two do not do.
+
+The third answer has a hole, and it is **measured**, not deduced. A `keep`
+written inside an `@:surface(Auxiliary)` body names `lifetime` — the
+application's, because that is the only one an application can see — while the
+application's lifetime is *between* passes. So the key is registered, and the
+Primary's very next rebuild sweeps it:
+
+```
+after first render:        started=1 stopped=0 keeping=true
+after a primary rebuild:   started=1 stopped=1 keeping=false
+```
+
+(`KeepProbe` against `wui.bridge.HaxeBridge` under `--interp`, 2026-09-29. The
+same shape was reproduced in `pui` on purpose, by putting a lifetime back per
+window, before the one-pass answer was settled: the wall's key started twice
+and was swept once.)
+
+It is a hole in one backend and not in the model, and the general fix is not a
+backend's: `rui.Lifetime` has no notion of *which* surface a key was declared
+by, and giving it one would let every backend keep per-surface rebuilds and
+correct sweeping at once. Until then, **a `keep` in an Auxiliary body is
+reliable on sui and pui and is swept on wui**, which is written here rather
+than discovered by a subscription that starts and stops for ever.
+
+### What a backend has to do
+
+Very little, and none of it new:
+
+1. **State that you host it.** `Auxiliary` in `@:hostedRoles` on your
+   `mui.App`. A backend that cannot is not behind: it is telling the truth,
+   and a declaration aimed at it stops that build by name.
+2. **Ask `mui` for the declarations**, rather than walking `surfaces()`
+   yourself: `mui.surface.SurfaceDeclTools.treesOf(surfaces(), Auxiliary)`
+   gives them in declaration order. Three backends were each writing that walk
+   with a `switch` whose `case _:` silently dropped what it did not know.
+   `pickOne(decls, role, defaultId)` is the cardinality-One rule beside it —
+   the role's default id if declared, else the first.
+3. **Give each window its own interaction state.** Focus, hover, overlays,
+   scroll offsets and the clock are per pane of glass. This is where the bugs
+   are: `pui` had one overlay for the process, and a press in one window was
+   tested against the other window's open drop-down.
+4. **Do not give it a loop.** Every desktop system has one event queue per
+   process, so the extra windows are pumped and painted by the loop that
+   already exists. `pui.Platform.openWindow` hands back a whole platform whose
+   `run` records its frame callback and returns — a shape the interface already
+   allowed, because the browser needs it.
+5. **Answer the closing of one window without ending the application.** One
+   window going is not the process going; the loop's own window going is.
+
+### Hosting is a property of the build, not only of the backend
+
+`pui` is one library over seven surfaces, and AppKit puts N windows on one
+process while iOS has exactly one pane of glass. So its `@:hostedRoles` is
+written per build:
+
+```haxe
+#if (cpp && !pui_surface)
+@:hostedRoles(Auxiliary, Companion)   // macOS
+#else
+@:hostedRoles(Companion)              // browser, iOS, Android, Qt, Direct2D
+#end
+```
+
+That is the same rule one level down, not a way round it: which surface is
+being built is as knowable at compile time as which backend is, so it is a
+compile error and not a silence. Each refusal is written where the surface
+lives — see `openWindow` in each of `pui`'s platforms, which says, per
+platform, whether this is a port nobody has written (Qt, Direct2D) or an
+answer that will not change (iOS, Android, the browser, where the second
+surface is a scene, a widget or a blocked pop-up, and those are other roles).
+
+### The three that do not host it, and what each would need
+
+Stated rather than left blank, because "not listed" and "cannot" are different
+facts and only one of them is worth waiting for.
+
+| Backend | What a second window would be | What it would take |
+|---|---|---|
+| `cui` | a terminal has one screen | nothing to host. A second panel in a terminal is a layout an application already writes with the views it has; calling it a window would put a role somewhere the reader cannot find it. This is an answer, not a gap. |
+| `aui` | another Activity, or a launcher widget | the Activity is the system's, started by an intent and owned by the back stack, and the widget is `Glance`, which `aui` already hosts. Neither is a window this process opens and keeps. |
+| `qui` | SailfishOS gives an application one page stack | the cover is `Glance` and `qui` mounts it live. A floating second top-level surface is something the platform does not have. (`qui` is not checked out on the machine this was written on; this is read from `pui`'s own Qt/Sailfish surface, which refuses for the same reason — **deduced**, not measured.) |
+
+### When it is still `dui`
+
+`Auxiliary` is the same machine and the same process. The moment the second
+surface is on another machine, another device or another process, it is
+`Companion` and it is carried by `dui` — with the define, the explicit serve
+call and the pairing. Nothing here weakens that: what it removes is paying for
+a network to put a window beside another window.
 
 ## Following, rather than being told
 
@@ -338,7 +514,7 @@ the floor.
 | `Glance` | qui, aui, sui (iOS) |
 | `Preferences` | sui |
 | `Commands` | sui, wui, cui |
-| `Auxiliary` | sui, wui |
+| `Auxiliary` | sui, wui, pui (macOS builds only — see below) |
 | `Companion` | every backend that installs a describer — all but qui — **and only when the build sets `-D mui_cafos`** |
 
 Cardinality is still the host's answer: when a platform mounts only one

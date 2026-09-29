@@ -90,6 +90,20 @@ check UnknownRole         reject "not a mui.surface.SurfaceRole"
 # on purpose with `optional`.
 check UnhostedRefused     reject "cui hosts no Glance"
 
+# Several windows on one machine, in one process, is the Auxiliary role and
+# not a vocabulary of its own. A terminal has no second window and says so;
+# an application that accepts that says so too, in its own source.
+check AuxiliaryRefused    reject "cui hosts no Auxiliary"
+check LocalWindows        pass
+out=$(compile LocalWindows --interp)
+if [ "$out" = "monitors,gauges | 1 primary" ]; then
+	echo "  ok   LocalWindows: treesOf gives monitors,gauges in declaration order"
+else
+	failures=$((failures + 1))
+	echo "  FAIL LocalWindows: expected \"monitors,gauges | 1 primary\""
+	echo "$out" | sed 's/^/         /'
+fi
+
 # The networked corner is opt-in: the same declaration is refused without the
 # switch and accepted with it. Both halves, or "it compiles" would prove
 # nothing about the default.

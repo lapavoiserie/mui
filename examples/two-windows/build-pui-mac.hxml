@@ -1,0 +1,13 @@
+# Two windows on macOS, in one process: `body()` and one @:surface(Auxiliary).
+-cp .
+-cp ../../src
+-lib pui
+-lib kui
+-lib rui
+-lib nui
+-D mui_backend=pui
+--macro mui.macros.Bind.all()
+--macro pui.nui.Vocabulary.registerWithMui()
+--macro pui.kui.Platform.registerWithKui()
+--main TwoWindows
+-cpp build/mac
