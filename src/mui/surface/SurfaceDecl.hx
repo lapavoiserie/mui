@@ -1,5 +1,7 @@
 package mui.surface;
 
+import mui.surface.Labelled.SurfaceLabel;
+
 /**
 	One declared surface: a role, a stable id, and what fills it.
 
@@ -35,6 +37,13 @@ enum SurfaceDecl {
 
 	/** Named commands, mapped to the platform's command surface. **/
 	CommandSet(id:String, commands:() -> Array<Command>);
+	/**
+		A living view tree shown by a label before it is opened — a `Status`
+		item. One thunk for both: `label` and `view` are read off what it
+		returns, and the view is itself a thunk, so a host drawing the label
+		does not build the panel.
+	**/
+	LabelledTree(role:SurfaceRole, id:String, labelled:() -> Labelled);
 }
 
 class SurfaceDeclTools {
@@ -43,6 +52,7 @@ class SurfaceDeclTools {
 		return switch (decl) {
 			case Tree(role, _, _): role;
 			case CommandSet(_, _): Commands;
+			case LabelledTree(role, _, _): role;
 		};
 	}
 
@@ -51,6 +61,7 @@ class SurfaceDeclTools {
 		return switch (decl) {
 			case Tree(_, id, _): id;
 			case CommandSet(id, _): id;
+			case LabelledTree(_, id, _): id;
 		};
 	}
 
@@ -73,9 +84,38 @@ class SurfaceDeclTools {
 		var out:Array<{id:String, content:() -> mui.View}> = [];
 		for (d in decls) switch (d) {
 			case Tree(r, id, content) if (Type.enumEq(r, role)): out.push({id: id, content: content});
+			// The panel of a labelled surface is a tree like any other: a host
+			// mounting the role's content gets it here, and its label from
+			// `labelledOf`.
+			case LabelledTree(r, id, labelled) if (Type.enumEq(r, role)):
+				out.push({id: id, content: () -> labelled().view()});
 			case _:
 		}
 		return out;
+	}
+
+	/**
+		Every labelled surface declared for one role, in declaration order:
+		its id, its label and its panel, each a thunk a host reads inside the
+		surface's own effect.
+	**/
+	public static function labelledOf(decls:Array<SurfaceDecl>, role:SurfaceRole):Array<{id:String, label:() -> SurfaceLabel, content:() -> mui.View}> {
+		var out:Array<{id:String, label:() -> SurfaceLabel, content:() -> mui.View}> = [];
+		for (d in decls) switch (d) {
+			case LabelledTree(r, id, labelled) if (Type.enumEq(r, role)):
+				out.push({id: id, label: () -> labelled().label, content: () -> labelled().view()});
+			case _:
+		}
+		return out;
+	}
+
+	/** `pickOne` for a labelled role: the default id if declared, else the first. **/
+	public static function pickOneLabelled(decls:Array<SurfaceDecl>, role:SurfaceRole,
+			defaultId:String):Null<{id:String, label:() -> SurfaceLabel, content:() -> mui.View}> {
+		var all = labelledOf(decls, role);
+		if (all.length == 0) return null;
+		for (one in all) if (one.id == defaultId) return one;
+		return all[0];
 	}
 
 	/**

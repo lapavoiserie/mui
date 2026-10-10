@@ -54,4 +54,14 @@ enum SurfaceRole {
 		`-D mui_carry`; even then it goes nowhere until somebody pairs it.
 	**/
 	Companion;
+	/**
+		A small presence in the system's status area, shown by its label all
+		day and opened into a panel: the macOS menu bar extra, the Windows
+		notification area, a tray icon.
+
+		Declared with a label — `mui.surface.Labelled` — because the label is
+		most of what the surface is. Cardinality One: a platform shows one per
+		application, the role's default id ("status") else the first.
+	**/
+	Status;
 }
