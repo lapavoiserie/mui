@@ -127,6 +127,16 @@ if [ "$out" = "today Chores check 3 built=0 then=1 trees=1" ]; then
 else
 	failures=$((failures + 1))
 	echo "  FAIL StatusLabelled: expected 'today Chores check 3 built=0 then=1 trees=1'"
+fi
+
+# A command set may name its menu; the title travels beside the set.
+check CommandsTitled      pass
+out=$(compile CommandsTitled --interp)
+if [ "$out" = "Tâches Nouvelle tâche/ctrl+n" ]; then
+	echo "  ok   CommandsTitled runs: the menu's name and its commands"
+else
+	failures=$((failures + 1))
+	echo "  FAIL CommandsTitled: expected 'Tâches Nouvelle tâche/ctrl+n'"
 	echo "$out" | sed 's/^/         /'
 fi
 

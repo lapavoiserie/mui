@@ -85,6 +85,9 @@ class Surfaces {
 			seen.set(key, 'method "${f.name}"');
 
 			decls.push(declFor(parsed.role, parsed.id, f));
+			// A command set with a menu name: the set as before, and its title
+			// beside it, both read off one call so they cannot disagree.
+			if (parsed.role == "Commands" && returnsCommandMenu(fn)) decls.push(commandTitleFor(parsed.id, f));
 		}
 
 		if (decls.length == 0) return fields;
@@ -286,7 +289,13 @@ class Surfaces {
 		};
 		var thunk = macro function() return $e{call};
 
-		return if (role == "Commands") {
+		var menu = switch (f.kind) {
+			case FFun(fn): returnsCommandMenu(fn);
+			case _: false;
+		};
+		return if (role == "Commands" && menu) {
+			macro mui.surface.SurfaceDecl.CommandSet($v{id}, function() return ($e{call} : mui.surface.CommandMenu).commands);
+		} else if (role == "Commands") {
 			macro mui.surface.SurfaceDecl.CommandSet($v{id}, $e{thunk});
 		} else if (role == "Status") {
 			// Typed as returning a `Labelled`, so a Status method returning a
@@ -298,6 +307,24 @@ class Surfaces {
 			var roleExpr:Expr = {expr: EField(macro mui.surface.SurfaceRole, role), pos: f.pos};
 			macro mui.surface.SurfaceDecl.Tree($e{roleExpr}, $v{id}, $e{thunk});
 		}
+	}
+
+	/** Whether a Commands method is declared as returning a `CommandMenu`. **/
+	static function returnsCommandMenu(fn:Function):Bool {
+		if (fn.ret == null) return false;
+		return switch (fn.ret) {
+			case TPath(p): p.name == "CommandMenu" || p.sub == "CommandMenu";
+			case _: false;
+		};
+	}
+
+	/** `CommandTitle(id, () -> this.method().title)`. **/
+	static function commandTitleFor(id:String, f:Field):Expr {
+		var call:Expr = {
+			expr: ECall({expr: EField({expr: EConst(CIdent("this")), pos: f.pos}, f.name), pos: f.pos}, []),
+			pos: f.pos,
+		};
+		return macro mui.surface.SurfaceDecl.CommandTitle($v{id}, function() return ($e{call} : mui.surface.CommandMenu).title);
 	}
 
 	/**

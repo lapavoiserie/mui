@@ -53,6 +53,16 @@ class TodoApp extends mui.App {
 }
 ```
 
+A command set whose menu has a name of its own returns a `CommandMenu` — the
+title in the person's language, read like a view, so a change of language
+renames the menu — and the id stays its identity:
+
+```haxe
+@:surface(Commands)
+function chores():CommandMenu
+	return new CommandMenu(t("menu.chores"), [new Command(t("menu.new"), add).key("ctrl+n")]);
+```
+
 Declare as many surfaces of a role as the application wants — an iOS
 application offers several widgets. Renaming a method is a compatibility event
 (the id is identity); pin the id across a rename with
