@@ -149,6 +149,36 @@ Not both at once, and not a child of another type: each is refused by name,
 because a dropped row in a picker reads as "the application does not offer that"
 rather than as a bug.
 
+### A shape that follows a cell
+
+Some controls decide *what they hold* from a cell, and each one is the
+application's state rather than the control's:
+
+```haxe
+<Tabs selectedIndex={section_} style="sidebar">
+    <Tab label="Today" icon="calendar"><TodayScreen/></Tab>
+    <Tab label="Chores" icon="list"><ChoresScreen/></Tab>
+</Tabs>
+
+<Sheet presented={editing_} title="New chore"><ChoreForm/></Sheet>
+
+<ConfirmDialog presented={archiving_} title="Archive this chore?"
+    confirmLabel="Archive" cancelLabel="Cancel" destructive={true}
+    onConfirm={archive}/>
+```
+
+Only the selected tab carries its page, and a sheet carries its content only
+while presented: write every page, and the backend keeps the one that is
+shown. Choosing a tab or dismissing a sheet writes the cell back, and the
+screen is rebuilt. Both labels of a `ConfirmDialog` are yours — a library
+supplying "Cancel" would be writing in a language it does not know. The rules
+are the canon's (`nui/docs/node-model.md`).
+
+These are declared by `sui` today and by no other backend yet: the
+[vocabulary matrix](https://github.com/lapavoiserie/mui/blob/main/test/vocabulary/matrix.txt)
+is where to look, and an application using them on another backend gets the
+usual compile error naming the tag.
+
 ### A component
 
 A reusable piece with state of its own is a view like any other — put it in with

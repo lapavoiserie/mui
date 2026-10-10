@@ -4,13 +4,16 @@ Box                 .   x   .   .   .   .
 Button              x   x   x   x   x   x  
 ComboBox            .   .   .   .   .   x  
 ComboBoxItem        .   .   .   .   .   x  
+ConfirmDialog       .   .   x   .   .   .  
+DateInput           .   .   x   .   .   .  
 Disclosure          x   .   x   .   .   .  
-Divider             x   x   .   x   x   .  
+Divider             x   x   x   x   x   .  
 FontIcon            .   .   .   .   .   x  
 Grid                .   .   .   .   .   x  
 HStack              x   x   x   x   x   x  
-Icon                x   x   .   x   x   x  
+Icon                x   x   x   x   x   x  
 Image               x   x   x   x   x   x  
+Menu                .   .   x   .   .   .  
 MenuBar             .   .   .   .   .   x  
 MenuBarItem         .   .   .   .   .   x  
 MenuFlyoutItem      .   .   .   .   .   x  
@@ -26,15 +29,18 @@ SafeArea            x   .   .   x   x   .
 ScrollView          x   x   x   x   x   x  
 ScrollViewer        .   .   .   .   .   x  
 SecretInput         x   .   x   .   .   x  
+Section             .   .   x   .   .   .  
 SelectorBar         .   .   .   .   .   x  
 SelectorBarItem     .   .   .   .   .   x  
+Sheet               .   .   x   .   .   .  
 Slider              x   x   x   x   x   x  
 Spacer              x   x   x   x   x   x  
 StackPanel          .   .   .   .   .   x  
-Tab                 x   x   .   .   .   x  
+Stepper             .   .   x   .   .   .  
+Tab                 x   x   x   .   .   x  
 TabView             .   .   .   .   .   x  
 TabViewItem         .   .   .   .   .   x  
-Tabs                x   x   .   .   .   x  
+Tabs                x   x   x   .   .   x  
 Tappable            x   .   .   .   .   .  
 Text                x   x   x   x   x   x  
 TextBlock           .   .   .   .   .   x  
@@ -45,4 +51,4 @@ ToggleSwitch        .   .   .   .   .   x
 VStack              x   x   x   x   x   x  
 ZStack              x   x   x   x   x   x  
 
-total               22  19  15  16  16  39 
+total               22  19  25  16  16  39 
