@@ -319,6 +319,70 @@ class Markup {
 	}
 
 	/** The value inside a `PropValue` constructor this markup put it in. **/
+	/**
+		A cell given to a value on the node route: its value, and its `set` as
+		the callback. See `Backend.Vocabulary.cellOf`.
+
+		Recognised by its type -- a `rui.state.State`, which every backend's
+		cell is -- and not by its spelling: `muet_` and `this.muet_` and a cell
+		passed as a function argument are all cells. A value that is not one is
+		left as written, so `isOn={true}` is a value as before.
+	**/
+	static function withCells(tag:String, setters:Array<{key:String, value:Expr}>,
+			pos:Position):Array<{key:String, value:Expr}> {
+		// A backend that does not speak of cells keeps what it had: the value
+		// as written, and the type error a cell there always gave.
+		if (!Backend.takesCells(tag)) return setters;
+		var out:Array<{key:String, value:Expr}> = [];
+		var written = [for (s in setters) s.key => true];
+		for (setter in setters) {
+			var raw = unwrap(setter.value);
+			// Only a VALUE can be a cell; a callback is never typed here, since
+			// typing a lambda with no expected type would fix its argument early.
+			var kind = Backend.kindOf(tag, setter.key);
+			var isValue = kind == "KBool" || kind == "KString" || kind == "KInt" || kind == "KFloat";
+			if (!isValue || !isCell(raw)) {
+				out.push(setter);
+				continue;
+			}
+			var callback = Backend.cellOf(tag, setter.key);
+			if (callback == null) {
+				Context.error('"$tag" ne lie pas "${setter.key}" à une cellule : '
+					+ "donnez-lui une valeur, pas une cellule.", raw.pos);
+				out.push(setter);
+				continue;
+			}
+			if (written.exists(callback)) {
+				Context.error('"$tag" : "${setter.key}" est une cellule, qui écrit déjà '
+					+ 'par "$callback" ; ne donnez pas "$callback" en plus.', raw.pos);
+				continue;
+			}
+			var valueKind = kind;
+			var callbackKind = Backend.kindOf(tag, callback);
+			out.push({key: setter.key, value: wrap(valueKind, macro $raw.get(), tag, setter.key, pos)});
+			if (callbackKind != null)
+				out.push({key: callback, value: wrap(callbackKind, macro (__v) -> $raw.set(__v), tag, callback, pos)});
+		}
+		return out;
+	}
+
+	/** Whether an expression types as a cell -- a `rui.state.State` or one of its subclasses. **/
+	static function isCell(e:Expr):Bool {
+		var t = try Context.typeof(e) catch (_:Dynamic) null;
+		if (t == null) return false;
+		return switch (Context.follow(t)) {
+			case TInst(c, _):
+				var at = c.get();
+				var found = false;
+				while (at != null && !found) {
+					if (at.pack.join(".") == "rui.state" && at.name == "State") found = true;
+					at = at.superClass == null ? null : at.superClass.t.get();
+				}
+				found;
+			case _: false;
+		};
+	}
+
 	static function unwrap(e:Expr):Expr {
 		return switch (e.expr) {
 			case ECall({expr: EField(_, _)}, [inner]): inner;
@@ -643,6 +707,8 @@ class Markup {
 				+ 'encore poser de décoration : ' + [for (d in decorations) d.key].join(", "), pos);
 			return own;
 		}
+
+		setters = withCells(tag, setters, pos);
 
 		var builder = Backend.builderOf(tag);
 		var chain = builder != null

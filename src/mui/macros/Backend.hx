@@ -198,6 +198,22 @@ typedef Vocabulary = {
 		a compile error, because it is knowable and would otherwise be a lie.
 	**/
 	@:optional var keyed:(view:Expr, key:Expr, pos:Position) -> Expr;
+
+	/**
+		The callback a two-way value reports through, when the value is written
+		as a CELL -- `<Toggle isOn={muet_}/>` -- on the node route.
+
+		A cell (`rui.state.State`) given to `isOn` means "show this, and write
+		back here": the node gets the cell's value, read where the markup is
+		built (so the render effect tracks it), and `onToggle` becomes the
+		cell's `set`. A backend answers which callback goes with which value --
+		`isOn` → `onToggle` -- from its own declarations, and null for a
+		property that is not two-way, where a cell is refused by name.
+
+		Asked only on the node route. A backend that answered `viewOf` builds
+		its own control, and its control takes the cell as it is.
+	**/
+	@:optional var cellOf:(tag:String, key:String) -> Null<String>;
 };
 
 class Backend {
@@ -349,6 +365,18 @@ class Backend {
 	public static function kindOf(type:String, key:String):Null<String> {
 		var found = owner(type);
 		return found == null ? null : found.kindOf(type, key);
+	}
+
+	/** Whether the vocabulary answering for `type` speaks of cells at all. **/
+	public static function takesCells(type:String):Bool {
+		var found = owner(type);
+		return found != null && found.cellOf != null;
+	}
+
+	/** The callback a cell given to `key` reports through, or null. **/
+	public static function cellOf(type:String, key:String):Null<String> {
+		var found = owner(type);
+		return found == null || found.cellOf == null ? null : found.cellOf(type, key);
 	}
 
 	/** Types the target knows, for an error message that helps. **/
