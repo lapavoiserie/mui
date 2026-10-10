@@ -167,6 +167,16 @@ Present.show(Auxiliary, "inspector");   // one declared window, by its id
   host acts on it once that closure has returned: what the closure wrote is
   already in the tree the window opens on.
 
+### And the way out: `Present.quit()`
+
+A status item outlives its window: on Windows, closing the main window of an
+application that sits in the notification area hides it, and the person needs
+a way to end it that is not the window's close box. `Present.quit()` ends the
+application -- asked, then done once the closure has returned, like `show`.
+The words for it are the application's: a command in its status item's menu
+(`Labelled`'s `menu`), « Quitter Epi Tâches ». On macOS the application menu's
+⌘Q already says it, and sui ends the app the same way when asked.
+
 Optional in `mui.Contract`: a backend that has nothing to bring forward does
 not publish `mui.surface.Present`, and an application that names it there does
 not compile. sui has it.
