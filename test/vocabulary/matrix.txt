@@ -28,6 +28,7 @@ Picker              x   x   x   x   x   x
 ProgressBar         .   .   .   .   .   x  
 ProgressRing        .   .   .   .   .   x  
 ProgressView        x   x   x   x   x   x  
+ReorderList         .   .   x   .   .   .  
 SafeArea            x   .   .   x   x   .  
 ScrollView          x   x   x   x   x   x  
 ScrollViewer        .   .   .   .   .   x  
@@ -55,4 +56,4 @@ Toolbar             .   .   x   .   .   .
 VStack              x   x   x   x   x   x  
 ZStack              x   x   x   x   x   x  
 
-total               22  19  29  16  16  39 
+total               22  19  30  16  16  39 
