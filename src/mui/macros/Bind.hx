@@ -256,11 +256,16 @@ class Bind {
 			if (StringTools.startsWith(got, "Null<") && StringTools.endsWith(got, ">"))
 				got = got.substr(5, got.length - 6);
 
-			// `View` in the contract means whatever this backend calls its view.
+			// `View` in the contract means whatever this backend calls its view:
+			// its own `<backend>.View`, or the conformance's `<backend>.mui.View`
+			// when that is a type of its own rather than an alias -- wui's is an
+			// abstract that also takes a markup node, so that a hand-built
+			// container can hold `ui(...)`, and its containers say so.
 			var expected = StringTools.replace(wanted, "View", backend + ".View");
-			if (expected == wanted) expected = wanted;
+			var conformance = StringTools.replace(wanted, "View", backend + ".mui.View");
 
-			if (normalise(got) != normalise(expected) && normalise(got) != normalise(wanted))
+			if (normalise(got) != normalise(expected) && normalise(got) != normalise(conformance)
+					&& normalise(got) != normalise(wanted))
 				Context.error('${backend}.mui.${binding.name} argument ${i + 1} is $got, '
 					+ 'mui.Contract says $wanted', pos);
 		}
