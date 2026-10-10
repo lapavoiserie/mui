@@ -21,6 +21,7 @@ MenuBarItem         .   .   .   .   .   x
 MenuFlyoutItem      .   .   .   .   .   x  
 NavigationView      .   .   .   .   .   x  
 NavigationViewItem  .   .   .   .   .   x  
+Notice              .   .   x   .   .   .  
 PasswordBox         .   .   .   .   .   x  
 PasswordInput       x   x   .   .   .   .  
 Picker              x   x   x   x   x   x  
@@ -54,4 +55,4 @@ Toolbar             .   .   x   .   .   .
 VStack              x   x   x   x   x   x  
 ZStack              x   x   x   x   x   x  
 
-total               22  19  28  16  16  39 
+total               22  19  29  16  16  39 
