@@ -115,7 +115,7 @@ the list of what it can. The table is a statement of debt, not of design:
 | `pui` | all nine |
 | `cui` | eight — not `flex`; no stack there reads a weight. `opacity` is what a terminal can do of it: hidden at zero, dim below one |
 | `aui` | seven — not `border` (its own takes a colour value a role cannot become) or `flex` |
-| `sui` | five — not the colours (same reason, the other way round), nor `border` or `flex` |
+| `sui` | eight — not `flex` (SwiftUI shares leftover space with spacers and priority, not a share on the child). A role resolves to Apple's semantic colour, so it follows dark mode and increased contrast |
 | `qui` | four: `padding`, `foregroundColor`, `width`, `height` |
 
 ## A colour is a role or its components
@@ -134,6 +134,19 @@ particular red says `rgb` and means it.
 
 `mui.enums.ColorValue` predates all of this and **no backend reads it**. Use
 `nui.Color`.
+
+**The application's accent** — the colour `role:accent` resolves to — is the
+person's own by default. An application with a brand colour sets it on its
+backend today, light and dark (a colour chosen for a light window is often
+unreadable on a dark one):
+
+```haxe
+#if (mui_backend == "sui")
+sui.runtime.ViewNodeBridge.setAccent("#16319F", "#BAC3FF");
+#end
+```
+
+A portable way to say it belongs in mui once a second backend can honour it.
 
 ## Outside the canon
 
