@@ -115,6 +115,17 @@ EXTRA=""
 # What the typer refuses through the generated code: the thunk's return type.
 check WrongReturn         reject "Command"
 
+# A command set may name its menu; the title travels beside the set.
+check CommandsTitled      pass
+out=$(compile CommandsTitled --interp)
+if [ "$out" = "Tâches Nouvelle tâche/ctrl+n" ]; then
+	echo "  ok   CommandsTitled runs: the menu's name and its commands"
+else
+	failures=$((failures + 1))
+	echo "  FAIL CommandsTitled: expected 'Tâches Nouvelle tâche/ctrl+n'"
+	echo "$out" | sed 's/^/         /'
+fi
+
 # What the view rule refuses through the metadata registration: a surface
 # declaration reading a plain mutable field, named.
 check StaleRead           reject '"hits"'

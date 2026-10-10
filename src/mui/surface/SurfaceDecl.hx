@@ -35,6 +35,13 @@ enum SurfaceDecl {
 
 	/** Named commands, mapped to the platform's command surface. **/
 	CommandSet(id:String, commands:() -> Array<Command>);
+	/**
+		The menu name of the command set with the same id, when the
+		declaration gave one (a `CommandMenu`). Beside the set rather than in
+		it, so a backend that names no menus has nothing to read and a switch
+		over `CommandSet` is unchanged.
+	**/
+	CommandTitle(id:String, title:() -> String);
 }
 
 class SurfaceDeclTools {
@@ -43,6 +50,7 @@ class SurfaceDeclTools {
 		return switch (decl) {
 			case Tree(role, _, _): role;
 			case CommandSet(_, _): Commands;
+			case CommandTitle(_, _): Commands;
 		};
 	}
 
@@ -51,6 +59,7 @@ class SurfaceDeclTools {
 		return switch (decl) {
 			case Tree(_, id, _): id;
 			case CommandSet(id, _): id;
+			case CommandTitle(id, _): id;
 		};
 	}
 
@@ -76,6 +85,15 @@ class SurfaceDeclTools {
 			case _:
 		}
 		return out;
+	}
+
+	/** The menu name a command set was declared with, or null when it gave none. **/
+	public static function commandTitleOf(decls:Array<SurfaceDecl>, id:String):Null<() -> String> {
+		for (d in decls) switch (d) {
+			case CommandTitle(i, title) if (i == id): return title;
+			case _:
+		}
+		return null;
 	}
 
 	/**
