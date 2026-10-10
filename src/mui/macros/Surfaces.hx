@@ -303,6 +303,12 @@ class Surfaces {
 			// most of what this surface is, and there is no default to give.
 			var labelledThunk:Expr = macro (function():mui.surface.Labelled return $e{call});
 			macro mui.surface.SurfaceDecl.LabelledTree(mui.surface.SurfaceRole.Status, $v{id}, $e{labelledThunk});
+		} else if ((role == "Preferences" || role == "Auxiliary") && returnsLabelled(f)) {
+			// A window with a title of its own: the same constructor as a
+			// status item, read by a host for the window's name.
+			var roleExpr:Expr = {expr: EField(macro mui.surface.SurfaceRole, role), pos: f.pos};
+			var labelledThunk:Expr = macro (function():mui.surface.Labelled return $e{call});
+			macro mui.surface.SurfaceDecl.LabelledTree($e{roleExpr}, $v{id}, $e{labelledThunk});
 		} else {
 			var roleExpr:Expr = {expr: EField(macro mui.surface.SurfaceRole, role), pos: f.pos};
 			macro mui.surface.SurfaceDecl.Tree($e{roleExpr}, $v{id}, $e{thunk});
@@ -314,6 +320,14 @@ class Surfaces {
 		if (fn.ret == null) return false;
 		return switch (fn.ret) {
 			case TPath(p): p.name == "CommandMenu" || p.sub == "CommandMenu";
+			case _: false;
+		};
+	}
+
+	/** Whether a method is declared as returning a `Labelled`. **/
+	static function returnsLabelled(f:Field):Bool {
+		return switch (f.kind) {
+			case FFun({ret: TPath(p)}): p.name == "Labelled" || p.sub == "Labelled";
 			case _: false;
 		};
 	}

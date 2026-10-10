@@ -140,6 +140,18 @@ else
 	echo "$out" | sed 's/^/         /'
 fi
 
+# A window that names itself rides the label's constructor, and a status
+# item may carry a menu of its own -- both read by a host, in the app's words.
+check WindowTitled        pass
+out=$(compile WindowTitled --interp)
+if [ "$out" = "settings Réglages untitled menu=Ouvrir,Quitter" ]; then
+	echo "  ok   WindowTitled runs: the window's title, and the status item's menu"
+else
+	failures=$((failures + 1))
+	echo "  FAIL WindowTitled: expected 'settings Réglages untitled menu=Ouvrir,Quitter'"
+	echo "$out" | sed 's/^/         /'
+fi
+
 # What the view rule refuses through the metadata registration: a surface
 # declaration reading a plain mutable field, named.
 check StaleRead           reject '"hits"'

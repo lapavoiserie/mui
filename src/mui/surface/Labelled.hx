@@ -25,10 +25,19 @@ package mui.surface;
 class Labelled {
 	public final label:SurfaceLabel;
 	public final view:() -> mui.View;
+	/**
+		The label's own menu, where the platform gives a status item one: a
+		Windows tray icon's right click. The application's commands in its own
+		words -- "Open", "Quit" -- because a library writing them would be
+		writing in a language it does not know. A host without such a menu
+		reads nothing here: a macOS menu bar extra has its panel and no more.
+	**/
+	public final menu:Null<Array<mui.surface.Command>>;
 
-	public function new(label:SurfaceLabel, view:() -> mui.View) {
+	public function new(label:SurfaceLabel, view:() -> mui.View, ?menu:Array<mui.surface.Command>) {
 		this.label = label;
 		this.view = view;
+		this.menu = menu;
 	}
 }
 

@@ -127,6 +127,23 @@ class SurfaceDeclTools {
 		return out;
 	}
 
+	/**
+		The name a window declared for itself: a `Preferences` or `Auxiliary`
+		method that returns a `Labelled` gives its `title`. `null` when it
+		returned a bare view, and the host names the window as it would have.
+
+		A thunk, read inside the surface's own pass like the label of a status
+		item, so a change of language renames the window.
+	**/
+	public static function windowTitleOf(decls:Array<SurfaceDecl>, id:String):Null<() -> String> {
+		for (d in decls) switch (d) {
+			case LabelledTree(r, i, labelled) if (i == id && (Type.enumEq(r, Preferences) || Type.enumEq(r, Auxiliary))):
+				return () -> labelled().label.title;
+			case _:
+		}
+		return null;
+	}
+
 	/** `pickOne` for a labelled role: the default id if declared, else the first. **/
 	public static function pickOneLabelled(decls:Array<SurfaceDecl>, role:SurfaceRole,
 			defaultId:String):Null<{id:String, label:() -> SurfaceLabel, content:() -> mui.View}> {
