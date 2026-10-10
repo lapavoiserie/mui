@@ -318,7 +318,6 @@ class Markup {
 		return {expr: EObjectDecl(fields), pos: pos};
 	}
 
-	/** The value inside a `PropValue` constructor this markup put it in. **/
 	/**
 		A cell given to a value on the node route: its value, and its `set` as
 		the callback. See `Backend.Vocabulary.cellOf`.
@@ -383,6 +382,7 @@ class Markup {
 		};
 	}
 
+	/** The value inside a `PropValue` constructor this markup put it in. **/
 	static function unwrap(e:Expr):Expr {
 		return switch (e.expr) {
 			case ECall({expr: EField(_, _)}, [inner]): inner;
