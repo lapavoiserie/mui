@@ -86,6 +86,13 @@ class Contract {
 		{pack: ["mui"], name: "App", requires: ["lifetime", "surfaces"]},
 		{pack: ["mui"], name: "ViewComponent"},
 
+		// Bringing a declared surface forward -- the main window from a menu
+		// bar panel's "Open", the settings from its "Settings…". A static
+		// `show(role, ?id)`. Optional: a backend with one window and nothing
+		// to bring forward has nothing to offer, and an application reaching
+		// for it there fails at that line rather than pressing a dead button.
+		{pack: ["mui", "surface"], name: "Present", optional: true},
+
 		// ---- containers ----
 		{pack: ["mui", "ui"], name: "VStack", args: ["Array<View>", "?Float"]},
 		{pack: ["mui", "ui"], name: "HStack", args: ["Array<View>", "?Float"]},
