@@ -98,10 +98,36 @@ function today():Labelled
 - **A bare `View` is refused** at the method: the label is most of what this
   surface is, and there is no default to give it.
 
+- **The label may carry a menu**, where the platform gives a status item one
+  — a Windows tray icon's right click: `new Labelled(label, panel, [new
+  Command("Ouvrir Epi Tâches", …), new Command("Quitter", …)])`. The
+  application's commands in its own words. A host without such a menu reads
+  nothing there: a macOS menu bar extra has its panel and no more.
+
 Under the sugar it is `LabelledTree(role, id, () -> Labelled)`, read by a host
-with `SurfaceDeclTools.pickOneLabelled`. Only `Status` takes a label today: an
-`Auxiliary` window title would ride the same constructor, the day a host draws
-one — until then it is refused rather than dropped.
+with `SurfaceDeclTools.pickOneLabelled`.
+
+## A window that names itself
+
+A settings window has a title bar, and on most platforms nothing to put in it:
+macOS names its Settings scene itself, Windows does not, and a library writing
+« Réglages » would be writing in a language it does not know. So a
+`Preferences` or `Auxiliary` method may return a `Labelled` instead of a view,
+and its `title` names the window:
+
+```haxe
+@:surface(Preferences)
+function settings():Labelled
+	return new Labelled({title: i18n.t("settings.title")}, () -> ui(<VStack>…</VStack>));
+```
+
+It rides the status item's constructor — `LabelledTree(Preferences, id, …)` —
+so a host mounting the role's content gets it from `treesOf`/`pickOne` as
+before, and its name from `SurfaceDeclTools.windowTitleOf(decls, id)`, a thunk
+read inside the surface's own pass so a change of language renames the window.
+A bare view is still accepted, and the host names that window as it always has.
+A host whose platform names the window itself (sui's Settings scene) ignores the
+title.
 
 ## What is checked, and where
 
