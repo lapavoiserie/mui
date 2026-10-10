@@ -64,7 +64,9 @@ import haxe.macro.Expr;
 	`KString`, `KInt`, `KFloat`, `KBool` for values, and for acts `KCallback`
 	when it carries nothing plus `KCallbackString`, `KCallbackFloat`,
 	`KCallbackInt` and `KCallbackBool` when it carries something — one per
-	constructor of `nui.PropValue`. Anything else is a compile error naming the
+	constructor of `nui.PropValue` — and `KCallbackMove`, an `(Int, Int) -> Void`
+	carried as a `PCallbackString` of `"from,to"` (a `ReorderList`'s `onMove`).
+	Anything else is a compile error naming the
 	tag, the attribute and the kind: a schema exists to say what a value is, and
 	a default that guesses undoes it.
 

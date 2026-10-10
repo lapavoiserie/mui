@@ -998,6 +998,14 @@ class Markup {
 		it was lucky. A schema's job is to say what a value is; a default that
 		guesses undoes it. The same shape cost `wui` its numeral setters this
 		morning, and `pui` its property kinds.
+
+		## And a move is two numbers on one string
+
+		`ReorderList`'s `onMove(from, to)` carries two indices, and `nui.PropValue`
+		has no two-argument callback: the canon's wire form is the string
+		`"from,to"`. `KCallbackMove` takes the application's `(from, to) -> …` as
+		written and gives the node that string callback, so the same markup
+		reads the same on a backend that builds its own control.
 	**/
 	static function wrap(kind:String, value:Expr, tag:String, attr:String, pos:Position):Expr {
 		return switch (kind) {
@@ -1010,11 +1018,24 @@ class Markup {
 			case "KCallbackFloat": macro nui.PropValue.PCallbackFloat($value);
 			case "KCallbackInt": macro nui.PropValue.PCallbackInt($value);
 			case "KCallbackBool": macro nui.PropValue.PCallbackBool($value);
+			// A move, `(from, to) -> …`, carried as the canon's "from,to"; a
+			// malformed pair reports nothing rather than a move to nowhere.
+			case "KCallbackMove": macro nui.PropValue.PCallbackString({
+					// Typed first, so an untyped `(from, to) -> …` gets its Ints.
+					var move:(Int, Int) -> Void = $value;
+					function(both:String) {
+						var parts = both.split(",");
+						var from = parts.length == 2 ? Std.parseInt(parts[0]) : null;
+						var to = parts.length == 2 ? Std.parseInt(parts[1]) : null;
+						if (from != null && to != null) move(from, to);
+					};
+				});
 			case _:
 				Context.error('"$tag" déclare "$attr" de sorte "$kind", que ce markup '
 					+ "ne sait pas écrire.\n"
 					+ "  Sortes connues : KString, KInt, KFloat, KBool, KCallback, "
-					+ "KCallbackString, KCallbackFloat, KCallbackInt, KCallbackBool.", pos);
+					+ "KCallbackString, KCallbackFloat, KCallbackInt, KCallbackBool, "
+					+ "KCallbackMove.", pos);
 				macro null;
 		};
 	}
