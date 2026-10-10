@@ -48,7 +48,8 @@ TextBox             .   .   .   .   .   x
 TextInput           x   x   x   x   x   x  
 Toggle              x   x   x   x   x   x  
 ToggleSwitch        .   .   .   .   .   x  
+Toolbar             .   .   x   .   .   .  
 VStack              x   x   x   x   x   x  
 ZStack              x   x   x   x   x   x  
 
-total               22  19  25  16  16  39 
+total               22  19  26  16  16  39 
