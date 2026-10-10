@@ -69,6 +69,38 @@ application offers several widgets. Renaming a method is a compatibility event
 | `Auxiliary` | Another top-level window. | desktop platforms |
 | `Companion` | A companion device. *No backend maps it yet.* | — |
 
+## Bringing a surface forward: `Present`
+
+A menu bar panel's last rows are *Open*, *New chore…*, *Settings…*: acts that
+put another of the application's own surfaces in front of the person. A
+declaration says what a surface shows, and nothing said how to get to it — a
+closed main window stayed closed until the person found the Dock icon.
+
+```haxe
+import mui.surface.Present;
+
+Present.show(Primary);                  // the main window, opened if closed
+Present.show(Preferences);              // the settings surface
+Present.show(Auxiliary, "inspector");   // one declared window, by its id
+```
+
+- **Forward, not new.** A surface that is open is raised and focused, a
+  minimised one restored, a closed one opened — never a second copy of a root
+  that exists once.
+- **The application comes forward with it.** Asked from a status panel, the
+  app is not the active one; showing a window behind another application's
+  would be pressing a button that did nothing.
+- **Only what can be in front.** `Primary`, `Preferences` and `Auxiliary`.
+  `show` answers `false` for anything else — a glance, a command set, a status
+  label are not places the person goes — and for an id no declaration has.
+- **Asked, then done.** The request leaves the closure that made it, and the
+  host acts on it once that closure has returned: what the closure wrote is
+  already in the tree the window opens on.
+
+Optional in `mui.Contract`: a backend that has nothing to bring forward does
+not publish `mui.surface.Present`, and an application that names it there does
+not compile. sui has it.
+
 ## What is checked, and where
 
 - **A declaration is a view.** It runs inside its surface's own effect, so it
