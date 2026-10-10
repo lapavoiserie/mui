@@ -18,6 +18,7 @@ actually has, and a role the backend being built has no host for is a
 > | `Commands` | macOS: the menu bar (with derived shortcuts); terminal: key bindings; Windows: the MenuBar, injected as ordinary nodes |
 > | `Auxiliary` | Windows (`wui`), macOS (`sui`, and `pui` since it learned to open a second `NSWindow`): real extra windows, one per declaration, on the one process and the one event loop |
 > | `Companion` | another machine, or a paired watch, when the build asks for it (`-D mui_carry`) — see below |
+> | `Status` | macOS: a menu bar extra (`sui`), its label and badge live, its panel a live root |
 > | `Notification` | not yet — waits for the detached subsystem |
 >
 > A role with no host on the backend being built stops that build, naming
@@ -67,7 +68,40 @@ application offers several widgets. Renaming a method is a compatibility event
 | `Commands` | Named commands. | menu bar, key bindings |
 | `Notification` | A system notification. *No declaration form yet.* | — |
 | `Auxiliary` | Another top-level window. | desktop platforms |
-| `Companion` | A companion device. *No backend maps it yet.* | — |
+| `Companion` | A live panel on another device. | another machine, a paired watch |
+| `Status` | A label in the status area that opens a panel. Returns a `Labelled`. | macOS menu bar extra; Windows notification area, a tray |
+
+## A label before a panel: `Status`
+
+A menu bar extra is mostly its label — an icon and a count the person sees all
+day — and only sometimes its panel. So a `Status` declaration returns both, as
+a `mui.surface.Labelled`:
+
+```haxe
+@:state var dueToday:Int = 0;
+
+@:surface(Status)
+function today():Labelled
+	return new Labelled({title: "Chores", icon: Check, badge: dueToday}, () -> ui(<VStack>
+		…today's chores, each with its checkbox…
+	</VStack>));
+```
+
+- **The label is read like a view**, inside the surface's own effect: write
+  `dueToday` and the count in the menu bar changes, with nothing to call.
+- **`title` is required**: it is what a screen reader says and what a host
+  shows when it has no room for an icon — the application's words, in the
+  person's language.
+- **The panel is a thunk**: drawing the label does not build it.
+- **Cardinality One**: a platform shows one per application — the role's
+  default id (`status`), else the first.
+- **A bare `View` is refused** at the method: the label is most of what this
+  surface is, and there is no default to give it.
+
+Under the sugar it is `LabelledTree(role, id, () -> Labelled)`, read by a host
+with `SurfaceDeclTools.pickOneLabelled`. Only `Status` takes a label today: an
+`Auxiliary` window title would ride the same constructor, the day a host draws
+one — until then it is refused rather than dropped.
 
 ## What is checked, and where
 
@@ -76,7 +110,8 @@ application offers several widgets. Renaming a method is a compatibility event
   raw `rui.Signal` — `@:state` instead. Refused at compile time, naming the
   field.
 - **Return types, per role.** A `Glance` method returns `View`; a `Commands`
-  method returns `Array<mui.surface.Command>`. The typer refuses a mismatch at
+  method returns `Array<mui.surface.Command>`; a `Status` method returns a
+  `mui.surface.Labelled`. The typer refuses a mismatch at
   the method.
 - **`@:surface(Primary)`** is refused: Primary is `body()`.
 - **`@:surface(Notification)`** is refused until the detached-surface

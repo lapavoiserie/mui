@@ -115,6 +115,21 @@ EXTRA=""
 # What the typer refuses through the generated code: the thunk's return type.
 check WrongReturn         reject "Command"
 
+# Status: a label and a panel. Refused where nothing can show it; accepted
+# as optional, collected with its label, and the panel is not built by
+# reading the label -- a menu bar shows the label all day.
+check StatusUnhosted      reject "cui hosts no Status"
+check StatusWithoutLabel  reject "Labelled"
+check StatusLabelled      pass
+out=$(compile StatusLabelled --interp)
+if [ "$out" = "today Chores check 3 built=0 then=1 trees=1" ]; then
+	echo "  ok   StatusLabelled runs: label read without building the panel"
+else
+	failures=$((failures + 1))
+	echo "  FAIL StatusLabelled: expected 'today Chores check 3 built=0 then=1 trees=1'"
+	echo "$out" | sed 's/^/         /'
+fi
+
 # What the view rule refuses through the metadata registration: a surface
 # declaration reading a plain mutable field, named.
 check StaleRead           reject '"hits"'

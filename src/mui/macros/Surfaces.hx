@@ -28,7 +28,8 @@ import haxe.macro.Expr;
 
 	Return types are checked by the typer through the generated code: the thunk
 	for a `Tree` role must return `mui.View`, for `Commands` an
-	`Array<mui.surface.Command>` — a mismatch is a compile error at the method.
+	`Array<mui.surface.Command>`, for `Status` a `mui.surface.Labelled` — a
+	mismatch is a compile error at the method.
 	What this macro checks itself is what the typer cannot word well: an
 	unknown role, `Primary` (implicit — it is `body()`), `Notification` (no
 	declaration form until the detached subsystem), arguments on a declaration,
@@ -287,6 +288,12 @@ class Surfaces {
 
 		return if (role == "Commands") {
 			macro mui.surface.SurfaceDecl.CommandSet($v{id}, $e{thunk});
+		} else if (role == "Status") {
+			// Typed as returning a `Labelled`, so a Status method returning a
+			// bare View is refused by the typer at the method: the label is
+			// most of what this surface is, and there is no default to give.
+			var labelledThunk:Expr = macro (function():mui.surface.Labelled return $e{call});
+			macro mui.surface.SurfaceDecl.LabelledTree(mui.surface.SurfaceRole.Status, $v{id}, $e{labelledThunk});
 		} else {
 			var roleExpr:Expr = {expr: EField(macro mui.surface.SurfaceRole, role), pos: f.pos};
 			macro mui.surface.SurfaceDecl.Tree($e{roleExpr}, $v{id}, $e{thunk});
