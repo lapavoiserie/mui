@@ -14,6 +14,7 @@
   - [Overview](state/README.md)
   - [Bindings](state/bindings.md)
   - [Durable state](state/durable.md)
+  - [Slow work (`mui.Task`)](state/async.md)
 - [Surfaces](surfaces.md)
 - [Enums](enums.md)
 - [Hot Reload](hot-reload.md)
