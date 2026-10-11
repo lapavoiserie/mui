@@ -644,6 +644,17 @@ class Markup {
 			return own;
 		}
 
+		// Data children on the node route: the canon's own shape, one child of
+		// the declared type per value. Read above for a backend building its
+		// own control, they were then dropped here -- a backend that draws
+		// nodes got a picker with no options.
+		if (data != null) {
+			var childType = asData.type;
+			var childProp = asData.prop;
+			pieces = [{node: null, splice: macro [for (__value in ($data : Array<String>))
+				new nui.Node($v{childType}).prop($v{childProp}, nui.PropValue.PString(__value))]}];
+		}
+
 		var builder = Backend.builderOf(tag);
 		var chain = builder != null
 			? macro $p{builder.split(".")}.node(${object(setters, pos)})
