@@ -15,6 +15,7 @@
   - [Bindings](state/bindings.md)
   - [Durable state](state/durable.md)
 - [Surfaces](surfaces.md)
+- [One look](look.md)
 - [Enums](enums.md)
 - [Hot Reload](hot-reload.md)
 - [CLI Reference](cli.md)
