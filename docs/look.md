@@ -76,6 +76,17 @@ A row of an avatar, a name and a button lines up on the avatar's centre.
 | sui | native |
 | wui | native since 2026-10 (it applies to every wui app) |
 
+### A row's text gives way before its trailing controls
+
+When a row is short of room, its text narrows and wraps. The controls at the
+end of the row (a button, a menu) keep their size and stay visible. With room,
+nothing changes.
+
+| Backend | How |
+|---|---|
+| sui | native: SwiftUI compresses text first |
+| wui | native since 2026-10: in an `HStack` with one `Spacer`, the text or stack before it takes the leftover width (it applies to every wui app) |
+
 ### Controls that share a field's row are centred on it
 
 When a `Field` holds several controls, they sit side by side on the field's
