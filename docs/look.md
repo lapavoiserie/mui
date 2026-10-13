@@ -98,6 +98,20 @@ up on the control's centre.
 | sui | native |
 | wui | native since 2026-10 (it applies to every wui app) |
 
+## What follows the platform
+
+Some things are not arrangement. They are the platform's own chrome, and
+each backend keeps its platform's way. No rule makes them match.
+
+- **The toolbar's place.** On macOS it joins the window's title bar. On
+  Windows it stays at the top of the page, under the title bar.
+- **The title bar.** Each platform draws its own. wui extends the content into
+  it, with the app's title and its menus in one row, as Windows 11 apps do.
+- **A narrow window's sidebar.** On Windows it folds to a rail of icons
+  below a width. On macOS it keeps its width.
+- **The main window's first size and its memory.** Each platform picks the
+  first size and restores the last one.
+
 ## Adding a rule
 
 A rule belongs here when a mui application would otherwise look different on
