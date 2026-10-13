@@ -44,15 +44,15 @@ in the canon).
 
 A `Notice` appears at the bottom of the window, centred, over the content and
 narrower than the window. A success or an info closes itself after a few
-seconds: about 4 s, or longer when it carries an act (Undo) so that the act can
-still be reached, from the keyboard and with a screen reader too. The timer
+seconds, and longer when it carries an act (Undo) so that the act can still be
+reached, from the keyboard and with a screen reader too. The timer
 waits while the pointer or the focus is inside the notice. A warning or an
 error stays until it is closed.
 
 | Backend | How |
 |---|---|
-| sui | native: the overlay toast |
-| wui | `wui.placement = "bottomCenter"`; a plain wui app keeps the InfoBar at the top of its content |
+| sui | native: the overlay toast, 4 s, 6 s with an act |
+| wui | `wui.placement = "bottomCenter"`, 5 s, 8 s with an act; a plain wui app keeps the InfoBar at the top of its content |
 
 ### A child that stretches keeps its width, whatever the alignment
 
@@ -70,6 +70,17 @@ width of the stack (the full height, in a row) even when the stack says
 
 An `HStack` centres its children on the vertical axis unless it says otherwise.
 A row of an avatar, a name and a button lines up on the avatar's centre.
+
+| Backend | How |
+|---|---|
+| sui | native |
+| wui | native since 2026-10 (it applies to every wui app) |
+
+### Controls that share a field's row are centred on it
+
+When a `Field` holds several controls, they sit side by side on the field's
+row, centred on its vertical axis. A caption beside a segmented control lines
+up on the control's centre.
 
 | Backend | How |
 |---|---|
